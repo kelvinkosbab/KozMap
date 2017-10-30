@@ -53,9 +53,9 @@ class BaseNavigationController : UINavigationController {
     var titleTextAttributes: [NSAttributedStringKey : Any]? {
       switch self {
       case .standard:
-        return [ NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16), NSAttributedStringKey.foregroundColor: UIColor.black ]
+        return [ NSAttributedStringKey.font: UIFont.systemFont(ofSize: 17, weight: .medium), NSAttributedStringKey.foregroundColor: UIColor.black ]
       case .transparent:
-        return [ NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16), NSAttributedStringKey.foregroundColor: UIColor.white ]
+        return [ NSAttributedStringKey.font: UIFont.systemFont(ofSize: 17, weight: .medium), NSAttributedStringKey.foregroundColor: UIColor.white ]
       }
     }
     

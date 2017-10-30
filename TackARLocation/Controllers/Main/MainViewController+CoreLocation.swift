@@ -15,6 +15,8 @@ extension MainViewController : LocationManagerDelegate {
     
     if let addLocationViewController = self.presentedViewController as? AddLocationViewController {
       addLocationViewController.location = location
+    } else if let locationListViewController = self.presentedViewController as? LocationListViewController {
+      locationListViewController.currentLocation = location
     }
   }
   
@@ -58,5 +60,16 @@ extension MainViewController : AddLocationViewControllerDelegate {
         self?.dismiss(animated: true, completion: nil)
       }
     }
+  }
+}
+
+extension MainViewController : LocationListViewControllerDelegate {
+  
+  func shouldDelete(location: SavedLocation) {
+    
+    // TODO: - KAK remove this location from the scene view
+    
+    // Delete this location from core data
+    SavedLocation.deleteOne(location)
   }
 }

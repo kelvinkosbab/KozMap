@@ -30,7 +30,7 @@ class MainViewController : UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.navigationItem.title = "Point Finder AR"
+    self.navigationItem.title = "ARMap"
     self.navigationItem.largeTitleDisplayMode = .never
     
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "settings"), style: .plain, target: self, action: #selector(self.settingsButtonSelected))
@@ -40,10 +40,10 @@ class MainViewController : UIViewController {
     super.viewWillAppear(animated)
     
     // Style visual effect views
-    self.addVisualEffectView.layer.cornerRadius = 25
+    self.addVisualEffectView.layer.cornerRadius = 28
     self.addVisualEffectView.layer.masksToBounds = true
     self.addVisualEffectView.clipsToBounds = true
-    self.listVisualEffectView.layer.cornerRadius = 25
+    self.listVisualEffectView.layer.cornerRadius = 28
     self.listVisualEffectView.layer.masksToBounds = true
     self.listVisualEffectView.clipsToBounds = true
   }
@@ -61,9 +61,9 @@ class MainViewController : UIViewController {
   
   @IBAction func addButtonSelected() {
     
-    // Instantiate the location view controller
-    let location = LocationManager.shared.currentLocation
-    let addLocationViewController = AddLocationViewController.newViewController(location: location, delegate: self)
+    // Instantiate the add location view controller
+    let currentLocation = LocationManager.shared.currentLocation
+    let addLocationViewController = AddLocationViewController.newViewController(location: currentLocation, delegate: self)
     addLocationViewController.modalPresentationStyle = .popover
     addLocationViewController.popoverPresentationController?.delegate = self
     addLocationViewController.preferredContentSize = CGSize(width: self.view.bounds.width - 16, height: addLocationViewController.preferredContentHeight)
@@ -74,6 +74,15 @@ class MainViewController : UIViewController {
   
   @IBAction func listButtonSelected() {
     
+    // Instantiate the location list view controller
+    let currentLocation = LocationManager.shared.currentLocation
+    let locationListViewController = LocationListViewController.newViewController(currentLocation: currentLocation, delegate: self)
+    locationListViewController.modalPresentationStyle = .popover
+    locationListViewController.popoverPresentationController?.delegate = self
+    locationListViewController.preferredContentSize = CGSize(width: self.view.bounds.width - 16, height: min(self.view.bounds.height, 300))
+    locationListViewController.popoverPresentationController?.sourceView = self.listButton
+    locationListViewController.popoverPresentationController?.sourceRect = self.listButton.bounds
+    self.present(locationListViewController, animated: true, completion: nil)
   }
   
   @objc func settingsButtonSelected() {

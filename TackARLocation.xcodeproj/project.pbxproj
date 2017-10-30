@@ -34,6 +34,9 @@
 		B6C6EA6F1FA7C264001F97E7 /* LocationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA6E1FA7C264001F97E7 /* LocationListViewController.swift */; };
 		B6C6EA711FA7C26D001F97E7 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA701FA7C26D001F97E7 /* AddLocationViewController.swift */; };
 		B6C6EA731FA7CDF9001F97E7 /* MainViewController+CoreLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA721FA7CDF9001F97E7 /* MainViewController+CoreLocation.swift */; };
+		B6C6EA751FA7D717001F97E7 /* Defaults+MyManagedObjectProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA741FA7D717001F97E7 /* Defaults+MyManagedObjectProtocol.swift */; };
+		B6C6EA771FA7D761001F97E7 /* UnitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA761FA7D761001F97E7 /* UnitType.swift */; };
+		B6C6EA791FA7DAB9001F97E7 /* LocationListViewController+Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA781FA7DAB9001F97E7 /* LocationListViewController+Cells.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +69,9 @@
 		B6C6EA6E1FA7C264001F97E7 /* LocationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListViewController.swift; sourceTree = "<group>"; };
 		B6C6EA701FA7C26D001F97E7 /* AddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
 		B6C6EA721FA7CDF9001F97E7 /* MainViewController+CoreLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+CoreLocation.swift"; sourceTree = "<group>"; };
+		B6C6EA741FA7D717001F97E7 /* Defaults+MyManagedObjectProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+MyManagedObjectProtocol.swift"; sourceTree = "<group>"; };
+		B6C6EA761FA7D761001F97E7 /* UnitType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitType.swift; sourceTree = "<group>"; };
+		B6C6EA781FA7DAB9001F97E7 /* LocationListViewController+Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocationListViewController+Cells.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +121,7 @@
 				B6C6EA401FA79F43001F97E7 /* Model */,
 				B6C6EA621FA7B6AD001F97E7 /* SceneKit */,
 				B6C6EA411FA79F77001F97E7 /* LocationManager.swift */,
+				B6C6EA761FA7D761001F97E7 /* UnitType.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -150,6 +157,7 @@
 				B6C6EA651FA7BD5B001F97E7 /* MyDataManager.swift */,
 				B6C6EA671FA7BD91001F97E7 /* MyManagedObjectProtocol.swift */,
 				B6C6EA691FA7BE0A001F97E7 /* SavedLocation+MyManagedObjectProtocol.swift */,
+				B6C6EA741FA7D717001F97E7 /* Defaults+MyManagedObjectProtocol.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -222,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				B6C6EA6E1FA7C264001F97E7 /* LocationListViewController.swift */,
+				B6C6EA781FA7DAB9001F97E7 /* LocationListViewController+Cells.swift */,
 			);
 			path = "Location List";
 			sourceTree = "<group>";
@@ -310,15 +319,18 @@
 				B6C6EA421FA79F77001F97E7 /* LocationManager.swift in Sources */,
 				B6C6EA571FA7AF56001F97E7 /* SCNNode+Util.swift in Sources */,
 				B6C6EA611FA7B68C001F97E7 /* Plane.swift in Sources */,
+				B6C6EA791FA7DAB9001F97E7 /* LocationListViewController+Cells.swift in Sources */,
 				B6C6EA6F1FA7C264001F97E7 /* LocationListViewController.swift in Sources */,
 				B6C6EA311FA79B45001F97E7 /* TackARLocation.xcdatamodeld in Sources */,
 				B6C6EA5F1FA7B5D6001F97E7 /* SCNMaterial+Util.swift in Sources */,
 				B6C6EA4E1FA7A9A6001F97E7 /* BaseNavigationController.swift in Sources */,
 				B6C6EA481FA7A15C001F97E7 /* ViewControllerFromStoryboardProtocol.swift in Sources */,
+				B6C6EA751FA7D717001F97E7 /* Defaults+MyManagedObjectProtocol.swift in Sources */,
 				B6C6EA2B1FA79B45001F97E7 /* ViewController.swift in Sources */,
 				B6C6EA541FA7AEA4001F97E7 /* Loggable.swift in Sources */,
 				B6C6EA291FA79B45001F97E7 /* AppDelegate.swift in Sources */,
 				B6C6EA731FA7CDF9001F97E7 /* MainViewController+CoreLocation.swift in Sources */,
+				B6C6EA771FA7D761001F97E7 /* UnitType.swift in Sources */,
 				B6C6EA641FA7BD33001F97E7 /* DataMangerProtocol.swift in Sources */,
 				B6C6EA591FA7AFEF001F97E7 /* ARSCNView+Util.swift in Sources */,
 				B6C6EA521FA7ACEC001F97E7 /* ARViewController.swift in Sources */,
