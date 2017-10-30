@@ -13,6 +13,18 @@
 		B6C6EA311FA79B45001F97E7 /* TackARLocation.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA2F1FA79B45001F97E7 /* TackARLocation.xcdatamodeld */; };
 		B6C6EA331FA79B45001F97E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6C6EA321FA79B45001F97E7 /* Assets.xcassets */; };
 		B6C6EA361FA79B45001F97E7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6C6EA341FA79B45001F97E7 /* LaunchScreen.storyboard */; };
+		B6C6EA421FA79F77001F97E7 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA411FA79F77001F97E7 /* LocationManager.swift */; };
+		B6C6EA451FA7A050001F97E7 /* PermissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA441FA7A050001F97E7 /* PermissionsViewController.swift */; };
+		B6C6EA481FA7A15C001F97E7 /* ViewControllerFromStoryboardProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA471FA7A15C001F97E7 /* ViewControllerFromStoryboardProtocol.swift */; };
+		B6C6EA4A1FA7A3DB001F97E7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA491FA7A3DB001F97E7 /* MainViewController.swift */; };
+		B6C6EA4C1FA7A694001F97E7 /* RootNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA4B1FA7A694001F97E7 /* RootNavigationController.swift */; };
+		B6C6EA4E1FA7A9A6001F97E7 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA4D1FA7A9A6001F97E7 /* BaseNavigationController.swift */; };
+		B6C6EA521FA7ACEC001F97E7 /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA511FA7ACEC001F97E7 /* ARViewController.swift */; };
+		B6C6EA541FA7AEA4001F97E7 /* Loggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA531FA7AEA4001F97E7 /* Loggable.swift */; };
+		B6C6EA571FA7AF56001F97E7 /* SCNNode+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA561FA7AF56001F97E7 /* SCNNode+Util.swift */; };
+		B6C6EA591FA7AFEF001F97E7 /* ARSCNView+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA581FA7AFEF001F97E7 /* ARSCNView+Util.swift */; };
+		B6C6EA5B1FA7B02B001F97E7 /* Models.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = B6C6EA5A1FA7B02B001F97E7 /* Models.scnassets */; };
+		B6C6EA5D1FA7B0C3001F97E7 /* CGRect+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA5C1FA7B0C3001F97E7 /* CGRect+Util.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +36,18 @@
 		B6C6EA321FA79B45001F97E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B6C6EA351FA79B45001F97E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B6C6EA371FA79B45001F97E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B6C6EA411FA79F77001F97E7 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		B6C6EA441FA7A050001F97E7 /* PermissionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsViewController.swift; sourceTree = "<group>"; };
+		B6C6EA471FA7A15C001F97E7 /* ViewControllerFromStoryboardProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFromStoryboardProtocol.swift; sourceTree = "<group>"; };
+		B6C6EA491FA7A3DB001F97E7 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		B6C6EA4B1FA7A694001F97E7 /* RootNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootNavigationController.swift; sourceTree = "<group>"; };
+		B6C6EA4D1FA7A9A6001F97E7 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
+		B6C6EA511FA7ACEC001F97E7 /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
+		B6C6EA531FA7AEA4001F97E7 /* Loggable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loggable.swift; sourceTree = "<group>"; };
+		B6C6EA561FA7AF56001F97E7 /* SCNNode+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNNode+Util.swift"; sourceTree = "<group>"; };
+		B6C6EA581FA7AFEF001F97E7 /* ARSCNView+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ARSCNView+Util.swift"; sourceTree = "<group>"; };
+		B6C6EA5A1FA7B02B001F97E7 /* Models.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Models.scnassets; sourceTree = "<group>"; };
+		B6C6EA5C1FA7B0C3001F97E7 /* CGRect+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+Util.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,12 +83,88 @@
 				B6C6EA281FA79B45001F97E7 /* AppDelegate.swift */,
 				B6C6EA2A1FA79B45001F97E7 /* ViewController.swift */,
 				B6C6EA2C1FA79B45001F97E7 /* Main.storyboard */,
+				B6C6EA3D1FA79F21001F97E7 /* Common */,
+				B6C6EA3E1FA79F2B001F97E7 /* Controllers */,
+				B6C6EA3F1FA79F35001F97E7 /* Supporting Files */,
+			);
+			path = TackARLocation;
+			sourceTree = "<group>";
+		};
+		B6C6EA3D1FA79F21001F97E7 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				B6C6EA551FA7AF49001F97E7 /* Extensions */,
+				B6C6EA461FA7A14F001F97E7 /* Protocols */,
+				B6C6EA401FA79F43001F97E7 /* Model */,
+				B6C6EA411FA79F77001F97E7 /* LocationManager.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		B6C6EA3E1FA79F2B001F97E7 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B6C6EA4D1FA7A9A6001F97E7 /* BaseNavigationController.swift */,
+				B6C6EA4B1FA7A694001F97E7 /* RootNavigationController.swift */,
+				B6C6EA4F1FA7AC9E001F97E7 /* Permissions */,
+				B6C6EA501FA7ACA5001F97E7 /* Main */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		B6C6EA3F1FA79F35001F97E7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B6C6EA5A1FA7B02B001F97E7 /* Models.scnassets */,
 				B6C6EA321FA79B45001F97E7 /* Assets.xcassets */,
 				B6C6EA341FA79B45001F97E7 /* LaunchScreen.storyboard */,
 				B6C6EA371FA79B45001F97E7 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B6C6EA401FA79F43001F97E7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
 				B6C6EA2F1FA79B45001F97E7 /* TackARLocation.xcdatamodeld */,
 			);
-			path = TackARLocation;
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B6C6EA461FA7A14F001F97E7 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				B6C6EA471FA7A15C001F97E7 /* ViewControllerFromStoryboardProtocol.swift */,
+				B6C6EA531FA7AEA4001F97E7 /* Loggable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		B6C6EA4F1FA7AC9E001F97E7 /* Permissions */ = {
+			isa = PBXGroup;
+			children = (
+				B6C6EA441FA7A050001F97E7 /* PermissionsViewController.swift */,
+			);
+			path = Permissions;
+			sourceTree = "<group>";
+		};
+		B6C6EA501FA7ACA5001F97E7 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				B6C6EA491FA7A3DB001F97E7 /* MainViewController.swift */,
+				B6C6EA511FA7ACEC001F97E7 /* ARViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		B6C6EA551FA7AF49001F97E7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B6C6EA561FA7AF56001F97E7 /* SCNNode+Util.swift */,
+				B6C6EA581FA7AFEF001F97E7 /* ARSCNView+Util.swift */,
+				B6C6EA5C1FA7B0C3001F97E7 /* CGRect+Util.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,6 +227,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6C6EA361FA79B45001F97E7 /* LaunchScreen.storyboard in Resources */,
+				B6C6EA5B1FA7B02B001F97E7 /* Models.scnassets in Resources */,
 				B6C6EA331FA79B45001F97E7 /* Assets.xcassets in Resources */,
 				B6C6EA2E1FA79B45001F97E7 /* Main.storyboard in Resources */,
 			);
@@ -139,9 +240,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6C6EA4A1FA7A3DB001F97E7 /* MainViewController.swift in Sources */,
+				B6C6EA4C1FA7A694001F97E7 /* RootNavigationController.swift in Sources */,
+				B6C6EA451FA7A050001F97E7 /* PermissionsViewController.swift in Sources */,
+				B6C6EA5D1FA7B0C3001F97E7 /* CGRect+Util.swift in Sources */,
+				B6C6EA421FA79F77001F97E7 /* LocationManager.swift in Sources */,
+				B6C6EA571FA7AF56001F97E7 /* SCNNode+Util.swift in Sources */,
 				B6C6EA311FA79B45001F97E7 /* TackARLocation.xcdatamodeld in Sources */,
+				B6C6EA4E1FA7A9A6001F97E7 /* BaseNavigationController.swift in Sources */,
+				B6C6EA481FA7A15C001F97E7 /* ViewControllerFromStoryboardProtocol.swift in Sources */,
 				B6C6EA2B1FA79B45001F97E7 /* ViewController.swift in Sources */,
+				B6C6EA541FA7AEA4001F97E7 /* Loggable.swift in Sources */,
 				B6C6EA291FA79B45001F97E7 /* AppDelegate.swift in Sources */,
+				B6C6EA591FA7AFEF001F97E7 /* ARSCNView+Util.swift in Sources */,
+				B6C6EA521FA7ACEC001F97E7 /* ARViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,7 +392,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6SS93B87P2;
-				INFOPLIST_FILE = TackARLocation/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/TackARLocation/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kozinga.TackARLocation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -295,7 +407,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6SS93B87P2;
-				INFOPLIST_FILE = TackARLocation/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/TackARLocation/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kozinga.TackARLocation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
