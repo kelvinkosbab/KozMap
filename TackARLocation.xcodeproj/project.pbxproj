@@ -86,7 +86,6 @@
 			children = (
 				B6C6EA281FA79B45001F97E7 /* AppDelegate.swift */,
 				B6C6EA2A1FA79B45001F97E7 /* ViewController.swift */,
-				B6C6EA2C1FA79B45001F97E7 /* Main.storyboard */,
 				B6C6EA3D1FA79F21001F97E7 /* Common */,
 				B6C6EA3E1FA79F2B001F97E7 /* Controllers */,
 				B6C6EA3F1FA79F35001F97E7 /* Supporting Files */,
@@ -109,6 +108,7 @@
 		B6C6EA3E1FA79F2B001F97E7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B6C6EA2C1FA79B45001F97E7 /* Main.storyboard */,
 				B6C6EA4D1FA7A9A6001F97E7 /* BaseNavigationController.swift */,
 				B6C6EA4B1FA7A694001F97E7 /* RootNavigationController.swift */,
 				B6C6EA4F1FA7AC9E001F97E7 /* Permissions */,
