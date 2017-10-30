@@ -9,7 +9,8 @@
 import SceneKit
 
 extension SCNNode {
-  class func axesNode(quiverLength: CGFloat, quiverThickness: CGFloat) -> SCNNode {
+  
+  static func axesNode(quiverLength: CGFloat, quiverThickness: CGFloat) -> SCNNode {
     let quiverThickness = (quiverLength / 50.0) * quiverThickness
     let chamferRadius = quiverThickness / 2.0
     

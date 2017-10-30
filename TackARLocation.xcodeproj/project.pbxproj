@@ -25,6 +25,8 @@
 		B6C6EA591FA7AFEF001F97E7 /* ARSCNView+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA581FA7AFEF001F97E7 /* ARSCNView+Util.swift */; };
 		B6C6EA5B1FA7B02B001F97E7 /* Models.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = B6C6EA5A1FA7B02B001F97E7 /* Models.scnassets */; };
 		B6C6EA5D1FA7B0C3001F97E7 /* CGRect+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA5C1FA7B0C3001F97E7 /* CGRect+Util.swift */; };
+		B6C6EA5F1FA7B5D6001F97E7 /* SCNMaterial+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA5E1FA7B5D6001F97E7 /* SCNMaterial+Util.swift */; };
+		B6C6EA611FA7B68C001F97E7 /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA601FA7B68C001F97E7 /* Plane.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +50,8 @@
 		B6C6EA581FA7AFEF001F97E7 /* ARSCNView+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ARSCNView+Util.swift"; sourceTree = "<group>"; };
 		B6C6EA5A1FA7B02B001F97E7 /* Models.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Models.scnassets; sourceTree = "<group>"; };
 		B6C6EA5C1FA7B0C3001F97E7 /* CGRect+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+Util.swift"; sourceTree = "<group>"; };
+		B6C6EA5E1FA7B5D6001F97E7 /* SCNMaterial+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNMaterial+Util.swift"; sourceTree = "<group>"; };
+		B6C6EA601FA7B68C001F97E7 /* Plane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +100,7 @@
 				B6C6EA551FA7AF49001F97E7 /* Extensions */,
 				B6C6EA461FA7A14F001F97E7 /* Protocols */,
 				B6C6EA401FA79F43001F97E7 /* Model */,
+				B6C6EA621FA7B6AD001F97E7 /* SceneKit */,
 				B6C6EA411FA79F77001F97E7 /* LocationManager.swift */,
 			);
 			path = Common;
@@ -163,8 +168,17 @@
 				B6C6EA561FA7AF56001F97E7 /* SCNNode+Util.swift */,
 				B6C6EA581FA7AFEF001F97E7 /* ARSCNView+Util.swift */,
 				B6C6EA5C1FA7B0C3001F97E7 /* CGRect+Util.swift */,
+				B6C6EA5E1FA7B5D6001F97E7 /* SCNMaterial+Util.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B6C6EA621FA7B6AD001F97E7 /* SceneKit */ = {
+			isa = PBXGroup;
+			children = (
+				B6C6EA601FA7B68C001F97E7 /* Plane.swift */,
+			);
+			path = SceneKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,7 +260,9 @@
 				B6C6EA5D1FA7B0C3001F97E7 /* CGRect+Util.swift in Sources */,
 				B6C6EA421FA79F77001F97E7 /* LocationManager.swift in Sources */,
 				B6C6EA571FA7AF56001F97E7 /* SCNNode+Util.swift in Sources */,
+				B6C6EA611FA7B68C001F97E7 /* Plane.swift in Sources */,
 				B6C6EA311FA79B45001F97E7 /* TackARLocation.xcdatamodeld in Sources */,
+				B6C6EA5F1FA7B5D6001F97E7 /* SCNMaterial+Util.swift in Sources */,
 				B6C6EA4E1FA7A9A6001F97E7 /* BaseNavigationController.swift in Sources */,
 				B6C6EA481FA7A15C001F97E7 /* ViewControllerFromStoryboardProtocol.swift in Sources */,
 				B6C6EA2B1FA79B45001F97E7 /* ViewController.swift in Sources */,

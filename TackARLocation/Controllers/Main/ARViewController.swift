@@ -18,6 +18,7 @@ class ARViewController : UIViewController {
   private let session = ARSession()
   private let sessionConfig = ARWorldTrackingConfiguration()
   public private(set) weak var sceneNode: SCNNode?
+  public private(set) weak var basePlane: SCNNode?
   
   var scneViewCenter: CGPoint {
     return self.sceneView.bounds.mid
@@ -64,10 +65,15 @@ extension ARViewController : ARSCNViewDelegate {
       self.sceneNode = node
       scene.rootNode.addChildNode(node)
       
-//      if showAxesNode {
-        let axesNode = SCNNode.axesNode(quiverLength: 0.1, quiverThickness: 0.5)
-        self.sceneNode?.addChildNode(axesNode)
-//      }
+      // Axes node
+      let axesNode = SCNNode.axesNode(quiverLength: 0.1, quiverThickness: 0.5)
+      self.sceneNode?.addChildNode(axesNode)
+      
+      // Base plane
+      let basePlane = Plane(width: 3000, length: 3000)
+      basePlane.position = SCNVector3(x: 0, y: -5, z: 0)
+      self.basePlane = basePlane
+      self.sceneNode?.addChildNode(basePlane)
     }
     
 //    if !didFetchInitialLocation {
