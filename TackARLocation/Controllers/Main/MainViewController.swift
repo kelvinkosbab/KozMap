@@ -30,8 +30,10 @@ class MainViewController : UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.navigationItem.title = "Something"
+    self.navigationItem.title = "Point Finder AR"
     self.navigationItem.largeTitleDisplayMode = .never
+    
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "settings"), style: .plain, target: self, action: #selector(self.settingsButtonSelected))
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -59,9 +61,29 @@ class MainViewController : UIViewController {
   
   @IBAction func addButtonSelected() {
     
+    // Instantiate the location view controller
+    let location = LocationManager.shared.currentLocation
+    let addLocationViewController = AddLocationViewController.newViewController(location: location, delegate: self)
+    addLocationViewController.modalPresentationStyle = .popover
+    addLocationViewController.popoverPresentationController?.delegate = self
+    addLocationViewController.preferredContentSize = CGSize(width: self.view.bounds.width - 16, height: addLocationViewController.preferredContentHeight)
+    addLocationViewController.popoverPresentationController?.sourceView = self.addButton
+    addLocationViewController.popoverPresentationController?.sourceRect = self.addButton.bounds
+    self.present(addLocationViewController, animated: true, completion: nil)
   }
   
   @IBAction func listButtonSelected() {
     
+  }
+  
+  @objc func settingsButtonSelected() {
+    
+  }
+}
+
+extension MainViewController : UIPopoverPresentationControllerDelegate {
+  
+  func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+    return .none
   }
 }

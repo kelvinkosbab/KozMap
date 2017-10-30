@@ -27,6 +27,13 @@
 		B6C6EA5D1FA7B0C3001F97E7 /* CGRect+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA5C1FA7B0C3001F97E7 /* CGRect+Util.swift */; };
 		B6C6EA5F1FA7B5D6001F97E7 /* SCNMaterial+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA5E1FA7B5D6001F97E7 /* SCNMaterial+Util.swift */; };
 		B6C6EA611FA7B68C001F97E7 /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA601FA7B68C001F97E7 /* Plane.swift */; };
+		B6C6EA641FA7BD33001F97E7 /* DataMangerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA631FA7BD33001F97E7 /* DataMangerProtocol.swift */; };
+		B6C6EA661FA7BD5B001F97E7 /* MyDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA651FA7BD5B001F97E7 /* MyDataManager.swift */; };
+		B6C6EA681FA7BD91001F97E7 /* MyManagedObjectProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA671FA7BD91001F97E7 /* MyManagedObjectProtocol.swift */; };
+		B6C6EA6A1FA7BE0A001F97E7 /* SavedLocation+MyManagedObjectProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA691FA7BE0A001F97E7 /* SavedLocation+MyManagedObjectProtocol.swift */; };
+		B6C6EA6F1FA7C264001F97E7 /* LocationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA6E1FA7C264001F97E7 /* LocationListViewController.swift */; };
+		B6C6EA711FA7C26D001F97E7 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA701FA7C26D001F97E7 /* AddLocationViewController.swift */; };
+		B6C6EA731FA7CDF9001F97E7 /* MainViewController+CoreLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA721FA7CDF9001F97E7 /* MainViewController+CoreLocation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +59,13 @@
 		B6C6EA5C1FA7B0C3001F97E7 /* CGRect+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+Util.swift"; sourceTree = "<group>"; };
 		B6C6EA5E1FA7B5D6001F97E7 /* SCNMaterial+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNMaterial+Util.swift"; sourceTree = "<group>"; };
 		B6C6EA601FA7B68C001F97E7 /* Plane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
+		B6C6EA631FA7BD33001F97E7 /* DataMangerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataMangerProtocol.swift; sourceTree = "<group>"; };
+		B6C6EA651FA7BD5B001F97E7 /* MyDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDataManager.swift; sourceTree = "<group>"; };
+		B6C6EA671FA7BD91001F97E7 /* MyManagedObjectProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyManagedObjectProtocol.swift; sourceTree = "<group>"; };
+		B6C6EA691FA7BE0A001F97E7 /* SavedLocation+MyManagedObjectProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SavedLocation+MyManagedObjectProtocol.swift"; sourceTree = "<group>"; };
+		B6C6EA6E1FA7C264001F97E7 /* LocationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListViewController.swift; sourceTree = "<group>"; };
+		B6C6EA701FA7C26D001F97E7 /* AddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
+		B6C6EA721FA7CDF9001F97E7 /* MainViewController+CoreLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+CoreLocation.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +146,10 @@
 			isa = PBXGroup;
 			children = (
 				B6C6EA2F1FA79B45001F97E7 /* TackARLocation.xcdatamodeld */,
+				B6C6EA631FA7BD33001F97E7 /* DataMangerProtocol.swift */,
+				B6C6EA651FA7BD5B001F97E7 /* MyDataManager.swift */,
+				B6C6EA671FA7BD91001F97E7 /* MyManagedObjectProtocol.swift */,
+				B6C6EA691FA7BE0A001F97E7 /* SavedLocation+MyManagedObjectProtocol.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -157,7 +175,11 @@
 			isa = PBXGroup;
 			children = (
 				B6C6EA491FA7A3DB001F97E7 /* MainViewController.swift */,
+				B6C6EA721FA7CDF9001F97E7 /* MainViewController+CoreLocation.swift */,
 				B6C6EA511FA7ACEC001F97E7 /* ARViewController.swift */,
+				B6C6EA6D1FA7C255001F97E7 /* Location List */,
+				B6C6EA6C1FA7C24C001F97E7 /* Add Location */,
+				B6C6EA6B1FA7C246001F97E7 /* Settings */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -179,6 +201,29 @@
 				B6C6EA601FA7B68C001F97E7 /* Plane.swift */,
 			);
 			path = SceneKit;
+			sourceTree = "<group>";
+		};
+		B6C6EA6B1FA7C246001F97E7 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		B6C6EA6C1FA7C24C001F97E7 /* Add Location */ = {
+			isa = PBXGroup;
+			children = (
+				B6C6EA701FA7C26D001F97E7 /* AddLocationViewController.swift */,
+			);
+			path = "Add Location";
+			sourceTree = "<group>";
+		};
+		B6C6EA6D1FA7C255001F97E7 /* Location List */ = {
+			isa = PBXGroup;
+			children = (
+				B6C6EA6E1FA7C264001F97E7 /* LocationListViewController.swift */,
+			);
+			path = "Location List";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,12 +300,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6C6EA4A1FA7A3DB001F97E7 /* MainViewController.swift in Sources */,
+				B6C6EA6A1FA7BE0A001F97E7 /* SavedLocation+MyManagedObjectProtocol.swift in Sources */,
 				B6C6EA4C1FA7A694001F97E7 /* RootNavigationController.swift in Sources */,
 				B6C6EA451FA7A050001F97E7 /* PermissionsViewController.swift in Sources */,
+				B6C6EA661FA7BD5B001F97E7 /* MyDataManager.swift in Sources */,
+				B6C6EA711FA7C26D001F97E7 /* AddLocationViewController.swift in Sources */,
 				B6C6EA5D1FA7B0C3001F97E7 /* CGRect+Util.swift in Sources */,
+				B6C6EA681FA7BD91001F97E7 /* MyManagedObjectProtocol.swift in Sources */,
 				B6C6EA421FA79F77001F97E7 /* LocationManager.swift in Sources */,
 				B6C6EA571FA7AF56001F97E7 /* SCNNode+Util.swift in Sources */,
 				B6C6EA611FA7B68C001F97E7 /* Plane.swift in Sources */,
+				B6C6EA6F1FA7C264001F97E7 /* LocationListViewController.swift in Sources */,
 				B6C6EA311FA79B45001F97E7 /* TackARLocation.xcdatamodeld in Sources */,
 				B6C6EA5F1FA7B5D6001F97E7 /* SCNMaterial+Util.swift in Sources */,
 				B6C6EA4E1FA7A9A6001F97E7 /* BaseNavigationController.swift in Sources */,
@@ -268,6 +318,8 @@
 				B6C6EA2B1FA79B45001F97E7 /* ViewController.swift in Sources */,
 				B6C6EA541FA7AEA4001F97E7 /* Loggable.swift in Sources */,
 				B6C6EA291FA79B45001F97E7 /* AppDelegate.swift in Sources */,
+				B6C6EA731FA7CDF9001F97E7 /* MainViewController+CoreLocation.swift in Sources */,
+				B6C6EA641FA7BD33001F97E7 /* DataMangerProtocol.swift in Sources */,
 				B6C6EA591FA7AFEF001F97E7 /* ARSCNView+Util.swift in Sources */,
 				B6C6EA521FA7ACEC001F97E7 /* ARViewController.swift in Sources */,
 			);

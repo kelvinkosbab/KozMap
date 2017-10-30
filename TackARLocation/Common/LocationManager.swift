@@ -13,7 +13,7 @@ import CoreLocation
  * Handles retrieving the location and heading from CoreLocation
  */
 
-protocol LocationManagerDelegate: class {
+protocol LocationManagerDelegate : class {
   func locationManagerDidUpdateLocation(_ locationManager: LocationManager, location: CLLocation)
   func locationManagerDidUpdateHeading(_ locationManager: LocationManager, heading: CLLocationDirection, accuracy: CLLocationDirection)
 }
