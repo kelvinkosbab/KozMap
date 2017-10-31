@@ -14,7 +14,7 @@ extension Defaults : MyManagedObjectProtocol {
   // MARK: - MyManagedObjectProtocol
   
   static var sortDescriptors: [NSSortDescriptor] {
-    return [ NSSortDescriptor(key: "unitTypeValue", ascending: true) ]
+    return [ NSSortDescriptor(key: "farUnitTypeValue", ascending: true) ]
   }
   
   // MARK: - Singleton
@@ -36,18 +36,34 @@ extension Defaults : MyManagedObjectProtocol {
   
   // MARK: - Helpers
   
-  var unitType: UnitType {
+  var farUnitType: UnitType {
     get {
-      if let unitType = UnitType(rawValue: Int(self.unitTypeValue)) {
+      if let unitType = UnitType(rawValue: Int(self.farUnitTypeValue)) {
         return unitType
       }
       
       // Set default unit type
-      self.unitType = .us
-      return self.unitType
+      self.farUnitType = .us
+      return self.farUnitType
     }
     set {
-      self.unitTypeValue = Int16(newValue.rawValue)
+      self.farUnitTypeValue = Int16(newValue.rawValue)
+      MyDataManager.shared.saveMainContext()
+    }
+  }
+  
+  var nearUnitType: UnitType {
+    get {
+      if let unitType = UnitType(rawValue: Int(self.nearUnitTypeValue)) {
+        return unitType
+      }
+      
+      // Set default unit type
+      self.nearUnitType = .us
+      return self.nearUnitType
+    }
+    set {
+      self.nearUnitTypeValue = Int16(newValue.rawValue)
       MyDataManager.shared.saveMainContext()
     }
   }

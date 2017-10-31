@@ -8,7 +8,13 @@
 
 import UIKit
 
-class BaseNavigationController : UINavigationController {
+class BaseNavigationController : UINavigationController, PresentableController {
+  
+  // MARK: - PresentableController
+  
+  var presentedMode: PresentationMode = .modal
+  var transitioningDelegateReference: UIViewControllerTransitioningDelegate? = nil
+  var currentFlowFirstController: PresentableController? = nil
   
   // MARK: - Lifecycle
   

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController : UIViewController {
+class MainViewController : BaseViewController {
   
   // MARK: - Static Accessors
   
@@ -33,7 +33,7 @@ class MainViewController : UIViewController {
     self.navigationItem.title = "ARMap"
     self.navigationItem.largeTitleDisplayMode = .never
     
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "settings"), style: .plain, target: self, action: #selector(self.settingsButtonSelected))
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "assetOptions"), style: .plain, target: self, action: #selector(self.settingsButtonSelected))
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -86,7 +86,10 @@ class MainViewController : UIViewController {
   }
   
   @objc func settingsButtonSelected() {
-    
+    let settingsViewController = SettingsViewController.newViewController()
+    let offset = UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.height ?? 0)
+    let interactiveElement = InteractiveElement(size: settingsViewController.defaultContentHeight, offset: offset, view: settingsViewController.view)
+    self.present(viewController: settingsViewController, withMode: .topDown, inNavigationController: false, dismissInteractiveElement: interactiveElement)
   }
 }
 

@@ -11,12 +11,21 @@ import Foundation
 enum UnitType : Int {
   case us, metric
   
-  var name: String {
+  var farName: String {
     switch self {
     case .us:
-      return "US"
+      return "Miles"
     case .metric:
-      return "Metric"
+      return "Kilometers"
+    }
+  }
+  
+  var nearName: String {
+    switch self {
+    case .us:
+      return "Feet"
+    case .metric:
+      return "Meters"
     }
   }
 }

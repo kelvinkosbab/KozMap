@@ -13,7 +13,7 @@ protocol AddLocationViewControllerDelegate : class {
   func didSave(location: SavedLocation)
 }
 
-class AddLocationViewController : UIViewController {
+class AddLocationViewController : BaseViewController {
   
   // MARK: - Static Accessors
   

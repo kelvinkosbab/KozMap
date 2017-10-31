@@ -14,7 +14,7 @@ protocol LocationListViewControllerDelegate : class {
   func shouldDelete(location: SavedLocation)
 }
 
-class LocationListViewController : UIViewController, NSFetchedResultsControllerDelegate {
+class LocationListViewController : BaseViewController, NSFetchedResultsControllerDelegate {
   
   // MARK: - Static Accessors
   
@@ -138,12 +138,8 @@ extension LocationListViewController : UITableViewDelegate, UITableViewDataSourc
     if let currentLocation = self.currentLocation {
       let saved = CLLocation(latitude: savedLocation.latitude, longitude: savedLocation.longitude)
       let distance = currentLocation.distance(from: saved)
-      if Defaults.shared.unitType == .metric {
-        cell.detailLabel.text = "\(Int(distance)) m away"
-      } else {
-        let feet = distance * 3.28084 // 1m == 3.28084ft
-        cell.detailLabel.text = "\(Int(feet)) ft away"
-      }
+      let readibleDistance = distance.getReadibleDistance(nearUnitType: Defaults.shared.nearUnitType, farUnitType: Defaults.shared.farUnitType)
+      cell.detailLabel.text = "\(readibleDistance) away"
     } else {
       let roundedLatitude = Double(round(savedLocation.latitude*1000)/1000)
       let roundedLongitude = Double(round(savedLocation.longitude*1000)/1000)

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B69BDAD31FA7F84400A385DE /* UIApplication+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69BDAD21FA7F84400A385DE /* UIApplication+Util.swift */; };
+		B69BDAD51FA7FB0B00A385DE /* Double+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69BDAD41FA7FB0B00A385DE /* Double+Util.swift */; };
 		B6C6EA291FA79B45001F97E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA281FA79B45001F97E7 /* AppDelegate.swift */; };
 		B6C6EA2B1FA79B45001F97E7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA2A1FA79B45001F97E7 /* ViewController.swift */; };
 		B6C6EA2E1FA79B45001F97E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6C6EA2C1FA79B45001F97E7 /* Main.storyboard */; };
@@ -37,9 +39,28 @@
 		B6C6EA751FA7D717001F97E7 /* Defaults+MyManagedObjectProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA741FA7D717001F97E7 /* Defaults+MyManagedObjectProtocol.swift */; };
 		B6C6EA771FA7D761001F97E7 /* UnitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA761FA7D761001F97E7 /* UnitType.swift */; };
 		B6C6EA791FA7DAB9001F97E7 /* LocationListViewController+Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA781FA7DAB9001F97E7 /* LocationListViewController+Cells.swift */; };
+		B6C6EA7B1FA7E5E1001F97E7 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA7A1FA7E5E1001F97E7 /* SettingsViewController.swift */; };
+		B6C6EA7E1FA7E639001F97E7 /* PresentableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA7D1FA7E639001F97E7 /* PresentableController.swift */; };
+		B6C6EA821FA7E670001F97E7 /* PresenationManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA811FA7E670001F97E7 /* PresenationManagerProtocol.swift */; };
+		B6C6EA841FA7E690001F97E7 /* InteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA831FA7E690001F97E7 /* InteractiveTransition.swift */; };
+		B6C6EA861FA7E6A6001F97E7 /* DragUpDismissInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA851FA7E6A6001F97E7 /* DragUpDismissInteractiveTransition.swift */; };
+		B6C6EA881FA7E6BB001F97E7 /* LeftMenuPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA871FA7E6BB001F97E7 /* LeftMenuPresentationManager.swift */; };
+		B6C6EA8A1FA7E6D2001F97E7 /* RightToLeftPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA891FA7E6D2001F97E7 /* RightToLeftPresentationManager.swift */; };
+		B6C6EA8C1FA7E6E3001F97E7 /* HDFadeWithBlurPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA8B1FA7E6E3001F97E7 /* HDFadeWithBlurPresentationManager.swift */; };
+		B6C6EA8E1FA7E6F5001F97E7 /* UIView+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA8D1FA7E6F5001F97E7 /* UIView+Util.swift */; };
+		B6C6EA901FA7E766001F97E7 /* TopDownPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA8F1FA7E766001F97E7 /* TopDownPresentationManager.swift */; };
+		B6C6EA931FA7E83F001F97E7 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA921FA7E83F001F97E7 /* Device.swift */; };
+		B6C6EA951FA7E869001F97E7 /* UIDevice+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA941FA7E869001F97E7 /* UIDevice+Util.swift */; };
+		B6C6EA971FA7E8B4001F97E7 /* DragDownDismissInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA961FA7E8B4001F97E7 /* DragDownDismissInteractiveTransition.swift */; };
+		B6C6EA991FA7E8D1001F97E7 /* DragLeftDismissInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA981FA7E8D1001F97E7 /* DragLeftDismissInteractiveTransition.swift */; };
+		B6C6EA9B1FA7E8E4001F97E7 /* DragRightDismissInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA9A1FA7E8E4001F97E7 /* DragRightDismissInteractiveTransition.swift */; };
+		B6C6EA9D1FA7EBEE001F97E7 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA9C1FA7EBEE001F97E7 /* BaseViewController.swift */; };
+		B6C6EA9F1FA7EBF6001F97E7 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA9E1FA7EBF6001F97E7 /* BaseTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B69BDAD21FA7F84400A385DE /* UIApplication+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Util.swift"; sourceTree = "<group>"; };
+		B69BDAD41FA7FB0B00A385DE /* Double+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Util.swift"; sourceTree = "<group>"; };
 		B6C6EA251FA79B45001F97E7 /* TackARLocation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TackARLocation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6C6EA281FA79B45001F97E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6C6EA2A1FA79B45001F97E7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -72,6 +93,23 @@
 		B6C6EA741FA7D717001F97E7 /* Defaults+MyManagedObjectProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+MyManagedObjectProtocol.swift"; sourceTree = "<group>"; };
 		B6C6EA761FA7D761001F97E7 /* UnitType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitType.swift; sourceTree = "<group>"; };
 		B6C6EA781FA7DAB9001F97E7 /* LocationListViewController+Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocationListViewController+Cells.swift"; sourceTree = "<group>"; };
+		B6C6EA7A1FA7E5E1001F97E7 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		B6C6EA7D1FA7E639001F97E7 /* PresentableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentableController.swift; sourceTree = "<group>"; };
+		B6C6EA811FA7E670001F97E7 /* PresenationManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenationManagerProtocol.swift; sourceTree = "<group>"; };
+		B6C6EA831FA7E690001F97E7 /* InteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveTransition.swift; sourceTree = "<group>"; };
+		B6C6EA851FA7E6A6001F97E7 /* DragUpDismissInteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragUpDismissInteractiveTransition.swift; sourceTree = "<group>"; };
+		B6C6EA871FA7E6BB001F97E7 /* LeftMenuPresentationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftMenuPresentationManager.swift; sourceTree = "<group>"; };
+		B6C6EA891FA7E6D2001F97E7 /* RightToLeftPresentationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightToLeftPresentationManager.swift; sourceTree = "<group>"; };
+		B6C6EA8B1FA7E6E3001F97E7 /* HDFadeWithBlurPresentationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDFadeWithBlurPresentationManager.swift; sourceTree = "<group>"; };
+		B6C6EA8D1FA7E6F5001F97E7 /* UIView+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Util.swift"; sourceTree = "<group>"; };
+		B6C6EA8F1FA7E766001F97E7 /* TopDownPresentationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopDownPresentationManager.swift; sourceTree = "<group>"; };
+		B6C6EA921FA7E83F001F97E7 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		B6C6EA941FA7E869001F97E7 /* UIDevice+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Util.swift"; sourceTree = "<group>"; };
+		B6C6EA961FA7E8B4001F97E7 /* DragDownDismissInteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragDownDismissInteractiveTransition.swift; sourceTree = "<group>"; };
+		B6C6EA981FA7E8D1001F97E7 /* DragLeftDismissInteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragLeftDismissInteractiveTransition.swift; sourceTree = "<group>"; };
+		B6C6EA9A1FA7E8E4001F97E7 /* DragRightDismissInteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragRightDismissInteractiveTransition.swift; sourceTree = "<group>"; };
+		B6C6EA9C1FA7EBEE001F97E7 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		B6C6EA9E1FA7EBF6001F97E7 /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,12 +154,14 @@
 		B6C6EA3D1FA79F21001F97E7 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				B6C6EA7C1FA7E62B001F97E7 /* Presenting Controllers */,
 				B6C6EA551FA7AF49001F97E7 /* Extensions */,
 				B6C6EA461FA7A14F001F97E7 /* Protocols */,
 				B6C6EA401FA79F43001F97E7 /* Model */,
 				B6C6EA621FA7B6AD001F97E7 /* SceneKit */,
 				B6C6EA411FA79F77001F97E7 /* LocationManager.swift */,
 				B6C6EA761FA7D761001F97E7 /* UnitType.swift */,
+				B6C6EA911FA7E836001F97E7 /* Device */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -131,6 +171,8 @@
 			children = (
 				B6C6EA2C1FA79B45001F97E7 /* Main.storyboard */,
 				B6C6EA4D1FA7A9A6001F97E7 /* BaseNavigationController.swift */,
+				B6C6EA9C1FA7EBEE001F97E7 /* BaseViewController.swift */,
+				B6C6EA9E1FA7EBF6001F97E7 /* BaseTableViewController.swift */,
 				B6C6EA4B1FA7A694001F97E7 /* RootNavigationController.swift */,
 				B6C6EA4F1FA7AC9E001F97E7 /* Permissions */,
 				B6C6EA501FA7ACA5001F97E7 /* Main */,
@@ -199,6 +241,10 @@
 				B6C6EA581FA7AFEF001F97E7 /* ARSCNView+Util.swift */,
 				B6C6EA5C1FA7B0C3001F97E7 /* CGRect+Util.swift */,
 				B6C6EA5E1FA7B5D6001F97E7 /* SCNMaterial+Util.swift */,
+				B6C6EA8D1FA7E6F5001F97E7 /* UIView+Util.swift */,
+				B6C6EA941FA7E869001F97E7 /* UIDevice+Util.swift */,
+				B69BDAD21FA7F84400A385DE /* UIApplication+Util.swift */,
+				B69BDAD41FA7FB0B00A385DE /* Double+Util.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -214,6 +260,7 @@
 		B6C6EA6B1FA7C246001F97E7 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				B6C6EA7A1FA7E5E1001F97E7 /* SettingsViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -233,6 +280,48 @@
 				B6C6EA781FA7DAB9001F97E7 /* LocationListViewController+Cells.swift */,
 			);
 			path = "Location List";
+			sourceTree = "<group>";
+		};
+		B6C6EA7C1FA7E62B001F97E7 /* Presenting Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B6C6EA7D1FA7E639001F97E7 /* PresentableController.swift */,
+				B6C6EA7F1FA7E651001F97E7 /* Custom Controller Presentations */,
+				B6C6EA801FA7E65A001F97E7 /* Interactive Transitions */,
+			);
+			path = "Presenting Controllers";
+			sourceTree = "<group>";
+		};
+		B6C6EA7F1FA7E651001F97E7 /* Custom Controller Presentations */ = {
+			isa = PBXGroup;
+			children = (
+				B6C6EA811FA7E670001F97E7 /* PresenationManagerProtocol.swift */,
+				B6C6EA871FA7E6BB001F97E7 /* LeftMenuPresentationManager.swift */,
+				B6C6EA891FA7E6D2001F97E7 /* RightToLeftPresentationManager.swift */,
+				B6C6EA8B1FA7E6E3001F97E7 /* HDFadeWithBlurPresentationManager.swift */,
+				B6C6EA8F1FA7E766001F97E7 /* TopDownPresentationManager.swift */,
+			);
+			path = "Custom Controller Presentations";
+			sourceTree = "<group>";
+		};
+		B6C6EA801FA7E65A001F97E7 /* Interactive Transitions */ = {
+			isa = PBXGroup;
+			children = (
+				B6C6EA831FA7E690001F97E7 /* InteractiveTransition.swift */,
+				B6C6EA851FA7E6A6001F97E7 /* DragUpDismissInteractiveTransition.swift */,
+				B6C6EA961FA7E8B4001F97E7 /* DragDownDismissInteractiveTransition.swift */,
+				B6C6EA981FA7E8D1001F97E7 /* DragLeftDismissInteractiveTransition.swift */,
+				B6C6EA9A1FA7E8E4001F97E7 /* DragRightDismissInteractiveTransition.swift */,
+			);
+			path = "Interactive Transitions";
+			sourceTree = "<group>";
+		};
+		B6C6EA911FA7E836001F97E7 /* Device */ = {
+			isa = PBXGroup;
+			children = (
+				B6C6EA921FA7E83F001F97E7 /* Device.swift */,
+			);
+			path = Device;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -309,31 +398,50 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6C6EA4A1FA7A3DB001F97E7 /* MainViewController.swift in Sources */,
+				B6C6EA9F1FA7EBF6001F97E7 /* BaseTableViewController.swift in Sources */,
 				B6C6EA6A1FA7BE0A001F97E7 /* SavedLocation+MyManagedObjectProtocol.swift in Sources */,
 				B6C6EA4C1FA7A694001F97E7 /* RootNavigationController.swift in Sources */,
 				B6C6EA451FA7A050001F97E7 /* PermissionsViewController.swift in Sources */,
 				B6C6EA661FA7BD5B001F97E7 /* MyDataManager.swift in Sources */,
+				B6C6EA9D1FA7EBEE001F97E7 /* BaseViewController.swift in Sources */,
+				B6C6EA951FA7E869001F97E7 /* UIDevice+Util.swift in Sources */,
+				B6C6EA821FA7E670001F97E7 /* PresenationManagerProtocol.swift in Sources */,
 				B6C6EA711FA7C26D001F97E7 /* AddLocationViewController.swift in Sources */,
+				B6C6EA971FA7E8B4001F97E7 /* DragDownDismissInteractiveTransition.swift in Sources */,
+				B6C6EA931FA7E83F001F97E7 /* Device.swift in Sources */,
 				B6C6EA5D1FA7B0C3001F97E7 /* CGRect+Util.swift in Sources */,
+				B6C6EA991FA7E8D1001F97E7 /* DragLeftDismissInteractiveTransition.swift in Sources */,
 				B6C6EA681FA7BD91001F97E7 /* MyManagedObjectProtocol.swift in Sources */,
 				B6C6EA421FA79F77001F97E7 /* LocationManager.swift in Sources */,
 				B6C6EA571FA7AF56001F97E7 /* SCNNode+Util.swift in Sources */,
 				B6C6EA611FA7B68C001F97E7 /* Plane.swift in Sources */,
+				B6C6EA8C1FA7E6E3001F97E7 /* HDFadeWithBlurPresentationManager.swift in Sources */,
+				B6C6EA8A1FA7E6D2001F97E7 /* RightToLeftPresentationManager.swift in Sources */,
 				B6C6EA791FA7DAB9001F97E7 /* LocationListViewController+Cells.swift in Sources */,
 				B6C6EA6F1FA7C264001F97E7 /* LocationListViewController.swift in Sources */,
+				B69BDAD51FA7FB0B00A385DE /* Double+Util.swift in Sources */,
+				B6C6EA9B1FA7E8E4001F97E7 /* DragRightDismissInteractiveTransition.swift in Sources */,
 				B6C6EA311FA79B45001F97E7 /* TackARLocation.xcdatamodeld in Sources */,
 				B6C6EA5F1FA7B5D6001F97E7 /* SCNMaterial+Util.swift in Sources */,
 				B6C6EA4E1FA7A9A6001F97E7 /* BaseNavigationController.swift in Sources */,
+				B69BDAD31FA7F84400A385DE /* UIApplication+Util.swift in Sources */,
+				B6C6EA841FA7E690001F97E7 /* InteractiveTransition.swift in Sources */,
 				B6C6EA481FA7A15C001F97E7 /* ViewControllerFromStoryboardProtocol.swift in Sources */,
+				B6C6EA8E1FA7E6F5001F97E7 /* UIView+Util.swift in Sources */,
 				B6C6EA751FA7D717001F97E7 /* Defaults+MyManagedObjectProtocol.swift in Sources */,
+				B6C6EA861FA7E6A6001F97E7 /* DragUpDismissInteractiveTransition.swift in Sources */,
 				B6C6EA2B1FA79B45001F97E7 /* ViewController.swift in Sources */,
+				B6C6EA7E1FA7E639001F97E7 /* PresentableController.swift in Sources */,
 				B6C6EA541FA7AEA4001F97E7 /* Loggable.swift in Sources */,
 				B6C6EA291FA79B45001F97E7 /* AppDelegate.swift in Sources */,
+				B6C6EA881FA7E6BB001F97E7 /* LeftMenuPresentationManager.swift in Sources */,
 				B6C6EA731FA7CDF9001F97E7 /* MainViewController+CoreLocation.swift in Sources */,
+				B6C6EA901FA7E766001F97E7 /* TopDownPresentationManager.swift in Sources */,
 				B6C6EA771FA7D761001F97E7 /* UnitType.swift in Sources */,
 				B6C6EA641FA7BD33001F97E7 /* DataMangerProtocol.swift in Sources */,
 				B6C6EA591FA7AFEF001F97E7 /* ARSCNView+Util.swift in Sources */,
 				B6C6EA521FA7ACEC001F97E7 /* ARViewController.swift in Sources */,
+				B6C6EA7B1FA7E5E1001F97E7 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
