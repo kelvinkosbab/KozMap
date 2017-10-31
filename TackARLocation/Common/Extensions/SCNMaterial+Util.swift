@@ -12,8 +12,7 @@ extension SCNMaterial {
   
   static var tron: SCNMaterial {
     let material = SCNMaterial()
-    material.diffuse.contents = UIColor.blue
-//    material.diffuse.contents = #imageLiteral(resourceName: "tron-albedo.png")
+    material.diffuse.contents = #imageLiteral(resourceName: "assetTron")
     return material
   }
   

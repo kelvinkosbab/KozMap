@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B67B2A7A1FA8279000F531BF /* LocationNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67B2A791FA8279000F531BF /* LocationNode.swift */; };
+		B67B2A7A1FA8279000F531BF /* VerticalBeamNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67B2A791FA8279000F531BF /* VerticalBeamNode.swift */; };
+		B695236B1FA8D11E0014ABED /* CLLocation+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236A1FA8D11E0014ABED /* CLLocation+Util.swift */; };
+		B695236D1FA8D2E10014ABED /* SCNVector3+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236C1FA8D2E10014ABED /* SCNVector3+Util.swift */; };
+		B695236F1FA8D3430014ABED /* AxesNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236E1FA8D3430014ABED /* AxesNode.swift */; };
 		B69BDAD31FA7F84400A385DE /* UIApplication+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69BDAD21FA7F84400A385DE /* UIApplication+Util.swift */; };
 		B69BDAD51FA7FB0B00A385DE /* Double+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69BDAD41FA7FB0B00A385DE /* Double+Util.swift */; };
 		B6C6EA291FA79B45001F97E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA281FA79B45001F97E7 /* AppDelegate.swift */; };
@@ -60,7 +63,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B67B2A791FA8279000F531BF /* LocationNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationNode.swift; sourceTree = "<group>"; };
+		B67B2A791FA8279000F531BF /* VerticalBeamNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalBeamNode.swift; sourceTree = "<group>"; };
+		B695236A1FA8D11E0014ABED /* CLLocation+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Util.swift"; sourceTree = "<group>"; };
+		B695236C1FA8D2E10014ABED /* SCNVector3+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Util.swift"; sourceTree = "<group>"; };
+		B695236E1FA8D3430014ABED /* AxesNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxesNode.swift; sourceTree = "<group>"; };
 		B69BDAD21FA7F84400A385DE /* UIApplication+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Util.swift"; sourceTree = "<group>"; };
 		B69BDAD41FA7FB0B00A385DE /* Double+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Util.swift"; sourceTree = "<group>"; };
 		B6C6EA251FA79B45001F97E7 /* TackARLocation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TackARLocation.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -240,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				B6C6EA561FA7AF56001F97E7 /* SCNNode+Util.swift */,
+				B695236C1FA8D2E10014ABED /* SCNVector3+Util.swift */,
 				B6C6EA581FA7AFEF001F97E7 /* ARSCNView+Util.swift */,
 				B6C6EA5C1FA7B0C3001F97E7 /* CGRect+Util.swift */,
 				B6C6EA5E1FA7B5D6001F97E7 /* SCNMaterial+Util.swift */,
@@ -247,6 +254,7 @@
 				B6C6EA941FA7E869001F97E7 /* UIDevice+Util.swift */,
 				B69BDAD21FA7F84400A385DE /* UIApplication+Util.swift */,
 				B69BDAD41FA7FB0B00A385DE /* Double+Util.swift */,
+				B695236A1FA8D11E0014ABED /* CLLocation+Util.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -255,7 +263,8 @@
 			isa = PBXGroup;
 			children = (
 				B6C6EA601FA7B68C001F97E7 /* Plane.swift */,
-				B67B2A791FA8279000F531BF /* LocationNode.swift */,
+				B695236E1FA8D3430014ABED /* AxesNode.swift */,
+				B67B2A791FA8279000F531BF /* VerticalBeamNode.swift */,
 			);
 			path = SceneKit;
 			sourceTree = "<group>";
@@ -404,11 +413,13 @@
 				B6C6EA9F1FA7EBF6001F97E7 /* BaseTableViewController.swift in Sources */,
 				B6C6EA6A1FA7BE0A001F97E7 /* SavedLocation+MyManagedObjectProtocol.swift in Sources */,
 				B6C6EA4C1FA7A694001F97E7 /* RootNavigationController.swift in Sources */,
+				B695236F1FA8D3430014ABED /* AxesNode.swift in Sources */,
 				B6C6EA451FA7A050001F97E7 /* PermissionsViewController.swift in Sources */,
 				B6C6EA661FA7BD5B001F97E7 /* MyDataManager.swift in Sources */,
 				B6C6EA9D1FA7EBEE001F97E7 /* BaseViewController.swift in Sources */,
 				B6C6EA951FA7E869001F97E7 /* UIDevice+Util.swift in Sources */,
 				B6C6EA821FA7E670001F97E7 /* PresenationManagerProtocol.swift in Sources */,
+				B695236B1FA8D11E0014ABED /* CLLocation+Util.swift in Sources */,
 				B6C6EA711FA7C26D001F97E7 /* AddLocationViewController.swift in Sources */,
 				B6C6EA971FA7E8B4001F97E7 /* DragDownDismissInteractiveTransition.swift in Sources */,
 				B6C6EA931FA7E83F001F97E7 /* Device.swift in Sources */,
@@ -416,8 +427,9 @@
 				B6C6EA991FA7E8D1001F97E7 /* DragLeftDismissInteractiveTransition.swift in Sources */,
 				B6C6EA681FA7BD91001F97E7 /* MyManagedObjectProtocol.swift in Sources */,
 				B6C6EA421FA79F77001F97E7 /* LocationManager.swift in Sources */,
-				B67B2A7A1FA8279000F531BF /* LocationNode.swift in Sources */,
+				B67B2A7A1FA8279000F531BF /* VerticalBeamNode.swift in Sources */,
 				B6C6EA571FA7AF56001F97E7 /* SCNNode+Util.swift in Sources */,
+				B695236D1FA8D2E10014ABED /* SCNVector3+Util.swift in Sources */,
 				B6C6EA611FA7B68C001F97E7 /* Plane.swift in Sources */,
 				B6C6EA8C1FA7E6E3001F97E7 /* HDFadeWithBlurPresentationManager.swift in Sources */,
 				B6C6EA8A1FA7E6D2001F97E7 /* RightToLeftPresentationManager.swift in Sources */,

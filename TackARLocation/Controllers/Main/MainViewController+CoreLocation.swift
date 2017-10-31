@@ -13,6 +13,10 @@ extension MainViewController : LocationManagerDelegate {
   
   func locationManagerDidUpdateLocation(_ locationManager: LocationManager, location: CLLocation) {
     
+    // Update location on child AR controller
+    self.arViewController?.currentLocation = location
+    
+    // Update location on presented controllers
     if let addLocationViewController = self.presentedViewController as? AddLocationViewController {
       addLocationViewController.location = location
     } else if let locationListViewController = self.presentedViewController as? LocationListViewController {
@@ -20,14 +24,12 @@ extension MainViewController : LocationManagerDelegate {
     }
   }
   
-  func locationManagerDidUpdateHeading(_ locationManager: LocationManager, heading: CLLocationDirection, accuracy: CLLocationDirection) {
-    
-  }
+  func locationManagerDidUpdateHeading(_ locationManager: LocationManager, heading: CLLocationDirection, accuracy: CLLocationDirection) {}
 }
 
 extension MainViewController : AddLocationViewControllerDelegate {
   
-  func didSave(location: SavedLocation) {
+  func didSave(savedLocation: SavedLocation) {
     
     let dispatchGroup = DispatchGroup()
     if let _ = self.presentedViewController as? AddLocationViewController {
@@ -39,10 +41,11 @@ extension MainViewController : AddLocationViewControllerDelegate {
     
     dispatchGroup.notify(queue: .main) { [weak self] in
       
-      // TODO: - KAK add this location to the scene view
+      // Add this location to the scene
+      self?.arViewController?.addLocationNode(savedLocation: savedLocation)
       
       // Present an alert
-      self?.presentLocationSavedAlert(location: location)
+      self?.presentLocationSavedAlert(location: savedLocation)
     }
   }
   
@@ -65,11 +68,12 @@ extension MainViewController : AddLocationViewControllerDelegate {
 
 extension MainViewController : LocationListViewControllerDelegate {
   
-  func shouldDelete(location: SavedLocation) {
+  func shouldDelete(savedLocation: SavedLocation) {
     
-    // TODO: - KAK remove this location from the scene view
+    // Remove this location from the scene view
+    self.arViewController?.removeLocationNode(savedLocation: savedLocation)
     
     // Delete this location from core data
-    SavedLocation.deleteOne(location)
+    SavedLocation.deleteOne(savedLocation)
   }
 }

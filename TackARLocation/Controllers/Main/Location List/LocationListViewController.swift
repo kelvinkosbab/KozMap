@@ -11,7 +11,7 @@ import CoreLocation
 import CoreData
 
 protocol LocationListViewControllerDelegate : class {
-  func shouldDelete(location: SavedLocation)
+  func shouldDelete(savedLocation: SavedLocation)
 }
 
 class LocationListViewController : BaseViewController, NSFetchedResultsControllerDelegate {
@@ -158,7 +158,7 @@ extension LocationListViewController : UITableViewDelegate, UITableViewDataSourc
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
       let savedLocation = self.savedLocations[indexPath.row]
-      self.delegate?.shouldDelete(location: savedLocation)
+      self.delegate?.shouldDelete(savedLocation: savedLocation)
     }
   }
 }

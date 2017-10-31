@@ -26,14 +26,22 @@ extension Double {
       switch farUnitType {
       case .us:
         let miles = kilometers * 0.621371 // 1km == 0.621371mi
-        return "\(miles.twoDecimal) miles"
+        return "\(miles.threeDecimal) miles"
       case .metric:
-        return "\(kilometers.twoDecimal) kilometers"
+        return "\(kilometers.threeDecimal) kilometers"
       }
     }
   }
   
-  private var twoDecimal: Double {
+  private var oneDecimal: Double {
     return Double(Int(self*100)/100)
+  }
+  
+  private var twoDecimal: Double {
+    return Double(Int(self*1000)/1000)
+  }
+  
+  private var threeDecimal: Double {
+    return Double(Int(self*10000)/10000)
   }
 }

@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 
 protocol AddLocationViewControllerDelegate : class {
-  func didSave(location: SavedLocation)
+  func didSave(savedLocation: SavedLocation)
 }
 
 class AddLocationViewController : BaseViewController {
@@ -113,7 +113,7 @@ class AddLocationViewController : BaseViewController {
     // Save the location
     let savedLocation = SavedLocation.create(name: name, location: location)
     MyDataManager.shared.saveMainContext()
-    self.delegate?.didSave(location: savedLocation)
+    self.delegate?.didSave(savedLocation: savedLocation)
   }
 }
 
