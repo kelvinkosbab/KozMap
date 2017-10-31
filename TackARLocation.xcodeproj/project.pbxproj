@@ -11,6 +11,7 @@
 		B695236B1FA8D11E0014ABED /* CLLocation+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236A1FA8D11E0014ABED /* CLLocation+Util.swift */; };
 		B695236D1FA8D2E10014ABED /* SCNVector3+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236C1FA8D2E10014ABED /* SCNVector3+Util.swift */; };
 		B695236F1FA8D3430014ABED /* AxesNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236E1FA8D3430014ABED /* AxesNode.swift */; };
+		B69523711FA8EFAF0014ABED /* BeamEffect.scn in Resources */ = {isa = PBXBuildFile; fileRef = B69523701FA8EFAF0014ABED /* BeamEffect.scn */; };
 		B69BDAD31FA7F84400A385DE /* UIApplication+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69BDAD21FA7F84400A385DE /* UIApplication+Util.swift */; };
 		B69BDAD51FA7FB0B00A385DE /* Double+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69BDAD41FA7FB0B00A385DE /* Double+Util.swift */; };
 		B6C6EA291FA79B45001F97E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA281FA79B45001F97E7 /* AppDelegate.swift */; };
@@ -67,6 +68,7 @@
 		B695236A1FA8D11E0014ABED /* CLLocation+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Util.swift"; sourceTree = "<group>"; };
 		B695236C1FA8D2E10014ABED /* SCNVector3+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Util.swift"; sourceTree = "<group>"; };
 		B695236E1FA8D3430014ABED /* AxesNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxesNode.swift; sourceTree = "<group>"; };
+		B69523701FA8EFAF0014ABED /* BeamEffect.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = BeamEffect.scn; sourceTree = "<group>"; };
 		B69BDAD21FA7F84400A385DE /* UIApplication+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Util.swift"; sourceTree = "<group>"; };
 		B69BDAD41FA7FB0B00A385DE /* Double+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Util.swift"; sourceTree = "<group>"; };
 		B6C6EA251FA79B45001F97E7 /* TackARLocation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TackARLocation.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -195,6 +197,7 @@
 				B6C6EA321FA79B45001F97E7 /* Assets.xcassets */,
 				B6C6EA341FA79B45001F97E7 /* LaunchScreen.storyboard */,
 				B6C6EA371FA79B45001F97E7 /* Info.plist */,
+				B69523701FA8EFAF0014ABED /* BeamEffect.scn */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 			files = (
 				B6C6EA361FA79B45001F97E7 /* LaunchScreen.storyboard in Resources */,
 				B6C6EA5B1FA7B02B001F97E7 /* Models.scnassets in Resources */,
+				B69523711FA8EFAF0014ABED /* BeamEffect.scn in Resources */,
 				B6C6EA331FA79B45001F97E7 /* Assets.xcassets in Resources */,
 				B6C6EA2E1FA79B45001F97E7 /* Main.storyboard in Resources */,
 			);

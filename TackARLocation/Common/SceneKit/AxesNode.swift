@@ -42,7 +42,7 @@ class AxesNode : SCNNode {
     let yQuiverNode = SCNNode(geometry: yQuiverBox)
     yQuiverNode.position = SCNVector3Make(0.0, Float(quiverLength / 2.0), 0.0)
     
-    let yTextGeometry = SCNText(string: "Z", extrusionDepth: 0.2)
+    let yTextGeometry = SCNText(string: "Y", extrusionDepth: 0.2)
     yTextGeometry.firstMaterial?.diffuse.contents = UIColor.green
     yTextGeometry.font = UIFont.systemFont(ofSize: 15, weight: .regular)
     let yTextNode = SCNNode()

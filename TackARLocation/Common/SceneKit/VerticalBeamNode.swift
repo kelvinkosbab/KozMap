@@ -66,10 +66,20 @@ class VerticalBeamNode : LocationNode {
     let textGeometry = SCNText(string: savedLocation.name, extrusionDepth: 0)
     textGeometry.firstMaterial?.diffuse.contents = UIColor.orange
     textGeometry.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+    textGeometry.alignmentMode = kCAAlignmentCenter
     let textNode = SCNNode()
     textNode.geometry = textGeometry
-    textNode.scale = SCNVector3(x:  0.01, y:  0.01, z: 0.01)
+    textNode.scale = SCNVector3(x:  0.02, y:  0.02, z: 0.02)
+    textNode.position = SCNVector3(x: 0, y: -Float(height) / 6, z: 0)
     billboardNode.addChildNode(textNode)
+    
+    let coneGeometry = SCNCone()
+    coneGeometry.height = 50
+    coneGeometry.firstMaterial?.diffuse.contents = #imageLiteral(resourceName: "assetTron")
+    coneGeometry.firstMaterial?.lightingModel = .constant
+    let coneNode = SCNNode()
+    coneNode.geometry = coneGeometry
+    coneNode.position = SCNVector3(x: 0, y: 0, z: 0)
     
     super.init(savedLocation: savedLocation)
     
@@ -78,6 +88,7 @@ class VerticalBeamNode : LocationNode {
     self.constraints = [ billboardConstraint ]
     
     self.addChildNode(billboardNode)
+    self.addChildNode(coneNode)
   }
   
   required init?(coder aDecoder: NSCoder) {
