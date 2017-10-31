@@ -171,7 +171,6 @@ class TopDownPresentationManager : NSObject, UIViewControllerTransitioningDelega
       let dismissView = self.dismissView ?? self.createDismissView()
       self.dismissView = dismissView
       dismissView.addToContainer(containerView, atIndex: 0)
-      dismissView.alpha = 0
       
       // Begin animation
       self.presentedViewController.view.alpha = 0

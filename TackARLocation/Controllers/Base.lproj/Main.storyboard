@@ -519,14 +519,28 @@
                                                 <constraint firstAttribute="trailing" secondItem="x8Z-qD-7hY" secondAttribute="trailing" id="wEZ-kX-SjK"/>
                                             </constraints>
                                         </view>
+                                        <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e47-QF-MMJ">
+                                            <rect key="frame" x="162" y="222" width="50" height="6"/>
+                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Y36-E8-tAR">
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="6"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            </view>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="6" id="E9i-6C-DQS"/>
+                                                <constraint firstAttribute="width" constant="50" id="rHp-z1-INE"/>
+                                            </constraints>
+                                            <blurEffect style="light"/>
+                                        </visualEffectView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="mEu-SU-5FJ" firstAttribute="leading" secondItem="WJ0-sj-hnz" secondAttribute="leading" constant="24" id="0mm-BW-edS"/>
+                                        <constraint firstItem="e47-QF-MMJ" firstAttribute="top" secondItem="VGa-2o-zle" secondAttribute="bottom" constant="24" id="1Nz-w7-LP9"/>
                                         <constraint firstItem="mEu-SU-5FJ" firstAttribute="top" secondItem="TdI-vb-tqd" secondAttribute="bottom" id="86N-qT-GzP"/>
                                         <constraint firstAttribute="trailing" secondItem="TdI-vb-tqd" secondAttribute="trailing" id="9Ub-km-hls"/>
                                         <constraint firstItem="VGa-2o-zle" firstAttribute="top" secondItem="IMn-gC-qlk" secondAttribute="bottom" constant="24" id="Io9-ie-Fn3"/>
                                         <constraint firstItem="IMn-gC-qlk" firstAttribute="top" secondItem="mEu-SU-5FJ" secondAttribute="bottom" id="Kfb-Lz-yFd"/>
                                         <constraint firstItem="gcx-EF-3uG" firstAttribute="leading" secondItem="WJ0-sj-hnz" secondAttribute="leading" constant="24" id="L68-NT-ZMI"/>
+                                        <constraint firstItem="e47-QF-MMJ" firstAttribute="centerX" secondItem="WJ0-sj-hnz" secondAttribute="centerX" id="PSk-lB-tTJ"/>
                                         <constraint firstItem="TdI-vb-tqd" firstAttribute="leading" secondItem="WJ0-sj-hnz" secondAttribute="leading" constant="24" id="Pk5-l8-OMc"/>
                                         <constraint firstItem="TdI-vb-tqd" firstAttribute="top" secondItem="gcx-EF-3uG" secondAttribute="bottom" id="VsF-pn-het"/>
                                         <constraint firstItem="gcx-EF-3uG" firstAttribute="top" secondItem="wxv-0l-ebO" secondAttribute="bottom" constant="12" id="XN5-oy-9nI"/>
@@ -556,6 +570,7 @@
                         <viewLayoutGuide key="safeArea" id="Sym-N9-2ky"/>
                     </view>
                     <connections>
+                        <outlet property="bottomDragHandle" destination="e47-QF-MMJ" id="Vl5-LE-eCe"/>
                         <outlet property="farUnitTypeControl" destination="yAR-Ng-QlP" id="RSB-zx-LDX"/>
                         <outlet property="nearUnitTypeControl" destination="x8Z-qD-7hY" id="r6E-fb-Aa6"/>
                         <outlet property="versionLabel" destination="VGa-2o-zle" id="9Mn-Mz-XgW"/>
