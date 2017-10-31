@@ -37,17 +37,32 @@ class ARViewController : UIViewController {
     
     UIApplication.shared.isIdleTimerDisabled = true
     self.restartPlaneDetection()
+    
+    NotificationCenter.default.addObserver(self, selector: #selector(self.restartPlaneDetection), name: .UIApplicationDidBecomeActive, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(self.pauseScene), name: .UIApplicationWillResignActive, object: nil)
   }
   
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
     
-    self.session.pause()
+    self.pauseScene()
+    NotificationCenter.default.removeObserver(self)
   }
   
   // MARK: - Scene
   
-  func restartPlaneDetection() {
+  @objc func pauseScene() {
+    self.session.pause()
+  }
+  
+  @objc func restartPlaneDetection() {
+    
+    // Remove all nodes
+    self.sceneNode = nil
+    self.basePlane = nil
+    self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
+      node.removeFromParentNode()
+    }
     
     // Configure session
     self.sessionConfig.planeDetection = .horizontal

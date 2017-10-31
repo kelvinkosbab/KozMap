@@ -46,6 +46,9 @@ class MainViewController : BaseViewController {
     self.listVisualEffectView.layer.cornerRadius = 28
     self.listVisualEffectView.layer.masksToBounds = true
     self.listVisualEffectView.clipsToBounds = true
+    
+    // Location
+    LocationManager.shared.delegate = self
   }
   
   // MARK: - Navigation

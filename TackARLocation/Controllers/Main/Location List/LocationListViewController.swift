@@ -136,8 +136,7 @@ extension LocationListViewController : UITableViewDelegate, UITableViewDataSourc
     let savedLocation = self.savedLocations[indexPath.row]
     cell.titleLabel.text = savedLocation.name ?? "Unnamed"
     if let currentLocation = self.currentLocation {
-      let saved = CLLocation(latitude: savedLocation.latitude, longitude: savedLocation.longitude)
-      let distance = currentLocation.distance(from: saved)
+      let distance = currentLocation.distance(from: savedLocation.location)
       let readibleDistance = distance.getReadibleDistance(nearUnitType: Defaults.shared.nearUnitType, farUnitType: Defaults.shared.farUnitType)
       cell.detailLabel.text = "\(readibleDistance) away"
     } else {
