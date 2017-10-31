@@ -52,13 +52,24 @@ class VerticalBeamNode : LocationNode {
   
   override init(savedLocation: SavedLocation) {
     
-    let image = #imageLiteral(resourceName: "assetTron")
-    let plane = SCNPlane(width: image.size.width / 100, height: image.size.height / 100)
+    let image = #imageLiteral(resourceName: "assetGradient").withRenderingMode(.alwaysTemplate)
+    let width = image.size.width / 100
+    let height = image.size.height / 100
+    let plane = SCNPlane(width: width, height: height)
     plane.firstMaterial?.diffuse.contents = image
     plane.firstMaterial?.lightingModel = .constant
     let billboardNode = SCNNode()
     billboardNode.geometry = plane
+    billboardNode.position = SCNVector3(x: 0, y: Float(height) / 2, z: 0)
     self.billboardAnnotationNode = billboardNode
+    
+    let textGeometry = SCNText(string: savedLocation.name, extrusionDepth: 0)
+    textGeometry.firstMaterial?.diffuse.contents = UIColor.orange
+    textGeometry.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+    let textNode = SCNNode()
+    textNode.geometry = textGeometry
+    textNode.scale = SCNVector3(x:  0.01, y:  0.01, z: 0.01)
+    billboardNode.addChildNode(textNode)
     
     super.init(savedLocation: savedLocation)
     
