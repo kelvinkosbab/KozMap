@@ -21,7 +21,7 @@ class ARViewController : UIViewController {
   public private(set) weak var sceneNode: SCNNode?
   public private(set) weak var basePlane: SCNNode?
   private var currentCameraTrackingState: ARCamera.TrackingState? = nil
-  private var locationNodes = Set<LocationNode>()
+  private var placemarks = Set<PlacemarkNode>()
   
   var scneViewCenter: CGPoint {
     return self.sceneView.bounds.mid
@@ -38,8 +38,8 @@ class ARViewController : UIViewController {
   
   var currentLocation: CLLocation? = nil {
     didSet {
-      if self.isViewLoaded {
-        self.updatePositionAndScaleOfLocationNodes()
+      if self.isViewLoaded && oldValue == nil {
+        self.updatePositionAndScaleOfPlacemarks()
       }
     }
   }
@@ -93,56 +93,63 @@ class ARViewController : UIViewController {
   
   // MARK: - KAK TO REFACTOR
   
-  func addLocationNode(savedLocation: SavedLocation) {
-    let locationNode = VerticalBeamNode(savedLocation: savedLocation)
-    self.addLocationNode(locationNode: locationNode)
+  func add(savedLocation: SavedLocation) {
+    let location = savedLocation.location
+    let distanceText: String
+    if let currentLocation = self.currentLocation {
+      distanceText = "\(currentLocation.distance(from: location).oneDecimal)"
+    } else {
+      distanceText = "NA"
+    }
+    let unitText = Defaults.shared.nearUnitType.nearName
+    let placemark = BillboardPlacemarkNode(location: location, primaryName: savedLocation.name, distanceText: distanceText, unitText: unitText, beamColor: .cyan, beamTransparency: 1)
+    self.add(placemark: placemark)
   }
   
-  func removeLocationNode(savedLocation: SavedLocation) {
+  func remove(savedLocation: SavedLocation) {
     self.sceneView.scene.rootNode.enumerateChildNodes { (child, _) in
-      if let locationNode = child as? LocationNode, locationNode.savedLocation == savedLocation {
-        locationNode.removeFromParentNode()
+      if let placemark = child as? PlacemarkNode, placemark.location == savedLocation.location {
+        placemark.removeFromParentNode()
       }
     }
   }
   
-  ///location not being nil, and locationConfirmed being true are required
-  ///Upon being added, a node's position will be modified and should not be changed externally.
-  ///location will not be modified, but taken as accurate.
-  private func addLocationNode(locationNode: LocationNode) {
-    self.updatePositionAndScaleOfLocationNode(locationNode: locationNode, initialSetup: true, animated: false)
-    self.locationNodes.insert(locationNode)
-    self.sceneNode?.addChildNode(locationNode)
+  private func add(placemark: PlacemarkNode) {
+    placemark.loadModel { [weak self] in
+      self?.updatePositionAndScale(placemark: placemark, animated: true)
+      self?.placemarks.insert(placemark)
+      self?.sceneNode?.addChildNode(placemark)
+    }
   }
   
-  private func updatePositionAndScaleOfLocationNodes() {
-    for locationNode in self.locationNodes {
-      self.updatePositionAndScaleOfLocationNode(locationNode: locationNode, animated: true)
+  private func updatePositionAndScaleOfPlacemarks() {
+    for placemark in self.placemarks {
+      self.updatePositionAndScale(placemark: placemark, animated: true)
     }
   }
   
   ///Gives the best estimate of the location of a node
-  private func getLocation(locationNode: LocationNode) -> CLLocation {
-    return locationNode.savedLocation.location
-//    if locationNode.locationConfirmed || locationEstimateMethod == .coreLocationDataOnly {
-//      return locationNode.location!
-//    }
-//
-//    if let bestLocationEstimate = bestLocationEstimate(),
-//      locationNode.location == nil ||
-//        bestLocationEstimate.location.horizontalAccuracy < locationNode.location!.horizontalAccuracy {
-//      let translatedLocation = bestLocationEstimate.translatedLocation(to: locationNode.position)
-//
-//      return translatedLocation
-//    } else {
-//      return locationNode.location!
-//    }
+  private func getLocation(placemark: PlacemarkNode) -> CLLocation? {
+    return placemark.location
+    //    if locationNode.locationConfirmed || locationEstimateMethod == .coreLocationDataOnly {
+    //      return locationNode.location!
+    //    }
+    //
+    //    if let bestLocationEstimate = bestLocationEstimate(),
+    //      locationNode.location == nil ||
+    //        bestLocationEstimate.location.horizontalAccuracy < locationNode.location!.horizontalAccuracy {
+    //      let translatedLocation = bestLocationEstimate.translatedLocation(to: locationNode.position)
+    //
+    //      return translatedLocation
+    //    } else {
+    //      return locationNode.location!
+    //    }
   }
   
-  func updatePositionAndScaleOfLocationNode(locationNode: LocationNode, initialSetup: Bool = false, animated: Bool = false, duration: TimeInterval = 0.1) {
+  func updatePositionAndScale(placemark: PlacemarkNode, initialSetup: Bool = false, animated: Bool = false, duration: TimeInterval = 0.1) {
     
-    guard let currentPosition = self.currentScenePosition, let currentLocation = self.currentLocation else {
-        return
+    guard let currentPosition = self.currentScenePosition, let currentLocation = self.currentLocation, let locationNodeLocation = self.getLocation(placemark: placemark) else {
+      return
     }
     
     SCNTransaction.begin()
@@ -153,9 +160,6 @@ class ARViewController : UIViewController {
       SCNTransaction.animationDuration = 0
     }
     
-    // Core location of this node
-    let locationNodeLocation = self.getLocation(locationNode: locationNode)
-    
     //Position is set to a position coordinated via the current position
     let locationTranslation = currentLocation.translation(toLocation: locationNodeLocation)
     
@@ -163,10 +167,11 @@ class ARViewController : UIViewController {
     
     let distance = locationNodeLocation.distance(from: currentLocation)
     
-    if distance > 100 || locationNode.continuallyAdjustNodePositionWhenWithinRange || initialSetup {
+    if distance > 100 || placemark.continuallyAdjustNodePositionWhenWithinRange || initialSetup {
       if distance > 100 {
         //If the item is too far away, bring it closer and scale it down
         let scale = 100 / Float(distance)
+        let yOffset: Float = -30
         
         adjustedDistance = distance * Double(scale)
         
@@ -177,42 +182,43 @@ class ARViewController : UIViewController {
         
         let position = SCNVector3(
           x: currentPosition.x + adjustedTranslation.x,
-          y: currentPosition.y + adjustedTranslation.y,
+          y: currentPosition.y + adjustedTranslation.y + yOffset,
           z: currentPosition.z - adjustedTranslation.z)
         
-        locationNode.position = position
+        placemark.position = position
+        placemark.scale = SCNVector3(x: scale, y: scale, z: scale)
         
-        locationNode.scale = SCNVector3(x: scale, y: scale, z: scale)
       } else {
+        
+        let yOffset: Float = -8
         adjustedDistance = distance
         let position = SCNVector3(
           x: currentPosition.x + Float(locationTranslation.longitudeTranslation),
-          y: currentPosition.y + Float(locationTranslation.altitudeTranslation),
+          y: currentPosition.y + Float(locationTranslation.altitudeTranslation) + yOffset,
           z: currentPosition.z - Float(locationTranslation.latitudeTranslation))
         
-        locationNode.position = position
-        locationNode.scale = SCNVector3(x: 1, y: 1, z: 1)
+        placemark.position = position
+        placemark.scale = SCNVector3(x: 1, y: 1, z: 1)
       }
       
     } else {
       
       //Calculates distance based on the distance within the scene, as the location isn't yet confirmed
-      adjustedDistance = Double(currentPosition.distance(to: locationNode.position))
-      
-      locationNode.scale = SCNVector3(x: 1, y: 1, z: 1)
+      adjustedDistance = Double(currentPosition.distance(to: placemark.position))
+      placemark.scale = SCNVector3(x: 1, y: 1, z: 1)
     }
     
-    if let beamNode = locationNode as? VerticalBeamNode {
+    if let placemark = placemark as? BillboardPlacemarkNode {
       //The scale of a node with a billboard constraint applied is ignored
       //The annotation subnode itself, as a subnode, has the scale applied to it
-      let appliedScale = locationNode.scale
-      locationNode.scale = SCNVector3(x: 1, y: 1, z: 1)
+      let appliedScale = placemark.scale
+      placemark.scale = SCNVector3(x: 1, y: 1, z: 1)
       
       var scale: Float
       
-      if beamNode.scaleRelativeToDistance {
+      if placemark.scaleRelativeToDistance {
         scale = appliedScale.y
-        beamNode.billboardAnnotationNode.scale = appliedScale
+        placemark.billboardAnnotationNode?.scale = appliedScale
       } else {
         //Scale it to be an appropriate size so that it can be seen
         scale = Float(adjustedDistance) * 0.181
@@ -220,10 +226,10 @@ class ARViewController : UIViewController {
         if distance > 3000 {
           scale = scale * 0.75
         }
-        beamNode.billboardAnnotationNode.scale = SCNVector3(x: scale, y: scale, z: scale)
+        placemark.billboardAnnotationNode?.scale = SCNVector3(x: scale, y: scale, z: scale)
       }
       
-      beamNode.pivot = SCNMatrix4MakeTranslation(0, -1.1 * scale, 0)
+      placemark.pivot = SCNMatrix4MakeTranslation(0, -1.1 * scale, 0)
     }
     
     SCNTransaction.commit()
@@ -254,10 +260,9 @@ extension ARViewController : ARSCNViewDelegate {
         
         // KAK TMP
         for savedLocation in SavedLocation.fetchAll() {
-          let locationNode = VerticalBeamNode(savedLocation: savedLocation)
-          self.addLocationNode(locationNode: locationNode)
+          self.add(savedLocation: savedLocation)
         }
-      
+        
       default: break
       }
     }
@@ -291,3 +296,4 @@ extension ARViewController : ARSCNViewDelegate {
     }
   }
 }
+

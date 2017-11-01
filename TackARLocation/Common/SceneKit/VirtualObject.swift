@@ -15,6 +15,7 @@ class VirtualObject : SCNNode {
   let modelName: String
   let fileExtension: String
   var modelLoaded: Bool = false
+  internal weak var baseWrapperNode: SCNNode? = nil
   
   // MARK: - Init
   
@@ -29,9 +30,13 @@ class VirtualObject : SCNNode {
   }
   
   func loadModel(completion: @escaping () -> Void) {
-    DispatchQueue.global().async {
+    DispatchQueue.global().async { [weak self] in
       
-      guard let virtualObjectScene = SCNScene(named: "\(self.modelName).\(self.fileExtension)", inDirectory: "Models.scnassets/") else {
+      guard let strongSelf = self else {
+        return
+      }
+      
+      guard let virtualObjectScene = SCNScene(named: "\(strongSelf.modelName).\(strongSelf.fileExtension)", inDirectory: "Models.scnassets/") else {
         DispatchQueue.main.async {
           completion()
         }
@@ -39,14 +44,15 @@ class VirtualObject : SCNNode {
       }
       
       let wrapperNode = SCNNode()
+      strongSelf.baseWrapperNode = wrapperNode
       
       for child in virtualObjectScene.rootNode.childNodes {
         wrapperNode.addChildNode(child)
       }
       
-      DispatchQueue.main.async {
-        self.addChildNode(wrapperNode)
-        self.modelLoaded = true
+      DispatchQueue.main.async { [weak self] in
+        self?.addChildNode(wrapperNode)
+        self?.modelLoaded = true
         completion()
       }
     }

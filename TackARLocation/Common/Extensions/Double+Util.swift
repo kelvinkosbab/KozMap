@@ -33,15 +33,15 @@ extension Double {
     }
   }
   
-  private var oneDecimal: Double {
+  var oneDecimal: Double {
     return Double(Int(self*100)/100)
   }
   
-  private var twoDecimal: Double {
+  var twoDecimal: Double {
     return Double(Int(self*1000)/1000)
   }
   
-  private var threeDecimal: Double {
+  var threeDecimal: Double {
     return Double(Int(self*10000)/10000)
   }
 }
