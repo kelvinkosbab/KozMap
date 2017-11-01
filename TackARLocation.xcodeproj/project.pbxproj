@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B66041EF1FA905350076EBEF /* VirtualObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66041EE1FA905350076EBEF /* VirtualObject.swift */; };
 		B67B2A7A1FA8279000F531BF /* VerticalBeamNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67B2A791FA8279000F531BF /* VerticalBeamNode.swift */; };
 		B695236B1FA8D11E0014ABED /* CLLocation+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236A1FA8D11E0014ABED /* CLLocation+Util.swift */; };
 		B695236D1FA8D2E10014ABED /* SCNVector3+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236C1FA8D2E10014ABED /* SCNVector3+Util.swift */; };
 		B695236F1FA8D3430014ABED /* AxesNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236E1FA8D3430014ABED /* AxesNode.swift */; };
-		B69523711FA8EFAF0014ABED /* BeamEffect.scn in Resources */ = {isa = PBXBuildFile; fileRef = B69523701FA8EFAF0014ABED /* BeamEffect.scn */; };
 		B69BDAD31FA7F84400A385DE /* UIApplication+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69BDAD21FA7F84400A385DE /* UIApplication+Util.swift */; };
 		B69BDAD51FA7FB0B00A385DE /* Double+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69BDAD41FA7FB0B00A385DE /* Double+Util.swift */; };
 		B6C6EA291FA79B45001F97E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA281FA79B45001F97E7 /* AppDelegate.swift */; };
@@ -61,14 +61,15 @@
 		B6C6EA9B1FA7E8E4001F97E7 /* DragRightDismissInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA9A1FA7E8E4001F97E7 /* DragRightDismissInteractiveTransition.swift */; };
 		B6C6EA9D1FA7EBEE001F97E7 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA9C1FA7EBEE001F97E7 /* BaseViewController.swift */; };
 		B6C6EA9F1FA7EBF6001F97E7 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA9E1FA7EBF6001F97E7 /* BaseTableViewController.swift */; };
+		B6CE3D061FAA1E9400F9DF76 /* PlacemarkNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CE3D051FAA1E9400F9DF76 /* PlacemarkNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B66041EE1FA905350076EBEF /* VirtualObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObject.swift; sourceTree = "<group>"; };
 		B67B2A791FA8279000F531BF /* VerticalBeamNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalBeamNode.swift; sourceTree = "<group>"; };
 		B695236A1FA8D11E0014ABED /* CLLocation+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Util.swift"; sourceTree = "<group>"; };
 		B695236C1FA8D2E10014ABED /* SCNVector3+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Util.swift"; sourceTree = "<group>"; };
 		B695236E1FA8D3430014ABED /* AxesNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxesNode.swift; sourceTree = "<group>"; };
-		B69523701FA8EFAF0014ABED /* BeamEffect.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = BeamEffect.scn; sourceTree = "<group>"; };
 		B69BDAD21FA7F84400A385DE /* UIApplication+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Util.swift"; sourceTree = "<group>"; };
 		B69BDAD41FA7FB0B00A385DE /* Double+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Util.swift"; sourceTree = "<group>"; };
 		B6C6EA251FA79B45001F97E7 /* TackARLocation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TackARLocation.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,6 +121,7 @@
 		B6C6EA9A1FA7E8E4001F97E7 /* DragRightDismissInteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragRightDismissInteractiveTransition.swift; sourceTree = "<group>"; };
 		B6C6EA9C1FA7EBEE001F97E7 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		B6C6EA9E1FA7EBF6001F97E7 /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
+		B6CE3D051FAA1E9400F9DF76 /* PlacemarkNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacemarkNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,7 +199,6 @@
 				B6C6EA321FA79B45001F97E7 /* Assets.xcassets */,
 				B6C6EA341FA79B45001F97E7 /* LaunchScreen.storyboard */,
 				B6C6EA371FA79B45001F97E7 /* Info.plist */,
-				B69523701FA8EFAF0014ABED /* BeamEffect.scn */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -268,6 +269,8 @@
 				B6C6EA601FA7B68C001F97E7 /* Plane.swift */,
 				B695236E1FA8D3430014ABED /* AxesNode.swift */,
 				B67B2A791FA8279000F531BF /* VerticalBeamNode.swift */,
+				B66041EE1FA905350076EBEF /* VirtualObject.swift */,
+				B6CE3D051FAA1E9400F9DF76 /* PlacemarkNode.swift */,
 			);
 			path = SceneKit;
 			sourceTree = "<group>";
@@ -400,7 +403,6 @@
 			files = (
 				B6C6EA361FA79B45001F97E7 /* LaunchScreen.storyboard in Resources */,
 				B6C6EA5B1FA7B02B001F97E7 /* Models.scnassets in Resources */,
-				B69523711FA8EFAF0014ABED /* BeamEffect.scn in Resources */,
 				B6C6EA331FA79B45001F97E7 /* Assets.xcassets in Resources */,
 				B6C6EA2E1FA79B45001F97E7 /* Main.storyboard in Resources */,
 			);
@@ -443,6 +445,7 @@
 				B6C6EA9B1FA7E8E4001F97E7 /* DragRightDismissInteractiveTransition.swift in Sources */,
 				B6C6EA311FA79B45001F97E7 /* TackARLocation.xcdatamodeld in Sources */,
 				B6C6EA5F1FA7B5D6001F97E7 /* SCNMaterial+Util.swift in Sources */,
+				B66041EF1FA905350076EBEF /* VirtualObject.swift in Sources */,
 				B6C6EA4E1FA7A9A6001F97E7 /* BaseNavigationController.swift in Sources */,
 				B69BDAD31FA7F84400A385DE /* UIApplication+Util.swift in Sources */,
 				B6C6EA841FA7E690001F97E7 /* InteractiveTransition.swift in Sources */,
@@ -451,6 +454,7 @@
 				B6C6EA751FA7D717001F97E7 /* Defaults+MyManagedObjectProtocol.swift in Sources */,
 				B6C6EA861FA7E6A6001F97E7 /* DragUpDismissInteractiveTransition.swift in Sources */,
 				B6C6EA2B1FA79B45001F97E7 /* ViewController.swift in Sources */,
+				B6CE3D061FAA1E9400F9DF76 /* PlacemarkNode.swift in Sources */,
 				B6C6EA7E1FA7E639001F97E7 /* PresentableController.swift in Sources */,
 				B6C6EA541FA7AEA4001F97E7 /* Loggable.swift in Sources */,
 				B6C6EA291FA79B45001F97E7 /* AppDelegate.swift in Sources */,

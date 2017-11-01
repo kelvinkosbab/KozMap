@@ -52,9 +52,9 @@ class VerticalBeamNode : LocationNode {
   
   override init(savedLocation: SavedLocation) {
     
-    let image = #imageLiteral(resourceName: "assetGradient").withRenderingMode(.alwaysTemplate)
-    let width = image.size.width / 100
-    let height = image.size.height / 100
+    let image = #imageLiteral(resourceName: "icGradient").withRenderingMode(.alwaysTemplate)
+    let width = image.size.width / 5000
+    let height = image.size.height / 10
     let plane = SCNPlane(width: width, height: height)
     plane.firstMaterial?.diffuse.contents = image
     plane.firstMaterial?.lightingModel = .constant
@@ -73,14 +73,6 @@ class VerticalBeamNode : LocationNode {
     textNode.position = SCNVector3(x: 0, y: -Float(height) / 6, z: 0)
     billboardNode.addChildNode(textNode)
     
-    let coneGeometry = SCNCone()
-    coneGeometry.height = 50
-    coneGeometry.firstMaterial?.diffuse.contents = #imageLiteral(resourceName: "assetTron")
-    coneGeometry.firstMaterial?.lightingModel = .constant
-    let coneNode = SCNNode()
-    coneNode.geometry = coneGeometry
-    coneNode.position = SCNVector3(x: 0, y: 0, z: 0)
-    
     super.init(savedLocation: savedLocation)
     
     let billboardConstraint = SCNBillboardConstraint()
@@ -88,7 +80,6 @@ class VerticalBeamNode : LocationNode {
     self.constraints = [ billboardConstraint ]
     
     self.addChildNode(billboardNode)
-    self.addChildNode(coneNode)
   }
   
   required init?(coder aDecoder: NSCoder) {
