@@ -264,30 +264,30 @@ extension ARViewController : ARSCNViewDelegate {
   }
   
   func sessionWasInterrupted(_ session: ARSession) {
-    self.extendedLog("session was interrupted")
+    Log.extendedLog("session was interrupted")
   }
   
   func sessionInterruptionEnded(_ session: ARSession) {
-    self.extendedLog("session interruption ended")
+    Log.extendedLog("session interruption ended")
   }
   
   func session(_ session: ARSession, didFailWithError error: Error) {
-    self.extendedLog("session did fail with error: \(error)")
+    Log.extendedLog("session did fail with error: \(error)")
   }
   
   func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
     self.currentCameraTrackingState = camera.trackingState
     switch camera.trackingState {
     case .limited(.insufficientFeatures):
-      self.extendedLog("camera did change tracking state: limited, insufficient features")
+      Log.extendedLog("camera did change tracking state: limited, insufficient features")
     case .limited(.excessiveMotion):
-      self.extendedLog("camera did change tracking state: limited, excessive motion")
+      Log.extendedLog("camera did change tracking state: limited, excessive motion")
     case .limited(.initializing):
-      self.extendedLog("camera did change tracking state: limited, initializing")
+      Log.extendedLog("camera did change tracking state: limited, initializing")
     case .normal:
-      self.extendedLog("camera did change tracking state: normal")
+      Log.extendedLog("camera did change tracking state: normal")
     case .notAvailable:
-      self.extendedLog("camera did change tracking state: not available")
+      Log.extendedLog("camera did change tracking state: not available")
     }
   }
 }
