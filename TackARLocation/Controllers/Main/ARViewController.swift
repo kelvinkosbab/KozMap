@@ -95,14 +95,21 @@ class ARViewController : UIViewController {
   
   func add(savedLocation: SavedLocation) {
     let location = savedLocation.location
-    let distanceText: String
+    
+    // Distance text
+    let distanceText: String?
+    let unitText: String?
     if let currentLocation = self.currentLocation {
-      distanceText = "\(currentLocation.distance(from: location).oneDecimal)"
+      let distance = currentLocation.distance(from: location)
+      distanceText = distance.getDistanceValue(nearUnitType: Defaults.shared.nearUnitType, farUnitType: Defaults.shared.farUnitType, asShortValue: true)
+      unitText = distance.getUnitTypeString(nearUnitType: Defaults.shared.nearUnitType, farUnitType: Defaults.shared.farUnitType, asShortString: true)
     } else {
-      distanceText = "NA"
+      distanceText = nil
+      unitText = nil
     }
-    let unitText = Defaults.shared.nearUnitType.nearName
-    let placemark = BillboardPlacemarkNode(location: location, primaryName: savedLocation.name, distanceText: distanceText, unitText: unitText, beamColor: .cyan, beamTransparency: 1)
+    
+    // Placemark
+    let placemark = BillboardPlacemarkNode(location: location, primaryName: savedLocation.name, distanceText: distanceText, unitText: unitText, beamColor: .cyan, beamTransparency: 0.3)
     self.add(placemark: placemark)
   }
   
@@ -167,11 +174,11 @@ class ARViewController : UIViewController {
     
     let distance = locationNodeLocation.distance(from: currentLocation)
     
-    if distance > 100 || placemark.continuallyAdjustNodePositionWhenWithinRange || initialSetup {
-      if distance > 100 {
+    if distance > Double.shortDistanceCutoff || placemark.continuallyAdjustNodePositionWhenWithinRange || initialSetup {
+      if distance > Double.shortDistanceCutoff {
         //If the item is too far away, bring it closer and scale it down
         let scale = 100 / Float(distance)
-        let yOffset: Float = -30
+        let yOffset: Float = -50
         
         adjustedDistance = distance * Double(scale)
         
@@ -190,7 +197,7 @@ class ARViewController : UIViewController {
         
       } else {
         
-        let yOffset: Float = -8
+        let yOffset: Float = -11
         adjustedDistance = distance
         let position = SCNVector3(
           x: currentPosition.x + Float(locationTranslation.longitudeTranslation),

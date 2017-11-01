@@ -20,12 +20,30 @@ enum UnitType : Int {
     }
   }
   
+  var farNameShort: String {
+    switch self {
+    case .us:
+      return "Mi"
+    case .metric:
+      return "Km"
+    }
+  }
+  
   var nearName: String {
     switch self {
     case .us:
       return "Feet"
     case .metric:
       return "Meters"
+    }
+  }
+  
+  var nearNameShort: String {
+    switch self {
+    case .us:
+      return "Ft"
+    case .metric:
+      return "m"
     }
   }
 }
