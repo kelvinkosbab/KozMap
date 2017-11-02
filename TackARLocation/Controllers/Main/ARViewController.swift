@@ -208,6 +208,7 @@ class ARViewController : UIViewController {
         scale = appliedScale.y
         placemark.scalableNode?.scale = appliedScale
       } else {
+        
         //Scale it to be an appropriate size so that it can be seen
         scale = Float(adjustedDistance) * 0.181
 
