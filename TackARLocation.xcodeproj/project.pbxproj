@@ -61,6 +61,7 @@
 		B6C6EA9D1FA7EBEE001F97E7 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA9C1FA7EBEE001F97E7 /* BaseViewController.swift */; };
 		B6C6EA9F1FA7EBF6001F97E7 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA9E1FA7EBF6001F97E7 /* BaseTableViewController.swift */; };
 		B6CE3D061FAA1E9400F9DF76 /* PlacemarkNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CE3D051FAA1E9400F9DF76 /* PlacemarkNode.swift */; };
+		B6CE3D121FAAFC6700F9DF76 /* GradientSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CE3D111FAAFC6700F9DF76 /* GradientSlider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -120,6 +121,7 @@
 		B6C6EA9C1FA7EBEE001F97E7 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		B6C6EA9E1FA7EBF6001F97E7 /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		B6CE3D051FAA1E9400F9DF76 /* PlacemarkNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacemarkNode.swift; sourceTree = "<group>"; };
+		B6CE3D111FAAFC6700F9DF76 /* GradientSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientSlider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +166,7 @@
 		B6C6EA3D1FA79F21001F97E7 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				B6CE3D101FAAFC5700F9DF76 /* GradientSlider */,
 				B6C6EA911FA7E836001F97E7 /* Device */,
 				B6C6EA7C1FA7E62B001F97E7 /* Presenting Controllers */,
 				B6C6EA551FA7AF49001F97E7 /* Extensions */,
@@ -339,6 +342,14 @@
 			path = Device;
 			sourceTree = "<group>";
 		};
+		B6CE3D101FAAFC5700F9DF76 /* GradientSlider */ = {
+			isa = PBXGroup;
+			children = (
+				B6CE3D111FAAFC6700F9DF76 /* GradientSlider.swift */,
+			);
+			path = GradientSlider;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -434,6 +445,7 @@
 				B695236D1FA8D2E10014ABED /* SCNVector3+Util.swift in Sources */,
 				B6C6EA611FA7B68C001F97E7 /* Plane.swift in Sources */,
 				B6C6EA8C1FA7E6E3001F97E7 /* HDFadeWithBlurPresentationManager.swift in Sources */,
+				B6CE3D121FAAFC6700F9DF76 /* GradientSlider.swift in Sources */,
 				B6C6EA8A1FA7E6D2001F97E7 /* RightToLeftPresentationManager.swift in Sources */,
 				B6C6EA791FA7DAB9001F97E7 /* LocationListViewController+Cells.swift in Sources */,
 				B6C6EA6F1FA7C264001F97E7 /* LocationListViewController.swift in Sources */,
