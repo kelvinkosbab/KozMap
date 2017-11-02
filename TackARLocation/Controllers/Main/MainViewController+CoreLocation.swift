@@ -41,9 +41,6 @@ extension MainViewController : AddLocationViewControllerDelegate {
     
     dispatchGroup.notify(queue: .main) { [weak self] in
       
-      // Add this location to the scene
-      self?.arViewController?.add(savedLocation: savedLocation)
-      
       // Present an alert
       self?.presentLocationSavedAlert(location: savedLocation)
     }
@@ -69,9 +66,6 @@ extension MainViewController : AddLocationViewControllerDelegate {
 extension MainViewController : LocationListViewControllerDelegate {
   
   func shouldDelete(savedLocation: SavedLocation) {
-    
-    // Remove this location from the scene view
-    self.arViewController?.remove(savedLocation: savedLocation)
     
     // Delete this location from core data
     SavedLocation.deleteOne(savedLocation)

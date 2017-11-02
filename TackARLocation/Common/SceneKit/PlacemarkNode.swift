@@ -9,13 +9,11 @@
 import SceneKit
 import CoreLocation
 
-class PlacemarkNode : VirtualObject, Locatible {
-  
-  // MARK: - Locatible
-  
-  var location: CLLocation? = nil
+class PlacemarkNode : VirtualObject {
   
   // MARK: - Properties
+  
+  let savedLocation: SavedLocation
   
   var primaryName: String? = nil {
     didSet {
@@ -49,9 +47,8 @@ class PlacemarkNode : VirtualObject, Locatible {
   
   // MARK: - Init
   
-  convenience init(location: CLLocation, primaryName: String? = nil, distanceText: String? = nil, unitText: String? = nil, beamColor: UIColor = .cyan, beamTransparency: CGFloat = 1) {
-    self.init()
-    self.location = location
+  convenience init(savedLocation: SavedLocation, primaryName: String? = nil, distanceText: String? = nil, unitText: String? = nil, beamColor: UIColor = .cyan, beamTransparency: CGFloat = 1) {
+    self.init(savedLocation: savedLocation)
     self.primaryName = primaryName
     self.distanceText = distanceText
     self.unitText = unitText
@@ -59,7 +56,8 @@ class PlacemarkNode : VirtualObject, Locatible {
     self.beamTransparency = beamTransparency
   }
   
-  init() {
+  init(savedLocation: SavedLocation) {
+    self.savedLocation = savedLocation
     super.init(modelName: "PlacemarkNode", fileExtension: "scn")
   }
   
@@ -153,12 +151,12 @@ class BillboardPlacemarkNode : PlacemarkNode {
   
   ///Subnodes and adjustments should be applied to this subnode
   ///Required to allow scaling at the same time as having a 2D 'billboard' appearance
-  var billboardAnnotationNode: SCNNode? {
+  var scalableNode: SCNNode? {
     return self.baseWrapperNode
   }
   
-  override init() {
-    super.init()
+  override init(savedLocation: SavedLocation) {
+    super.init(savedLocation: savedLocation)
     
     let billboardConstraint = SCNBillboardConstraint()
     billboardConstraint.freeAxes = .Y
