@@ -109,7 +109,7 @@ class ARViewController : UIViewController {
   private func add(placemark: PlacemarkNode) {
     self.placemarks.insert(placemark)
     placemark.loadModel { [weak self] in
-      self?.update(placemark: placemark, animated: true)
+      self?.update(placemark: placemark, animated: true, updatePosition: true)
       self?.sceneNode?.addChildNode(placemark)
     }
   }
