@@ -30,7 +30,7 @@ class MainViewController : BaseViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.navigationItem.title = "ARMap"
+    self.navigationItem.title = "KozMap"
     self.navigationItem.largeTitleDisplayMode = .never
     
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "assetOptions"), style: .plain, target: self, action: #selector(self.settingsButtonSelected))

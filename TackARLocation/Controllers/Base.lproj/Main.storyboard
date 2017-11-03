@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13528" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Yg3-Eg-XZo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13770" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Yg3-Eg-XZo">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13526"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13770"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -15,7 +15,7 @@
         <!--Root Navigation Controller-->
         <scene sceneID="m5X-Zr-XfR">
             <objects>
-                <navigationController storyboardIdentifier="RootNavigationController" id="Yg3-Eg-XZo" customClass="RootNavigationController" customModule="TackARLocation" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="RootNavigationController" id="Yg3-Eg-XZo" customClass="RootNavigationController" customModule="KozMap" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pr0-oa-Q7s">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -31,7 +31,7 @@
         <!--Main View Controller-->
         <scene sceneID="F5i-5X-K5u">
             <objects>
-                <viewController storyboardIdentifier="MainViewController" id="G2c-OT-CDt" customClass="MainViewController" customModule="TackARLocation" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" id="G2c-OT-CDt" customClass="MainViewController" customModule="KozMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LJa-2v-V0U">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -64,7 +64,7 @@
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wNG-t2-g00">
                                                         <rect key="frame" x="2" y="2" width="52" height="52"/>
-                                                        <state key="normal" backgroundImage="add">
+                                                        <state key="normal" image="assetPlus">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <connections>
@@ -111,7 +111,7 @@
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xq0-oX-NLO">
                                                         <rect key="frame" x="2" y="2" width="52" height="52"/>
-                                                        <state key="normal" backgroundImage="menu">
+                                                        <state key="normal" image="assetList">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <connections>
@@ -177,7 +177,7 @@
         <!--Permissions View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="PermissionsViewController" id="BYZ-38-t0r" customClass="PermissionsViewController" customModule="TackARLocation" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PermissionsViewController" id="BYZ-38-t0r" customClass="PermissionsViewController" customModule="KozMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -205,7 +205,7 @@
         <!--View Controller-->
         <scene sceneID="Q41-ef-App">
             <objects>
-                <viewController storyboardIdentifier="ARViewController" id="EaT-SM-uBO" customClass="ARViewController" customModule="TackARLocation" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ARViewController" id="EaT-SM-uBO" customClass="ARViewController" customModule="KozMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0wq-Wv-cF1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -234,7 +234,7 @@
         <!--Add Location View Controller-->
         <scene sceneID="FDq-QK-t4l">
             <objects>
-                <viewController storyboardIdentifier="AddLocationViewController" id="SuI-P8-9Vq" customClass="AddLocationViewController" customModule="TackARLocation" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddLocationViewController" id="SuI-P8-9Vq" customClass="AddLocationViewController" customModule="KozMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bJ6-gh-iLf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -395,7 +395,7 @@
         <!--Settings View Controller-->
         <scene sceneID="Cr4-WW-1eD">
             <objects>
-                <viewController storyboardIdentifier="SettingsViewController" id="uFu-Kp-nFk" customClass="SettingsViewController" customModule="TackARLocation" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingsViewController" id="uFu-Kp-nFk" customClass="SettingsViewController" customModule="KozMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rjd-mq-xPR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -583,7 +583,7 @@
         <!--Location List View Controller-->
         <scene sceneID="dWR-Kn-3hl">
             <objects>
-                <viewController storyboardIdentifier="LocationListViewController" id="T8K-mf-jBt" customClass="LocationListViewController" customModule="TackARLocation" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LocationListViewController" id="T8K-mf-jBt" customClass="LocationListViewController" customModule="KozMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iV8-Qy-Cvi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -598,7 +598,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <prototypes>
-                                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="LocationListViewControllerCell" id="WbG-V0-SCv" customClass="LocationListViewControllerCell" customModule="TackARLocation" customModuleProvider="target">
+                                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="LocationListViewControllerCell" id="WbG-V0-SCv" customClass="LocationListViewControllerCell" customModule="KozMap" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WbG-V0-SCv" id="YCB-QG-hkg">
@@ -663,8 +663,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="add" width="48" height="48"/>
+        <image name="assetList" width="24" height="14"/>
         <image name="assetLocation" width="24" height="22"/>
-        <image name="menu" width="48" height="48"/>
+        <image name="assetPlus" width="24" height="24"/>
     </resources>
 </document>
