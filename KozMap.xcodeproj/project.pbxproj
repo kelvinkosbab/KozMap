@@ -14,7 +14,6 @@
 		B69BDAD31FA7F84400A385DE /* UIApplication+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69BDAD21FA7F84400A385DE /* UIApplication+Util.swift */; };
 		B69BDAD51FA7FB0B00A385DE /* Double+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69BDAD41FA7FB0B00A385DE /* Double+Util.swift */; };
 		B6C6EA291FA79B45001F97E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA281FA79B45001F97E7 /* AppDelegate.swift */; };
-		B6C6EA2B1FA79B45001F97E7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA2A1FA79B45001F97E7 /* ViewController.swift */; };
 		B6C6EA2E1FA79B45001F97E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6C6EA2C1FA79B45001F97E7 /* Main.storyboard */; };
 		B6C6EA311FA79B45001F97E7 /* TackARLocation.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA2F1FA79B45001F97E7 /* TackARLocation.xcdatamodeld */; };
 		B6C6EA331FA79B45001F97E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6C6EA321FA79B45001F97E7 /* Assets.xcassets */; };
@@ -73,7 +72,6 @@
 		B69BDAD41FA7FB0B00A385DE /* Double+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Util.swift"; sourceTree = "<group>"; };
 		B6C6EA251FA79B45001F97E7 /* KozMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KozMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6C6EA281FA79B45001F97E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B6C6EA2A1FA79B45001F97E7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B6C6EA2D1FA79B45001F97E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B6C6EA301FA79B45001F97E7 /* TackARLocation.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TackARLocation.xcdatamodel; sourceTree = "<group>"; };
 		B6C6EA321FA79B45001F97E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -155,7 +153,6 @@
 			isa = PBXGroup;
 			children = (
 				B6C6EA281FA79B45001F97E7 /* AppDelegate.swift */,
-				B6C6EA2A1FA79B45001F97E7 /* ViewController.swift */,
 				B6C6EA3D1FA79F21001F97E7 /* Common */,
 				B6C6EA3E1FA79F2B001F97E7 /* Controllers */,
 				B6C6EA3F1FA79F35001F97E7 /* Supporting Files */,
@@ -461,7 +458,6 @@
 				B6C6EA8E1FA7E6F5001F97E7 /* UIView+Util.swift in Sources */,
 				B6C6EA751FA7D717001F97E7 /* Defaults+MyManagedObjectProtocol.swift in Sources */,
 				B6C6EA861FA7E6A6001F97E7 /* DragUpDismissInteractiveTransition.swift in Sources */,
-				B6C6EA2B1FA79B45001F97E7 /* ViewController.swift in Sources */,
 				B6CE3D061FAA1E9400F9DF76 /* PlacemarkNode.swift in Sources */,
 				B6C6EA7E1FA7E639001F97E7 /* PresentableController.swift in Sources */,
 				B6C6EA541FA7AEA4001F97E7 /* Loggable.swift in Sources */,
