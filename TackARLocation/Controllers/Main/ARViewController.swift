@@ -51,7 +51,7 @@ class ARViewController : UIViewController {
   var currentLocation: CLLocation? = nil {
     didSet {
       if self.isViewLoaded {
-        self.updatePlacemarks(updatePosition: oldValue == nil)
+        self.updatePlacemarks(updatePosition: true)
       }
     }
   }
@@ -265,7 +265,7 @@ extension ARViewController : ARSCNViewDelegate {
         
         // Update placemarks
         self.updateSavedLocations()
-        self.updatePlacemarks()
+        self.updatePlacemarks(updatePosition: true)
         
       default: break
       }

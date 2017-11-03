@@ -39,7 +39,7 @@ class PlacemarkNode : VirtualObject {
     }
   }
   
-  var beamTransparency: CGFloat = 0.3 {
+  var beamTransparency: CGFloat = 0.5 {
     didSet {
       self.updateBeamTransparency()
     }
@@ -47,7 +47,7 @@ class PlacemarkNode : VirtualObject {
   
   // MARK: - Init
   
-  convenience init(savedLocation: SavedLocation, primaryName: String? = nil, distanceText: String? = nil, unitText: String? = nil, beamColor: UIColor = .cyan, beamTransparency: CGFloat = 0.3) {
+  convenience init(savedLocation: SavedLocation, primaryName: String? = nil, distanceText: String? = nil, unitText: String? = nil, beamColor: UIColor = .cyan, beamTransparency: CGFloat = 0.5) {
     self.init(savedLocation: savedLocation)
     self.primaryName = primaryName
     self.distanceText = distanceText
@@ -83,6 +83,18 @@ class PlacemarkNode : VirtualObject {
     return self.childNode(withName: "beam", recursively: true)
   }
   
+  private var bottomPyramidNode: SCNNode? {
+    return self.childNode(withName: "pyramid1", recursively: true)
+  }
+  
+  private var middlePyramidNode: SCNNode? {
+    return self.childNode(withName: "pyramid2", recursively: true)
+  }
+  
+  private var topPyramidNode: SCNNode? {
+    return self.childNode(withName: "pyramid3", recursively: true)
+  }
+  
   private func updatePrimaryName() {
     if let textGeometry = self.nameTextNode?.geometry as? SCNText {
       textGeometry.string = self.primaryName
@@ -103,10 +115,16 @@ class PlacemarkNode : VirtualObject {
   
   private func updateBeamColor() {
     self.beamNode?.geometry?.firstMaterial?.diffuse.contents = self.beamColor
+    self.topPyramidNode?.geometry?.firstMaterial?.diffuse.contents = self.beamColor
+    self.middlePyramidNode?.geometry?.firstMaterial?.diffuse.contents = self.beamColor
+    self.bottomPyramidNode?.geometry?.firstMaterial?.diffuse.contents = self.beamColor
   }
   
   private func updateBeamTransparency() {
     self.beamNode?.geometry?.firstMaterial?.transparency = self.beamTransparency
+    self.topPyramidNode?.geometry?.firstMaterial?.transparency = self.beamTransparency
+    self.middlePyramidNode?.geometry?.firstMaterial?.transparency = self.beamTransparency * 2 / 3
+    self.bottomPyramidNode?.geometry?.firstMaterial?.transparency = self.beamTransparency * 1 / 3
   }
   
   // MARK: - Load Model
