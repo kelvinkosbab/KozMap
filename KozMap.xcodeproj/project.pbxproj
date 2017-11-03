@@ -71,7 +71,7 @@
 		B695236E1FA8D3430014ABED /* AxesNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxesNode.swift; sourceTree = "<group>"; };
 		B69BDAD21FA7F84400A385DE /* UIApplication+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Util.swift"; sourceTree = "<group>"; };
 		B69BDAD41FA7FB0B00A385DE /* Double+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Util.swift"; sourceTree = "<group>"; };
-		B6C6EA251FA79B45001F97E7 /* TackARLocation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TackARLocation.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6C6EA251FA79B45001F97E7 /* KozMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KozMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6C6EA281FA79B45001F97E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6C6EA2A1FA79B45001F97E7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B6C6EA2D1FA79B45001F97E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -146,7 +146,7 @@
 		B6C6EA261FA79B45001F97E7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B6C6EA251FA79B45001F97E7 /* TackARLocation.app */,
+				B6C6EA251FA79B45001F97E7 /* KozMap.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -353,9 +353,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B6C6EA241FA79B45001F97E7 /* TackARLocation */ = {
+		B6C6EA241FA79B45001F97E7 /* KozMap */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B6C6EA3A1FA79B45001F97E7 /* Build configuration list for PBXNativeTarget "TackARLocation" */;
+			buildConfigurationList = B6C6EA3A1FA79B45001F97E7 /* Build configuration list for PBXNativeTarget "KozMap" */;
 			buildPhases = (
 				B6C6EA211FA79B45001F97E7 /* Sources */,
 				B6C6EA221FA79B45001F97E7 /* Frameworks */,
@@ -365,9 +365,9 @@
 			);
 			dependencies = (
 			);
-			name = TackARLocation;
+			name = KozMap;
 			productName = TackARLocation;
-			productReference = B6C6EA251FA79B45001F97E7 /* TackARLocation.app */;
+			productReference = B6C6EA251FA79B45001F97E7 /* KozMap.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -386,7 +386,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B6C6EA201FA79B44001F97E7 /* Build configuration list for PBXProject "TackARLocation" */;
+			buildConfigurationList = B6C6EA201FA79B44001F97E7 /* Build configuration list for PBXProject "KozMap" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -399,7 +399,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B6C6EA241FA79B45001F97E7 /* TackARLocation */,
+				B6C6EA241FA79B45001F97E7 /* KozMap */,
 			);
 		};
 /* End PBXProject section */
@@ -614,7 +614,7 @@
 				DEVELOPMENT_TEAM = 6SS93B87P2;
 				INFOPLIST_FILE = "$(SRCROOT)/TackARLocation/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kozinga.TackARLocation;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kozinga.KozMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -629,7 +629,7 @@
 				DEVELOPMENT_TEAM = 6SS93B87P2;
 				INFOPLIST_FILE = "$(SRCROOT)/TackARLocation/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kozinga.TackARLocation;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kozinga.KozMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -639,7 +639,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B6C6EA201FA79B44001F97E7 /* Build configuration list for PBXProject "TackARLocation" */ = {
+		B6C6EA201FA79B44001F97E7 /* Build configuration list for PBXProject "KozMap" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B6C6EA381FA79B45001F97E7 /* Debug */,
@@ -648,7 +648,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B6C6EA3A1FA79B45001F97E7 /* Build configuration list for PBXNativeTarget "TackARLocation" */ = {
+		B6C6EA3A1FA79B45001F97E7 /* Build configuration list for PBXNativeTarget "KozMap" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B6C6EA3B1FA79B45001F97E7 /* Debug */,
