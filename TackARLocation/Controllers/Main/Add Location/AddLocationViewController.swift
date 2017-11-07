@@ -34,9 +34,11 @@ class AddLocationViewController : BaseViewController {
   @IBOutlet weak var latitudeLabel: UILabel!
   @IBOutlet weak var longitudeLabel: UILabel!
   @IBOutlet weak var addLocationButton: UIButton!
+  @IBOutlet weak var colorChooserContainer: UIView!
   
-  let preferredContentHeight: CGFloat = 186
+  let preferredContentHeight: CGFloat = 238
   weak var delegate: AddLocationViewControllerDelegate? = nil
+  weak var colorChooserController: InlineColorChooserViewController? = nil
   
   var location: CLLocation? = nil {
     didSet {
@@ -52,6 +54,12 @@ class AddLocationViewController : BaseViewController {
     super.viewDidLoad()
     
     self.nameTextField.delegate = self
+    
+    // Add color chooser
+    let colorChooserController = InlineColorChooserViewController.newViewController(delegate: self)
+    colorChooserController.view.backgroundColor = .clear
+    self.add(childViewController: colorChooserController, intoContainerView: self.colorChooserContainer)
+    self.colorChooserController = colorChooserController
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -116,6 +124,17 @@ class AddLocationViewController : BaseViewController {
     self.delegate?.didSave(savedLocation: savedLocation)
   }
 }
+
+// MARK: - InlineColorChooserViewControllerDelegate
+
+extension AddLocationViewController : InlineColorChooserViewControllerDelegate {
+  
+  func didSelect(color: UIColor) {
+    self.addLocationButton.backgroundColor = color
+  }
+}
+
+// MARK: - UITextFieldDelegate
 
 extension AddLocationViewController : UITextFieldDelegate {
   
