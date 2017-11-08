@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13771" systemVersion="17C60c" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Color" representedClassName="Color" syncable="YES" codeGenerationType="class">
+        <attribute name="alpha" optional="YES" attributeType="Float" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="blue" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="brightness" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="green" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="red" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="savedLocation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SavedLocation" inverseName="color" inverseEntity="SavedLocation" syncable="YES"/>
@@ -24,8 +24,8 @@
         <relationship name="color" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Color" inverseName="savedLocation" inverseEntity="Color" syncable="YES"/>
     </entity>
     <elements>
+        <element name="Color" positionX="-45" positionY="63" width="128" height="120"/>
         <element name="Defaults" positionX="-54" positionY="18" width="128" height="75"/>
         <element name="SavedLocation" positionX="-63" positionY="-18" width="128" height="195"/>
-        <element name="Color" positionX="-54" positionY="54" width="128" height="120"/>
     </elements>
 </model>

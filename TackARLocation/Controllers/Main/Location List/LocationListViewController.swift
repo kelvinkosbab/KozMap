@@ -134,8 +134,12 @@ extension LocationListViewController : UITableViewDelegate, UITableViewDataSourc
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "LocationListViewControllerCell", for: indexPath) as! LocationListViewControllerCell
     cell.backgroundColor = .clear
+    
+    // Saved location
     let savedLocation = self.savedLocations[indexPath.row]
     cell.titleLabel.text = savedLocation.name ?? "Unnamed"
+    
+    // Distance labels
     if let currentLocation = self.currentLocation {
       let distance = currentLocation.distance(from: savedLocation.location)
       let readibleDistance = distance.getBasicReadibleDistance(nearUnitType: Defaults.shared.nearUnitType, farUnitType: Defaults.shared.farUnitType)
@@ -145,6 +149,14 @@ extension LocationListViewController : UITableViewDelegate, UITableViewDataSourc
       let roundedLongitude = Double(round(savedLocation.longitude*1000)/1000)
       cell.detailLabel.text = "\(roundedLatitude)°N, \(roundedLongitude)°W"
     }
+    
+    // Color view
+    if let color = savedLocation.color {
+      cell.colorView.backgroundColor = color.color
+    } else {
+      cell.colorView.backgroundColor = .kozRed
+    }
+    
     return cell
   }
   

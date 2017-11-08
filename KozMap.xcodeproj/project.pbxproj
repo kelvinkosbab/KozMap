@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B61470041FB1475B0068CA67 /* InlineColorChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61470031FB1475B0068CA67 /* InlineColorChooserViewController.swift */; };
+		B61470061FB1485F0068CA67 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61470051FB1485F0068CA67 /* Style.swift */; };
+		B61470081FB148720068CA67 /* UIColor+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61470071FB148720068CA67 /* UIColor+Util.swift */; };
+		B614700B1FB180E30068CA67 /* Color+MyManagedObjectProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B614700A1FB180E30068CA67 /* Color+MyManagedObjectProtocol.swift */; };
+		B614700D1FB193FA0068CA67 /* UIViewController+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B614700C1FB193FA0068CA67 /* UIViewController+Util.swift */; };
+		B614700F1FB194380068CA67 /* UICollectionView+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B614700E1FB194380068CA67 /* UICollectionView+Util.swift */; };
 		B66041EF1FA905350076EBEF /* VirtualObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66041EE1FA905350076EBEF /* VirtualObject.swift */; };
 		B695236B1FA8D11E0014ABED /* CLLocation+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236A1FA8D11E0014ABED /* CLLocation+Util.swift */; };
 		B695236D1FA8D2E10014ABED /* SCNVector3+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236C1FA8D2E10014ABED /* SCNVector3+Util.swift */; };
@@ -64,6 +70,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B61470031FB1475B0068CA67 /* InlineColorChooserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InlineColorChooserViewController.swift; sourceTree = "<group>"; };
+		B61470051FB1485F0068CA67 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
+		B61470071FB148720068CA67 /* UIColor+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Util.swift"; sourceTree = "<group>"; };
+		B61470091FB17E580068CA67 /* TackARLocation 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TackARLocation 2.xcdatamodel"; sourceTree = "<group>"; };
+		B614700A1FB180E30068CA67 /* Color+MyManagedObjectProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+MyManagedObjectProtocol.swift"; sourceTree = "<group>"; };
+		B614700C1FB193FA0068CA67 /* UIViewController+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Util.swift"; sourceTree = "<group>"; };
+		B614700E1FB194380068CA67 /* UICollectionView+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Util.swift"; sourceTree = "<group>"; };
 		B66041EE1FA905350076EBEF /* VirtualObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObject.swift; sourceTree = "<group>"; };
 		B695236A1FA8D11E0014ABED /* CLLocation+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Util.swift"; sourceTree = "<group>"; };
 		B695236C1FA8D2E10014ABED /* SCNVector3+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Util.swift"; sourceTree = "<group>"; };
@@ -133,6 +146,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B61470021FB147410068CA67 /* InlineColorChooser */ = {
+			isa = PBXGroup;
+			children = (
+				B61470031FB1475B0068CA67 /* InlineColorChooserViewController.swift */,
+			);
+			path = InlineColorChooser;
+			sourceTree = "<group>";
+		};
 		B6C6EA1C1FA79B44001F97E7 = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +193,7 @@
 				B6C6EA621FA7B6AD001F97E7 /* SceneKit */,
 				B6C6EA411FA79F77001F97E7 /* LocationManager.swift */,
 				B6C6EA761FA7D761001F97E7 /* UnitType.swift */,
+				B61470051FB1485F0068CA67 /* Style.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -209,6 +231,7 @@
 				B6C6EA671FA7BD91001F97E7 /* MyManagedObjectProtocol.swift */,
 				B6C6EA691FA7BE0A001F97E7 /* SavedLocation+MyManagedObjectProtocol.swift */,
 				B6C6EA741FA7D717001F97E7 /* Defaults+MyManagedObjectProtocol.swift */,
+				B614700A1FB180E30068CA67 /* Color+MyManagedObjectProtocol.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -239,6 +262,7 @@
 				B6C6EA6D1FA7C255001F97E7 /* Location List */,
 				B6C6EA6C1FA7C24C001F97E7 /* Add Location */,
 				B6C6EA6B1FA7C246001F97E7 /* Settings */,
+				B61470021FB147410068CA67 /* InlineColorChooser */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -256,6 +280,9 @@
 				B69BDAD21FA7F84400A385DE /* UIApplication+Util.swift */,
 				B69BDAD41FA7FB0B00A385DE /* Double+Util.swift */,
 				B695236A1FA8D11E0014ABED /* CLLocation+Util.swift */,
+				B61470071FB148720068CA67 /* UIColor+Util.swift */,
+				B614700C1FB193FA0068CA67 /* UIViewController+Util.swift */,
+				B614700E1FB194380068CA67 /* UICollectionView+Util.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -424,6 +451,7 @@
 				B6C6EA9F1FA7EBF6001F97E7 /* BaseTableViewController.swift in Sources */,
 				B6C6EA6A1FA7BE0A001F97E7 /* SavedLocation+MyManagedObjectProtocol.swift in Sources */,
 				B6C6EA4C1FA7A694001F97E7 /* RootNavigationController.swift in Sources */,
+				B614700F1FB194380068CA67 /* UICollectionView+Util.swift in Sources */,
 				B695236F1FA8D3430014ABED /* AxesNode.swift in Sources */,
 				B6C6EA451FA7A050001F97E7 /* PermissionsViewController.swift in Sources */,
 				B6C6EA661FA7BD5B001F97E7 /* MyDataManager.swift in Sources */,
@@ -443,18 +471,22 @@
 				B6C6EA611FA7B68C001F97E7 /* Plane.swift in Sources */,
 				B6C6EA8C1FA7E6E3001F97E7 /* HDFadeWithBlurPresentationManager.swift in Sources */,
 				B6CE3D121FAAFC6700F9DF76 /* GradientSlider.swift in Sources */,
+				B61470081FB148720068CA67 /* UIColor+Util.swift in Sources */,
 				B6C6EA8A1FA7E6D2001F97E7 /* RightToLeftPresentationManager.swift in Sources */,
 				B6C6EA791FA7DAB9001F97E7 /* LocationListViewController+Cells.swift in Sources */,
 				B6C6EA6F1FA7C264001F97E7 /* LocationListViewController.swift in Sources */,
 				B69BDAD51FA7FB0B00A385DE /* Double+Util.swift in Sources */,
 				B6C6EA9B1FA7E8E4001F97E7 /* DragRightDismissInteractiveTransition.swift in Sources */,
 				B6C6EA311FA79B45001F97E7 /* TackARLocation.xcdatamodeld in Sources */,
+				B61470041FB1475B0068CA67 /* InlineColorChooserViewController.swift in Sources */,
 				B6C6EA5F1FA7B5D6001F97E7 /* SCNMaterial+Util.swift in Sources */,
+				B61470061FB1485F0068CA67 /* Style.swift in Sources */,
 				B66041EF1FA905350076EBEF /* VirtualObject.swift in Sources */,
 				B6C6EA4E1FA7A9A6001F97E7 /* BaseNavigationController.swift in Sources */,
 				B69BDAD31FA7F84400A385DE /* UIApplication+Util.swift in Sources */,
 				B6C6EA841FA7E690001F97E7 /* InteractiveTransition.swift in Sources */,
 				B6C6EA481FA7A15C001F97E7 /* ViewControllerFromStoryboardProtocol.swift in Sources */,
+				B614700B1FB180E30068CA67 /* Color+MyManagedObjectProtocol.swift in Sources */,
 				B6C6EA8E1FA7E6F5001F97E7 /* UIView+Util.swift in Sources */,
 				B6C6EA751FA7D717001F97E7 /* Defaults+MyManagedObjectProtocol.swift in Sources */,
 				B6C6EA861FA7E6A6001F97E7 /* DragUpDismissInteractiveTransition.swift in Sources */,
@@ -466,6 +498,7 @@
 				B6C6EA731FA7CDF9001F97E7 /* MainViewController+CoreLocation.swift in Sources */,
 				B6C6EA901FA7E766001F97E7 /* TopDownPresentationManager.swift in Sources */,
 				B6C6EA771FA7D761001F97E7 /* UnitType.swift in Sources */,
+				B614700D1FB193FA0068CA67 /* UIViewController+Util.swift in Sources */,
 				B6C6EA641FA7BD33001F97E7 /* DataMangerProtocol.swift in Sources */,
 				B6C6EA591FA7AFEF001F97E7 /* ARSCNView+Util.swift in Sources */,
 				B6C6EA521FA7ACEC001F97E7 /* ARViewController.swift in Sources */,
@@ -659,9 +692,10 @@
 		B6C6EA2F1FA79B45001F97E7 /* TackARLocation.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				B61470091FB17E580068CA67 /* TackARLocation 2.xcdatamodel */,
 				B6C6EA301FA79B45001F97E7 /* TackARLocation.xcdatamodel */,
 			);
-			currentVersion = B6C6EA301FA79B45001F97E7 /* TackARLocation.xcdatamodel */;
+			currentVersion = B61470091FB17E580068CA67 /* TackARLocation 2.xcdatamodel */;
 			path = TackARLocation.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

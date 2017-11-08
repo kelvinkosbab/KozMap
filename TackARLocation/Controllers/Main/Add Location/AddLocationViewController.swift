@@ -34,9 +34,12 @@ class AddLocationViewController : BaseViewController {
   @IBOutlet weak var latitudeLabel: UILabel!
   @IBOutlet weak var longitudeLabel: UILabel!
   @IBOutlet weak var addLocationButton: UIButton!
+  @IBOutlet weak var colorChooserContainer: UIView!
   
-  let preferredContentHeight: CGFloat = 186
+  var locationColor: UIColor = UIColor.kozRed
+  let preferredContentHeight: CGFloat = 238
   weak var delegate: AddLocationViewControllerDelegate? = nil
+  weak var colorChooserController: InlineColorChooserViewController? = nil
   
   var location: CLLocation? = nil {
     didSet {
@@ -52,6 +55,13 @@ class AddLocationViewController : BaseViewController {
     super.viewDidLoad()
     
     self.nameTextField.delegate = self
+    
+    // Add color chooser
+    let colorChooserController = InlineColorChooserViewController.newViewController(delegate: self)
+    colorChooserController.view.backgroundColor = .clear
+    self.add(childViewController: colorChooserController, intoContainerView: self.colorChooserContainer)
+    self.colorChooserController = colorChooserController
+    self.locationColor = colorChooserController.selectedColor
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -110,12 +120,27 @@ class AddLocationViewController : BaseViewController {
     // Dismiss the keyboard
     self.nameTextField.resignFirstResponder()
     
+    // Color of the saved location
+    let color = Color.create()
+    color.color = self.locationColor
+    
     // Save the location
-    let savedLocation = SavedLocation.create(name: name, location: location)
+    let savedLocation = SavedLocation.create(name: name, location: location, color: color)
     MyDataManager.shared.saveMainContext()
     self.delegate?.didSave(savedLocation: savedLocation)
   }
 }
+
+// MARK: - InlineColorChooserViewControllerDelegate
+
+extension AddLocationViewController : InlineColorChooserViewControllerDelegate {
+  
+  func didSelect(color: UIColor) {
+    self.locationColor = color
+  }
+}
+
+// MARK: - UITextFieldDelegate
 
 extension AddLocationViewController : UITextFieldDelegate {
   
