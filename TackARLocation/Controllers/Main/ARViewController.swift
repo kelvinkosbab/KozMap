@@ -146,6 +146,11 @@ class ARViewController : UIViewController {
       placemark.unitText = distanceAndUnitText.unitText
     }
     
+    // Update the color
+    if let color = savedLocation.color {
+      placemark.beamColor = color.color
+    }
+    
     // Scene location updates
     guard updatePosition, let currentPosition = self.currentScenePosition, let currentLocation = self.currentLocation else {
       return
