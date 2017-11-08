@@ -65,6 +65,12 @@ extension MainViewController : AddLocationViewControllerDelegate {
 
 extension MainViewController : LocationListViewControllerDelegate {
   
+  func shouldEdit(savedLocation: SavedLocation) {
+    self.dismiss(animated: true) { [weak self] in
+      // Do something
+    }
+  }
+  
   func shouldDelete(savedLocation: SavedLocation) {
     
     // Delete this location from core data

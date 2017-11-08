@@ -11,6 +11,7 @@ import CoreLocation
 import CoreData
 
 protocol LocationListViewControllerDelegate : class {
+  func shouldEdit(savedLocation: SavedLocation)
   func shouldDelete(savedLocation: SavedLocation)
 }
 
@@ -147,18 +148,25 @@ extension LocationListViewController : UITableViewDelegate, UITableViewDataSourc
     return cell
   }
   
-  func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-    return true
-  }
-  
-  func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-    return .delete
-  }
-  
-  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-    if editingStyle == .delete {
-      let savedLocation = self.savedLocations[indexPath.row]
-      self.delegate?.shouldDelete(savedLocation: savedLocation)
+  func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    let savedLocation = self.savedLocations[indexPath.row]
+    let editAction = UIContextualAction(style: .normal, title: "Edit") { [weak self] (action, view, success) in
+      self?.delegate?.shouldEdit(savedLocation: savedLocation)
+      success(true)
     }
+//    editAction.image
+    editAction.backgroundColor = .cyan
+    return UISwipeActionsConfiguration(actions: [ editAction ])
+  }
+  
+  func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    let savedLocation = self.savedLocations[indexPath.row]
+    let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (action, view, success) in
+      self?.delegate?.shouldDelete(savedLocation: savedLocation)
+      success(true)
+    }
+    //    deleteAction.image
+    deleteAction.backgroundColor = .red
+    return UISwipeActionsConfiguration(actions: [ deleteAction ])
   }
 }
