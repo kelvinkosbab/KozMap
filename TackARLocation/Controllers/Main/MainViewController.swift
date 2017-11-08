@@ -64,9 +64,9 @@ class MainViewController : BaseViewController {
   
   @IBAction func addButtonSelected() {
     
-    // Instantiate the add location view controller
+    // Instantiate the location detail view controller
     let currentLocation = LocationManager.shared.currentLocation
-    let addLocationViewController = AddLocationViewController.newViewController(location: currentLocation, delegate: self)
+    let addLocationViewController = LocationDetailViewController.newViewController(location: currentLocation, delegate: self)
     addLocationViewController.modalPresentationStyle = .popover
     addLocationViewController.popoverPresentationController?.delegate = self
     addLocationViewController.preferredContentSize = CGSize(width: self.view.bounds.width - 16, height: addLocationViewController.preferredContentHeight)
@@ -94,7 +94,23 @@ class MainViewController : BaseViewController {
     let interactiveElement = InteractiveElement(size: settingsViewController.defaultContentHeight, offset: offset, view: settingsViewController.view)
     self.present(viewController: settingsViewController, withMode: .topDown, inNavigationController: false, dismissInteractiveElement: interactiveElement)
   }
+  
+  // MARK: - Navigation
+  
+  func presentLocationDetail(savedLocation: SavedLocation) {
+    
+    // Instantiate the location detail view controller
+    let addLocationViewController = LocationDetailViewController.newViewController(savedLocation: savedLocation, delegate: self)
+    addLocationViewController.modalPresentationStyle = .popover
+    addLocationViewController.popoverPresentationController?.delegate = self
+    addLocationViewController.preferredContentSize = CGSize(width: self.view.bounds.width - 16, height: addLocationViewController.preferredContentHeight)
+    addLocationViewController.popoverPresentationController?.sourceView = self.listButton
+    addLocationViewController.popoverPresentationController?.sourceRect = self.listButton.bounds
+    self.present(addLocationViewController, animated: true, completion: nil)
+  }
 }
+
+// MARK: - UIPopoverPresentationControllerDelegate
 
 extension MainViewController : UIPopoverPresentationControllerDelegate {
   

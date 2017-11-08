@@ -1,5 +1,5 @@
 //
-//  AddLocationViewController.swift
+//  LocationDetailViewController.swift
 //  TackARLocation
 //
 //  Created by Kelvin Kosbab on 10/30/17.
@@ -9,21 +9,33 @@
 import UIKit
 import CoreLocation
 
-protocol AddLocationViewControllerDelegate : class {
+protocol LocationDetailViewControllerDelegate : class {
   func didSave(savedLocation: SavedLocation)
+  func didUpdate(savedLocation: SavedLocation)
 }
 
-class AddLocationViewController : BaseViewController {
+class LocationDetailViewController : BaseViewController {
   
   // MARK: - Static Accessors
   
-  private static func newViewController() -> AddLocationViewController {
+  private static func newViewController() -> LocationDetailViewController {
     return self.newViewController(fromStoryboardWithName: "Main")
   }
   
-  static func newViewController(location: CLLocation?, delegate: AddLocationViewControllerDelegate?) -> AddLocationViewController {
+  static func newViewController(location: CLLocation?, delegate: LocationDetailViewControllerDelegate?) -> LocationDetailViewController {
     let viewController = self.newViewController()
     viewController.location = location
+    viewController.delegate = delegate
+    return viewController
+  }
+  
+  static func newViewController(savedLocation: SavedLocation, delegate: LocationDetailViewControllerDelegate?) -> LocationDetailViewController {
+    let viewController = self.newViewController()
+    viewController.savedLocation = savedLocation
+    viewController.location = savedLocation.location
+    if let color = savedLocation.color {
+      viewController.locationColor = color.color
+    }
     viewController.delegate = delegate
     return viewController
   }
@@ -36,17 +48,22 @@ class AddLocationViewController : BaseViewController {
   @IBOutlet weak var addLocationButton: UIButton!
   @IBOutlet weak var colorChooserContainer: UIView!
   
-  var locationColor: UIColor = UIColor.kozRed
   let preferredContentHeight: CGFloat = 238
-  weak var delegate: AddLocationViewControllerDelegate? = nil
+  weak var delegate: LocationDetailViewControllerDelegate? = nil
   weak var colorChooserController: InlineColorChooserViewController? = nil
   
+  var savedLocation: SavedLocation? = nil
+  var locationColor: UIColor = .kozRed
   var location: CLLocation? = nil {
     didSet {
-      if self.isViewLoaded {
+      if self.isViewLoaded && self.isCreatingSavedLocation {
         self.reloadContent()
       }
     }
+  }
+  
+  var isCreatingSavedLocation: Bool {
+    return self.savedLocation == nil
   }
   
   // MARK: - Lifecycle
@@ -61,7 +78,11 @@ class AddLocationViewController : BaseViewController {
     colorChooserController.view.backgroundColor = .clear
     self.add(childViewController: colorChooserController, intoContainerView: self.colorChooserContainer)
     self.colorChooserController = colorChooserController
-    self.locationColor = colorChooserController.selectedColor
+    if self.isCreatingSavedLocation {
+      self.locationColor = colorChooserController.selectedColor
+    } else {
+      // TODO: - KAK update the color chooser with the selected color
+    }
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -79,6 +100,11 @@ class AddLocationViewController : BaseViewController {
   // MARK: - Content
   
   func reloadContent() {
+    
+    if let savedLocation = self.savedLocation {
+      self.nameTextField.text = savedLocation.name
+      self.location = savedLocation.location
+    }
     
     // Check if there is a location to populate
     guard let location = self.location else {
@@ -113,7 +139,7 @@ class AddLocationViewController : BaseViewController {
     }
     
     // Check for valid name
-    guard let name = self.nameTextField.text else {
+    guard let name = self.nameTextField.text?.trimmed, !name.isEmpty else {
       return
     }
     
@@ -121,19 +147,30 @@ class AddLocationViewController : BaseViewController {
     self.nameTextField.resignFirstResponder()
     
     // Color of the saved location
-    let color = Color.create()
+    let color = self.savedLocation?.color ?? Color.create()
     color.color = self.locationColor
     
     // Save the location
-    let savedLocation = SavedLocation.create(name: name, location: location, color: color)
-    MyDataManager.shared.saveMainContext()
-    self.delegate?.didSave(savedLocation: savedLocation)
+    if let savedLocation = self.savedLocation {
+      
+      // Updating this location
+      savedLocation.update(name: name, location: location, color: color)
+      MyDataManager.shared.saveMainContext()
+      self.delegate?.didUpdate(savedLocation: savedLocation)
+      
+    } else {
+      
+      // Creating a location
+      let savedLocation = SavedLocation.create(name: name, location: location, color: color)
+      MyDataManager.shared.saveMainContext()
+      self.delegate?.didSave(savedLocation: savedLocation)
+    }
   }
 }
 
 // MARK: - InlineColorChooserViewControllerDelegate
 
-extension AddLocationViewController : InlineColorChooserViewControllerDelegate {
+extension LocationDetailViewController : InlineColorChooserViewControllerDelegate {
   
   func didSelect(color: UIColor) {
     self.locationColor = color
@@ -142,7 +179,7 @@ extension AddLocationViewController : InlineColorChooserViewControllerDelegate {
 
 // MARK: - UITextFieldDelegate
 
-extension AddLocationViewController : UITextFieldDelegate {
+extension LocationDetailViewController : UITextFieldDelegate {
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     if let _ = textField.text {

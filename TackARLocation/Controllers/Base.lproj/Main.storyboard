@@ -231,10 +231,10 @@
             </objects>
             <point key="canvasLocation" x="783" y="-10"/>
         </scene>
-        <!--Add Location View Controller-->
+        <!--Location Detail View Controller-->
         <scene sceneID="FDq-QK-t4l">
             <objects>
-                <viewController storyboardIdentifier="AddLocationViewController" id="SuI-P8-9Vq" customClass="AddLocationViewController" customModule="KozMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LocationDetailViewController" id="SuI-P8-9Vq" customClass="LocationDetailViewController" customModule="KozMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bJ6-gh-iLf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
