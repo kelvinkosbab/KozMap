@@ -415,7 +415,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oQC-Ip-rqM">
+                                        <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oQC-Ip-rqM">
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j0n-rQ-lZh">
@@ -671,28 +671,39 @@
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9OR-SI-tJD">
-                                                                <rect key="frame" x="23" y="9.5" width="329" height="20.5"/>
+                                                                <rect key="frame" x="63" y="9.5" width="297" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yTk-7A-g2P">
-                                                                <rect key="frame" x="23" y="30" width="329" height="20.5"/>
+                                                                <rect key="frame" x="63" y="30" width="297" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
+                                                            <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8C7-hz-lHH">
+                                                                <rect key="frame" x="15" y="9" width="40" height="40"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="40" id="Kb2-AE-aD9"/>
+                                                                    <constraint firstAttribute="width" constant="40" id="c8L-78-ZMP"/>
+                                                                </constraints>
+                                                            </view>
                                                         </subviews>
                                                         <constraints>
                                                             <constraint firstItem="9OR-SI-tJD" firstAttribute="bottom" secondItem="YCB-QG-hkg" secondAttribute="centerY" id="9yB-fW-9is"/>
                                                             <constraint firstItem="yTk-7A-g2P" firstAttribute="top" secondItem="YCB-QG-hkg" secondAttribute="centerY" id="RCy-km-fdC"/>
-                                                            <constraint firstItem="9OR-SI-tJD" firstAttribute="leading" secondItem="YCB-QG-hkg" secondAttribute="leadingMargin" constant="8" id="Vmm-Uq-bfo"/>
-                                                            <constraint firstItem="yTk-7A-g2P" firstAttribute="leading" secondItem="YCB-QG-hkg" secondAttribute="leadingMargin" constant="8" id="X0V-mR-cFQ"/>
-                                                            <constraint firstAttribute="trailingMargin" secondItem="yTk-7A-g2P" secondAttribute="trailing" constant="8" id="Xeb-Xt-QMo"/>
-                                                            <constraint firstAttribute="trailingMargin" secondItem="9OR-SI-tJD" secondAttribute="trailing" constant="8" id="egk-6o-SKa"/>
+                                                            <constraint firstItem="8C7-hz-lHH" firstAttribute="centerY" secondItem="YCB-QG-hkg" secondAttribute="centerY" id="WkG-uy-FEg"/>
+                                                            <constraint firstAttribute="trailingMargin" secondItem="yTk-7A-g2P" secondAttribute="trailing" id="Xeb-Xt-QMo"/>
+                                                            <constraint firstItem="8C7-hz-lHH" firstAttribute="leading" secondItem="YCB-QG-hkg" secondAttribute="leadingMargin" id="aLF-Oh-fsd"/>
+                                                            <constraint firstItem="yTk-7A-g2P" firstAttribute="leading" secondItem="8C7-hz-lHH" secondAttribute="trailing" constant="8" id="d2T-nL-gue"/>
+                                                            <constraint firstAttribute="trailingMargin" secondItem="9OR-SI-tJD" secondAttribute="trailing" id="egk-6o-SKa"/>
+                                                            <constraint firstItem="9OR-SI-tJD" firstAttribute="leading" secondItem="8C7-hz-lHH" secondAttribute="trailing" constant="8" id="nhW-Mc-NKr"/>
                                                         </constraints>
                                                     </tableViewCellContentView>
                                                     <connections>
+                                                        <outlet property="colorView" destination="8C7-hz-lHH" id="cgf-l6-rt6"/>
                                                         <outlet property="detailLabel" destination="yTk-7A-g2P" id="iKW-M0-9Iv"/>
                                                         <outlet property="titleLabel" destination="9OR-SI-tJD" id="90y-h6-GpZ"/>
                                                     </connections>
@@ -724,7 +735,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Efu-ZI-IN5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1465" y="691"/>
+            <point key="canvasLocation" x="1464.8" y="690.40479760119945"/>
         </scene>
     </scenes>
     <resources>

@@ -143,7 +143,7 @@ class InlineColorChooserCollectionViewCell : UICollectionViewCell {
     self.colorViewHeightRelationConstraint.constant = isSelected ? -6 : 0
     self.colorViewWidthRelationConstraint.constant = isSelected ? -6 : 0
     if animated {
-      UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: { [weak self] in
+      UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: .curveEaseInOut, animations: { [weak self] in
         self?.colorView.layoutSubviews()
       })
     } else {
