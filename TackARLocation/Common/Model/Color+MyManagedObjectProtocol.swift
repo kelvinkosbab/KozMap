@@ -9,7 +9,6 @@
 import UIKit
 
 extension UIColor {
-  
   static let kozRed = UIColor(red: 208 / 255, green: 2 / 255, blue: 100 / 255, alpha: 1)
   static let kozOrange = UIColor(red: 245 / 255, green: 166 / 255, blue: 35 / 255, alpha: 1)
   static let kozYellow = UIColor(red: 248 / 255, green: 231 / 255, blue: 28 / 255, alpha: 1)
@@ -23,7 +22,7 @@ extension Color : MyManagedObjectProtocol {
   // MARK: - MyManagedObjectProtocol
   
   static var sortDescriptors: [NSSortDescriptor] {
-    return [ NSSortDescriptor(key: "red", ascending: true), NSSortDescriptor(key: "green", ascending: true), NSSortDescriptor(key: "blue", ascending: true), NSSortDescriptor(key: "brightness", ascending: true) ]
+    return [ NSSortDescriptor(key: "red", ascending: true), NSSortDescriptor(key: "green", ascending: true), NSSortDescriptor(key: "blue", ascending: true), NSSortDescriptor(key: "alpha", ascending: true) ]
   }
   
   // MARK: - Static Utilites
@@ -68,13 +67,13 @@ extension Color : MyManagedObjectProtocol {
   
   var color: UIColor {
     get {
-      return UIColor(red: CGFloat(self.red) / 255, green: CGFloat(self.green) / 255, blue: CGFloat(self.blue) / 255, alpha: CGFloat(self.alpha) / 100)
+      return UIColor(red: CGFloat(self.red) / 255, green: CGFloat(self.green) / 255, blue: CGFloat(self.blue) / 255, alpha: CGFloat(self.alpha))
     }
     set {
       self.red = Int16(newValue.rgbRed)
       self.green = Int16(newValue.rgbGreen)
       self.blue = Int16(newValue.rgbBlue)
-      self.alpha = Int16(newValue.rgbAlpha)
+      self.alpha = Float(newValue.rgbAlpha)
     }
   }
 }

@@ -6,7 +6,7 @@
 //  Copyright © 2017 Kozinga. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import CoreLocation
 
 extension SavedLocation : MyManagedObjectProtocol {
@@ -19,7 +19,7 @@ extension SavedLocation : MyManagedObjectProtocol {
   
   // MARK: - Creating
   
-  static func create(name: String, latitude: Double, longitude: Double, altitude: Double, horizontalAccuracy: Double, verticalAccuracy: Double, course: Double, speed: Double, date: Date = Date()) -> SavedLocation {
+  static func create(name: String, latitude: Double, longitude: Double, altitude: Double, horizontalAccuracy: Double, verticalAccuracy: Double, course: Double, speed: Double, date: Date, color: Color) -> SavedLocation {
     let object = self.create()
     object.name = name
     object.latitude = latitude
@@ -30,12 +30,13 @@ extension SavedLocation : MyManagedObjectProtocol {
     object.course = course
     object.speed = speed
     object.date = date
+    object.color = color
     return object
   }
   
-  static func create(name: String, location: CLLocation) -> SavedLocation {
+  static func create(name: String, location: CLLocation, color: Color) -> SavedLocation {
     let coordinate = location.coordinate
-    return self.create(name: name, latitude: coordinate.latitude, longitude: coordinate.longitude, altitude: location.altitude, horizontalAccuracy: location.horizontalAccuracy, verticalAccuracy: location.verticalAccuracy, course: location.course, speed: location.speed, date: location.timestamp)
+    return self.create(name: name, latitude: coordinate.latitude, longitude: coordinate.longitude, altitude: location.altitude, horizontalAccuracy: location.horizontalAccuracy, verticalAccuracy: location.verticalAccuracy, course: location.course, speed: location.speed, date: location.timestamp, color: color)
   }
   
   // MARK: - Helpers

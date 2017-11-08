@@ -36,6 +36,7 @@ class AddLocationViewController : BaseViewController {
   @IBOutlet weak var addLocationButton: UIButton!
   @IBOutlet weak var colorChooserContainer: UIView!
   
+  var locationColor: UIColor = UIColor.kozRed
   let preferredContentHeight: CGFloat = 238
   weak var delegate: AddLocationViewControllerDelegate? = nil
   weak var colorChooserController: InlineColorChooserViewController? = nil
@@ -60,6 +61,7 @@ class AddLocationViewController : BaseViewController {
     colorChooserController.view.backgroundColor = .clear
     self.add(childViewController: colorChooserController, intoContainerView: self.colorChooserContainer)
     self.colorChooserController = colorChooserController
+    self.locationColor = colorChooserController.selectedColor
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -118,8 +120,12 @@ class AddLocationViewController : BaseViewController {
     // Dismiss the keyboard
     self.nameTextField.resignFirstResponder()
     
+    // Color of the saved location
+    let color = Color.create()
+    color.color = self.locationColor
+    
     // Save the location
-    let savedLocation = SavedLocation.create(name: name, location: location)
+    let savedLocation = SavedLocation.create(name: name, location: location, color: color)
     MyDataManager.shared.saveMainContext()
     self.delegate?.didSave(savedLocation: savedLocation)
   }
@@ -130,7 +136,7 @@ class AddLocationViewController : BaseViewController {
 extension AddLocationViewController : InlineColorChooserViewControllerDelegate {
   
   func didSelect(color: UIColor) {
-    self.addLocationButton.backgroundColor = color
+    self.locationColor = color
   }
 }
 

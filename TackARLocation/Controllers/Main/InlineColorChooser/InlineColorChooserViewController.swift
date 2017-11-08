@@ -30,6 +30,26 @@ class InlineColorChooserViewController : UICollectionViewController, UICollectio
   
   weak var delegate: InlineColorChooserViewControllerDelegate? = nil
   let colors: [UIColor] = [ UIColor.kozRed, UIColor.kozOrange, UIColor.kozYellow, UIColor.kozGreen, UIColor.kozBlue, UIColor.kozPurple ]
+  var selectedIndexPath: IndexPath = IndexPath(row: 0, section: 0) {
+    didSet {
+      if self.isViewLoaded {
+        
+        // De-select the old color
+        if let cell = self.collectionView?.cellForItem(at: oldValue) as? InlineColorChooserCollectionViewCell {
+          cell.update(isSelected: false, animated: true)
+        }
+        
+        // Select the new color
+        if let cell = self.collectionView?.cellForItem(at: self.selectedIndexPath) as? InlineColorChooserCollectionViewCell {
+          cell.update(isSelected: true, animated: true)
+        }
+      }
+    }
+  }
+  
+  var selectedColor: UIColor {
+    return self.colors[self.selectedIndexPath.row]
+  }
   
   // MARK: - Lifecycle
   
@@ -54,12 +74,17 @@ class InlineColorChooserViewController : UICollectionViewController, UICollectio
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InlineColorChooserCollectionViewCell", for: indexPath) as! InlineColorChooserCollectionViewCell
     let color = self.colors[indexPath.row]
     cell.colorView.backgroundColor = color
-//    cell.isSelected = true
+    cell.update(isSelected: self.selectedIndexPath == indexPath, animated: false)
     return cell
   }
   
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    
+    // Selected color
     let color = self.colors[indexPath.row]
+    self.selectedIndexPath = indexPath
+    
+    // Notify the delegate
     self.delegate?.didSelect(color: color)
   }
   
@@ -105,34 +130,24 @@ class InlineColorChooserCollectionViewCell : UICollectionViewCell {
   override func layoutSubviews() {
     super.layoutSubviews()
     
-    self.colorContainerView.layer.cornerRadius = self.colorContainerView.bounds.height / 2
+    self.colorContainerView.layer.cornerRadius = (self.colorContainerView.bounds.height - 5) / 2
     self.colorContainerView.layer.masksToBounds = true
     self.colorContainerView.clipsToBounds = true
-    self.colorView.layer.cornerRadius = self.colorView.bounds.height / 2
+    self.colorView.layer.cornerRadius = (self.colorView.bounds.height - 5) / 2
     self.colorView.layer.masksToBounds = true
     self.colorView.clipsToBounds = true
   }
   
-  override var isSelected: Bool {
-    didSet {
-      self.update(isSelected: self.isSelected, animated: false)
-    }
-  }
-  
-  func update(isSelected: Bool, animated: Bool, completion: (() -> Void)? = nil) {
-    guard self.isSelected != isSelected else { return }
+  func update(isSelected: Bool, animated: Bool) {
     self.isSelected = isSelected
     self.colorViewHeightRelationConstraint.constant = isSelected ? -6 : 0
     self.colorViewWidthRelationConstraint.constant = isSelected ? -6 : 0
     if animated {
-      UIView.animate(withDuration: 0.2, animations: { [weak self] in
-        self?.layoutSubviews()
-      }, completion: { _ in
-        completion?()
+      UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: { [weak self] in
+        self?.colorView.layoutSubviews()
       })
     } else {
-      self.layoutSubviews()
-      completion?()
+      self.colorView.layoutSubviews()
     }
   }
 }
