@@ -167,7 +167,7 @@ extension LocationListViewController : UITableViewDelegate, UITableViewDataSourc
       success(true)
     }
 //    editAction.image
-    editAction.backgroundColor = .cyan
+    editAction.backgroundColor = .kozBlue
     return UISwipeActionsConfiguration(actions: [ editAction ])
   }
   
@@ -178,7 +178,7 @@ extension LocationListViewController : UITableViewDelegate, UITableViewDataSourc
       success(true)
     }
     //    deleteAction.image
-    deleteAction.backgroundColor = .red
+    deleteAction.backgroundColor = .kozRed
     return UISwipeActionsConfiguration(actions: [ deleteAction ])
   }
 }
