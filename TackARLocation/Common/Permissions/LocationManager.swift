@@ -19,10 +19,10 @@ protocol LocationManagerDelegate : class {
 }
 
 protocol LocationManagerAuthorizationDelegate : class {
-  func locationManagerDidUpdateAuthorization(_ locationManager: LocationManager)
+  func locationManagerDidUpdateAuthorization()
 }
 
-class LocationManager : NSObject, CLLocationManagerDelegate {
+class LocationManager : NSObject, CLLocationManagerDelegate, PermissionManagerDelegate {
   
   // MARK: - Singleton
   
@@ -52,6 +52,19 @@ class LocationManager : NSObject, CLLocationManagerDelegate {
     }
   }
   
+  // MARK: - PermissionManagerDelegate
+  
+  var status: PermissionAuthorizationStatus {
+    switch self.clAuthorizationStatus {
+    case .authorizedAlways, .authorizedWhenInUse:
+      return .authorized
+    case .denied, .restricted:
+      return .denied
+    case .notDetermined:
+      return .notDetermined
+    }
+  }
+  
   // MARK: - Properties / Init
   
   weak var delegate: LocationManagerDelegate? = nil
@@ -63,8 +76,14 @@ class LocationManager : NSObject, CLLocationManagerDelegate {
   var heading: CLLocationDirection?
   var headingAccuracy: CLLocationDegrees?
   
+  // MARK: - Permissions
+  
+  private var clAuthorizationStatus: CLAuthorizationStatus {
+    return CLLocationManager.authorizationStatus()
+  }
+  
   var isAccessAuthorized: Bool {
-    switch CLLocationManager.authorizationStatus() {
+    switch self.clAuthorizationStatus {
     case .authorizedAlways, .authorizedWhenInUse:
       return true
     case .denied, .restricted, .notDetermined:
@@ -73,7 +92,7 @@ class LocationManager : NSObject, CLLocationManagerDelegate {
   }
   
   var isAccessDenied: Bool {
-    switch CLLocationManager.authorizationStatus() {
+    switch self.clAuthorizationStatus {
     case .authorizedAlways, .authorizedWhenInUse, .notDetermined:
       return false
     case .denied, .restricted:
@@ -82,7 +101,7 @@ class LocationManager : NSObject, CLLocationManagerDelegate {
   }
   
   var isAccessNotDetermined: Bool {
-    return CLLocationManager.authorizationStatus() == .notDetermined
+    return self.clAuthorizationStatus == .notDetermined
   }
   
   // MARK: - Authorization
@@ -101,7 +120,7 @@ class LocationManager : NSObject, CLLocationManagerDelegate {
   // MARK: - CLLocationManagerDelegate
   
   func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-    self.authorizationDelegate?.locationManagerDidUpdateAuthorization(self)
+    self.authorizationDelegate?.locationManagerDidUpdateAuthorization()
   }
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

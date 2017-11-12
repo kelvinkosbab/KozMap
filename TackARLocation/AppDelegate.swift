@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     
     // Check if we don't have the correct permissions
-    if !LocationManager.shared.isAccessAuthorized {
+    if !PermissionManager.shared.isAccessAuthorized {
       let permissionsViewController = PermissionsViewController.newViewController()
       RootNavigationController.shared.viewControllers = [ permissionsViewController ]
     }

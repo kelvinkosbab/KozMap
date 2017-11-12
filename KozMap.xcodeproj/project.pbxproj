@@ -13,6 +13,8 @@
 		B614700B1FB180E30068CA67 /* Color+MyManagedObjectProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B614700A1FB180E30068CA67 /* Color+MyManagedObjectProtocol.swift */; };
 		B614700D1FB193FA0068CA67 /* UIViewController+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B614700C1FB193FA0068CA67 /* UIViewController+Util.swift */; };
 		B614700F1FB194380068CA67 /* UICollectionView+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B614700E1FB194380068CA67 /* UICollectionView+Util.swift */; };
+		B62735DC1FB7EDFF004711A4 /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62735DB1FB7EDFF004711A4 /* PermissionManager.swift */; };
+		B62735DE1FB7EEE2004711A4 /* CameraPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62735DD1FB7EEE2004711A4 /* CameraPermissionManager.swift */; };
 		B66041EF1FA905350076EBEF /* VirtualObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66041EE1FA905350076EBEF /* VirtualObject.swift */; };
 		B695236B1FA8D11E0014ABED /* CLLocation+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236A1FA8D11E0014ABED /* CLLocation+Util.swift */; };
 		B695236D1FA8D2E10014ABED /* SCNVector3+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236C1FA8D2E10014ABED /* SCNVector3+Util.swift */; };
@@ -67,7 +69,6 @@
 		B6C6EA9D1FA7EBEE001F97E7 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA9C1FA7EBEE001F97E7 /* BaseViewController.swift */; };
 		B6C6EA9F1FA7EBF6001F97E7 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA9E1FA7EBF6001F97E7 /* BaseTableViewController.swift */; };
 		B6CE3D061FAA1E9400F9DF76 /* PlacemarkNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CE3D051FAA1E9400F9DF76 /* PlacemarkNode.swift */; };
-		B6CE3D121FAAFC6700F9DF76 /* GradientSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CE3D111FAAFC6700F9DF76 /* GradientSlider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,8 @@
 		B614700A1FB180E30068CA67 /* Color+MyManagedObjectProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+MyManagedObjectProtocol.swift"; sourceTree = "<group>"; };
 		B614700C1FB193FA0068CA67 /* UIViewController+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Util.swift"; sourceTree = "<group>"; };
 		B614700E1FB194380068CA67 /* UICollectionView+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Util.swift"; sourceTree = "<group>"; };
+		B62735DB1FB7EDFF004711A4 /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
+		B62735DD1FB7EEE2004711A4 /* CameraPermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPermissionManager.swift; sourceTree = "<group>"; };
 		B66041EE1FA905350076EBEF /* VirtualObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObject.swift; sourceTree = "<group>"; };
 		B695236A1FA8D11E0014ABED /* CLLocation+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Util.swift"; sourceTree = "<group>"; };
 		B695236C1FA8D2E10014ABED /* SCNVector3+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Util.swift"; sourceTree = "<group>"; };
@@ -134,7 +137,6 @@
 		B6C6EA9C1FA7EBEE001F97E7 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		B6C6EA9E1FA7EBF6001F97E7 /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		B6CE3D051FAA1E9400F9DF76 /* PlacemarkNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacemarkNode.swift; sourceTree = "<group>"; };
-		B6CE3D111FAAFC6700F9DF76 /* GradientSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientSlider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,16 @@
 				B61470031FB1475B0068CA67 /* InlineColorChooserViewController.swift */,
 			);
 			path = InlineColorChooser;
+			sourceTree = "<group>";
+		};
+		B62735DA1FB7EDEB004711A4 /* Permissions */ = {
+			isa = PBXGroup;
+			children = (
+				B62735DB1FB7EDFF004711A4 /* PermissionManager.swift */,
+				B6C6EA411FA79F77001F97E7 /* LocationManager.swift */,
+				B62735DD1FB7EEE2004711A4 /* CameraPermissionManager.swift */,
+			);
+			path = Permissions;
 			sourceTree = "<group>";
 		};
 		B6C6EA1C1FA79B44001F97E7 = {
@@ -186,14 +198,13 @@
 		B6C6EA3D1FA79F21001F97E7 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				B6CE3D101FAAFC5700F9DF76 /* GradientSlider */,
+				B62735DA1FB7EDEB004711A4 /* Permissions */,
 				B6C6EA911FA7E836001F97E7 /* Device */,
 				B6C6EA7C1FA7E62B001F97E7 /* Presenting Controllers */,
 				B6C6EA551FA7AF49001F97E7 /* Extensions */,
 				B6C6EA461FA7A14F001F97E7 /* Protocols */,
 				B6C6EA401FA79F43001F97E7 /* Model */,
 				B6C6EA621FA7B6AD001F97E7 /* SceneKit */,
-				B6C6EA411FA79F77001F97E7 /* LocationManager.swift */,
 				B6C6EA761FA7D761001F97E7 /* UnitType.swift */,
 				B61470051FB1485F0068CA67 /* Style.swift */,
 			);
@@ -369,14 +380,6 @@
 			path = Device;
 			sourceTree = "<group>";
 		};
-		B6CE3D101FAAFC5700F9DF76 /* GradientSlider */ = {
-			isa = PBXGroup;
-			children = (
-				B6CE3D111FAAFC6700F9DF76 /* GradientSlider.swift */,
-			);
-			path = GradientSlider;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -467,14 +470,15 @@
 				B6C6EA971FA7E8B4001F97E7 /* DragDownDismissInteractiveTransition.swift in Sources */,
 				B6C6EA931FA7E83F001F97E7 /* Device.swift in Sources */,
 				B6C6EA5D1FA7B0C3001F97E7 /* CGRect+Util.swift in Sources */,
+				B62735DC1FB7EDFF004711A4 /* PermissionManager.swift in Sources */,
 				B6C6EA991FA7E8D1001F97E7 /* DragLeftDismissInteractiveTransition.swift in Sources */,
 				B6C6EA681FA7BD91001F97E7 /* MyManagedObjectProtocol.swift in Sources */,
 				B6C6EA421FA79F77001F97E7 /* LocationManager.swift in Sources */,
 				B6C6EA571FA7AF56001F97E7 /* SCNNode+Util.swift in Sources */,
 				B695236D1FA8D2E10014ABED /* SCNVector3+Util.swift in Sources */,
+				B62735DE1FB7EEE2004711A4 /* CameraPermissionManager.swift in Sources */,
 				B6C6EA611FA7B68C001F97E7 /* Plane.swift in Sources */,
 				B6C6EA8C1FA7E6E3001F97E7 /* HDFadeWithBlurPresentationManager.swift in Sources */,
-				B6CE3D121FAAFC6700F9DF76 /* GradientSlider.swift in Sources */,
 				B61470081FB148720068CA67 /* UIColor+Util.swift in Sources */,
 				B6C6EA8A1FA7E6D2001F97E7 /* RightToLeftPresentationManager.swift in Sources */,
 				B6C6EA791FA7DAB9001F97E7 /* LocationListViewController+Cells.swift in Sources */,
