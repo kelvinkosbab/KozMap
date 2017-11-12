@@ -18,7 +18,8 @@ class PermissionsViewController : UIViewController {
   
   // MARK: - Properties
   
-  @IBOutlet weak var permissionsButton: UIButton!
+  @IBOutlet weak var locationPermissionButton: UIButton!
+  @IBOutlet weak var cameraPermissionButton: UIButton!
   
   // MARK: - Lifecycle
   
@@ -26,11 +27,39 @@ class PermissionsViewController : UIViewController {
     super.viewWillAppear(animated)
     
     LocationManager.shared.authorizationDelegate = self
+    CameraPermissionManager.shared.authorizationDelegate = self
+  }
+  
+  // MARK: - Content
+  
+  func reloadContent() {
+    
+    // Location
+    if LocationManager.shared.isAccessAuthorized {
+      self.locationPermissionButton.setTitle("Location Access Granted", for: .normal)
+      self.locationPermissionButton.isUserInteractionEnabled = false
+      self.locationPermissionButton.setTitleColor(.lightGray, for: .normal)
+    } else {
+      self.locationPermissionButton.setTitle("Allow Location Access", for: .normal)
+      self.locationPermissionButton.isUserInteractionEnabled = true
+      self.locationPermissionButton.setTitleColor(.blue, for: .normal)
+    }
+    
+    // Camera
+    if CameraPermissionManager.shared.isAccessAuthorized {
+      self.cameraPermissionButton.setTitle("Camera Access Granted", for: .normal)
+      self.cameraPermissionButton.isUserInteractionEnabled = false
+      self.cameraPermissionButton.setTitleColor(.lightGray, for: .normal)
+    } else {
+      self.cameraPermissionButton.setTitle("Allow Location Access", for: .normal)
+      self.cameraPermissionButton.isUserInteractionEnabled = true
+      self.cameraPermissionButton.setTitleColor(.blue, for: .normal)
+    }
   }
   
   // MARK: - Actions
   
-  @IBAction func permissionsButtonSelected() {
+  @IBAction func locationPermissionButtonSelected() {
     
     // Check if access has been denied - Settings
     guard LocationManager.shared.isAccessNotDetermined else {
@@ -40,6 +69,18 @@ class PermissionsViewController : UIViewController {
     
     // Request permissions
     LocationManager.shared.requestAuthorization()
+  }
+  
+  @IBAction func cameraPermissionButtonSelected() {
+    
+    // Check if access has been denied - Settings
+    guard CameraPermissionManager.shared.isAccessNotDetermined else {
+      self.showSettingsAlert()
+      return
+    }
+    
+    // Request permissions
+    CameraPermissionManager.shared.requestAuthorization()
   }
   
   private func showSettingsAlert() {
@@ -71,12 +112,26 @@ class PermissionsViewController : UIViewController {
   }
 }
 
+// MARK: - LocationManagerAuthorizationDelegate
+
 extension PermissionsViewController : LocationManagerAuthorizationDelegate {
   
-  func locationManagerDidUpdateAuthorization(_ locationManager: LocationManager) {
+  func locationManagerDidUpdateAuthorization() {
     
-    if locationManager.isAccessAuthorized {
-      self.showMainController()
+    if PermissionManager.shared.isAccessAuthorized {
+//      self.showMainController()
+    }
+  }
+}
+
+// MARK: - CameraPermissionDelegate
+
+extension PermissionsViewController : CameraPermissionDelegate {
+  
+  func cameraPermissionManagerDidUpdateAuthorization() {
+    
+    if PermissionManager.shared.isAccessAuthorized {
+//      self.showMainController()
     }
   }
 }
