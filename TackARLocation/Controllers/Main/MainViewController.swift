@@ -80,19 +80,21 @@ class MainViewController : BaseViewController {
     // Instantiate the location list view controller
     let currentLocation = LocationManager.shared.currentLocation
     let locationListViewController = LocationListViewController.newViewController(currentLocation: currentLocation, delegate: self)
-    locationListViewController.modalPresentationStyle = .popover
-    locationListViewController.popoverPresentationController?.delegate = self
-    locationListViewController.preferredContentSize = CGSize(width: self.view.bounds.width - 16, height: min(self.view.bounds.height, 300))
-    locationListViewController.popoverPresentationController?.sourceView = self.listButton
-    locationListViewController.popoverPresentationController?.sourceRect = self.listButton.bounds
-    self.present(locationListViewController, animated: true, completion: nil)
+    let viewControllerToPresent = VisualEffectContainerViewController(embeddedViewController: locationListViewController)
+    viewControllerToPresent.modalPresentationStyle = .popover
+    viewControllerToPresent.popoverPresentationController?.delegate = self
+    viewControllerToPresent.preferredContentSize = CGSize(width: self.view.bounds.width - 16, height: min(self.view.bounds.height, 300))
+    viewControllerToPresent.popoverPresentationController?.sourceView = self.listButton
+    viewControllerToPresent.popoverPresentationController?.sourceRect = self.listButton.bounds
+    self.present(viewControllerToPresent, animated: true, completion: nil)
   }
   
   @objc func settingsButtonSelected() {
     let settingsViewController = SettingsViewController.newViewController()
     let offset = UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.height ?? 0)
     let interactiveElement = InteractiveElement(size: settingsViewController.defaultContentHeight, offset: offset, view: settingsViewController.view)
-    self.present(viewController: settingsViewController, withMode: .topDown, inNavigationController: false, dismissInteractiveElement: interactiveElement)
+    let viewControllerToPresent = VisualEffectContainerViewController(embeddedViewController: settingsViewController, blurEffectStyle: .dark)
+    self.present(viewController: viewControllerToPresent, withMode: .topDown, inNavigationController: false, dismissInteractiveElement: interactiveElement)
   }
   
   // MARK: - Navigation
@@ -101,12 +103,13 @@ class MainViewController : BaseViewController {
     
     // Instantiate the location detail view controller
     let addLocationViewController = LocationDetailViewController.newViewController(savedLocation: savedLocation, delegate: self)
-    addLocationViewController.modalPresentationStyle = .popover
-    addLocationViewController.popoverPresentationController?.delegate = self
-    addLocationViewController.preferredContentSize = CGSize(width: self.view.bounds.width - 16, height: addLocationViewController.preferredContentHeight)
-    addLocationViewController.popoverPresentationController?.sourceView = self.listButton
-    addLocationViewController.popoverPresentationController?.sourceRect = self.listButton.bounds
-    self.present(addLocationViewController, animated: true, completion: nil)
+    let viewControllerToPresent = VisualEffectContainerViewController(embeddedViewController: addLocationViewController)
+    viewControllerToPresent.modalPresentationStyle = .popover
+    viewControllerToPresent.popoverPresentationController?.delegate = self
+    viewControllerToPresent.preferredContentSize = CGSize(width: self.view.bounds.width - 16, height: addLocationViewController.preferredContentHeight)
+    viewControllerToPresent.popoverPresentationController?.sourceView = self.listButton
+    viewControllerToPresent.popoverPresentationController?.sourceRect = self.listButton.bounds
+    self.present(viewControllerToPresent, animated: true, completion: nil)
   }
 }
 

@@ -62,13 +62,15 @@ class CameraPermissionManager : NSObject, PermissionManagerDelegate {
   // MARK: - Authorization
   
   func requestAuthorization() {
-    AVCaptureDevice.requestAccess(for: .video) { granted in
-      self.authorizationDelegate?.cameraPermissionManagerDidUpdateAuthorization()
+    AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
       if granted {
         Log.log("Authorization granted")
       } else {
         Log.log("Authorization denied")
       }
+      
+      // Notify delegate
+      self?.authorizationDelegate?.cameraPermissionManagerDidUpdateAuthorization()
     }
   }
 }

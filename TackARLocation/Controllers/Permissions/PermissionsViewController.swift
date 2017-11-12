@@ -26,6 +26,7 @@ class PermissionsViewController : UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
+    self.reloadContent()
     LocationManager.shared.authorizationDelegate = self
     CameraPermissionManager.shared.authorizationDelegate = self
   }
@@ -42,7 +43,7 @@ class PermissionsViewController : UIViewController {
     } else {
       self.locationPermissionButton.setTitle("Allow Location Access", for: .normal)
       self.locationPermissionButton.isUserInteractionEnabled = true
-      self.locationPermissionButton.setTitleColor(.blue, for: .normal)
+      self.locationPermissionButton.setTitleColor(.cyan, for: .normal)
     }
     
     // Camera
@@ -51,9 +52,9 @@ class PermissionsViewController : UIViewController {
       self.cameraPermissionButton.isUserInteractionEnabled = false
       self.cameraPermissionButton.setTitleColor(.lightGray, for: .normal)
     } else {
-      self.cameraPermissionButton.setTitle("Allow Location Access", for: .normal)
+      self.cameraPermissionButton.setTitle("Allow Camera Access", for: .normal)
       self.cameraPermissionButton.isUserInteractionEnabled = true
-      self.cameraPermissionButton.setTitleColor(.blue, for: .normal)
+      self.cameraPermissionButton.setTitleColor(.cyan, for: .normal)
     }
   }
   
@@ -119,8 +120,11 @@ extension PermissionsViewController : LocationManagerAuthorizationDelegate {
   func locationManagerDidUpdateAuthorization() {
     
     if PermissionManager.shared.isAccessAuthorized {
-//      self.showMainController()
+      self.showMainController()
     }
+    
+    // Update the content
+    self.reloadContent()
   }
 }
 
@@ -131,7 +135,10 @@ extension PermissionsViewController : CameraPermissionDelegate {
   func cameraPermissionManagerDidUpdateAuthorization() {
     
     if PermissionManager.shared.isAccessAuthorized {
-//      self.showMainController()
+      self.showMainController()
     }
+    
+    // Update the content
+    self.reloadContent()
   }
 }

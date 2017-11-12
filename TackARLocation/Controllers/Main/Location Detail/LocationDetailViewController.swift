@@ -19,7 +19,7 @@ class LocationDetailViewController : BaseViewController {
   // MARK: - Static Accessors
   
   private static func newViewController() -> LocationDetailViewController {
-    return self.newViewController(fromStoryboardWithName: "Main")
+    return self.newViewController(fromStoryboardWithName: "AddLocation")
   }
   
   static func newViewController(location: CLLocation?, delegate: LocationDetailViewControllerDelegate?) -> LocationDetailViewController {
