@@ -8,13 +8,17 @@
 
 import UIKit
 
-class SearchViewController : BaseTableViewController {
+class SearchViewController : BaseViewController {
   
   // MARK: - Static Accessors
   
   static func newViewController() -> SearchViewController {
     return self.newViewController(fromStoryboardWithName: "AddLocation")
   }
+  
+  // MARK: - Properties
+  
+  @IBOutlet weak var tableView: UITableView!
   
   // MARK: - Lifecycle
 }

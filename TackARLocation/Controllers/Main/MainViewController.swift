@@ -66,7 +66,7 @@ class MainViewController : BaseViewController {
     
     // Instantiate the location detail view controller
     let currentLocation = LocationManager.shared.currentLocation
-    let addLocationViewController = LocationDetailViewController.newViewController(location: currentLocation, delegate: self)
+    let addLocationViewController = AddLocationViewController.newViewController(location: currentLocation, delegate: self)
     addLocationViewController.modalPresentationStyle = .popover
     addLocationViewController.popoverPresentationController?.delegate = self
     addLocationViewController.preferredContentSize = CGSize(width: self.view.bounds.width - 16, height: addLocationViewController.preferredContentHeight)
