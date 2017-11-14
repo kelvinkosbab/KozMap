@@ -9,23 +9,7 @@
 import UIKit
 import CoreLocation
 
-extension MainViewController : LocationManagerDelegate {
-  
-  func locationManagerDidUpdateLocation(_ locationManager: LocationManager, location: CLLocation) {
-    
-    // Update location on child AR controller
-    self.arViewController?.currentLocation = location
-    
-    // Update location on presented controllers
-    if let locationDetailViewController = self.presentedViewController as? LocationDetailViewController, locationDetailViewController.isCreatingSavedLocation {
-      locationDetailViewController.location = location
-    } else if let locationListViewController = self.presentedViewController as? LocationListViewController {
-      locationListViewController.currentLocation = location
-    }
-  }
-  
-  func locationManagerDidUpdateHeading(_ locationManager: LocationManager, heading: CLLocationDirection, accuracy: CLLocationDirection) {}
-}
+// MARK: - LocationDetailViewControllerDelegate
 
 extension MainViewController : LocationDetailViewControllerDelegate {
   
@@ -93,6 +77,8 @@ extension MainViewController : LocationDetailViewControllerDelegate {
     }
   }
 }
+
+// MARK: - LocationListViewControllerDelegate
 
 extension MainViewController : LocationListViewControllerDelegate {
   

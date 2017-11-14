@@ -16,6 +16,7 @@
 		B62735DC1FB7EDFF004711A4 /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62735DB1FB7EDFF004711A4 /* PermissionManager.swift */; };
 		B62735DE1FB7EEE2004711A4 /* CameraPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62735DD1FB7EEE2004711A4 /* CameraPermissionManager.swift */; };
 		B62735E11FB82B9E004711A4 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62735E01FB82B9E004711A4 /* SearchViewController.swift */; };
+		B63B9A281FBA7D7100982FC6 /* LocationSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63B9A271FBA7D7100982FC6 /* LocationSearchService.swift */; };
 		B66041EF1FA905350076EBEF /* VirtualObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66041EE1FA905350076EBEF /* VirtualObject.swift */; };
 		B695236B1FA8D11E0014ABED /* CLLocation+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236A1FA8D11E0014ABED /* CLLocation+Util.swift */; };
 		B695236D1FA8D2E10014ABED /* SCNVector3+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236C1FA8D2E10014ABED /* SCNVector3+Util.swift */; };
@@ -86,6 +87,7 @@
 		B62735DB1FB7EDFF004711A4 /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
 		B62735DD1FB7EEE2004711A4 /* CameraPermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPermissionManager.swift; sourceTree = "<group>"; };
 		B62735E01FB82B9E004711A4 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		B63B9A271FBA7D7100982FC6 /* LocationSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchService.swift; sourceTree = "<group>"; };
 		B66041EE1FA905350076EBEF /* VirtualObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObject.swift; sourceTree = "<group>"; };
 		B695236A1FA8D11E0014ABED /* CLLocation+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Util.swift"; sourceTree = "<group>"; };
 		B695236C1FA8D2E10014ABED /* SCNVector3+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Util.swift"; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 				B6C6EA621FA7B6AD001F97E7 /* SceneKit */,
 				B6C6EA761FA7D761001F97E7 /* UnitType.swift */,
 				B61470051FB1485F0068CA67 /* Style.swift */,
+				B63B9A271FBA7D7100982FC6 /* LocationSearchService.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -504,6 +507,7 @@
 				B6C6EA951FA7E869001F97E7 /* UIDevice+Util.swift in Sources */,
 				B6C6EA821FA7E670001F97E7 /* PresenationManagerProtocol.swift in Sources */,
 				B695236B1FA8D11E0014ABED /* CLLocation+Util.swift in Sources */,
+				B63B9A281FBA7D7100982FC6 /* LocationSearchService.swift in Sources */,
 				B6C6EA711FA7C26D001F97E7 /* LocationDetailViewController.swift in Sources */,
 				B62735E11FB82B9E004711A4 /* SearchViewController.swift in Sources */,
 				B6C6EA971FA7E8B4001F97E7 /* DragDownDismissInteractiveTransition.swift in Sources */,

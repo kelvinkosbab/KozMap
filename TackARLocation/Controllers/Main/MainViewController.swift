@@ -46,16 +46,13 @@ class MainViewController : BaseViewController {
     self.listVisualEffectView.layer.cornerRadius = 28
     self.listVisualEffectView.layer.masksToBounds = true
     self.listVisualEffectView.clipsToBounds = true
-    
-    // Location
-    LocationManager.shared.delegate = self
   }
   
   // MARK: - Navigation
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     
-    if let arViewController =  segue.destination as? ARViewController {
+    if let arViewController = segue.destination as? ARViewController {
       self.arViewController = arViewController
     }
   }
@@ -78,8 +75,7 @@ class MainViewController : BaseViewController {
   @IBAction func listButtonSelected() {
     
     // Instantiate the location list view controller
-    let currentLocation = LocationManager.shared.currentLocation
-    let locationListViewController = LocationListViewController.newViewController(currentLocation: currentLocation, delegate: self)
+    let locationListViewController = LocationListViewController.newViewController(delegate: self)
     let viewControllerToPresent = VisualEffectContainerViewController(embeddedViewController: locationListViewController)
     viewControllerToPresent.modalPresentationStyle = .popover
     viewControllerToPresent.popoverPresentationController?.delegate = self

@@ -32,6 +32,7 @@
                                             <segment title="Current Location"/>
                                             <segment title="Search"/>
                                         </segments>
+                                        <color key="tintColor" red="0.0" green="0.65098039220000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="segmentedControlValueChanged:" destination="SbQ-yx-8tD" eventType="valueChanged" id="a6g-lk-s1S"/>
                                         </connections>
@@ -47,6 +48,8 @@
                             </view>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="TGh-3m-aPE">
                                 <rect key="frame" x="168" y="630" width="39" height="37"/>
+                                <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="currentPageIndicatorTintColor" red="0.0" green="0.65098039220000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -217,7 +220,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6sW-a9-crM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="897" y="287"/>
+            <point key="canvasLocation" x="896.79999999999995" y="286.50674662668666"/>
         </scene>
         <!--Inline Color Chooser View Controller-->
         <scene sceneID="SaP-i9-LZU">
@@ -351,14 +354,44 @@
         <!--Search View Controller-->
         <scene sceneID="P9m-ND-ho0">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Pnr-Hz-xQ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="SearchViewController" id="Wz6-6U-ft3" customClass="SearchViewController" customModule="KozMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lHv-JK-tdL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search for ..." translatesAutoresizingMaskIntoConstraints="NO" id="vHC-Bm-jGB">
+                                <rect key="frame" x="8" y="28" width="359" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                                <connections>
+                                    <outlet property="delegate" destination="Wz6-6U-ft3" id="MwF-fi-DWe"/>
+                                </connections>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="g8a-tE-Wx5">
+                                <rect key="frame" x="0.0" y="84" width="375" height="583"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="g8a-tE-Wx5" firstAttribute="top" secondItem="vHC-Bm-jGB" secondAttribute="bottom" id="5qh-Rt-zHt"/>
+                            <constraint firstItem="vHC-Bm-jGB" firstAttribute="leading" secondItem="fAL-2x-hsz" secondAttribute="leading" constant="8" id="D6x-7r-08A"/>
+                            <constraint firstItem="fAL-2x-hsz" firstAttribute="trailing" secondItem="g8a-tE-Wx5" secondAttribute="trailing" id="PZy-Dr-YGt"/>
+                            <constraint firstItem="vHC-Bm-jGB" firstAttribute="top" secondItem="fAL-2x-hsz" secondAttribute="top" constant="8" id="QtJ-wt-e96"/>
+                            <constraint firstItem="vHC-Bm-jGB" firstAttribute="trailing" secondItem="fAL-2x-hsz" secondAttribute="trailing" constant="-8" id="Rkh-hF-eIb"/>
+                            <constraint firstItem="fAL-2x-hsz" firstAttribute="bottom" secondItem="g8a-tE-Wx5" secondAttribute="bottom" id="TKj-VC-t3D"/>
+                            <constraint firstItem="g8a-tE-Wx5" firstAttribute="leading" secondItem="fAL-2x-hsz" secondAttribute="leading" id="gUp-FA-0JW"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="fAL-2x-hsz"/>
                     </view>
+                    <connections>
+                        <outlet property="searchBar" destination="vHC-Bm-jGB" id="MbC-9o-eSg"/>
+                        <outlet property="tableView" destination="g8a-tE-Wx5" id="suu-1I-UIX"/>
+                    </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pnr-Hz-xQ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="897" y="-406"/>
         </scene>

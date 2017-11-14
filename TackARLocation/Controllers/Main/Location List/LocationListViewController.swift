@@ -23,9 +23,8 @@ class LocationListViewController : BaseTableViewController, NSFetchedResultsCont
     return self.newViewController(fromStoryboardWithName: "AddLocation")
   }
   
-  static func newViewController(currentLocation: CLLocation?, delegate: LocationListViewControllerDelegate?) -> LocationListViewController {
+  static func newViewController(delegate: LocationListViewControllerDelegate?) -> LocationListViewController {
     let viewController = self.newViewController()
-    viewController.currentLocation = currentLocation
     viewController.delegate = delegate
     return viewController
   }
@@ -35,12 +34,8 @@ class LocationListViewController : BaseTableViewController, NSFetchedResultsCont
   weak var delegate: LocationListViewControllerDelegate? = nil
   let rowHeight: CGFloat = 60
   
-  var currentLocation: CLLocation? = nil {
-    didSet {
-      if self.isViewLoaded {
-        self.reloadContent()
-      }
-    }
+  var currentLocation: CLLocation? {
+    return LocationManager.shared.currentLocation
   }
   
   var savedLocations: [SavedLocation] {
@@ -66,7 +61,19 @@ class LocationListViewController : BaseTableViewController, NSFetchedResultsCont
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
-    Log.log("KAK appear")
+    NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveUpdatedLocationNotification(_:)), name: .locationManagerDidUpdateCurrentLocation, object: nil)
+  }
+  
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    
+    NotificationCenter.default.removeObserver(self)
+  }
+  
+  // MARK: - Notifications
+  
+  @objc func didReceiveUpdatedLocationNotification(_ notification: Notification) {
+    self.reloadContent()
   }
   
   // MARK: - NSFetchedResultsControllerDelegate

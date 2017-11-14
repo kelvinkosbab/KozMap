@@ -48,12 +48,12 @@ class ARViewController : UIViewController {
     return self.sceneView.scene.rootNode.convertPosition(pointOfView.position, to: self.sceneNode)
   }
   
-  var currentLocation: CLLocation? = nil {
-    didSet {
-      if self.isViewLoaded {
-        self.updatePlacemarks(updatePosition: true)
-      }
-    }
+  var currentLocation: CLLocation? {
+    return LocationManager.shared.currentLocation
+  }
+  
+  var currentHeading: CLHeading? {
+    return LocationManager.shared.currentHeading
   }
   
   // MARK: - Lifecycle
@@ -72,6 +72,8 @@ class ARViewController : UIViewController {
     
     NotificationCenter.default.addObserver(self, selector: #selector(self.restartPlaneDetection), name: .UIApplicationDidBecomeActive, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(self.pauseScene), name: .UIApplicationWillResignActive, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveUpdatedLocationNotification(_:)), name: .locationManagerDidUpdateCurrentLocation, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveUpdatedHeadingNotification(_:)), name: .locationManagerDidUpdateCurrentHeading, object: nil)
   }
   
   override func viewDidDisappear(_ animated: Bool) {
@@ -79,6 +81,16 @@ class ARViewController : UIViewController {
     
     self.pauseScene()
     NotificationCenter.default.removeObserver(self)
+  }
+  
+  // MARK: - Notifications
+  
+  @objc func didReceiveUpdatedLocationNotification(_ notification: Notification) {
+    self.updatePlacemarks(updatePosition: true)
+  }
+  
+  @objc func didReceiveUpdatedHeadingNotification(_ notification: Notification) {
+    
   }
   
   // MARK: - Scene

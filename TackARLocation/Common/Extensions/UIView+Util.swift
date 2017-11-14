@@ -23,17 +23,17 @@ extension UIView {
     if #available(iOS 11, *) {
       let guide = containerView.safeAreaLayoutGuide
       NSLayoutConstraint.activate([
-        self.topAnchor.constraint(equalTo: guide.topAnchor, constant: 0),
-        guide.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0),
-        self.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: 0),
-        guide.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0)
+        self.topAnchor.constraint(equalTo: guide.topAnchor, constant: topMargin),
+        guide.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: bottomMargin),
+        self.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: leadingMargin),
+        guide.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: trailingMargin)
         ])
     } else {
       NSLayoutConstraint.activate([
-        self.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 0),
-        containerView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0),
-        self.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 0),
-        containerView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0)
+        self.topAnchor.constraint(equalTo: containerView.topAnchor, constant: topMargin),
+        containerView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: bottomMargin),
+        self.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: leadingMargin),
+        containerView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: trailingMargin)
         ])
     }
     containerView.layoutIfNeeded()

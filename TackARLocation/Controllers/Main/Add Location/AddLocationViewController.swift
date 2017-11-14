@@ -61,6 +61,10 @@ class AddLocationViewController : BaseViewController {
     if let firstViewController = self.orderedViewControllers.first {
       pageViewController.setViewControllers([ firstViewController ], direction: .forward, animated: true, completion: nil)
     }
+    
+    // Page control
+    self.pageControl.numberOfPages = 2
+    self.pageControl.currentPage = 0
   }
   
   // MARK: - Content
@@ -74,6 +78,7 @@ class AddLocationViewController : BaseViewController {
   }
   
   func reloadContent() {
+    self.segmentedControl.selectedSegmentIndex = self.currentSelectedIndex
     self.pageControl.currentPage = self.currentSelectedIndex
   }
   

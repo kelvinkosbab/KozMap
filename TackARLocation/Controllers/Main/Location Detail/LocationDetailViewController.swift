@@ -93,8 +93,27 @@ class LocationDetailViewController : BaseViewController {
     self.addLocationButton.layer.masksToBounds = true
     self.addLocationButton.clipsToBounds = true
     
-    // MARK: - Content
+    // Content
     self.reloadContent()
+    
+    // Location updates
+    if self.isCreatingSavedLocation {
+      NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveUpdatedLocationNotification(_:)), name: .locationManagerDidUpdateCurrentLocation, object: nil)
+    }
+  }
+  
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    
+    NotificationCenter.default.removeObserver(self)
+  }
+  
+  // MARK: - Notifications
+  
+  @objc func didReceiveUpdatedLocationNotification(_ notification: Notification) {
+    if self.isCreatingSavedLocation {
+      self.location = LocationManager.shared.currentLocation
+    }
   }
   
   // MARK: - Content

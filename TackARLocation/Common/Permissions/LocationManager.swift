@@ -13,9 +13,26 @@ import CoreLocation
  * Handles retrieving the location and heading from CoreLocation
  */
 
+extension Notification.Name {
+  static let locationManagerDidUpdateCurrentLocation = Notification.Name("locationManagerDidUpdateCurrentLocation")
+  static let locationManagerDidUpdateCurrentHeading = Notification.Name("locationManagerDidUpdateCurrentHeading")
+  static let locationManagerdidUpdateAuthorization = Notification.Name("locationManagerdidUpdateAuthorization")
+}
+
+extension CLHeading {
+  
+  var heading: CLLocationDirection {
+    if self.headingAccuracy >= 0 {
+      return self.trueHeading
+    } else {
+      return self.magneticHeading
+    }
+  }
+}
+
 protocol LocationManagerDelegate : class {
-  func locationManagerDidUpdateLocation(_ locationManager: LocationManager, location: CLLocation)
-  func locationManagerDidUpdateHeading(_ locationManager: LocationManager, heading: CLLocationDirection, accuracy: CLLocationDirection)
+  func locationManagerDidUpdateCurrentLocation(_ locationManager: LocationManager, currentLocation: CLLocation?)
+  func locationManagerDidUpdateCurrentHeading(_ locationManager: LocationManager, currentHeading: CLHeading?)
 }
 
 protocol LocationManagerAuthorizationDelegate : class {
@@ -43,13 +60,7 @@ class LocationManager : NSObject, CLLocationManagerDelegate, PermissionManagerDe
     
     self.locationManager.delegate = self
     self.currentLocation = self.locationManager.location
-    if let heading = self.locationManager.heading {
-      if heading.headingAccuracy >= 0 {
-        self.heading = heading.trueHeading
-      } else {
-        self.heading = heading.magneticHeading
-      }
-    }
+    self.currentHeading = self.locationManager.heading
   }
   
   // MARK: - PermissionManagerDelegate
@@ -72,9 +83,23 @@ class LocationManager : NSObject, CLLocationManagerDelegate, PermissionManagerDe
   
   private let locationManager: CLLocationManager
   
-  var currentLocation: CLLocation?
-  var heading: CLLocationDirection?
-  var headingAccuracy: CLLocationDegrees?
+  var currentLocation: CLLocation? {
+    didSet {
+      if let currentLocation = self.currentLocation {
+        self.delegate?.locationManagerDidUpdateCurrentLocation(self, currentLocation: currentLocation)
+        NotificationCenter.default.post(name: .locationManagerDidUpdateCurrentLocation, object: currentLocation)
+      }
+    }
+  }
+  
+  var currentHeading: CLHeading? {
+    didSet {
+      if let currentHeading = self.currentHeading {
+        self.delegate?.locationManagerDidUpdateCurrentHeading(self, currentHeading: currentHeading)
+        NotificationCenter.default.post(name: .locationManagerDidUpdateCurrentHeading, object: currentHeading)
+      }
+    }
+  }
   
   // MARK: - Permissions
   
@@ -124,23 +149,11 @@ class LocationManager : NSObject, CLLocationManagerDelegate, PermissionManagerDe
   }
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    for location in locations {
-      self.delegate?.locationManagerDidUpdateLocation(self, location: location)
-    }
-    
-    self.currentLocation = manager.location
+    self.currentLocation = locations.last ?? manager.location
   }
   
   func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-    if newHeading.headingAccuracy >= 0 {
-      self.heading = newHeading.trueHeading
-    } else {
-      self.heading = newHeading.magneticHeading
-    }
-    
-    self.headingAccuracy = newHeading.headingAccuracy
-    
-    self.delegate?.locationManagerDidUpdateHeading(self, heading: self.heading!, accuracy: newHeading.headingAccuracy)
+    self.currentHeading = newHeading
   }
   
   func locationManagerShouldDisplayHeadingCalibration(_ manager: CLLocationManager) -> Bool {
