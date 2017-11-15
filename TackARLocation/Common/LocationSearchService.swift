@@ -15,20 +15,30 @@ extension MKCoordinateSpan {
 }
 
 struct MapItem {
-  let name: String?
-  private var placemark: MKPlacemark
-  let isCurrentLocation: Bool
-  let phoneNumber: String?
-  let url: URL?
-  let timeZone: TimeZone?
+  let mkMapItem: MKMapItem
   
-  init(mkMapItem: MKMapItem) {
-    self.name = mkMapItem.name
-    self.placemark = mkMapItem.placemark
-    self.isCurrentLocation = mkMapItem.isCurrentLocation
-    self.phoneNumber = mkMapItem.phoneNumber
-    self.url = mkMapItem.url
-    self.timeZone = mkMapItem.timeZone
+  var name: String? {
+    return self.mkMapItem.name
+  }
+  
+  var placemark: MKPlacemark {
+    return self.mkMapItem.placemark
+  }
+  
+  var isCurrentLocation: Bool {
+    return self.mkMapItem.isCurrentLocation
+  }
+  
+  var phoneNumber: String? {
+    return self.mkMapItem.phoneNumber
+  }
+  
+  var url: URL? {
+    return self.mkMapItem.url
+  }
+  
+  var timeZone: TimeZone? {
+    return self.mkMapItem.timeZone
   }
 }
 

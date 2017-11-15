@@ -24,6 +24,7 @@ class SearchViewController : BaseViewController {
   
   let locationSearchService = LocationSearchService()
   var resultSearchController: UISearchController? = nil
+  var mapItems: [MapItem] = []
   
   var currentLocation: CLLocation? {
     return LocationManager.shared.currentLocation
@@ -36,6 +37,7 @@ class SearchViewController : BaseViewController {
     
     self.tableView.delegate = self
     self.tableView.dataSource = self
+    self.searchBar.delegate = self
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -53,13 +55,14 @@ class SearchViewController : BaseViewController {
   // MARK: - Notifications
   
   @objc func didReceiveUpdatedLocationNotification(_ notification: Notification) {
-    self.reloadContent()
+    self.reloadContent(mapItems: self.mapItems)
   }
   
   // MARK: - Content
   
-  func reloadContent() {
-    
+  func reloadContent(mapItems: [MapItem]) {
+    self.mapItems = mapItems
+    self.tableView.reloadData()
   }
 }
 
@@ -72,27 +75,38 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 0
+    return self.mapItems.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    return UITableViewCell()
+    let cell = tableView.dequeueReusableCell(withIdentifier: "LocationListViewControllerCell", for: indexPath) as! LocationListViewControllerCell
+    let mapItem = self.mapItems[indexPath.row]
+    cell.titleLabel.text = mapItem.name
+    cell.detailLabel.text = mapItem.url?.absoluteString
+    return cell
   }
 }
 
-// MARK: - UISearchResultsUpdating
+// MARK: - UISearchBarDelegate
 
-extension SearchViewController : UISearchResultsUpdating {
+extension SearchViewController : UISearchBarDelegate {
   
-  func updateSearchResults(for searchController: UISearchController) {
+  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    self.performSearch(text: searchBar.text)
+  }
+  
+  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    self.performSearch(text: searchText)
+  }
+  
+  private func performSearch(text: String?) {
     
-    guard let text = searchController.searchBar.text, let currentLocation = self.currentLocation else {
+    guard let text = searchBar.text, let currentLocation = self.currentLocation else {
       return
-      
     }
     
-    self.locationSearchService.queryLocations(query: text, currentLocation: currentLocation) { mapItems in
-      print("KAK found \(mapItems.count) map items")
+    self.locationSearchService.queryLocations(query: text, currentLocation: currentLocation) { [weak self] mapItems in
+      self?.reloadContent(mapItems: mapItems)
     }
   }
 }

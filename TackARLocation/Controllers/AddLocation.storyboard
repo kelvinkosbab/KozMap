@@ -373,6 +373,53 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="g8a-tE-Wx5">
                                 <rect key="frame" x="0.0" y="84" width="375" height="583"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="LocationListViewControllerCell" id="Rji-ZD-rMx" customClass="LocationListViewControllerCell" customModule="KozMap" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Rji-ZD-rMx" id="tFO-Ek-V1R">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R5I-dm-C7z">
+                                                    <rect key="frame" x="63" y="1.5" width="297" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VZb-6C-SPu">
+                                                    <rect key="frame" x="63" y="22" width="297" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rGC-Pi-nLq">
+                                                    <rect key="frame" x="15" y="2" width="40" height="40"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="JDS-3K-aGS"/>
+                                                        <constraint firstAttribute="width" constant="40" id="hCP-2d-b7P"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="R5I-dm-C7z" secondAttribute="trailing" id="3fk-fY-AVt"/>
+                                                <constraint firstItem="rGC-Pi-nLq" firstAttribute="leading" secondItem="tFO-Ek-V1R" secondAttribute="leadingMargin" id="Owl-7K-KwH"/>
+                                                <constraint firstItem="VZb-6C-SPu" firstAttribute="leading" secondItem="rGC-Pi-nLq" secondAttribute="trailing" constant="8" id="aNB-s8-maC"/>
+                                                <constraint firstItem="rGC-Pi-nLq" firstAttribute="centerY" secondItem="tFO-Ek-V1R" secondAttribute="centerY" id="bnJ-lm-29w"/>
+                                                <constraint firstItem="VZb-6C-SPu" firstAttribute="top" secondItem="tFO-Ek-V1R" secondAttribute="centerY" id="o9h-v4-KOf"/>
+                                                <constraint firstItem="R5I-dm-C7z" firstAttribute="leading" secondItem="rGC-Pi-nLq" secondAttribute="trailing" constant="8" id="r6E-rI-20Z"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="VZb-6C-SPu" secondAttribute="trailing" id="tlc-CU-nG8"/>
+                                                <constraint firstItem="R5I-dm-C7z" firstAttribute="bottom" secondItem="tFO-Ek-V1R" secondAttribute="centerY" id="xqZ-G7-f9e"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="colorView" destination="rGC-Pi-nLq" id="6py-mN-vBQ"/>
+                                            <outlet property="detailLabel" destination="VZb-6C-SPu" id="DlI-Kk-swr"/>
+                                            <outlet property="titleLabel" destination="R5I-dm-C7z" id="lcZ-b7-BgQ"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                         </subviews>
                         <constraints>

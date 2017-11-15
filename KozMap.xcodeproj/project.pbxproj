@@ -13,6 +13,7 @@
 		B614700B1FB180E30068CA67 /* Color+MyManagedObjectProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B614700A1FB180E30068CA67 /* Color+MyManagedObjectProtocol.swift */; };
 		B614700D1FB193FA0068CA67 /* UIViewController+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B614700C1FB193FA0068CA67 /* UIViewController+Util.swift */; };
 		B614700F1FB194380068CA67 /* UICollectionView+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B614700E1FB194380068CA67 /* UICollectionView+Util.swift */; };
+		B620C3771FBB6043001B29E9 /* BatchUpdatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B620C3761FBB6043001B29E9 /* BatchUpdatable.swift */; };
 		B62735DC1FB7EDFF004711A4 /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62735DB1FB7EDFF004711A4 /* PermissionManager.swift */; };
 		B62735DE1FB7EEE2004711A4 /* CameraPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62735DD1FB7EEE2004711A4 /* CameraPermissionManager.swift */; };
 		B62735E11FB82B9E004711A4 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62735E01FB82B9E004711A4 /* SearchViewController.swift */; };
@@ -84,6 +85,7 @@
 		B614700A1FB180E30068CA67 /* Color+MyManagedObjectProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+MyManagedObjectProtocol.swift"; sourceTree = "<group>"; };
 		B614700C1FB193FA0068CA67 /* UIViewController+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Util.swift"; sourceTree = "<group>"; };
 		B614700E1FB194380068CA67 /* UICollectionView+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Util.swift"; sourceTree = "<group>"; };
+		B620C3761FBB6043001B29E9 /* BatchUpdatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatchUpdatable.swift; sourceTree = "<group>"; };
 		B62735DB1FB7EDFF004711A4 /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
 		B62735DD1FB7EEE2004711A4 /* CameraPermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPermissionManager.swift; sourceTree = "<group>"; };
 		B62735E01FB82B9E004711A4 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 			children = (
 				B6C6EA471FA7A15C001F97E7 /* ViewControllerFromStoryboardProtocol.swift */,
 				B6C6EA531FA7AEA4001F97E7 /* Loggable.swift */,
+				B620C3761FBB6043001B29E9 /* BatchUpdatable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -527,6 +530,7 @@
 				B6C6EA791FA7DAB9001F97E7 /* LocationListViewController+Cells.swift in Sources */,
 				B6C6EA6F1FA7C264001F97E7 /* LocationListViewController.swift in Sources */,
 				B69BDAD51FA7FB0B00A385DE /* Double+Util.swift in Sources */,
+				B620C3771FBB6043001B29E9 /* BatchUpdatable.swift in Sources */,
 				B6C6EA9B1FA7E8E4001F97E7 /* DragRightDismissInteractiveTransition.swift in Sources */,
 				B6C6EA311FA79B45001F97E7 /* TackARLocation.xcdatamodeld in Sources */,
 				B61470041FB1475B0068CA67 /* InlineColorChooserViewController.swift in Sources */,
