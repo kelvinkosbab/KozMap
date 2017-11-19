@@ -48,6 +48,7 @@ extension MKPlacemark {
 
 struct MapItem {
   let mkMapItem: MKMapItem
+  var currentLocation: CLLocation?
   
   var name: String? {
     return self.mkMapItem.name
@@ -75,5 +76,12 @@ struct MapItem {
   
   var address: String? {
     return self.placemark.address
+  }
+  
+  var distance: Double? {
+    if let mapItemLocation = self.mkMapItem.placemark.location {
+      return self.currentLocation?.distance(from: mapItemLocation)
+    }
+    return nil
   }
 }

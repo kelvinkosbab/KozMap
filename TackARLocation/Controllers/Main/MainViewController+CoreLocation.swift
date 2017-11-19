@@ -15,7 +15,7 @@ extension MainViewController : LocationDetailViewControllerDelegate {
   
   func didUpdate(savedLocation: SavedLocation) {
     let dispatchGroup = DispatchGroup()
-    if let _ = self.presentedViewController as? LocationDetailViewController {
+    if let _ = self.presentedViewController {
       dispatchGroup.enter()
       self.dismiss(animated: true) {
         dispatchGroup.leave()
@@ -31,7 +31,7 @@ extension MainViewController : LocationDetailViewControllerDelegate {
   
   func didSave(savedLocation: SavedLocation) {
     let dispatchGroup = DispatchGroup()
-    if let _ = self.presentedViewController as? LocationDetailViewController {
+    if let _ = self.presentedViewController {
       dispatchGroup.enter()
       self.dismiss(animated: true) {
         dispatchGroup.leave()
@@ -92,5 +92,16 @@ extension MainViewController : LocationListViewControllerDelegate {
     
     // Delete this location from core data
     SavedLocation.deleteOne(savedLocation)
+  }
+}
+
+// MARK: - SearchViewControllerDelegate
+
+extension MainViewController : SearchViewControllerDelegate {
+  
+  func shouldAdd(mapItem: MapItem) {
+    self.dismiss(animated: true) { [weak self] in
+      self?.presentLocationDetail(mapItem: mapItem)
+    }
   }
 }

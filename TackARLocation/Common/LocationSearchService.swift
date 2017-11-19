@@ -26,12 +26,23 @@ struct LocationSearchService {
       // Parse the map items
       var mapItems: [MapItem] = []
       for mkMapItem in response?.mapItems ?? [] {
-        let mapItem = MapItem(mkMapItem: mkMapItem)
-        mapItems.append(mapItem)
+        if let _ = mkMapItem.placemark.location {
+          let mapItem = MapItem(mkMapItem: mkMapItem, currentLocation: currentLocation)
+          mapItems.append(mapItem)
+        }
       }
       
       // Completion
-      completion(mapItems)
+      let sortedItems = mapItems.sorted { (item1, item2) -> Bool in
+        if let distance1 = item1.distance, let distance2 = item2.distance {
+          return distance1 < distance2
+        } else if let _ = item1.distance {
+          return true
+        } else {
+          return false
+        }
+      }
+      completion(sortedItems)
     }
   }
 }

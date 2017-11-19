@@ -9,12 +9,22 @@
 import UIKit
 import CoreLocation
 
+protocol SearchViewControllerDelegate : class {
+  func shouldAdd(mapItem: MapItem)
+}
+
 class SearchViewController : BaseViewController {
   
   // MARK: - Static Accessors
   
-  static func newViewController() -> SearchViewController {
+  private static func newViewController() -> SearchViewController {
     return self.newViewController(fromStoryboardWithName: "AddLocation")
+  }
+  
+  static func newViewController(delegate: SearchViewControllerDelegate?) -> SearchViewController {
+    let viewController = self.newViewController()
+    viewController.delegate = delegate
+    return viewController
   }
   
   // MARK: - Properties
@@ -22,6 +32,7 @@ class SearchViewController : BaseViewController {
   @IBOutlet weak var searchBar: UISearchBar!
   @IBOutlet weak var tableView: UITableView!
   
+  weak var delegate: SearchViewControllerDelegate? = nil
   let locationSearchService = LocationSearchService()
   var resultSearchController: UISearchController? = nil
   var mapItems: [MapItem] = []
@@ -78,6 +89,10 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource {
     return self.mapItems.count
   }
   
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 50
+  }
+  
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "SearchViewControllerCell", for: indexPath) as! SearchViewControllerCell
     cell.backgroundColor = .clear
@@ -86,18 +101,10 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource {
     cell.titleLabel.text = mapItem.name
     cell.detailLabel.text = mapItem.address
     
-    // Distance labels
-    if let location = mapItem.placemark.location, let currentLocation = self.currentLocation {
-      let distance = currentLocation.distance(from: location)
-      let readibleDistance = distance.getBasicReadibleDistance(nearUnitType: Defaults.shared.nearUnitType, farUnitType: Defaults.shared.farUnitType)
-      cell.rightDetailLabel.text = readibleDistance
-    } else if let location = mapItem.placemark.location {
-      let roundedLatitude = Double(round(location.coordinate.latitude*1000)/1000)
-      let roundedLongitude = Double(round(location.coordinate.longitude*1000)/1000)
-      cell.rightDetailLabel.text = "\(roundedLatitude)°N, \(roundedLongitude)°W"
-    } else {
-      cell.rightDetailLabel.text = ""
-    }
+    // Distance label
+    let distance = mapItem.distance
+    let readibleDistance = distance?.getBasicReadibleDistance(nearUnitType: Defaults.shared.nearUnitType, farUnitType: Defaults.shared.farUnitType)
+    cell.rightDetailLabel.text = readibleDistance
     
     return cell
   }
@@ -105,7 +112,9 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
     
-    let _ = self.mapItems[indexPath.row]
+    // Add the map item
+    let mapItem = self.mapItems[indexPath.row]
+    self.delegate?.shouldAdd(mapItem: mapItem)
   }
 }
 

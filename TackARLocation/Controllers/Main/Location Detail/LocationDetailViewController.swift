@@ -40,6 +40,14 @@ class LocationDetailViewController : BaseViewController {
     return viewController
   }
   
+  static func newViewController(mapItem: MapItem, delegate: LocationDetailViewControllerDelegate?) -> LocationDetailViewController {
+    let viewController = self.newViewController()
+    viewController.mapItem = mapItem
+    viewController.location = mapItem.placemark.location
+    viewController.delegate = delegate
+    return viewController
+  }
+  
   // MARK: - Properties
   
   @IBOutlet weak var nameTextField: UITextField!
@@ -53,17 +61,27 @@ class LocationDetailViewController : BaseViewController {
   weak var colorChooserController: InlineColorChooserViewController? = nil
   
   var savedLocation: SavedLocation? = nil
+  var mapItem: MapItem? = nil
   var locationColor: UIColor = .kozRed
   var location: CLLocation? = nil {
     didSet {
-      if self.isViewLoaded && self.isCreatingSavedLocation {
+      if self.isViewLoaded && self.state == .creating {
         self.reloadContent()
       }
     }
   }
   
-  var isCreatingSavedLocation: Bool {
-    return self.savedLocation == nil
+  enum LocationDetailState {
+    case creating, updatingSavedLocation, creatingMapItem
+  }
+  
+  var state: LocationDetailState {
+    if self.savedLocation == nil && self.mapItem == nil {
+      return .creating
+    } else if let _ = self.savedLocation {
+      return .updatingSavedLocation
+    }
+    return .creatingMapItem
   }
   
   // MARK: - Lifecycle
@@ -77,6 +95,11 @@ class LocationDetailViewController : BaseViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
+    // Configure the color chooser
+    if self.colorChooserController == nil {
+      self.configureColorChooser()
+    }
+    
     // Style button
     self.addLocationButton.layer.cornerRadius = 5
     self.addLocationButton.layer.masksToBounds = true
@@ -86,7 +109,7 @@ class LocationDetailViewController : BaseViewController {
     self.reloadContent()
     
     // Location updates
-    if self.isCreatingSavedLocation {
+    if self.state == .creating {
       NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveUpdatedLocationNotification(_:)), name: .locationManagerDidUpdateCurrentLocation, object: nil)
     }
   }
@@ -97,18 +120,10 @@ class LocationDetailViewController : BaseViewController {
     NotificationCenter.default.removeObserver(self)
   }
   
-  override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews()
-    
-    if self.colorChooserController == nil {
-      self.configureColorChooser()
-    }
-  }
-  
   // MARK: - Notifications
   
   @objc func didReceiveUpdatedLocationNotification(_ notification: Notification) {
-    if self.isCreatingSavedLocation {
+    if self.state == .creating {
       self.location = LocationManager.shared.currentLocation
     }
   }
@@ -125,7 +140,7 @@ class LocationDetailViewController : BaseViewController {
     colorChooserController.view.backgroundColor = .clear
     self.add(childViewController: colorChooserController, intoContainerView: self.colorChooserContainer)
     self.colorChooserController = colorChooserController
-    if self.isCreatingSavedLocation {
+    if self.state == .creating || self.state == .creatingMapItem {
       self.locationColor = .kozRed
       colorChooserController.selectedColor = .kozRed
     } else {
@@ -140,9 +155,16 @@ class LocationDetailViewController : BaseViewController {
   
   func reloadContent() {
     
+    // Saved location
     if let savedLocation = self.savedLocation {
       self.nameTextField.text = savedLocation.name
       self.location = savedLocation.location
+    }
+    
+    // Map Item
+    if let mapItem = self.mapItem {
+      self.nameTextField.text = mapItem.name
+      self.location = mapItem.placemark.location
     }
     
     // Check if there is a location to populate

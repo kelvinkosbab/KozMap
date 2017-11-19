@@ -17,10 +17,11 @@ class AddLocationViewController : BaseViewController {
     return self.newViewController(fromStoryboardWithName: "AddLocation")
   }
   
-  static func newViewController(location: CLLocation?, delegate: LocationDetailViewControllerDelegate?) -> AddLocationViewController {
+  static func newViewController(location: CLLocation?, locationDetailDelegate: LocationDetailViewControllerDelegate?, searchDelegate: SearchViewControllerDelegate?) -> AddLocationViewController {
     let viewController = self.newViewController()
     viewController.location = location
-    viewController.delegate = delegate
+    viewController.locationDetailDelegate = locationDetailDelegate
+    viewController.searchDelegate = searchDelegate
     return viewController
   }
   
@@ -31,7 +32,8 @@ class AddLocationViewController : BaseViewController {
   
   let preferredContentHeight: CGFloat = 325
   var pageViewController: UIPageViewController? = nil
-  weak var delegate: LocationDetailViewControllerDelegate? = nil
+  weak var locationDetailDelegate: LocationDetailViewControllerDelegate? = nil
+  weak var searchDelegate: SearchViewControllerDelegate? = nil
   var location: CLLocation? = nil {
     didSet {
 //      if self.isViewLoaded && self.isCreatingSavedLocation {
@@ -41,8 +43,8 @@ class AddLocationViewController : BaseViewController {
   }
   
   private(set) lazy var orderedViewControllers: [UIViewController] = {
-    let currentLocationViewController = LocationDetailViewController.newViewController(location: self.location, delegate: self.delegate)
-    let searchViewController = SearchViewController.newViewController()
+    let currentLocationViewController = LocationDetailViewController.newViewController(location: self.location, delegate: self.locationDetailDelegate)
+    let searchViewController = SearchViewController.newViewController(delegate: self.searchDelegate)
     return [ currentLocationViewController, searchViewController ]
   }()
   

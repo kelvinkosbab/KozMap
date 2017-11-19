@@ -177,7 +177,6 @@ extension LocationListViewController {
       self?.delegate?.shouldEdit(savedLocation: savedLocation)
       success(true)
     }
-//    editAction.image
     editAction.backgroundColor = .kozBlue
     return UISwipeActionsConfiguration(actions: [ editAction ])
   }
@@ -188,7 +187,6 @@ extension LocationListViewController {
       self?.delegate?.shouldDelete(savedLocation: savedLocation)
       success(true)
     }
-    //    deleteAction.image
     deleteAction.backgroundColor = .kozRed
     return UISwipeActionsConfiguration(actions: [ deleteAction ])
   }

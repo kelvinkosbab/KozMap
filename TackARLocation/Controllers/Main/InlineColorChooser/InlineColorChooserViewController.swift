@@ -12,7 +12,7 @@ protocol InlineColorChooserViewControllerDelegate : class {
   func didSelect(color: UIColor)
 }
 
-class InlineColorChooserViewController : UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class InlineColorChooserViewController : UICollectionViewController, UICollectionViewDelegateFlowLayout, BatchUpdatable {
   
   // MARK: - Static Accessors
   
@@ -26,37 +26,35 @@ class InlineColorChooserViewController : UICollectionViewController, UICollectio
     return viewController
   }
   
+  // MARK: - BatchUpdatable
+  
+  var isProcessingBatchUpdate: Bool = false
+  var batchUpdateQueue: [BatchUpdatableItem] = []
+  
   // MARK: - Properties
   
   weak var delegate: InlineColorChooserViewControllerDelegate? = nil
-  let colors: [UIColor] = [ .kozRed, .kozOrange, .kozYellow, .kozGreen, .kozBlue, .kozPurple ]
-  private var selectedIndexPath: IndexPath? = nil
+  var colors: [UIColor] = []
   
-  var selectedColor: UIColor? {
-    get {
-      if let selectedIndexPath = self.selectedIndexPath {
-        return self.colors[selectedIndexPath.row]
+  var selectedColor: UIColor = .kozRed {
+    didSet {
+      
+      guard self.isViewLoaded && self.selectedColor != oldValue else {
+        return
       }
-      return nil
-    }
-    set {
-      if let selectedIndexPath = newValue, let index = self.colors.index(of: selectedIndexPath) {
-        
-        // Deselect the old indexPath
-        if let oldSelectedIndexPath = self.selectedIndexPath {
-          self.collectionView?.deselectItem(at: oldSelectedIndexPath, animated: self.isViewLoaded)
-        } else {
-          self.collectionView?.reloadData()
-        }
-        
-        // New selected color
+      
+      var indexPathsToUpdate: [IndexPath] = []
+      if let index = self.colors.index(of: self.selectedColor) {
         let indexPath = IndexPath(row: index, section: 0)
-        self.selectedIndexPath = indexPath
-        self.collectionView?.selectItem(at: indexPath, animated: self.isViewLoaded, scrollPosition: .centeredVertically)
-      } else {
-        self.selectedIndexPath = nil
-        self.collectionView?.reloadData()
+        indexPathsToUpdate.append(indexPath)
       }
+      
+      if let index = self.colors.index(of: oldValue) {
+        let indexPath = IndexPath(row: index, section: 0)
+        indexPathsToUpdate.append(indexPath)
+      }
+      
+      self.collectionView?.reloadItems(at: indexPathsToUpdate)
     }
   }
   
@@ -69,12 +67,22 @@ class InlineColorChooserViewController : UICollectionViewController, UICollectio
     self.collectionView?.dataSource = self
   }
   
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
     
-    if let selectedIndexPath = self.selectedIndexPath {
-      self.collectionView?.reloadItems(at: [ selectedIndexPath ])
-    }
+    self.loadItems()
+  }
+  
+  // MARK: - Content
+  
+  func loadItems() {
+    let newColors: [UIColor] = [ .kozRed, .kozOrange, .kozYellow, .kozGreen, .kozBlue, .kozPurple ]
+    self.perform(dataSourceUpdates: { [weak self] in
+      self?.colors = newColors
+    }, batchUpdates: { [weak self] in
+      let indexSet = IndexSet(integer: 0)
+      self?.collectionView?.reloadSections(indexSet)
+    })
   }
   
   // MARK: - UICollectionView
@@ -91,7 +99,7 @@ class InlineColorChooserViewController : UICollectionViewController, UICollectio
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InlineColorChooserCollectionViewCell", for: indexPath) as! InlineColorChooserCollectionViewCell
     let color = self.colors[indexPath.row]
     cell.colorView.backgroundColor = color
-    cell.update(isSelected: self.selectedIndexPath == indexPath, animated: false)
+    cell.update(isSelected: self.selectedColor == color, animated: false)
     return cell
   }
   
@@ -99,29 +107,16 @@ class InlineColorChooserViewController : UICollectionViewController, UICollectio
     
     // Selected color
     let color = self.colors[indexPath.row]
-    self.selectedIndexPath = indexPath
-    
-    // Select the new color
-    if let cell = self.collectionView?.cellForItem(at: indexPath) as? InlineColorChooserCollectionViewCell {
-      cell.update(isSelected: true, animated: true)
-    }
+    self.selectedColor = color
     
     // Notify the delegate
     self.delegate?.didSelect(color: color)
   }
   
-  override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-    
-    // De-select the old color
-    if let cell = self.collectionView?.cellForItem(at: indexPath) as? InlineColorChooserCollectionViewCell {
-      cell.update(isSelected: false, animated: true)
-    }
-  }
-  
   // MARK: - UICollectionViewDelegateFlowLayout
   
   var adjustedTotalViewWidth: CGFloat {
-    return self.view.bounds.width - 20
+    return self.view.bounds.width
   }
   
   var cellDimension: CGFloat {

@@ -63,7 +63,7 @@ class MainViewController : BaseViewController {
     
     // Instantiate the location detail view controller
     let currentLocation = LocationManager.shared.currentLocation
-    let addLocationViewController = AddLocationViewController.newViewController(location: currentLocation, delegate: self)
+    let addLocationViewController = AddLocationViewController.newViewController(location: currentLocation, locationDetailDelegate: self, searchDelegate: self)
     addLocationViewController.modalPresentationStyle = .popover
     addLocationViewController.popoverPresentationController?.delegate = self
     addLocationViewController.preferredContentSize = CGSize(width: self.view.bounds.width - 16, height: addLocationViewController.preferredContentHeight)
@@ -105,6 +105,19 @@ class MainViewController : BaseViewController {
     viewControllerToPresent.preferredContentSize = CGSize(width: self.view.bounds.width - 16, height: addLocationViewController.preferredContentHeight)
     viewControllerToPresent.popoverPresentationController?.sourceView = self.listButton
     viewControllerToPresent.popoverPresentationController?.sourceRect = self.listButton.bounds
+    self.present(viewControllerToPresent, animated: true, completion: nil)
+  }
+  
+  func presentLocationDetail(mapItem: MapItem) {
+    
+    // Instantiate the location detail view controller
+    let addLocationViewController = LocationDetailViewController.newViewController(mapItem: mapItem, delegate: self)
+    let viewControllerToPresent = VisualEffectContainerViewController(embeddedViewController: addLocationViewController)
+    viewControllerToPresent.modalPresentationStyle = .popover
+    viewControllerToPresent.popoverPresentationController?.delegate = self
+    viewControllerToPresent.preferredContentSize = CGSize(width: self.view.bounds.width - 16, height: addLocationViewController.preferredContentHeight)
+    viewControllerToPresent.popoverPresentationController?.sourceView = self.addButton
+    viewControllerToPresent.popoverPresentationController?.sourceRect = self.addButton.bounds
     self.present(viewControllerToPresent, animated: true, completion: nil)
   }
 }
