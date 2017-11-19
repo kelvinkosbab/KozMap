@@ -246,8 +246,8 @@ class ARViewController : UIViewController {
     let unitText: String?
     if let currentLocation = self.currentLocation {
       let distance = currentLocation.distance(from: savedLocation.location)
-      distanceText = distance.getDistanceValue(nearUnitType: Defaults.shared.nearUnitType, farUnitType: Defaults.shared.farUnitType, asShortValue: true)
-      unitText = distance.getUnitTypeString(nearUnitType: Defaults.shared.nearUnitType, farUnitType: Defaults.shared.farUnitType, asShortString: true)
+      distanceText = distance.getDistanceValue(unitType: Defaults.shared.unitType, asShortValue: true)
+      unitText = distance.getUnitTypeString(unitType: Defaults.shared.unitType, asShortString: true)
     } else {
       distanceText = nil
       unitText = nil

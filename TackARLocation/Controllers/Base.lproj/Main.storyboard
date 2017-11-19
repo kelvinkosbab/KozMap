@@ -300,7 +300,7 @@
                                 </constraints>
                                 <blurEffect style="light"/>
                             </visualEffectView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance Units" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wxv-0l-ebO">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wxv-0l-ebO">
                                 <rect key="frame" x="24" y="45" width="339" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -309,7 +309,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gcx-EF-3uG">
                                 <rect key="frame" x="24" y="73" width="351" height="52"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Far" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nPg-bv-g34">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Units" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nPg-bv-g34">
                                         <rect key="frame" x="0.0" y="16" width="137" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -321,8 +321,8 @@
                                             <constraint firstAttribute="width" constant="214" id="GpY-rB-9Eu"/>
                                         </constraints>
                                         <segments>
-                                            <segment title="Miles"/>
-                                            <segment title="Kilometers"/>
+                                            <segment title="Imperial"/>
+                                            <segment title="Metric"/>
                                         </segments>
                                         <color key="tintColor" red="0.29019607843137252" green="0.56470588235294117" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
@@ -351,59 +351,14 @@
                                 </constraints>
                                 <blurEffect style="light"/>
                             </visualEffectView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mEu-SU-5FJ">
-                                <rect key="frame" x="24" y="126" width="351" height="52"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Near" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lUq-Nd-RPb">
-                                        <rect key="frame" x="0.0" y="15" width="137" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="x8Z-qD-7hY">
-                                        <rect key="frame" x="137" y="12" width="214" height="29"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="214" id="L7r-L4-R0G"/>
-                                        </constraints>
-                                        <segments>
-                                            <segment title="Feet"/>
-                                            <segment title="Meters"/>
-                                        </segments>
-                                        <color key="tintColor" red="0.29019607843137252" green="0.56470588235294117" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <connections>
-                                            <action selector="segmentedControlValueChanged:" destination="uFu-Kp-nFk" eventType="valueChanged" id="FRJ-F6-JWE"/>
-                                        </connections>
-                                    </segmentedControl>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="lUq-Nd-RPb" firstAttribute="centerY" secondItem="mEu-SU-5FJ" secondAttribute="centerY" id="57B-cj-RLL"/>
-                                    <constraint firstAttribute="height" constant="52" id="F88-WK-XvB"/>
-                                    <constraint firstItem="x8Z-qD-7hY" firstAttribute="centerY" secondItem="mEu-SU-5FJ" secondAttribute="centerY" id="JOP-0F-QHX"/>
-                                    <constraint firstItem="x8Z-qD-7hY" firstAttribute="leading" secondItem="lUq-Nd-RPb" secondAttribute="trailing" id="LXV-Wn-c1b"/>
-                                    <constraint firstItem="lUq-Nd-RPb" firstAttribute="leading" secondItem="mEu-SU-5FJ" secondAttribute="leading" id="UOy-A2-ckx"/>
-                                    <constraint firstAttribute="trailing" secondItem="x8Z-qD-7hY" secondAttribute="trailing" id="wEZ-kX-SjK"/>
-                                </constraints>
-                            </view>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IMn-gC-qlk">
-                                <rect key="frame" x="24" y="178" width="351" height="1"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="1jZ-hT-jxr">
-                                    <rect key="frame" x="0.0" y="0.0" width="351" height="1"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </view>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="pKt-L4-Xt4"/>
-                                </constraints>
-                                <blurEffect style="light"/>
-                            </visualEffectView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VGa-2o-zle">
-                                <rect key="frame" x="12" y="203" width="351" height="16"/>
+                                <rect key="frame" x="12" y="150" width="351" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e47-QF-MMJ">
-                                <rect key="frame" x="162" y="243" width="50" height="6"/>
+                                <rect key="frame" x="162" y="190" width="50" height="6"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Y36-E8-tAR">
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="6"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -421,20 +376,14 @@
                             <constraint firstItem="Sym-N9-2ky" firstAttribute="trailing" secondItem="wxv-0l-ebO" secondAttribute="trailing" constant="12" id="4d4-4w-PEE"/>
                             <constraint firstItem="e47-QF-MMJ" firstAttribute="top" secondItem="VGa-2o-zle" secondAttribute="bottom" constant="24" id="5FQ-hL-mjd"/>
                             <constraint firstItem="wxv-0l-ebO" firstAttribute="leading" secondItem="Sym-N9-2ky" secondAttribute="leading" constant="24" id="8mH-uZ-Vv3"/>
-                            <constraint firstItem="VGa-2o-zle" firstAttribute="top" secondItem="IMn-gC-qlk" secondAttribute="bottom" constant="24" id="N9f-h0-ysS"/>
+                            <constraint firstItem="VGa-2o-zle" firstAttribute="top" secondItem="TdI-vb-tqd" secondAttribute="bottom" constant="24" id="Kzr-G8-Frl"/>
                             <constraint firstItem="wxv-0l-ebO" firstAttribute="top" secondItem="CUo-k6-ckZ" secondAttribute="bottom" constant="24" id="PoD-WP-mnF"/>
                             <constraint firstItem="Sym-N9-2ky" firstAttribute="trailing" secondItem="VGa-2o-zle" secondAttribute="trailing" constant="12" id="Qbh-7r-MYk"/>
-                            <constraint firstItem="mEu-SU-5FJ" firstAttribute="leading" secondItem="Sym-N9-2ky" secondAttribute="leading" constant="24" id="R8F-cH-h7Z"/>
                             <constraint firstItem="gcx-EF-3uG" firstAttribute="top" secondItem="wxv-0l-ebO" secondAttribute="bottom" constant="12" id="VDQ-YK-7My"/>
                             <constraint firstAttribute="trailing" secondItem="TdI-vb-tqd" secondAttribute="trailing" id="VJi-pA-lYt"/>
                             <constraint firstItem="TdI-vb-tqd" firstAttribute="leading" secondItem="rjd-mq-xPR" secondAttribute="leading" constant="24" id="W5r-zS-KXV"/>
-                            <constraint firstItem="Sym-N9-2ky" firstAttribute="trailing" secondItem="mEu-SU-5FJ" secondAttribute="trailing" id="Wgg-gi-Hf3"/>
-                            <constraint firstItem="IMn-gC-qlk" firstAttribute="leading" secondItem="rjd-mq-xPR" secondAttribute="leading" constant="24" id="YfI-8z-Vq3"/>
-                            <constraint firstItem="mEu-SU-5FJ" firstAttribute="top" secondItem="TdI-vb-tqd" secondAttribute="bottom" id="brp-KC-ElO"/>
                             <constraint firstItem="CUo-k6-ckZ" firstAttribute="leading" secondItem="rjd-mq-xPR" secondAttribute="leading" id="ifT-Ft-XJh"/>
                             <constraint firstItem="TdI-vb-tqd" firstAttribute="top" secondItem="gcx-EF-3uG" secondAttribute="bottom" id="ltM-to-5Rb"/>
-                            <constraint firstAttribute="trailing" secondItem="IMn-gC-qlk" secondAttribute="trailing" id="p3s-xx-lpw"/>
-                            <constraint firstItem="IMn-gC-qlk" firstAttribute="top" secondItem="mEu-SU-5FJ" secondAttribute="bottom" id="pCc-AQ-38j"/>
                             <constraint firstItem="CUo-k6-ckZ" firstAttribute="top" secondItem="Sym-N9-2ky" secondAttribute="top" id="sYd-4T-vJC"/>
                             <constraint firstItem="VGa-2o-zle" firstAttribute="leading" secondItem="Sym-N9-2ky" secondAttribute="leading" constant="12" id="sop-2a-By3"/>
                             <constraint firstAttribute="trailing" secondItem="CUo-k6-ckZ" secondAttribute="trailing" id="ugE-9Z-avc"/>
@@ -445,8 +394,7 @@
                     </view>
                     <connections>
                         <outlet property="bottomDragHandle" destination="e47-QF-MMJ" id="Vl5-LE-eCe"/>
-                        <outlet property="farUnitTypeControl" destination="yAR-Ng-QlP" id="RSB-zx-LDX"/>
-                        <outlet property="nearUnitTypeControl" destination="x8Z-qD-7hY" id="r6E-fb-Aa6"/>
+                        <outlet property="unitTypeControl" destination="yAR-Ng-QlP" id="Ymj-sS-uKu"/>
                         <outlet property="versionLabel" destination="VGa-2o-zle" id="9Mn-Mz-XgW"/>
                     </connections>
                 </viewController>

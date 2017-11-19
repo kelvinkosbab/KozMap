@@ -211,18 +211,23 @@ class LocationDetailViewController : BaseViewController {
     let color = self.savedLocation?.color ?? Color.create()
     color.color = self.locationColor
     
+    // Distance
+    let currentLocation = LocationManager.shared.currentLocation
+    let distance = currentLocation?.distance(from: location)
+    
     // Save the location
     if let savedLocation = self.savedLocation {
       
       // Updating this location
-      savedLocation.update(name: name, location: location, color: color)
+      
+      savedLocation.update(name: name, location: location, color: color, distance: distance)
       MyDataManager.shared.saveMainContext()
       self.delegate?.didUpdate(savedLocation: savedLocation)
       
     } else {
       
       // Creating a location
-      let savedLocation = SavedLocation.create(name: name, location: location, color: color)
+      let savedLocation = SavedLocation.create(name: name, location: location, color: color, distance: distance)
       MyDataManager.shared.saveMainContext()
       self.delegate?.didSave(savedLocation: savedLocation)
     }

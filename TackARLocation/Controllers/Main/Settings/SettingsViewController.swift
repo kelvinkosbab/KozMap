@@ -19,11 +19,10 @@ class SettingsViewController : BaseViewController {
   // MARK: - Properties
   
   @IBOutlet weak var versionLabel: UILabel!
-  @IBOutlet weak var farUnitTypeControl: UISegmentedControl!
-  @IBOutlet weak var nearUnitTypeControl: UISegmentedControl!
+  @IBOutlet weak var unitTypeControl: UISegmentedControl!
   @IBOutlet weak var bottomDragHandle: UIVisualEffectView!
   
-  let defaultContentHeight: CGFloat = 244
+  let defaultContentHeight: CGFloat = 191
   
   // MARK: - Lifecycle
   
@@ -46,8 +45,11 @@ class SettingsViewController : BaseViewController {
   // MARK: - Content
   
   func reloadContent() {
-    self.farUnitTypeControl.selectedSegmentIndex = Defaults.shared.farUnitType.rawValue
-    self.nearUnitTypeControl.selectedSegmentIndex = Defaults.shared.nearUnitType.rawValue
+    
+    // Unit type
+    self.unitTypeControl.selectedSegmentIndex = Defaults.shared.unitType.rawValue
+    
+    // Version
     if let versionString = UIApplication.shared.versionString {
       self.versionLabel.text = "Version \(versionString)"
     } else {
@@ -59,18 +61,11 @@ class SettingsViewController : BaseViewController {
   
   @IBAction func segmentedControlValueChanged(_ control: UISegmentedControl) {
     switch control {
-    case self.farUnitTypeControl:
+    case self.unitTypeControl:
       if let unitType = UnitType(rawValue: control.selectedSegmentIndex) {
-        Defaults.shared.farUnitType = unitType
+        Defaults.shared.unitType = unitType
         MyDataManager.shared.saveMainContext()
       }
-      
-    case self.nearUnitTypeControl:
-      if let unitType = UnitType(rawValue: control.selectedSegmentIndex) {
-        Defaults.shared.nearUnitType = unitType
-        MyDataManager.shared.saveMainContext()
-      }
-      
     default: break
     }
   }

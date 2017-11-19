@@ -153,7 +153,7 @@ extension LocationListViewController {
     // Distance labels
     if let currentLocation = self.currentLocation {
       let distance = currentLocation.distance(from: savedLocation.location)
-      let readibleDistance = distance.getBasicReadibleDistance(nearUnitType: Defaults.shared.nearUnitType, farUnitType: Defaults.shared.farUnitType)
+      let readibleDistance = distance.getBasicReadibleDistance(unitType: Defaults.shared.unitType)
       cell.detailLabel.text = "\(readibleDistance) away"
     } else {
       let roundedLatitude = Double(round(savedLocation.latitude*1000)/1000)
