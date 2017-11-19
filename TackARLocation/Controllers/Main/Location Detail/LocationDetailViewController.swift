@@ -48,7 +48,7 @@ class LocationDetailViewController : BaseViewController {
   @IBOutlet weak var addLocationButton: UIButton!
   @IBOutlet weak var colorChooserContainer: UIView!
   
-  let preferredContentHeight: CGFloat = 238
+  let preferredContentHeight: CGFloat = 295
   weak var delegate: LocationDetailViewControllerDelegate? = nil
   weak var colorChooserController: InlineColorChooserViewController? = nil
   
@@ -72,17 +72,6 @@ class LocationDetailViewController : BaseViewController {
     super.viewDidLoad()
     
     self.nameTextField.delegate = self
-    
-    // Add color chooser
-    let colorChooserController = InlineColorChooserViewController.newViewController(delegate: self)
-    colorChooserController.view.backgroundColor = .clear
-    self.add(childViewController: colorChooserController, intoContainerView: self.colorChooserContainer)
-    self.colorChooserController = colorChooserController
-    if self.isCreatingSavedLocation {
-      self.locationColor = colorChooserController.selectedColor
-    } else {
-      // TODO: - KAK update the color chooser with the selected color
-    }
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -108,11 +97,42 @@ class LocationDetailViewController : BaseViewController {
     NotificationCenter.default.removeObserver(self)
   }
   
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    
+    if self.colorChooserController == nil {
+      self.configureColorChooser()
+    }
+  }
+  
   // MARK: - Notifications
   
   @objc func didReceiveUpdatedLocationNotification(_ notification: Notification) {
     if self.isCreatingSavedLocation {
       self.location = LocationManager.shared.currentLocation
+    }
+  }
+  
+  // MARK: - Color Chooser
+  
+  func configureColorChooser() {
+    
+    guard self.colorChooserController == nil else {
+      return
+    }
+    
+    let colorChooserController = InlineColorChooserViewController.newViewController(delegate: self)
+    colorChooserController.view.backgroundColor = .clear
+    self.add(childViewController: colorChooserController, intoContainerView: self.colorChooserContainer)
+    self.colorChooserController = colorChooserController
+    if self.isCreatingSavedLocation {
+      self.locationColor = .kozRed
+      colorChooserController.selectedColor = .kozRed
+    } else {
+      if let selectedColor = self.savedLocation?.color {
+        self.locationColor = selectedColor.color
+        colorChooserController.selectedColor = selectedColor.color
+      }
     }
   }
   
@@ -192,7 +212,9 @@ class LocationDetailViewController : BaseViewController {
 extension LocationDetailViewController : InlineColorChooserViewControllerDelegate {
   
   func didSelect(color: UIColor) {
-    self.locationColor = color
+    if color != self.locationColor {
+      self.locationColor = color
+    }
   }
 }
 

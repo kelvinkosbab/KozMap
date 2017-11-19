@@ -14,34 +14,6 @@ extension MKCoordinateSpan {
   static let standard = MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
 }
 
-struct MapItem {
-  let mkMapItem: MKMapItem
-  
-  var name: String? {
-    return self.mkMapItem.name
-  }
-  
-  var placemark: MKPlacemark {
-    return self.mkMapItem.placemark
-  }
-  
-  var isCurrentLocation: Bool {
-    return self.mkMapItem.isCurrentLocation
-  }
-  
-  var phoneNumber: String? {
-    return self.mkMapItem.phoneNumber
-  }
-  
-  var url: URL? {
-    return self.mkMapItem.url
-  }
-  
-  var timeZone: TimeZone? {
-    return self.mkMapItem.timeZone
-  }
-}
-
 struct LocationSearchService {
   
   func queryLocations(query: String?, currentLocation: CLLocation, completion: @escaping (_ mapItems: [MapItem]) -> Void) {

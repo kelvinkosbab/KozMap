@@ -28,7 +28,6 @@ class AddLocationViewController : BaseViewController {
   
   @IBOutlet weak var segmentedControl: UISegmentedControl!
   @IBOutlet weak var pagingContainerView: UIView!
-  @IBOutlet weak var pageControl: UIPageControl!
   
   let preferredContentHeight: CGFloat = 325
   var pageViewController: UIPageViewController? = nil
@@ -61,10 +60,6 @@ class AddLocationViewController : BaseViewController {
     if let firstViewController = self.orderedViewControllers.first {
       pageViewController.setViewControllers([ firstViewController ], direction: .forward, animated: true, completion: nil)
     }
-    
-    // Page control
-    self.pageControl.numberOfPages = 2
-    self.pageControl.currentPage = 0
   }
   
   // MARK: - Content
@@ -79,7 +74,6 @@ class AddLocationViewController : BaseViewController {
   
   func reloadContent() {
     self.segmentedControl.selectedSegmentIndex = self.currentSelectedIndex
-    self.pageControl.currentPage = self.currentSelectedIndex
   }
   
   // MARK: - Actions

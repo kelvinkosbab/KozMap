@@ -22,11 +22,13 @@
 		B695236B1FA8D11E0014ABED /* CLLocation+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236A1FA8D11E0014ABED /* CLLocation+Util.swift */; };
 		B695236D1FA8D2E10014ABED /* SCNVector3+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236C1FA8D2E10014ABED /* SCNVector3+Util.swift */; };
 		B695236F1FA8D3430014ABED /* AxesNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236E1FA8D3430014ABED /* AxesNode.swift */; };
+		B69B94571FBE20A600A7047F /* MapItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69B94561FBE20A600A7047F /* MapItem.swift */; };
 		B69BDAD31FA7F84400A385DE /* UIApplication+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69BDAD21FA7F84400A385DE /* UIApplication+Util.swift */; };
 		B69BDAD51FA7FB0B00A385DE /* Double+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69BDAD41FA7FB0B00A385DE /* Double+Util.swift */; };
 		B6AA79B81FB89EC900428D86 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AA79B71FB89EC900428D86 /* AddLocationViewController.swift */; };
 		B6AA79BA1FB89FD000428D86 /* AddLocation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6AA79B91FB89FD000428D86 /* AddLocation.storyboard */; };
 		B6AA79BD1FB8A3D000428D86 /* VisualEffectContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AA79BC1FB8A3D000428D86 /* VisualEffectContainerViewController.swift */; };
+		B6B47FD51FBFB61B004AE609 /* SearchViewController+Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B47FD41FBFB61B004AE609 /* SearchViewController+Cells.swift */; };
 		B6C576451FB2FF0E00C4966F /* String+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C576441FB2FF0E00C4966F /* String+Util.swift */; };
 		B6C6EA291FA79B45001F97E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA281FA79B45001F97E7 /* AppDelegate.swift */; };
 		B6C6EA2E1FA79B45001F97E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6C6EA2C1FA79B45001F97E7 /* Main.storyboard */; };
@@ -94,11 +96,13 @@
 		B695236A1FA8D11E0014ABED /* CLLocation+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Util.swift"; sourceTree = "<group>"; };
 		B695236C1FA8D2E10014ABED /* SCNVector3+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Util.swift"; sourceTree = "<group>"; };
 		B695236E1FA8D3430014ABED /* AxesNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxesNode.swift; sourceTree = "<group>"; };
+		B69B94561FBE20A600A7047F /* MapItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapItem.swift; sourceTree = "<group>"; };
 		B69BDAD21FA7F84400A385DE /* UIApplication+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Util.swift"; sourceTree = "<group>"; };
 		B69BDAD41FA7FB0B00A385DE /* Double+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Util.swift"; sourceTree = "<group>"; };
 		B6AA79B71FB89EC900428D86 /* AddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
 		B6AA79B91FB89FD000428D86 /* AddLocation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddLocation.storyboard; sourceTree = "<group>"; };
 		B6AA79BC1FB8A3D000428D86 /* VisualEffectContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectContainerViewController.swift; sourceTree = "<group>"; };
+		B6B47FD41FBFB61B004AE609 /* SearchViewController+Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchViewController+Cells.swift"; sourceTree = "<group>"; };
 		B6C576441FB2FF0E00C4966F /* String+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Util.swift"; sourceTree = "<group>"; };
 		B6C6EA251FA79B45001F97E7 /* KozMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KozMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6C6EA281FA79B45001F97E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -184,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				B62735E01FB82B9E004711A4 /* SearchViewController.swift */,
+				B6B47FD41FBFB61B004AE609 /* SearchViewController+Cells.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -244,6 +249,7 @@
 				B6C6EA761FA7D761001F97E7 /* UnitType.swift */,
 				B61470051FB1485F0068CA67 /* Style.swift */,
 				B63B9A271FBA7D7100982FC6 /* LocationSearchService.swift */,
+				B69B94561FBE20A600A7047F /* MapItem.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -517,12 +523,14 @@
 				B6C6EA931FA7E83F001F97E7 /* Device.swift in Sources */,
 				B6C6EA5D1FA7B0C3001F97E7 /* CGRect+Util.swift in Sources */,
 				B62735DC1FB7EDFF004711A4 /* PermissionManager.swift in Sources */,
+				B69B94571FBE20A600A7047F /* MapItem.swift in Sources */,
 				B6C6EA991FA7E8D1001F97E7 /* DragLeftDismissInteractiveTransition.swift in Sources */,
 				B6C6EA681FA7BD91001F97E7 /* MyManagedObjectProtocol.swift in Sources */,
 				B6C6EA421FA79F77001F97E7 /* LocationManager.swift in Sources */,
 				B6C6EA571FA7AF56001F97E7 /* SCNNode+Util.swift in Sources */,
 				B695236D1FA8D2E10014ABED /* SCNVector3+Util.swift in Sources */,
 				B62735DE1FB7EEE2004711A4 /* CameraPermissionManager.swift in Sources */,
+				B6B47FD51FBFB61B004AE609 /* SearchViewController+Cells.swift in Sources */,
 				B6C6EA611FA7B68C001F97E7 /* Plane.swift in Sources */,
 				B6C6EA8C1FA7E6E3001F97E7 /* HDFadeWithBlurPresentationManager.swift in Sources */,
 				B61470081FB148720068CA67 /* UIColor+Util.swift in Sources */,
