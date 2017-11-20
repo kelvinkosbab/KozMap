@@ -52,6 +52,10 @@ extension SavedLocation : MyManagedObjectProtocol {
     }
   }
   
+  var hasLastDistance: Bool {
+    return self.lastDistance > 0
+  }
+  
   // MARK: - Updating
   
   func update(name: String, location: CLLocation, color: Color, distance: Double?) {

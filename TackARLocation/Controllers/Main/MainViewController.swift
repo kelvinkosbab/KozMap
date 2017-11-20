@@ -62,8 +62,7 @@ class MainViewController : BaseViewController {
   @IBAction func addButtonSelected() {
     
     // Instantiate the location detail view controller
-    let currentLocation = LocationManager.shared.currentLocation
-    let addLocationViewController = AddLocationViewController.newViewController(location: currentLocation, locationDetailDelegate: self, searchDelegate: self)
+    let addLocationViewController = AddLocationViewController.newViewController(locationDetailDelegate: self, searchDelegate: self)
     addLocationViewController.modalPresentationStyle = .popover
     addLocationViewController.popoverPresentationController?.delegate = self
     addLocationViewController.preferredContentSize = CGSize(width: self.view.bounds.width - 16, height: addLocationViewController.preferredContentHeight)

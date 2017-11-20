@@ -34,10 +34,6 @@ class LocationListViewController : BaseTableViewController, NSFetchedResultsCont
   weak var delegate: LocationListViewControllerDelegate? = nil
   let rowHeight: CGFloat = 60
   
-  var currentLocation: CLLocation? {
-    return LocationManager.shared.currentLocation
-  }
-  
   var savedLocations: [SavedLocation] {
     return self.savedLocationsFetchedResultsController?.fetchedObjects ?? []
   }
@@ -49,33 +45,6 @@ class LocationListViewController : BaseTableViewController, NSFetchedResultsCont
     return controller
   }()
   
-  // MARK: - Lifecycle
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    self.tableView.delegate = self
-    self.tableView.dataSource = self
-  }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    
-    NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveUpdatedLocationNotification(_:)), name: .locationManagerDidUpdateCurrentLocation, object: nil)
-  }
-  
-  override func viewDidDisappear(_ animated: Bool) {
-    super.viewDidDisappear(animated)
-    
-    NotificationCenter.default.removeObserver(self)
-  }
-  
-  // MARK: - Notifications
-  
-  @objc func didReceiveUpdatedLocationNotification(_ notification: Notification) {
-    self.reloadContent()
-  }
-  
   // MARK: - NSFetchedResultsControllerDelegate
   
   func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -86,43 +55,31 @@ class LocationListViewController : BaseTableViewController, NSFetchedResultsCont
     switch type {
     case .insert:
       if let newIndexPath = newIndexPath {
-        self.tableView.insertRows(at: [ newIndexPath ], with: .automatic)
-      } else {
-        self.tableView.reloadData()
+        self.tableView.insertRows(at: [ newIndexPath ], with: .top)
       }
-      
     case .delete:
       if let indexPath = indexPath {
-        self.tableView.deleteRows(at: [ indexPath ], with: .automatic)
-      } else {
-        self.tableView.reloadData()
+        self.tableView.deleteRows(at: [ indexPath ], with: .top)
       }
-      
     case .update:
       if let indexPath = indexPath {
-        self.tableView.reloadRows(at: [ indexPath ], with: .none)
-      } else {
-        self.tableView.reloadData()
+        if let cell = self.tableView.cellForRow(at: indexPath) as? LocationListViewControllerCell {
+          let savedLocation = self.savedLocations[indexPath.row]
+          cell.configure(savedLocation: savedLocation)
+        } else {
+          self.tableView.reloadRows(at: [ indexPath ], with: .none)
+        }
       }
-      
     case .move:
       if let indexPath = indexPath, let newIndexPath = newIndexPath {
-        self.tableView.deleteRows(at: [ indexPath ], with: .automatic)
-        self.tableView.insertRows(at: [ newIndexPath ], with: .automatic)
-      } else {
-        self.tableView.reloadData()
+        self.tableView.deleteRows(at: [ indexPath ], with: .top)
+        self.tableView.insertRows(at: [ newIndexPath ], with: .top)
       }
     }
   }
   
   func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
     self.tableView.endUpdates()
-  }
-  
-  // MARK: - Content
-  
-  func reloadContent() {
-    self.tableView.reloadData()
   }
 }
 
@@ -148,25 +105,7 @@ extension LocationListViewController {
     
     // Saved location
     let savedLocation = self.savedLocations[indexPath.row]
-    cell.titleLabel.text = savedLocation.name ?? "Unnamed"
-    
-    // Distance labels
-    if let currentLocation = self.currentLocation {
-      let distance = currentLocation.distance(from: savedLocation.location)
-      let readibleDistance = distance.getBasicReadibleDistance(unitType: Defaults.shared.unitType)
-      cell.detailLabel.text = "\(readibleDistance) away"
-    } else {
-      let roundedLatitude = Double(round(savedLocation.latitude*1000)/1000)
-      let roundedLongitude = Double(round(savedLocation.longitude*1000)/1000)
-      cell.detailLabel.text = "\(roundedLatitude)°N, \(roundedLongitude)°W"
-    }
-    
-    // Color view
-    if let color = savedLocation.color {
-      cell.colorView.backgroundColor = color.color
-    } else {
-      cell.colorView.backgroundColor = .kozRed
-    }
+    cell.configure(savedLocation: savedLocation)
     
     return cell
   }

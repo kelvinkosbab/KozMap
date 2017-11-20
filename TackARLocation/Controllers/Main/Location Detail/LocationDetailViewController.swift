@@ -22,9 +22,8 @@ class LocationDetailViewController : BaseViewController {
     return self.newViewController(fromStoryboardWithName: "AddLocation")
   }
   
-  static func newViewController(location: CLLocation?, delegate: LocationDetailViewControllerDelegate?) -> LocationDetailViewController {
+  static func newViewController(delegate: LocationDetailViewControllerDelegate?) -> LocationDetailViewController {
     let viewController = self.newViewController()
-    viewController.location = location
     viewController.delegate = delegate
     return viewController
   }
@@ -110,6 +109,7 @@ class LocationDetailViewController : BaseViewController {
     
     // Location updates
     if self.state == .creating {
+      self.location = LocationManager.shared.currentLocation
       NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveUpdatedLocationNotification(_:)), name: .locationManagerDidUpdateCurrentLocation, object: nil)
     }
   }
