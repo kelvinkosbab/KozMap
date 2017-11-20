@@ -10,7 +10,7 @@ import UIKit
 
 extension UIViewController {
   
-  // MARK: - Adding child view controller helpers
+  // MARK: - Add Child View Controller
   
   func add(childViewController: UIViewController, intoContainerView containerView: UIView) {
     childViewController.view.translatesAutoresizingMaskIntoConstraints = false
@@ -42,5 +42,13 @@ extension UIViewController {
     if let collectionViewController = childViewController as? UICollectionViewController {
       collectionViewController.collectionView?.configureLongPressReordering()
     }
+  }
+  
+  // MARK: - Remove Child View Controller
+  
+  func remove(childViewController: UIViewController) {
+    childViewController.willMove(toParentViewController: nil)
+    childViewController.view.removeFromSuperview()
+    childViewController.removeFromParentViewController()
   }
 }

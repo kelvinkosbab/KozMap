@@ -23,17 +23,18 @@ class MainViewController : BaseViewController {
   @IBOutlet weak var listVisualEffectView: UIVisualEffectView!
   @IBOutlet weak var listButton: UIButton!
   
-  weak var arViewController: ARViewController? = nil
+  var arViewController: ARViewController? = nil
+  
+  var configuringViewController: ConfiguringViewController? = nil
+  var configuringVisualEffectContainerViewController: VisualEffectContainerViewController? = nil
   
   // MARK: - Lifecycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.navigationItem.title = "KozMap"
     self.navigationItem.largeTitleDisplayMode = .never
-    
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "assetOptions"), style: .plain, target: self, action: #selector(self.settingsButtonSelected))
+    self.clearNavigationBarElements()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -51,10 +52,25 @@ class MainViewController : BaseViewController {
   // MARK: - Navigation
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    
     if let arViewController = segue.destination as? ARViewController {
+      arViewController.trackingStateDelegate = self
       self.arViewController = arViewController
     }
+  }
+  
+  // MARK: - Navigation Items
+  
+  func loadConfiguredNavigationBar() {
+    self.navigationItem.title = "KozMap"
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "assetOptions"), style: .plain, target: self, action: #selector(self.settingsButtonSelected))
+    self.navigationItem.hidesBackButton = false
+  }
+  
+  func clearNavigationBarElements() {
+    self.navigationItem.title = nil
+    self.navigationItem.leftBarButtonItem = nil
+    self.navigationItem.rightBarButtonItem = nil
+    self.navigationItem.hidesBackButton = true
   }
   
   // MARK: - Actions
@@ -88,7 +104,7 @@ class MainViewController : BaseViewController {
     let settingsViewController = SettingsViewController.newViewController()
     let offset = UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.height ?? 0)
     let interactiveElement = InteractiveElement(size: settingsViewController.defaultContentHeight, offset: offset, view: settingsViewController.view)
-    let viewControllerToPresent = VisualEffectContainerViewController(embeddedViewController: settingsViewController, blurEffectStyle: .dark)
+    let viewControllerToPresent = VisualEffectContainerViewController(embeddedViewController: settingsViewController, blurEffect: UIBlurEffect(style: .dark))
     self.present(viewController: viewControllerToPresent, withMode: .topDown, inNavigationController: false, dismissInteractiveElement: interactiveElement)
   }
   
@@ -118,6 +134,34 @@ class MainViewController : BaseViewController {
     viewControllerToPresent.popoverPresentationController?.sourceView = self.addButton
     viewControllerToPresent.popoverPresentationController?.sourceRect = self.addButton.bounds
     self.present(viewControllerToPresent, animated: true, completion: nil)
+  }
+  
+  // MARK: - Hiding and Showing Elements
+  
+  func showButtons(completion: (() -> Void)? = nil) {
+    UIView.animate(withDuration: 0.3, animations: { [weak self] in
+      self?.listVisualEffectView.effect = UIBlurEffect(style: .light)
+      self?.listButton.alpha = 1
+      self?.addVisualEffectView.effect = UIBlurEffect(style: .light)
+      self?.addButton.alpha = 1
+    }) { [weak self] _ in
+      self?.listButton.isUserInteractionEnabled = true
+      self?.addButton.isUserInteractionEnabled = true
+      completion?()
+    }
+  }
+  
+  func hideButtons(completion: (() -> Void)? = nil) {
+    self.listButton.isUserInteractionEnabled = false
+    self.addButton.isUserInteractionEnabled = false
+    UIView.animate(withDuration: 0.3, animations: { [weak self] in
+      self?.listVisualEffectView.effect = nil
+      self?.listButton.alpha = 0
+      self?.addVisualEffectView.effect = nil
+      self?.addButton.alpha = 0
+    }) { _ in
+      completion?()
+    }
   }
 }
 
