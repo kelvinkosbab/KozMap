@@ -19,6 +19,7 @@
 		B62735E11FB82B9E004711A4 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62735E01FB82B9E004711A4 /* SearchViewController.swift */; };
 		B63B9A281FBA7D7100982FC6 /* LocationSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63B9A271FBA7D7100982FC6 /* LocationSearchService.swift */; };
 		B64391571FC2861B005721E5 /* CurrentLocationUpdatableService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64391561FC2861B005721E5 /* CurrentLocationUpdatableService.swift */; };
+		B643915A1FC29989005721E5 /* Distance.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64391591FC29989005721E5 /* Distance.swift */; };
 		B66041EF1FA905350076EBEF /* VirtualObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66041EE1FA905350076EBEF /* VirtualObject.swift */; };
 		B695236B1FA8D11E0014ABED /* CLLocation+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236A1FA8D11E0014ABED /* CLLocation+Util.swift */; };
 		B695236D1FA8D2E10014ABED /* SCNVector3+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236C1FA8D2E10014ABED /* SCNVector3+Util.swift */; };
@@ -96,6 +97,7 @@
 		B63B9A271FBA7D7100982FC6 /* LocationSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchService.swift; sourceTree = "<group>"; };
 		B64391551FC1F336005721E5 /* TackARLocation 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TackARLocation 3.xcdatamodel"; sourceTree = "<group>"; };
 		B64391561FC2861B005721E5 /* CurrentLocationUpdatableService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationUpdatableService.swift; sourceTree = "<group>"; };
+		B64391591FC29989005721E5 /* Distance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Distance.swift; sourceTree = "<group>"; };
 		B66041EE1FA905350076EBEF /* VirtualObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObject.swift; sourceTree = "<group>"; };
 		B695236A1FA8D11E0014ABED /* CLLocation+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Util.swift"; sourceTree = "<group>"; };
 		B695236C1FA8D2E10014ABED /* SCNVector3+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Util.swift"; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				B64391581FC28DD9005721E5 /* Location */,
 				B6C6EA761FA7D761001F97E7 /* UnitType.swift */,
 				B61470051FB1485F0068CA67 /* Style.swift */,
+				B64391591FC29989005721E5 /* Distance.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -565,6 +568,7 @@
 				B69BDAD31FA7F84400A385DE /* UIApplication+Util.swift in Sources */,
 				B6C6EA841FA7E690001F97E7 /* InteractiveTransition.swift in Sources */,
 				B6C6EA481FA7A15C001F97E7 /* ViewControllerFromStoryboardProtocol.swift in Sources */,
+				B643915A1FC29989005721E5 /* Distance.swift in Sources */,
 				B614700B1FB180E30068CA67 /* Color+MyManagedObjectProtocol.swift in Sources */,
 				B6C37C5D1FC1EF1D0068A2D9 /* UnsupportedDeviceViewController.swift in Sources */,
 				B6C6EA8E1FA7E6F5001F97E7 /* UIView+Util.swift in Sources */,

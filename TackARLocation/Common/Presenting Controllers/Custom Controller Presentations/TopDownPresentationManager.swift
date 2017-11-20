@@ -207,4 +207,3 @@ class TopDownPresentationManager : NSObject, UIViewControllerTransitioningDelega
     }
   }
 }
-
