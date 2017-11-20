@@ -17,12 +17,37 @@ class ARViewController : UIViewController {
   
   @IBOutlet weak var sceneView: ARSCNView!
   
+  weak var trackingStateDelegate: ARStateDelegate? = nil
   private let session = ARSession()
   private let sessionConfig = ARWorldTrackingConfiguration()
   public private(set) weak var sceneNode: SCNNode?
   public private(set) weak var basePlane: SCNNode?
-  private var currentCameraTrackingState: ARCamera.TrackingState? = nil
   private var placemarks = Set<PlacemarkNode>()
+  
+  private var currentCameraTrackingState: ARCamera.TrackingState? = nil {
+    didSet {
+      self.trackingStateDelegate?.arStateDidUpdate(self.state)
+    }
+  }
+  
+  var state: ARState {
+    guard let currentCameraTrackingState = self.currentCameraTrackingState else {
+      return .configuring
+    }
+    
+    switch currentCameraTrackingState {
+    case .limited(.insufficientFeatures):
+      return .limited(.insufficientFeatures)
+    case .limited(.excessiveMotion):
+      return .limited(.excessiveMotion)
+    case .limited(.initializing):
+      return .limited(.initializing)
+    case .normal:
+      return .normal
+    case .notAvailable:
+      return .notAvailable
+    }
+  }
   
   var savedLocations: [SavedLocation] {
     return self.savedLocationsFetchedResultsController?.fetchedObjects ?? []
@@ -35,17 +60,15 @@ class ARViewController : UIViewController {
     return controller
   }()
   
-  var scneViewCenter: CGPoint {
+  var sceneViewCenter: CGPoint {
     return self.sceneView.bounds.mid
   }
   
   var currentScenePosition: SCNVector3? {
-    
-    guard let pointOfView = self.sceneView.pointOfView else {
-      return nil
+    if let pointOfView = self.sceneView.pointOfView {
+      return self.sceneView.scene.rootNode.convertPosition(pointOfView.position, to: self.sceneNode)
     }
-    
-    return self.sceneView.scene.rootNode.convertPosition(pointOfView.position, to: self.sceneNode)
+    return nil
   }
   
   var currentLocation: CLLocation? {
@@ -67,9 +90,16 @@ class ARViewController : UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
+    // Set idle timer flag
     UIApplication.shared.isIdleTimerDisabled = true
+    
+    // Start / restart plane detection
     self.restartPlaneDetection()
     
+    // Check camera tracking state
+    self.trackingStateDelegate?.arStateDidUpdate(self.state)
+    
+    // Notifications
     NotificationCenter.default.addObserver(self, selector: #selector(self.restartPlaneDetection), name: .UIApplicationDidBecomeActive, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(self.pauseScene), name: .UIApplicationWillResignActive, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveUpdatedLocationNotification(_:)), name: .locationManagerDidUpdateCurrentLocation, object: nil)
@@ -79,8 +109,20 @@ class ARViewController : UIViewController {
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
     
+    // Reset idle timer flat
+    UIApplication.shared.isIdleTimerDisabled = true
+    
+    // Pause the AR scene
     self.pauseScene()
-    NotificationCenter.default.removeObserver(self)
+    
+    // Check camera tracking state
+    self.trackingStateDelegate?.arStateDidUpdate(self.state)
+    
+    // Remove self from notifications
+    NotificationCenter.default.removeObserver(self, name: .UIApplicationDidBecomeActive, object: nil)
+    NotificationCenter.default.removeObserver(self, name: .UIApplicationWillResignActive, object: nil)
+    NotificationCenter.default.removeObserver(self, name: .locationManagerDidUpdateCurrentLocation, object: nil)
+    NotificationCenter.default.removeObserver(self, name: .locationManagerDidUpdateCurrentHeading, object: nil)
   }
   
   // MARK: - Notifications

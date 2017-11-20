@@ -12,9 +12,9 @@ class VisualEffectContainerViewController : BaseViewController {
   
   // MARK: - Init
   
-  convenience init(embeddedViewController: UIViewController, blurEffectStyle: UIBlurEffectStyle = .prominent) {
+  convenience init(embeddedViewController: UIViewController, blurEffect: UIBlurEffect? = UIBlurEffect(style: .light)) {
     self.init()
-    self.blurEffectStyle = blurEffectStyle
+    self.blurEffect = blurEffect
     self.embeddedViewController = embeddedViewController
   }
   
@@ -23,7 +23,7 @@ class VisualEffectContainerViewController : BaseViewController {
   weak var visualEffectView: UIVisualEffectView?
   
   var embeddedViewController: UIViewController?
-  var blurEffectStyle: UIBlurEffectStyle = .prominent
+  var blurEffect: UIBlurEffect? = UIBlurEffect(style: .light)
   
   // MARK: - Lifecycle
   
@@ -33,8 +33,7 @@ class VisualEffectContainerViewController : BaseViewController {
     self.view.backgroundColor = .clear
     
     // Configure visual effect view
-    let blurEffect = UIBlurEffect(style: self.blurEffectStyle)
-    let visualEffectView = UIVisualEffectView(effect: blurEffect)
+    let visualEffectView = UIVisualEffectView(effect: self.blurEffect)
     visualEffectView.addToContainer(self.view)
     self.visualEffectView = visualEffectView
     
@@ -42,6 +41,22 @@ class VisualEffectContainerViewController : BaseViewController {
     if let embeddedViewController = self.embeddedViewController {
       embeddedViewController.view.backgroundColor = .clear
       self.add(childViewController: embeddedViewController, intoContainerView: visualEffectView.contentView)
+    }
+  }
+  
+  // MARK: - Animating
+  
+  func update(blurEffect: UIBlurEffect?, duration: TimeInterval?, completion: (() -> Void)? = nil) {
+    self.blurEffect = blurEffect
+    if let duration = duration {
+      UIView.animate(withDuration: duration, animations: { [weak self] in
+        self?.visualEffectView?.effect = blurEffect
+      }) { _ in
+        completion?()
+      }
+    } else {
+      self.visualEffectView?.effect = blurEffect
+      completion?()
     }
   }
 }

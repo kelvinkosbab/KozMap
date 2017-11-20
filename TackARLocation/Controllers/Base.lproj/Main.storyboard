@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13770"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -190,38 +191,34 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="KozMap" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gn7-QP-Bgt">
-                                            <rect key="frame" x="134.5" y="40" width="105.5" height="36"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Permissions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jdp-rv-kPh">
-                                            <rect key="frame" x="146" y="86" width="83" height="18"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Permissions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gn7-QP-Bgt">
+                                            <rect key="frame" x="135.5" y="40" width="105" height="24"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="gn7-QP-Bgt" firstAttribute="top" secondItem="AF7-ux-ABG" secondAttribute="top" constant="40" id="3Lv-iC-aYB"/>
-                                        <constraint firstItem="jdp-rv-kPh" firstAttribute="top" secondItem="gn7-QP-Bgt" secondAttribute="bottom" constant="10" id="Gdv-ND-6f3"/>
                                         <constraint firstItem="gn7-QP-Bgt" firstAttribute="centerX" secondItem="AF7-ux-ABG" secondAttribute="centerX" id="IOk-yF-b4c"/>
-                                        <constraint firstItem="jdp-rv-kPh" firstAttribute="centerX" secondItem="AF7-ux-ABG" secondAttribute="centerX" id="ekk-F5-OhB"/>
                                     </constraints>
                                 </view>
                                 <blurEffect style="dark"/>
                             </visualEffectView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UUY-Ab-d1h">
                                 <rect key="frame" x="111" y="278.5" width="153" height="30"/>
-                                <state key="normal" title="Allow Location Access"/>
+                                <state key="normal" title="Allow Location Access">
+                                    <color key="titleColor" name="SeaBlue"/>
+                                </state>
                                 <connections>
                                     <action selector="locationPermissionButtonSelected" destination="BYZ-38-t0r" eventType="touchUpInside" id="dgI-i1-IEY"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oIR-3d-g9M">
                                 <rect key="frame" x="113" y="358.5" width="148" height="30"/>
-                                <state key="normal" title="Allow Camera Access"/>
+                                <state key="normal" title="Allow Camera Access">
+                                    <color key="titleColor" name="SeaBlue"/>
+                                </state>
                                 <connections>
                                     <action selector="cameraPermissionButtonSelected" destination="BYZ-38-t0r" eventType="touchUpInside" id="M32-Q2-S4F"/>
                                 </connections>
@@ -252,6 +249,39 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-786" y="-684"/>
+        </scene>
+        <!--Configuring View Controller-->
+        <scene sceneID="dHe-9e-Fzr">
+            <objects>
+                <viewController storyboardIdentifier="ConfiguringViewController" id="JPy-iy-B4a" customClass="ConfiguringViewController" customModule="KozMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FGG-ST-r9L">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QnS-bt-iYg">
+                                <rect key="frame" x="62.5" y="323" width="250" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="wl4-QQ-mAh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="QnS-bt-iYg" firstAttribute="centerX" secondItem="FGG-ST-r9L" secondAttribute="centerX" id="TDy-DT-eWS"/>
+                            <constraint firstItem="QnS-bt-iYg" firstAttribute="centerY" secondItem="FGG-ST-r9L" secondAttribute="centerY" id="gne-cm-svc"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="dCW-oY-g4I"/>
+                    </view>
+                    <connections>
+                        <outlet property="statusLabel" destination="QnS-bt-iYg" id="Jga-Ml-Z6p"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="btb-L2-KI8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="38" y="-684"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Q41-ef-App">
@@ -408,5 +438,8 @@
         <image name="assetList" width="24" height="14"/>
         <image name="assetPlus" width="24" height="24"/>
         <image name="assetSpherical" width="3584" height="1792"/>
+        <namedColor name="SeaBlue">
+            <color red="0.29019607843137257" green="0.56470588235294117" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>
