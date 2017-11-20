@@ -12,12 +12,12 @@ protocol InlineColorChooserViewControllerDelegate : class {
   func didSelect(color: UIColor)
 }
 
-class InlineColorChooserViewController : UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class InlineColorChooserViewController : UICollectionViewController, UICollectionViewDelegateFlowLayout, BatchUpdatable {
   
   // MARK: - Static Accessors
   
   static func newViewController() -> InlineColorChooserViewController {
-    return self.newViewController(fromStoryboardWithName: "Main")
+    return self.newViewController(fromStoryboardWithName: "AddLocation")
   }
   
   static func newViewController(delegate: InlineColorChooserViewControllerDelegate) -> InlineColorChooserViewController {
@@ -26,29 +26,36 @@ class InlineColorChooserViewController : UICollectionViewController, UICollectio
     return viewController
   }
   
+  // MARK: - BatchUpdatable
+  
+  var isProcessingBatchUpdate: Bool = false
+  var batchUpdateQueue: [BatchUpdatableItem] = []
+  
   // MARK: - Properties
   
   weak var delegate: InlineColorChooserViewControllerDelegate? = nil
-  let colors: [UIColor] = [ UIColor.kozRed, UIColor.kozOrange, UIColor.kozYellow, UIColor.kozGreen, UIColor.kozBlue, UIColor.kozPurple ]
-  var selectedIndexPath: IndexPath = IndexPath(row: 0, section: 0) {
-    didSet {
-      if self.isViewLoaded {
-        
-        // De-select the old color
-        if let cell = self.collectionView?.cellForItem(at: oldValue) as? InlineColorChooserCollectionViewCell {
-          cell.update(isSelected: false, animated: true)
-        }
-        
-        // Select the new color
-        if let cell = self.collectionView?.cellForItem(at: self.selectedIndexPath) as? InlineColorChooserCollectionViewCell {
-          cell.update(isSelected: true, animated: true)
-        }
-      }
-    }
-  }
+  var colors: [UIColor] = []
   
-  var selectedColor: UIColor {
-    return self.colors[self.selectedIndexPath.row]
+  var selectedColor: UIColor = .kozRed {
+    didSet {
+      
+      guard self.isViewLoaded && self.selectedColor != oldValue else {
+        return
+      }
+      
+      var indexPathsToUpdate: [IndexPath] = []
+      if let index = self.colors.index(of: self.selectedColor) {
+        let indexPath = IndexPath(row: index, section: 0)
+        indexPathsToUpdate.append(indexPath)
+      }
+      
+      if let index = self.colors.index(of: oldValue) {
+        let indexPath = IndexPath(row: index, section: 0)
+        indexPathsToUpdate.append(indexPath)
+      }
+      
+      self.collectionView?.reloadItems(at: indexPathsToUpdate)
+    }
   }
   
   // MARK: - Lifecycle
@@ -58,6 +65,24 @@ class InlineColorChooserViewController : UICollectionViewController, UICollectio
     
     self.collectionView?.delegate = self
     self.collectionView?.dataSource = self
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    
+    self.loadItems()
+  }
+  
+  // MARK: - Content
+  
+  func loadItems() {
+    let newColors: [UIColor] = [ .kozRed, .kozOrange, .kozYellow, .kozGreen, .kozBlue, .kozPurple ]
+    self.perform(dataSourceUpdates: { [weak self] in
+      self?.colors = newColors
+    }, batchUpdates: { [weak self] in
+      let indexSet = IndexSet(integer: 0)
+      self?.collectionView?.reloadSections(indexSet)
+    })
   }
   
   // MARK: - UICollectionView
@@ -74,7 +99,7 @@ class InlineColorChooserViewController : UICollectionViewController, UICollectio
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InlineColorChooserCollectionViewCell", for: indexPath) as! InlineColorChooserCollectionViewCell
     let color = self.colors[indexPath.row]
     cell.colorView.backgroundColor = color
-    cell.update(isSelected: self.selectedIndexPath == indexPath, animated: false)
+    cell.update(isSelected: self.selectedColor == color, animated: false)
     return cell
   }
   
@@ -82,7 +107,7 @@ class InlineColorChooserViewController : UICollectionViewController, UICollectio
     
     // Selected color
     let color = self.colors[indexPath.row]
-    self.selectedIndexPath = indexPath
+    self.selectedColor = color
     
     // Notify the delegate
     self.delegate?.didSelect(color: color)
@@ -90,13 +115,17 @@ class InlineColorChooserViewController : UICollectionViewController, UICollectio
   
   // MARK: - UICollectionViewDelegateFlowLayout
   
-  func getCellDimension(collectionView: UICollectionView) -> CGFloat {
-    let desiredWidth = collectionView.bounds.width / CGFloat(self.colors.count)
-    return min(desiredWidth, collectionView.bounds.height)
+  var adjustedTotalViewWidth: CGFloat {
+    return self.view.bounds.width
+  }
+  
+  var cellDimension: CGFloat {
+    let desiredWidth = self.adjustedTotalViewWidth / CGFloat(self.colors.count)
+    return min(desiredWidth, self.view.bounds.height)
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    let cellDimension = self.getCellDimension(collectionView: collectionView)
+    let cellDimension = self.cellDimension
     return CGSize(width: cellDimension, height: cellDimension)
   }
   
@@ -106,11 +135,11 @@ class InlineColorChooserViewController : UICollectionViewController, UICollectio
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
     // Asks the delegate for the spacing between successive rows or columns of a section.
-    let cellDimension = self.getCellDimension(collectionView: collectionView)
+    let cellDimension = self.cellDimension
     let totalCellWidth = cellDimension * CGFloat(self.colors.count)
-    let remainingWidth = collectionView.bounds.width - totalCellWidth
-    let desiredSpacing = remainingWidth / CGFloat(self.colors.count + 1)
-    return max(0, desiredSpacing)
+    let remainingWidth = self.adjustedTotalViewWidth - totalCellWidth
+    let desiredSpacing = remainingWidth / CGFloat(self.colors.count - 1)
+    return desiredSpacing
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -122,32 +151,34 @@ class InlineColorChooserViewController : UICollectionViewController, UICollectio
 // MARK: - InlineColorChooserCollectionViewCell
 
 class InlineColorChooserCollectionViewCell : UICollectionViewCell {
-  @IBOutlet weak var colorContainerView: UIView!
   @IBOutlet weak var colorView: UIView!
-  @IBOutlet weak var colorViewHeightRelationConstraint: NSLayoutConstraint!
-  @IBOutlet weak var colorViewWidthRelationConstraint: NSLayoutConstraint!
+  @IBOutlet weak var selectedCircleView: UIImageView!
+  @IBOutlet weak var selectedCircleViewHeight: NSLayoutConstraint!
+  @IBOutlet weak var selectedCircleViewWidth: NSLayoutConstraint!
   
   override func layoutSubviews() {
     super.layoutSubviews()
     
-    self.colorContainerView.layer.cornerRadius = (self.colorContainerView.bounds.height - 5) / 2
-    self.colorContainerView.layer.masksToBounds = true
-    self.colorContainerView.clipsToBounds = true
-    self.colorView.layer.cornerRadius = (self.colorView.bounds.height - 5) / 2
+    self.colorView.layer.cornerRadius = self.colorView.layer.bounds.height / 2
     self.colorView.layer.masksToBounds = true
     self.colorView.clipsToBounds = true
   }
   
   func update(isSelected: Bool, animated: Bool) {
     self.isSelected = isSelected
-    self.colorViewHeightRelationConstraint.constant = isSelected ? -6 : 0
-    self.colorViewWidthRelationConstraint.constant = isSelected ? -6 : 0
+    let toDimension: CGFloat = isSelected ? 20 : 0
+    let toAlpha: CGFloat = isSelected ? 0.75 : 0
     if animated {
-      UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: .curveEaseInOut, animations: { [weak self] in
-        self?.colorView.layoutSubviews()
-      })
+      UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: { [weak self] in
+        self?.selectedCircleView.alpha = toAlpha
+        self?.selectedCircleViewHeight.constant = toDimension
+        self?.selectedCircleViewWidth.constant = toDimension
+      }, completion: nil)
     } else {
-      self.colorView.layoutSubviews()
+      self.selectedCircleView.alpha = toAlpha
+      self.selectedCircleViewHeight.constant = toDimension
+      self.selectedCircleViewWidth.constant = toDimension
+      self.layoutSubviews()
     }
   }
 }

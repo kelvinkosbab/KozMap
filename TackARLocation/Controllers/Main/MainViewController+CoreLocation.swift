@@ -9,29 +9,13 @@
 import UIKit
 import CoreLocation
 
-extension MainViewController : LocationManagerDelegate {
-  
-  func locationManagerDidUpdateLocation(_ locationManager: LocationManager, location: CLLocation) {
-    
-    // Update location on child AR controller
-    self.arViewController?.currentLocation = location
-    
-    // Update location on presented controllers
-    if let locationDetailViewController = self.presentedViewController as? LocationDetailViewController, locationDetailViewController.isCreatingSavedLocation {
-      locationDetailViewController.location = location
-    } else if let locationListViewController = self.presentedViewController as? LocationListViewController {
-      locationListViewController.currentLocation = location
-    }
-  }
-  
-  func locationManagerDidUpdateHeading(_ locationManager: LocationManager, heading: CLLocationDirection, accuracy: CLLocationDirection) {}
-}
+// MARK: - LocationDetailViewControllerDelegate
 
 extension MainViewController : LocationDetailViewControllerDelegate {
   
   func didUpdate(savedLocation: SavedLocation) {
     let dispatchGroup = DispatchGroup()
-    if let _ = self.presentedViewController as? LocationDetailViewController {
+    if let _ = self.presentedViewController {
       dispatchGroup.enter()
       self.dismiss(animated: true) {
         dispatchGroup.leave()
@@ -47,7 +31,7 @@ extension MainViewController : LocationDetailViewControllerDelegate {
   
   func didSave(savedLocation: SavedLocation) {
     let dispatchGroup = DispatchGroup()
-    if let _ = self.presentedViewController as? LocationDetailViewController {
+    if let _ = self.presentedViewController {
       dispatchGroup.enter()
       self.dismiss(animated: true) {
         dispatchGroup.leave()
@@ -94,6 +78,8 @@ extension MainViewController : LocationDetailViewControllerDelegate {
   }
 }
 
+// MARK: - LocationListViewControllerDelegate
+
 extension MainViewController : LocationListViewControllerDelegate {
   
   func shouldEdit(savedLocation: SavedLocation) {
@@ -106,5 +92,16 @@ extension MainViewController : LocationListViewControllerDelegate {
     
     // Delete this location from core data
     SavedLocation.deleteOne(savedLocation)
+  }
+}
+
+// MARK: - SearchViewControllerDelegate
+
+extension MainViewController : SearchViewControllerDelegate {
+  
+  func shouldAdd(mapItem: MapItem) {
+    self.dismiss(animated: true) { [weak self] in
+      self?.presentLocationDetail(mapItem: mapItem)
+    }
   }
 }

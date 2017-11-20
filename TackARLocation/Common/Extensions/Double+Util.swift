@@ -28,11 +28,11 @@ extension Double {
   
   static let shortDistanceCutoff: Double = 1000
   
-  func getDistanceValue(nearUnitType: UnitType, farUnitType: UnitType, asShortValue: Bool = false) -> String {
+  func getDistanceValue(unitType: UnitType, asShortValue: Bool = false) -> String {
     switch self {
     case ..<Double.shortDistanceCutoff:
-      switch nearUnitType {
-      case .us:
+      switch unitType {
+      case .imperial:
         let feet = self * 3.28084 // 1m == 3.28084ft
         return "\(Int(feet))"
       case .metric:
@@ -41,8 +41,8 @@ extension Double {
       
     default:
       let kilometers = self / 1000
-      switch farUnitType {
-      case .us:
+      switch unitType {
+      case .imperial:
         let miles = kilometers * 0.621371 // 1km == 0.621371mi
         return "\(asShortValue ? miles.oneDecimal : miles.threeDecimal)"
       case .metric:
@@ -51,18 +51,18 @@ extension Double {
     }
   }
   
-  func getUnitTypeString(nearUnitType: UnitType, farUnitType: UnitType, asShortString: Bool = false) -> String {
+  func getUnitTypeString(unitType: UnitType, asShortString: Bool = false) -> String {
     switch self {
     case ..<Double.shortDistanceCutoff:
-      return asShortString ? nearUnitType.nearNameShort : nearUnitType.nearName
+      return asShortString ? unitType.nearNameShort : unitType.nearName
     default:
-      return asShortString ? farUnitType.farNameShort : farUnitType.farName
+      return asShortString ? unitType.farNameShort : unitType.farName
     }
   }
   
-  func getBasicReadibleDistance(nearUnitType: UnitType, farUnitType: UnitType) -> String {
-    let distanceValue = self.getDistanceValue(nearUnitType: nearUnitType, farUnitType: farUnitType)
-    let unitTypeString = self.getUnitTypeString(nearUnitType: nearUnitType, farUnitType: farUnitType)
+  func getBasicReadibleDistance(unitType: UnitType) -> String {
+    let distanceValue = self.getDistanceValue(unitType: unitType)
+    let unitTypeString = self.getUnitTypeString(unitType: unitType)
     return "\(distanceValue) \(unitTypeString)"
   }
 }

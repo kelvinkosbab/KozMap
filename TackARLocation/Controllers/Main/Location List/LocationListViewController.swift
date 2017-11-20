@@ -15,35 +15,24 @@ protocol LocationListViewControllerDelegate : class {
   func shouldDelete(savedLocation: SavedLocation)
 }
 
-class LocationListViewController : BaseViewController, NSFetchedResultsControllerDelegate {
+class LocationListViewController : BaseTableViewController, NSFetchedResultsControllerDelegate {
   
   // MARK: - Static Accessors
   
   private static func newViewController() -> LocationListViewController {
-    return self.newViewController(fromStoryboardWithName: "Main")
+    return self.newViewController(fromStoryboardWithName: "AddLocation")
   }
   
-  static func newViewController(currentLocation: CLLocation?, delegate: LocationListViewControllerDelegate?) -> LocationListViewController {
+  static func newViewController(delegate: LocationListViewControllerDelegate?) -> LocationListViewController {
     let viewController = self.newViewController()
-    viewController.currentLocation = currentLocation
     viewController.delegate = delegate
     return viewController
   }
   
   // MARK: - Properties
   
-  @IBOutlet weak var tableView: UITableView!
-  
   weak var delegate: LocationListViewControllerDelegate? = nil
   let rowHeight: CGFloat = 60
-  
-  var currentLocation: CLLocation? = nil {
-    didSet {
-      if self.isViewLoaded {
-        self.reloadContent()
-      }
-    }
-  }
   
   var savedLocations: [SavedLocation] {
     return self.savedLocationsFetchedResultsController?.fetchedObjects ?? []
@@ -56,15 +45,6 @@ class LocationListViewController : BaseViewController, NSFetchedResultsControlle
     return controller
   }()
   
-  // MARK: - Lifecycle
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    self.tableView.delegate = self
-    self.tableView.dataSource = self
-  }
-  
   // MARK: - NSFetchedResultsControllerDelegate
   
   func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -75,31 +55,25 @@ class LocationListViewController : BaseViewController, NSFetchedResultsControlle
     switch type {
     case .insert:
       if let newIndexPath = newIndexPath {
-        self.tableView.insertRows(at: [ newIndexPath ], with: .automatic)
-      } else {
-        self.tableView.reloadData()
+        self.tableView.insertRows(at: [ newIndexPath ], with: .top)
       }
-      
     case .delete:
       if let indexPath = indexPath {
-        self.tableView.deleteRows(at: [ indexPath ], with: .automatic)
-      } else {
-        self.tableView.reloadData()
+        self.tableView.deleteRows(at: [ indexPath ], with: .top)
       }
-      
     case .update:
       if let indexPath = indexPath {
-        self.tableView.reloadRows(at: [ indexPath ], with: .none)
-      } else {
-        self.tableView.reloadData()
+        if let cell = self.tableView.cellForRow(at: indexPath) as? LocationListViewControllerCell {
+          let savedLocation = self.savedLocations[indexPath.row]
+          cell.configure(savedLocation: savedLocation)
+        } else {
+          self.tableView.reloadRows(at: [ indexPath ], with: .none)
+        }
       }
-      
     case .move:
       if let indexPath = indexPath, let newIndexPath = newIndexPath {
-        self.tableView.deleteRows(at: [ indexPath ], with: .automatic)
-        self.tableView.insertRows(at: [ newIndexPath ], with: .automatic)
-      } else {
-        self.tableView.reloadData()
+        self.tableView.deleteRows(at: [ indexPath ], with: .top)
+        self.tableView.insertRows(at: [ newIndexPath ], with: .top)
       }
     }
   }
@@ -107,77 +81,51 @@ class LocationListViewController : BaseViewController, NSFetchedResultsControlle
   func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
     self.tableView.endUpdates()
   }
-  
-  // MARK: - Content
-  
-  func reloadContent() {
-    self.tableView.reloadData()
-  }
 }
 
-// MARK: - UITableViewDelegate, UITableViewDataSource
+// MARK: - UITableView
 
-extension LocationListViewController : UITableViewDelegate, UITableViewDataSource {
+extension LocationListViewController {
   
-  func numberOfSections(in tableView: UITableView) -> Int {
+  override func numberOfSections(in tableView: UITableView) -> Int {
     return 1
   }
   
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return self.savedLocations.count
   }
   
-  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return self.rowHeight
   }
   
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "LocationListViewControllerCell", for: indexPath) as! LocationListViewControllerCell
     cell.backgroundColor = .clear
     
     // Saved location
     let savedLocation = self.savedLocations[indexPath.row]
-    cell.titleLabel.text = savedLocation.name ?? "Unnamed"
-    
-    // Distance labels
-    if let currentLocation = self.currentLocation {
-      let distance = currentLocation.distance(from: savedLocation.location)
-      let readibleDistance = distance.getBasicReadibleDistance(nearUnitType: Defaults.shared.nearUnitType, farUnitType: Defaults.shared.farUnitType)
-      cell.detailLabel.text = "\(readibleDistance) away"
-    } else {
-      let roundedLatitude = Double(round(savedLocation.latitude*1000)/1000)
-      let roundedLongitude = Double(round(savedLocation.longitude*1000)/1000)
-      cell.detailLabel.text = "\(roundedLatitude)°N, \(roundedLongitude)°W"
-    }
-    
-    // Color view
-    if let color = savedLocation.color {
-      cell.colorView.backgroundColor = color.color
-    } else {
-      cell.colorView.backgroundColor = .kozRed
-    }
+    cell.configure(savedLocation: savedLocation)
     
     return cell
   }
   
-  func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+  override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
     let savedLocation = self.savedLocations[indexPath.row]
     let editAction = UIContextualAction(style: .normal, title: "Edit") { [weak self] (action, view, success) in
       self?.delegate?.shouldEdit(savedLocation: savedLocation)
       success(true)
     }
-//    editAction.image
     editAction.backgroundColor = .kozBlue
     return UISwipeActionsConfiguration(actions: [ editAction ])
   }
   
-  func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+  override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
     let savedLocation = self.savedLocations[indexPath.row]
     let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (action, view, success) in
       self?.delegate?.shouldDelete(savedLocation: savedLocation)
       success(true)
     }
-    //    deleteAction.image
     deleteAction.backgroundColor = .kozRed
     return UISwipeActionsConfiguration(actions: [ deleteAction ])
   }

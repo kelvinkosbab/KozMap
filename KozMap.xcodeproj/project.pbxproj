@@ -13,14 +13,24 @@
 		B614700B1FB180E30068CA67 /* Color+MyManagedObjectProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B614700A1FB180E30068CA67 /* Color+MyManagedObjectProtocol.swift */; };
 		B614700D1FB193FA0068CA67 /* UIViewController+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B614700C1FB193FA0068CA67 /* UIViewController+Util.swift */; };
 		B614700F1FB194380068CA67 /* UICollectionView+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B614700E1FB194380068CA67 /* UICollectionView+Util.swift */; };
+		B620C3771FBB6043001B29E9 /* BatchUpdatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B620C3761FBB6043001B29E9 /* BatchUpdatable.swift */; };
 		B62735DC1FB7EDFF004711A4 /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62735DB1FB7EDFF004711A4 /* PermissionManager.swift */; };
 		B62735DE1FB7EEE2004711A4 /* CameraPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62735DD1FB7EEE2004711A4 /* CameraPermissionManager.swift */; };
+		B62735E11FB82B9E004711A4 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62735E01FB82B9E004711A4 /* SearchViewController.swift */; };
+		B63B9A281FBA7D7100982FC6 /* LocationSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63B9A271FBA7D7100982FC6 /* LocationSearchService.swift */; };
+		B64391571FC2861B005721E5 /* CurrentLocationUpdatableService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64391561FC2861B005721E5 /* CurrentLocationUpdatableService.swift */; };
 		B66041EF1FA905350076EBEF /* VirtualObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66041EE1FA905350076EBEF /* VirtualObject.swift */; };
 		B695236B1FA8D11E0014ABED /* CLLocation+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236A1FA8D11E0014ABED /* CLLocation+Util.swift */; };
 		B695236D1FA8D2E10014ABED /* SCNVector3+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236C1FA8D2E10014ABED /* SCNVector3+Util.swift */; };
 		B695236F1FA8D3430014ABED /* AxesNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236E1FA8D3430014ABED /* AxesNode.swift */; };
+		B69B94571FBE20A600A7047F /* MapItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69B94561FBE20A600A7047F /* MapItem.swift */; };
 		B69BDAD31FA7F84400A385DE /* UIApplication+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69BDAD21FA7F84400A385DE /* UIApplication+Util.swift */; };
 		B69BDAD51FA7FB0B00A385DE /* Double+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69BDAD41FA7FB0B00A385DE /* Double+Util.swift */; };
+		B6AA79B81FB89EC900428D86 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AA79B71FB89EC900428D86 /* AddLocationViewController.swift */; };
+		B6AA79BA1FB89FD000428D86 /* AddLocation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6AA79B91FB89FD000428D86 /* AddLocation.storyboard */; };
+		B6AA79BD1FB8A3D000428D86 /* VisualEffectContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AA79BC1FB8A3D000428D86 /* VisualEffectContainerViewController.swift */; };
+		B6B47FD51FBFB61B004AE609 /* SearchViewController+Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B47FD41FBFB61B004AE609 /* SearchViewController+Cells.swift */; };
+		B6C37C5D1FC1EF1D0068A2D9 /* UnsupportedDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C37C5C1FC1EF1C0068A2D9 /* UnsupportedDeviceViewController.swift */; };
 		B6C576451FB2FF0E00C4966F /* String+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C576441FB2FF0E00C4966F /* String+Util.swift */; };
 		B6C6EA291FA79B45001F97E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA281FA79B45001F97E7 /* AppDelegate.swift */; };
 		B6C6EA2E1FA79B45001F97E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6C6EA2C1FA79B45001F97E7 /* Main.storyboard */; };
@@ -79,14 +89,25 @@
 		B614700A1FB180E30068CA67 /* Color+MyManagedObjectProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+MyManagedObjectProtocol.swift"; sourceTree = "<group>"; };
 		B614700C1FB193FA0068CA67 /* UIViewController+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Util.swift"; sourceTree = "<group>"; };
 		B614700E1FB194380068CA67 /* UICollectionView+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Util.swift"; sourceTree = "<group>"; };
+		B620C3761FBB6043001B29E9 /* BatchUpdatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatchUpdatable.swift; sourceTree = "<group>"; };
 		B62735DB1FB7EDFF004711A4 /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
 		B62735DD1FB7EEE2004711A4 /* CameraPermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPermissionManager.swift; sourceTree = "<group>"; };
+		B62735E01FB82B9E004711A4 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		B63B9A271FBA7D7100982FC6 /* LocationSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchService.swift; sourceTree = "<group>"; };
+		B64391551FC1F336005721E5 /* TackARLocation 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TackARLocation 3.xcdatamodel"; sourceTree = "<group>"; };
+		B64391561FC2861B005721E5 /* CurrentLocationUpdatableService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationUpdatableService.swift; sourceTree = "<group>"; };
 		B66041EE1FA905350076EBEF /* VirtualObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObject.swift; sourceTree = "<group>"; };
 		B695236A1FA8D11E0014ABED /* CLLocation+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Util.swift"; sourceTree = "<group>"; };
 		B695236C1FA8D2E10014ABED /* SCNVector3+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Util.swift"; sourceTree = "<group>"; };
 		B695236E1FA8D3430014ABED /* AxesNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxesNode.swift; sourceTree = "<group>"; };
+		B69B94561FBE20A600A7047F /* MapItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapItem.swift; sourceTree = "<group>"; };
 		B69BDAD21FA7F84400A385DE /* UIApplication+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Util.swift"; sourceTree = "<group>"; };
 		B69BDAD41FA7FB0B00A385DE /* Double+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Util.swift"; sourceTree = "<group>"; };
+		B6AA79B71FB89EC900428D86 /* AddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
+		B6AA79B91FB89FD000428D86 /* AddLocation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddLocation.storyboard; sourceTree = "<group>"; };
+		B6AA79BC1FB8A3D000428D86 /* VisualEffectContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectContainerViewController.swift; sourceTree = "<group>"; };
+		B6B47FD41FBFB61B004AE609 /* SearchViewController+Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchViewController+Cells.swift"; sourceTree = "<group>"; };
+		B6C37C5C1FC1EF1C0068A2D9 /* UnsupportedDeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsupportedDeviceViewController.swift; sourceTree = "<group>"; };
 		B6C576441FB2FF0E00C4966F /* String+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Util.swift"; sourceTree = "<group>"; };
 		B6C6EA251FA79B45001F97E7 /* KozMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KozMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6C6EA281FA79B45001F97E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -168,6 +189,41 @@
 			path = Permissions;
 			sourceTree = "<group>";
 		};
+		B62735DF1FB82B7F004711A4 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				B62735E01FB82B9E004711A4 /* SearchViewController.swift */,
+				B6B47FD41FBFB61B004AE609 /* SearchViewController+Cells.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		B64391581FC28DD9005721E5 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				B63B9A271FBA7D7100982FC6 /* LocationSearchService.swift */,
+				B69B94561FBE20A600A7047F /* MapItem.swift */,
+				B64391561FC2861B005721E5 /* CurrentLocationUpdatableService.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
+		B6AA79B61FB89EAB00428D86 /* Add Location */ = {
+			isa = PBXGroup;
+			children = (
+				B6AA79B71FB89EC900428D86 /* AddLocationViewController.swift */,
+			);
+			path = "Add Location";
+			sourceTree = "<group>";
+		};
+		B6AA79BB1FB8A3B900428D86 /* Visual Effect Container */ = {
+			isa = PBXGroup;
+			children = (
+				B6AA79BC1FB8A3D000428D86 /* VisualEffectContainerViewController.swift */,
+			);
+			path = "Visual Effect Container";
+			sourceTree = "<group>";
+		};
 		B6C6EA1C1FA79B44001F97E7 = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +261,7 @@
 				B6C6EA461FA7A14F001F97E7 /* Protocols */,
 				B6C6EA401FA79F43001F97E7 /* Model */,
 				B6C6EA621FA7B6AD001F97E7 /* SceneKit */,
+				B64391581FC28DD9005721E5 /* Location */,
 				B6C6EA761FA7D761001F97E7 /* UnitType.swift */,
 				B61470051FB1485F0068CA67 /* Style.swift */,
 			);
@@ -215,6 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				B6C6EA2C1FA79B45001F97E7 /* Main.storyboard */,
+				B6AA79B91FB89FD000428D86 /* AddLocation.storyboard */,
 				B6C6EA4D1FA7A9A6001F97E7 /* BaseNavigationController.swift */,
 				B6C6EA9C1FA7EBEE001F97E7 /* BaseViewController.swift */,
 				B6C6EA9E1FA7EBF6001F97E7 /* BaseTableViewController.swift */,
@@ -254,6 +312,7 @@
 			children = (
 				B6C6EA471FA7A15C001F97E7 /* ViewControllerFromStoryboardProtocol.swift */,
 				B6C6EA531FA7AEA4001F97E7 /* Loggable.swift */,
+				B620C3761FBB6043001B29E9 /* BatchUpdatable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -262,6 +321,7 @@
 			isa = PBXGroup;
 			children = (
 				B6C6EA441FA7A050001F97E7 /* PermissionsViewController.swift */,
+				B6C37C5C1FC1EF1C0068A2D9 /* UnsupportedDeviceViewController.swift */,
 			);
 			path = Permissions;
 			sourceTree = "<group>";
@@ -272,10 +332,13 @@
 				B6C6EA491FA7A3DB001F97E7 /* MainViewController.swift */,
 				B6C6EA721FA7CDF9001F97E7 /* MainViewController+CoreLocation.swift */,
 				B6C6EA511FA7ACEC001F97E7 /* ARViewController.swift */,
+				B6AA79BB1FB8A3B900428D86 /* Visual Effect Container */,
 				B6C6EA6D1FA7C255001F97E7 /* Location List */,
 				B6C6EA6C1FA7C24C001F97E7 /* Location Detail */,
 				B6C6EA6B1FA7C246001F97E7 /* Settings */,
 				B61470021FB147410068CA67 /* InlineColorChooser */,
+				B6AA79B61FB89EAB00428D86 /* Add Location */,
+				B62735DF1FB82B7F004711A4 /* Search */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -443,6 +506,7 @@
 				B6C6EA5B1FA7B02B001F97E7 /* Models.scnassets in Resources */,
 				B6C6EA331FA79B45001F97E7 /* Assets.xcassets in Resources */,
 				B6C6EA2E1FA79B45001F97E7 /* Main.storyboard in Resources */,
+				B6AA79BA1FB89FD000428D86 /* AddLocation.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,25 +522,31 @@
 				B6C6EA6A1FA7BE0A001F97E7 /* SavedLocation+MyManagedObjectProtocol.swift in Sources */,
 				B6C6EA4C1FA7A694001F97E7 /* RootNavigationController.swift in Sources */,
 				B614700F1FB194380068CA67 /* UICollectionView+Util.swift in Sources */,
+				B64391571FC2861B005721E5 /* CurrentLocationUpdatableService.swift in Sources */,
 				B695236F1FA8D3430014ABED /* AxesNode.swift in Sources */,
 				B6C576451FB2FF0E00C4966F /* String+Util.swift in Sources */,
+				B6AA79B81FB89EC900428D86 /* AddLocationViewController.swift in Sources */,
 				B6C6EA451FA7A050001F97E7 /* PermissionsViewController.swift in Sources */,
 				B6C6EA661FA7BD5B001F97E7 /* MyDataManager.swift in Sources */,
 				B6C6EA9D1FA7EBEE001F97E7 /* BaseViewController.swift in Sources */,
 				B6C6EA951FA7E869001F97E7 /* UIDevice+Util.swift in Sources */,
 				B6C6EA821FA7E670001F97E7 /* PresenationManagerProtocol.swift in Sources */,
 				B695236B1FA8D11E0014ABED /* CLLocation+Util.swift in Sources */,
+				B63B9A281FBA7D7100982FC6 /* LocationSearchService.swift in Sources */,
 				B6C6EA711FA7C26D001F97E7 /* LocationDetailViewController.swift in Sources */,
+				B62735E11FB82B9E004711A4 /* SearchViewController.swift in Sources */,
 				B6C6EA971FA7E8B4001F97E7 /* DragDownDismissInteractiveTransition.swift in Sources */,
 				B6C6EA931FA7E83F001F97E7 /* Device.swift in Sources */,
 				B6C6EA5D1FA7B0C3001F97E7 /* CGRect+Util.swift in Sources */,
 				B62735DC1FB7EDFF004711A4 /* PermissionManager.swift in Sources */,
+				B69B94571FBE20A600A7047F /* MapItem.swift in Sources */,
 				B6C6EA991FA7E8D1001F97E7 /* DragLeftDismissInteractiveTransition.swift in Sources */,
 				B6C6EA681FA7BD91001F97E7 /* MyManagedObjectProtocol.swift in Sources */,
 				B6C6EA421FA79F77001F97E7 /* LocationManager.swift in Sources */,
 				B6C6EA571FA7AF56001F97E7 /* SCNNode+Util.swift in Sources */,
 				B695236D1FA8D2E10014ABED /* SCNVector3+Util.swift in Sources */,
 				B62735DE1FB7EEE2004711A4 /* CameraPermissionManager.swift in Sources */,
+				B6B47FD51FBFB61B004AE609 /* SearchViewController+Cells.swift in Sources */,
 				B6C6EA611FA7B68C001F97E7 /* Plane.swift in Sources */,
 				B6C6EA8C1FA7E6E3001F97E7 /* HDFadeWithBlurPresentationManager.swift in Sources */,
 				B61470081FB148720068CA67 /* UIColor+Util.swift in Sources */,
@@ -484,6 +554,7 @@
 				B6C6EA791FA7DAB9001F97E7 /* LocationListViewController+Cells.swift in Sources */,
 				B6C6EA6F1FA7C264001F97E7 /* LocationListViewController.swift in Sources */,
 				B69BDAD51FA7FB0B00A385DE /* Double+Util.swift in Sources */,
+				B620C3771FBB6043001B29E9 /* BatchUpdatable.swift in Sources */,
 				B6C6EA9B1FA7E8E4001F97E7 /* DragRightDismissInteractiveTransition.swift in Sources */,
 				B6C6EA311FA79B45001F97E7 /* TackARLocation.xcdatamodeld in Sources */,
 				B61470041FB1475B0068CA67 /* InlineColorChooserViewController.swift in Sources */,
@@ -495,6 +566,7 @@
 				B6C6EA841FA7E690001F97E7 /* InteractiveTransition.swift in Sources */,
 				B6C6EA481FA7A15C001F97E7 /* ViewControllerFromStoryboardProtocol.swift in Sources */,
 				B614700B1FB180E30068CA67 /* Color+MyManagedObjectProtocol.swift in Sources */,
+				B6C37C5D1FC1EF1D0068A2D9 /* UnsupportedDeviceViewController.swift in Sources */,
 				B6C6EA8E1FA7E6F5001F97E7 /* UIView+Util.swift in Sources */,
 				B6C6EA751FA7D717001F97E7 /* Defaults+MyManagedObjectProtocol.swift in Sources */,
 				B6C6EA861FA7E6A6001F97E7 /* DragUpDismissInteractiveTransition.swift in Sources */,
@@ -506,6 +578,7 @@
 				B6C6EA731FA7CDF9001F97E7 /* MainViewController+CoreLocation.swift in Sources */,
 				B6C6EA901FA7E766001F97E7 /* TopDownPresentationManager.swift in Sources */,
 				B6C6EA771FA7D761001F97E7 /* UnitType.swift in Sources */,
+				B6AA79BD1FB8A3D000428D86 /* VisualEffectContainerViewController.swift in Sources */,
 				B614700D1FB193FA0068CA67 /* UIViewController+Util.swift in Sources */,
 				B6C6EA641FA7BD33001F97E7 /* DataMangerProtocol.swift in Sources */,
 				B6C6EA591FA7AFEF001F97E7 /* ARSCNView+Util.swift in Sources */,
@@ -700,10 +773,11 @@
 		B6C6EA2F1FA79B45001F97E7 /* TackARLocation.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				B64391551FC1F336005721E5 /* TackARLocation 3.xcdatamodel */,
 				B61470091FB17E580068CA67 /* TackARLocation 2.xcdatamodel */,
 				B6C6EA301FA79B45001F97E7 /* TackARLocation.xcdatamodel */,
 			);
-			currentVersion = B61470091FB17E580068CA67 /* TackARLocation 2.xcdatamodel */;
+			currentVersion = B64391551FC1F336005721E5 /* TackARLocation 3.xcdatamodel */;
 			path = TackARLocation.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

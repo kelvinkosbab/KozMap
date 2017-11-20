@@ -14,14 +14,14 @@ extension SavedLocation : MyManagedObjectProtocol {
   // MARK: - MyManagedObjectProtocol
   
   static var sortDescriptors: [NSSortDescriptor] {
-    return [ NSSortDescriptor(key: "name", ascending: true), NSSortDescriptor(key: "date", ascending: true) ]
+    return [ NSSortDescriptor(key: "lastDistance", ascending: true), NSSortDescriptor(key: "name", ascending: true), NSSortDescriptor(key: "date", ascending: true) ]
   }
   
   // MARK: - Creating
   
-  static func create(name: String, location: CLLocation, color: Color) -> SavedLocation {
+  static func create(name: String, location: CLLocation, color: Color, distance: Double?) -> SavedLocation {
     let object = self.create()
-    object.update(name: name, location: location, color: color)
+    object.update(name: name, location: location, color: color, distance: distance)
     return object
   }
   
@@ -52,14 +52,19 @@ extension SavedLocation : MyManagedObjectProtocol {
     }
   }
   
+  var hasLastDistance: Bool {
+    return self.lastDistance > 0
+  }
+  
   // MARK: - Updating
   
-  func update(name: String, location: CLLocation, color: Color) {
+  func update(name: String, location: CLLocation, color: Color, distance: Double?) {
     self.name = name
     self.location = location
     if let oldColor = self.color, oldColor != color {
       Color.deleteOne(oldColor)
     }
     self.color = color
+    self.lastDistance = distance ?? -1
   }
 }

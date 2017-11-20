@@ -9,11 +9,11 @@
 import Foundation
 
 enum UnitType : Int {
-  case us, metric
+  case imperial, metric
   
   var farName: String {
     switch self {
-    case .us:
+    case .imperial:
       return "Miles"
     case .metric:
       return "Kilometers"
@@ -22,7 +22,7 @@ enum UnitType : Int {
   
   var farNameShort: String {
     switch self {
-    case .us:
+    case .imperial:
       return "Mi"
     case .metric:
       return "Km"
@@ -31,7 +31,7 @@ enum UnitType : Int {
   
   var nearName: String {
     switch self {
-    case .us:
+    case .imperial:
       return "Feet"
     case .metric:
       return "Meters"
@@ -40,7 +40,7 @@ enum UnitType : Int {
   
   var nearNameShort: String {
     switch self {
-    case .us:
+    case .imperial:
       return "Ft"
     case .metric:
       return "m"
