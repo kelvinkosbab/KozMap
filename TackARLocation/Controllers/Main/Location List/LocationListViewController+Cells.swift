@@ -23,14 +23,13 @@ class LocationListViewControllerCell : UITableViewCell {
     }
   }
   
-  func configure(savedLocation: SavedLocation) {
+  func configure(savedLocation: SavedLocation, unitType: UnitType) {
     
     // Saved location
     self.titleLabel.text = savedLocation.name ?? "Unnamed"
     
     // Distance labels
-    if savedLocation.hasLastDistance {
-      let readibleDistance = savedLocation.lastDistance.getBasicReadibleDistance(unitType: Defaults.shared.unitType)
+    if let readibleDistance = savedLocation.lastDistance.getDistanceString(unitType: unitType, displayType: .numbericUnits(false))?.lowercased() {
       self.detailLabel.text = "\(readibleDistance) away"
     } else {
       let roundedLatitude = Double(round(savedLocation.latitude*1000)/1000)

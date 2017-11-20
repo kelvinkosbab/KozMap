@@ -65,7 +65,7 @@ class LocationListViewController : BaseTableViewController, NSFetchedResultsCont
       if let indexPath = indexPath {
         if let cell = self.tableView.cellForRow(at: indexPath) as? LocationListViewControllerCell {
           let savedLocation = self.savedLocations[indexPath.row]
-          cell.configure(savedLocation: savedLocation)
+          cell.configure(savedLocation: savedLocation, unitType: Defaults.shared.unitType)
         } else {
           self.tableView.reloadRows(at: [ indexPath ], with: .none)
         }
@@ -105,7 +105,7 @@ extension LocationListViewController {
     
     // Saved location
     let savedLocation = self.savedLocations[indexPath.row]
-    cell.configure(savedLocation: savedLocation)
+    cell.configure(savedLocation: savedLocation, unitType: Defaults.shared.unitType)
     
     return cell
   }

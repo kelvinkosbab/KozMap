@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13770"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -309,14 +310,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gcx-EF-3uG">
                                 <rect key="frame" x="24" y="73" width="351" height="52"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Units" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nPg-bv-g34">
-                                        <rect key="frame" x="0.0" y="16" width="137" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Units" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nPg-bv-g34">
+                                        <rect key="frame" x="0.0" y="16" width="129" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="yAR-Ng-QlP">
-                                        <rect key="frame" x="137" y="11.5" width="214" height="29"/>
+                                        <rect key="frame" x="129" y="11.5" width="214" height="29"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="214" id="GpY-rB-9Eu"/>
                                         </constraints>
@@ -335,7 +336,7 @@
                                     <constraint firstAttribute="height" constant="52" id="0d3-bm-lzG"/>
                                     <constraint firstItem="yAR-Ng-QlP" firstAttribute="leading" secondItem="nPg-bv-g34" secondAttribute="trailing" id="Lg9-nt-uVT"/>
                                     <constraint firstItem="yAR-Ng-QlP" firstAttribute="centerY" secondItem="gcx-EF-3uG" secondAttribute="centerY" id="mrw-gg-ilf"/>
-                                    <constraint firstAttribute="trailing" secondItem="yAR-Ng-QlP" secondAttribute="trailing" id="rwf-3C-0wD"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="yAR-Ng-QlP" secondAttribute="trailing" id="rwf-3C-0wD"/>
                                     <constraint firstItem="nPg-bv-g34" firstAttribute="leading" secondItem="gcx-EF-3uG" secondAttribute="leading" id="wWL-vA-BON"/>
                                     <constraint firstItem="nPg-bv-g34" firstAttribute="centerY" secondItem="gcx-EF-3uG" secondAttribute="centerY" id="yxV-Fs-US5"/>
                                 </constraints>

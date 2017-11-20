@@ -102,8 +102,7 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource {
     cell.detailLabel.text = mapItem.address
     
     // Distance label
-    let distance = mapItem.distance
-    let readibleDistance = distance?.getBasicReadibleDistance(unitType: Defaults.shared.unitType)
+    let readibleDistance = mapItem.distance?.getDistanceString(unitType: Defaults.shared.unitType, displayType: .numbericUnits(false))
     cell.rightDetailLabel.text = readibleDistance
     
     return cell
