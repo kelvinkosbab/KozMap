@@ -10,7 +10,7 @@ import Foundation
 import AVFoundation
 
 protocol CameraPermissionDelegate : class {
-  func cameraPermissionManagerDidUpdateAuthorization()
+  func cameraPermissionManagerDidUpdateAuthorization(isAuthorized: Bool)
 }
 
 class CameraPermissionManager : NSObject, PermissionManagerDelegate {
@@ -62,15 +62,15 @@ class CameraPermissionManager : NSObject, PermissionManagerDelegate {
   // MARK: - Authorization
   
   func requestAuthorization() {
-    AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
-      if granted {
-        Log.log("Authorization granted")
+    AVCaptureDevice.requestAccess(for: .video) { [weak self] isAuthorized in
+      if isAuthorized {
+        Log.log("Authorization authorized")
       } else {
-        Log.log("Authorization denied")
+        Log.log("Authorization declined")
       }
       
       // Notify delegate
-      self?.authorizationDelegate?.cameraPermissionManagerDidUpdateAuthorization()
+      self?.authorizationDelegate?.cameraPermissionManagerDidUpdateAuthorization(isAuthorized: isAuthorized)
     }
   }
 }

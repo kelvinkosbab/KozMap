@@ -34,7 +34,6 @@
 		B6AA79BA1FB89FD000428D86 /* AddLocation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6AA79B91FB89FD000428D86 /* AddLocation.storyboard */; };
 		B6AA79BD1FB8A3D000428D86 /* VisualEffectContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AA79BC1FB8A3D000428D86 /* VisualEffectContainerViewController.swift */; };
 		B6B47FD51FBFB61B004AE609 /* SearchViewController+Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B47FD41FBFB61B004AE609 /* SearchViewController+Cells.swift */; };
-		B6C37C5D1FC1EF1D0068A2D9 /* UnsupportedDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C37C5C1FC1EF1C0068A2D9 /* UnsupportedDeviceViewController.swift */; };
 		B6C576451FB2FF0E00C4966F /* String+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C576441FB2FF0E00C4966F /* String+Util.swift */; };
 		B6C6EA291FA79B45001F97E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA281FA79B45001F97E7 /* AppDelegate.swift */; };
 		B6C6EA2E1FA79B45001F97E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6C6EA2C1FA79B45001F97E7 /* Main.storyboard */; };
@@ -115,7 +114,6 @@
 		B6AA79B91FB89FD000428D86 /* AddLocation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddLocation.storyboard; sourceTree = "<group>"; };
 		B6AA79BC1FB8A3D000428D86 /* VisualEffectContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectContainerViewController.swift; sourceTree = "<group>"; };
 		B6B47FD41FBFB61B004AE609 /* SearchViewController+Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchViewController+Cells.swift"; sourceTree = "<group>"; };
-		B6C37C5C1FC1EF1C0068A2D9 /* UnsupportedDeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsupportedDeviceViewController.swift; sourceTree = "<group>"; };
 		B6C576441FB2FF0E00C4966F /* String+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Util.swift"; sourceTree = "<group>"; };
 		B6C6EA251FA79B45001F97E7 /* KozMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KozMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6C6EA281FA79B45001F97E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -339,7 +337,6 @@
 			isa = PBXGroup;
 			children = (
 				B6C6EA441FA7A050001F97E7 /* PermissionsViewController.swift */,
-				B6C37C5C1FC1EF1C0068A2D9 /* UnsupportedDeviceViewController.swift */,
 			);
 			path = Permissions;
 			sourceTree = "<group>";
@@ -589,7 +586,6 @@
 				B6C6EA481FA7A15C001F97E7 /* ViewControllerFromStoryboardProtocol.swift in Sources */,
 				B643915A1FC29989005721E5 /* Distance.swift in Sources */,
 				B614700B1FB180E30068CA67 /* Color+MyManagedObjectProtocol.swift in Sources */,
-				B6C37C5D1FC1EF1D0068A2D9 /* UnsupportedDeviceViewController.swift in Sources */,
 				B6C6EA8E1FA7E6F5001F97E7 /* UIView+Util.swift in Sources */,
 				B6C6EA751FA7D717001F97E7 /* Defaults+MyManagedObjectProtocol.swift in Sources */,
 				B64391631FC2BEBF005721E5 /* ConfiguringViewController.swift in Sources */,

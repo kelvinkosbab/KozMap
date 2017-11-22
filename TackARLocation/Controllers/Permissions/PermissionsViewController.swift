@@ -21,14 +21,31 @@ class PermissionsViewController : UIViewController {
   @IBOutlet weak var locationPermissionButton: UIButton!
   @IBOutlet weak var cameraPermissionButton: UIButton!
   
+  var isLocationAuthorized: Bool {
+    return LocationManager.shared.isAccessAuthorized
+  }
+  
+  var isLocationNotDetermined: Bool {
+    return LocationManager.shared.isAccessNotDetermined
+  }
+  
+  var isCameraAuthorized: Bool = CameraPermissionManager.shared.isAccessAuthorized
+  var isCameraNotDetermined: Bool = CameraPermissionManager.shared.isAccessNotDetermined
+  
+  var areAllPermissionAuthorized: Bool {
+    return self.isLocationAuthorized && self.isCameraAuthorized
+  }
+  
   // MARK: - Lifecycle
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
-    self.reloadContent()
     LocationManager.shared.authorizationDelegate = self
     CameraPermissionManager.shared.authorizationDelegate = self
+    self.isCameraAuthorized = CameraPermissionManager.shared.isAccessAuthorized
+    self.isCameraNotDetermined = CameraPermissionManager.shared.isAccessNotDetermined
+    self.reloadContent()
   }
   
   // MARK: - Content
@@ -36,7 +53,7 @@ class PermissionsViewController : UIViewController {
   func reloadContent() {
     
     // Location
-    if LocationManager.shared.isAccessAuthorized {
+    if self.isLocationAuthorized {
       self.locationPermissionButton.setTitle("Location Access Granted", for: .normal)
       self.locationPermissionButton.isUserInteractionEnabled = false
       self.locationPermissionButton.setTitleColor(.lightGray, for: .normal)
@@ -47,7 +64,7 @@ class PermissionsViewController : UIViewController {
     }
     
     // Camera
-    if CameraPermissionManager.shared.isAccessAuthorized {
+    if self.isCameraAuthorized {
       self.cameraPermissionButton.setTitle("Camera Access Granted", for: .normal)
       self.cameraPermissionButton.isUserInteractionEnabled = false
       self.cameraPermissionButton.setTitleColor(.lightGray, for: .normal)
@@ -63,7 +80,7 @@ class PermissionsViewController : UIViewController {
   @IBAction func locationPermissionButtonSelected() {
     
     // Check if access has been denied - Settings
-    guard LocationManager.shared.isAccessNotDetermined else {
+    guard self.isLocationNotDetermined else {
       self.showSettingsAlert()
       return
     }
@@ -75,7 +92,7 @@ class PermissionsViewController : UIViewController {
   @IBAction func cameraPermissionButtonSelected() {
     
     // Check if access has been denied - Settings
-    guard CameraPermissionManager.shared.isAccessNotDetermined else {
+    guard self.isCameraNotDetermined else {
       self.showSettingsAlert()
       return
     }
@@ -87,16 +104,14 @@ class PermissionsViewController : UIViewController {
   private func showSettingsAlert() {
     let alertController = UIAlertController (title: "Action Required", message: "Go to Settings?", preferredStyle: .alert)
     
-    let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
+    let settingsAction = UIAlertAction(title: "Settings", style: .default) { _ -> Void in
       
       guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
         return
       }
       
       if UIApplication.shared.canOpenURL(settingsUrl) {
-        UIApplication.shared.open(settingsUrl) { (success) in
-          print("Settings opened: \(success)") // Prints true
-        }
+        UIApplication.shared.open(settingsUrl)
       }
     }
     alertController.addAction(settingsAction)
@@ -119,7 +134,7 @@ extension PermissionsViewController : LocationManagerAuthorizationDelegate {
   
   func locationManagerDidUpdateAuthorization() {
     
-    if PermissionManager.shared.isAccessAuthorized {
+    if self.areAllPermissionAuthorized {
       self.showMainController()
     }
     
@@ -132,9 +147,9 @@ extension PermissionsViewController : LocationManagerAuthorizationDelegate {
 
 extension PermissionsViewController : CameraPermissionDelegate {
   
-  func cameraPermissionManagerDidUpdateAuthorization() {
-    
-    if PermissionManager.shared.isAccessAuthorized {
+  func cameraPermissionManagerDidUpdateAuthorization(isAuthorized: Bool) {
+    self.isCameraAuthorized = isAuthorized
+    if self.areAllPermissionAuthorized {
       self.showMainController()
     }
     

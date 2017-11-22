@@ -147,8 +147,8 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="NAi-Z9-fak" firstAttribute="bottom" secondItem="het-qu-p0b" secondAttribute="bottom" id="4t6-Or-BO4"/>
                             <constraint firstItem="NAi-Z9-fak" firstAttribute="trailing" secondItem="E3M-G1-my4" secondAttribute="trailing" constant="24" id="5Ms-Cb-L4w"/>
+                            <constraint firstAttribute="bottom" secondItem="het-qu-p0b" secondAttribute="bottom" id="6Gn-xM-FVI"/>
                             <constraint firstItem="het-qu-p0b" firstAttribute="leading" secondItem="NAi-Z9-fak" secondAttribute="leading" id="CUm-wM-qOJ"/>
                             <constraint firstItem="CiA-1e-fpQ" firstAttribute="leading" secondItem="NAi-Z9-fak" secondAttribute="leading" id="Cei-3H-Dte"/>
                             <constraint firstItem="NAi-Z9-fak" firstAttribute="bottom" secondItem="yi7-zU-H26" secondAttribute="bottom" constant="24" id="Eiw-Vj-h2g"/>
