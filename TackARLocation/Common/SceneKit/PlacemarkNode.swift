@@ -41,7 +41,7 @@ class PlacemarkNode : VirtualObject {
     }
   }
   
-  var beamTransparency: CGFloat = 0.5 {
+  var beamTransparency: CGFloat = 0.7 {
     didSet {
       self.updateBeamTransparency()
     }
@@ -49,7 +49,7 @@ class PlacemarkNode : VirtualObject {
   
   // MARK: - Init
   
-  convenience init(primaryName: String? = nil, distanceText: String? = nil, unitText: String? = nil, beamColor: UIColor = .kozRed, beamTransparency: CGFloat = 0.5) {
+  convenience init(primaryName: String? = nil, distanceText: String? = nil, unitText: String? = nil, beamColor: UIColor = .kozRed, beamTransparency: CGFloat = 0.7) {
     self.init()
     self.primaryName = primaryName
     self.distanceText = distanceText

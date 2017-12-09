@@ -183,7 +183,8 @@ class ARViewController : UIViewController {
     
     // Scene location updates
     if updatePosition, let currentScenePosition = self.currentScenePosition, let currentLocation = self.currentLocation {
-      placemark.update(currentScenePosition: currentScenePosition, currentLocation: currentLocation, animated: animated, duration: duration, completion: completion)
+      placemark.update(currentScenePosition: currentScenePosition, currentLocation: currentLocation)
+      completion?()
     }
   }
 }

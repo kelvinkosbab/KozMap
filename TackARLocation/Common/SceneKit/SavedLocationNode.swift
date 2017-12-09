@@ -24,7 +24,6 @@ class SavedLocationNode : VirtualObject {
   }
   
   // MARK: - Init
-  
   init(savedLocation: SavedLocation) {
     self.savedLocation = savedLocation
     super.init()
@@ -72,14 +71,14 @@ class SavedLocationNode : VirtualObject {
     return (distanceText, unitText)
   }
   
-  func update(currentScenePosition: SCNVector3, currentLocation: CLLocation, animated: Bool = true, duration: TimeInterval = 0.1, completion: (() -> Void)? = nil) {
+  func update(currentScenePosition: SCNVector3, currentLocation: CLLocation) {
     
     // Distance to the saved location object
     let distance = self.savedLocation.location.distance(from: currentLocation)
     
     // Update the active placemark node
     let dispatchGroup = DispatchGroup()
-    let closeDistanceCutoff: Double = 100
+    let closeDistanceCutoff: Double = 400 // 400 meters = 0.25 miles
     let mediumDistanceCutoff: Double = 8000 // 8000 meters = 5 miles
     if distance < closeDistanceCutoff && self.defaultPlacemarkNode == nil {
       dispatchGroup.enter()
@@ -131,109 +130,143 @@ class SavedLocationNode : VirtualObject {
     dispatchGroup.notify(queue: .main) { [weak self] in
       
       guard let strongSelf = self else {
-        completion?()
         return
       }
       
       let locationTranslation = currentLocation.translation(toLocation: strongSelf.savedLocation.location)
-      let adjustedDistance: CLLocationDistance
-      SCNTransaction.begin()
-      
-      SCNTransaction.completionBlock = completion
-      
-      if animated {
-        SCNTransaction.animationDuration = duration
-      } else {
-        SCNTransaction.animationDuration = 0
-      }
       
       if distance < closeDistanceCutoff {
-      } else if distance >= closeDistanceCutoff && distance < mediumDistanceCutoff {
-      } else if distance >= mediumDistanceCutoff {
-      }
-      
-      if distance > 1000 {
         
-        //If the item is too far away, bring it closer and scale it down
-        let scale = 100 / Float(distance)
-        adjustedDistance = distance * Double(scale)
-        
-        let adjustedTranslation = SCNVector3(
-          x: Float(locationTranslation.longitudeTranslation) * scale,
-          y: Float(locationTranslation.altitudeTranslation) * scale,
-          z: Float(locationTranslation.latitudeTranslation) * scale)
-        
-        let yOffset: Float = strongSelf.activePlacemarkNode?.boundingBox.max.y ?? 50
-        let position = SCNVector3(
-          x: currentScenePosition.x + adjustedTranslation.x,
-          y: currentScenePosition.y + adjustedTranslation.y - yOffset,
-          z: currentScenePosition.z - adjustedTranslation.z)
-        
-        strongSelf.position = position
-        strongSelf.scale = SCNVector3(x: scale, y: scale, z: scale)
-        
-      } else {
-        
-        let yOffset: Float = strongSelf.activePlacemarkNode?.boundingBox.max.y ?? 50 / 4
-        adjustedDistance = distance
+        // Close distance
         let position = SCNVector3(
           x: currentScenePosition.x + Float(locationTranslation.longitudeTranslation),
-          y: currentScenePosition.y + Float(locationTranslation.altitudeTranslation) - yOffset,
+          y: currentScenePosition.y + Float(locationTranslation.altitudeTranslation),
           z: currentScenePosition.z - Float(locationTranslation.latitudeTranslation))
-        
         strongSelf.position = position
+        
+        // Scale it to be an appropriate size so that it can be seen
         strongSelf.scale = SCNVector3(x: 1, y: 1, z: 1)
-      }
-      
-      //The scale of a node with a billboard constraint applied is ignored
-      //The annotation subnode itself, as a subnode, has the scale applied to it
-      let appliedScale = strongSelf.scale
-      strongSelf.scale = SCNVector3(x: 1, y: 1, z: 1)
-      
-      var scale: Float
-      if strongSelf.scaleRelativeToDistance {
-        scale = appliedScale.y
-        strongSelf.scalableNode?.scale = appliedScale
-      } else {
-        
-        //Scale it to be an appropriate size so that it can be seen
-        scale = Float(adjustedDistance) * 0.181
-        
-        if distance > 3000 {
-          scale = scale * 0.75
+        if let activePlacemarkNode = strongSelf.activePlacemarkNode {
+          let desiredNodeHeight: Float = 50
+          let scale = desiredNodeHeight / activePlacemarkNode.boundingBox.max.y
+          activePlacemarkNode.scale = SCNVector3(x: scale, y: scale, z: scale)
+          strongSelf.pivot = SCNMatrix4MakeTranslation(0, -1.1 * scale, 0)
         }
-        strongSelf.scalableNode?.scale = SCNVector3(x: scale, y: scale, z: scale)
+        
+      } else if distance >= closeDistanceCutoff && distance < mediumDistanceCutoff {
+        
+        // Medium distance
+        let scale = Float(distance) * Float((distance - closeDistanceCutoff) / (mediumDistanceCutoff - closeDistanceCutoff))
+        let adjustedTranslation = SCNVector3(
+          x: Float(locationTranslation.longitudeTranslation) * scale / 100,
+          y: Float(locationTranslation.altitudeTranslation) * scale / 100,
+          z: Float(locationTranslation.latitudeTranslation) * scale / 100)
+        let position = SCNVector3(
+          x: currentScenePosition.x + adjustedTranslation.x,
+          y: currentScenePosition.y + adjustedTranslation.y,
+          z: currentScenePosition.z - adjustedTranslation.z)
+        strongSelf.position = position
+        
+        // Scale it to be an appropriate size so that it can be seen
+//        let scale = Float(distance) * 0.181
+//        let scale = Float(distance) * Float((distance - closeDistanceCutoff) / (mediumDistanceCutoff - closeDistanceCutoff)) / 10
+        strongSelf.scale = SCNVector3(x: 1, y: 1, z: 1)
+        strongSelf.activePlacemarkNode?.scale = SCNVector3(x: scale / 10, y: scale / 10, z: scale / 10)
+        strongSelf.pivot = SCNMatrix4MakeTranslation(0, -1.1 * scale / 10, 0)
+        
+      } else if distance >= mediumDistanceCutoff {
+
+        // Far distance
+        let positionScale: Float = 100 / Float(distance)
+        let adjustedTranslation = SCNVector3(
+          x: Float(locationTranslation.longitudeTranslation) * positionScale,
+          y: Float(locationTranslation.altitudeTranslation) * positionScale,
+          z: Float(locationTranslation.latitudeTranslation) * positionScale)
+        let position = SCNVector3(
+          x: currentScenePosition.x + adjustedTranslation.x,
+          y: currentScenePosition.y + adjustedTranslation.y,
+          z: currentScenePosition.z - adjustedTranslation.z)
+        strongSelf.position = position
+        
+        // Scale it to be an appropriate size so that it can be seen
+        strongSelf.scale = SCNVector3(x: 1, y: 1, z: 1)
+        strongSelf.activePlacemarkNode?.scale = SCNVector3(x: positionScale, y: positionScale, z: positionScale)
+        strongSelf.pivot = SCNMatrix4MakeTranslation(0, -1.1 * positionScale, 0)
       }
       
-      strongSelf.pivot = SCNMatrix4MakeTranslation(0, -1.1 * scale, 0)
       
-      SCNTransaction.commit()
+//      let adjustedDistance: CLLocationDistance
+//      if distance > 1000 {
+//
+//        //If the item is too far away, bring it closer and scale it down
+//        let scale = 100 / Float(distance)
+//        adjustedDistance = distance * Double(scale)
+//
+//        let adjustedTranslation = SCNVector3(
+//          x: Float(locationTranslation.longitudeTranslation) * scale,
+//          y: Float(locationTranslation.altitudeTranslation) * scale,
+//          z: Float(locationTranslation.latitudeTranslation) * scale)
+//
+//        let yOffset: Float = strongSelf.activePlacemarkNode?.boundingBox.max.y ?? 50
+//        let position = SCNVector3(
+//          x: currentScenePosition.x + adjustedTranslation.x,
+//          y: currentScenePosition.y + adjustedTranslation.y - yOffset,
+//          z: currentScenePosition.z - adjustedTranslation.z)
+//
+//        strongSelf.position = position
+//        strongSelf.scale = SCNVector3(x: scale, y: scale, z: scale)
+//
+//      } else {
+//
+//        let yOffset: Float = strongSelf.activePlacemarkNode?.boundingBox.max.y ?? 50 / 4
+//        adjustedDistance = distance
+////        let position = SCNVector3(
+////          x: currentScenePosition.x + Float(locationTranslation.longitudeTranslation),
+////          y: currentScenePosition.y + Float(locationTranslation.altitudeTranslation) - yOffset,
+////          z: currentScenePosition.z - Float(locationTranslation.latitudeTranslation))
+//
+//        let position = SCNVector3(
+//          x: currentScenePosition.x + Float(locationTranslation.longitudeTranslation),
+//          y: 0 - yOffset,
+//          z: currentScenePosition.z - Float(locationTranslation.latitudeTranslation))
+//
+//        strongSelf.position = position
+//        strongSelf.scale = SCNVector3(x: 1, y: 1, z: 1)
+//      }
+//
+//      //The scale of a node with a billboard constraint applied is ignored
+//      //The annotation subnode itself, as a subnode, has the scale applied to it
+//      let appliedScale = strongSelf.scale
+//      strongSelf.scale = SCNVector3(x: 1, y: 1, z: 1)
+//
+//      var scale: Float
+//      if strongSelf.scaleRelativeToDistance {
+//        scale = appliedScale.y
+//        strongSelf.activePlacemarkNode?.scale = appliedScale
+//      } else {
+//
+//        //Scale it to be an appropriate size so that it can be seen
+//        scale = Float(adjustedDistance) * 0.181
+//
+//        if distance > 3000 {
+//          scale = scale * 0.75
+//        }
+//        strongSelf.activePlacemarkNode?.scale = SCNVector3(x: scale, y: scale, z: scale)
+//      }
+//
+//      strongSelf.pivot = SCNMatrix4MakeTranslation(0, -1.1 * scale, 0)
+      
+      print("KAK pos x:\(strongSelf.position.x) y:\(strongSelf.position.y) z:\(strongSelf.position.z)")
+      print("KAK max x:\(strongSelf.boundingBox.max.x) y:\(strongSelf.boundingBox.max.y) z:\(strongSelf.boundingBox.max.z)")
     }
   }
   
   // MARK: - KAK TO REFACTOR
-  
-  ///Subnodes and adjustments should be applied to this subnode
-  ///Required to allow scaling at the same time as having a 2D 'billboard' appearance
-  var scalableNode: SCNNode? {
-    return self.baseWrapperNode
-  }
-  
-  ///Whether a node's position should be adjusted on an ongoing basis
-  ///based on its' given location.
-  ///This only occurs when a node's location is within 100m of the user.
-  ///Adjustment doesn't apply to nodes without a confirmed location.
-  ///When this is set to false, the result is a smoother appearance.
-  ///When this is set to true, this means a node may appear to jump around
-  ///as the user's location estimates update,
-  ///but the position is generally more accurate.
-  ///Defaults to true.
-  public var continuallyAdjustNodePositionWhenWithinRange = true
   
   ///Whether the node should be scaled relative to its distance from the camera
   ///Default value (false) scales it to visually appear at the same size no matter the distance
   ///Setting to true causes annotation nodes to scale like a regular node
   ///Scaling relative to distance may be useful with local navigation-based uses
   ///For landmarks in the distance, the default is correct
-  public var scaleRelativeToDistance = true
+  public var scaleRelativeToDistance = false
 }

@@ -40,7 +40,7 @@
 		B6C576451FB2FF0E00C4966F /* String+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C576441FB2FF0E00C4966F /* String+Util.swift */; };
 		B6C6EA291FA79B45001F97E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA281FA79B45001F97E7 /* AppDelegate.swift */; };
 		B6C6EA2E1FA79B45001F97E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6C6EA2C1FA79B45001F97E7 /* Main.storyboard */; };
-		B6C6EA311FA79B45001F97E7 /* TackARLocation.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA2F1FA79B45001F97E7 /* TackARLocation.xcdatamodeld */; };
+		B6C6EA311FA79B45001F97E7 /* KozMap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA2F1FA79B45001F97E7 /* KozMap.xcdatamodeld */; };
 		B6C6EA331FA79B45001F97E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6C6EA321FA79B45001F97E7 /* Assets.xcassets */; };
 		B6C6EA361FA79B45001F97E7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6C6EA341FA79B45001F97E7 /* LaunchScreen.storyboard */; };
 		B6C6EA421FA79F77001F97E7 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA411FA79F77001F97E7 /* LocationManager.swift */; };
@@ -318,7 +318,7 @@
 		B6C6EA401FA79F43001F97E7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B6C6EA2F1FA79B45001F97E7 /* TackARLocation.xcdatamodeld */,
+				B6C6EA2F1FA79B45001F97E7 /* KozMap.xcdatamodeld */,
 				B6C6EA631FA7BD33001F97E7 /* DataMangerProtocol.swift */,
 				B6C6EA651FA7BD5B001F97E7 /* MyDataManager.swift */,
 				B6C6EA671FA7BD91001F97E7 /* MyManagedObjectProtocol.swift */,
@@ -583,7 +583,7 @@
 				B69BDAD51FA7FB0B00A385DE /* Double+Util.swift in Sources */,
 				B620C3771FBB6043001B29E9 /* BatchUpdatable.swift in Sources */,
 				B6C6EA9B1FA7E8E4001F97E7 /* DragRightDismissInteractiveTransition.swift in Sources */,
-				B6C6EA311FA79B45001F97E7 /* TackARLocation.xcdatamodeld in Sources */,
+				B6C6EA311FA79B45001F97E7 /* KozMap.xcdatamodeld in Sources */,
 				B61470041FB1475B0068CA67 /* InlineColorChooserViewController.swift in Sources */,
 				B6C6EA5F1FA7B5D6001F97E7 /* SCNMaterial+Util.swift in Sources */,
 				B643915E1FC2B548005721E5 /* MainViewController+AR.swift in Sources */,
@@ -802,7 +802,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		B6C6EA2F1FA79B45001F97E7 /* TackARLocation.xcdatamodeld */ = {
+		B6C6EA2F1FA79B45001F97E7 /* KozMap.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				B64391551FC1F336005721E5 /* TackARLocation 3.xcdatamodel */,
@@ -810,7 +810,7 @@
 				B6C6EA301FA79B45001F97E7 /* TackARLocation.xcdatamodel */,
 			);
 			currentVersion = B64391551FC1F336005721E5 /* TackARLocation 3.xcdatamodel */;
-			path = TackARLocation.xcdatamodeld;
+			path = KozMap.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

@@ -30,6 +30,7 @@ extension Defaults : MyManagedObjectProtocol {
     
     // Need to fetch / create
     let shared = self.fetchAll().first ?? self.create()
+    self._shared = shared
     MyDataManager.shared.saveMainContext()
     return shared
   }
