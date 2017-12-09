@@ -71,7 +71,7 @@ class SavedLocationNode : VirtualObject {
     return (distanceText, unitText)
   }
   
-  func update(currentScenePosition: SCNVector3, currentLocation: CLLocation) {
+  func update(currentScenePosition: SCNVector3, currentLocation: CLLocation, animated: Bool = true, duration: TimeInterval = 0.5, completion: (() -> Void)? = nil) {
     
     // Distance to the saved location object
     let distance = self.savedLocation.location.distance(from: currentLocation)
@@ -133,6 +133,12 @@ class SavedLocationNode : VirtualObject {
         return
       }
       
+      // Animate the updates
+      SCNTransaction.begin()
+      SCNTransaction.completionBlock = completion
+      SCNTransaction.animationDuration = animated ? duration : 0
+      
+      // Translated location
       let locationTranslation = currentLocation.translation(toLocation: strongSelf.savedLocation.location)
       
       if distance < closeDistanceCutoff {
@@ -175,7 +181,7 @@ class SavedLocationNode : VirtualObject {
         print("KAK max x:\(strongSelf.boundingBox.max.x) y:\(strongSelf.boundingBox.max.y) z:\(strongSelf.boundingBox.max.z)")
         
       } else if distance >= mediumDistanceCutoff {
-
+        
         // Far distance
         let scaledDistance: Float = 30
         let desiredX = Float(locationTranslation.longitudeTranslation)
@@ -195,6 +201,8 @@ class SavedLocationNode : VirtualObject {
         strongSelf.scale = SCNVector3(x: sizeScale, y: sizeScale, z: sizeScale)
         strongSelf.pivot = SCNMatrix4MakeTranslation(0, -1.1 * sizeScale, 0)
       }
+      
+      SCNTransaction.commit()
     }
   }
 }

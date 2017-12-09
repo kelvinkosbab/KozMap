@@ -175,7 +175,7 @@ class ARViewController : UIViewController {
   
   // MARK: - KAK TO REFACTOR
   
-  func update(placemark: SavedLocationNode, initialSetup: Bool = false, animated: Bool = false, duration: TimeInterval = 0.1, updatePosition: Bool = true, completion: (() -> Void)? = nil) {
+  func update(placemark: SavedLocationNode, initialSetup: Bool = false, animated: Bool = false, duration: TimeInterval = 0.5, updatePosition: Bool = true, completion: (() -> Void)? = nil) {
     Log.log("Updating placemark \(placemark.savedLocation.name ?? "nil name") at location \(placemark.savedLocation.location.coordinate)")
     
     // Refresh saved location properties
@@ -183,7 +183,7 @@ class ARViewController : UIViewController {
     
     // Scene location updates
     if updatePosition, let currentScenePosition = self.currentScenePosition, let currentLocation = self.currentLocation {
-      placemark.update(currentScenePosition: currentScenePosition, currentLocation: currentLocation)
+      placemark.update(currentScenePosition: currentScenePosition, currentLocation: currentLocation, animated: animated, duration: duration,completion: completion)
       completion?()
     }
   }
