@@ -22,7 +22,7 @@ class ARViewController : UIViewController {
   private let sessionConfig = ARWorldTrackingConfiguration()
   public private(set) weak var sceneNode: SCNNode?
   public private(set) weak var basePlane: SCNNode?
-  private var placemarks = Set<PlacemarkNode>()
+  private var placemarks = Set<SavedLocationNode>()
   
   private var currentCameraTrackingState: ARCamera.TrackingState? = nil {
     didSet {
@@ -160,10 +160,9 @@ class ARViewController : UIViewController {
   
   // MARK: - Placemarks
   
-  private func add(placemark: PlacemarkNode) {
+  private func add(placemark: SavedLocationNode) {
     self.placemarks.insert(placemark)
-    placemark.loadModel { [weak self] in
-      self?.update(placemark: placemark, animated: true, updatePosition: true)
+    self.update(placemark: placemark, animated: true, updatePosition: true) { [weak self] in
       self?.sceneNode?.addChildNode(placemark)
     }
   }
@@ -176,117 +175,17 @@ class ARViewController : UIViewController {
   
   // MARK: - KAK TO REFACTOR
   
-  func update(placemark: PlacemarkNode, initialSetup: Bool = false, animated: Bool = false, duration: TimeInterval = 0.1, updatePosition: Bool = true) {
+  func update(placemark: SavedLocationNode, initialSetup: Bool = false, animated: Bool = false, duration: TimeInterval = 0.5, updatePosition: Bool = true, completion: (() -> Void)? = nil) {
     Log.log("Updating placemark \(placemark.savedLocation.name ?? "nil name") at location \(placemark.savedLocation.location.coordinate)")
     
-    // Saved location updates
-    let savedLocation = placemark.savedLocation
-    
-    // Update name
-    if placemark.primaryName != savedLocation.name {
-      placemark.primaryName = savedLocation.name
-    }
-    
-    // Distance and unit text
-    let distanceAndUnitText = self.getDistanceAndUnitText(savedLocation: savedLocation)
-    
-    // Update distance text
-    if placemark.distanceText != distanceAndUnitText.distanceText {
-      placemark.distanceText = distanceAndUnitText.distanceText
-    }
-    
-    // Update unit text
-    if placemark.unitText != distanceAndUnitText.unitText {
-      placemark.unitText = distanceAndUnitText.unitText
-    }
-    
-    // Update the color
-    if let color = savedLocation.color {
-      placemark.beamColor = color.color
-    }
+    // Refresh saved location properties
+    placemark.refreshContent()
     
     // Scene location updates
-    guard updatePosition, let currentPosition = self.currentScenePosition, let currentLocation = self.currentLocation else {
-      return
+    if updatePosition, let currentScenePosition = self.currentScenePosition, let currentLocation = self.currentLocation {
+      placemark.update(currentScenePosition: currentScenePosition, currentLocation: currentLocation, animated: animated, duration: duration,completion: completion)
+      completion?()
     }
-    
-    SCNTransaction.begin()
-    
-    if animated {
-      SCNTransaction.animationDuration = duration
-    } else {
-      SCNTransaction.animationDuration = 0
-    }
-    
-    // Position is set to a position coordinated via the current position
-    let adjustedDistance: CLLocationDistance
-    let locationTranslation = currentLocation.translation(toLocation: savedLocation.location)
-    let distance = savedLocation.location.distance(from: currentLocation)
-    
-    if distance > Double.shortDistanceCutoff {
-
-      //If the item is too far away, bring it closer and scale it down
-      let scale = 100 / Float(distance)
-      let yOffset: Float = -50
-      adjustedDistance = distance * Double(scale)
-
-      let adjustedTranslation = SCNVector3(
-        x: Float(locationTranslation.longitudeTranslation) * scale,
-        y: Float(locationTranslation.altitudeTranslation) * scale,
-        z: Float(locationTranslation.latitudeTranslation) * scale)
-
-      let position = SCNVector3(
-        x: currentPosition.x + adjustedTranslation.x,
-        y: currentPosition.y + adjustedTranslation.y + yOffset,
-        z: currentPosition.z - adjustedTranslation.z)
-
-      placemark.position = position
-      placemark.scale = SCNVector3(x: scale, y: scale, z: scale)
-
-    } else {
-
-      let yOffset: Float = -11
-      adjustedDistance = distance
-      let position = SCNVector3(
-        x: currentPosition.x + Float(locationTranslation.longitudeTranslation),
-        y: currentPosition.y + Float(locationTranslation.altitudeTranslation) + yOffset,
-        z: currentPosition.z - Float(locationTranslation.latitudeTranslation))
-
-      placemark.position = position
-      placemark.scale = SCNVector3(x: 1, y: 1, z: 1)
-    }
-
-    if let placemark = placemark as? BillboardPlacemarkNode {
-      //The scale of a node with a billboard constraint applied is ignored
-      //The annotation subnode itself, as a subnode, has the scale applied to it
-      let appliedScale = placemark.scale
-      placemark.scale = SCNVector3(x: 1, y: 1, z: 1)
-
-      var scale: Float
-      if placemark.scaleRelativeToDistance {
-        scale = appliedScale.y
-        placemark.scalableNode?.scale = appliedScale
-      } else {
-        
-        //Scale it to be an appropriate size so that it can be seen
-        scale = Float(adjustedDistance) * 0.181
-
-        if distance > 3000 {
-          scale = scale * 0.75
-        }
-        placemark.scalableNode?.scale = SCNVector3(x: scale, y: scale, z: scale)
-      }
-
-      placemark.pivot = SCNMatrix4MakeTranslation(0, -1.1 * scale, 0)
-    }
-    
-    SCNTransaction.commit()
-  }
-  
-  private func getDistanceAndUnitText(savedLocation: SavedLocation) -> (distanceText: String?, unitText: String?) {
-    let distanceText = savedLocation.lastDistance.getDistanceString(unitType: Defaults.shared.unitType, displayType: .numeric)
-    let unitText = savedLocation.lastDistance.getDistanceString(unitType: Defaults.shared.unitType, displayType: .units(true))
-    return (distanceText, unitText)
   }
 }
 
@@ -390,7 +289,7 @@ extension ARViewController : NSFetchedResultsControllerDelegate {
   private func add(savedLocation: SavedLocation) {
     
     // Add placemark
-    let placemark = BillboardPlacemarkNode(savedLocation: savedLocation)
+    let placemark = SavedLocationNode(savedLocation: savedLocation)
     self.add(placemark: placemark)
   }
   

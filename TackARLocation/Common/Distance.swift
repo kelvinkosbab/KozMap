@@ -18,8 +18,6 @@ enum DistanceDisplayType {
 
 extension Distance {
   
-  static let shortDistanceCutoff: Double = 1000
-  
   func getDistanceString(unitType: UnitType, displayType: DistanceDisplayType) -> String? {
     
     // Check if valid distance

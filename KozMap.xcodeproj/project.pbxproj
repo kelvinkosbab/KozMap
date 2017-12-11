@@ -24,6 +24,8 @@
 		B64391601FC2BCF1005721E5 /* ARState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B643915F1FC2BCF1005721E5 /* ARState.swift */; };
 		B64391631FC2BEBF005721E5 /* ConfiguringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64391621FC2BEBF005721E5 /* ConfiguringViewController.swift */; };
 		B66041EF1FA905350076EBEF /* VirtualObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66041EE1FA905350076EBEF /* VirtualObject.swift */; };
+		B66634321FCBB09D006D5922 /* PinPlacemarkNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66634311FCBB09D006D5922 /* PinPlacemarkNode.swift */; };
+		B666343F1FCBCDA8006D5922 /* SavedLocationNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B666343E1FCBCDA8006D5922 /* SavedLocationNode.swift */; };
 		B695236B1FA8D11E0014ABED /* CLLocation+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236A1FA8D11E0014ABED /* CLLocation+Util.swift */; };
 		B695236D1FA8D2E10014ABED /* SCNVector3+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236C1FA8D2E10014ABED /* SCNVector3+Util.swift */; };
 		B695236F1FA8D3430014ABED /* AxesNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236E1FA8D3430014ABED /* AxesNode.swift */; };
@@ -37,7 +39,7 @@
 		B6C576451FB2FF0E00C4966F /* String+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C576441FB2FF0E00C4966F /* String+Util.swift */; };
 		B6C6EA291FA79B45001F97E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA281FA79B45001F97E7 /* AppDelegate.swift */; };
 		B6C6EA2E1FA79B45001F97E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6C6EA2C1FA79B45001F97E7 /* Main.storyboard */; };
-		B6C6EA311FA79B45001F97E7 /* TackARLocation.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA2F1FA79B45001F97E7 /* TackARLocation.xcdatamodeld */; };
+		B6C6EA311FA79B45001F97E7 /* KozMap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA2F1FA79B45001F97E7 /* KozMap.xcdatamodeld */; };
 		B6C6EA331FA79B45001F97E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6C6EA321FA79B45001F97E7 /* Assets.xcassets */; };
 		B6C6EA361FA79B45001F97E7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6C6EA341FA79B45001F97E7 /* LaunchScreen.storyboard */; };
 		B6C6EA421FA79F77001F97E7 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA411FA79F77001F97E7 /* LocationManager.swift */; };
@@ -104,6 +106,8 @@
 		B643915F1FC2BCF1005721E5 /* ARState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARState.swift; sourceTree = "<group>"; };
 		B64391621FC2BEBF005721E5 /* ConfiguringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfiguringViewController.swift; sourceTree = "<group>"; };
 		B66041EE1FA905350076EBEF /* VirtualObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObject.swift; sourceTree = "<group>"; };
+		B66634311FCBB09D006D5922 /* PinPlacemarkNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinPlacemarkNode.swift; sourceTree = "<group>"; };
+		B666343E1FCBCDA8006D5922 /* SavedLocationNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedLocationNode.swift; sourceTree = "<group>"; };
 		B695236A1FA8D11E0014ABED /* CLLocation+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Util.swift"; sourceTree = "<group>"; };
 		B695236C1FA8D2E10014ABED /* SCNVector3+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Util.swift"; sourceTree = "<group>"; };
 		B695236E1FA8D3430014ABED /* AxesNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxesNode.swift; sourceTree = "<group>"; };
@@ -312,7 +316,7 @@
 		B6C6EA401FA79F43001F97E7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B6C6EA2F1FA79B45001F97E7 /* TackARLocation.xcdatamodeld */,
+				B6C6EA2F1FA79B45001F97E7 /* KozMap.xcdatamodeld */,
 				B6C6EA631FA7BD33001F97E7 /* DataMangerProtocol.swift */,
 				B6C6EA651FA7BD5B001F97E7 /* MyDataManager.swift */,
 				B6C6EA671FA7BD91001F97E7 /* MyManagedObjectProtocol.swift */,
@@ -389,6 +393,8 @@
 				B695236E1FA8D3430014ABED /* AxesNode.swift */,
 				B66041EE1FA905350076EBEF /* VirtualObject.swift */,
 				B6CE3D051FAA1E9400F9DF76 /* PlacemarkNode.swift */,
+				B66634311FCBB09D006D5922 /* PinPlacemarkNode.swift */,
+				B666343E1FCBCDA8006D5922 /* SavedLocationNode.swift */,
 			);
 			path = SceneKit;
 			sourceTree = "<group>";
@@ -574,7 +580,7 @@
 				B69BDAD51FA7FB0B00A385DE /* Double+Util.swift in Sources */,
 				B620C3771FBB6043001B29E9 /* BatchUpdatable.swift in Sources */,
 				B6C6EA9B1FA7E8E4001F97E7 /* DragRightDismissInteractiveTransition.swift in Sources */,
-				B6C6EA311FA79B45001F97E7 /* TackARLocation.xcdatamodeld in Sources */,
+				B6C6EA311FA79B45001F97E7 /* KozMap.xcdatamodeld in Sources */,
 				B61470041FB1475B0068CA67 /* InlineColorChooserViewController.swift in Sources */,
 				B6C6EA5F1FA7B5D6001F97E7 /* SCNMaterial+Util.swift in Sources */,
 				B643915E1FC2B548005721E5 /* MainViewController+AR.swift in Sources */,
@@ -586,6 +592,7 @@
 				B6C6EA481FA7A15C001F97E7 /* ViewControllerFromStoryboardProtocol.swift in Sources */,
 				B643915A1FC29989005721E5 /* Distance.swift in Sources */,
 				B614700B1FB180E30068CA67 /* Color+MyManagedObjectProtocol.swift in Sources */,
+				B666343F1FCBCDA8006D5922 /* SavedLocationNode.swift in Sources */,
 				B6C6EA8E1FA7E6F5001F97E7 /* UIView+Util.swift in Sources */,
 				B6C6EA751FA7D717001F97E7 /* Defaults+MyManagedObjectProtocol.swift in Sources */,
 				B64391631FC2BEBF005721E5 /* ConfiguringViewController.swift in Sources */,
@@ -603,6 +610,7 @@
 				B6C6EA641FA7BD33001F97E7 /* DataMangerProtocol.swift in Sources */,
 				B6C6EA591FA7AFEF001F97E7 /* ARSCNView+Util.swift in Sources */,
 				B6C6EA521FA7ACEC001F97E7 /* ARViewController.swift in Sources */,
+				B66634321FCBB09D006D5922 /* PinPlacemarkNode.swift in Sources */,
 				B6C6EA7B1FA7E5E1001F97E7 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -790,7 +798,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		B6C6EA2F1FA79B45001F97E7 /* TackARLocation.xcdatamodeld */ = {
+		B6C6EA2F1FA79B45001F97E7 /* KozMap.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				B64391551FC1F336005721E5 /* TackARLocation 3.xcdatamodel */,
@@ -798,7 +806,7 @@
 				B6C6EA301FA79B45001F97E7 /* TackARLocation.xcdatamodel */,
 			);
 			currentVersion = B64391551FC1F336005721E5 /* TackARLocation 3.xcdatamodel */;
-			path = TackARLocation.xcdatamodeld;
+			path = KozMap.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

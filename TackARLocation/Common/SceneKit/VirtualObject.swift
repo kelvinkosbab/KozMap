@@ -12,22 +12,18 @@ class VirtualObject : SCNNode {
   
   // MARK: - Properties
   
-  let modelName: String
-  let fileExtension: String
+  var modelName: String {
+    return "UNDEFINED_VIRTUAL_OBJECT"
+  }
+  
+  var fileExtension: String {
+    return "scn"
+  }
+  
   var modelLoaded: Bool = false
-  internal weak var baseWrapperNode: SCNNode? = nil
+  weak var baseWrapperNode: SCNNode? = nil
   
   // MARK: - Init
-  
-  init(modelName: String, fileExtension: String) {
-    self.modelName = modelName
-    self.fileExtension = fileExtension
-    super.init()
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
   
   func loadModel(completion: @escaping () -> Void) {
     DispatchQueue.global().async { [weak self] in
@@ -36,11 +32,12 @@ class VirtualObject : SCNNode {
         return
       }
       
-      guard let virtualObjectScene = SCNScene(named: "\(strongSelf.modelName).\(strongSelf.fileExtension)", inDirectory: "Models.scnassets/") else {
-        DispatchQueue.main.async {
-          completion()
-        }
-        return
+      let virtualObjectScene: SCNScene
+      if let scene = SCNScene(named: "\(strongSelf.modelName).\(strongSelf.fileExtension)", inDirectory: "Models.scnassets/") {
+        virtualObjectScene = scene
+      } else {
+        Log.log("Virtual object '\(strongSelf.modelName).\(strongSelf.fileExtension)' is undefined. Using empty scene.")
+        virtualObjectScene = SCNScene()
       }
       
       let wrapperNode = SCNNode()
