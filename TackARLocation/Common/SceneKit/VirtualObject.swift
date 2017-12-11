@@ -21,7 +21,7 @@ class VirtualObject : SCNNode {
   }
   
   var modelLoaded: Bool = false
-  internal weak var baseWrapperNode: SCNNode? = nil
+  weak var baseWrapperNode: SCNNode? = nil
   
   // MARK: - Init
   
