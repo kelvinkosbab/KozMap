@@ -25,7 +25,6 @@
 		B64391631FC2BEBF005721E5 /* ConfiguringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64391621FC2BEBF005721E5 /* ConfiguringViewController.swift */; };
 		B66041EF1FA905350076EBEF /* VirtualObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66041EE1FA905350076EBEF /* VirtualObject.swift */; };
 		B66634321FCBB09D006D5922 /* PinPlacemarkNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66634311FCBB09D006D5922 /* PinPlacemarkNode.swift */; };
-		B66634341FCBB0A6006D5922 /* BeamPlacemarkNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66634331FCBB0A6006D5922 /* BeamPlacemarkNode.swift */; };
 		B666343F1FCBCDA8006D5922 /* SavedLocationNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B666343E1FCBCDA8006D5922 /* SavedLocationNode.swift */; };
 		B695236B1FA8D11E0014ABED /* CLLocation+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236A1FA8D11E0014ABED /* CLLocation+Util.swift */; };
 		B695236D1FA8D2E10014ABED /* SCNVector3+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236C1FA8D2E10014ABED /* SCNVector3+Util.swift */; };
@@ -108,7 +107,6 @@
 		B64391621FC2BEBF005721E5 /* ConfiguringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfiguringViewController.swift; sourceTree = "<group>"; };
 		B66041EE1FA905350076EBEF /* VirtualObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObject.swift; sourceTree = "<group>"; };
 		B66634311FCBB09D006D5922 /* PinPlacemarkNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinPlacemarkNode.swift; sourceTree = "<group>"; };
-		B66634331FCBB0A6006D5922 /* BeamPlacemarkNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeamPlacemarkNode.swift; sourceTree = "<group>"; };
 		B666343E1FCBCDA8006D5922 /* SavedLocationNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedLocationNode.swift; sourceTree = "<group>"; };
 		B695236A1FA8D11E0014ABED /* CLLocation+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Util.swift"; sourceTree = "<group>"; };
 		B695236C1FA8D2E10014ABED /* SCNVector3+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Util.swift"; sourceTree = "<group>"; };
@@ -396,7 +394,6 @@
 				B66041EE1FA905350076EBEF /* VirtualObject.swift */,
 				B6CE3D051FAA1E9400F9DF76 /* PlacemarkNode.swift */,
 				B66634311FCBB09D006D5922 /* PinPlacemarkNode.swift */,
-				B66634331FCBB0A6006D5922 /* BeamPlacemarkNode.swift */,
 				B666343E1FCBCDA8006D5922 /* SavedLocationNode.swift */,
 			);
 			path = SceneKit;
@@ -592,7 +589,6 @@
 				B6C6EA4E1FA7A9A6001F97E7 /* BaseNavigationController.swift in Sources */,
 				B69BDAD31FA7F84400A385DE /* UIApplication+Util.swift in Sources */,
 				B6C6EA841FA7E690001F97E7 /* InteractiveTransition.swift in Sources */,
-				B66634341FCBB0A6006D5922 /* BeamPlacemarkNode.swift in Sources */,
 				B6C6EA481FA7A15C001F97E7 /* ViewControllerFromStoryboardProtocol.swift in Sources */,
 				B643915A1FC29989005721E5 /* Distance.swift in Sources */,
 				B614700B1FB180E30068CA67 /* Color+MyManagedObjectProtocol.swift in Sources */,

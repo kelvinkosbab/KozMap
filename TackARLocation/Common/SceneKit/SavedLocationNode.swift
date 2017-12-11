@@ -15,32 +15,30 @@ class SavedLocationNode : VirtualObject {
   
   let savedLocation: SavedLocation
   
-  private var defaultPlacemarkNode: PlacemarkNode? {
+  private weak var defaultPlacemarkNode: PlacemarkNode? {
     didSet {
       if let defaultPlacemarkNode = self.defaultPlacemarkNode {
         self.baseWrapperNode = defaultPlacemarkNode
       }
-    }
-  }
-  
-  private var pinPlacemarkNode: PlacemarkNode? {
-    didSet {
-      if let pinPlacemarkNode = self.pinPlacemarkNode {
-        self.baseWrapperNode = pinPlacemarkNode
+      if self.pinPlacemarkNode == nil && self.defaultPlacemarkNode == nil {
+        self.baseWrapperNode = nil
       }
     }
   }
   
-  private var beamPlacemarkNode: PlacemarkNode? {
+  private weak var pinPlacemarkNode: PlacemarkNode? {
     didSet {
-      if let beamPlacemarkNode = self.beamPlacemarkNode {
-        self.baseWrapperNode = beamPlacemarkNode
+      if let pinPlacemarkNode = self.pinPlacemarkNode {
+        self.baseWrapperNode = pinPlacemarkNode
+      }
+      if self.pinPlacemarkNode == nil && self.defaultPlacemarkNode == nil {
+        self.baseWrapperNode = nil
       }
     }
   }
   
   private var activePlacemarkNode: PlacemarkNode? {
-    return self.defaultPlacemarkNode ?? self.pinPlacemarkNode ?? self.beamPlacemarkNode
+    return self.defaultPlacemarkNode ?? self.pinPlacemarkNode
   }
   
   private var scalableNode: SCNNode? {
@@ -109,7 +107,6 @@ class SavedLocationNode : VirtualObject {
       let defaultPlacemarkNode = PlacemarkNode()
       defaultPlacemarkNode.loadModel { [weak self] in
         self?.pinPlacemarkNode = nil
-        self?.beamPlacemarkNode = nil
         self?.enumerateChildNodes { (node, _) in
           node.removeFromParentNode()
         }
@@ -124,7 +121,6 @@ class SavedLocationNode : VirtualObject {
       let pinPlacemarkNode = PinPlacemarkNode()
       pinPlacemarkNode.loadModel { [weak self] in
         self?.defaultPlacemarkNode = nil
-        self?.beamPlacemarkNode = nil
         self?.enumerateChildNodes { (node, _) in
           node.removeFromParentNode()
         }
@@ -134,20 +130,15 @@ class SavedLocationNode : VirtualObject {
         dispatchGroup.leave()
       }
       
-    } else if distance >= mediumDistanceCutoff && self.beamPlacemarkNode == nil {
+    } else if distance >= mediumDistanceCutoff {
       dispatchGroup.enter()
-      let beamPlacemarkNode = BeamPlacemarkNode()
-      beamPlacemarkNode.loadModel { [weak self] in
-        self?.defaultPlacemarkNode = nil
-        self?.pinPlacemarkNode = nil
-        self?.enumerateChildNodes { (node, _) in
-          node.removeFromParentNode()
-        }
-        self?.beamPlacemarkNode = beamPlacemarkNode
-        self?.addChildNode(beamPlacemarkNode)
-        self?.refreshContent()
-        dispatchGroup.leave()
+      self.defaultPlacemarkNode = nil
+      self.pinPlacemarkNode = nil
+      self.enumerateChildNodes { (node, _) in
+        node.removeFromParentNode()
       }
+      self.refreshContent()
+      dispatchGroup.leave()
     }
     
     // Wait until the active placemark node has been set
