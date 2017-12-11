@@ -126,6 +126,7 @@ class SavedLocationNode : VirtualObject {
         }
         self?.pinPlacemarkNode = pinPlacemarkNode
         self?.addChildNode(pinPlacemarkNode)
+        pinPlacemarkNode.beamTransparency = 0.25
         self?.refreshContent()
         dispatchGroup.leave()
       }
@@ -172,56 +173,22 @@ class SavedLocationNode : VirtualObject {
         let moveAction = SCNAction.move(to: position, duration: animated ? duration : 0)
         strongSelf.runAction(moveAction, completionHandler: completion)
         
-      } else if distance >= closeDistanceCutoff && distance < mediumDistanceCutoff {
+      } else {//if distance >= closeDistanceCutoff && distance < mediumDistanceCutoff {
         
         // Medium distance
-        let scaledDistance: Float = 30
-        let desiredX = Float(locationTranslation.longitudeTranslation)
-        let desiredY = Float(locationTranslation.altitudeTranslation)
-        let desiredZ = Float(locationTranslation.latitudeTranslation)
-        let scaleVector = SCNVector3(x: abs(scaledDistance / desiredX), y: abs(scaledDistance / desiredY), z: abs(scaledDistance / desiredZ))
-        let scale = max(scaleVector.x, max(scaleVector.y, scaleVector.z))
+        let translationScale = 100 / distance
         let position = SCNVector3(
-          x: currentScenePosition.x + desiredX * scale,
-          y: currentScenePosition.y + desiredY * scale,
-          z: currentScenePosition.z - desiredZ * scale)
+          x: currentScenePosition.x + Float(locationTranslation.longitudeTranslation) * Float(translationScale),
+          y: currentScenePosition.y + Float(locationTranslation.altitudeTranslation) * Float(translationScale),
+          z: currentScenePosition.z - Float(locationTranslation.latitudeTranslation) * Float(translationScale))
         let moveAction = SCNAction.move(to: position, duration: animated ? duration : 0)
         strongSelf.runAction(moveAction, completionHandler: completion)
-        
+
         // Scale it to be an appropriate size so that it can be seen
-        let desiredNodeHeight: Float = 100 + scale * Float(distance)
-        let sizeScale = desiredNodeHeight / strongSelf.boundingBox.max.y
-        let scaleAction = SCNAction.scale(to: CGFloat(sizeScale), duration: animated ? duration : 0)
-        strongSelf.scalableNode?.runAction(scaleAction)
-        strongSelf.pivot = SCNMatrix4MakeTranslation(0, -1.1 * sizeScale, 0)
-        
-        print("KAK-Med pos x:\(strongSelf.position.x) y:\(strongSelf.position.y) z:\(strongSelf.position.z)")
-        print("KAK-Med max x:\(strongSelf.boundingBox.max.x) y:\(strongSelf.boundingBox.max.y) z:\(strongSelf.boundingBox.max.z)")
-        
-      } else if distance >= mediumDistanceCutoff {
-        
-        // Far distance
-        let scaledDistance: Float = 30
-        let desiredX = Float(locationTranslation.longitudeTranslation)
-        let desiredY = Float(locationTranslation.altitudeTranslation)
-        let desiredZ = Float(locationTranslation.latitudeTranslation)
-        let scaleVector = SCNVector3(x: abs(scaledDistance / desiredX), y: abs(scaledDistance / desiredY), z: abs(scaledDistance / desiredZ))
-        let scale = max(scaleVector.x, max(scaleVector.y, scaleVector.z))
-        let position = SCNVector3(
-          x: currentScenePosition.x + desiredX * scale,
-          y: currentScenePosition.y + desiredY * scale,
-          z: currentScenePosition.z - desiredZ * scale)
-        let moveAction = SCNAction.move(to: position, duration: animated ? duration : 0)
-        strongSelf.runAction(moveAction, completionHandler: completion)
-        
-        // Scale it to be an appropriate size so that it can be seen
-        let desiredNodeHeight: Float = 100
-        let sizeScale = desiredNodeHeight / strongSelf.boundingBox.max.y
-        let scaleAction = SCNAction.scale(to: CGFloat(sizeScale), duration: animated ? duration : 0)
-        strongSelf.scalableNode?.runAction(scaleAction)
-        
-        print("KAK-Far pos x:\(strongSelf.position.x) y:\(strongSelf.position.y) z:\(strongSelf.position.z)")
-        print("KAK-Far max x:\(strongSelf.boundingBox.max.x) y:\(strongSelf.boundingBox.max.y) z:\(strongSelf.boundingBox.max.z)")
+        let adjustedDistance = distance * translationScale
+        let scale = Float(adjustedDistance) * 0.181
+        strongSelf.scalableNode?.scale = SCNVector3(x: scale, y: scale, z: scale)
+        strongSelf.pivot = SCNMatrix4MakeTranslation(0, -1.1 * scale, 0)
       }
     }
   }
