@@ -260,10 +260,13 @@ class ARViewController : UIViewController {
           
           // Medium distance
           let translationScale = 100 / distance
+          let xPos = currentScenePosition.x + Float(locationTranslation.longitudeTranslation) * Float(translationScale)
+          _ = currentScenePosition.y + Float(locationTranslation.altitudeTranslation) * Float(translationScale)
+          let zPos = currentScenePosition.z - Float(locationTranslation.latitudeTranslation) * Float(translationScale)
           let position = SCNVector3(
-            x: currentScenePosition.x + Float(locationTranslation.longitudeTranslation) * Float(translationScale),
-            y: currentScenePosition.y + Float(locationTranslation.altitudeTranslation) * Float(translationScale),
-            z: currentScenePosition.z - Float(locationTranslation.latitudeTranslation) * Float(translationScale))
+            x: xPos,
+            y: -placemarkNode.boundingBox.max.y,
+            z: zPos)
           let moveAction = SCNAction.move(to: position, duration: animated ? duration : 0)
           placemarkNode.runAction(moveAction)
           

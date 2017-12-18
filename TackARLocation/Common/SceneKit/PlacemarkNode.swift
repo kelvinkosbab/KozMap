@@ -76,49 +76,71 @@ class PlacemarkNode : VirtualObject {
   
   // MARK: - Child Nodes
   
-  private var nameTextNode: SCNNode? {
+  final internal var nameTextNode: SCNNode? {
     return self.childNode(withName: "nameText", recursively: true)
   }
   
-  private var distanceTextNode: SCNNode? {
+  final internal var distanceTextNode: SCNNode? {
     return self.childNode(withName: "distanceText", recursively: true)
   }
   
-  private var unitTextNode: SCNNode? {
+  final internal var unitTextNode: SCNNode? {
     return self.childNode(withName: "unitText", recursively: true)
   }
   
-  private var beamNode: SCNNode? {
+  final internal var beamNode: SCNNode? {
     return self.childNode(withName: "beam", recursively: true)
   }
   
-  private var bottomPyramidNode: SCNNode? {
+  final internal var bottomPyramidNode: SCNNode? {
     return self.childNode(withName: "pyramid1", recursively: true)
   }
   
-  private var middlePyramidNode: SCNNode? {
+  final internal var middlePyramidNode: SCNNode? {
     return self.childNode(withName: "pyramid2", recursively: true)
   }
   
-  private var topPyramidNode: SCNNode? {
+  final internal var topPyramidNode: SCNNode? {
     return self.childNode(withName: "pyramid3", recursively: true)
   }
   
-  private func updatePrimaryName() {
+  internal func updatePrimaryName() {
     if let textGeometry = self.nameTextNode?.geometry as? SCNText {
-      textGeometry.string = self.primaryName
+      textGeometry.alignmentMode = kCAAlignmentCenter
+      textGeometry.truncationMode = kCATruncationEnd
+      
+      if textGeometry.string as? String != self.primaryName {
+        textGeometry.string = self.primaryName
+      }
     }
   }
   
-  private func updateDistanceText() {
-    if let textGeometry = self.distanceTextNode?.geometry as? SCNText {
+  internal func updateDistanceText() {
+    if let textGeometry = self.distanceTextNode?.geometry as? SCNText, textGeometry.string as? String != self.distanceText {
+      textGeometry.alignmentMode = kCAAlignmentCenter
       textGeometry.string = self.distanceText
     }
+    
+    // Center the node on the x-axis
+    if let distanceTextNode = self.distanceTextNode {
+      let dx = -(distanceTextNode.boundingBox.max.x - distanceTextNode.boundingBox.min.x) * distanceTextNode.scale.x / 2
+      distanceTextNode.position = SCNVector3(x: dx, y: distanceTextNode.position.y, z: distanceTextNode.position.z)
+    }
   }
   
-  private func updateUnitText() {
+  internal func updateUnitText() {
     if let textGeometry = self.unitTextNode?.geometry as? SCNText {
-      textGeometry.string = self.unitText
+      textGeometry.alignmentMode = kCAAlignmentCenter
+      
+      if textGeometry.string as? String != self.unitText {
+        textGeometry.string = self.unitText
+      }
+    }
+    
+    // Center the node on the x-axis
+    if let unitTextNode = self.unitTextNode {
+      let dx = -(unitTextNode.boundingBox.max.x - unitTextNode.boundingBox.min.x) * unitTextNode.scale.x / 2
+      unitTextNode.position = SCNVector3(x: dx, y: unitTextNode.position.y, z: unitTextNode.position.z)
     }
   }
   
