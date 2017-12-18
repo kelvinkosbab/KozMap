@@ -24,6 +24,19 @@ class ARViewController : UIViewController {
   public private(set) weak var basePlane: SCNNode?
   private var placemarks = Set<SavedLocationNode>()
   
+  var savedLocations: [SavedLocation] {
+    return self.savedLocationsFetchedResultsController?.fetchedObjects ?? []
+  }
+  
+  private lazy var savedLocationsFetchedResultsController: NSFetchedResultsController<SavedLocation>? = {
+    let controller = SavedLocation.newFetchedResultsController()
+    controller.delegate = self
+    try? controller.performFetch()
+    return controller
+  }()
+  
+  // MARK: - AR Scene Properties
+  
   private var currentCameraTrackingState: ARCamera.TrackingState? = nil {
     didSet {
       self.trackingStateDelegate?.arStateDidUpdate(self.state)
@@ -48,17 +61,6 @@ class ARViewController : UIViewController {
       return .notAvailable
     }
   }
-  
-  var savedLocations: [SavedLocation] {
-    return self.savedLocationsFetchedResultsController?.fetchedObjects ?? []
-  }
-  
-  private lazy var savedLocationsFetchedResultsController: NSFetchedResultsController<SavedLocation>? = {
-    let controller = SavedLocation.newFetchedResultsController()
-    controller.delegate = self
-    try? controller.performFetch()
-    return controller
-  }()
   
   var sceneViewCenter: CGPoint {
     return self.sceneView.bounds.mid
@@ -162,9 +164,7 @@ class ARViewController : UIViewController {
   
   private func add(placemark: SavedLocationNode) {
     self.placemarks.insert(placemark)
-    self.update(placemark: placemark, animated: true, updatePosition: true) { [weak self] in
-      self?.sceneNode?.addChildNode(placemark)
-    }
+    self.update(placemark: placemark, animated: true, updatePosition: true)
   }
   
   internal func updatePlacemarks(updatePosition: Bool = true) {
@@ -173,9 +173,9 @@ class ARViewController : UIViewController {
     }
   }
   
-  // MARK: - KAK TO REFACTOR
+  // MARK: - Updating placemarks
   
-  func update(placemark: SavedLocationNode, initialSetup: Bool = false, animated: Bool = false, duration: TimeInterval = 0.5, updatePosition: Bool = true, completion: (() -> Void)? = nil) {
+  internal func update(placemark: SavedLocationNode, animated: Bool = false, updatePosition: Bool = true) {
     Log.log("Updating placemark \(placemark.savedLocation.name ?? "nil name") at location \(placemark.savedLocation.location.coordinate)")
     
     // Refresh saved location properties
@@ -183,8 +183,97 @@ class ARViewController : UIViewController {
     
     // Scene location updates
     if updatePosition, let currentScenePosition = self.currentScenePosition, let currentLocation = self.currentLocation {
-      placemark.update(currentScenePosition: currentScenePosition, currentLocation: currentLocation, animated: animated, duration: duration,completion: completion)
-      completion?()
+      
+      // Distance to the saved location object
+      let distance = placemark.savedLocation.location.distance(from: currentLocation)
+      
+      // Update the active placemark node
+      let dispatchGroup = DispatchGroup()
+      let closeDistanceCutoff: Double = 400 // 400 meters = 0.25 miles
+      let mediumDistanceCutoff: Double = 8000 // 8000 meters = 5 miles
+      let duration: TimeInterval = 0.5
+      
+      if distance < closeDistanceCutoff && !placemark.isDefaultPlacemarkNode {
+        dispatchGroup.enter()
+        let defaultPlacemarkNode = PlacemarkNode()
+        defaultPlacemarkNode.loadModel { [weak self] in
+          placemark.placemarkNode?.removeFromParentNode()
+          placemark.placemarkNode = defaultPlacemarkNode
+          
+          placemark.refreshContent()
+          self?.sceneNode?.addChildNode(defaultPlacemarkNode)
+          dispatchGroup.leave()
+        }
+        
+      } else if distance >= closeDistanceCutoff && distance < mediumDistanceCutoff && !placemark.isPinPlacemarkNode {
+        dispatchGroup.enter()
+        let pinPlacemarkNode = PinPlacemarkNode()
+        pinPlacemarkNode.loadModel { [weak self] in
+          placemark.placemarkNode?.removeFromParentNode()
+          placemark.placemarkNode = pinPlacemarkNode
+          pinPlacemarkNode.beamTransparency = 0.25
+          
+          placemark.refreshContent()
+          self?.sceneNode?.addChildNode(pinPlacemarkNode)
+          dispatchGroup.leave()
+        }
+        
+      } else if distance >= mediumDistanceCutoff {
+        dispatchGroup.enter()
+        placemark.placemarkNode?.removeFromParentNode()
+        placemark.placemarkNode = nil
+        dispatchGroup.leave()
+      }
+      
+      // Wait until the active placemark node has been set
+      dispatchGroup.notify(queue: .main) {
+        
+        guard let placemarkNode = placemark.placemarkNode else {
+          return
+        }
+        
+        // Translated location
+        let locationTranslation = currentLocation.translation(toLocation: placemark.savedLocation.location)
+        
+        if distance < closeDistanceCutoff {
+          
+          // Close distance
+          
+          // Scale it to be an appropriate size so that it can be seen
+          let desiredNodeHeight: Float = 50 + Float(distance)
+          let scale = desiredNodeHeight / placemarkNode.boundingBox.max.y
+          placemarkNode.scalableNode?.scale = SCNVector3(x: scale, y: scale, z: scale)
+          placemarkNode.pivot = SCNMatrix4MakeTranslation(0, -1.1 * scale, 0)
+          
+          // Update the position
+          let xPos = currentScenePosition.x + Float(locationTranslation.longitudeTranslation)
+          let yPos = currentScenePosition.y + Float(locationTranslation.altitudeTranslation)
+          let zPos = currentScenePosition.z - Float(locationTranslation.latitudeTranslation)
+          let position = SCNVector3(
+            x: xPos,
+            y: abs(yPos) > 200 ? -(placemarkNode.scalableNode?.boundingBox.max.y ?? 0) / 2 : yPos,
+            z: zPos)
+          let moveAction = SCNAction.move(to: position, duration: animated ? duration : 0)
+          placemarkNode.runAction(moveAction)
+          
+        } else {//if distance >= closeDistanceCutoff && distance < mediumDistanceCutoff {
+          
+          // Medium distance
+          let translationScale = 100 / distance
+          let position = SCNVector3(
+            x: currentScenePosition.x + Float(locationTranslation.longitudeTranslation) * Float(translationScale),
+            y: currentScenePosition.y + Float(locationTranslation.altitudeTranslation) * Float(translationScale),
+            z: currentScenePosition.z - Float(locationTranslation.latitudeTranslation) * Float(translationScale))
+          let moveAction = SCNAction.move(to: position, duration: animated ? duration : 0)
+          placemarkNode.runAction(moveAction)
+          
+          // Scale it to be an appropriate size so that it can be seen
+          let adjustedDistance = distance * translationScale
+          let scale = Float(adjustedDistance) * 0.181
+          placemarkNode.scalableNode?.scale = SCNVector3(x: scale, y: scale, z: scale)
+          placemarkNode.pivot = SCNMatrix4MakeTranslation(0, -1.1 * scale, 0)
+        }
+      }
     }
   }
 }
@@ -307,7 +396,7 @@ extension ARViewController : NSFetchedResultsControllerDelegate {
     if let placemark = self.placemarks.first(where: { $0.savedLocation == savedLocation }) {
       Log.log("Removing \(savedLocation.name ?? "nil name") at location \(savedLocation.location.coordinate)")
       self.placemarks.remove(placemark)
-      placemark.removeFromParentNode()
+      placemark.placemarkNode?.removeFromParentNode()
     }
   }
 }

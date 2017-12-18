@@ -9,6 +9,89 @@
 import SceneKit
 import CoreLocation
 
+class SavedLocationNode : Hashable {
+  
+  // MARK: - Properties
+  
+  let savedLocation: SavedLocation
+  weak var placemarkNode: PlacemarkNode? = nil
+  
+  init(savedLocation: SavedLocation, placemarkNode: PlacemarkNode? = nil) {
+    self.savedLocation = savedLocation
+    self.placemarkNode = placemarkNode
+  }
+  
+  // MARK: - Node Types
+  
+  var isDefaultPlacemarkNode: Bool {
+    if let _ = self.placemarkNode as? PinPlacemarkNode {
+      return false
+    } else if let _ = self.placemarkNode {
+      return true
+    }
+    return false
+  }
+  
+  var isPinPlacemarkNode: Bool {
+    if let _ = self.placemarkNode as? PinPlacemarkNode {
+      return true
+    }
+    return false
+  }
+  
+  // MARK: - Node Content
+  
+  func refreshContent() {
+    
+    guard let placemarkNode = self.placemarkNode else {
+      return
+    }
+    
+    // Update name
+    if placemarkNode.primaryName != self.savedLocation.name {
+      placemarkNode.primaryName = self.savedLocation.name
+    }
+    
+    // Distance and unit text
+    let distanceAndUnitText = self.getDistanceAndUnitText(savedLocation: self.savedLocation)
+    
+    // Update distance text
+    if placemarkNode.distanceText != distanceAndUnitText.distanceText {
+      placemarkNode.distanceText = distanceAndUnitText.distanceText
+    }
+    
+    // Update unit text
+    if placemarkNode.unitText != distanceAndUnitText.unitText {
+      placemarkNode.unitText = distanceAndUnitText.unitText
+    }
+    
+    // Update the color
+    if let color = self.savedLocation.color {
+      placemarkNode.beamColor = color.color
+    }
+  }
+  
+  private func getDistanceAndUnitText(savedLocation: SavedLocation, unitType: UnitType = Defaults.shared.unitType) -> (distanceText: String?, unitText: String?) {
+    let distanceText = savedLocation.lastDistance.getDistanceString(unitType: unitType, displayType: .numeric)
+    let unitText = savedLocation.lastDistance.getDistanceString(unitType: unitType, displayType: .units(true))
+    return (distanceText, unitText)
+  }
+  
+  // MARK: - Hashable
+  
+  var hashValue: Int {
+    return self.savedLocation.hashValue
+  }
+  
+  // MARK: - Equatable
+  
+  static func ==(lhs: SavedLocationNode, rhs: SavedLocationNode) -> Bool {
+    return lhs.savedLocation == rhs.savedLocation
+  }
+}
+
+/*
+
 class SavedLocationNode : VirtualObject {
   
   // MARK: - Properties
@@ -193,3 +276,5 @@ class SavedLocationNode : VirtualObject {
     }
   }
 }
+
+ */

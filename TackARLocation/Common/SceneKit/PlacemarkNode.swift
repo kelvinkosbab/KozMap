@@ -17,6 +17,10 @@ class PlacemarkNode : VirtualObject {
   
   // MARK: - Properties
   
+  var scalableNode: SCNNode? {
+    return self.baseWrapperNode
+  }
+  
   var primaryName: String? = nil {
     didSet {
       self.updatePrimaryName()
