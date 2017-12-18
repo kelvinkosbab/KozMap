@@ -239,11 +239,10 @@ class ARViewController : UIViewController {
           
           // Close distance
           
-          // Scale it to be an appropriate size so that it can be seen
+          // Scale the node according to distance where at a zero distance the node will have a height of 50m
           let desiredNodeHeight: Float = 50 + Float(distance)
           let scale = desiredNodeHeight / placemarkNode.boundingBox.max.y
           placemarkNode.scalableNode?.scale = SCNVector3(x: scale, y: scale, z: scale)
-          placemarkNode.pivot = SCNMatrix4MakeTranslation(0, -1.1 * scale, 0)
           
           // Update the position
           let xPos = currentScenePosition.x + Float(locationTranslation.longitudeTranslation)
@@ -265,16 +264,14 @@ class ARViewController : UIViewController {
           let zPos = currentScenePosition.z - Float(locationTranslation.latitudeTranslation) * Float(translationScale)
           let position = SCNVector3(
             x: xPos,
-            y: -placemarkNode.boundingBox.max.y,
+            y: -placemarkNode.boundingBox.max.y / 4,
             z: zPos)
           let moveAction = SCNAction.move(to: position, duration: animated ? duration : 0)
           placemarkNode.runAction(moveAction)
           
-          // Scale it to be an appropriate size so that it can be seen
-          let adjustedDistance = distance * translationScale
-          let scale = Float(adjustedDistance) * 0.181
+          // Scale the node
+          let scale = Float(distance * translationScale) * 0.2
           placemarkNode.scalableNode?.scale = SCNVector3(x: scale, y: scale, z: scale)
-          placemarkNode.pivot = SCNMatrix4MakeTranslation(0, -1.1 * scale, 0)
         }
       }
     }
