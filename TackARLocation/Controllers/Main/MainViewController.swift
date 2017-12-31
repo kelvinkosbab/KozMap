@@ -18,6 +18,7 @@ class MainViewController : BaseViewController {
   
   // MARK: - Properties
   
+  @IBOutlet weak var aboveSafeAreaVisualEffectView: UIVisualEffectView!
   @IBOutlet weak var addVisualEffectView: UIVisualEffectView!
   @IBOutlet weak var addButton: UIButton!
   @IBOutlet weak var listVisualEffectView: UIVisualEffectView!
@@ -34,7 +35,7 @@ class MainViewController : BaseViewController {
     super.viewDidLoad()
     
     self.navigationItem.largeTitleDisplayMode = .never
-    self.clearNavigationBarElements()
+    self.clearNavigationBar()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -66,7 +67,7 @@ class MainViewController : BaseViewController {
     self.navigationItem.hidesBackButton = false
   }
   
-  func clearNavigationBarElements() {
+  func clearNavigationBar() {
     self.navigationItem.title = nil
     self.navigationItem.leftBarButtonItem = nil
     self.navigationItem.rightBarButtonItem = nil
@@ -138,8 +139,9 @@ class MainViewController : BaseViewController {
   
   // MARK: - Hiding and Showing Elements
   
-  func showButtons(completion: (() -> Void)? = nil) {
+  func showElements(completion: (() -> Void)? = nil) {
     UIView.animate(withDuration: 0.3, animations: { [weak self] in
+      self?.aboveSafeAreaVisualEffectView.effect = UIBlurEffect(style: .dark)
       self?.listVisualEffectView.effect = UIBlurEffect(style: .light)
       self?.listButton.alpha = 1
       self?.addVisualEffectView.effect = UIBlurEffect(style: .light)
@@ -147,14 +149,17 @@ class MainViewController : BaseViewController {
     }) { [weak self] _ in
       self?.listButton.isUserInteractionEnabled = true
       self?.addButton.isUserInteractionEnabled = true
+      self?.loadConfiguredNavigationBar()
       completion?()
     }
   }
   
-  func hideButtons(completion: (() -> Void)? = nil) {
+  func hideElements(completion: (() -> Void)? = nil) {
+    self.clearNavigationBar()
     self.listButton.isUserInteractionEnabled = false
     self.addButton.isUserInteractionEnabled = false
     UIView.animate(withDuration: 0.3, animations: { [weak self] in
+      self?.aboveSafeAreaVisualEffectView.effect = nil
       self?.listVisualEffectView.effect = nil
       self?.listButton.alpha = 0
       self?.addVisualEffectView.effect = nil

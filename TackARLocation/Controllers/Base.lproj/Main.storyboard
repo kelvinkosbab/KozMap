@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13770" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Yg3-Eg-XZo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Yg3-Eg-XZo">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13770"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -164,6 +164,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="HmH-7e-Xab"/>
                     <connections>
+                        <outlet property="aboveSafeAreaVisualEffectView" destination="CiA-1e-fpQ" id="rf9-2f-MA6"/>
                         <outlet property="addButton" destination="wNG-t2-g00" id="681-v1-jGR"/>
                         <outlet property="addVisualEffectView" destination="E3M-G1-my4" id="7VT-C3-WRb"/>
                         <outlet property="listButton" destination="xq0-oX-NLO" id="wmx-XG-sD9"/>
@@ -214,6 +215,10 @@
                                     <action selector="locationPermissionButtonSelected" destination="BYZ-38-t0r" eventType="touchUpInside" id="dgI-i1-IEY"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="b9j-tb-DyK">
+                                <rect key="frame" x="177" y="283.5" width="20" height="20"/>
+                                <color key="color" name="SeaBlue"/>
+                            </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oIR-3d-g9M">
                                 <rect key="frame" x="113" y="358.5" width="148" height="30"/>
                                 <state key="normal" title="Allow Camera Access">
@@ -223,15 +228,23 @@
                                     <action selector="cameraPermissionButtonSelected" destination="BYZ-38-t0r" eventType="touchUpInside" id="M32-Q2-S4F"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="5xe-Pa-z4L">
+                                <rect key="frame" x="177" y="363" width="20" height="20"/>
+                                <color key="color" name="SeaBlue"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="whO-p3-r5W" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="6Fv-kl-FsI"/>
+                            <constraint firstItem="5xe-Pa-z4L" firstAttribute="centerX" secondItem="oIR-3d-g9M" secondAttribute="centerX" id="85y-sA-eba"/>
                             <constraint firstItem="UUY-Ab-d1h" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9Bv-KX-qOE"/>
                             <constraint firstItem="oIR-3d-g9M" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="CaT-58-UEf"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="whO-p3-r5W" secondAttribute="trailing" id="Cxr-AH-UOY"/>
+                            <constraint firstItem="b9j-tb-DyK" firstAttribute="centerY" secondItem="UUY-Ab-d1h" secondAttribute="centerY" id="Fun-Hb-YHf"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="SUC-dA-Hko" secondAttribute="bottom" id="I7Z-hy-YPA"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SUC-dA-Hko" secondAttribute="trailing" id="Jcn-F1-7DV"/>
+                            <constraint firstItem="b9j-tb-DyK" firstAttribute="centerX" secondItem="UUY-Ab-d1h" secondAttribute="centerX" id="Mux-sv-dRR"/>
+                            <constraint firstItem="5xe-Pa-z4L" firstAttribute="centerY" secondItem="oIR-3d-g9M" secondAttribute="centerY" id="Npg-wZ-xua"/>
                             <constraint firstItem="UUY-Ab-d1h" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-40" id="PJO-SQ-skU"/>
                             <constraint firstAttribute="bottom" secondItem="whO-p3-r5W" secondAttribute="bottom" id="XeK-tj-tQU"/>
                             <constraint firstItem="whO-p3-r5W" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="gC6-97-ass"/>
@@ -242,7 +255,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="cameraActivityIndicatorView" destination="5xe-Pa-z4L" id="57t-w1-jTg"/>
                         <outlet property="cameraPermissionButton" destination="oIR-3d-g9M" id="ojC-SQ-UwL"/>
+                        <outlet property="locationActivityIndicatorView" destination="b9j-tb-DyK" id="OVU-BC-VtH"/>
                         <outlet property="locationPermissionButton" destination="UUY-Ab-d1h" id="dsv-T8-8CU"/>
                     </connections>
                 </viewController>
@@ -258,7 +273,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QnS-bt-iYg">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QnS-bt-iYg">
                                 <rect key="frame" x="62.5" y="323" width="250" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="wl4-QQ-mAh"/>
@@ -267,15 +282,28 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JeC-ml-DRX">
+                                <rect key="frame" x="62" y="364" width="250" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="OoO-2z-jHH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="JeC-ml-DRX" firstAttribute="centerX" secondItem="FGG-ST-r9L" secondAttribute="centerX" id="Fgu-t1-tYi"/>
+                            <constraint firstItem="JeC-ml-DRX" firstAttribute="width" secondItem="QnS-bt-iYg" secondAttribute="width" id="I2k-L8-vjt"/>
                             <constraint firstItem="QnS-bt-iYg" firstAttribute="centerX" secondItem="FGG-ST-r9L" secondAttribute="centerX" id="TDy-DT-eWS"/>
+                            <constraint firstItem="JeC-ml-DRX" firstAttribute="top" secondItem="QnS-bt-iYg" secondAttribute="bottom" constant="20" id="cgP-uA-aRc"/>
                             <constraint firstItem="QnS-bt-iYg" firstAttribute="centerY" secondItem="FGG-ST-r9L" secondAttribute="centerY" id="gne-cm-svc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="dCW-oY-g4I"/>
                     </view>
                     <connections>
+                        <outlet property="messageLabel" destination="JeC-ml-DRX" id="Say-Ih-edo"/>
                         <outlet property="statusLabel" destination="QnS-bt-iYg" id="Jga-Ml-Z6p"/>
                     </connections>
                 </viewController>

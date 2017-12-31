@@ -22,39 +22,39 @@ extension MainViewController : ARStateDelegate {
     
     switch state {
     case .configuring:
-      self.showConfiguringView(status: "⚙️ Configuring ⚙️")
+      self.showConfiguringView(status: "Configuring", message: nil)
     case .limited(.insufficientFeatures):
-      self.showConfiguringView(status: "⚙️ Configuring ⚙️\nInsufficent Features")
+      self.showConfiguringView(status: "Insufficent Features", message: "Please move to a well lit area with defined surface features.")
     case .limited(.excessiveMotion):
-      self.showConfiguringView(status: "⚙️ Configuring ⚙️\nExcessive Motion")
+      self.showConfiguringView(status: "Excessive Motion", message: "Please hold the device steady pointing horizontally.")
     case .limited(.initializing):
-      self.showConfiguringView(status: "⚙️ Configuring ⚙️")
+      self.showConfiguringView(status: "Initializing", message: "Please hold the device steady pointing horizontally in a well lit area.")
     case .normal:
       self.hideConfiguringView()
     case .notAvailable:
-      self.showConfiguringView(status: "❌ Not Available ❌")
+      self.showConfiguringView(status: "Not Available", message: "Only supported on Apple devices with an A9, A10, or A11 chip or newer. This includes all phones including the iPhone 6s/6s+ and newer as well as all iPad Pro models and the 2017 iPad.")
     }
   }
   
   // MARK: - Configuring View
   
-  func showConfiguringView(status: String) {
+  func showConfiguringView(status: String, message: String?) {
     
     // Check if already showing the configuring view
     if let configuringViewController = self.configuringViewController {
-      configuringViewController.status = status
+      configuringViewController.state = .statusMessage(status, message)
       return
     }
     
     // Create the configuring view
-    let configuringViewController = ConfiguringViewController.newViewController(status: status)
+    let configuringViewController = ConfiguringViewController.newViewController(state: .statusMessage(status, message))
     configuringViewController.view.alpha = 0
     self.configuringViewController = configuringViewController
     let visualEffectContainerController = VisualEffectContainerViewController(embeddedViewController: configuringViewController, blurEffect: nil)
     self.configuringVisualEffectContainerViewController = visualEffectContainerController
     
     // Hide the buttons
-    self.hideButtons { [weak self] in
+    self.hideElements { [weak self] in
       if let strongSelf = self {
         strongSelf.add(childViewController: visualEffectContainerController, intoContainerView: strongSelf.view)
         
@@ -71,7 +71,7 @@ extension MainViewController : ARStateDelegate {
   func hideConfiguringView() {
     
     guard let _ = self.configuringViewController, let configuringVisualEffectContainerViewController = self.configuringVisualEffectContainerViewController else {
-      self.showButtons()
+      self.showElements()
       return
     }
     
@@ -82,7 +82,7 @@ extension MainViewController : ARStateDelegate {
     })
     configuringVisualEffectContainerViewController.update(blurEffect: nil, duration: duration) { [weak self] in
       self?.loadConfiguredNavigationBar()
-      self?.showButtons()
+      self?.showElements()
       if let configuringVisualEffectContainerViewController = self?.configuringVisualEffectContainerViewController {
         self?.remove(childViewController: configuringVisualEffectContainerViewController)
       }

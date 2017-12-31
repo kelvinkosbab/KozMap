@@ -16,7 +16,7 @@ extension UIView {
   
   func addToContainer(_ containerView: UIView, atIndex index: Int? = nil, topMargin: CGFloat = 0, bottomMargin: CGFloat = 0, leadingMargin: CGFloat = 0, trailingMargin: CGFloat = 0, relativeLayoutType: RelativeLayoutType = .view) {
     self.translatesAutoresizingMaskIntoConstraints = false
-    self.frame = containerView.frame
+    self.frame = containerView.bounds
     
     if let index = index {
       containerView.insertSubview(self, at: index)

@@ -8,6 +8,10 @@
 
 import UIKit
 
+enum ConfiguringState {
+  case na, statusMessage(String, String?)
+}
+
 class ConfiguringViewController : BaseViewController {
   
   // MARK: - Static Accessors
@@ -16,20 +20,21 @@ class ConfiguringViewController : BaseViewController {
     return self.newViewController(fromStoryboardWithName: "Main")
   }
   
-  static func newViewController(status: String?) -> ConfiguringViewController {
+  static func newViewController(state: ConfiguringState) -> ConfiguringViewController {
     let viewController = self.newViewController()
-    viewController.status = status
+    viewController.state = state
     return viewController
   }
   
   // MARK: - Properties
   
   @IBOutlet private weak var statusLabel: UILabel!
+  @IBOutlet private weak var messageLabel: UILabel!
   
-  var status: String? = nil {
+  var state: ConfiguringState = .na {
     didSet {
       if self.isViewLoaded {
-        self.statusLabel.text = self.status
+        self.updateContent()
       }
     }
   }
@@ -39,6 +44,19 @@ class ConfiguringViewController : BaseViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
-    self.statusLabel.text = self.status
+    self.updateContent()
+  }
+  
+  // MARK: - Content
+  
+  func updateContent() {
+    switch self.state {
+    case .statusMessage(let status, let message):
+      self.statusLabel.text = status
+      self.messageLabel.text = message
+    case .na:
+      self.statusLabel.text = ""
+      self.messageLabel.text = ""
+    }
   }
 }

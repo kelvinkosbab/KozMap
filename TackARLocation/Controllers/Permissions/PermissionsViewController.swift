@@ -19,7 +19,9 @@ class PermissionsViewController : UIViewController {
   // MARK: - Properties
   
   @IBOutlet weak var locationPermissionButton: UIButton!
+  @IBOutlet weak var locationActivityIndicatorView: UIActivityIndicatorView!
   @IBOutlet weak var cameraPermissionButton: UIButton!
+  @IBOutlet weak var cameraActivityIndicatorView: UIActivityIndicatorView!
   
   var isLocationAuthorized: Bool {
     return LocationManager.shared.isAccessAuthorized
@@ -85,6 +87,12 @@ class PermissionsViewController : UIViewController {
       return
     }
     
+    // Show loading
+    self.locationActivityIndicatorView.isHidden = false
+    self.locationActivityIndicatorView.startAnimating()
+    self.locationPermissionButton.isUserInteractionEnabled = false
+    self.locationPermissionButton.isHidden = true
+    
     // Request permissions
     LocationManager.shared.requestAuthorization()
   }
@@ -96,6 +104,12 @@ class PermissionsViewController : UIViewController {
       self.showSettingsAlert()
       return
     }
+    
+    // Show loading
+    self.cameraActivityIndicatorView.isHidden = false
+    self.cameraActivityIndicatorView.startAnimating()
+    self.cameraPermissionButton.isUserInteractionEnabled = false
+    self.cameraPermissionButton.isHidden = true
     
     // Request permissions
     CameraPermissionManager.shared.requestAuthorization()
@@ -140,6 +154,12 @@ extension PermissionsViewController : LocationManagerAuthorizationDelegate {
     
     // Update the content
     self.reloadContent()
+    
+    // Stop loading
+    self.locationActivityIndicatorView.stopAnimating()
+    self.locationActivityIndicatorView.isHidden = true
+    self.locationPermissionButton.isUserInteractionEnabled = true
+    self.locationPermissionButton.isHidden = false
   }
 }
 
@@ -155,5 +175,11 @@ extension PermissionsViewController : CameraPermissionDelegate {
     
     // Update the content
     self.reloadContent()
+    
+    // Stop loading
+    self.cameraActivityIndicatorView.stopAnimating()
+    self.cameraActivityIndicatorView.isHidden = true
+    self.cameraPermissionButton.isUserInteractionEnabled = true
+    self.cameraPermissionButton.isHidden = false
   }
 }

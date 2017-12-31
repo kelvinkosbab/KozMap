@@ -112,7 +112,7 @@ class ARViewController : UIViewController {
     super.viewDidDisappear(animated)
     
     // Reset idle timer flat
-    UIApplication.shared.isIdleTimerDisabled = true
+    UIApplication.shared.isIdleTimerDisabled = false
     
     // Pause the AR scene
     self.pauseScene()
