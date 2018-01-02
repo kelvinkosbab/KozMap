@@ -1,14 +1,14 @@
 //
-//  TopDownPresentationManager.swift
-//  TackARLocation
+//  BottomUpPresentationManager.swift
+//  KozMap
 //
-//  Created by Kelvin Kosbab on 10/30/17.
+//  Created by Kelvin Kosbab on 12/31/17.
 //  Copyright © 2017 Kozinga. All rights reserved.
 //
 
 import UIKit
 
-class TopDownPresentationManager : NSObject, UIViewControllerTransitioningDelegate, PresenationManagerProtocol {
+class BottomUpPresentationManager : NSObject, UIViewControllerTransitioningDelegate, PresenationManagerProtocol {
   
   var interactiveElement: InteractiveElement?
   
@@ -45,17 +45,17 @@ class TopDownPresentationManager : NSObject, UIViewControllerTransitioningDelega
   // MARK: - UIViewControllerTransitioningDelegate
   
   func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-    let controller = TopDownPresentationController(presentedViewController: presented, presenting: source)
+    let controller = BottomUpPresentationController(presentedViewController: presented, presenting: source)
     controller.interactiveElement = self.interactiveElement
     return controller
   }
   
   func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-    return TopDownAnimator(interactiveElement: self.interactiveElement)
+    return BottomUpAnimator(interactiveElement: self.interactiveElement)
   }
   
   func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-    return TopDownAnimator(interactiveElement: self.interactiveElement)
+    return BottomUpAnimator(interactiveElement: self.interactiveElement)
   }
   
   func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
@@ -74,7 +74,7 @@ class TopDownPresentationManager : NSObject, UIViewControllerTransitioningDelega
   
   // MARK: - Animator
   
-  class TopDownAnimator : NSObject, UIViewControllerAnimatedTransitioning {
+  class BottomUpAnimator : NSObject, UIViewControllerAnimatedTransitioning {
     
     let interactiveElement: InteractiveElement?
     
@@ -110,23 +110,23 @@ class TopDownPresentationManager : NSObject, UIViewControllerTransitioningDelega
       if isPresenting {
         
         // Currently presenting
-        presentedViewController.view.frame.origin.y -= presentedYOffset
+        presentedViewController.view.frame.origin.y = containerView.bounds.height
         containerView.addSubview(presentedViewController.view)
         UIView.animate(withDuration: self.transitionDuration(using: transitionContext), animations: {
           presentingViewController.setNeedsStatusBarAppearanceUpdate()
           presentedViewController.setNeedsStatusBarAppearanceUpdate()
-          presentedViewController.view.frame.origin.y += presentedYOffset
+          presentedViewController.view.frame.origin.y -= presentedYOffset
         }, completion: { (_) in
           transitionContext.completeTransition(true)
         })
         
       } else {
         
-        // Currently not presenting
+        // Currently dismissing
         UIView.animate(withDuration: self.transitionDuration(using: transitionContext), animations: {
           presentingViewController.setNeedsStatusBarAppearanceUpdate()
           presentedViewController.setNeedsStatusBarAppearanceUpdate()
-          presentedViewController.view.frame.origin.y -= presentedYOffset
+          presentedViewController.view.frame.origin.y += presentedYOffset
         }, completion: { (_) in
           transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         })
@@ -136,7 +136,7 @@ class TopDownPresentationManager : NSObject, UIViewControllerTransitioningDelega
   
   // MARK: - Presentation Controller
   
-  class TopDownPresentationController : UIPresentationController {
+  class BottomUpPresentationController : UIPresentationController {
     
     var interactiveElement: InteractiveElement?
     
@@ -173,6 +173,11 @@ class TopDownPresentationManager : NSObject, UIViewControllerTransitioningDelega
       dismissView.addToContainer(containerView, atIndex: 0)
     }
     
+    override func dismissalTransitionWillBegin() {
+      self.presentedViewController.transitionCoordinator?.animate(alongsideTransition: { (context) in
+      }, completion: nil)
+    }
+    
     override func containerViewWillLayoutSubviews() {
       super.containerViewWillLayoutSubviews()
       
@@ -183,7 +188,7 @@ class TopDownPresentationManager : NSObject, UIViewControllerTransitioningDelega
       if let size = self.containerView?.bounds.size {
         let height: CGFloat = self.interactiveElement?.size ?? size.height
         let yOffset: CGFloat = self.interactiveElement?.offset ?? 0
-        return CGRect(x: 0, y: yOffset, width: size.width, height: height)
+        return CGRect(x: 0, y: size.height - yOffset - height, width: size.width, height: height)
       }
       return CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
     }

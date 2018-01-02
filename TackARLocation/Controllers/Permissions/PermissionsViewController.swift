@@ -40,6 +40,13 @@ class PermissionsViewController : UIViewController {
   
   // MARK: - Lifecycle
   
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    self.locationActivityIndicatorView.isHidden = true
+    self.cameraActivityIndicatorView.isHidden = true
+  }
+  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     

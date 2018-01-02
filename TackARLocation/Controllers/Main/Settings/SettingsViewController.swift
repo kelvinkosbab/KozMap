@@ -20,7 +20,6 @@ class SettingsViewController : BaseViewController {
   
   @IBOutlet weak var versionLabel: UILabel!
   @IBOutlet weak var unitTypeControl: UISegmentedControl!
-  @IBOutlet weak var bottomDragHandle: UIVisualEffectView!
   
   let defaultContentHeight: CGFloat = 191
   
@@ -28,11 +27,6 @@ class SettingsViewController : BaseViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    
-    // Style handle
-    self.bottomDragHandle.layer.cornerRadius = 3
-    self.bottomDragHandle.layer.masksToBounds = true
-    self.bottomDragHandle.clipsToBounds = true
     
     // Reload content
     self.reloadContent()

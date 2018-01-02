@@ -16,38 +16,30 @@ extension MainViewController : ARStateDelegate {
     
     // Check if the scene hasn't already been configured
     guard self.arViewController?.sceneNode == nil else {
-      // TODO: - KAK future - display any state messages
+      // TODO: - KAK future - display any necessary state messages
       return
     }
     
     switch state {
-    case .configuring:
-      self.showConfiguringView(status: "Configuring", message: nil)
-    case .limited(.insufficientFeatures):
-      self.showConfiguringView(status: "Insufficent Features", message: "Please move to a well lit area with defined surface features.")
-    case .limited(.excessiveMotion):
-      self.showConfiguringView(status: "Excessive Motion", message: "Please hold the device steady pointing horizontally.")
-    case .limited(.initializing):
-      self.showConfiguringView(status: "Initializing", message: "Please hold the device steady pointing horizontally in a well lit area.")
     case .normal:
       self.hideConfiguringView()
-    case .notAvailable:
-      self.showConfiguringView(status: "Not Available", message: "Only supported on Apple devices with an A9, A10, or A11 chip or newer. This includes all phones including the iPhone 6s/6s+ and newer as well as all iPad Pro models and the 2017 iPad.")
+    default:
+      self.showConfiguringView(state: state)
     }
   }
   
   // MARK: - Configuring View
   
-  func showConfiguringView(status: String, message: String?) {
+  func showConfiguringView(state: ARState) {
     
     // Check if already showing the configuring view
     if let configuringViewController = self.configuringViewController {
-      configuringViewController.state = .statusMessage(status, message)
+      configuringViewController.state = .statusMessage(state.status, state.message)
       return
     }
     
     // Create the configuring view
-    let configuringViewController = ConfiguringViewController.newViewController(state: .statusMessage(status, message))
+    let configuringViewController = ConfiguringViewController.newViewController(state: .statusMessage(state.status, state.message))
     configuringViewController.view.alpha = 0
     self.configuringViewController = configuringViewController
     let visualEffectContainerController = VisualEffectContainerViewController(embeddedViewController: configuringViewController, blurEffect: nil)

@@ -25,6 +25,7 @@
 		B64391631FC2BEBF005721E5 /* ConfiguringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64391621FC2BEBF005721E5 /* ConfiguringViewController.swift */; };
 		B66041EF1FA905350076EBEF /* VirtualObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66041EE1FA905350076EBEF /* VirtualObject.swift */; };
 		B66634321FCBB09D006D5922 /* PinPlacemarkNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66634311FCBB09D006D5922 /* PinPlacemarkNode.swift */; };
+		B68A7DB21FF9AB8F00C45FF6 /* BottomUpPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68A7DB11FF9AB8F00C45FF6 /* BottomUpPresentationManager.swift */; };
 		B695236B1FA8D11E0014ABED /* CLLocation+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236A1FA8D11E0014ABED /* CLLocation+Util.swift */; };
 		B695236D1FA8D2E10014ABED /* SCNVector3+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236C1FA8D2E10014ABED /* SCNVector3+Util.swift */; };
 		B695236F1FA8D3430014ABED /* AxesNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236E1FA8D3430014ABED /* AxesNode.swift */; };
@@ -108,6 +109,7 @@
 		B66041EE1FA905350076EBEF /* VirtualObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObject.swift; sourceTree = "<group>"; };
 		B66634311FCBB09D006D5922 /* PinPlacemarkNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinPlacemarkNode.swift; sourceTree = "<group>"; };
 		B666343E1FCBCDA8006D5922 /* SavedLocationNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedLocationNode.swift; sourceTree = "<group>"; };
+		B68A7DB11FF9AB8F00C45FF6 /* BottomUpPresentationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomUpPresentationManager.swift; sourceTree = "<group>"; };
 		B695236A1FA8D11E0014ABED /* CLLocation+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Util.swift"; sourceTree = "<group>"; };
 		B695236C1FA8D2E10014ABED /* SCNVector3+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Util.swift"; sourceTree = "<group>"; };
 		B695236E1FA8D3430014ABED /* AxesNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxesNode.swift; sourceTree = "<group>"; };
@@ -442,6 +444,7 @@
 				B6C6EA891FA7E6D2001F97E7 /* RightToLeftPresentationManager.swift */,
 				B6C6EA8B1FA7E6E3001F97E7 /* HDFadeWithBlurPresentationManager.swift */,
 				B6C6EA8F1FA7E766001F97E7 /* TopDownPresentationManager.swift */,
+				B68A7DB11FF9AB8F00C45FF6 /* BottomUpPresentationManager.swift */,
 			);
 			path = "Custom Controller Presentations";
 			sourceTree = "<group>";
@@ -618,6 +621,7 @@
 				B6C6EA641FA7BD33001F97E7 /* DataMangerProtocol.swift in Sources */,
 				B6C6EA591FA7AFEF001F97E7 /* ARSCNView+Util.swift in Sources */,
 				B6C6EA521FA7ACEC001F97E7 /* ARViewController.swift in Sources */,
+				B68A7DB21FF9AB8F00C45FF6 /* BottomUpPresentationManager.swift in Sources */,
 				B66634321FCBB09D006D5922 /* PinPlacemarkNode.swift in Sources */,
 				B6C6EA7B1FA7E5E1001F97E7 /* SettingsViewController.swift in Sources */,
 			);

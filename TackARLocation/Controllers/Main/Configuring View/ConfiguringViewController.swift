@@ -9,7 +9,7 @@
 import UIKit
 
 enum ConfiguringState {
-  case na, statusMessage(String, String?)
+  case na, statusMessage(String?, String?)
 }
 
 class ConfiguringViewController : BaseViewController {

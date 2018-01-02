@@ -103,10 +103,9 @@ class MainViewController : BaseViewController {
   
   @objc func settingsButtonSelected() {
     let settingsViewController = SettingsViewController.newViewController()
-    let offset = UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.height ?? 0)
-    let interactiveElement = InteractiveElement(size: settingsViewController.defaultContentHeight, offset: offset, view: settingsViewController.view)
+    let interactiveElement = InteractiveElement(size: settingsViewController.defaultContentHeight, offset: 0, view: settingsViewController.view)
     let viewControllerToPresent = VisualEffectContainerViewController(embeddedViewController: settingsViewController, blurEffect: UIBlurEffect(style: .dark))
-    self.present(viewController: viewControllerToPresent, withMode: .topDown, inNavigationController: false, dismissInteractiveElement: interactiveElement)
+    self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
   }
   
   // MARK: - Navigation

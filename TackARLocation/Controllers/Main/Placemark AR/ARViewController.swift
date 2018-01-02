@@ -39,26 +39,41 @@ class ARViewController : UIViewController {
   
   private var currentCameraTrackingState: ARCamera.TrackingState? = nil {
     didSet {
-      self.trackingStateDelegate?.arStateDidUpdate(self.state)
+      
+      // Check if the device supports ARKit
+      if let state = self.state {
+        switch state {
+        case .unsupported:
+          return
+        default: break
+        }
+      }
+      
+      guard let currentCameraTrackingState = self.currentCameraTrackingState else {
+        self.state = .configuring
+        return
+      }
+      
+      switch currentCameraTrackingState {
+      case .limited(.insufficientFeatures):
+        self.state = .limited(.insufficientFeatures)
+      case .limited(.excessiveMotion):
+        self.state = .limited(.excessiveMotion)
+      case .limited(.initializing):
+        self.state = .limited(.initializing)
+      case .normal:
+        self.state = .normal
+      case .notAvailable:
+        self.state = .notAvailable
+      }
     }
   }
   
-  var state: ARState {
-    guard let currentCameraTrackingState = self.currentCameraTrackingState else {
-      return .configuring
-    }
-    
-    switch currentCameraTrackingState {
-    case .limited(.insufficientFeatures):
-      return .limited(.insufficientFeatures)
-    case .limited(.excessiveMotion):
-      return .limited(.excessiveMotion)
-    case .limited(.initializing):
-      return .limited(.initializing)
-    case .normal:
-      return .normal
-    case .notAvailable:
-      return .notAvailable
+  var state: ARState? = nil {
+    didSet {
+      if let state = self.state {
+        self.trackingStateDelegate?.arStateDidUpdate(state)
+      }
     }
   }
   
@@ -99,7 +114,7 @@ class ARViewController : UIViewController {
     self.restartPlaneDetection()
     
     // Check camera tracking state
-    self.trackingStateDelegate?.arStateDidUpdate(self.state)
+    self.trackingStateDelegate?.arStateDidUpdate(self.state ?? .configuring)
     
     // Notifications
     NotificationCenter.default.addObserver(self, selector: #selector(self.restartPlaneDetection), name: .UIApplicationDidBecomeActive, object: nil)
@@ -118,7 +133,7 @@ class ARViewController : UIViewController {
     self.pauseScene()
     
     // Check camera tracking state
-    self.trackingStateDelegate?.arStateDidUpdate(self.state)
+    self.trackingStateDelegate?.arStateDidUpdate(self.state ?? .configuring)
     
     // Remove self from notifications
     NotificationCenter.default.removeObserver(self, name: .UIApplicationDidBecomeActive, object: nil)
@@ -312,30 +327,31 @@ extension ARViewController : ARSCNViewDelegate {
   }
   
   func sessionWasInterrupted(_ session: ARSession) {
-    Log.extendedLog("session was interrupted")
+    Log.extendedLog("Session was interrupted")
   }
   
   func sessionInterruptionEnded(_ session: ARSession) {
-    Log.extendedLog("session interruption ended")
+    Log.extendedLog("Session interruption ended")
   }
   
   func session(_ session: ARSession, didFailWithError error: Error) {
-    Log.extendedLog("session did fail with error: \(error)")
+    Log.extendedLog("Session did fail with error: \(error)")
+    self.state = .unsupported
   }
   
   func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
     self.currentCameraTrackingState = camera.trackingState
     switch camera.trackingState {
     case .limited(.insufficientFeatures):
-      Log.extendedLog("camera did change tracking state: limited, insufficient features")
+      Log.extendedLog("Camera did change tracking state: limited, insufficient features")
     case .limited(.excessiveMotion):
-      Log.extendedLog("camera did change tracking state: limited, excessive motion")
+      Log.extendedLog("Camera did change tracking state: limited, excessive motion")
     case .limited(.initializing):
-      Log.extendedLog("camera did change tracking state: limited, initializing")
+      Log.extendedLog("Camera did change tracking state: limited, initializing")
     case .normal:
-      Log.extendedLog("camera did change tracking state: normal")
+      Log.extendedLog("Camera did change tracking state: normal")
     case .notAvailable:
-      Log.extendedLog("camera did change tracking state: not available")
+      Log.extendedLog("Camera did change tracking state: not available")
     }
   }
 }
