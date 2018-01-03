@@ -87,8 +87,6 @@ class MainViewController : BaseViewController {
   // MARK: - Actions
   
   @IBAction func addButtonSelected() {
-    
-    // Instantiate the location detail view controller
     let addLocationViewController = AddLocationViewController.newViewController(locationDetailDelegate: self, searchDelegate: self)
     let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: addLocationViewController)
     let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
@@ -96,16 +94,10 @@ class MainViewController : BaseViewController {
   }
   
   @IBAction func listButtonSelected() {
-    
-    // Instantiate the location list view controller
     let locationListViewController = LocationListViewController.newViewController(delegate: self)
-    let viewControllerToPresent = VisualEffectContainerViewController(embeddedViewController: locationListViewController)
-    viewControllerToPresent.modalPresentationStyle = .popover
-    viewControllerToPresent.popoverPresentationController?.delegate = self
-    viewControllerToPresent.preferredContentSize = CGSize(width: self.view.bounds.width - 16, height: min(self.view.bounds.height, 300))
-    viewControllerToPresent.popoverPresentationController?.sourceView = self.listButton
-    viewControllerToPresent.popoverPresentationController?.sourceRect = self.listButton.bounds
-    self.present(viewControllerToPresent, animated: true, completion: nil)
+    let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: locationListViewController)
+    let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
+    self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
   }
   
   @objc func settingsButtonSelected() {
@@ -118,29 +110,17 @@ class MainViewController : BaseViewController {
   // MARK: - Navigation
   
   func presentLocationDetail(savedLocation: SavedLocation) {
-    
-    // Instantiate the location detail view controller
-    let addLocationViewController = LocationDetailViewController.newViewController(savedLocation: savedLocation, delegate: self)
-    let viewControllerToPresent = VisualEffectContainerViewController(embeddedViewController: addLocationViewController)
-    viewControllerToPresent.modalPresentationStyle = .popover
-    viewControllerToPresent.popoverPresentationController?.delegate = self
-    viewControllerToPresent.preferredContentSize = CGSize(width: self.view.bounds.width - 16, height: addLocationViewController.desiredContentHeight)
-    viewControllerToPresent.popoverPresentationController?.sourceView = self.listButton
-    viewControllerToPresent.popoverPresentationController?.sourceRect = self.listButton.bounds
-    self.present(viewControllerToPresent, animated: true, completion: nil)
+    let locationDetailViewController = LocationDetailViewController.newViewController(savedLocation: savedLocation, delegate: self)
+    let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: locationDetailViewController)
+    let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
+    self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
   }
   
   func presentLocationDetail(mapItem: MapItem) {
-    
-    // Instantiate the location detail view controller
-    let addLocationViewController = LocationDetailViewController.newViewController(mapItem: mapItem, delegate: self)
-    let viewControllerToPresent = VisualEffectContainerViewController(embeddedViewController: addLocationViewController)
-    viewControllerToPresent.modalPresentationStyle = .popover
-    viewControllerToPresent.popoverPresentationController?.delegate = self
-    viewControllerToPresent.preferredContentSize = CGSize(width: self.view.bounds.width - 16, height: addLocationViewController.desiredContentHeight)
-    viewControllerToPresent.popoverPresentationController?.sourceView = self.addButton
-    viewControllerToPresent.popoverPresentationController?.sourceRect = self.addButton.bounds
-    self.present(viewControllerToPresent, animated: true, completion: nil)
+    let locationDetailViewController = LocationDetailViewController.newViewController(mapItem: mapItem, delegate: self)
+    let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: locationDetailViewController)
+    let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
+    self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
   }
   
   // MARK: - Hiding and Showing Elements

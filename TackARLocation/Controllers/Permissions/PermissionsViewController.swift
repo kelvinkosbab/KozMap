@@ -57,6 +57,10 @@ class PermissionsViewController : UIViewController {
     self.reloadContent()
   }
   
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
+  }
+  
   // MARK: - Content
   
   func reloadContent() {

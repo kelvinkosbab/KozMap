@@ -25,7 +25,7 @@ class TopKnobVisualEffectContainerViewController : BaseViewController, DesiredCo
     if let desiredContentHeightDelegate = self.embeddedViewController as? DesiredContentHeightDelegate {
       return desiredContentHeightDelegate.desiredContentHeight + self.topKnobSpace + self.knobHeight + self.bottomKnobSpace
     }
-    return UIScreen.main.bounds.height
+    return UIScreen.main.bounds.height - 175
   }
   
   // MARK: - Properties
@@ -54,9 +54,6 @@ class TopKnobVisualEffectContainerViewController : BaseViewController, DesiredCo
   }
   
   override var preferredStatusBarStyle: UIStatusBarStyle {
-    if let embeddedViewController = self.embeddedViewController {
-      return embeddedViewController.preferredStatusBarStyle
-    }
     return .lightContent
   }
   

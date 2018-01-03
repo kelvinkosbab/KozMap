@@ -48,7 +48,7 @@ class VisualEffectContainerViewController : BaseViewController, KeyboardFrameRes
     if let embeddedViewController = self.embeddedViewController {
       return embeddedViewController.preferredStatusBarStyle
     }
-    return .lightContent
+    return super.preferredStatusBarStyle
   }
   
   // MARK: - Animating
