@@ -19,13 +19,16 @@ class SettingsViewController : BaseViewController, DesiredContentHeightDelegate 
   // MARK: - DesiredContentHeightDelegate
   
   var desiredContentHeight: CGFloat {
-    return 180
+    return 250
   }
   
   // MARK: - Properties
   
-  @IBOutlet weak var versionLabel: UILabel!
+  @IBOutlet weak var settingsLabel: UILabel!
+  @IBOutlet weak var unitLabel: UILabel!
   @IBOutlet weak var unitTypeControl: UISegmentedControl!
+  @IBOutlet weak var versionLabel: UILabel!
+  @IBOutlet weak var companyLabel: UILabel!
   
   // MARK: - Lifecycle
   
@@ -44,11 +47,7 @@ class SettingsViewController : BaseViewController, DesiredContentHeightDelegate 
     self.unitTypeControl.selectedSegmentIndex = Defaults.shared.unitType.rawValue
     
     // Version
-    if let versionString = UIApplication.shared.versionString {
-      self.versionLabel.text = "Version \(versionString)"
-    } else {
-      self.versionLabel.text = "Kozinga"
-    }
+    self.versionLabel.text = "Version \(UIApplication.shared.versionString ?? "N/A")"
   }
   
   // MARK: - Actions
@@ -62,5 +61,9 @@ class SettingsViewController : BaseViewController, DesiredContentHeightDelegate 
       }
     default: break
     }
+  }
+  
+  @IBAction func walkthroughButtonSelected() {
+    
   }
 }
