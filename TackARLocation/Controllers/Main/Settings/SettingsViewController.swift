@@ -18,6 +18,7 @@ class SettingsViewController : BaseViewController {
   
   // MARK: - Properties
   
+  @IBOutlet weak var topKnobView: UIView!
   @IBOutlet weak var versionLabel: UILabel!
   @IBOutlet weak var unitTypeControl: UISegmentedControl!
   
@@ -34,6 +35,16 @@ class SettingsViewController : BaseViewController {
   
   override var preferredStatusBarStyle: UIStatusBarStyle {
     return .lightContent
+  }
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    
+    // Update the corner radius of the to knob if necessary
+    if self.topKnobView.layer.cornerRadius != self.topKnobView.bounds.height / 2 {
+      self.topKnobView.layer.cornerRadius = self.topKnobView.bounds.height / 2
+      self.view.layoutSubviews()
+    }
   }
   
   // MARK: - Content

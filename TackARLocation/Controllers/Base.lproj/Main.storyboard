@@ -344,6 +344,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="43P-WT-nCJ">
+                                <rect key="frame" x="167" y="26" width="40" height="3"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="hNa-ku-Wbr">
+                                    <rect key="frame" x="0.0" y="0.0" width="40" height="3"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="3" id="aBm-Wj-LlZ"/>
+                                    <constraint firstAttribute="width" constant="40" id="u5M-qF-GlB"/>
+                                </constraints>
+                                <blurEffect style="dark"/>
+                            </visualEffectView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CUo-k6-ckZ">
                                 <rect key="frame" x="0.0" y="20" width="375" height="1"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="leN-SX-Hra">
@@ -356,18 +368,16 @@
                                 <blurEffect style="light"/>
                             </visualEffectView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wxv-0l-ebO">
-                                <rect key="frame" x="24" y="45" width="339" height="16"/>
+                                <rect key="frame" x="24" y="44" width="339" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gcx-EF-3uG">
-                                <rect key="frame" x="24" y="73" width="351" height="52"/>
+                                <rect key="frame" x="24" y="72" width="351" height="52"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Units" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nPg-bv-g34">
                                         <rect key="frame" x="0.0" y="16" width="88" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="yAR-Ng-QlP">
@@ -394,7 +404,7 @@
                                 </constraints>
                             </view>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TdI-vb-tqd">
-                                <rect key="frame" x="24" y="125" width="351" height="1"/>
+                                <rect key="frame" x="24" y="124" width="351" height="1"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="hxa-Fn-qZs">
                                     <rect key="frame" x="0.0" y="0.0" width="351" height="1"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -405,26 +415,26 @@
                                 <blurEffect style="light"/>
                             </visualEffectView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VGa-2o-zle">
-                                <rect key="frame" x="12" y="141" width="351" height="16"/>
+                                <rect key="frame" x="12" y="140" width="351" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="gcx-EF-3uG" firstAttribute="leading" secondItem="Sym-N9-2ky" secondAttribute="leading" constant="24" id="0AO-46-4GE"/>
                             <constraint firstItem="Sym-N9-2ky" firstAttribute="trailing" secondItem="wxv-0l-ebO" secondAttribute="trailing" constant="12" id="4d4-4w-PEE"/>
                             <constraint firstItem="wxv-0l-ebO" firstAttribute="leading" secondItem="Sym-N9-2ky" secondAttribute="leading" constant="24" id="8mH-uZ-Vv3"/>
                             <constraint firstItem="VGa-2o-zle" firstAttribute="top" secondItem="TdI-vb-tqd" secondAttribute="bottom" constant="15" id="Kzr-G8-Frl"/>
-                            <constraint firstItem="wxv-0l-ebO" firstAttribute="top" secondItem="CUo-k6-ckZ" secondAttribute="bottom" constant="24" id="PoD-WP-mnF"/>
                             <constraint firstItem="Sym-N9-2ky" firstAttribute="trailing" secondItem="VGa-2o-zle" secondAttribute="trailing" constant="12" id="Qbh-7r-MYk"/>
                             <constraint firstItem="gcx-EF-3uG" firstAttribute="top" secondItem="wxv-0l-ebO" secondAttribute="bottom" constant="12" id="VDQ-YK-7My"/>
                             <constraint firstAttribute="trailing" secondItem="TdI-vb-tqd" secondAttribute="trailing" id="VJi-pA-lYt"/>
                             <constraint firstItem="TdI-vb-tqd" firstAttribute="leading" secondItem="rjd-mq-xPR" secondAttribute="leading" constant="24" id="W5r-zS-KXV"/>
                             <constraint firstItem="CUo-k6-ckZ" firstAttribute="top" secondItem="Sym-N9-2ky" secondAttribute="top" id="XuN-Uk-nS8"/>
+                            <constraint firstItem="43P-WT-nCJ" firstAttribute="centerX" secondItem="rjd-mq-xPR" secondAttribute="centerX" id="Z1Y-4e-g80"/>
                             <constraint firstItem="CUo-k6-ckZ" firstAttribute="leading" secondItem="rjd-mq-xPR" secondAttribute="leading" id="ifT-Ft-XJh"/>
                             <constraint firstItem="TdI-vb-tqd" firstAttribute="top" secondItem="gcx-EF-3uG" secondAttribute="bottom" id="ltM-to-5Rb"/>
+                            <constraint firstItem="wxv-0l-ebO" firstAttribute="top" secondItem="43P-WT-nCJ" secondAttribute="bottom" constant="15" id="nvq-9z-IAI"/>
+                            <constraint firstItem="43P-WT-nCJ" firstAttribute="top" secondItem="CUo-k6-ckZ" secondAttribute="bottom" constant="5" id="sKp-OJ-fNA"/>
                             <constraint firstItem="VGa-2o-zle" firstAttribute="leading" secondItem="Sym-N9-2ky" secondAttribute="leading" constant="12" id="sop-2a-By3"/>
                             <constraint firstAttribute="trailing" secondItem="CUo-k6-ckZ" secondAttribute="trailing" id="ugE-9Z-avc"/>
                             <constraint firstItem="Sym-N9-2ky" firstAttribute="trailing" secondItem="gcx-EF-3uG" secondAttribute="trailing" id="vD0-tl-sdo"/>
@@ -432,6 +442,7 @@
                         <viewLayoutGuide key="safeArea" id="Sym-N9-2ky"/>
                     </view>
                     <connections>
+                        <outlet property="topKnobView" destination="hNa-ku-Wbr" id="zAI-Gp-9Ad"/>
                         <outlet property="unitTypeControl" destination="yAR-Ng-QlP" id="Ymj-sS-uKu"/>
                         <outlet property="versionLabel" destination="VGa-2o-zle" id="9Mn-Mz-XgW"/>
                     </connections>

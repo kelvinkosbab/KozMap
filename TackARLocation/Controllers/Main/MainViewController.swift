@@ -48,6 +48,16 @@ class MainViewController : BaseViewController {
     self.listVisualEffectView.layer.cornerRadius = 28
     self.listVisualEffectView.layer.masksToBounds = true
     self.listVisualEffectView.clipsToBounds = true
+    
+    // Notifications
+    NotificationCenter.default.addObserver(self, selector: #selector(self.handleKeyboardNotification(_:)), name: .UIKeyboardWillShow, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(self.handleKeyboardNotification(_:)), name: .UIKeyboardWillHide, object: nil)
+  }
+  
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    
+    NotificationCenter.default.removeObserver(self)
   }
   
   // MARK: - Navigation
@@ -80,12 +90,9 @@ class MainViewController : BaseViewController {
     
     // Instantiate the location detail view controller
     let addLocationViewController = AddLocationViewController.newViewController(locationDetailDelegate: self, searchDelegate: self)
-    addLocationViewController.modalPresentationStyle = .popover
-    addLocationViewController.popoverPresentationController?.delegate = self
-    addLocationViewController.preferredContentSize = CGSize(width: self.view.bounds.width - 16, height: addLocationViewController.preferredContentHeight)
-    addLocationViewController.popoverPresentationController?.sourceView = self.addButton
-    addLocationViewController.popoverPresentationController?.sourceRect = self.addButton.bounds
-    self.present(addLocationViewController, animated: true, completion: nil)
+    let interactiveElement = InteractiveElement(size: addLocationViewController.preferredContentHeight, offset: 0, view: addLocationViewController.view)
+    let viewControllerToPresent = VisualEffectContainerViewController(embeddedViewController: addLocationViewController, blurEffect: UIBlurEffect(style: .prominent))
+    self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
   }
   
   @IBAction func listButtonSelected() {
@@ -104,7 +111,7 @@ class MainViewController : BaseViewController {
   @objc func settingsButtonSelected() {
     let settingsViewController = SettingsViewController.newViewController()
     let interactiveElement = InteractiveElement(size: settingsViewController.defaultContentHeight, offset: 0, view: settingsViewController.view)
-    let viewControllerToPresent = VisualEffectContainerViewController(embeddedViewController: settingsViewController, blurEffect: UIBlurEffect(style: .dark))
+    let viewControllerToPresent = VisualEffectContainerViewController(embeddedViewController: settingsViewController, blurEffect: UIBlurEffect(style: .prominent))
     self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
   }
   
@@ -166,6 +173,35 @@ class MainViewController : BaseViewController {
     }) { _ in
       completion?()
     }
+  }
+  
+  // MARK: - Keyboard
+  
+  @objc func handleKeyboardNotification(_ notification: NSNotification) {
+    
+    guard let viewController = self.presentedViewController as? VisualEffectContainerViewController, let userInfo = notification.userInfo else {
+      return
+    }
+    
+    let initialViewHeight = viewController.view.bounds.height
+    let endFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+    let duration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+    let animationCurveRawNSN = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
+    let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
+    let animationCurve = UIViewAnimationOptions(rawValue: animationCurveRaw)
+    let keyboardOffset: CGFloat
+    if (endFrame?.origin.y)! >= UIScreen.main.bounds.size.height {
+      keyboardOffset = 0
+    } else {
+      keyboardOffset = endFrame?.size.height ?? 0.0
+    }
+    
+    // Perform the animation
+    UIView.animate(withDuration: duration, delay: 0, options: animationCurve, animations: { [weak self] in
+      if let strongSelf = self {
+        self?.presentedViewController?.view.frame.origin.y = strongSelf.view.bounds.height - keyboardOffset - initialViewHeight
+      }
+    })
   }
 }
 

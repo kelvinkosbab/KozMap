@@ -29,7 +29,7 @@ class AddLocationViewController : BaseViewController {
   @IBOutlet weak var segmentedControl: UISegmentedControl!
   @IBOutlet weak var pagingContainerView: UIView!
   
-  let preferredContentHeight: CGFloat = 325
+  let preferredContentHeight: CGFloat = 350
   var pageViewController: UIPageViewController? = nil
   weak var locationDetailDelegate: LocationDetailViewControllerDelegate? = nil
   weak var searchDelegate: SearchViewControllerDelegate? = nil
