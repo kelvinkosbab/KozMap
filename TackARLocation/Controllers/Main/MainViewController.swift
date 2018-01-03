@@ -90,8 +90,8 @@ class MainViewController : BaseViewController {
     
     // Instantiate the location detail view controller
     let addLocationViewController = AddLocationViewController.newViewController(locationDetailDelegate: self, searchDelegate: self)
-    let interactiveElement = InteractiveElement(size: addLocationViewController.preferredContentHeight, offset: 0, view: addLocationViewController.view)
-    let viewControllerToPresent = VisualEffectContainerViewController(embeddedViewController: addLocationViewController, blurEffect: UIBlurEffect(style: .prominent))
+    let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: addLocationViewController)
+    let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
     self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
   }
   
@@ -110,8 +110,8 @@ class MainViewController : BaseViewController {
   
   @objc func settingsButtonSelected() {
     let settingsViewController = SettingsViewController.newViewController()
-    let interactiveElement = InteractiveElement(size: settingsViewController.defaultContentHeight, offset: 0, view: settingsViewController.view)
-    let viewControllerToPresent = VisualEffectContainerViewController(embeddedViewController: settingsViewController, blurEffect: UIBlurEffect(style: .prominent))
+    let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: settingsViewController)
+    let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
     self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
   }
   
@@ -124,7 +124,7 @@ class MainViewController : BaseViewController {
     let viewControllerToPresent = VisualEffectContainerViewController(embeddedViewController: addLocationViewController)
     viewControllerToPresent.modalPresentationStyle = .popover
     viewControllerToPresent.popoverPresentationController?.delegate = self
-    viewControllerToPresent.preferredContentSize = CGSize(width: self.view.bounds.width - 16, height: addLocationViewController.preferredContentHeight)
+    viewControllerToPresent.preferredContentSize = CGSize(width: self.view.bounds.width - 16, height: addLocationViewController.desiredContentHeight)
     viewControllerToPresent.popoverPresentationController?.sourceView = self.listButton
     viewControllerToPresent.popoverPresentationController?.sourceRect = self.listButton.bounds
     self.present(viewControllerToPresent, animated: true, completion: nil)
@@ -137,7 +137,7 @@ class MainViewController : BaseViewController {
     let viewControllerToPresent = VisualEffectContainerViewController(embeddedViewController: addLocationViewController)
     viewControllerToPresent.modalPresentationStyle = .popover
     viewControllerToPresent.popoverPresentationController?.delegate = self
-    viewControllerToPresent.preferredContentSize = CGSize(width: self.view.bounds.width - 16, height: addLocationViewController.preferredContentHeight)
+    viewControllerToPresent.preferredContentSize = CGSize(width: self.view.bounds.width - 16, height: addLocationViewController.desiredContentHeight)
     viewControllerToPresent.popoverPresentationController?.sourceView = self.addButton
     viewControllerToPresent.popoverPresentationController?.sourceRect = self.addButton.bounds
     self.present(viewControllerToPresent, animated: true, completion: nil)
@@ -179,7 +179,7 @@ class MainViewController : BaseViewController {
   
   @objc func handleKeyboardNotification(_ notification: NSNotification) {
     
-    guard let viewController = self.presentedViewController as? VisualEffectContainerViewController, let userInfo = notification.userInfo else {
+    guard let viewController = self.presentedViewController as? KeyboardFrameRespondable, let userInfo = notification.userInfo else {
       return
     }
     

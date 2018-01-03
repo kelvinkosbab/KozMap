@@ -26,6 +26,9 @@
 		B66041EF1FA905350076EBEF /* VirtualObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66041EE1FA905350076EBEF /* VirtualObject.swift */; };
 		B66634321FCBB09D006D5922 /* PinPlacemarkNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66634311FCBB09D006D5922 /* PinPlacemarkNode.swift */; };
 		B68A7DB21FF9AB8F00C45FF6 /* BottomUpPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68A7DB11FF9AB8F00C45FF6 /* BottomUpPresentationManager.swift */; };
+		B68A7DBC1FFCC23700C45FF6 /* TopKnobVisualEffectContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68A7DBB1FFCC23700C45FF6 /* TopKnobVisualEffectContainerViewController.swift */; };
+		B68A7DBE1FFCC2F200C45FF6 /* DesiredContentHeightDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68A7DBD1FFCC2F200C45FF6 /* DesiredContentHeightDelegate.swift */; };
+		B68A7DC01FFCC9F200C45FF6 /* KeyboardFrameRespondable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68A7DBF1FFCC9F200C45FF6 /* KeyboardFrameRespondable.swift */; };
 		B695236B1FA8D11E0014ABED /* CLLocation+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236A1FA8D11E0014ABED /* CLLocation+Util.swift */; };
 		B695236D1FA8D2E10014ABED /* SCNVector3+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236C1FA8D2E10014ABED /* SCNVector3+Util.swift */; };
 		B695236F1FA8D3430014ABED /* AxesNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236E1FA8D3430014ABED /* AxesNode.swift */; };
@@ -110,6 +113,9 @@
 		B66634311FCBB09D006D5922 /* PinPlacemarkNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinPlacemarkNode.swift; sourceTree = "<group>"; };
 		B666343E1FCBCDA8006D5922 /* SavedLocationNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedLocationNode.swift; sourceTree = "<group>"; };
 		B68A7DB11FF9AB8F00C45FF6 /* BottomUpPresentationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomUpPresentationManager.swift; sourceTree = "<group>"; };
+		B68A7DBB1FFCC23700C45FF6 /* TopKnobVisualEffectContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopKnobVisualEffectContainerViewController.swift; sourceTree = "<group>"; };
+		B68A7DBD1FFCC2F200C45FF6 /* DesiredContentHeightDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesiredContentHeightDelegate.swift; sourceTree = "<group>"; };
+		B68A7DBF1FFCC9F200C45FF6 /* KeyboardFrameRespondable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardFrameRespondable.swift; sourceTree = "<group>"; };
 		B695236A1FA8D11E0014ABED /* CLLocation+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Util.swift"; sourceTree = "<group>"; };
 		B695236C1FA8D2E10014ABED /* SCNVector3+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Util.swift"; sourceTree = "<group>"; };
 		B695236E1FA8D3430014ABED /* AxesNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxesNode.swift; sourceTree = "<group>"; };
@@ -240,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				B6AA79BC1FB8A3D000428D86 /* VisualEffectContainerViewController.swift */,
+				B68A7DBB1FFCC23700C45FF6 /* TopKnobVisualEffectContainerViewController.swift */,
 			);
 			path = "Visual Effect Container";
 			sourceTree = "<group>";
@@ -335,6 +342,8 @@
 				B6C6EA471FA7A15C001F97E7 /* ViewControllerFromStoryboardProtocol.swift */,
 				B6C6EA531FA7AEA4001F97E7 /* Loggable.swift */,
 				B620C3761FBB6043001B29E9 /* BatchUpdatable.swift */,
+				B68A7DBD1FFCC2F200C45FF6 /* DesiredContentHeightDelegate.swift */,
+				B68A7DBF1FFCC9F200C45FF6 /* KeyboardFrameRespondable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -596,6 +605,7 @@
 				B61470041FB1475B0068CA67 /* InlineColorChooserViewController.swift in Sources */,
 				B6C6EA5F1FA7B5D6001F97E7 /* SCNMaterial+Util.swift in Sources */,
 				B643915E1FC2B548005721E5 /* MainViewController+AR.swift in Sources */,
+				B68A7DBC1FFCC23700C45FF6 /* TopKnobVisualEffectContainerViewController.swift in Sources */,
 				B61470061FB1485F0068CA67 /* Style.swift in Sources */,
 				B66041EF1FA905350076EBEF /* VirtualObject.swift in Sources */,
 				B6C6EA4E1FA7A9A6001F97E7 /* BaseNavigationController.swift in Sources */,
@@ -604,6 +614,7 @@
 				B6C6EA481FA7A15C001F97E7 /* ViewControllerFromStoryboardProtocol.swift in Sources */,
 				B643915A1FC29989005721E5 /* Distance.swift in Sources */,
 				B614700B1FB180E30068CA67 /* Color+MyManagedObjectProtocol.swift in Sources */,
+				B68A7DBE1FFCC2F200C45FF6 /* DesiredContentHeightDelegate.swift in Sources */,
 				B6C6EA8E1FA7E6F5001F97E7 /* UIView+Util.swift in Sources */,
 				B6C6EA751FA7D717001F97E7 /* Defaults+MyManagedObjectProtocol.swift in Sources */,
 				B64391631FC2BEBF005721E5 /* ConfiguringViewController.swift in Sources */,
@@ -617,6 +628,7 @@
 				B6C6EA901FA7E766001F97E7 /* TopDownPresentationManager.swift in Sources */,
 				B6C6EA771FA7D761001F97E7 /* UnitType.swift in Sources */,
 				B6AA79BD1FB8A3D000428D86 /* VisualEffectContainerViewController.swift in Sources */,
+				B68A7DC01FFCC9F200C45FF6 /* KeyboardFrameRespondable.swift in Sources */,
 				B614700D1FB193FA0068CA67 /* UIViewController+Util.swift in Sources */,
 				B6C6EA641FA7BD33001F97E7 /* DataMangerProtocol.swift in Sources */,
 				B6C6EA591FA7AFEF001F97E7 /* ARSCNView+Util.swift in Sources */,

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class VisualEffectContainerViewController : BaseViewController {
+class VisualEffectContainerViewController : BaseViewController, KeyboardFrameRespondable {
   
   // MARK: - Init
   
@@ -42,6 +42,13 @@ class VisualEffectContainerViewController : BaseViewController {
       embeddedViewController.view.backgroundColor = .clear
       self.add(childViewController: embeddedViewController, intoContainerView: visualEffectView.contentView)
     }
+  }
+  
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    if let embeddedViewController = self.embeddedViewController {
+      return embeddedViewController.preferredStatusBarStyle
+    }
+    return .lightContent
   }
   
   // MARK: - Animating

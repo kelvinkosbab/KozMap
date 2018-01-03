@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsViewController : BaseViewController {
+class SettingsViewController : BaseViewController, DesiredContentHeightDelegate {
   
   // MARK: - Static Accessors
   
@@ -16,13 +16,16 @@ class SettingsViewController : BaseViewController {
     return self.newViewController(fromStoryboardWithName: "Main")
   }
   
+  // MARK: - DesiredContentHeightDelegate
+  
+  var desiredContentHeight: CGFloat {
+    return 180
+  }
+  
   // MARK: - Properties
   
-  @IBOutlet weak var topKnobView: UIView!
   @IBOutlet weak var versionLabel: UILabel!
   @IBOutlet weak var unitTypeControl: UISegmentedControl!
-  
-  let defaultContentHeight: CGFloat = 191
   
   // MARK: - Lifecycle
   
@@ -35,16 +38,6 @@ class SettingsViewController : BaseViewController {
   
   override var preferredStatusBarStyle: UIStatusBarStyle {
     return .lightContent
-  }
-  
-  override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews()
-    
-    // Update the corner radius of the to knob if necessary
-    if self.topKnobView.layer.cornerRadius != self.topKnobView.bounds.height / 2 {
-      self.topKnobView.layer.cornerRadius = self.topKnobView.bounds.height / 2
-      self.view.layoutSubviews()
-    }
   }
   
   // MARK: - Content
