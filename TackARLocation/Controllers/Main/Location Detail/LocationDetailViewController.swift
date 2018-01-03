@@ -14,7 +14,7 @@ protocol LocationDetailViewControllerDelegate : class {
   func didUpdate(savedLocation: SavedLocation)
 }
 
-class LocationDetailViewController : BaseViewController {
+class LocationDetailViewController : BaseViewController, DesiredContentHeightDelegate {
   
   // MARK: - Static Accessors
   
@@ -47,6 +47,12 @@ class LocationDetailViewController : BaseViewController {
     return viewController
   }
   
+  // MARK: - DesiredContentHeightDelegate
+  
+  var desiredContentHeight: CGFloat {
+    return 295
+  }
+  
   // MARK: - Properties
   
   @IBOutlet weak var nameTextField: UITextField!
@@ -55,7 +61,6 @@ class LocationDetailViewController : BaseViewController {
   @IBOutlet weak var addLocationButton: UIButton!
   @IBOutlet weak var colorChooserContainer: UIView!
   
-  let preferredContentHeight: CGFloat = 295
   weak var delegate: LocationDetailViewControllerDelegate? = nil
   weak var colorChooserController: InlineColorChooserViewController? = nil
   

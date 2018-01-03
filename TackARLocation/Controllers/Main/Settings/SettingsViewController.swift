@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsViewController : BaseViewController {
+class SettingsViewController : BaseViewController, DesiredContentHeightDelegate {
   
   // MARK: - Static Accessors
   
@@ -16,30 +16,27 @@ class SettingsViewController : BaseViewController {
     return self.newViewController(fromStoryboardWithName: "Main")
   }
   
+  // MARK: - DesiredContentHeightDelegate
+  
+  var desiredContentHeight: CGFloat {
+    return 250
+  }
+  
   // MARK: - Properties
   
-  @IBOutlet weak var versionLabel: UILabel!
+  @IBOutlet weak var settingsLabel: UILabel!
+  @IBOutlet weak var unitLabel: UILabel!
   @IBOutlet weak var unitTypeControl: UISegmentedControl!
-  @IBOutlet weak var bottomDragHandle: UIVisualEffectView!
-  
-  let defaultContentHeight: CGFloat = 191
+  @IBOutlet weak var versionLabel: UILabel!
+  @IBOutlet weak var companyLabel: UILabel!
   
   // MARK: - Lifecycle
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
-    // Style handle
-    self.bottomDragHandle.layer.cornerRadius = 3
-    self.bottomDragHandle.layer.masksToBounds = true
-    self.bottomDragHandle.clipsToBounds = true
-    
     // Reload content
     self.reloadContent()
-  }
-  
-  override var preferredStatusBarStyle: UIStatusBarStyle {
-    return .lightContent
   }
   
   // MARK: - Content
@@ -50,11 +47,7 @@ class SettingsViewController : BaseViewController {
     self.unitTypeControl.selectedSegmentIndex = Defaults.shared.unitType.rawValue
     
     // Version
-    if let versionString = UIApplication.shared.versionString {
-      self.versionLabel.text = "Version \(versionString)"
-    } else {
-      self.versionLabel.text = "Kozinga"
-    }
+    self.versionLabel.text = "Version \(UIApplication.shared.versionString ?? "N/A")"
   }
   
   // MARK: - Actions
@@ -68,5 +61,9 @@ class SettingsViewController : BaseViewController {
       }
     default: break
     }
+  }
+  
+  @IBAction func walkthroughButtonSelected() {
+    
   }
 }

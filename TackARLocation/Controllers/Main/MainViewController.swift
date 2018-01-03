@@ -18,6 +18,7 @@ class MainViewController : BaseViewController {
   
   // MARK: - Properties
   
+  @IBOutlet weak var aboveSafeAreaVisualEffectView: UIVisualEffectView!
   @IBOutlet weak var addVisualEffectView: UIVisualEffectView!
   @IBOutlet weak var addButton: UIButton!
   @IBOutlet weak var listVisualEffectView: UIVisualEffectView!
@@ -34,7 +35,7 @@ class MainViewController : BaseViewController {
     super.viewDidLoad()
     
     self.navigationItem.largeTitleDisplayMode = .never
-    self.clearNavigationBarElements()
+    self.clearNavigationBar()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -47,6 +48,16 @@ class MainViewController : BaseViewController {
     self.listVisualEffectView.layer.cornerRadius = 28
     self.listVisualEffectView.layer.masksToBounds = true
     self.listVisualEffectView.clipsToBounds = true
+    
+    // Notifications
+    NotificationCenter.default.addObserver(self, selector: #selector(self.handleKeyboardNotification(_:)), name: .UIKeyboardWillShow, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(self.handleKeyboardNotification(_:)), name: .UIKeyboardWillHide, object: nil)
+  }
+  
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    
+    NotificationCenter.default.removeObserver(self)
   }
   
   // MARK: - Navigation
@@ -66,7 +77,7 @@ class MainViewController : BaseViewController {
     self.navigationItem.hidesBackButton = false
   }
   
-  func clearNavigationBarElements() {
+  func clearNavigationBar() {
     self.navigationItem.title = nil
     self.navigationItem.leftBarButtonItem = nil
     self.navigationItem.rightBarButtonItem = nil
@@ -76,70 +87,47 @@ class MainViewController : BaseViewController {
   // MARK: - Actions
   
   @IBAction func addButtonSelected() {
-    
-    // Instantiate the location detail view controller
     let addLocationViewController = AddLocationViewController.newViewController(locationDetailDelegate: self, searchDelegate: self)
-    addLocationViewController.modalPresentationStyle = .popover
-    addLocationViewController.popoverPresentationController?.delegate = self
-    addLocationViewController.preferredContentSize = CGSize(width: self.view.bounds.width - 16, height: addLocationViewController.preferredContentHeight)
-    addLocationViewController.popoverPresentationController?.sourceView = self.addButton
-    addLocationViewController.popoverPresentationController?.sourceRect = self.addButton.bounds
-    self.present(addLocationViewController, animated: true, completion: nil)
+    let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: addLocationViewController)
+    let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
+    self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
   }
   
   @IBAction func listButtonSelected() {
-    
-    // Instantiate the location list view controller
     let locationListViewController = LocationListViewController.newViewController(delegate: self)
-    let viewControllerToPresent = VisualEffectContainerViewController(embeddedViewController: locationListViewController)
-    viewControllerToPresent.modalPresentationStyle = .popover
-    viewControllerToPresent.popoverPresentationController?.delegate = self
-    viewControllerToPresent.preferredContentSize = CGSize(width: self.view.bounds.width - 16, height: min(self.view.bounds.height, 300))
-    viewControllerToPresent.popoverPresentationController?.sourceView = self.listButton
-    viewControllerToPresent.popoverPresentationController?.sourceRect = self.listButton.bounds
-    self.present(viewControllerToPresent, animated: true, completion: nil)
+    let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: locationListViewController)
+    let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
+    self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
   }
   
   @objc func settingsButtonSelected() {
     let settingsViewController = SettingsViewController.newViewController()
-    let offset = UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.height ?? 0)
-    let interactiveElement = InteractiveElement(size: settingsViewController.defaultContentHeight, offset: offset, view: settingsViewController.view)
-    let viewControllerToPresent = VisualEffectContainerViewController(embeddedViewController: settingsViewController, blurEffect: UIBlurEffect(style: .dark))
-    self.present(viewController: viewControllerToPresent, withMode: .topDown, inNavigationController: false, dismissInteractiveElement: interactiveElement)
+    let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: settingsViewController)
+    let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
+    self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
   }
   
   // MARK: - Navigation
   
   func presentLocationDetail(savedLocation: SavedLocation) {
-    
-    // Instantiate the location detail view controller
-    let addLocationViewController = LocationDetailViewController.newViewController(savedLocation: savedLocation, delegate: self)
-    let viewControllerToPresent = VisualEffectContainerViewController(embeddedViewController: addLocationViewController)
-    viewControllerToPresent.modalPresentationStyle = .popover
-    viewControllerToPresent.popoverPresentationController?.delegate = self
-    viewControllerToPresent.preferredContentSize = CGSize(width: self.view.bounds.width - 16, height: addLocationViewController.preferredContentHeight)
-    viewControllerToPresent.popoverPresentationController?.sourceView = self.listButton
-    viewControllerToPresent.popoverPresentationController?.sourceRect = self.listButton.bounds
-    self.present(viewControllerToPresent, animated: true, completion: nil)
+    let locationDetailViewController = LocationDetailViewController.newViewController(savedLocation: savedLocation, delegate: self)
+    let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: locationDetailViewController)
+    let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
+    self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
   }
   
   func presentLocationDetail(mapItem: MapItem) {
-    
-    // Instantiate the location detail view controller
-    let addLocationViewController = LocationDetailViewController.newViewController(mapItem: mapItem, delegate: self)
-    let viewControllerToPresent = VisualEffectContainerViewController(embeddedViewController: addLocationViewController)
-    viewControllerToPresent.modalPresentationStyle = .popover
-    viewControllerToPresent.popoverPresentationController?.delegate = self
-    viewControllerToPresent.preferredContentSize = CGSize(width: self.view.bounds.width - 16, height: addLocationViewController.preferredContentHeight)
-    viewControllerToPresent.popoverPresentationController?.sourceView = self.addButton
-    viewControllerToPresent.popoverPresentationController?.sourceRect = self.addButton.bounds
-    self.present(viewControllerToPresent, animated: true, completion: nil)
+    let locationDetailViewController = LocationDetailViewController.newViewController(mapItem: mapItem, delegate: self)
+    let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: locationDetailViewController)
+    let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
+    self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
   }
   
   // MARK: - Hiding and Showing Elements
   
-  func showButtons(completion: (() -> Void)? = nil) {
+  func showElements(completion: (() -> Void)? = nil) {
     UIView.animate(withDuration: 0.3, animations: { [weak self] in
+      self?.aboveSafeAreaVisualEffectView.effect = UIBlurEffect(style: .dark)
       self?.listVisualEffectView.effect = UIBlurEffect(style: .light)
       self?.listButton.alpha = 1
       self?.addVisualEffectView.effect = UIBlurEffect(style: .light)
@@ -147,14 +135,17 @@ class MainViewController : BaseViewController {
     }) { [weak self] _ in
       self?.listButton.isUserInteractionEnabled = true
       self?.addButton.isUserInteractionEnabled = true
+      self?.loadConfiguredNavigationBar()
       completion?()
     }
   }
   
-  func hideButtons(completion: (() -> Void)? = nil) {
+  func hideElements(completion: (() -> Void)? = nil) {
+    self.clearNavigationBar()
     self.listButton.isUserInteractionEnabled = false
     self.addButton.isUserInteractionEnabled = false
     UIView.animate(withDuration: 0.3, animations: { [weak self] in
+      self?.aboveSafeAreaVisualEffectView.effect = nil
       self?.listVisualEffectView.effect = nil
       self?.listButton.alpha = 0
       self?.addVisualEffectView.effect = nil
@@ -162,6 +153,35 @@ class MainViewController : BaseViewController {
     }) { _ in
       completion?()
     }
+  }
+  
+  // MARK: - Keyboard
+  
+  @objc func handleKeyboardNotification(_ notification: NSNotification) {
+    
+    guard let viewController = self.presentedViewController as? KeyboardFrameRespondable, let userInfo = notification.userInfo else {
+      return
+    }
+    
+    let initialViewHeight = viewController.view.bounds.height
+    let endFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+    let duration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+    let animationCurveRawNSN = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
+    let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
+    let animationCurve = UIViewAnimationOptions(rawValue: animationCurveRaw)
+    let keyboardOffset: CGFloat
+    if (endFrame?.origin.y)! >= UIScreen.main.bounds.size.height {
+      keyboardOffset = 0
+    } else {
+      keyboardOffset = endFrame?.size.height ?? 0.0
+    }
+    
+    // Perform the animation
+    UIView.animate(withDuration: duration, delay: 0, options: animationCurve, animations: { [weak self] in
+      if let strongSelf = self {
+        self?.presentedViewController?.view.frame.origin.y = strongSelf.view.bounds.height - keyboardOffset - initialViewHeight
+      }
+    })
   }
 }
 

@@ -8,28 +8,69 @@
 
 import UIKit
 
+// MARK: - InteractiveElement
+
 struct InteractiveElement {
   let size: CGFloat?
   let offset: CGFloat?
   let view: UIView
 }
 
-enum PresentationMode {
-  case modal, modalOverCurrentContext, leftMenu, rightToLeft, fadeWithBlur, overCurrentContext, topDown, navStack
+// MARK: - PresentableControllerOption
+
+enum PresentableControllerOption {
+  case withoutNavigationController, dismissInteractiveElement(InteractiveElement)
 }
+
+extension Sequence where Iterator.Element == PresentableControllerOption {
+  
+  var inNavigationController: Bool {
+    return !self.contains { option -> Bool in
+      switch option {
+      case .withoutNavigationController:
+        return true
+      default:
+        return false
+      }
+    }
+  }
+  
+  var dismissInteractiveElement: InteractiveElement? {
+    for option in self {
+      switch option {
+      case .dismissInteractiveElement(let interactiveElement):
+        return interactiveElement
+      default: break
+      }
+    }
+    return nil
+  }
+}
+
+// MARK: - PresentationMode
+
+enum PresentationMode {
+  case modal, modalOverCurrentContext, leftMenu, rightToLeft, fadeWithBlur, overCurrentContext, topDown, bottomUp, navStack
+}
+
+// MARK: - PresentableController
 
 protocol PresentableController : class {
   var presentedMode: PresentationMode { get set }
   var transitioningDelegateReference: UIViewControllerTransitioningDelegate? { get set }
   var currentFlowFirstController: PresentableController? { get set }
-  func present(viewController: UIViewController, withMode mode: PresentationMode, inNavigationController: Bool, dismissInteractiveElement: InteractiveElement?, completion: (() -> Void)?)
+  func present(viewController: UIViewController, withMode mode: PresentationMode, options: [PresentableControllerOption], completion: (() -> Void)?)
   func dismissController(completion: (() -> Void)?)
   func dismissCurrentNavigationFlow(completion: (() -> Void)?)
 }
 
 extension PresentableController where Self : UIViewController {
   
-  func present(viewController: UIViewController, withMode mode: PresentationMode, inNavigationController: Bool = true, dismissInteractiveElement: InteractiveElement? = nil, completion: (() -> Void)? = nil) {
+  func present(viewController: UIViewController, withMode mode: PresentationMode, options: [PresentableControllerOption] = [], completion: (() -> Void)? = nil) {
+    
+    // Handle options
+    let inNavigationController = options.inNavigationController
+    let dismissInteractiveElement: InteractiveElement? = options.dismissInteractiveElement
     
     // Configure the view controller to present
     let presentingPresentableController: PresentableController? = viewController as? PresentableController
@@ -99,6 +140,15 @@ extension PresentableController where Self : UIViewController {
     case .topDown:
       presentingPresentableController?.currentFlowFirstController = self
       let presentationManager = TopDownPresentationManager(interactiveElement: dismissInteractiveElement, dismissInteractor: DragUpDismissInteractiveTransition(presentingController: viewControllerToPresent, interactiveView: dismissInteractiveElement?.view))
+      viewControllerToPresent.modalPresentationStyle = .custom
+      viewControllerToPresent.modalPresentationCapturesStatusBarAppearance = true
+      viewControllerToPresent.transitioningDelegate = presentationManager
+      viewControllerToPresentPresentableController?.transitioningDelegateReference = presentationManager
+      self.present(viewControllerToPresent, animated: true, completion: completion)
+      
+    case .bottomUp:
+      presentingPresentableController?.currentFlowFirstController = self
+      let presentationManager = BottomUpPresentationManager(interactiveElement: dismissInteractiveElement, dismissInteractor: DragDownDismissInteractiveTransition(presentingController: viewControllerToPresent, interactiveView: dismissInteractiveElement?.view))
       viewControllerToPresent.modalPresentationStyle = .custom
       viewControllerToPresent.modalPresentationCapturesStatusBarAppearance = true
       viewControllerToPresent.transitioningDelegate = presentationManager

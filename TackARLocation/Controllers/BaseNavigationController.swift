@@ -27,13 +27,13 @@ class BaseNavigationController : UINavigationController, PresentableController {
   // MARK: - NavigationBarStyle
   
   enum NavigationBarStyle {
-    case standard, transparent
+    case standard, transparent, transparentBlack
     
     var isTranslucent: Bool {
       switch self {
       case .standard:
         return false
-      case .transparent:
+      case .transparent, .transparentBlack:
         return true
       }
     }
@@ -42,7 +42,7 @@ class BaseNavigationController : UINavigationController, PresentableController {
       switch self {
       case .standard:
         return .white
-      case .transparent:
+      case .transparent, .transparentBlack:
         return .clear
       }
     }
@@ -53,6 +53,8 @@ class BaseNavigationController : UINavigationController, PresentableController {
         return .blue
       case .transparent:
         return .white
+      case .transparentBlack:
+        return .black
       }
     }
     
@@ -62,6 +64,8 @@ class BaseNavigationController : UINavigationController, PresentableController {
         return [ NSAttributedStringKey.font: UIFont.systemFont(ofSize: 17, weight: .medium), NSAttributedStringKey.foregroundColor: UIColor.black ]
       case .transparent:
         return [ NSAttributedStringKey.font: UIFont.systemFont(ofSize: 17, weight: .medium), NSAttributedStringKey.foregroundColor: UIColor.white ]
+      case .transparentBlack:
+        return [ NSAttributedStringKey.font: UIFont.systemFont(ofSize: 17, weight: .medium), NSAttributedStringKey.foregroundColor: UIColor.black ]
       }
     }
     
@@ -123,7 +127,7 @@ class BaseNavigationController : UINavigationController, PresentableController {
   
   override var preferredStatusBarStyle: UIStatusBarStyle {
     switch self.navigationBarStyle {
-    case .standard:
+    case .standard, .transparentBlack:
       return .default
     case .transparent:
       return .lightContent

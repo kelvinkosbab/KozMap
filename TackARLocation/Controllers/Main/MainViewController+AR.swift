@@ -16,45 +16,37 @@ extension MainViewController : ARStateDelegate {
     
     // Check if the scene hasn't already been configured
     guard self.arViewController?.sceneNode == nil else {
-      // TODO: - KAK future - display any state messages
+      // TODO: - KAK future - display any necessary state messages
       return
     }
     
     switch state {
-    case .configuring:
-      self.showConfiguringView(status: "⚙️ Configuring ⚙️")
-    case .limited(.insufficientFeatures):
-      self.showConfiguringView(status: "⚙️ Configuring ⚙️\nInsufficent Features")
-    case .limited(.excessiveMotion):
-      self.showConfiguringView(status: "⚙️ Configuring ⚙️\nExcessive Motion")
-    case .limited(.initializing):
-      self.showConfiguringView(status: "⚙️ Configuring ⚙️")
     case .normal:
       self.hideConfiguringView()
-    case .notAvailable:
-      self.showConfiguringView(status: "❌ Not Available ❌")
+    default:
+      self.showConfiguringView(state: state)
     }
   }
   
   // MARK: - Configuring View
   
-  func showConfiguringView(status: String) {
+  func showConfiguringView(state: ARState) {
     
     // Check if already showing the configuring view
     if let configuringViewController = self.configuringViewController {
-      configuringViewController.status = status
+      configuringViewController.state = .statusMessage(state.status, state.message)
       return
     }
     
     // Create the configuring view
-    let configuringViewController = ConfiguringViewController.newViewController(status: status)
+    let configuringViewController = ConfiguringViewController.newViewController(state: .statusMessage(state.status, state.message))
     configuringViewController.view.alpha = 0
     self.configuringViewController = configuringViewController
     let visualEffectContainerController = VisualEffectContainerViewController(embeddedViewController: configuringViewController, blurEffect: nil)
     self.configuringVisualEffectContainerViewController = visualEffectContainerController
     
     // Hide the buttons
-    self.hideButtons { [weak self] in
+    self.hideElements { [weak self] in
       if let strongSelf = self {
         strongSelf.add(childViewController: visualEffectContainerController, intoContainerView: strongSelf.view)
         
@@ -71,7 +63,7 @@ extension MainViewController : ARStateDelegate {
   func hideConfiguringView() {
     
     guard let _ = self.configuringViewController, let configuringVisualEffectContainerViewController = self.configuringVisualEffectContainerViewController else {
-      self.showButtons()
+      self.showElements()
       return
     }
     
@@ -82,7 +74,7 @@ extension MainViewController : ARStateDelegate {
     })
     configuringVisualEffectContainerViewController.update(blurEffect: nil, duration: duration) { [weak self] in
       self?.loadConfiguredNavigationBar()
-      self?.showButtons()
+      self?.showElements()
       if let configuringVisualEffectContainerViewController = self?.configuringVisualEffectContainerViewController {
         self?.remove(childViewController: configuringVisualEffectContainerViewController)
       }

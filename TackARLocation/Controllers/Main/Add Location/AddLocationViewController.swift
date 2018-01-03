@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class AddLocationViewController : BaseViewController {
+class AddLocationViewController : BaseViewController, DesiredContentHeightDelegate, KeyboardFrameRespondable {
   
   // MARK: - Static Accessors
   
@@ -24,12 +24,17 @@ class AddLocationViewController : BaseViewController {
     return viewController
   }
   
+  // MARK: - DesiredContentHeightDelegate
+  
+  var desiredContentHeight: CGFloat {
+    return 335
+  }
+  
   // MARK: - Properties
   
   @IBOutlet weak var segmentedControl: UISegmentedControl!
   @IBOutlet weak var pagingContainerView: UIView!
   
-  let preferredContentHeight: CGFloat = 325
   var pageViewController: UIPageViewController? = nil
   weak var locationDetailDelegate: LocationDetailViewControllerDelegate? = nil
   weak var searchDelegate: SearchViewControllerDelegate? = nil
