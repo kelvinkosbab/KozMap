@@ -21,8 +21,8 @@ extension MyClassProtocol {
   }
 }
 
-extension NSObject: MyClassProtocol {}
-extension Int: MyClassProtocol {}
-extension Float: MyClassProtocol {}
-extension Double: MyClassProtocol {}
-extension String: MyClassProtocol {}
+extension NSObject : MyClassProtocol {}
+extension Int : MyClassProtocol {}
+extension Float : MyClassProtocol {}
+extension Double : MyClassProtocol {}
+extension String : MyClassProtocol {}

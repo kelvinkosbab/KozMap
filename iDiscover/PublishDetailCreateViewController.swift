@@ -9,12 +9,16 @@
 import Foundation
 import UIKit
 
+protocol PublishNetServiceDelegate : class {
+  func servicePublished()
+}
+
 class PublishDetailCreateViewController: MyTableViewController, UITextFieldDelegate {
   
   // MARK: - Class Accessors
   
-  static func newController() -> PublishDetailCreateViewController {
-    return self.newController(fromStoryboard: .main, withIdentifier: self.name) as! PublishDetailCreateViewController
+  static func newViewController() -> PublishDetailCreateViewController {
+    return self.newViewController(fromStoryboard: .services)
   }
   
   // MARK: - Properties
@@ -27,12 +31,17 @@ class PublishDetailCreateViewController: MyTableViewController, UITextFieldDeleg
   @IBOutlet weak var domainTextField: UITextField!
   @IBOutlet weak var detailTextField: UITextField!
   
+  weak var delegate: PublishNetServiceDelegate? = nil
+  
   // MARK: - Lifecycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     self.title = "Create a Service"
+    
+    self.navigationItem.leftBarButtonItem = UIBarButtonItem(text: "Cancel", target: self, action: #selector(self.cancelButtonSelected))
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(text: "Publish", target: self, action: #selector(self.publishButtonSelected))
     
     self.nameTextField.delegate = self
     self.typeTextField.delegate = self
@@ -94,9 +103,7 @@ class PublishDetailCreateViewController: MyTableViewController, UITextFieldDeleg
       self.detailTextField.becomeFirstResponder()
       
     } else if indexPath.section == 6 && indexPath.row == 0 {
-      self.publishButtonSelected()
-    } else if indexPath.section == 7 && indexPath.row == 0{
-      self.clearButtonSelected()
+      self.resetForm()
     }
   }
   
@@ -138,16 +145,20 @@ class PublishDetailCreateViewController: MyTableViewController, UITextFieldDeleg
   
   // MARK: - Actions
   
-  private func publishButtonSelected() {
+  @objc func cancelButtonSelected() {
+    self.dismissController()
+  }
+  
+  @objc func publishButtonSelected() {
     
     // Validate the form
     
-    guard let name = self.nameTextField.text, !name.trim().isEmpty else {
+    guard let name = self.nameTextField.text?.trimmed, !name.isEmpty else {
       self.showDisappearingAlertDialog(title: "Service Name Required")
       return
     }
     
-    guard let type = self.typeTextField.text, !type.trim().isEmpty else {
+    guard let type = self.typeTextField.text?.trimmed, !type.isEmpty else {
       self.showDisappearingAlertDialog(title: "Service Type Required")
       return
     }
@@ -165,8 +176,8 @@ class PublishDetailCreateViewController: MyTableViewController, UITextFieldDeleg
     
     let domain = self.domainTextField.text ?? ""
     var detail: String? = nil
-    if let text = self.detailTextField.text, !text.trim().isEmpty {
-      detail = text.trim()
+    if let text = self.detailTextField.text?.trimmed, !text.isEmpty {
+      detail = text.trimmed
     }
     
     // Publish the service
@@ -176,7 +187,7 @@ class PublishDetailCreateViewController: MyTableViewController, UITextFieldDeleg
       MyLoadingManager.hideLoading()
       self.showDisappearingAlertDialog(title: "Service Published!") {
         self.dismissController(completion: {
-          NotificationCenter.default.post(name: .publishNetServiceSearchShouldDismiss, object: nil)
+          self.delegate?.servicePublished()
         })
       }
     }) { 
@@ -184,9 +195,5 @@ class PublishDetailCreateViewController: MyTableViewController, UITextFieldDeleg
       MyLoadingManager.hideLoading()
       self.showDisappearingAlertDialog(title: "☹️ Something Went Wrong ☹️", message: "Please try again.")
     }
-  }
-  
-  private func clearButtonSelected() {
-    self.resetForm()
   }
 }

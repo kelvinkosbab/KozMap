@@ -13,8 +13,8 @@ class CreateServiceTypeTableViewController: MyTableViewController, UITextFieldDe
   
   // MARK: - Class Accessors
   
-  static func newController() -> CreateServiceTypeTableViewController {
-    return self.newController(fromStoryboard: .main, withIdentifier: self.name) as! CreateServiceTypeTableViewController
+  static func newViewController() -> CreateServiceTypeTableViewController {
+    return self.newViewController(fromStoryboard: .services)
   }
   
   // MARK: - Properties
@@ -31,6 +31,9 @@ class CreateServiceTypeTableViewController: MyTableViewController, UITextFieldDe
     super.viewDidLoad()
     
     self.title = "Create a Service"
+    
+    self.navigationItem.leftBarButtonItem = UIBarButtonItem(text: "Cancel", target: self, action: #selector(self.cancelButtonSelected(_:)))
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(text: "Create", target: self, action: #selector(self.createButtonSelected(_:)))
     
     self.nameTextField.delegate = self
     self.typeTextField.delegate = self
@@ -84,9 +87,7 @@ class CreateServiceTypeTableViewController: MyTableViewController, UITextFieldDe
       self.detailTextField.becomeFirstResponder()
       
     } else if indexPath.section == 4 && indexPath.row == 0 {
-      self.createButtonSelected()
-    } else if indexPath.section == 5 && indexPath.row == 0{
-      self.clearButtonSelected()
+      self.resetForm()
     }
   }
   
@@ -119,18 +120,22 @@ class CreateServiceTypeTableViewController: MyTableViewController, UITextFieldDe
   
   // MARK: - Actions
   
-  private func createButtonSelected() {
+  @objc func cancelButtonSelected(_ sender: UIButton) {
+    self.dismissController()
+  }
+  
+  @objc func createButtonSelected(_ sender: UIButton) {
     
     // Validate the form
     
     let transportLayer = MyTransportLayer.tcp
     
-    guard let name = self.nameTextField.text, !name.trim().isEmpty else {
+    guard let name = self.nameTextField.text?.trimmed, !name.isEmpty else {
       self.showDisappearingAlertDialog(title: "Service Name Required")
       return
     }
     
-    guard let type = self.typeTextField.text, !type.trim().isEmpty else {
+    guard let type = self.typeTextField.text?.trimmed, !type.isEmpty else {
       self.showDisappearingAlertDialog(title: "Service Type Required")
       return
     }
@@ -142,8 +147,8 @@ class CreateServiceTypeTableViewController: MyTableViewController, UITextFieldDe
     }
     
     var detail: String? = nil
-    if let text = self.detailTextField.text, !text.trim().isEmpty {
-      detail = text.trim()
+    if let text = self.detailTextField.text?.trimmed, !text.isEmpty {
+      detail = text
     }
     
     // Create the service type
@@ -157,9 +162,5 @@ class CreateServiceTypeTableViewController: MyTableViewController, UITextFieldDe
       self.dismissController()
       NotificationCenter.default.post(name: .myServiceTypeDidCreateAndSave, object: serviceType)
     }
-  }
-  
-  private func clearButtonSelected() {
-    self.resetForm()
   }
 }

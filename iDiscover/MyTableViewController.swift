@@ -9,11 +9,12 @@
 import Foundation
 import UIKit
 
-class MyTableViewController: UITableViewController, PresentableController {
+class MyTableViewController : UITableViewController, PresentableController, MyViewControllerIdentifierProtocol {
   
-  // MARK: - Properties
+  // MARK: - PresentableController
   
   var presentedMode: PresentationMode = .navStack
+  var transitioningDelegateReference: UIViewControllerTransitioningDelegate? = nil
   
   // MARK: - Lifecycle
   
@@ -41,7 +42,7 @@ class MyTableViewController: UITableViewController, PresentableController {
   
   override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let headerView = UIView()
-    headerView.backgroundColor = UIColor.white
+    headerView.backgroundColor = .white
     return headerView
   }
   
@@ -51,7 +52,7 @@ class MyTableViewController: UITableViewController, PresentableController {
   
   override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
     let footerView = UIView()
-    footerView.backgroundColor = UIColor.white
+    footerView.backgroundColor = .clear
     return footerView
   }
   
