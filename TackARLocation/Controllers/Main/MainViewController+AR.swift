@@ -8,6 +8,13 @@
 
 import UIKit
 
+extension MainViewController : ARViewControllerDelegate {
+  
+  func userDidTap(savedLocation: SavedLocation) {
+    self.presentLocationDetail(savedLocation: savedLocation)
+  }
+}
+
 extension MainViewController : ARStateDelegate {
   
   // MARK: - ARStateDelegate

@@ -64,6 +64,7 @@ class MainViewController : BaseViewController {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if let arViewController = segue.destination as? ARViewController {
+      arViewController.delegate = self
       arViewController.trackingStateDelegate = self
       self.arViewController = arViewController
     }
@@ -87,6 +88,11 @@ class MainViewController : BaseViewController {
   // MARK: - Actions
   
   @IBAction func addButtonSelected() {
+    
+    guard self.presentedViewController == nil else {
+      return
+    }
+    
     let addLocationViewController = AddLocationViewController.newViewController(locationDetailDelegate: self, searchDelegate: self)
     let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: addLocationViewController)
     let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
@@ -94,6 +100,11 @@ class MainViewController : BaseViewController {
   }
   
   @IBAction func listButtonSelected() {
+    
+    guard self.presentedViewController == nil else {
+      return
+    }
+    
     let locationListViewController = LocationListViewController.newViewController(delegate: self)
     let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: locationListViewController)
     let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
@@ -101,6 +112,11 @@ class MainViewController : BaseViewController {
   }
   
   @objc func settingsButtonSelected() {
+    
+    guard self.presentedViewController == nil else {
+      return
+    }
+    
     let settingsViewController = SettingsViewController.newViewController()
     let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: settingsViewController)
     let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
@@ -110,6 +126,11 @@ class MainViewController : BaseViewController {
   // MARK: - Navigation
   
   func presentLocationDetail(savedLocation: SavedLocation) {
+    
+    guard self.presentedViewController == nil else {
+      return
+    }
+    
     let locationDetailViewController = LocationDetailViewController.newViewController(savedLocation: savedLocation, delegate: self)
     let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: locationDetailViewController)
     let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
@@ -117,6 +138,11 @@ class MainViewController : BaseViewController {
   }
   
   func presentLocationDetail(mapItem: MapItem) {
+    
+    guard self.presentedViewController == nil else {
+      return
+    }
+    
     let locationDetailViewController = LocationDetailViewController.newViewController(mapItem: mapItem, delegate: self)
     let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: locationDetailViewController)
     let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)

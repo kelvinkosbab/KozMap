@@ -26,6 +26,7 @@
 		B66041EF1FA905350076EBEF /* VirtualObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66041EE1FA905350076EBEF /* VirtualObject.swift */; };
 		B66634321FCBB09D006D5922 /* PinPlacemarkNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66634311FCBB09D006D5922 /* PinPlacemarkNode.swift */; };
 		B668AB402006052300997FB9 /* ARDistanceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B668AB3F2006052300997FB9 /* ARDistanceType.swift */; };
+		B668AB4220060C6B00997FB9 /* ARViewController+Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = B668AB4120060C6B00997FB9 /* ARViewController+Gestures.swift */; };
 		B68A7DB21FF9AB8F00C45FF6 /* BottomUpPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68A7DB11FF9AB8F00C45FF6 /* BottomUpPresentationManager.swift */; };
 		B68A7DBC1FFCC23700C45FF6 /* TopKnobVisualEffectContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68A7DBB1FFCC23700C45FF6 /* TopKnobVisualEffectContainerViewController.swift */; };
 		B68A7DBE1FFCC2F200C45FF6 /* DesiredContentHeightDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68A7DBD1FFCC2F200C45FF6 /* DesiredContentHeightDelegate.swift */; };
@@ -114,6 +115,7 @@
 		B66634311FCBB09D006D5922 /* PinPlacemarkNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinPlacemarkNode.swift; sourceTree = "<group>"; };
 		B666343E1FCBCDA8006D5922 /* SavedLocationNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedLocationNode.swift; sourceTree = "<group>"; };
 		B668AB3F2006052300997FB9 /* ARDistanceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARDistanceType.swift; sourceTree = "<group>"; };
+		B668AB4120060C6B00997FB9 /* ARViewController+Gestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ARViewController+Gestures.swift"; sourceTree = "<group>"; };
 		B68A7DB11FF9AB8F00C45FF6 /* BottomUpPresentationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomUpPresentationManager.swift; sourceTree = "<group>"; };
 		B68A7DBB1FFCC23700C45FF6 /* TopKnobVisualEffectContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopKnobVisualEffectContainerViewController.swift; sourceTree = "<group>"; };
 		B68A7DBD1FFCC2F200C45FF6 /* DesiredContentHeightDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesiredContentHeightDelegate.swift; sourceTree = "<group>"; };
@@ -485,6 +487,7 @@
 			isa = PBXGroup;
 			children = (
 				B6C6EA511FA7ACEC001F97E7 /* ARViewController.swift */,
+				B668AB4120060C6B00997FB9 /* ARViewController+Gestures.swift */,
 			);
 			path = "Placemark AR";
 			sourceTree = "<group>";
@@ -578,6 +581,7 @@
 				B6C791621FE76DBC00037105 /* SavedLocationNode.swift in Sources */,
 				B6C6EA951FA7E869001F97E7 /* UIDevice+Util.swift in Sources */,
 				B6C6EA821FA7E670001F97E7 /* PresenationManagerProtocol.swift in Sources */,
+				B668AB4220060C6B00997FB9 /* ARViewController+Gestures.swift in Sources */,
 				B695236B1FA8D11E0014ABED /* CLLocation+Util.swift in Sources */,
 				B63B9A281FBA7D7100982FC6 /* LocationSearchService.swift in Sources */,
 				B6C6EA711FA7C26D001F97E7 /* LocationDetailViewController.swift in Sources */,

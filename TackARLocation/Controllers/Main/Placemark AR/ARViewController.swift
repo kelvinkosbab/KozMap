@@ -11,18 +11,23 @@ import ARKit
 import CoreLocation
 import CoreData
 
+protocol ARViewControllerDelegate : class {
+  func userDidTap(savedLocation: SavedLocation)
+}
+
 class ARViewController : UIViewController {
   
   // MARK: - Properties
   
   @IBOutlet weak var sceneView: ARSCNView!
   
+  weak var delegate: ARViewControllerDelegate? = nil
   weak var trackingStateDelegate: ARStateDelegate? = nil
   private let session = ARSession()
   private let sessionConfig = ARWorldTrackingConfiguration()
   public private(set) weak var sceneNode: SCNNode?
   public private(set) weak var basePlane: SCNNode?
-  private var placemarks = Set<SavedLocationNode>()
+  internal var placemarks = Set<SavedLocationNode>()
   
   var savedLocations: [SavedLocation] {
     return self.savedLocationsFetchedResultsController?.fetchedObjects ?? []
@@ -101,7 +106,11 @@ class ARViewController : UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    // Setup the scene
     self.sceneView.setUp(delegate: self, session: self.session)
+    
+    // Listen for gestures
+    self.startListeningForGestures()
   }
   
   override func viewWillAppear(_ animated: Bool) {
