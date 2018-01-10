@@ -204,11 +204,11 @@ class ARViewController : UIViewController {
       
       // Update the active placemark node
       let dispatchGroup = DispatchGroup()
-      let closeDistanceCutoff: Double = 400 // 400 meters = 0.25 miles
-      let mediumDistanceCutoff: Double = 8000 // 8000 meters = 5 miles
+      let defaultPlacemarkDistanceCutoff: Double = 400 // 400 meters = 0.25 miles
+      let pinPlacemarkDistanceCutoff: Double = 8000 // 8000 meters = 5 miles
       let duration: TimeInterval = 0.5
       
-      if distance < closeDistanceCutoff && !placemark.isDefaultPlacemarkNode {
+      if distance < defaultPlacemarkDistanceCutoff && !placemark.isDefaultPlacemarkNode {
         dispatchGroup.enter()
         let defaultPlacemarkNode = PlacemarkNode()
         defaultPlacemarkNode.loadModel { [weak self] in
@@ -220,7 +220,7 @@ class ARViewController : UIViewController {
           dispatchGroup.leave()
         }
         
-      } else if distance >= closeDistanceCutoff && distance < mediumDistanceCutoff && !placemark.isPinPlacemarkNode {
+      } else if distance >= defaultPlacemarkDistanceCutoff && distance < pinPlacemarkDistanceCutoff && !placemark.isPinPlacemarkNode {
         dispatchGroup.enter()
         let pinPlacemarkNode = PinPlacemarkNode()
         pinPlacemarkNode.loadModel { [weak self] in
@@ -233,7 +233,7 @@ class ARViewController : UIViewController {
           dispatchGroup.leave()
         }
         
-      } else if distance >= mediumDistanceCutoff {
+      } else if distance >= pinPlacemarkDistanceCutoff {
         dispatchGroup.enter()
         placemark.placemarkNode?.removeFromParentNode()
         placemark.placemarkNode = nil
@@ -250,13 +250,14 @@ class ARViewController : UIViewController {
         // Translated location
         let locationTranslation = currentLocation.translation(toLocation: placemark.savedLocation.location)
         
-        if distance < closeDistanceCutoff {
+        if distance < defaultPlacemarkDistanceCutoff {
           
-          // Close distance
+          // Use actual distance when scaling and positioning the node
           
           // Scale the node according to distance where at a zero distance the node will have a height of 50m
           let desiredNodeHeight: Float = 50 + Float(distance)
-          let scale = desiredNodeHeight / placemarkNode.boundingBox.max.y
+          let additionalScaleByDistance: Float = Float(distance) * 0.025
+          let scale = (desiredNodeHeight / placemarkNode.boundingBox.max.y) + additionalScaleByDistance
           placemarkNode.scalableNode?.scale = SCNVector3(x: scale, y: scale, z: scale)
           
           // Update the position
@@ -270,7 +271,7 @@ class ARViewController : UIViewController {
           let moveAction = SCNAction.move(to: position, duration: animated ? duration : 0)
           placemarkNode.runAction(moveAction)
           
-        } else {//if distance >= closeDistanceCutoff && distance < mediumDistanceCutoff {
+        } else { //if distance >= defaultPlacemarkDistanceCutoff && distance < pinPlacemarkDistanceCutoff {
           
           // Medium distance
           let translationScale = 100 / distance
