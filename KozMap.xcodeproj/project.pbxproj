@@ -17,6 +17,8 @@
 		B62735DC1FB7EDFF004711A4 /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62735DB1FB7EDFF004711A4 /* PermissionManager.swift */; };
 		B62735DE1FB7EEE2004711A4 /* CameraPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62735DD1FB7EEE2004711A4 /* CameraPermissionManager.swift */; };
 		B62735E11FB82B9E004711A4 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62735E01FB82B9E004711A4 /* SearchViewController.swift */; };
+		B63419532006D2DB00847049 /* BuildManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63419522006D2DB00847049 /* BuildManager.swift */; };
+		B63419552006D55A00847049 /* AppCompany.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63419542006D55A00847049 /* AppCompany.swift */; };
 		B63B9A281FBA7D7100982FC6 /* LocationSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63B9A271FBA7D7100982FC6 /* LocationSearchService.swift */; };
 		B64391571FC2861B005721E5 /* CurrentLocationUpdatableService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64391561FC2861B005721E5 /* CurrentLocationUpdatableService.swift */; };
 		B643915A1FC29989005721E5 /* Distance.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64391591FC29989005721E5 /* Distance.swift */; };
@@ -104,6 +106,8 @@
 		B62735DB1FB7EDFF004711A4 /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
 		B62735DD1FB7EEE2004711A4 /* CameraPermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPermissionManager.swift; sourceTree = "<group>"; };
 		B62735E01FB82B9E004711A4 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		B63419522006D2DB00847049 /* BuildManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildManager.swift; sourceTree = "<group>"; };
+		B63419542006D55A00847049 /* AppCompany.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCompany.swift; sourceTree = "<group>"; };
 		B63B9A271FBA7D7100982FC6 /* LocationSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchService.swift; sourceTree = "<group>"; };
 		B64391551FC1F336005721E5 /* TackARLocation 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TackARLocation 3.xcdatamodel"; sourceTree = "<group>"; };
 		B64391561FC2861B005721E5 /* CurrentLocationUpdatableService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationUpdatableService.swift; sourceTree = "<group>"; };
@@ -220,6 +224,15 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
+		B63419512006D2CE00847049 /* Build Manager */ = {
+			isa = PBXGroup;
+			children = (
+				B63419522006D2DB00847049 /* BuildManager.swift */,
+				B63419542006D55A00847049 /* AppCompany.swift */,
+			);
+			path = "Build Manager";
+			sourceTree = "<group>";
+		};
 		B64391581FC28DD9005721E5 /* Location */ = {
 			isa = PBXGroup;
 			children = (
@@ -285,6 +298,7 @@
 		B6C6EA3D1FA79F21001F97E7 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				B63419512006D2CE00847049 /* Build Manager */,
 				B62735DA1FB7EDEB004711A4 /* Permissions */,
 				B6C6EA911FA7E836001F97E7 /* Device */,
 				B6C6EA7C1FA7E62B001F97E7 /* Presenting Controllers */,
@@ -570,6 +584,7 @@
 				B6C6EA9F1FA7EBF6001F97E7 /* BaseTableViewController.swift in Sources */,
 				B6C6EA6A1FA7BE0A001F97E7 /* SavedLocation+MyManagedObjectProtocol.swift in Sources */,
 				B6C6EA4C1FA7A694001F97E7 /* RootNavigationController.swift in Sources */,
+				B63419532006D2DB00847049 /* BuildManager.swift in Sources */,
 				B614700F1FB194380068CA67 /* UICollectionView+Util.swift in Sources */,
 				B64391571FC2861B005721E5 /* CurrentLocationUpdatableService.swift in Sources */,
 				B695236F1FA8D3430014ABED /* AxesNode.swift in Sources */,
@@ -632,6 +647,7 @@
 				B6C6EA541FA7AEA4001F97E7 /* Loggable.swift in Sources */,
 				B6C6EA291FA79B45001F97E7 /* AppDelegate.swift in Sources */,
 				B6C6EA881FA7E6BB001F97E7 /* LeftMenuPresentationManager.swift in Sources */,
+				B63419552006D55A00847049 /* AppCompany.swift in Sources */,
 				B6C6EA731FA7CDF9001F97E7 /* MainViewController+CoreLocation.swift in Sources */,
 				B6C6EA901FA7E766001F97E7 /* TopDownPresentationManager.swift in Sources */,
 				B6C6EA771FA7D761001F97E7 /* UnitType.swift in Sources */,
@@ -673,6 +689,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_ID = com.tackmobile.ARMap;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -701,6 +718,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DISPLAY_NAME = ARMap;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -720,6 +738,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-DDEBUG -DTACK";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -745,6 +764,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_ID = com.tackmobile.ARMap;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -773,6 +793,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DISPLAY_NAME = ARMap;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -785,6 +806,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "-DTACK";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
@@ -810,6 +832,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_ID = com.kozinga.KozMap;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -838,6 +861,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DISPLAY_NAME = KozMap;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -857,6 +881,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-DDEBUG -DKOZINGA";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -867,6 +892,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_ID = com.kozinga.KozMap;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -895,6 +921,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DISPLAY_NAME = KozMap;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -907,6 +934,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "-DKOZINGA";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;

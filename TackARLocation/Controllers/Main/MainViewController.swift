@@ -73,7 +73,7 @@ class MainViewController : BaseViewController {
   // MARK: - Navigation Items
   
   func loadConfiguredNavigationBar() {
-    self.navigationItem.title = "KozMap"
+    self.navigationItem.title = BuildManager.shared.company.displayName
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "assetOptions"), style: .plain, target: self, action: #selector(self.settingsButtonSelected))
     self.navigationItem.hidesBackButton = false
   }
