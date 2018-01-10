@@ -25,6 +25,7 @@
 		B64391631FC2BEBF005721E5 /* ConfiguringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64391621FC2BEBF005721E5 /* ConfiguringViewController.swift */; };
 		B66041EF1FA905350076EBEF /* VirtualObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66041EE1FA905350076EBEF /* VirtualObject.swift */; };
 		B66634321FCBB09D006D5922 /* PinPlacemarkNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66634311FCBB09D006D5922 /* PinPlacemarkNode.swift */; };
+		B668AB402006052300997FB9 /* ARDistanceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B668AB3F2006052300997FB9 /* ARDistanceType.swift */; };
 		B68A7DB21FF9AB8F00C45FF6 /* BottomUpPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68A7DB11FF9AB8F00C45FF6 /* BottomUpPresentationManager.swift */; };
 		B68A7DBC1FFCC23700C45FF6 /* TopKnobVisualEffectContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68A7DBB1FFCC23700C45FF6 /* TopKnobVisualEffectContainerViewController.swift */; };
 		B68A7DBE1FFCC2F200C45FF6 /* DesiredContentHeightDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68A7DBD1FFCC2F200C45FF6 /* DesiredContentHeightDelegate.swift */; };
@@ -112,6 +113,7 @@
 		B66041EE1FA905350076EBEF /* VirtualObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObject.swift; sourceTree = "<group>"; };
 		B66634311FCBB09D006D5922 /* PinPlacemarkNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinPlacemarkNode.swift; sourceTree = "<group>"; };
 		B666343E1FCBCDA8006D5922 /* SavedLocationNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedLocationNode.swift; sourceTree = "<group>"; };
+		B668AB3F2006052300997FB9 /* ARDistanceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARDistanceType.swift; sourceTree = "<group>"; };
 		B68A7DB11FF9AB8F00C45FF6 /* BottomUpPresentationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomUpPresentationManager.swift; sourceTree = "<group>"; };
 		B68A7DBB1FFCC23700C45FF6 /* TopKnobVisualEffectContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopKnobVisualEffectContainerViewController.swift; sourceTree = "<group>"; };
 		B68A7DBD1FFCC2F200C45FF6 /* DesiredContentHeightDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesiredContentHeightDelegate.swift; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 				B61470051FB1485F0068CA67 /* Style.swift */,
 				B64391591FC29989005721E5 /* Distance.swift */,
 				B643915F1FC2BCF1005721E5 /* ARState.swift */,
+				B668AB3F2006052300997FB9 /* ARDistanceType.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -592,6 +595,7 @@
 				B695236D1FA8D2E10014ABED /* SCNVector3+Util.swift in Sources */,
 				B62735DE1FB7EEE2004711A4 /* CameraPermissionManager.swift in Sources */,
 				B6B47FD51FBFB61B004AE609 /* SearchViewController+Cells.swift in Sources */,
+				B668AB402006052300997FB9 /* ARDistanceType.swift in Sources */,
 				B6C6EA611FA7B68C001F97E7 /* Plane.swift in Sources */,
 				B6C6EA8C1FA7E6E3001F97E7 /* HDFadeWithBlurPresentationManager.swift in Sources */,
 				B61470081FB148720068CA67 /* UIColor+Util.swift in Sources */,
