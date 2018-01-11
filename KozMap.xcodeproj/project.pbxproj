@@ -749,7 +749,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9B83N8S7VW;
+				DEVELOPMENT_TEAM = 6SS93B87P2;
 				INFOPLIST_FILE = "$(SRCROOT)/TackARLocation/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tackmobile.ARMap;
@@ -816,7 +816,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9B83N8S7VW;
+				DEVELOPMENT_TEAM = 6SS93B87P2;
 				INFOPLIST_FILE = "$(SRCROOT)/TackARLocation/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tackmobile.ARMap;
@@ -942,7 +942,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9B83N8S7VW;
+				DEVELOPMENT_TEAM = 6SS93B87P2;
 				INFOPLIST_FILE = "$(SRCROOT)/TackARLocation/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kozinga.KozMap;
@@ -957,7 +957,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9B83N8S7VW;
+				DEVELOPMENT_TEAM = 6SS93B87P2;
 				INFOPLIST_FILE = "$(SRCROOT)/TackARLocation/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kozinga.KozMap;

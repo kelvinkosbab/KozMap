@@ -8,10 +8,17 @@
 
 import UIKit
 
+protocol LocationListViewControllerCellDelegate : class {
+  func moreButtonSelected(savedLocation: SavedLocation, sender: UIView)
+}
+
 class LocationListViewControllerCell : UITableViewCell {
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var detailLabel: UILabel!
   @IBOutlet weak var colorView: UIView!
+  @IBOutlet weak var moreButton: UIButton!
+  private weak var savedLocation: SavedLocation? = nil
+  weak var delegate: LocationListViewControllerCellDelegate? = nil
   
   override func layoutSubviews() {
     super.layoutSubviews()
@@ -23,9 +30,13 @@ class LocationListViewControllerCell : UITableViewCell {
     }
   }
   
-  func configure(savedLocation: SavedLocation, unitType: UnitType) {
+  func configure(savedLocation: SavedLocation, unitType: UnitType, delegate: LocationListViewControllerCellDelegate?) {
+    
+    // Delegate
+    self.delegate = delegate
     
     // Saved location
+    self.savedLocation = savedLocation
     self.titleLabel.text = savedLocation.name ?? "Unnamed"
     
     // Distance labels
@@ -42,6 +53,12 @@ class LocationListViewControllerCell : UITableViewCell {
       self.colorView.backgroundColor = color.color
     } else {
       self.colorView.backgroundColor = .kozRed
+    }
+  }
+  
+  @IBAction func moreButtonSelected(_ sender: UIView) {
+    if let savedLocation = self.savedLocation {
+      self.delegate?.moreButtonSelected(savedLocation: savedLocation, sender: sender)
     }
   }
 }

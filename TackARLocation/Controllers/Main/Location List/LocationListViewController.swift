@@ -65,7 +65,7 @@ class LocationListViewController : BaseTableViewController, NSFetchedResultsCont
       if let indexPath = indexPath {
         if let cell = self.tableView.cellForRow(at: indexPath) as? LocationListViewControllerCell {
           let savedLocation = self.savedLocations[indexPath.row]
-          cell.configure(savedLocation: savedLocation, unitType: Defaults.shared.unitType)
+          cell.configure(savedLocation: savedLocation, unitType: Defaults.shared.unitType, delegate: self)
         } else {
           self.tableView.reloadRows(at: [ indexPath ], with: .none)
         }
@@ -105,28 +105,46 @@ extension LocationListViewController {
     
     // Saved location
     let savedLocation = self.savedLocations[indexPath.row]
-    cell.configure(savedLocation: savedLocation, unitType: Defaults.shared.unitType)
+    cell.configure(savedLocation: savedLocation, unitType: Defaults.shared.unitType, delegate: self)
     
     return cell
   }
+}
+
+// MARK: - LocationListViewControllerCellDelegate
+
+extension LocationListViewController : LocationListViewControllerCellDelegate {
   
-  override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-    let savedLocation = self.savedLocations[indexPath.row]
-    let editAction = UIContextualAction(style: .normal, title: "Edit") { [weak self] (action, view, success) in
-      self?.delegate?.shouldEdit(savedLocation: savedLocation)
-      success(true)
-    }
-    editAction.backgroundColor = .kozBlue
-    return UISwipeActionsConfiguration(actions: [ editAction ])
+  func moreButtonSelected(savedLocation: SavedLocation, sender: UIView) {
+    self.presentMoreActionSheet(savedLocation: savedLocation, sender: sender)
   }
   
-  override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-    let savedLocation = self.savedLocations[indexPath.row]
-    let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (action, view, success) in
-      self?.delegate?.shouldDelete(savedLocation: savedLocation)
-      success(true)
+  private func presentMoreActionSheet(savedLocation: SavedLocation, sender: UIView) {
+    let actionSheet = UIAlertController(title: savedLocation.name, message: nil, preferredStyle: .actionSheet)
+    
+    // Edit
+    let editAction = UIAlertAction(title: "Edit", style: .default) { [weak self] _ in
+      self?.delegate?.shouldEdit(savedLocation: savedLocation)
     }
-    deleteAction.backgroundColor = .kozRed
-    return UISwipeActionsConfiguration(actions: [ deleteAction ])
+    actionSheet.addAction(editAction)
+    
+    // Delete
+    let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
+      self?.delegate?.shouldDelete(savedLocation: savedLocation)
+    }
+    actionSheet.addAction(deleteAction)
+    
+    // Cancel
+    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+    actionSheet.addAction(cancelAction)
+    
+    if UIDevice.current.isPhone {
+      self.present(actionSheet, animated: true, completion: nil)
+    } else {
+      actionSheet.modalPresentationStyle = .popover
+      actionSheet.popoverPresentationController?.sourceView = sender
+      actionSheet.popoverPresentationController?.sourceRect = sender.frame
+      self.present(actionSheet, animated: true, completion: nil)
+    }
   }
 }

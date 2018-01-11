@@ -297,13 +297,13 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="23B-2x-vT8">
-                                            <rect key="frame" x="64" y="1.5" width="295" height="20.5"/>
+                                            <rect key="frame" x="64" y="1.5" width="265" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1cf-u8-pee">
-                                            <rect key="frame" x="64" y="22" width="295" height="20.5"/>
+                                            <rect key="frame" x="64" y="22" width="265" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -316,21 +316,35 @@
                                                 <constraint firstAttribute="height" constant="40" id="YAI-h5-Wtg"/>
                                             </constraints>
                                         </view>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CR0-2y-eEP">
+                                            <rect key="frame" x="329" y="1" width="40" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="J42-U8-9kp"/>
+                                                <constraint firstAttribute="width" constant="40" id="QxI-Lf-q6l"/>
+                                            </constraints>
+                                            <state key="normal" image="assetMore"/>
+                                            <connections>
+                                                <action selector="moreButtonSelected:" destination="YhC-RU-Acg" eventType="touchUpInside" id="f2Q-ey-NPc"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="1cf-u8-pee" firstAttribute="top" secondItem="8cq-JY-HhJ" secondAttribute="centerY" id="0gV-uS-64U"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="23B-2x-vT8" secondAttribute="trailing" id="8vS-q8-5tp"/>
                                         <constraint firstItem="kA1-us-b8k" firstAttribute="centerY" secondItem="8cq-JY-HhJ" secondAttribute="centerY" id="Ait-1D-8DN"/>
                                         <constraint firstItem="23B-2x-vT8" firstAttribute="leading" secondItem="kA1-us-b8k" secondAttribute="trailing" constant="8" id="CSR-C4-sXi"/>
+                                        <constraint firstItem="CR0-2y-eEP" firstAttribute="centerY" secondItem="8cq-JY-HhJ" secondAttribute="centerY" id="HeX-P4-WYB"/>
                                         <constraint firstItem="1cf-u8-pee" firstAttribute="leading" secondItem="kA1-us-b8k" secondAttribute="trailing" constant="8" id="NyV-d2-Lb7"/>
                                         <constraint firstItem="kA1-us-b8k" firstAttribute="leading" secondItem="8cq-JY-HhJ" secondAttribute="leadingMargin" id="QWk-qu-0TU"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="CR0-2y-eEP" secondAttribute="trailing" constant="-10" id="dsv-dS-1Fq"/>
                                         <constraint firstItem="23B-2x-vT8" firstAttribute="bottom" secondItem="8cq-JY-HhJ" secondAttribute="centerY" id="fvf-3D-LvE"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="1cf-u8-pee" secondAttribute="trailing" id="u7r-g0-dSW"/>
+                                        <constraint firstItem="CR0-2y-eEP" firstAttribute="leading" secondItem="23B-2x-vT8" secondAttribute="trailing" id="gat-8c-yzu"/>
+                                        <constraint firstItem="CR0-2y-eEP" firstAttribute="leading" secondItem="1cf-u8-pee" secondAttribute="trailing" id="nHS-JM-P6G"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="colorView" destination="kA1-us-b8k" id="pRO-If-IQP"/>
                                     <outlet property="detailLabel" destination="1cf-u8-pee" id="C4T-pg-c4B"/>
+                                    <outlet property="moreButton" destination="CR0-2y-eEP" id="tyG-Fd-Xiu"/>
                                     <outlet property="titleLabel" destination="23B-2x-vT8" id="ter-lT-irU"/>
                                 </connections>
                             </tableViewCell>
@@ -440,6 +454,7 @@
     </scenes>
     <resources>
         <image name="assetCircle" width="20" height="20"/>
+        <image name="assetMore" width="20" height="20"/>
         <namedColor name="SeaBlue">
             <color red="0.29019607843137257" green="0.56470588235294117" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
