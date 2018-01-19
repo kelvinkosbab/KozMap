@@ -93,8 +93,8 @@ class MainViewController : BaseViewController {
       return
     }
     
-    let addLocationViewController = AddLocationViewController.newViewController(locationDetailDelegate: self, searchDelegate: self)
-    let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: addLocationViewController)
+    let addLocationContainerViewController = AddLocationContainerViewController.newViewController(locationDetailDelegate: self, searchDelegate: self)
+    let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: addLocationContainerViewController)
     let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
     self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
   }
@@ -131,20 +131,19 @@ class MainViewController : BaseViewController {
       return
     }
     
-    let locationDetailViewController = LocationDetailViewController.newViewController(savedLocation: savedLocation, delegate: self)
-    let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: locationDetailViewController)
-    let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
-    self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
+//    let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: addLocationViewController)
+//    let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
+//    self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
   }
   
-  func presentLocationDetail(mapItem: MapItem) {
+  func presentAddLocation(mapItem: MapItem) {
     
     guard self.presentedViewController == nil else {
       return
     }
     
-    let locationDetailViewController = LocationDetailViewController.newViewController(mapItem: mapItem, delegate: self)
-    let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: locationDetailViewController)
+    let addLocationViewController = AddLocationViewController.newViewController(mapItem: mapItem, delegate: self)
+    let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: addLocationViewController)
     let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
     self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
   }

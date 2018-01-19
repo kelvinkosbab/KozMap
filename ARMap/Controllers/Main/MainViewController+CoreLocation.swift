@@ -9,25 +9,9 @@
 import UIKit
 import CoreLocation
 
-// MARK: - LocationDetailViewControllerDelegate
+// MARK: - AddLocationViewControllerDelegate
 
-extension MainViewController : LocationDetailViewControllerDelegate {
-  
-  func didUpdate(savedLocation: SavedLocation) {
-    let dispatchGroup = DispatchGroup()
-    if let _ = self.presentedViewController {
-      dispatchGroup.enter()
-      self.dismiss(animated: true) {
-        dispatchGroup.leave()
-      }
-    }
-    
-    dispatchGroup.notify(queue: .main) { [weak self] in
-      
-      // Present an alert
-      self?.presentLocationUpdatedAlert(savedLocation: savedLocation)
-    }
-  }
+extension MainViewController : AddLocationViewControllerDelegate {
   
   func didSave(savedLocation: SavedLocation) {
     let dispatchGroup = DispatchGroup()
@@ -101,7 +85,7 @@ extension MainViewController : SearchViewControllerDelegate {
   
   func shouldAdd(mapItem: MapItem) {
     self.dismiss(animated: true) { [weak self] in
-      self?.presentLocationDetail(mapItem: mapItem)
+      self?.presentAddLocation(mapItem: mapItem)
     }
   }
 }

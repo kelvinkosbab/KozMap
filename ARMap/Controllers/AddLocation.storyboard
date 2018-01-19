@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -13,22 +9,22 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Add Location View Controller-->
+        <!--Add Location Container View Controller-->
         <scene sceneID="WxG-EZ-eRk">
             <objects>
-                <viewController storyboardIdentifier="AddLocationViewController" id="SbQ-yx-8tD" customClass="AddLocationViewController" customModule="KozMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddLocationContainerViewController" id="SbQ-yx-8tD" customClass="AddLocationContainerViewController" customModule="KozMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="faJ-gU-qJh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qoO-4Z-DP2">
-                                <rect key="frame" x="0.0" y="58" width="375" height="609"/>
+                                <rect key="frame" x="0.0" y="58" width="600" height="542"/>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E08-W3-fDS">
-                                <rect key="frame" x="0.0" y="20" width="375" height="38"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="38"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="owW-MX-2qr">
-                                        <rect key="frame" x="16" y="5" width="343" height="29"/>
+                                        <rect key="frame" x="16" y="5" width="568" height="29"/>
                                         <segments>
                                             <segment title="Current Location"/>
                                             <segment title="Search"/>
@@ -69,16 +65,16 @@
             </objects>
             <point key="canvasLocation" x="172" y="287.40629685157421"/>
         </scene>
-        <!--Location Detail View Controller-->
+        <!--Add Location View Controller-->
         <scene sceneID="h3C-5s-CFC">
             <objects>
-                <viewController storyboardIdentifier="LocationDetailViewController" id="OJW-ZR-sig" customClass="LocationDetailViewController" customModule="KozMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddLocationViewController" id="OJW-ZR-sig" customClass="AddLocationViewController" customModule="KozMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lXr-1W-zNk">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kyp-c2-McU">
-                                <rect key="frame" x="16" y="36" width="343" height="40"/>
+                                <rect key="frame" x="16" y="36" width="568" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="bSt-QS-OJk"/>
                                 </constraints>
@@ -87,25 +83,25 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardAppearance="alert" returnKeyType="done" textContentType="name"/>
                             </textField>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wwm-FW-ofI">
-                                <rect key="frame" x="16" y="89" width="343" height="55"/>
+                                <rect key="frame" x="16" y="89" width="568" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="dHd-f7-Mi3"/>
                                 </constraints>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="epq-nX-2vQ">
-                                <rect key="frame" x="16" y="157" width="343" height="60"/>
+                                <rect key="frame" x="16" y="157" width="568" height="60"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CVL-uK-stY">
-                                        <rect key="frame" x="0.0" y="0.0" width="171" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="283.5" height="60"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Latitude" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dcO-bW-CO4">
-                                                <rect key="frame" x="8" y="10" width="143" height="20"/>
+                                                <rect key="frame" x="8" y="10" width="255.5" height="20"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12345" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PB1-7x-AyE">
-                                                <rect key="frame" x="8" y="30" width="143" height="20.5"/>
+                                                <rect key="frame" x="8" y="30" width="255.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -121,7 +117,7 @@
                                         </constraints>
                                     </view>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vIg-1B-dxr">
-                                        <rect key="frame" x="171" y="20" width="1" height="20"/>
+                                        <rect key="frame" x="283.5" y="20" width="1" height="20"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="uEo-bA-rtm">
                                             <rect key="frame" x="0.0" y="0.0" width="1" height="20"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -133,16 +129,16 @@
                                         <blurEffect style="dark"/>
                                     </visualEffectView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BFk-EW-MJk">
-                                        <rect key="frame" x="172" y="0.0" width="171" height="60"/>
+                                        <rect key="frame" x="284.5" y="0.0" width="283.5" height="60"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Longitude" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lWv-iF-0bB">
-                                                <rect key="frame" x="20" y="9.5" width="143" height="20.5"/>
+                                                <rect key="frame" x="20" y="9.5" width="255.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12345" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OD3-ef-yOj">
-                                                <rect key="frame" x="20" y="30" width="143" height="20.5"/>
+                                                <rect key="frame" x="20" y="30" width="255.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -173,7 +169,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="geC-nL-Tjs">
-                                <rect key="frame" x="16" y="230" width="343" height="50"/>
+                                <rect key="frame" x="16" y="230" width="568" height="50"/>
                                 <color key="backgroundColor" name="SeaBlue"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="4ga-Ng-fu9"/>
@@ -220,7 +216,7 @@
             <objects>
                 <collectionViewController storyboardIdentifier="InlineColorChooserViewController" id="TYx-U1-xg1" customClass="InlineColorChooserViewController" customModule="KozMap" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" id="20d-pS-3B9">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="sXE-c7-F8h">
@@ -285,31 +281,31 @@
             <objects>
                 <tableViewController storyboardIdentifier="LocationListViewController" id="erZ-ro-Mur" customClass="LocationListViewController" customModule="KozMap" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="zrv-gJ-BYq">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="LocationListViewControllerCell" id="YhC-RU-Acg" customClass="LocationListViewControllerCell" customModule="KozMap" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YhC-RU-Acg" id="8cq-JY-HhJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="23B-2x-vT8">
-                                            <rect key="frame" x="64" y="1.5" width="255" height="20.5"/>
+                                            <rect key="frame" x="68" y="1.5" width="472" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1cf-u8-pee">
-                                            <rect key="frame" x="64" y="22" width="255" height="20.5"/>
+                                            <rect key="frame" x="68" y="22" width="472" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kA1-us-b8k">
-                                            <rect key="frame" x="16" y="2" width="40" height="40"/>
+                                            <rect key="frame" x="20" y="2" width="40" height="40"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="40" id="EQW-xc-Fw8"/>
@@ -317,7 +313,7 @@
                                             </constraints>
                                         </view>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CR0-2y-eEP">
-                                            <rect key="frame" x="319" y="1" width="40" height="40"/>
+                                            <rect key="frame" x="540" y="1" width="40" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="J42-U8-9kp"/>
                                                 <constraint firstAttribute="width" constant="40" id="QxI-Lf-q6l"/>
@@ -364,11 +360,11 @@
             <objects>
                 <viewController storyboardIdentifier="SearchViewController" id="Wz6-6U-ft3" customClass="SearchViewController" customModule="KozMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lHv-JK-tdL">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search for ..." translatesAutoresizingMaskIntoConstraints="NO" id="vHC-Bm-jGB">
-                                <rect key="frame" x="8" y="28" width="359" height="56"/>
+                                <rect key="frame" x="8" y="28" width="584" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <scopeButtonTitles>
                                     <string>Title</string>
@@ -379,7 +375,7 @@
                                 </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="g8a-tE-Wx5">
-                                <rect key="frame" x="0.0" y="84" width="375" height="583"/>
+                                <rect key="frame" x="0.0" y="84" width="600" height="516"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="SearchViewControllerCell" id="Rji-ZD-rMx" customClass="SearchViewControllerCell" customModule="KozMap" customModuleProvider="target">
