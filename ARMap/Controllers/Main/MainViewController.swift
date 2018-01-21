@@ -195,11 +195,11 @@ class MainViewController : BaseViewController {
   
   @objc func handleKeyboardNotification(_ notification: NSNotification) {
     
-    guard let viewController = self.presentedViewController as? KeyboardFrameRespondable, let userInfo = notification.userInfo else {
+    guard let presentedViewController = self.presentedViewController as? KeyboardFrameRespondable, let userInfo = notification.userInfo else {
       return
     }
     
-    let initialViewHeight = viewController.view.bounds.height
+    // Keyboard presentation properties
     let endFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
     let duration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
     let animationCurveRawNSN = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
@@ -212,11 +212,14 @@ class MainViewController : BaseViewController {
       keyboardOffset = endFrame?.size.height ?? 0.0
     }
     
+    // Calculate the new frame
+    let xOffset = presentedViewController.view.frame.origin.x
+    let yOffset = self.view.bounds.height - keyboardOffset - presentedViewController.view.bounds.height
+    let newFrame = CGRect(x: xOffset, y: yOffset, width: presentedViewController.view.bounds.width, height: presentedViewController.view.bounds.height)
+    
     // Perform the animation
     UIView.animate(withDuration: duration, delay: 0, options: animationCurve, animations: { [weak self] in
-      if let strongSelf = self {
-        self?.presentedViewController?.view.frame.origin.y = strongSelf.view.bounds.height - keyboardOffset - initialViewHeight
-      }
+      self?.presentedViewController?.view.frame = newFrame
     })
   }
 }
