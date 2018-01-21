@@ -27,14 +27,26 @@ class ARViewController : UIViewController {
   private let sessionConfig = ARWorldTrackingConfiguration()
   public private(set) weak var sceneNode: SCNNode?
   public private(set) weak var basePlane: SCNNode?
+  public private(set) weak var axisNode: AxisNode?
   internal var placemarks = Set<SavedLocationNode>()
   
   var savedLocations: [SavedLocation] {
-    return self.savedLocationsFetchedResultsController?.fetchedObjects ?? []
+    return self.savedLocationsFetchedResultsController.fetchedObjects ?? []
   }
   
-  private lazy var savedLocationsFetchedResultsController: NSFetchedResultsController<SavedLocation>? = {
+  private lazy var savedLocationsFetchedResultsController: NSFetchedResultsController<SavedLocation> = {
     let controller = SavedLocation.newFetchedResultsController()
+    controller.delegate = self
+    try? controller.performFetch()
+    return controller
+  }()
+  
+  var defaults: Defaults? {
+    return self.defaultsFetchedResultsController.fetchedObjects?.first
+  }
+  
+  private lazy var defaultsFetchedResultsController: NSFetchedResultsController<Defaults> = {
+    let controller = Defaults.newFetchedResultsController()
     controller.delegate = self
     try? controller.performFetch()
     return controller
@@ -157,9 +169,7 @@ class ARViewController : UIViewController {
     self.updatePlacemarks(updatePosition: true)
   }
   
-  @objc func didReceiveUpdatedHeadingNotification(_ notification: Notification) {
-    
-  }
+  @objc func didReceiveUpdatedHeadingNotification(_ notification: Notification) {}
   
   // MARK: - Scene
   
@@ -318,8 +328,7 @@ extension ARViewController : ARSCNViewDelegate {
         scene.rootNode.addChildNode(sceneNode)
         
         // Axes node
-        let axesNode = AxesNode()
-        self.sceneNode?.addChildNode(axesNode)
+        self.configureAxisNode()
         
         // Base plane
         let basePlane = Plane(width: 3000, length: 3000)
@@ -391,7 +400,34 @@ extension ARViewController : NSFetchedResultsControllerDelegate {
     }
   }
   
-  func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {}
+  func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    if controller == self.defaultsFetchedResultsController {
+      self.configureAxisNode()
+    }
+  }
+  
+  // MARK: - Axis Node
+  
+  func configureAxisNode() {
+    
+    guard let defaults = self.defaults else {
+      return
+    }
+    
+    if defaults.showAxis {
+      if self.axisNode == nil {
+        let axisNode = AxisNode()
+        self.axisNode = axisNode
+        if let pointOfView = self.sceneView.pointOfView {
+          axisNode.position = pointOfView.position
+        }
+        self.sceneNode?.addChildNode(axisNode)
+      }
+    } else {
+      self.axisNode?.removeFromParentNode()
+      self.axisNode = nil
+    }
+  }
   
   // MARK: - Saved Locations
   

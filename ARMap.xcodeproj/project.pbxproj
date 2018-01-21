@@ -35,7 +35,7 @@
 		B68A7DBE1FFCC2F200C45FF6 /* DesiredContentHeightDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68A7DBD1FFCC2F200C45FF6 /* DesiredContentHeightDelegate.swift */; };
 		B68A7DC01FFCC9F200C45FF6 /* KeyboardFrameRespondable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68A7DBF1FFCC9F200C45FF6 /* KeyboardFrameRespondable.swift */; };
 		B695236D1FA8D2E10014ABED /* SCNVector3+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236C1FA8D2E10014ABED /* SCNVector3+Util.swift */; };
-		B695236F1FA8D3430014ABED /* AxesNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236E1FA8D3430014ABED /* AxesNode.swift */; };
+		B695236F1FA8D3430014ABED /* AxisNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695236E1FA8D3430014ABED /* AxisNode.swift */; };
 		B69B94571FBE20A600A7047F /* MapItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69B94561FBE20A600A7047F /* MapItem.swift */; };
 		B69BDAD31FA7F84400A385DE /* UIApplication+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69BDAD21FA7F84400A385DE /* UIApplication+Util.swift */; };
 		B69BDAD51FA7FB0B00A385DE /* Double+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69BDAD41FA7FB0B00A385DE /* Double+Util.swift */; };
@@ -110,6 +110,7 @@
 		B62735DD1FB7EEE2004711A4 /* CameraPermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPermissionManager.swift; sourceTree = "<group>"; };
 		B62735E01FB82B9E004711A4 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		B62BEA8B201524D7009CCF56 /* CLPlacemark+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLPlacemark+Util.swift"; sourceTree = "<group>"; };
+		B62BEA8D2015395E009CCF56 /* TackARLocation 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TackARLocation 5.xcdatamodel"; sourceTree = "<group>"; };
 		B63419522006D2DB00847049 /* BuildManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildManager.swift; sourceTree = "<group>"; };
 		B63B9A271FBA7D7100982FC6 /* LocationSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchService.swift; sourceTree = "<group>"; };
 		B64391551FC1F336005721E5 /* TackARLocation 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TackARLocation 3.xcdatamodel"; sourceTree = "<group>"; };
@@ -128,7 +129,7 @@
 		B68A7DBD1FFCC2F200C45FF6 /* DesiredContentHeightDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesiredContentHeightDelegate.swift; sourceTree = "<group>"; };
 		B68A7DBF1FFCC9F200C45FF6 /* KeyboardFrameRespondable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardFrameRespondable.swift; sourceTree = "<group>"; };
 		B695236C1FA8D2E10014ABED /* SCNVector3+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Util.swift"; sourceTree = "<group>"; };
-		B695236E1FA8D3430014ABED /* AxesNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxesNode.swift; sourceTree = "<group>"; };
+		B695236E1FA8D3430014ABED /* AxisNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxisNode.swift; sourceTree = "<group>"; };
 		B69B94561FBE20A600A7047F /* MapItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapItem.swift; sourceTree = "<group>"; };
 		B69BDAD21FA7F84400A385DE /* UIApplication+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Util.swift"; sourceTree = "<group>"; };
 		B69BDAD41FA7FB0B00A385DE /* Double+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Util.swift"; sourceTree = "<group>"; };
@@ -421,7 +422,7 @@
 			children = (
 				B6C6EA5A1FA7B02B001F97E7 /* Models.scnassets */,
 				B6C6EA601FA7B68C001F97E7 /* Plane.swift */,
-				B695236E1FA8D3430014ABED /* AxesNode.swift */,
+				B695236E1FA8D3430014ABED /* AxisNode.swift */,
 				B66041EE1FA905350076EBEF /* VirtualObject.swift */,
 				B6CE3D051FAA1E9400F9DF76 /* PlacemarkNode.swift */,
 				B66634311FCBB09D006D5922 /* PinPlacemarkNode.swift */,
@@ -593,7 +594,7 @@
 				B614700F1FB194380068CA67 /* UICollectionView+Util.swift in Sources */,
 				B6A646B020143B0900F6E8EE /* CLLocationCoordinate2D+Util.swift in Sources */,
 				B64391571FC2861B005721E5 /* CurrentLocationUpdatableService.swift in Sources */,
-				B695236F1FA8D3430014ABED /* AxesNode.swift in Sources */,
+				B695236F1FA8D3430014ABED /* AxisNode.swift in Sources */,
 				B6C576451FB2FF0E00C4966F /* String+Util.swift in Sources */,
 				B6AA79B81FB89EC900428D86 /* AddLocationContainerViewController.swift in Sources */,
 				B6C6EA451FA7A050001F97E7 /* PermissionsViewController.swift in Sources */,
@@ -856,12 +857,13 @@
 		B6C6EA2F1FA79B45001F97E7 /* KozMap.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				B62BEA8D2015395E009CCF56 /* TackARLocation 5.xcdatamodel */,
 				B60CB55B201247150010CF71 /* TackARLocation 4.xcdatamodel */,
 				B64391551FC1F336005721E5 /* TackARLocation 3.xcdatamodel */,
 				B61470091FB17E580068CA67 /* TackARLocation 2.xcdatamodel */,
 				B6C6EA301FA79B45001F97E7 /* TackARLocation.xcdatamodel */,
 			);
-			currentVersion = B60CB55B201247150010CF71 /* TackARLocation 4.xcdatamodel */;
+			currentVersion = B62BEA8D2015395E009CCF56 /* TackARLocation 5.xcdatamodel */;
 			path = KozMap.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -63,6 +63,9 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
       self.configureColorChooser()
     }
     
+    // UITextFieldDelegate
+    self.nameTextField.delegate = self
+    
     // Update content
     self.reloadContent()
     
@@ -160,5 +163,18 @@ extension LocationDetailViewController : InlineColorChooserViewControllerDelegat
   
   func didSelect(color: UIColor) {
     self.savedLocation?.color?.color = color
+  }
+}
+
+// MARK: - UITextFieldDelegate
+
+extension LocationDetailViewController : UITextFieldDelegate {
+  
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
+    if let _ = textField.text {
+      return true
+    }
+    return false
   }
 }
