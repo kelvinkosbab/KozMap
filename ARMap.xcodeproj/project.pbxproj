@@ -393,9 +393,9 @@
 				B6C6EA6D1FA7C255001F97E7 /* Location List */,
 				B6C6EA6C1FA7C24C001F97E7 /* Location Detail */,
 				B6AA79B61FB89EAB00428D86 /* Add Location */,
+				B62735DF1FB82B7F004711A4 /* Search */,
 				B6C6EA6B1FA7C246001F97E7 /* Settings */,
 				B61470021FB147410068CA67 /* InlineColorChooser */,
-				B62735DF1FB82B7F004711A4 /* Search */,
 			);
 			path = Main;
 			sourceTree = "<group>";

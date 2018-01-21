@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class LocationDetailViewController : BaseViewController, NSFetchedResultsControllerDelegate {
+class LocationDetailViewController : BaseViewController, NSFetchedResultsControllerDelegate, DesiredContentHeightDelegate {
   
   // MARK: - Static Accessors
   
@@ -23,11 +23,19 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
     return viewController
   }
   
+  // MARK: - DesiredContentHeightDelegate
+  
+  var desiredContentHeight: CGFloat {
+    return 271
+  }
+  
   // MARK: - Properties
   
   @IBOutlet weak var nameTextField: UITextField!
   @IBOutlet weak var latitudeLabel: UILabel!
   @IBOutlet weak var longitudeLabel: UILabel!
+  @IBOutlet weak var distanceLabel: UILabel!
+  @IBOutlet weak var locationDescriptionLabel: UILabel!
   @IBOutlet weak var colorChooserContainer: UIView!
   
   var savedLocation: SavedLocation? = nil
@@ -56,6 +64,22 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
     }
     
     // Update content
+    self.reloadContent()
+    
+    // Listen for updates to current location
+    NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveUpdatedLocationNotification(_:)), name: .locationManagerDidUpdateCurrentLocation, object: nil)
+  }
+  
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    
+    MyDataManager.shared.saveMainContext()
+    NotificationCenter.default.removeObserver(self)
+  }
+  
+  // MARK: - Notifications
+  
+  @objc func didReceiveUpdatedLocationNotification(_ notification: Notification) {
     self.reloadContent()
   }
   
@@ -86,9 +110,48 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
   
   func reloadContent() {
     
+    // Check if there is a location to populate
+    guard let savedLocation = self.savedLocation else {
+      self.latitudeLabel.text = "NA"
+      self.longitudeLabel.text = "NA"
+      self.distanceLabel.text = "NA"
+      self.locationDescriptionLabel.text = ""
+      return
+    }
+    
+    // Name
+    self.nameTextField.text = savedLocation.name
+    
+    // Color
+    if let color = savedLocation.color?.color {
+      self.colorChooserController?.selectedColor = color
+    }
+    
+    // Update the current location
+    let location = savedLocation.location
+    let coordinate = location.coordinate
+    let roundedLatitude = Double(round(coordinate.latitude*1000)/1000)
+    let roundedLongitude = Double(round(coordinate.longitude*1000)/1000)
+    self.latitudeLabel.text = "\(roundedLatitude)"
+    self.longitudeLabel.text = "\(roundedLongitude)"
+    
+    // Update the distance
+    let currentLocation = LocationManager.shared.currentLocation
+    let distance = currentLocation?.distance(from: location)
+    self.distanceLabel.text = distance?.getDistanceString(unitType: Defaults.shared.unitType, displayType: .numbericUnits(false)) ?? "NA"
+    
+    // Location address
+    self.locationDescriptionLabel.text = savedLocation.address
+    location.getPlacemark { [weak self] placemark in
+      self?.locationDescriptionLabel.text = placemark?.address
+    }
   }
   
   // MARK: - Actions
+  
+  @IBAction func nameTextFieldEditingChanged(_ sender: UITextField) {
+    self.savedLocation?.name = sender.text
+  }
 }
 
 // MARK: - InlineColorChooserViewControllerDelegate
@@ -97,6 +160,5 @@ extension LocationDetailViewController : InlineColorChooserViewControllerDelegat
   
   func didSelect(color: UIColor) {
     self.savedLocation?.color?.color = color
-    MyDataManager.shared.saveMainContext()
   }
 }
