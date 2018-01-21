@@ -25,7 +25,13 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
   
   // MARK: - Properties
   
+  @IBOutlet weak var nameTextField: UITextField!
+  @IBOutlet weak var latitudeLabel: UILabel!
+  @IBOutlet weak var longitudeLabel: UILabel!
+  @IBOutlet weak var colorChooserContainer: UIView!
+  
   var savedLocation: SavedLocation? = nil
+  var colorChooserController: InlineColorChooserViewController? = nil
   
   private lazy var savedLocationsFetchedResultsController: NSFetchedResultsController<SavedLocation>? = {
     
@@ -44,6 +50,12 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
+    // Configure the color chooser
+    if self.colorChooserController == nil {
+      self.configureColorChooser()
+    }
+    
+    // Update content
     self.reloadContent()
   }
   
@@ -56,6 +68,20 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
     }
   }
   
+  // MARK: - Color Chooser
+  
+  func configureColorChooser() {
+    
+    guard self.colorChooserController == nil else {
+      return
+    }
+    
+    let colorChooserController = InlineColorChooserViewController.newViewController(delegate: self)
+    colorChooserController.view.backgroundColor = .clear
+    self.add(childViewController: colorChooserController, intoContainerView: self.colorChooserContainer)
+    self.colorChooserController = colorChooserController
+  }
+  
   // MARK: - Content
   
   func reloadContent() {
@@ -63,4 +89,14 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
   }
   
   // MARK: - Actions
+}
+
+// MARK: - InlineColorChooserViewControllerDelegate
+
+extension LocationDetailViewController : InlineColorChooserViewControllerDelegate {
+  
+  func didSelect(color: UIColor) {
+    self.savedLocation?.color?.color = color
+    MyDataManager.shared.saveMainContext()
+  }
 }

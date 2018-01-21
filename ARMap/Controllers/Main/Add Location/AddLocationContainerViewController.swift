@@ -27,7 +27,7 @@ class AddLocationContainerViewController : BaseViewController, DesiredContentHei
   // MARK: - DesiredContentHeightDelegate
   
   var desiredContentHeight: CGFloat {
-    return 335
+    return 378
   }
   
   // MARK: - Properties

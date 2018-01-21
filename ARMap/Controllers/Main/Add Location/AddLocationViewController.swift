@@ -38,7 +38,7 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
   // MARK: - DesiredContentHeightDelegate
   
   var desiredContentHeight: CGFloat {
-    return 295
+    return 338
   }
   
   // MARK: - Properties
@@ -46,11 +46,13 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
   @IBOutlet weak var nameTextField: UITextField!
   @IBOutlet weak var latitudeLabel: UILabel!
   @IBOutlet weak var longitudeLabel: UILabel!
+  @IBOutlet weak var distanceLabel: UILabel!
+  @IBOutlet weak var locationDescriptionLabel: UILabel!
   @IBOutlet weak var addLocationButton: UIButton!
   @IBOutlet weak var colorChooserContainer: UIView!
   
   weak var delegate: AddLocationViewControllerDelegate? = nil
-  weak var colorChooserController: InlineColorChooserViewController? = nil
+  var colorChooserController: InlineColorChooserViewController? = nil
   
   var mapItem: MapItem? = nil
   var locationColor: UIColor = .kozRed
@@ -149,6 +151,8 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
       self.addLocationButton.alpha = 0.5
       self.latitudeLabel.text = "NA"
       self.longitudeLabel.text = "NA"
+      self.distanceLabel.text = "NA"
+      self.locationDescriptionLabel.text = ""
       return
     }
     
@@ -160,6 +164,16 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
     let roundedLongitude = Double(round(coordinate.longitude*1000)/1000)
     self.latitudeLabel.text = "\(roundedLatitude)"
     self.longitudeLabel.text = "\(roundedLongitude)"
+    
+    // Update the distance
+    let currentLocation = LocationManager.shared.currentLocation
+    let distance = currentLocation?.distance(from: location)
+    self.distanceLabel.text = distance?.getDistanceString(unitType: Defaults.shared.unitType, displayType: .numbericUnits(false)) ?? "NA"
+    
+    // Location address
+    location.getPlacemark { [weak self] placemark in
+      self?.locationDescriptionLabel.text = placemark?.address
+    }
   }
   
   // MARK: - Actions
@@ -218,6 +232,7 @@ extension AddLocationViewController : InlineColorChooserViewControllerDelegate {
 extension AddLocationViewController : UITextFieldDelegate {
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
     if let _ = textField.text {
       return true
     }

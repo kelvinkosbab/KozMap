@@ -10,42 +10,6 @@ import Foundation
 import MapKit
 import CoreLocation
 
-extension MKPlacemark {
-  
-  var streetNumber: String? {
-    return self.subThoroughfare
-  }
-  
-  var streetName: String? {
-    return self.thoroughfare
-  }
-  
-  var cityName: String? {
-    return self.locality
-  }
-  
-  var stateName: String? {
-    return self.administrativeArea
-  }
-  
-  var address: String? {
-    
-    // Space between street number and street name
-    let firstSpace = (self.subThoroughfare != nil && self.thoroughfare != nil) ? " " : ""
-    // Comma between street and city/state
-    let comma = (self.subThoroughfare != nil || self.thoroughfare != nil) && (self.subAdministrativeArea != nil || self.administrativeArea != nil) ? ", " : ""
-    // Space between city and state
-    let secondSpace = (self.subAdministrativeArea != nil && self.administrativeArea != nil) ? " " : ""
-    
-    // Construct the address
-    let streetNumber: String = self.subThoroughfare ?? ""
-    let streetName: String = self.thoroughfare ?? ""
-    let cityName: String = self.locality ?? ""
-    let stateName: String = self.administrativeArea ?? ""
-    return "\(streetNumber)\(firstSpace)\(streetName)\(comma)\(cityName)\(secondSpace)\(stateName)"
-  }
-}
-
 struct MapItem {
   let mkMapItem: MKMapItem
   var currentLocation: CLLocation?

@@ -75,14 +75,12 @@ class MainViewController : BaseViewController {
   func loadConfiguredNavigationBar() {
     self.navigationItem.title = "ARMap"
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "assetOptions"), style: .plain, target: self, action: #selector(self.settingsButtonSelected))
-    self.navigationItem.hidesBackButton = false
   }
   
   func clearNavigationBar() {
     self.navigationItem.title = nil
     self.navigationItem.leftBarButtonItem = nil
     self.navigationItem.rightBarButtonItem = nil
-    self.navigationItem.hidesBackButton = true
   }
   
   // MARK: - Actions

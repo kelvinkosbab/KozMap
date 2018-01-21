@@ -18,6 +18,7 @@
 		B62735DC1FB7EDFF004711A4 /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62735DB1FB7EDFF004711A4 /* PermissionManager.swift */; };
 		B62735DE1FB7EEE2004711A4 /* CameraPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62735DD1FB7EEE2004711A4 /* CameraPermissionManager.swift */; };
 		B62735E11FB82B9E004711A4 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62735E01FB82B9E004711A4 /* SearchViewController.swift */; };
+		B62BEA8C201524D7009CCF56 /* CLPlacemark+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62BEA8B201524D7009CCF56 /* CLPlacemark+Util.swift */; };
 		B63419532006D2DB00847049 /* BuildManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63419522006D2DB00847049 /* BuildManager.swift */; };
 		B63B9A281FBA7D7100982FC6 /* LocationSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63B9A271FBA7D7100982FC6 /* LocationSearchService.swift */; };
 		B64391571FC2861B005721E5 /* CurrentLocationUpdatableService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64391561FC2861B005721E5 /* CurrentLocationUpdatableService.swift */; };
@@ -108,6 +109,7 @@
 		B62735DB1FB7EDFF004711A4 /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
 		B62735DD1FB7EEE2004711A4 /* CameraPermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPermissionManager.swift; sourceTree = "<group>"; };
 		B62735E01FB82B9E004711A4 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		B62BEA8B201524D7009CCF56 /* CLPlacemark+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLPlacemark+Util.swift"; sourceTree = "<group>"; };
 		B63419522006D2DB00847049 /* BuildManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildManager.swift; sourceTree = "<group>"; };
 		B63B9A271FBA7D7100982FC6 /* LocationSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchService.swift; sourceTree = "<group>"; };
 		B64391551FC1F336005721E5 /* TackARLocation 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TackARLocation 3.xcdatamodel"; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				B64391561FC2861B005721E5 /* CurrentLocationUpdatableService.swift */,
 				B6A646AD20143A7C00F6E8EE /* CLLocation+Util.swift */,
 				B6A646AF20143B0900F6E8EE /* CLLocationCoordinate2D+Util.swift */,
+				B62BEA8B201524D7009CCF56 /* CLPlacemark+Util.swift */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -389,9 +392,9 @@
 				B6AA79BB1FB8A3B900428D86 /* Visual Effect Container */,
 				B6C6EA6D1FA7C255001F97E7 /* Location List */,
 				B6C6EA6C1FA7C24C001F97E7 /* Location Detail */,
+				B6AA79B61FB89EAB00428D86 /* Add Location */,
 				B6C6EA6B1FA7C246001F97E7 /* Settings */,
 				B61470021FB147410068CA67 /* InlineColorChooser */,
-				B6AA79B61FB89EAB00428D86 /* Add Location */,
 				B62735DF1FB82B7F004711A4 /* Search */,
 			);
 			path = Main;
@@ -602,6 +605,7 @@
 				B668AB4220060C6B00997FB9 /* ARViewController+Gestures.swift in Sources */,
 				B63B9A281FBA7D7100982FC6 /* LocationSearchService.swift in Sources */,
 				B6C6EA711FA7C26D001F97E7 /* AddLocationViewController.swift in Sources */,
+				B62BEA8C201524D7009CCF56 /* CLPlacemark+Util.swift in Sources */,
 				B62735E11FB82B9E004711A4 /* SearchViewController.swift in Sources */,
 				B64391601FC2BCF1005721E5 /* ARState.swift in Sources */,
 				B6C6EA971FA7E8B4001F97E7 /* DragDownDismissInteractiveTransition.swift in Sources */,
