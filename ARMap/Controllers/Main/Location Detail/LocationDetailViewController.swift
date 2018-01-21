@@ -33,7 +33,7 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
       return nil
     }
     
-    let controller = SavedLocation.newFetechedResultsController(savedLocation: savedLocation)
+    let controller = SavedLocation.newFetchedResultsController(savedLocation: savedLocation)
     controller.delegate = self
     try? controller.performFetch()
     return controller
@@ -50,7 +50,7 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
   // MARK: - NSFetchedResultsControllerDelegate
   
   func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-    if controller += self.savedLocationsFetchedResultsController {
+    if controller == self.savedLocationsFetchedResultsController {
       self.savedLocation = self.savedLocationsFetchedResultsController?.fetchedObjects?.first
       self.reloadContent()
     }

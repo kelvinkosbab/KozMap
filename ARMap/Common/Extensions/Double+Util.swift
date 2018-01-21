@@ -25,4 +25,14 @@ extension Double {
   var fourDecimal: Double {
     return Double(Int(self*10000))/10000
   }
+  
+  // MARK: - Location Utilities
+  
+  var metersToLatitude: Double {
+    return self / 6360500.0
+  }
+  
+  var metersToLongitude: Double {
+    return self / 5602900.0
+  }
 }

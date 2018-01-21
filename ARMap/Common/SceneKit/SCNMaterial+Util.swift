@@ -1,9 +1,9 @@
 //
 //  SCNMaterial+Util.swift
-//  TackARLocation
+//  ARMap
 //
-//  Created by Kelvin Kosbab on 10/30/17.
-//  Copyright © 2017 Tack Mobile. All rights reserved.
+//  Created by Kelvin Kosbab on 1/20/18.
+//  Copyright © 2018 Kozinga. All rights reserved.
 //
 
 import SceneKit
