@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import CoreData
 
 extension SavedLocation : MyManagedObjectProtocol {
   
@@ -58,7 +59,7 @@ extension SavedLocation : MyManagedObjectProtocol {
   
   // MARK: - Updating
   
-  func update(name: String, location: CLLocation, color: Color, distance: Double?) {
+  func update(name: String, location: CLLocation, color: Color, distance: Double?, uuid: String = UUID().uuidString) {
     self.name = name
     self.location = location
     if let oldColor = self.color, oldColor != color {
@@ -66,5 +67,18 @@ extension SavedLocation : MyManagedObjectProtocol {
     }
     self.color = color
     self.lastDistance = distance ?? -1
+    self.uuid = uuid
+  }
+  
+  // MARK: - NSFetchedResultsController
+  
+  static func newFetchedResultsController(uuid: String) -> NSFetchedResultsController<SavedLocation>? {
+    let predicate = NSPredicate(format: "uuid == %@", uuid)
+    return self.newFetchedResultsController(predicate: predicate)
+  }
+  
+  static func newFetchedResultsController(savedLocation: SavedLocation) -> NSFetchedResultsController<SavedLocation> {
+    let predicate = NSPredicate(format: "SELF == %@", savedLocation)
+    return self.newFetchedResultsController(predicate: predicate)
   }
 }

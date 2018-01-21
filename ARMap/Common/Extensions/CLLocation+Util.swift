@@ -42,6 +42,18 @@ extension CLLocation {
     let altitude = self.altitude + translation.altitudeTranslation
     return CLLocation(coordinate: coordinate, altitude: altitude, horizontalAccuracy: self.horizontalAccuracy, verticalAccuracy: self.verticalAccuracy, timestamp: self.timestamp)
   }
+  
+  func getPlacemark(completion: @escaping (_ placemark: CLPlacemark?) -> Void) {
+    let geocoder = CLGeocoder()
+    geocoder.reverseGeocodeLocation(self) { (placemarks, error) in
+      if let error = error {
+        Log.log("An error occurred: \(error.localizedDescription)")
+        completion(nil)
+      } else {
+        let firstPlacemark = placemarks?[0]
+        completion(firstPlacemark)
+      }
+    }
 }
 
 fileprivate extension Double {

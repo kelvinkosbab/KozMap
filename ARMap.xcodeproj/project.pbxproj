@@ -14,6 +14,7 @@
 		B614700D1FB193FA0068CA67 /* UIViewController+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B614700C1FB193FA0068CA67 /* UIViewController+Util.swift */; };
 		B614700F1FB194380068CA67 /* UICollectionView+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B614700E1FB194380068CA67 /* UICollectionView+Util.swift */; };
 		B620C3771FBB6043001B29E9 /* BatchUpdatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B620C3761FBB6043001B29E9 /* BatchUpdatable.swift */; };
+		B621414A201420300035C787 /* LocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6214149201420300035C787 /* LocationDetailViewController.swift */; };
 		B62735DC1FB7EDFF004711A4 /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62735DB1FB7EDFF004711A4 /* PermissionManager.swift */; };
 		B62735DE1FB7EEE2004711A4 /* CameraPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62735DD1FB7EEE2004711A4 /* CameraPermissionManager.swift */; };
 		B62735E11FB82B9E004711A4 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62735E01FB82B9E004711A4 /* SearchViewController.swift */; };
@@ -45,7 +46,7 @@
 		B6C576451FB2FF0E00C4966F /* String+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C576441FB2FF0E00C4966F /* String+Util.swift */; };
 		B6C6EA291FA79B45001F97E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA281FA79B45001F97E7 /* AppDelegate.swift */; };
 		B6C6EA2E1FA79B45001F97E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6C6EA2C1FA79B45001F97E7 /* Main.storyboard */; };
-		B6C6EA311FA79B45001F97E7 /* KozMap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA2F1FA79B45001F97E7 /* KozMap.xcdatamodeld */; };
+		B6C6EA311FA79B45001F97E7 /* ARMap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA2F1FA79B45001F97E7 /* ARMap.xcdatamodeld */; };
 		B6C6EA331FA79B45001F97E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6C6EA321FA79B45001F97E7 /* Assets.xcassets */; };
 		B6C6EA361FA79B45001F97E7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6C6EA341FA79B45001F97E7 /* LaunchScreen.storyboard */; };
 		B6C6EA421FA79F77001F97E7 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA411FA79F77001F97E7 /* LocationManager.swift */; };
@@ -94,6 +95,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B60CB55B201247150010CF71 /* TackARLocation 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TackARLocation 4.xcdatamodel"; sourceTree = "<group>"; };
 		B61470031FB1475B0068CA67 /* InlineColorChooserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InlineColorChooserViewController.swift; sourceTree = "<group>"; };
 		B61470051FB1485F0068CA67 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		B61470071FB148720068CA67 /* UIColor+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Util.swift"; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 		B614700C1FB193FA0068CA67 /* UIViewController+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Util.swift"; sourceTree = "<group>"; };
 		B614700E1FB194380068CA67 /* UICollectionView+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Util.swift"; sourceTree = "<group>"; };
 		B620C3761FBB6043001B29E9 /* BatchUpdatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatchUpdatable.swift; sourceTree = "<group>"; };
+		B6214149201420300035C787 /* LocationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailViewController.swift; sourceTree = "<group>"; };
 		B62735DB1FB7EDFF004711A4 /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
 		B62735DD1FB7EEE2004711A4 /* CameraPermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPermissionManager.swift; sourceTree = "<group>"; };
 		B62735E01FB82B9E004711A4 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -207,7 +210,6 @@
 			isa = PBXGroup;
 			children = (
 				B62735DB1FB7EDFF004711A4 /* PermissionManager.swift */,
-				B6C6EA411FA79F77001F97E7 /* LocationManager.swift */,
 				B62735DD1FB7EEE2004711A4 /* CameraPermissionManager.swift */,
 			);
 			path = Permissions;
@@ -233,6 +235,7 @@
 		B64391581FC28DD9005721E5 /* Location */ = {
 			isa = PBXGroup;
 			children = (
+				B6C6EA411FA79F77001F97E7 /* LocationManager.swift */,
 				B63B9A271FBA7D7100982FC6 /* LocationSearchService.swift */,
 				B69B94561FBE20A600A7047F /* MapItem.swift */,
 				B64391561FC2861B005721E5 /* CurrentLocationUpdatableService.swift */,
@@ -342,7 +345,7 @@
 		B6C6EA401FA79F43001F97E7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B6C6EA2F1FA79B45001F97E7 /* KozMap.xcdatamodeld */,
+				B6C6EA2F1FA79B45001F97E7 /* ARMap.xcdatamodeld */,
 				B6C6EA631FA7BD33001F97E7 /* DataMangerProtocol.swift */,
 				B6C6EA651FA7BD5B001F97E7 /* MyDataManager.swift */,
 				B6C6EA671FA7BD91001F97E7 /* MyManagedObjectProtocol.swift */,
@@ -438,6 +441,7 @@
 		B6C6EA6C1FA7C24C001F97E7 /* Location Detail */ = {
 			isa = PBXGroup;
 			children = (
+				B6214149201420300035C787 /* LocationDetailViewController.swift */,
 			);
 			path = "Location Detail";
 			sourceTree = "<group>";
@@ -601,6 +605,7 @@
 				B64391601FC2BCF1005721E5 /* ARState.swift in Sources */,
 				B6C6EA971FA7E8B4001F97E7 /* DragDownDismissInteractiveTransition.swift in Sources */,
 				B6C6EA931FA7E83F001F97E7 /* Device.swift in Sources */,
+				B621414A201420300035C787 /* LocationDetailViewController.swift in Sources */,
 				B6C6EA5D1FA7B0C3001F97E7 /* CGRect+Util.swift in Sources */,
 				B62735DC1FB7EDFF004711A4 /* PermissionManager.swift in Sources */,
 				B69B94571FBE20A600A7047F /* MapItem.swift in Sources */,
@@ -621,7 +626,7 @@
 				B69BDAD51FA7FB0B00A385DE /* Double+Util.swift in Sources */,
 				B620C3771FBB6043001B29E9 /* BatchUpdatable.swift in Sources */,
 				B6C6EA9B1FA7E8E4001F97E7 /* DragRightDismissInteractiveTransition.swift in Sources */,
-				B6C6EA311FA79B45001F97E7 /* KozMap.xcdatamodeld in Sources */,
+				B6C6EA311FA79B45001F97E7 /* ARMap.xcdatamodeld in Sources */,
 				B61470041FB1475B0068CA67 /* InlineColorChooserViewController.swift in Sources */,
 				B6C6EA5F1FA7B5D6001F97E7 /* SCNMaterial+Util.swift in Sources */,
 				B643915E1FC2B548005721E5 /* MainViewController+AR.swift in Sources */,
@@ -844,15 +849,16 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		B6C6EA2F1FA79B45001F97E7 /* KozMap.xcdatamodeld */ = {
+		B6C6EA2F1FA79B45001F97E7 /* ARMap.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				B60CB55B201247150010CF71 /* TackARLocation 4.xcdatamodel */,
 				B64391551FC1F336005721E5 /* TackARLocation 3.xcdatamodel */,
 				B61470091FB17E580068CA67 /* TackARLocation 2.xcdatamodel */,
 				B6C6EA301FA79B45001F97E7 /* TackARLocation.xcdatamodel */,
 			);
-			currentVersion = B64391551FC1F336005721E5 /* TackARLocation 3.xcdatamodel */;
-			path = KozMap.xcdatamodeld;
+			currentVersion = B60CB55B201247150010CF71 /* TackARLocation 4.xcdatamodel */;
+			path = ARMap.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

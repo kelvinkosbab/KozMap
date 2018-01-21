@@ -187,12 +187,16 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
     let color = Color.create()
     color.color = self.locationColor
     
+    // Address
+    let address = self.mapItem?.address
+    
     // Distance
     let currentLocation = LocationManager.shared.currentLocation
     let distance = currentLocation?.distance(from: location)
     
     // Create the location
     let savedLocation = SavedLocation.create(name: name, location: location, color: color, distance: distance)
+    savedLocation.address = address
     MyDataManager.shared.saveMainContext()
     self.delegate?.didSave(savedLocation: savedLocation)
   }
