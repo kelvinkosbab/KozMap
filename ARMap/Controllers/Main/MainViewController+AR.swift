@@ -8,12 +8,16 @@
 
 import UIKit
 
+// MARK: - ARViewControllerDelegate
+
 extension MainViewController : ARViewControllerDelegate {
   
   func userDidTap(savedLocation: SavedLocation) {
     self.presentLocationDetail(savedLocation: savedLocation)
   }
 }
+
+// MARK: - ARStateDelegate
 
 extension MainViewController : ARStateDelegate {
   
@@ -79,6 +83,7 @@ extension MainViewController : ARStateDelegate {
     UIView.animate(withDuration: duration, animations: { [weak self] in
       self?.configuringViewController?.view.alpha = 0
     })
+    
     configuringVisualEffectContainerViewController.update(blurEffect: nil, duration: duration) { [weak self] in
       self?.loadConfiguredNavigationBar()
       self?.showElements()
