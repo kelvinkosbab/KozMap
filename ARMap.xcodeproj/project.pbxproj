@@ -77,7 +77,6 @@
 		B6C6EA7B1FA7E5E1001F97E7 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA7A1FA7E5E1001F97E7 /* SettingsViewController.swift */; };
 		B6C6EA7E1FA7E639001F97E7 /* PresentableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA7D1FA7E639001F97E7 /* PresentableController.swift */; };
 		B6C6EA821FA7E670001F97E7 /* PresenationManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA811FA7E670001F97E7 /* PresenationManagerProtocol.swift */; };
-		B6C6EA841FA7E690001F97E7 /* DragInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA831FA7E690001F97E7 /* DragInteractiveTransition.swift */; };
 		B6C6EA861FA7E6A6001F97E7 /* DragUpDismissInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA851FA7E6A6001F97E7 /* DragUpDismissInteractiveTransition.swift */; };
 		B6C6EA881FA7E6BB001F97E7 /* LeftMenuPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA871FA7E6BB001F97E7 /* LeftMenuPresentationManager.swift */; };
 		B6C6EA8A1FA7E6D2001F97E7 /* RightToLeftPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C6EA891FA7E6D2001F97E7 /* RightToLeftPresentationManager.swift */; };
@@ -95,6 +94,7 @@
 		B6CE3D061FAA1E9400F9DF76 /* PlacemarkNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CE3D051FAA1E9400F9DF76 /* PlacemarkNode.swift */; };
 		B6D8FAEE201634CF0002CBA7 /* VerticalScrollInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D8FAED201634CF0002CBA7 /* VerticalScrollInteractiveTransition.swift */; };
 		B6D8FAF0201636350002CBA7 /* InteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D8FAEF201636350002CBA7 /* InteractiveTransition.swift */; };
+		B6D8FAF4201649130002CBA7 /* DragInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D8FAF3201649130002CBA7 /* DragInteractiveTransition.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -175,7 +175,6 @@
 		B6C6EA7A1FA7E5E1001F97E7 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		B6C6EA7D1FA7E639001F97E7 /* PresentableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentableController.swift; sourceTree = "<group>"; };
 		B6C6EA811FA7E670001F97E7 /* PresenationManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenationManagerProtocol.swift; sourceTree = "<group>"; };
-		B6C6EA831FA7E690001F97E7 /* DragInteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragInteractiveTransition.swift; sourceTree = "<group>"; };
 		B6C6EA851FA7E6A6001F97E7 /* DragUpDismissInteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragUpDismissInteractiveTransition.swift; sourceTree = "<group>"; };
 		B6C6EA871FA7E6BB001F97E7 /* LeftMenuPresentationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftMenuPresentationManager.swift; sourceTree = "<group>"; };
 		B6C6EA891FA7E6D2001F97E7 /* RightToLeftPresentationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightToLeftPresentationManager.swift; sourceTree = "<group>"; };
@@ -192,6 +191,7 @@
 		B6CE3D051FAA1E9400F9DF76 /* PlacemarkNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacemarkNode.swift; sourceTree = "<group>"; };
 		B6D8FAED201634CF0002CBA7 /* VerticalScrollInteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalScrollInteractiveTransition.swift; sourceTree = "<group>"; };
 		B6D8FAEF201636350002CBA7 /* InteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveTransition.swift; sourceTree = "<group>"; };
+		B6D8FAF3201649130002CBA7 /* DragInteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragInteractiveTransition.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -490,7 +490,7 @@
 			isa = PBXGroup;
 			children = (
 				B6D8FAEF201636350002CBA7 /* InteractiveTransition.swift */,
-				B6C6EA831FA7E690001F97E7 /* DragInteractiveTransition.swift */,
+				B6D8FAF3201649130002CBA7 /* DragInteractiveTransition.swift */,
 				B6C6EA851FA7E6A6001F97E7 /* DragUpDismissInteractiveTransition.swift */,
 				B6C6EA961FA7E8B4001F97E7 /* DragDownDismissInteractiveTransition.swift */,
 				B6C6EA981FA7E8D1001F97E7 /* DragLeftDismissInteractiveTransition.swift */,
@@ -617,6 +617,7 @@
 				B64391601FC2BCF1005721E5 /* ARState.swift in Sources */,
 				B6D8FAEE201634CF0002CBA7 /* VerticalScrollInteractiveTransition.swift in Sources */,
 				B6C6EA971FA7E8B4001F97E7 /* DragDownDismissInteractiveTransition.swift in Sources */,
+				B6D8FAF4201649130002CBA7 /* DragInteractiveTransition.swift in Sources */,
 				B6C6EA931FA7E83F001F97E7 /* Device.swift in Sources */,
 				B621414A201420300035C787 /* LocationDetailViewController.swift in Sources */,
 				B6C6EA5D1FA7B0C3001F97E7 /* CGRect+Util.swift in Sources */,
@@ -646,7 +647,6 @@
 				B66041EF1FA905350076EBEF /* VirtualObject.swift in Sources */,
 				B6C6EA4E1FA7A9A6001F97E7 /* BaseNavigationController.swift in Sources */,
 				B69BDAD31FA7F84400A385DE /* UIApplication+Util.swift in Sources */,
-				B6C6EA841FA7E690001F97E7 /* DragInteractiveTransition.swift in Sources */,
 				B6C6EA481FA7A15C001F97E7 /* ViewControllerFromStoryboardProtocol.swift in Sources */,
 				B6D8FAF0201636350002CBA7 /* InteractiveTransition.swift in Sources */,
 				B643915A1FC29989005721E5 /* Distance.swift in Sources */,
