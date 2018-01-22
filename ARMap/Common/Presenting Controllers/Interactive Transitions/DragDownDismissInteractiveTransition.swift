@@ -8,13 +8,13 @@
 
 import UIKit
 
-class DragDownDismissInteractiveTransition : InteractiveTransition {
+class DragDownDismissInteractiveTransition : DragInteractiveTransition {
   
-  override var axis: InteractiveTransition.InteractorAxis {
+  override var axis: DragInteractiveTransition.InteractorAxis {
     return .y
   }
   
-  override var direction: InteractiveTransition.InteractorDirection {
+  override var direction: DragInteractiveTransition.InteractorDirection {
     return .positive
   }
 }

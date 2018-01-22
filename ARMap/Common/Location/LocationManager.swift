@@ -81,7 +81,7 @@ class LocationManager : NSObject, CLLocationManagerDelegate, PermissionManagerDe
   weak var delegate: LocationManagerDelegate? = nil
   weak var authorizationDelegate: LocationManagerAuthorizationDelegate? = nil
   
-  private let locationManager: CLLocationManager
+  internal let locationManager: CLLocationManager
   
   var currentLocation: CLLocation? {
     didSet {

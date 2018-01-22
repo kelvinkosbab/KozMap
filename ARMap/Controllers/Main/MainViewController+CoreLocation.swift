@@ -9,11 +9,11 @@
 import UIKit
 import CoreLocation
 
-// MARK: - LocationDetailViewControllerDelegate
+// MARK: - AddLocationViewControllerDelegate
 
-extension MainViewController : LocationDetailViewControllerDelegate {
+extension MainViewController : AddLocationViewControllerDelegate {
   
-  func didUpdate(savedLocation: SavedLocation) {
+  func didSave(placemark: Placemark) {
     let dispatchGroup = DispatchGroup()
     if let _ = self.presentedViewController {
       dispatchGroup.enter()
@@ -25,30 +25,14 @@ extension MainViewController : LocationDetailViewControllerDelegate {
     dispatchGroup.notify(queue: .main) { [weak self] in
       
       // Present an alert
-      self?.presentLocationUpdatedAlert(savedLocation: savedLocation)
+      self?.presentLocationSavedAlert(placemark: placemark)
     }
   }
   
-  func didSave(savedLocation: SavedLocation) {
-    let dispatchGroup = DispatchGroup()
-    if let _ = self.presentedViewController {
-      dispatchGroup.enter()
-      self.dismiss(animated: true) {
-        dispatchGroup.leave()
-      }
-    }
-    
-    dispatchGroup.notify(queue: .main) { [weak self] in
-      
-      // Present an alert
-      self?.presentLocationSavedAlert(savedLocation: savedLocation)
-    }
-  }
-  
-  private func presentLocationSavedAlert(savedLocation: SavedLocation) {
+  private func presentLocationSavedAlert(placemark: Placemark) {
     let title = "Location Saved"
     let message: String?
-    if let name = savedLocation.name {
+    if let name = placemark.name {
       message = "\(name) has been saved."
     } else {
       message = nil
@@ -61,10 +45,10 @@ extension MainViewController : LocationDetailViewControllerDelegate {
     }
   }
   
-  private func presentLocationUpdatedAlert(savedLocation: SavedLocation) {
+  private func presentLocationUpdatedAlert(placemark: Placemark) {
     let title = "Location Updated"
     let message: String?
-    if let name = savedLocation.name {
+    if let name = placemark.name {
       message = "\(name) has been updated."
     } else {
       message = nil
@@ -82,16 +66,16 @@ extension MainViewController : LocationDetailViewControllerDelegate {
 
 extension MainViewController : LocationListViewControllerDelegate {
   
-  func shouldEdit(savedLocation: SavedLocation) {
+  func shouldEdit(placemark: Placemark) {
     self.dismiss(animated: true) { [weak self] in
-      self?.presentLocationDetail(savedLocation: savedLocation)
+      self?.presentLocationDetail(placemark: placemark)
     }
   }
   
-  func shouldDelete(savedLocation: SavedLocation) {
+  func shouldDelete(placemark: Placemark) {
     
     // Delete this location from core data
-    SavedLocation.deleteOne(savedLocation)
+    Placemark.deleteOne(placemark)
   }
 }
 
@@ -101,7 +85,7 @@ extension MainViewController : SearchViewControllerDelegate {
   
   func shouldAdd(mapItem: MapItem) {
     self.dismiss(animated: true) { [weak self] in
-      self?.presentLocationDetail(mapItem: mapItem)
+      self?.presentAddLocation(mapItem: mapItem)
     }
   }
 }

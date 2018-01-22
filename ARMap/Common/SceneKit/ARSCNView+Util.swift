@@ -35,4 +35,8 @@ extension ARSCNView {
     }
     self.scene.lightingEnvironment.intensity = intensity
   }
+  
+  var camera: SCNCamera? {
+    return self.pointOfView?.camera
+  }
 }

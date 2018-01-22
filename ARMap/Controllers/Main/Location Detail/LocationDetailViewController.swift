@@ -1,20 +1,15 @@
 //
 //  LocationDetailViewController.swift
-//  TackARLocation
+//  ARMap
 //
-//  Created by Kelvin Kosbab on 10/30/17.
-//  Copyright © 2017 Tack Mobile. All rights reserved.
+//  Created by Kelvin Kosbab on 1/20/18.
+//  Copyright © 2018 Kozinga. All rights reserved.
 //
 
 import UIKit
-import CoreLocation
+import CoreData
 
-protocol LocationDetailViewControllerDelegate : class {
-  func didSave(savedLocation: SavedLocation)
-  func didUpdate(savedLocation: SavedLocation)
-}
-
-class LocationDetailViewController : BaseViewController, DesiredContentHeightDelegate {
+class LocationDetailViewController : BaseViewController, NSFetchedResultsControllerDelegate, DesiredContentHeightDelegate {
   
   // MARK: - Static Accessors
   
@@ -22,35 +17,16 @@ class LocationDetailViewController : BaseViewController, DesiredContentHeightDel
     return self.newViewController(fromStoryboardWithName: "AddLocation")
   }
   
-  static func newViewController(delegate: LocationDetailViewControllerDelegate?) -> LocationDetailViewController {
+  static func newViewController(placemark: Placemark) -> LocationDetailViewController {
     let viewController = self.newViewController()
-    viewController.delegate = delegate
-    return viewController
-  }
-  
-  static func newViewController(savedLocation: SavedLocation, delegate: LocationDetailViewControllerDelegate?) -> LocationDetailViewController {
-    let viewController = self.newViewController()
-    viewController.savedLocation = savedLocation
-    viewController.location = savedLocation.location
-    if let color = savedLocation.color {
-      viewController.locationColor = color.color
-    }
-    viewController.delegate = delegate
-    return viewController
-  }
-  
-  static func newViewController(mapItem: MapItem, delegate: LocationDetailViewControllerDelegate?) -> LocationDetailViewController {
-    let viewController = self.newViewController()
-    viewController.mapItem = mapItem
-    viewController.location = mapItem.placemark.location
-    viewController.delegate = delegate
+    viewController.placemark = placemark
     return viewController
   }
   
   // MARK: - DesiredContentHeightDelegate
   
   var desiredContentHeight: CGFloat {
-    return 295
+    return 271
   }
   
   // MARK: - Properties
@@ -58,43 +34,26 @@ class LocationDetailViewController : BaseViewController, DesiredContentHeightDel
   @IBOutlet weak var nameTextField: UITextField!
   @IBOutlet weak var latitudeLabel: UILabel!
   @IBOutlet weak var longitudeLabel: UILabel!
-  @IBOutlet weak var addLocationButton: UIButton!
+  @IBOutlet weak var distanceLabel: UILabel!
+  @IBOutlet weak var locationDescriptionLabel: UILabel!
   @IBOutlet weak var colorChooserContainer: UIView!
   
-  weak var delegate: LocationDetailViewControllerDelegate? = nil
-  weak var colorChooserController: InlineColorChooserViewController? = nil
+  var placemark: Placemark? = nil
+  var colorChooserController: InlineColorChooserViewController? = nil
   
-  var savedLocation: SavedLocation? = nil
-  var mapItem: MapItem? = nil
-  var locationColor: UIColor = .kozRed
-  var location: CLLocation? = nil {
-    didSet {
-      if self.isViewLoaded && self.state == .creating {
-        self.reloadContent()
-      }
+  private lazy var placemarksFetchedResultsController: NSFetchedResultsController<Placemark>? = {
+    
+    guard let placemark = self.placemark else {
+      return nil
     }
-  }
-  
-  enum LocationDetailState {
-    case creating, updatingSavedLocation, creatingMapItem
-  }
-  
-  var state: LocationDetailState {
-    if self.savedLocation == nil && self.mapItem == nil {
-      return .creating
-    } else if let _ = self.savedLocation {
-      return .updatingSavedLocation
-    }
-    return .creatingMapItem
-  }
+    
+    let controller = Placemark.newFetchedResultsController(placemark: placemark)
+    controller.delegate = self
+    try? controller.performFetch()
+    return controller
+  }()
   
   // MARK: - Lifecycle
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    self.nameTextField.delegate = self
-  }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
@@ -104,32 +63,35 @@ class LocationDetailViewController : BaseViewController, DesiredContentHeightDel
       self.configureColorChooser()
     }
     
-    // Style button
-    self.addLocationButton.layer.cornerRadius = 5
-    self.addLocationButton.layer.masksToBounds = true
-    self.addLocationButton.clipsToBounds = true
+    // UITextFieldDelegate
+    self.nameTextField.delegate = self
     
-    // Content
+    // Update content
     self.reloadContent()
     
-    // Location updates
-    if self.state == .creating {
-      self.location = LocationManager.shared.currentLocation
-      NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveUpdatedLocationNotification(_:)), name: .locationManagerDidUpdateCurrentLocation, object: nil)
-    }
+    // Listen for updates to current location
+    NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveUpdatedLocationNotification(_:)), name: .locationManagerDidUpdateCurrentLocation, object: nil)
   }
   
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
     
+    MyDataManager.shared.saveMainContext()
     NotificationCenter.default.removeObserver(self)
   }
   
   // MARK: - Notifications
   
   @objc func didReceiveUpdatedLocationNotification(_ notification: Notification) {
-    if self.state == .creating {
-      self.location = LocationManager.shared.currentLocation
+    self.reloadContent()
+  }
+  
+  // MARK: - NSFetchedResultsControllerDelegate
+  
+  func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    if controller == self.placemarksFetchedResultsController {
+      self.placemark = self.placemarksFetchedResultsController?.fetchedObjects?.first
+      self.reloadContent()
     }
   }
   
@@ -145,97 +107,54 @@ class LocationDetailViewController : BaseViewController, DesiredContentHeightDel
     colorChooserController.view.backgroundColor = .clear
     self.add(childViewController: colorChooserController, intoContainerView: self.colorChooserContainer)
     self.colorChooserController = colorChooserController
-    if self.state == .creating || self.state == .creatingMapItem {
-      self.locationColor = .kozRed
-      colorChooserController.selectedColor = .kozRed
-    } else {
-      if let selectedColor = self.savedLocation?.color {
-        self.locationColor = selectedColor.color
-        colorChooserController.selectedColor = selectedColor.color
-      }
-    }
   }
   
   // MARK: - Content
   
   func reloadContent() {
     
-    // Saved location
-    if let savedLocation = self.savedLocation {
-      self.nameTextField.text = savedLocation.name
-      self.location = savedLocation.location
-    }
-    
-    // Map Item
-    if let mapItem = self.mapItem {
-      self.nameTextField.text = mapItem.name
-      self.location = mapItem.placemark.location
-    }
-    
     // Check if there is a location to populate
-    guard let location = self.location else {
-      self.addLocationButton.isUserInteractionEnabled = false
-      self.addLocationButton.alpha = 0.5
+    guard let placemark = self.placemark else {
       self.latitudeLabel.text = "NA"
       self.longitudeLabel.text = "NA"
+      self.distanceLabel.text = "NA"
+      self.locationDescriptionLabel.text = ""
       return
     }
     
+    // Name
+    self.nameTextField.text = placemark.name
+    
+    // Color
+    if let color = placemark.color?.color {
+      self.colorChooserController?.selectedColor = color
+    }
+    
     // Update the current location
-    self.addLocationButton.isUserInteractionEnabled = true
-    self.addLocationButton.alpha = 1
+    let location = placemark.location
     let coordinate = location.coordinate
     let roundedLatitude = Double(round(coordinate.latitude*1000)/1000)
     let roundedLongitude = Double(round(coordinate.longitude*1000)/1000)
     self.latitudeLabel.text = "\(roundedLatitude)"
     self.longitudeLabel.text = "\(roundedLongitude)"
+    
+    // Update the distance
+    let currentLocation = LocationManager.shared.currentLocation
+    let distance = currentLocation?.distance(from: location)
+    self.distanceLabel.text = distance?.getDistanceString(unitType: Defaults.shared.unitType, displayType: .numbericUnits(false)) ?? "NA"
+    
+    // Location address
+    let address = placemark.address
+    self.locationDescriptionLabel.text = address
+    location.getPlacemark { [weak self] placemark in
+      self?.locationDescriptionLabel.text = address ?? placemark?.address
+    }
   }
   
   // MARK: - Actions
   
-  @IBAction func addLocationButtonSelected() {
-    self.saveLocation()
-  }
-  
-  func saveLocation() {
-    
-    // Check for valid location
-    guard let location = self.location else {
-      return
-    }
-    
-    // Check for valid name
-    guard let name = self.nameTextField.text?.trimmed, !name.isEmpty else {
-      return
-    }
-    
-    // Dismiss the keyboard
-    self.nameTextField.resignFirstResponder()
-    
-    // Color of the saved location
-    let color = self.savedLocation?.color ?? Color.create()
-    color.color = self.locationColor
-    
-    // Distance
-    let currentLocation = LocationManager.shared.currentLocation
-    let distance = currentLocation?.distance(from: location)
-    
-    // Save the location
-    if let savedLocation = self.savedLocation {
-      
-      // Updating this location
-      
-      savedLocation.update(name: name, location: location, color: color, distance: distance)
-      MyDataManager.shared.saveMainContext()
-      self.delegate?.didUpdate(savedLocation: savedLocation)
-      
-    } else {
-      
-      // Creating a location
-      let savedLocation = SavedLocation.create(name: name, location: location, color: color, distance: distance)
-      MyDataManager.shared.saveMainContext()
-      self.delegate?.didSave(savedLocation: savedLocation)
-    }
+  @IBAction func nameTextFieldEditingChanged(_ sender: UITextField) {
+    self.placemark?.name = sender.text
   }
 }
 
@@ -244,9 +163,7 @@ class LocationDetailViewController : BaseViewController, DesiredContentHeightDel
 extension LocationDetailViewController : InlineColorChooserViewControllerDelegate {
   
   func didSelect(color: UIColor) {
-    if color != self.locationColor {
-      self.locationColor = color
-    }
+    self.placemark?.color?.color = color
   }
 }
 
@@ -255,6 +172,7 @@ extension LocationDetailViewController : InlineColorChooserViewControllerDelegat
 extension LocationDetailViewController : UITextFieldDelegate {
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
     if let _ = textField.text {
       return true
     }

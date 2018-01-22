@@ -75,43 +75,31 @@ class MainViewController : BaseViewController {
   func loadConfiguredNavigationBar() {
     self.navigationItem.title = "ARMap"
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "assetOptions"), style: .plain, target: self, action: #selector(self.settingsButtonSelected))
-    self.navigationItem.hidesBackButton = false
   }
   
   func clearNavigationBar() {
     self.navigationItem.title = nil
     self.navigationItem.leftBarButtonItem = nil
     self.navigationItem.rightBarButtonItem = nil
-    self.navigationItem.hidesBackButton = true
   }
   
   // MARK: - Actions
   
   @IBAction func addButtonSelected() {
-    
-    guard self.presentedViewController == nil else {
-      return
-    }
-    
-    let addLocationViewController = AddLocationViewController.newViewController(locationDetailDelegate: self, searchDelegate: self)
-    let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: addLocationViewController)
-    let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
-    self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
+    self.presentAddLocation()
   }
   
   @IBAction func listButtonSelected() {
-    
-    guard self.presentedViewController == nil else {
-      return
-    }
-    
-    let locationListViewController = LocationListViewController.newViewController(delegate: self)
-    let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: locationListViewController)
-    let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
-    self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
+    self.presentPlacemarkList()
   }
   
   @objc func settingsButtonSelected() {
+    self.presentSettings()
+  }
+  
+  // MARK: - Navigation
+  
+  func presentSettings() {
     
     guard self.presentedViewController == nil else {
       return
@@ -123,27 +111,49 @@ class MainViewController : BaseViewController {
     self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
   }
   
-  // MARK: - Navigation
-  
-  func presentLocationDetail(savedLocation: SavedLocation) {
+  func presentPlacemarkList() {
     
     guard self.presentedViewController == nil else {
       return
     }
     
-    let locationDetailViewController = LocationDetailViewController.newViewController(savedLocation: savedLocation, delegate: self)
-    let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: locationDetailViewController)
+    let locationListViewController = LocationListViewController.newViewController(delegate: self)
+    let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: locationListViewController)
     let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
     self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
   }
   
-  func presentLocationDetail(mapItem: MapItem) {
+  func presentAddLocation() {
     
     guard self.presentedViewController == nil else {
       return
     }
     
-    let locationDetailViewController = LocationDetailViewController.newViewController(mapItem: mapItem, delegate: self)
+    let addLocationContainerViewController = AddLocationContainerViewController.newViewController(locationDetailDelegate: self, searchDelegate: self)
+    let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: addLocationContainerViewController)
+    let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
+    self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
+  }
+  
+  func presentAddLocation(mapItem: MapItem) {
+    
+    guard self.presentedViewController == nil else {
+      return
+    }
+    
+    let addLocationViewController = AddLocationViewController.newViewController(mapItem: mapItem, delegate: self)
+    let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: addLocationViewController)
+    let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
+    self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
+  }
+  
+  func presentLocationDetail(placemark: Placemark) {
+    
+    guard self.presentedViewController == nil else {
+      return
+    }
+    
+    let locationDetailViewController = LocationDetailViewController.newViewController(placemark: placemark)
     let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: locationDetailViewController)
     let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
     self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
@@ -185,11 +195,11 @@ class MainViewController : BaseViewController {
   
   @objc func handleKeyboardNotification(_ notification: NSNotification) {
     
-    guard let viewController = self.presentedViewController as? KeyboardFrameRespondable, let userInfo = notification.userInfo else {
+    guard let presentedViewController = self.presentedViewController as? KeyboardFrameRespondable, let userInfo = notification.userInfo else {
       return
     }
     
-    let initialViewHeight = viewController.view.bounds.height
+    // Keyboard presentation properties
     let endFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
     let duration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
     let animationCurveRawNSN = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
@@ -202,11 +212,14 @@ class MainViewController : BaseViewController {
       keyboardOffset = endFrame?.size.height ?? 0.0
     }
     
+    // Calculate the new frame
+    let xOffset = presentedViewController.view.frame.origin.x
+    let yOffset = self.view.bounds.height - keyboardOffset - presentedViewController.view.bounds.height
+    let newFrame = CGRect(x: xOffset, y: yOffset, width: presentedViewController.view.bounds.width, height: presentedViewController.view.bounds.height)
+    
     // Perform the animation
     UIView.animate(withDuration: duration, delay: 0, options: animationCurve, animations: { [weak self] in
-      if let strongSelf = self {
-        self?.presentedViewController?.view.frame.origin.y = strongSelf.view.bounds.height - keyboardOffset - initialViewHeight
-      }
+      self?.presentedViewController?.view.frame = newFrame
     })
   }
 }

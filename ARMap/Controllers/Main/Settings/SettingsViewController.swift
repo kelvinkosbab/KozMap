@@ -29,6 +29,7 @@ class SettingsViewController : BaseViewController, DesiredContentHeightDelegate 
   @IBOutlet weak var unitTypeControl: UISegmentedControl!
   @IBOutlet weak var versionLabel: UILabel!
   @IBOutlet weak var companyLabel: UILabel!
+  @IBOutlet weak var showAxisSwitch: UISwitch!
   
   // MARK: - Lifecycle
   
@@ -45,6 +46,9 @@ class SettingsViewController : BaseViewController, DesiredContentHeightDelegate 
     
     // Unit type
     self.unitTypeControl.selectedSegmentIndex = Defaults.shared.unitType.rawValue
+    
+    // Show axis on start
+    self.showAxisSwitch.isOn = Defaults.shared.showAxis
     
     // Version
     self.versionLabel.text = "Version \(UIApplication.shared.versionString ?? "N/A")"
@@ -63,7 +67,7 @@ class SettingsViewController : BaseViewController, DesiredContentHeightDelegate 
     }
   }
   
-  @IBAction func walkthroughButtonSelected() {
-    
+  @IBAction func showAxisSwitchValueChanged(_ sender: UISwitch) {
+    Defaults.shared.showAxis = sender.isOn
   }
 }

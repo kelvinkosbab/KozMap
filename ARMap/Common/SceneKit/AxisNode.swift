@@ -1,5 +1,5 @@
 //
-//  AxesNode.swift
+//  AxisNode.swift
 //  TackARLocation
 //
 //  Created by Kelvin Kosbab on 10/31/17.
@@ -8,7 +8,7 @@
 
 import SceneKit
 
-class AxesNode : SCNNode {
+class AxisNode : SCNNode {
   
   // MARK: - Properties
   
