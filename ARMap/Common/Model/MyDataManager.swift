@@ -31,7 +31,7 @@ class MyDataManager: NSObject, DataMangerProtocol {
   
   // MARK: - DataMangerProtocol
   
-  internal let persistentContainerName = "KozMap"
+  internal let persistentContainerName = "ARMap"
   
   internal lazy var persistentContainer: NSPersistentContainer = {
     return self.getPersistentContainer()

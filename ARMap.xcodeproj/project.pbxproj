@@ -327,11 +327,11 @@
 			isa = PBXGroup;
 			children = (
 				B686EED620166C7300ACF075 /* ARMap.xcdatamodeld */,
-				B686EF6120166D9D00ACF075 /* Color+MyManagedObjectProtocol.swift */,
 				B686EF5F20166D9C00ACF075 /* DataManagerProtocol.swift */,
-				B686EF6320166D9D00ACF075 /* Defaults+MyManagedObjectProtocol.swift */,
 				B686EF5E20166D9C00ACF075 /* MyDataManager.swift */,
 				B686EF6020166D9D00ACF075 /* MyManagedObjectProtocol.swift */,
+				B686EF6320166D9D00ACF075 /* Defaults+MyManagedObjectProtocol.swift */,
+				B686EF6120166D9D00ACF075 /* Color+MyManagedObjectProtocol.swift */,
 				B686EF6220166D9D00ACF075 /* Placemark+MyManagedObjectProtocol.swift */,
 			);
 			path = Model;
@@ -790,6 +790,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9B83N8S7VW;
 				INFOPLIST_FILE = "$(SRCROOT)/ARMap/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tackmobile.ARMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -805,6 +806,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9B83N8S7VW;
 				INFOPLIST_FILE = "$(SRCROOT)/ARMap/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tackmobile.ARMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
