@@ -13,7 +13,7 @@ import CoreLocation
 
 extension MainViewController : AddLocationViewControllerDelegate {
   
-  func didSave(savedLocation: SavedLocation) {
+  func didSave(placemark: Placemark) {
     let dispatchGroup = DispatchGroup()
     if let _ = self.presentedViewController {
       dispatchGroup.enter()
@@ -25,14 +25,14 @@ extension MainViewController : AddLocationViewControllerDelegate {
     dispatchGroup.notify(queue: .main) { [weak self] in
       
       // Present an alert
-      self?.presentLocationSavedAlert(savedLocation: savedLocation)
+      self?.presentLocationSavedAlert(placemark: placemark)
     }
   }
   
-  private func presentLocationSavedAlert(savedLocation: SavedLocation) {
+  private func presentLocationSavedAlert(placemark: Placemark) {
     let title = "Location Saved"
     let message: String?
-    if let name = savedLocation.name {
+    if let name = placemark.name {
       message = "\(name) has been saved."
     } else {
       message = nil
@@ -45,10 +45,10 @@ extension MainViewController : AddLocationViewControllerDelegate {
     }
   }
   
-  private func presentLocationUpdatedAlert(savedLocation: SavedLocation) {
+  private func presentLocationUpdatedAlert(placemark: Placemark) {
     let title = "Location Updated"
     let message: String?
-    if let name = savedLocation.name {
+    if let name = placemark.name {
       message = "\(name) has been updated."
     } else {
       message = nil
@@ -66,16 +66,16 @@ extension MainViewController : AddLocationViewControllerDelegate {
 
 extension MainViewController : LocationListViewControllerDelegate {
   
-  func shouldEdit(savedLocation: SavedLocation) {
+  func shouldEdit(placemark: Placemark) {
     self.dismiss(animated: true) { [weak self] in
-      self?.presentLocationDetail(savedLocation: savedLocation)
+      self?.presentLocationDetail(placemark: placemark)
     }
   }
   
-  func shouldDelete(savedLocation: SavedLocation) {
+  func shouldDelete(placemark: Placemark) {
     
     // Delete this location from core data
-    SavedLocation.deleteOne(savedLocation)
+    Placemark.deleteOne(placemark)
   }
 }
 

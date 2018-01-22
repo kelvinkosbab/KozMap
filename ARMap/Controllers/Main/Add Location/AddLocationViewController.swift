@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 
 protocol AddLocationViewControllerDelegate : class {
-  func didSave(savedLocation: SavedLocation)
+  func didSave(placemark: Placemark)
 }
 
 class AddLocationViewController : BaseViewController, DesiredContentHeightDelegate {
@@ -215,10 +215,10 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
     let distance = currentLocation?.distance(from: location)
     
     // Create the location
-    let savedLocation = SavedLocation.create(name: name, location: location, color: color, distance: distance)
-    savedLocation.address = address
+    let placemark = Placemark.create(name: name, location: location, color: color, distance: distance)
+    placemark.address = address
     MyDataManager.shared.saveMainContext()
-    self.delegate?.didSave(savedLocation: savedLocation)
+    self.delegate?.didSave(placemark: placemark)
   }
 }
 

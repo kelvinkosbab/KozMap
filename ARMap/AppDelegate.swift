@@ -1,13 +1,12 @@
 //
 //  AppDelegate.swift
-//  TackARLocation
+//  ARMap
 //
-//  Created by Kelvin Kosbab on 10/30/17.
-//  Copyright © 2017 Tack Mobile. All rights reserved.
+//  Created by Kelvin Kosbab on 1/22/18.
+//  Copyright © 2018 Tack Mobile. All rights reserved.
 //
 
 import UIKit
-import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

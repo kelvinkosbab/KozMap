@@ -12,8 +12,8 @@ import UIKit
 
 extension MainViewController : ARViewControllerDelegate {
   
-  func userDidTap(savedLocation: SavedLocation) {
-    self.presentLocationDetail(savedLocation: savedLocation)
+  func userDidTap(placemark: Placemark) {
+    self.presentLocationDetail(placemark: placemark)
   }
 }
 

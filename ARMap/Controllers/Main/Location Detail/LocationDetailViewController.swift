@@ -17,9 +17,9 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
     return self.newViewController(fromStoryboardWithName: "AddLocation")
   }
   
-  static func newViewController(savedLocation: SavedLocation) -> LocationDetailViewController {
+  static func newViewController(placemark: Placemark) -> LocationDetailViewController {
     let viewController = self.newViewController()
-    viewController.savedLocation = savedLocation
+    viewController.placemark = placemark
     return viewController
   }
   
@@ -38,16 +38,16 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
   @IBOutlet weak var locationDescriptionLabel: UILabel!
   @IBOutlet weak var colorChooserContainer: UIView!
   
-  var savedLocation: SavedLocation? = nil
+  var placemark: Placemark? = nil
   var colorChooserController: InlineColorChooserViewController? = nil
   
-  private lazy var savedLocationsFetchedResultsController: NSFetchedResultsController<SavedLocation>? = {
+  private lazy var placemarksFetchedResultsController: NSFetchedResultsController<Placemark>? = {
     
-    guard let savedLocation = self.savedLocation else {
+    guard let placemark = self.placemark else {
       return nil
     }
     
-    let controller = SavedLocation.newFetchedResultsController(savedLocation: savedLocation)
+    let controller = Placemark.newFetchedResultsController(placemark: placemark)
     controller.delegate = self
     try? controller.performFetch()
     return controller
@@ -89,8 +89,8 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
   // MARK: - NSFetchedResultsControllerDelegate
   
   func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-    if controller == self.savedLocationsFetchedResultsController {
-      self.savedLocation = self.savedLocationsFetchedResultsController?.fetchedObjects?.first
+    if controller == self.placemarksFetchedResultsController {
+      self.placemark = self.placemarksFetchedResultsController?.fetchedObjects?.first
       self.reloadContent()
     }
   }
@@ -114,7 +114,7 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
   func reloadContent() {
     
     // Check if there is a location to populate
-    guard let savedLocation = self.savedLocation else {
+    guard let placemark = self.placemark else {
       self.latitudeLabel.text = "NA"
       self.longitudeLabel.text = "NA"
       self.distanceLabel.text = "NA"
@@ -123,15 +123,15 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
     }
     
     // Name
-    self.nameTextField.text = savedLocation.name
+    self.nameTextField.text = placemark.name
     
     // Color
-    if let color = savedLocation.color?.color {
+    if let color = placemark.color?.color {
       self.colorChooserController?.selectedColor = color
     }
     
     // Update the current location
-    let location = savedLocation.location
+    let location = placemark.location
     let coordinate = location.coordinate
     let roundedLatitude = Double(round(coordinate.latitude*1000)/1000)
     let roundedLongitude = Double(round(coordinate.longitude*1000)/1000)
@@ -144,16 +144,17 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
     self.distanceLabel.text = distance?.getDistanceString(unitType: Defaults.shared.unitType, displayType: .numbericUnits(false)) ?? "NA"
     
     // Location address
-    self.locationDescriptionLabel.text = savedLocation.address
+    let address = placemark.address
+    self.locationDescriptionLabel.text = address
     location.getPlacemark { [weak self] placemark in
-      self?.locationDescriptionLabel.text = placemark?.address
+      self?.locationDescriptionLabel.text = address ?? placemark?.address
     }
   }
   
   // MARK: - Actions
   
   @IBAction func nameTextFieldEditingChanged(_ sender: UITextField) {
-    self.savedLocation?.name = sender.text
+    self.placemark?.name = sender.text
   }
 }
 
@@ -162,7 +163,7 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
 extension LocationDetailViewController : InlineColorChooserViewControllerDelegate {
   
   func didSelect(color: UIColor) {
-    self.savedLocation?.color?.color = color
+    self.placemark?.color?.color = color
   }
 }
 

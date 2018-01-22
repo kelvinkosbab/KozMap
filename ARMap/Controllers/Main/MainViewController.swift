@@ -147,13 +147,13 @@ class MainViewController : BaseViewController {
     self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
   }
   
-  func presentLocationDetail(savedLocation: SavedLocation) {
+  func presentLocationDetail(placemark: Placemark) {
     
     guard self.presentedViewController == nil else {
       return
     }
     
-    let locationDetailViewController = LocationDetailViewController.newViewController(savedLocation: savedLocation)
+    let locationDetailViewController = LocationDetailViewController.newViewController(placemark: placemark)
     let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: locationDetailViewController)
     let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
     self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])

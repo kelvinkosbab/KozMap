@@ -9,7 +9,7 @@
 import UIKit
 
 protocol LocationListViewControllerCellDelegate : class {
-  func moreButtonSelected(savedLocation: SavedLocation, sender: UIView)
+  func moreButtonSelected(placemark: Placemark, sender: UIView)
 }
 
 class LocationListViewControllerCell : UITableViewCell {
@@ -17,7 +17,7 @@ class LocationListViewControllerCell : UITableViewCell {
   @IBOutlet weak var detailLabel: UILabel!
   @IBOutlet weak var colorView: UIView!
   @IBOutlet weak var moreButton: UIButton!
-  private weak var savedLocation: SavedLocation? = nil
+  private weak var placemark: Placemark? = nil
   weak var delegate: LocationListViewControllerCellDelegate? = nil
   
   override func layoutSubviews() {
@@ -30,26 +30,26 @@ class LocationListViewControllerCell : UITableViewCell {
     }
   }
   
-  func configure(savedLocation: SavedLocation, unitType: UnitType, delegate: LocationListViewControllerCellDelegate?) {
+  func configure(placemark: Placemark, unitType: UnitType, delegate: LocationListViewControllerCellDelegate?) {
     
     // Delegate
     self.delegate = delegate
     
     // Saved location
-    self.savedLocation = savedLocation
-    self.titleLabel.text = savedLocation.name ?? "Unnamed"
+    self.placemark = placemark
+    self.titleLabel.text = placemark.name ?? "Unnamed"
     
     // Distance labels
-    if let readibleDistance = savedLocation.lastDistance.getDistanceString(unitType: unitType, displayType: .numbericUnits(false))?.lowercased() {
+    if let readibleDistance = placemark.lastDistance.getDistanceString(unitType: unitType, displayType: .numbericUnits(false))?.lowercased() {
       self.detailLabel.text = "\(readibleDistance) away"
     } else {
-      let roundedLatitude = Double(round(savedLocation.latitude*1000)/1000)
-      let roundedLongitude = Double(round(savedLocation.longitude*1000)/1000)
+      let roundedLatitude = Double(round(placemark.latitude*1000)/1000)
+      let roundedLongitude = Double(round(placemark.longitude*1000)/1000)
       self.detailLabel.text = "\(roundedLatitude)°N, \(roundedLongitude)°W"
     }
     
     // Color view
-    if let color = savedLocation.color {
+    if let color = placemark.color {
       self.colorView.backgroundColor = color.color
     } else {
       self.colorView.backgroundColor = .kozRed
@@ -57,8 +57,8 @@ class LocationListViewControllerCell : UITableViewCell {
   }
   
   @IBAction func moreButtonSelected(_ sender: UIView) {
-    if let savedLocation = self.savedLocation {
-      self.delegate?.moreButtonSelected(savedLocation: savedLocation, sender: sender)
+    if let placemark = self.placemark {
+      self.delegate?.moreButtonSelected(placemark: placemark, sender: sender)
     }
   }
 }

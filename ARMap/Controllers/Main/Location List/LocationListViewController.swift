@@ -11,8 +11,8 @@ import CoreLocation
 import CoreData
 
 protocol LocationListViewControllerDelegate : class {
-  func shouldEdit(savedLocation: SavedLocation)
-  func shouldDelete(savedLocation: SavedLocation)
+  func shouldEdit(placemark: Placemark)
+  func shouldDelete(placemark: Placemark)
 }
 
 class LocationListViewController : BaseTableViewController, NSFetchedResultsControllerDelegate {
@@ -34,12 +34,12 @@ class LocationListViewController : BaseTableViewController, NSFetchedResultsCont
   weak var delegate: LocationListViewControllerDelegate? = nil
   let rowHeight: CGFloat = 60
   
-  var savedLocations: [SavedLocation] {
-    return self.savedLocationsFetchedResultsController?.fetchedObjects ?? []
+  var placemarks: [Placemark] {
+    return self.placemarksFetchedResultsController?.fetchedObjects ?? []
   }
   
-  private lazy var savedLocationsFetchedResultsController: NSFetchedResultsController<SavedLocation>? = {
-    let controller = SavedLocation.newFetchedResultsController()
+  private lazy var placemarksFetchedResultsController: NSFetchedResultsController<Placemark>? = {
+    let controller = Placemark.newFetchedResultsController()
     controller.delegate = self
     try? controller.performFetch()
     return controller
@@ -64,8 +64,8 @@ class LocationListViewController : BaseTableViewController, NSFetchedResultsCont
     case .update:
       if let indexPath = indexPath {
         if let cell = self.tableView.cellForRow(at: indexPath) as? LocationListViewControllerCell {
-          let savedLocation = self.savedLocations[indexPath.row]
-          cell.configure(savedLocation: savedLocation, unitType: Defaults.shared.unitType, delegate: self)
+          let placemark = self.placemarks[indexPath.row]
+          cell.configure(placemark: placemark, unitType: Defaults.shared.unitType, delegate: self)
         } else {
           self.tableView.reloadRows(at: [ indexPath ], with: .none)
         }
@@ -92,7 +92,7 @@ extension LocationListViewController {
   }
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return self.savedLocations.count
+    return self.placemarks.count
   }
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -104,8 +104,8 @@ extension LocationListViewController {
     cell.backgroundColor = .clear
     
     // Saved location
-    let savedLocation = self.savedLocations[indexPath.row]
-    cell.configure(savedLocation: savedLocation, unitType: Defaults.shared.unitType, delegate: self)
+    let placemark = self.placemarks[indexPath.row]
+    cell.configure(placemark: placemark, unitType: Defaults.shared.unitType, delegate: self)
     
     return cell
   }
@@ -115,22 +115,22 @@ extension LocationListViewController {
 
 extension LocationListViewController : LocationListViewControllerCellDelegate {
   
-  func moreButtonSelected(savedLocation: SavedLocation, sender: UIView) {
-    self.presentMoreActionSheet(savedLocation: savedLocation, sender: sender)
+  func moreButtonSelected(placemark: Placemark, sender: UIView) {
+    self.presentMoreActionSheet(placemark: placemark, sender: sender)
   }
   
-  private func presentMoreActionSheet(savedLocation: SavedLocation, sender: UIView) {
-    let actionSheet = UIAlertController(title: savedLocation.name, message: nil, preferredStyle: .actionSheet)
+  private func presentMoreActionSheet(placemark: Placemark, sender: UIView) {
+    let actionSheet = UIAlertController(title: placemark.name, message: nil, preferredStyle: .actionSheet)
     
     // Edit
     let editAction = UIAlertAction(title: "Edit", style: .default) { [weak self] _ in
-      self?.delegate?.shouldEdit(savedLocation: savedLocation)
+      self?.delegate?.shouldEdit(placemark: placemark)
     }
     actionSheet.addAction(editAction)
     
     // Delete
     let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
-      self?.delegate?.shouldDelete(savedLocation: savedLocation)
+      self?.delegate?.shouldDelete(placemark: placemark)
     }
     actionSheet.addAction(deleteAction)
     

@@ -12,7 +12,7 @@ import CoreLocation
 import CoreData
 
 protocol ARViewControllerDelegate : class {
-  func userDidTap(savedLocation: SavedLocation)
+  func userDidTap(placemark: Placemark)
 }
 
 class ARViewController : UIViewController {
@@ -28,14 +28,14 @@ class ARViewController : UIViewController {
   public private(set) weak var sceneNode: SCNNode?
   public private(set) weak var basePlane: SCNNode?
   public private(set) weak var axisNode: AxisNode?
-  internal var placemarks = Set<SavedLocationNode>()
+  internal var placemarkNodeContainers = Set<PlacemarkNodeContainer>()
   
-  var savedLocations: [SavedLocation] {
+  var placemarks: [Placemark] {
     return self.savedLocationsFetchedResultsController.fetchedObjects ?? []
   }
   
-  private lazy var savedLocationsFetchedResultsController: NSFetchedResultsController<SavedLocation> = {
-    let controller = SavedLocation.newFetchedResultsController()
+  private lazy var savedLocationsFetchedResultsController: NSFetchedResultsController<Placemark> = {
+    let controller = Placemark.newFetchedResultsController()
     controller.delegate = self
     try? controller.performFetch()
     return controller
@@ -166,7 +166,7 @@ class ARViewController : UIViewController {
   // MARK: - Notifications
   
   @objc func didReceiveUpdatedLocationNotification(_ notification: Notification) {
-    self.updatePlacemarks(updatePosition: true)
+    self.updatePlacemarkNodes(updatePosition: true)
   }
   
   @objc func didReceiveUpdatedHeadingNotification(_ notification: Notification) {}
@@ -182,7 +182,7 @@ class ARViewController : UIViewController {
     // Remove all nodes
     self.sceneNode = nil
     self.basePlane = nil
-    self.placemarks.removeAll()
+    self.placemarkNodeContainers.removeAll()
     self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
       node.removeFromParentNode()
     }
@@ -194,32 +194,32 @@ class ARViewController : UIViewController {
     self.session.run(self.sessionConfig, options: [.resetTracking, .removeExistingAnchors])
   }
   
-  // MARK: - Placemarks
+  // MARK: - Placemark Node Containers
   
-  private func add(placemark: SavedLocationNode) {
-    self.placemarks.insert(placemark)
-    self.update(placemark: placemark, animated: true, updatePosition: true)
+  private func add(placemarkNodeContainer: PlacemarkNodeContainer) {
+    self.placemarkNodeContainers.insert(placemarkNodeContainer)
+    self.update(placemarkNodeContainer: placemarkNodeContainer, animated: true, updatePosition: true)
   }
   
-  internal func updatePlacemarks(updatePosition: Bool = true) {
-    for placemark in self.placemarks {
-      self.update(placemark: placemark, animated: true, updatePosition: updatePosition)
+  internal func updatePlacemarkNodes(updatePosition: Bool = true) {
+    for placemarkNodeContainer in self.placemarkNodeContainers {
+      self.update(placemarkNodeContainer: placemarkNodeContainer, animated: true, updatePosition: updatePosition)
     }
   }
   
   // MARK: - Updating placemarks
   
-  internal func update(placemark: SavedLocationNode, animated: Bool = false, updatePosition: Bool = true) {
-    Log.log("Updating placemark \(placemark.savedLocation.name ?? "nil name") at location \(placemark.savedLocation.location.coordinate)")
+  internal func update(placemarkNodeContainer: PlacemarkNodeContainer, animated: Bool = false, updatePosition: Bool = true) {
+    Log.log("Updating placemark \(placemarkNodeContainer.placemark.name ?? "nil name") at location \(placemarkNodeContainer.placemark.location.coordinate)")
     
     // Refresh saved location properties
-    placemark.refreshContent()
+    placemarkNodeContainer.refreshContent()
     
     // Scene location updates
     if updatePosition, let currentScenePosition = self.currentScenePosition, let currentLocation = self.currentLocation {
       
       // Distance to the saved location object
-      let distance = placemark.savedLocation.location.distance(from: currentLocation)
+      let distance = placemarkNodeContainer.placemark.location.distance(from: currentLocation)
       let distanceType = ARDistanceType(distance: distance)
       
       // Update the active placemark node
@@ -228,46 +228,46 @@ class ARViewController : UIViewController {
       
       switch distanceType {
       case .close:
-        if !placemark.isDefaultPlacemarkNode {
+        if !placemarkNodeContainer.isDefaultPlacemarkNode {
           dispatchGroup.enter()
           let defaultPlacemarkNode = PlacemarkNode()
           defaultPlacemarkNode.loadModel { [weak self] in
-            placemark.placemarkNode?.removeFromParentNode()
-            placemark.placemarkNode = defaultPlacemarkNode
+            placemarkNodeContainer.placemarkNode?.removeFromParentNode()
+            placemarkNodeContainer.placemarkNode = defaultPlacemarkNode
             
-            placemark.refreshContent()
+            placemarkNodeContainer.refreshContent()
             self?.sceneNode?.addChildNode(defaultPlacemarkNode)
             dispatchGroup.leave()
           }
         }
       case .medium:
-        if !placemark.isPinPlacemarkNode {
+        if !placemarkNodeContainer.isPinPlacemarkNode {
           dispatchGroup.enter()
           let pinPlacemarkNode = PinPlacemarkNode()
           pinPlacemarkNode.loadModel { [weak self] in
-            placemark.placemarkNode?.removeFromParentNode()
-            placemark.placemarkNode = pinPlacemarkNode
+            placemarkNodeContainer.placemarkNode?.removeFromParentNode()
+            placemarkNodeContainer.placemarkNode = pinPlacemarkNode
             pinPlacemarkNode.beamTransparency = 0.25
             
-            placemark.refreshContent()
+            placemarkNodeContainer.refreshContent()
             self?.sceneNode?.addChildNode(pinPlacemarkNode)
             dispatchGroup.leave()
           }
         }
       case .far:
-        placemark.placemarkNode?.removeFromParentNode()
-        placemark.placemarkNode = nil
+        placemarkNodeContainer.placemarkNode?.removeFromParentNode()
+        placemarkNodeContainer.placemarkNode = nil
       }
       
       // Wait until the active placemark node has been set
-      dispatchGroup.notify(queue: .main) {
+      dispatchGroup.notify(queue: .main) { [weak placemarkNodeContainer] in
         
-        guard let placemarkNode = placemark.placemarkNode else {
+        guard let placemarkNodeContainer = placemarkNodeContainer, let placemarkNode = placemarkNodeContainer.placemarkNode else {
           return
         }
         
         // Translated location
-        let locationTranslation = currentLocation.translation(toLocation: placemark.savedLocation.location)
+        let locationTranslation = currentLocation.translation(toLocation: placemarkNodeContainer.placemark.location)
         
         // Update the placemark based on the distance
         switch distanceType {
@@ -337,8 +337,8 @@ extension ARViewController : ARSCNViewDelegate {
         self.sceneNode?.addChildNode(basePlane)
         
         // Update placemarks
-        self.updateSavedLocations()
-        self.updatePlacemarks(updatePosition: true)
+        self.updatePlacemarks()
+        self.updatePlacemarkNodes(updatePosition: true)
         
       default: break
       }
@@ -384,18 +384,18 @@ extension ARViewController : NSFetchedResultsControllerDelegate {
   func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
     switch type {
     case .insert:
-      if let savedLocation = anObject as? SavedLocation {
-        self.add(savedLocation: savedLocation)
+      if let placemark = anObject as? Placemark {
+        self.add(placemark: placemark)
       }
       
     case .delete:
-      if let savedLocation = anObject as? SavedLocation {
-        self.remove(savedLocation: savedLocation)
+      if let placemark = anObject as? Placemark {
+        self.remove(placemark: placemark)
       }
       
     case .update, .move:
-      if let savedLocation = anObject as? SavedLocation {
-        self.update(savedLocation: savedLocation)
+      if let placemark = anObject as? Placemark {
+        self.update(placemark: placemark)
       }
     }
   }
@@ -429,36 +429,36 @@ extension ARViewController : NSFetchedResultsControllerDelegate {
     }
   }
   
-  // MARK: - Saved Locations
+  // MARK: - Placemarks
   
-  func updateSavedLocations() {
-    for savedLocation in self.savedLocations {
-      self.update(savedLocation: savedLocation)
+  func updatePlacemarks() {
+    for placemark in self.placemarks {
+      self.update(placemark: placemark)
     }
   }
   
-  private func add(savedLocation: SavedLocation) {
+  private func add(placemark: Placemark) {
     
     // Add placemark
-    let placemark = SavedLocationNode(savedLocation: savedLocation)
-    self.add(placemark: placemark)
+    let placemarkNodeContainer = PlacemarkNodeContainer(placemark: placemark)
+    self.add(placemarkNodeContainer: placemarkNodeContainer)
   }
   
-  private func update(savedLocation: SavedLocation) {
+  private func update(placemark: Placemark) {
     
-    guard let placemark = self.placemarks.first(where: { $0.savedLocation == savedLocation }) else {
-      self.add(savedLocation: savedLocation)
+    guard let placemarkNodeContainer = self.placemarkNodeContainers.first(where: { $0.placemark == placemark }) else {
+      self.add(placemark: placemark)
       return
     }
     
-    self.update(placemark: placemark)
+    self.update(placemarkNodeContainer: placemarkNodeContainer)
   }
   
-  private func remove(savedLocation: SavedLocation) {
-    if let placemark = self.placemarks.first(where: { $0.savedLocation == savedLocation }) {
-      Log.log("Removing \(savedLocation.name ?? "nil name") at location \(savedLocation.location.coordinate)")
-      self.placemarks.remove(placemark)
-      placemark.placemarkNode?.removeFromParentNode()
+  private func remove(placemark: Placemark) {
+    if let placemarkNodeContainer = self.placemarkNodeContainers.first(where: { $0.placemark == placemark }) {
+      Log.log("Removing \(placemark.name ?? "nil name") at location \(placemark.location.coordinate)")
+      self.placemarkNodeContainers.remove(placemarkNodeContainer)
+      placemarkNodeContainer.placemarkNode?.removeFromParentNode()
     }
   }
 }
