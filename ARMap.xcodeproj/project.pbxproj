@@ -43,13 +43,7 @@
 		B686EF4620166D8700ACF075 /* PinPlacemarkNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF1E20166D8700ACF075 /* PinPlacemarkNode.swift */; };
 		B686EF4720166D8700ACF075 /* SCNVector3+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF1F20166D8700ACF075 /* SCNVector3+Util.swift */; };
 		B686EF4820166D8700ACF075 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF2020166D8700ACF075 /* Style.swift */; };
-		B686EF4920166D8700ACF075 /* InteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF2320166D8700ACF075 /* InteractiveTransition.swift */; };
-		B686EF4A20166D8700ACF075 /* DragUpDismissInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF2420166D8700ACF075 /* DragUpDismissInteractiveTransition.swift */; };
-		B686EF4B20166D8700ACF075 /* DragLeftDismissInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF2520166D8700ACF075 /* DragLeftDismissInteractiveTransition.swift */; };
-		B686EF4C20166D8700ACF075 /* DragDownDismissInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF2620166D8700ACF075 /* DragDownDismissInteractiveTransition.swift */; };
-		B686EF4D20166D8700ACF075 /* DragInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF2720166D8700ACF075 /* DragInteractiveTransition.swift */; };
-		B686EF4E20166D8700ACF075 /* DragRightDismissInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF2820166D8700ACF075 /* DragRightDismissInteractiveTransition.swift */; };
-		B686EF4F20166D8700ACF075 /* VerticalScrollInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF2920166D8700ACF075 /* VerticalScrollInteractiveTransition.swift */; };
+		B686EF4D20166D8700ACF075 /* InteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF2720166D8700ACF075 /* InteractiveTransition.swift */; };
 		B686EF5020166D8700ACF075 /* PresentableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF2A20166D8700ACF075 /* PresentableController.swift */; };
 		B686EF5120166D8700ACF075 /* PresenationManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF2C20166D8700ACF075 /* PresenationManagerProtocol.swift */; };
 		B686EF5220166D8700ACF075 /* HDFadeWithBlurPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF2D20166D8700ACF075 /* HDFadeWithBlurPresentationManager.swift */; };
@@ -136,13 +130,7 @@
 		B686EF1E20166D8700ACF075 /* PinPlacemarkNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinPlacemarkNode.swift; sourceTree = "<group>"; };
 		B686EF1F20166D8700ACF075 /* SCNVector3+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Util.swift"; sourceTree = "<group>"; };
 		B686EF2020166D8700ACF075 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
-		B686EF2320166D8700ACF075 /* InteractiveTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractiveTransition.swift; sourceTree = "<group>"; };
-		B686EF2420166D8700ACF075 /* DragUpDismissInteractiveTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragUpDismissInteractiveTransition.swift; sourceTree = "<group>"; };
-		B686EF2520166D8700ACF075 /* DragLeftDismissInteractiveTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragLeftDismissInteractiveTransition.swift; sourceTree = "<group>"; };
-		B686EF2620166D8700ACF075 /* DragDownDismissInteractiveTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragDownDismissInteractiveTransition.swift; sourceTree = "<group>"; };
-		B686EF2720166D8700ACF075 /* DragInteractiveTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragInteractiveTransition.swift; sourceTree = "<group>"; };
-		B686EF2820166D8700ACF075 /* DragRightDismissInteractiveTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragRightDismissInteractiveTransition.swift; sourceTree = "<group>"; };
-		B686EF2920166D8700ACF075 /* VerticalScrollInteractiveTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerticalScrollInteractiveTransition.swift; sourceTree = "<group>"; };
+		B686EF2720166D8700ACF075 /* InteractiveTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractiveTransition.swift; sourceTree = "<group>"; };
 		B686EF2A20166D8700ACF075 /* PresentableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentableController.swift; sourceTree = "<group>"; };
 		B686EF2C20166D8700ACF075 /* PresenationManagerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenationManagerProtocol.swift; sourceTree = "<group>"; };
 		B686EF2D20166D8700ACF075 /* HDFadeWithBlurPresentationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDFadeWithBlurPresentationManager.swift; sourceTree = "<group>"; };
@@ -233,13 +221,13 @@
 			children = (
 				B686EEE720166D4500ACF075 /* Build Manager */,
 				B686EEF220166D5A00ACF075 /* Device */,
-				B686EEF420166D5A00ACF075 /* Extensions */,
-				B686EEEA20166D5A00ACF075 /* Location */,
-				B686EF1120166D7200ACF075 /* Model */,
-				B686EF3820166D8700ACF075 /* Permissions */,
 				B686EF2120166D8700ACF075 /* Presenting Controllers */,
+				B686EEF420166D5A00ACF075 /* Extensions */,
 				B686EF3220166D8700ACF075 /* Protocols */,
+				B686EF3820166D8700ACF075 /* Permissions */,
+				B686EEEA20166D5A00ACF075 /* Location */,
 				B686EF1520166D8700ACF075 /* SceneKit */,
+				B686EF1120166D7200ACF075 /* Model */,
 				B686EF2020166D8700ACF075 /* Style.swift */,
 				B686EF1320166D8600ACF075 /* UnitType.swift */,
 				B686EF1420166D8600ACF075 /* ARDistanceType.swift */,
@@ -357,9 +345,9 @@
 		B686EF2120166D8700ACF075 /* Presenting Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				B686EF2220166D8700ACF075 /* Interactive Transitions */,
 				B686EF2A20166D8700ACF075 /* PresentableController.swift */,
 				B686EF2B20166D8700ACF075 /* Custom Controller Presentations */,
+				B686EF2220166D8700ACF075 /* Interactive Transitions */,
 			);
 			path = "Presenting Controllers";
 			sourceTree = "<group>";
@@ -367,13 +355,7 @@
 		B686EF2220166D8700ACF075 /* Interactive Transitions */ = {
 			isa = PBXGroup;
 			children = (
-				B686EF2320166D8700ACF075 /* InteractiveTransition.swift */,
-				B686EF2420166D8700ACF075 /* DragUpDismissInteractiveTransition.swift */,
-				B686EF2520166D8700ACF075 /* DragLeftDismissInteractiveTransition.swift */,
-				B686EF2620166D8700ACF075 /* DragDownDismissInteractiveTransition.swift */,
-				B686EF2720166D8700ACF075 /* DragInteractiveTransition.swift */,
-				B686EF2820166D8700ACF075 /* DragRightDismissInteractiveTransition.swift */,
-				B686EF2920166D8700ACF075 /* VerticalScrollInteractiveTransition.swift */,
+				B686EF2720166D8700ACF075 /* InteractiveTransition.swift */,
 			);
 			path = "Interactive Transitions";
 			sourceTree = "<group>";
@@ -435,12 +417,12 @@
 				B686EF7F20166F1200ACF075 /* MainViewController.swift */,
 				B686EF8920166F1200ACF075 /* MainViewController+CoreLocation.swift */,
 				B686EF7E20166F1200ACF075 /* MainViewController+AR.swift */,
+				B686EF8620166F1200ACF075 /* Placemark AR */,
 				B686EF7720166F1200ACF075 /* Settings */,
 				B686EF7920166F1200ACF075 /* Location Detail */,
 				B686EF7B20166F1200ACF075 /* Add Location */,
 				B686EF8020166F1200ACF075 /* Search */,
 				B686EF8320166F1200ACF075 /* Location List */,
-				B686EF8620166F1200ACF075 /* Placemark AR */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -601,7 +583,6 @@
 				B686EFA120166F1300ACF075 /* MainViewController+CoreLocation.swift in Sources */,
 				B686EF6420166D9D00ACF075 /* MyDataManager.swift in Sources */,
 				B686EF0620166D5A00ACF075 /* Device.swift in Sources */,
-				B686EF4B20166D8700ACF075 /* DragLeftDismissInteractiveTransition.swift in Sources */,
 				B686EF9A20166F1300ACF075 /* MainViewController.swift in Sources */,
 				B686EF9820166F1300ACF075 /* AddLocationViewController.swift in Sources */,
 				B686EF5720166D8700ACF075 /* KeyboardFrameRespondable.swift in Sources */,
@@ -623,7 +604,6 @@
 				B686EEE920166D4500ACF075 /* BuildManager.swift in Sources */,
 				B686EFA620166F1300ACF075 /* InlineColorChooserViewController.swift in Sources */,
 				B686EF0820166D5A00ACF075 /* UIViewController+Util.swift in Sources */,
-				B686EF4920166D8700ACF075 /* InteractiveTransition.swift in Sources */,
 				B686EF5320166D8700ACF075 /* TopDownPresentationManager.swift in Sources */,
 				B686EF0120166D5A00ACF075 /* CLPlacemark+Util.swift in Sources */,
 				B686EF6620166D9D00ACF075 /* MyManagedObjectProtocol.swift in Sources */,
@@ -635,13 +615,10 @@
 				B686EF9520166F1300ACF075 /* SettingsViewController.swift in Sources */,
 				B686EF5520166D8700ACF075 /* RightToLeftPresentationManager.swift in Sources */,
 				B686EF9F20166F1300ACF075 /* ARViewController+Gestures.swift in Sources */,
-				B686EF4F20166D8700ACF075 /* VerticalScrollInteractiveTransition.swift in Sources */,
 				B686EF9420166F1300ACF075 /* VisualEffectContainerViewController.swift in Sources */,
-				B686EF4C20166D8700ACF075 /* DragDownDismissInteractiveTransition.swift in Sources */,
 				B686EF6720166D9D00ACF075 /* Color+MyManagedObjectProtocol.swift in Sources */,
 				B686EF5420166D8700ACF075 /* LeftMenuPresentationManager.swift in Sources */,
-				B686EF4A20166D8700ACF075 /* DragUpDismissInteractiveTransition.swift in Sources */,
-				B686EF4D20166D8700ACF075 /* DragInteractiveTransition.swift in Sources */,
+				B686EF4D20166D8700ACF075 /* InteractiveTransition.swift in Sources */,
 				B686EF6520166D9D00ACF075 /* DataManagerProtocol.swift in Sources */,
 				B686EF9920166F1300ACF075 /* MainViewController+AR.swift in Sources */,
 				B686EF9320166F1300ACF075 /* TopKnobVisualEffectContainerViewController.swift in Sources */,
@@ -669,7 +646,6 @@
 				B686EF0B20166D5A00ACF075 /* UIApplication+Util.swift in Sources */,
 				B686EF6820166D9D00ACF075 /* Placemark+MyManagedObjectProtocol.swift in Sources */,
 				B686EF0420166D5A00ACF075 /* LocationManager.swift in Sources */,
-				B686EF4E20166D8700ACF075 /* DragRightDismissInteractiveTransition.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
