@@ -26,7 +26,7 @@ class PlacemarkNodeContainer : Hashable {
   // MARK: - Properties
   
   let placemark: Placemark
-  weak var placemarkNode: PlacemarkNode? = nil
+  var placemarkNode: PlacemarkNode? = nil
   
   init(placemark: Placemark, placemarkNode: PlacemarkNode? = nil) {
     self.placemark = placemark

@@ -25,9 +25,9 @@ class ARViewController : UIViewController {
   weak var trackingStateDelegate: ARStateDelegate? = nil
   private let session = ARSession()
   private let sessionConfig = ARWorldTrackingConfiguration()
-  public private(set) weak var sceneNode: SCNNode?
-  public private(set) weak var basePlane: SCNNode?
-  public private(set) weak var axisNode: AxisNode?
+  public private(set) var sceneNode: SCNNode?
+  public private(set) var basePlane: SCNNode?
+  public private(set) var axisNode: AxisNode?
   internal var placemarkNodeContainers = Set<PlacemarkNodeContainer>()
   
   var placemarks: [Placemark] {
@@ -180,8 +180,14 @@ class ARViewController : UIViewController {
   @objc func restartPlaneDetection() {
     
     // Remove all nodes
+    self.sceneNode?.removeFromParentNode()
     self.sceneNode = nil
+    self.basePlane?.removeFromParentNode()
     self.basePlane = nil
+    for placemarkNodeContainer in self.placemarkNodeContainers {
+      placemarkNodeContainer.placemarkNode?.removeFromParentNode()
+      placemarkNodeContainer.placemarkNode = nil
+    }
     self.placemarkNodeContainers.removeAll()
     self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
       node.removeFromParentNode()
