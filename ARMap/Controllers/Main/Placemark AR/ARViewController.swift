@@ -78,6 +78,8 @@ class ARViewController : UIViewController {
         self.state = .limited(.excessiveMotion)
       case .limited(.initializing):
         self.state = .limited(.initializing)
+      case .limited(.relocalizing):
+        self.state = .limited(.relocalizing)
       case .normal:
         self.state = .normal
       case .notAvailable:
@@ -373,6 +375,8 @@ extension ARViewController : ARSCNViewDelegate {
       Log.extendedLog("Camera did change tracking state: limited, excessive motion")
     case .limited(.initializing):
       Log.extendedLog("Camera did change tracking state: limited, initializing")
+    case .limited(.relocalizing):
+      Log.extendedLog("Camera did change tracking state: limited, relocalizing")
     case .normal:
       Log.extendedLog("Camera did change tracking state: normal")
     case .notAvailable:

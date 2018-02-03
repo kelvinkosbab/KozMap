@@ -16,7 +16,7 @@ enum ARState {
   case configuring, normal, limited(Reason), notAvailable, unsupported
   
   enum Reason {
-    case insufficientFeatures, excessiveMotion, initializing
+    case insufficientFeatures, excessiveMotion, initializing, relocalizing
   }
   
   var status: String? {
@@ -29,6 +29,8 @@ enum ARState {
       return "Excessive Motion"
     case .limited(.initializing):
       return "Initializing"
+    case .limited(.relocalizing):
+      return "Relocalizing"
     case .notAvailable:
       return "Not Available"
     case .unsupported:
@@ -44,7 +46,7 @@ enum ARState {
       return "Please move to a well lit area with defined surface features."
     case .limited(.excessiveMotion):
       return "Please hold the device steady pointing horizontally."
-    case .limited(.initializing):
+    case .limited(.initializing), .limited(.relocalizing):
       return "Please hold the device steady pointing horizontally in a well lit area."
     case .notAvailable, .unsupported:
       return "Only supported on Apple devices with an A9, A10, or A11 chip or newer. This includes all phones including the iPhone 6s/6s+ and newer as well as all iPad Pro models and the 2017 iPad."
