@@ -52,6 +52,9 @@ class SettingsViewController : BaseViewController, DesiredContentHeightDelegate 
     
     // Version
     self.versionLabel.text = "Version \(UIApplication.shared.versionString ?? "N/A")"
+    
+    // Company
+    self.companyLabel.text = BuildManager.shared.buildTarget.companyName
   }
   
   // MARK: - Actions
