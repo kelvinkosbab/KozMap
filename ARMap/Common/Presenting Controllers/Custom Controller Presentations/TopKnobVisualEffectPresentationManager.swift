@@ -102,7 +102,8 @@ class TopKnobVisualEffectPresentationManager : NSObject, UIViewControllerTransit
       
       let presentedYOffset: CGFloat
       if let interactiveElement = self.interactiveElement {
-        presentedYOffset = (interactiveElement.size ?? 0) + (interactiveElement.offset ?? 0)
+        let knobViewRequiredOffset = TopKnobVisualEffectView.topKnobSpace + TopKnobVisualEffectView.knobHeight + TopKnobVisualEffectView.bottomKnobSpace
+        presentedYOffset = (interactiveElement.size ?? 0) + knobViewRequiredOffset + (interactiveElement.offset ?? 0)
       } else {
         presentedYOffset = containerView.bounds.height
       }
@@ -112,6 +113,8 @@ class TopKnobVisualEffectPresentationManager : NSObject, UIViewControllerTransit
         // Currently presenting
         presentedViewController.view.frame.origin.y = containerView.bounds.height
         containerView.addSubview(presentedViewController.view)
+        
+        // Animate the presentation
         UIView.animate(withDuration: self.transitionDuration(using: transitionContext), animations: {
           presentingViewController.setNeedsStatusBarAppearanceUpdate()
           presentedViewController.setNeedsStatusBarAppearanceUpdate()
@@ -143,6 +146,7 @@ class TopKnobVisualEffectPresentationManager : NSObject, UIViewControllerTransit
     // MARK: - Properties
     
     private var dismissView: UIView? = nil
+    private var topKnobVisualEffectView: TopKnobVisualEffectView? = nil
     
     override var shouldPresentInFullscreen: Bool {
       return false
@@ -173,24 +177,38 @@ class TopKnobVisualEffectPresentationManager : NSObject, UIViewControllerTransit
       dismissView.addToContainer(containerView, atIndex: 0)
     }
     
-    override func dismissalTransitionWillBegin() {
-      self.presentedViewController.transitionCoordinator?.animate(alongsideTransition: { (context) in
-      }, completion: nil)
-    }
-    
     override func containerViewWillLayoutSubviews() {
       super.containerViewWillLayoutSubviews()
       
-      self.presentedView?.frame = self.frameOfPresentedViewInContainerView
+      // Presented view
+      let frameOfPresentedViewInContainerView = self.frameOfPresentedViewInContainerView
+      self.presentedView?.frame = frameOfPresentedViewInContainerView
+      
+      // Configure the top knob view
+      if self.topKnobVisualEffectView == nil, let presentedView = self.presentedView {
+        
+        // Crate the knob view
+        let topKnobVisualEffectView = TopKnobVisualEffectView.newView()
+        let knobViewRequiredOffset = TopKnobVisualEffectView.topKnobSpace + TopKnobVisualEffectView.knobHeight + TopKnobVisualEffectView.bottomKnobSpace
+        topKnobVisualEffectView.addToContainer(presentedView, atIndex: 0, topMargin: -knobViewRequiredOffset)
+      }
     }
     
     override var frameOfPresentedViewInContainerView: CGRect {
-      if let size = self.containerView?.bounds.size {
-        let height: CGFloat = self.interactiveElement?.size ?? size.height
-        let yOffset: CGFloat = self.interactiveElement?.offset ?? 0
-        return CGRect(x: 0, y: size.height - yOffset - height, width: size.width, height: height)
+      
+      guard let size = self.containerView?.bounds.size else {
+        return CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
       }
-      return CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+      
+      let height: CGFloat
+      if let size = self.interactiveElement?.size {
+        let knobViewRequiredOffset = TopKnobVisualEffectView.topKnobSpace + TopKnobVisualEffectView.knobHeight + TopKnobVisualEffectView.bottomKnobSpace
+        height = size + knobViewRequiredOffset
+      } else {
+        height = size.height
+      }
+      let yOffset: CGFloat = self.interactiveElement?.offset ?? 0
+      return CGRect(x: 0, y: size.height - yOffset - height, width: size.width, height: height)
     }
     
     // MARK: - Actions

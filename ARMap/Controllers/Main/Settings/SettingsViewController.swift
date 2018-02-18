@@ -40,6 +40,12 @@ class SettingsViewController : BaseViewController, DesiredContentHeightDelegate 
     self.reloadContent()
   }
   
+  // MARK: - Status Bar
+  
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
+  }
+  
   // MARK: - Content
   
   func reloadContent() {

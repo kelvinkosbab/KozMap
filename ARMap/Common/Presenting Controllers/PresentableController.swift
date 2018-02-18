@@ -50,7 +50,7 @@ extension Sequence where Iterator.Element == PresentableControllerOption {
 // MARK: - PresentationMode
 
 enum PresentationMode {
-  case modal, modalOverCurrentContext, leftMenu, rightToLeft, fadeWithBlur, overCurrentContext, topDown, bottomUp, visualEffectFade, navStack
+  case modal, modalOverCurrentContext, leftMenu, rightToLeft, fadeWithBlur, overCurrentContext, topDown, bottomUp, bottomUpTopKnob, visualEffectFade, navStack
 }
 
 // MARK: - PresentableController
@@ -150,6 +150,15 @@ extension PresentableController where Self : UIViewController {
     case .bottomUp:
       presentingPresentableController?.currentFlowFirstController = self
       let presentationManager = BottomUpPresentationManager(interactiveElement: dismissInteractiveElement, dismissInteractor: DragDownDismissInteractiveTransition(presentingController: viewControllerToPresent, interactiveView: dismissInteractiveElement?.view))
+      viewControllerToPresent.modalPresentationStyle = .custom
+      viewControllerToPresent.modalPresentationCapturesStatusBarAppearance = true
+      viewControllerToPresent.transitioningDelegate = presentationManager
+      viewControllerToPresentPresentableController?.transitioningDelegateReference = presentationManager
+      self.present(viewControllerToPresent, animated: true, completion: completion)
+      
+    case .bottomUpTopKnob:
+      presentingPresentableController?.currentFlowFirstController = self
+      let presentationManager = TopKnobVisualEffectPresentationManager(interactiveElement: dismissInteractiveElement, dismissInteractor: DragDownDismissInteractiveTransition(presentingController: viewControllerToPresent, interactiveView: dismissInteractiveElement?.view))
       viewControllerToPresent.modalPresentationStyle = .custom
       viewControllerToPresent.modalPresentationCapturesStatusBarAppearance = true
       viewControllerToPresent.transitioningDelegate = presentationManager

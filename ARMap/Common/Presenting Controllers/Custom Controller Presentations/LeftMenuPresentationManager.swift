@@ -150,13 +150,13 @@ class LeftMenuPresentationManager : NSObject, UIViewControllerTransitioningDeleg
       blurView.alpha = 0
       
       // Begin animation
-      self.presentedViewController.transitionCoordinator?.animate(alongsideTransition: { (context) in
+      self.presentedViewController.transitionCoordinator?.animate(alongsideTransition: { context in
         blurView.alpha = 0.75
       }, completion: nil)
     }
     
     override func dismissalTransitionWillBegin() {
-      self.presentedViewController.transitionCoordinator?.animate(alongsideTransition: { (context) in
+      self.presentedViewController.transitionCoordinator?.animate(alongsideTransition: { context in
         self.blurView?.alpha = 0
       }, completion: nil)
     }

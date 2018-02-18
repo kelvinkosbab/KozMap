@@ -61,6 +61,12 @@ class AddLocationContainerViewController : BaseViewController, DesiredContentHei
     }
   }
   
+  // MARK: - Status Bar
+  
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
+  }
+  
   // MARK: - Content
   
   var currentSelectedIndex: Int {

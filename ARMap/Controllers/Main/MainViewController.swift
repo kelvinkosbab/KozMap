@@ -104,9 +104,8 @@ class MainViewController : BaseViewController {
     }
     
     let settingsViewController = SettingsViewController.newViewController()
-    let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: settingsViewController)
-    let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
-    self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
+    let interactiveElement = InteractiveElement(size: settingsViewController.desiredContentHeight, offset: 0, view: settingsViewController.view)
+    self.present(viewController: settingsViewController, withMode: .bottomUpTopKnob, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
   }
   
   func presentPlacemarkList() {
@@ -116,9 +115,9 @@ class MainViewController : BaseViewController {
     }
     
     let locationListViewController = LocationListViewController.newViewController(delegate: self)
-    let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: locationListViewController)
-    let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: locationListViewController.tableView)
-    self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
+    let desiredContentHeight = self.view.bounds.height - 175
+    let interactiveElement = InteractiveElement(size: desiredContentHeight, offset: 0, view: locationListViewController.tableView)
+    self.present(viewController: locationListViewController, withMode: .bottomUpTopKnob, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
   }
   
   func presentAddLocation() {
@@ -128,9 +127,8 @@ class MainViewController : BaseViewController {
     }
     
     let addLocationContainerViewController = AddLocationContainerViewController.newViewController(locationDetailDelegate: self, searchDelegate: self)
-    let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: addLocationContainerViewController)
-    let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
-    self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
+    let interactiveElement = InteractiveElement(size: addLocationContainerViewController.desiredContentHeight, offset: 0, view: addLocationContainerViewController.view)
+    self.present(viewController: addLocationContainerViewController, withMode: .bottomUpTopKnob, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
   }
   
   func presentAddLocation(mapItem: MapItem) {
@@ -140,9 +138,8 @@ class MainViewController : BaseViewController {
     }
     
     let addLocationViewController = AddLocationViewController.newViewController(mapItem: mapItem, delegate: self)
-    let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: addLocationViewController)
-    let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
-    self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
+    let interactiveElement = InteractiveElement(size: addLocationViewController.desiredContentHeight, offset: 0, view: addLocationViewController.view)
+    self.present(viewController: addLocationViewController, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
   }
   
   func presentLocationDetail(placemark: Placemark) {
@@ -152,9 +149,8 @@ class MainViewController : BaseViewController {
     }
     
     let locationDetailViewController = LocationDetailViewController.newViewController(placemark: placemark)
-    let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: locationDetailViewController)
-    let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
-    self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
+    let interactiveElement = InteractiveElement(size: locationDetailViewController.desiredContentHeight, offset: 0, view: locationDetailViewController.view)
+    self.present(viewController: locationDetailViewController, withMode: .bottomUpTopKnob, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
   }
   
   // MARK: - Keyboard

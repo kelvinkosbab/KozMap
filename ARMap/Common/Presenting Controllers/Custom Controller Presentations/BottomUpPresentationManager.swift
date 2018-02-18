@@ -174,7 +174,7 @@ class BottomUpPresentationManager : NSObject, UIViewControllerTransitioningDeleg
     }
     
     override func dismissalTransitionWillBegin() {
-      self.presentedViewController.transitionCoordinator?.animate(alongsideTransition: { (context) in
+      self.presentedViewController.transitionCoordinator?.animate(alongsideTransition: { context in
       }, completion: nil)
     }
     

@@ -124,12 +124,12 @@ class RightToLeftPresentationManager : NSObject, UIViewControllerTransitioningDe
       }
       
       // Begin animation
-      self.presentedViewController.transitionCoordinator?.animate(alongsideTransition: { (context) in
+      self.presentedViewController.transitionCoordinator?.animate(alongsideTransition: { context in
       }, completion: nil)
     }
     
     override func dismissalTransitionWillBegin() {
-      self.presentedViewController.transitionCoordinator?.animate(alongsideTransition: { (context) in
+      self.presentedViewController.transitionCoordinator?.animate(alongsideTransition: { context in
       }, completion: nil)
     }
     

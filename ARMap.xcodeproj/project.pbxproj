@@ -69,7 +69,6 @@
 		B686EF6F20166F0C00ACF075 /* AddLocation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B686EF6E20166F0B00ACF075 /* AddLocation.storyboard */; };
 		B686EF9120166F1300ACF075 /* ConfiguringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF7120166F1200ACF075 /* ConfiguringViewController.swift */; };
 		B686EF9220166F1300ACF075 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF7220166F1200ACF075 /* BaseViewController.swift */; };
-		B686EF9320166F1300ACF075 /* TopKnobVisualEffectContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF7420166F1200ACF075 /* TopKnobVisualEffectContainerViewController.swift */; };
 		B686EF9520166F1300ACF075 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF7820166F1200ACF075 /* SettingsViewController.swift */; };
 		B686EF9620166F1300ACF075 /* LocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF7A20166F1200ACF075 /* LocationDetailViewController.swift */; };
 		B686EF9720166F1300ACF075 /* AddLocationContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF7C20166F1200ACF075 /* AddLocationContainerViewController.swift */; };
@@ -91,6 +90,8 @@
 		B6F451AE203925ED0084AFC8 /* TopKnobVisualEffectPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F451AD203925ED0084AFC8 /* TopKnobVisualEffectPresentationManager.swift */; };
 		B6F451B0203927410084AFC8 /* VisualEffectFadePresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F451AF203927410084AFC8 /* VisualEffectFadePresentationManager.swift */; };
 		B6F451B220392AD50084AFC8 /* PresentingViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F451B120392AD50084AFC8 /* PresentingViewControllerDelegate.swift */; };
+		B6F451B520393D470084AFC8 /* TopKnobVisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F451B420393D470084AFC8 /* TopKnobVisualEffectView.swift */; };
+		B6F451B720393E2F0084AFC8 /* TopKnobVisualEffectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6F451B620393E2F0084AFC8 /* TopKnobVisualEffectView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -158,7 +159,6 @@
 		B686EF6E20166F0B00ACF075 /* AddLocation.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddLocation.storyboard; sourceTree = "<group>"; };
 		B686EF7120166F1200ACF075 /* ConfiguringViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfiguringViewController.swift; sourceTree = "<group>"; };
 		B686EF7220166F1200ACF075 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		B686EF7420166F1200ACF075 /* TopKnobVisualEffectContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopKnobVisualEffectContainerViewController.swift; sourceTree = "<group>"; };
 		B686EF7820166F1200ACF075 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		B686EF7A20166F1200ACF075 /* LocationDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationDetailViewController.swift; sourceTree = "<group>"; };
 		B686EF7C20166F1200ACF075 /* AddLocationContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLocationContainerViewController.swift; sourceTree = "<group>"; };
@@ -180,6 +180,8 @@
 		B6F451AD203925ED0084AFC8 /* TopKnobVisualEffectPresentationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopKnobVisualEffectPresentationManager.swift; sourceTree = "<group>"; };
 		B6F451AF203927410084AFC8 /* VisualEffectFadePresentationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectFadePresentationManager.swift; sourceTree = "<group>"; };
 		B6F451B120392AD50084AFC8 /* PresentingViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentingViewControllerDelegate.swift; sourceTree = "<group>"; };
+		B6F451B420393D470084AFC8 /* TopKnobVisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopKnobVisualEffectView.swift; sourceTree = "<group>"; };
+		B6F451B620393E2F0084AFC8 /* TopKnobVisualEffectView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopKnobVisualEffectView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +234,7 @@
 				B686EEEA20166D5A00ACF075 /* Location */,
 				B686EF1520166D8700ACF075 /* SceneKit */,
 				B686EF1120166D7200ACF075 /* Model */,
+				B6F451B320393C060084AFC8 /* Custom Views */,
 				B686EF2020166D8700ACF075 /* Style.swift */,
 				B686EF1320166D8600ACF075 /* UnitType.swift */,
 				B686EF1420166D8600ACF075 /* ARDistanceType.swift */,
@@ -252,7 +255,6 @@
 				B686EF7020166F1200ACF075 /* Configuring View */,
 				B686EF8F20166F1300ACF075 /* InlineColorChooser */,
 				B686EF8C20166F1300ACF075 /* Permissions */,
-				B686EF7320166F1200ACF075 /* Visual Effect Container */,
 				B686EF7620166F1200ACF075 /* Main */,
 			);
 			path = Controllers;
@@ -373,8 +375,8 @@
 				B686EF2F20166D8700ACF075 /* LeftMenuPresentationManager.swift */,
 				B686EF3020166D8700ACF075 /* RightToLeftPresentationManager.swift */,
 				B686EF3120166D8700ACF075 /* BottomUpPresentationManager.swift */,
-				B6F451AD203925ED0084AFC8 /* TopKnobVisualEffectPresentationManager.swift */,
 				B6F451AF203927410084AFC8 /* VisualEffectFadePresentationManager.swift */,
+				B6F451AD203925ED0084AFC8 /* TopKnobVisualEffectPresentationManager.swift */,
 			);
 			path = "Custom Controller Presentations";
 			sourceTree = "<group>";
@@ -407,14 +409,6 @@
 				B686EF7120166F1200ACF075 /* ConfiguringViewController.swift */,
 			);
 			path = "Configuring View";
-			sourceTree = "<group>";
-		};
-		B686EF7320166F1200ACF075 /* Visual Effect Container */ = {
-			isa = PBXGroup;
-			children = (
-				B686EF7420166F1200ACF075 /* TopKnobVisualEffectContainerViewController.swift */,
-			);
-			path = "Visual Effect Container";
 			sourceTree = "<group>";
 		};
 		B686EF7620166F1200ACF075 /* Main */ = {
@@ -501,6 +495,15 @@
 			path = InlineColorChooser;
 			sourceTree = "<group>";
 		};
+		B6F451B320393C060084AFC8 /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				B6F451B420393D470084AFC8 /* TopKnobVisualEffectView.swift */,
+				B6F451B620393E2F0084AFC8 /* TopKnobVisualEffectView.xib */,
+			);
+			path = "Custom Views";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -561,6 +564,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B686EF6B20166DCF00ACF075 /* LaunchScreen.storyboard in Resources */,
+				B6F451B720393E2F0084AFC8 /* TopKnobVisualEffectView.xib in Resources */,
 				B686EF3E20166D8700ACF075 /* Models.scnassets in Resources */,
 				B686EEDA20166C7300ACF075 /* Assets.xcassets in Resources */,
 				B686EF6D20166F0500ACF075 /* Main.storyboard in Resources */,
@@ -592,6 +596,7 @@
 				B686EF0620166D5A00ACF075 /* Device.swift in Sources */,
 				B686EF9A20166F1300ACF075 /* MainViewController.swift in Sources */,
 				B6F451B220392AD50084AFC8 /* PresentingViewControllerDelegate.swift in Sources */,
+				B6F451B520393D470084AFC8 /* TopKnobVisualEffectView.swift in Sources */,
 				B686EF9820166F1300ACF075 /* AddLocationViewController.swift in Sources */,
 				B686EF5720166D8700ACF075 /* KeyboardFrameRespondable.swift in Sources */,
 				B686EED820166C7300ACF075 /* ARMap.xcdatamodeld in Sources */,
@@ -629,7 +634,6 @@
 				B686EF4D20166D8700ACF075 /* InteractiveTransition.swift in Sources */,
 				B686EF6520166D9D00ACF075 /* DataManagerProtocol.swift in Sources */,
 				B686EF9920166F1300ACF075 /* MainViewController+AR.swift in Sources */,
-				B686EF9320166F1300ACF075 /* TopKnobVisualEffectContainerViewController.swift in Sources */,
 				B686EF6920166D9D00ACF075 /* Defaults+MyManagedObjectProtocol.swift in Sources */,
 				B686EF3D20166D8700ACF075 /* ARDistanceType.swift in Sources */,
 				B686EF0020166D5A00ACF075 /* CLLocationCoordinate2D+Util.swift in Sources */,

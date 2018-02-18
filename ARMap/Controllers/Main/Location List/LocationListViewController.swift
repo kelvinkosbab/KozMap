@@ -45,6 +45,12 @@ class LocationListViewController : BaseTableViewController, NSFetchedResultsCont
     return controller
   }()
   
+  // MARK: - Status Bar
+  
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
+  }
+  
   // MARK: - NSFetchedResultsControllerDelegate
   
   func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
