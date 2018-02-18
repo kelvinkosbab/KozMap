@@ -14,6 +14,7 @@ class VisualEffectFadePresentationManager : NSObject, UIViewControllerTransition
   
   var presentationInteractor: InteractiveTransition? = nil
   var dismissInteractor: InteractiveTransition? = nil
+  weak var presentingViewControllerDelegate: PresentingViewControllerDelegate?
   
   required override init() {
     super.init()
@@ -42,11 +43,11 @@ class VisualEffectFadePresentationManager : NSObject, UIViewControllerTransition
   }
   
   func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-    return VisualEffectFadeAnimator()
+    return VisualEffectFadeAnimator(presentingViewControllerDelegate: self.presentingViewControllerDelegate)
   }
   
   func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-    return VisualEffectFadeAnimator()
+    return VisualEffectFadeAnimator(presentingViewControllerDelegate: self.presentingViewControllerDelegate)
   }
   
   func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
@@ -66,6 +67,13 @@ class VisualEffectFadePresentationManager : NSObject, UIViewControllerTransition
   // MARK: - Animator
   
   class VisualEffectFadeAnimator : NSObject, UIViewControllerAnimatedTransitioning {
+    
+    weak var presentingViewControllerDelegate: PresentingViewControllerDelegate?
+    
+    init(presentingViewControllerDelegate: PresentingViewControllerDelegate?) {
+      self.presentingViewControllerDelegate = presentingViewControllerDelegate
+      super.init()
+    }
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
       return 0.3
@@ -87,11 +95,7 @@ class VisualEffectFadePresentationManager : NSObject, UIViewControllerTransition
       if isPresenting {
         
         // Currently presenting
-        
-        if let presentingDelegate = presentingViewController as? PresentingViewControllerDelegate {
-          presentingDelegate.willPresentViewController(presentedViewController)
-        }
-        
+        self.presentingViewControllerDelegate?.willPresentViewController(presentedViewController)
         presentedViewController.view.backgroundColor = .clear
         presentedViewController.view.alpha = 0
         containerView.addSubview(presentedViewController.view)
@@ -99,39 +103,23 @@ class VisualEffectFadePresentationManager : NSObject, UIViewControllerTransition
           presentedViewController.view.alpha = 1
           presentingViewController.setNeedsStatusBarAppearanceUpdate()
           presentedViewController.setNeedsStatusBarAppearanceUpdate()
-          
-          if let presentingDelegate = presentingViewController as? PresentingViewControllerDelegate {
-            presentingDelegate.isPresentingViewController(presentedViewController)
-          }
-          
+          self.presentingViewControllerDelegate?.isPresentingViewController(presentedViewController)
         }, completion: { _ in
-          
-          if let presentingDelegate = presentingViewController as? PresentingViewControllerDelegate {
-            presentingDelegate.didPresentViewController(presentedViewController)
-          }
-          
-          // Completion
+          self.presentingViewControllerDelegate?.didPresentViewController(presentedViewController)
           transitionContext.completeTransition(true)
         })
         
       } else {
         
         // Currently not presenting
-        
-        if let presentingDelegate = presentingViewController as? PresentingViewControllerDelegate {
-          presentingDelegate.willDismissViewController(presentedViewController)
-        }
-        
+        self.presentingViewControllerDelegate?.willDismissViewController(presentedViewController)
         UIView.animate(withDuration: self.transitionDuration(using: transitionContext), animations: {
           presentedViewController.view.alpha = 0
           presentingViewController.setNeedsStatusBarAppearanceUpdate()
           presentedViewController.setNeedsStatusBarAppearanceUpdate()
-          
-          if let presentingDelegate = presentingViewController as? PresentingViewControllerDelegate {
-            presentingDelegate.isDismissingViewController(presentedViewController)
-          }
-          
+          self.presentingViewControllerDelegate?.isDismissingViewController(presentedViewController)
         }, completion: { _ in
+          self.presentingViewControllerDelegate?.didDismissViewController(presentedViewController)
           transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         })
       }

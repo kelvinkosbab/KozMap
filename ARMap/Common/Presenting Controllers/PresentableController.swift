@@ -19,7 +19,7 @@ struct InteractiveElement {
 // MARK: - PresentableControllerOption
 
 enum PresentableControllerOption {
-  case withoutNavigationController, dismissInteractiveElement(InteractiveElement)
+  case withoutNavigationController, dismissInteractiveElement(InteractiveElement), presentingViewControllerDelegate(PresentingViewControllerDelegate)
 }
 
 extension Sequence where Iterator.Element == PresentableControllerOption {
@@ -40,6 +40,17 @@ extension Sequence where Iterator.Element == PresentableControllerOption {
       switch option {
       case .dismissInteractiveElement(let interactiveElement):
         return interactiveElement
+      default: break
+      }
+    }
+    return nil
+  }
+  
+  var presentingViewControllerDelegate: PresentingViewControllerDelegate? {
+    for option in self {
+      switch option {
+      case .presentingViewControllerDelegate(let presentingViewControllerDelegate):
+        return presentingViewControllerDelegate
       default: break
       }
     }
@@ -71,6 +82,7 @@ extension PresentableController where Self : UIViewController {
     // Handle options
     let inNavigationController = options.inNavigationController
     let dismissInteractiveElement: InteractiveElement? = options.dismissInteractiveElement
+    let presentingViewControllerDelegate = options.presentingViewControllerDelegate
     
     // Configure the view controller to present
     let presentingPresentableController: PresentableController? = viewController as? PresentableController
@@ -107,6 +119,7 @@ extension PresentableController where Self : UIViewController {
       presentingPresentableController?.currentFlowFirstController = self
       _ = DragLeftDismissInteractiveTransition(presentingController: viewControllerToPresent, interactiveView: dismissInteractiveElement?.view)
       let presentationManager = LeftMenuPresentationManager(dismissInteractor: DragLeftDismissInteractiveTransition(presentingController: viewControllerToPresent, interactiveView: dismissInteractiveElement?.view))
+      presentationManager.presentingViewControllerDelegate = presentingViewControllerDelegate
       viewControllerToPresent.modalPresentationStyle = .custom
       viewControllerToPresent.modalPresentationCapturesStatusBarAppearance = true
       viewControllerToPresent.transitioningDelegate = presentationManager
@@ -116,6 +129,7 @@ extension PresentableController where Self : UIViewController {
     case .rightToLeft:
       presentingPresentableController?.currentFlowFirstController = self
       let presentationManager = RightToLeftPresentationManager(dismissInteractor: DragRightDismissInteractiveTransition(presentingController: viewControllerToPresent, interactiveView: dismissInteractiveElement?.view))
+      presentationManager.presentingViewControllerDelegate = presentingViewControllerDelegate
       viewControllerToPresent.modalPresentationStyle = .custom
       viewControllerToPresent.modalPresentationCapturesStatusBarAppearance = true
       viewControllerToPresent.transitioningDelegate = presentationManager
@@ -125,6 +139,7 @@ extension PresentableController where Self : UIViewController {
     case .fadeWithBlur:
       presentingPresentableController?.currentFlowFirstController = self
       let presentationManager = HDFadeWithBlurPresentationManager()
+      presentationManager.presentingViewControllerDelegate = presentingViewControllerDelegate
       viewControllerToPresent.modalPresentationStyle = .custom
       viewControllerToPresent.modalPresentationCapturesStatusBarAppearance = true
       viewControllerToPresent.transitioningDelegate = presentationManager
@@ -141,6 +156,7 @@ extension PresentableController where Self : UIViewController {
     case .topDown:
       presentingPresentableController?.currentFlowFirstController = self
       let presentationManager = TopDownPresentationManager(interactiveElement: dismissInteractiveElement, dismissInteractor: DragUpDismissInteractiveTransition(presentingController: viewControllerToPresent, interactiveView: dismissInteractiveElement?.view))
+      presentationManager.presentingViewControllerDelegate = presentingViewControllerDelegate
       viewControllerToPresent.modalPresentationStyle = .custom
       viewControllerToPresent.modalPresentationCapturesStatusBarAppearance = true
       viewControllerToPresent.transitioningDelegate = presentationManager
@@ -150,6 +166,7 @@ extension PresentableController where Self : UIViewController {
     case .bottomUp:
       presentingPresentableController?.currentFlowFirstController = self
       let presentationManager = BottomUpPresentationManager(interactiveElement: dismissInteractiveElement, dismissInteractor: DragDownDismissInteractiveTransition(presentingController: viewControllerToPresent, interactiveView: dismissInteractiveElement?.view))
+      presentationManager.presentingViewControllerDelegate = presentingViewControllerDelegate
       viewControllerToPresent.modalPresentationStyle = .custom
       viewControllerToPresent.modalPresentationCapturesStatusBarAppearance = true
       viewControllerToPresent.transitioningDelegate = presentationManager
@@ -159,6 +176,7 @@ extension PresentableController where Self : UIViewController {
     case .bottomUpTopKnob:
       presentingPresentableController?.currentFlowFirstController = self
       let presentationManager = TopKnobVisualEffectPresentationManager(interactiveElement: dismissInteractiveElement, dismissInteractor: DragDownDismissInteractiveTransition(presentingController: viewControllerToPresent, interactiveView: dismissInteractiveElement?.view))
+      presentationManager.presentingViewControllerDelegate = presentingViewControllerDelegate
       viewControllerToPresent.modalPresentationStyle = .custom
       viewControllerToPresent.modalPresentationCapturesStatusBarAppearance = true
       viewControllerToPresent.transitioningDelegate = presentationManager
@@ -168,6 +186,7 @@ extension PresentableController where Self : UIViewController {
     case .visualEffectFade:
       presentingPresentableController?.currentFlowFirstController = self
       let presentationManager = VisualEffectFadePresentationManager()
+      presentationManager.presentingViewControllerDelegate = presentingViewControllerDelegate
       viewControllerToPresent.modalPresentationStyle = .custom
       viewControllerToPresent.modalPresentationCapturesStatusBarAppearance = true
       viewControllerToPresent.transitioningDelegate = presentationManager

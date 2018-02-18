@@ -14,6 +14,7 @@ class RightToLeftPresentationManager : NSObject, UIViewControllerTransitioningDe
   
   var presentationInteractor: InteractiveTransition? = nil
   var dismissInteractor: InteractiveTransition? = nil
+  weak var presentingViewControllerDelegate: PresentingViewControllerDelegate?
   
   required override init() {
     super.init()

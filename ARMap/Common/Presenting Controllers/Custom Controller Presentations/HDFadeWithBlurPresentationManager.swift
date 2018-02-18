@@ -10,10 +10,11 @@ import UIKit
 
 class HDFadeWithBlurPresentationManager : NSObject, UIViewControllerTransitioningDelegate, PresenationManagerProtocol {
   
-  // MARK: - MyPresenationManager
+  // MARK: - PresenationManagerProtocol
   
   var presentationInteractor: InteractiveTransition? = nil
   var dismissInteractor: InteractiveTransition? = nil
+  weak var presentingViewControllerDelegate: PresentingViewControllerDelegate?
   
   required override init() {
     super.init()

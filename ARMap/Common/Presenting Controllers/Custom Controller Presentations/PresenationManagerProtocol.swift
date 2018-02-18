@@ -8,9 +8,10 @@
 
 import UIKit
 
-protocol PresenationManagerProtocol {
+protocol PresenationManagerProtocol : class {
   var presentationInteractor: InteractiveTransition? { get set }
   var dismissInteractor: InteractiveTransition? { get set }
+  var presentingViewControllerDelegate: PresentingViewControllerDelegate? { get set }
   init(presentationInteractor: InteractiveTransition, dismissInteractor: InteractiveTransition)
   init(presentationInteractor: InteractiveTransition)
   init(dismissInteractor: InteractiveTransition)

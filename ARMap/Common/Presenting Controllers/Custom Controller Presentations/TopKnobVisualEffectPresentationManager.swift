@@ -16,6 +16,7 @@ class TopKnobVisualEffectPresentationManager : NSObject, UIViewControllerTransit
   
   var presentationInteractor: InteractiveTransition? = nil
   var dismissInteractor: InteractiveTransition? = nil
+  weak var presentingViewControllerDelegate: PresentingViewControllerDelegate?
   
   required override init() {
     super.init()
@@ -51,11 +52,11 @@ class TopKnobVisualEffectPresentationManager : NSObject, UIViewControllerTransit
   }
   
   func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-    return TopKnobVisualEffectAnimator(interactiveElement: self.interactiveElement)
+    return TopKnobVisualEffectAnimator(interactiveElement: self.interactiveElement, presentingViewControllerDelegate: self.presentingViewControllerDelegate)
   }
   
   func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-    return TopKnobVisualEffectAnimator(interactiveElement: self.interactiveElement)
+    return TopKnobVisualEffectAnimator(interactiveElement: self.interactiveElement, presentingViewControllerDelegate: self.presentingViewControllerDelegate)
   }
   
   func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
@@ -77,9 +78,11 @@ class TopKnobVisualEffectPresentationManager : NSObject, UIViewControllerTransit
   class TopKnobVisualEffectAnimator : NSObject, UIViewControllerAnimatedTransitioning {
     
     let interactiveElement: InteractiveElement?
+    weak var presentingViewControllerDelegate: PresentingViewControllerDelegate?
     
-    init(interactiveElement: InteractiveElement?) {
+    init(interactiveElement: InteractiveElement?, presentingViewControllerDelegate: PresentingViewControllerDelegate?) {
       self.interactiveElement = interactiveElement
+      self.presentingViewControllerDelegate = presentingViewControllerDelegate
       super.init()
     }
     
@@ -111,6 +114,7 @@ class TopKnobVisualEffectPresentationManager : NSObject, UIViewControllerTransit
       if isPresenting {
         
         // Currently presenting
+        self.presentingViewControllerDelegate?.willPresentViewController(presentedViewController)
         presentedViewController.view.frame.origin.y = containerView.bounds.height
         containerView.addSubview(presentedViewController.view)
         
@@ -119,18 +123,23 @@ class TopKnobVisualEffectPresentationManager : NSObject, UIViewControllerTransit
           presentingViewController.setNeedsStatusBarAppearanceUpdate()
           presentedViewController.setNeedsStatusBarAppearanceUpdate()
           presentedViewController.view.frame.origin.y -= presentedYOffset
+          self.presentingViewControllerDelegate?.isPresentingViewController(presentedViewController)
         }, completion: { (_) in
+          self.presentingViewControllerDelegate?.didPresentViewController(presentedViewController)
           transitionContext.completeTransition(true)
         })
         
       } else {
         
         // Currently dismissing
+        self.presentingViewControllerDelegate?.willDismissViewController(presentedViewController)
         UIView.animate(withDuration: self.transitionDuration(using: transitionContext), animations: {
           presentingViewController.setNeedsStatusBarAppearanceUpdate()
           presentedViewController.setNeedsStatusBarAppearanceUpdate()
           presentedViewController.view.frame.origin.y += presentedYOffset
+          self.presentingViewControllerDelegate?.isDismissingViewController(presentedViewController)
         }, completion: { (_) in
+          self.presentingViewControllerDelegate?.didDismissViewController(presentedViewController)
           transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         })
       }
