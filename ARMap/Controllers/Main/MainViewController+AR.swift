@@ -39,7 +39,7 @@ extension MainViewController : ARStateDelegate {
     }
   }
   
-  // MARK: - Configuring View
+  // MARK: - Configuring Messages
   
   func showConfiguringView(state: ARState) {
     
@@ -51,47 +51,88 @@ extension MainViewController : ARStateDelegate {
     
     // Create the configuring view
     let configuringViewController = ConfiguringViewController.newViewController(state: .statusMessage(state.status, state.message))
-    configuringViewController.view.alpha = 0
     self.configuringViewController = configuringViewController
-    let visualEffectContainerController = VisualEffectContainerViewController(embeddedViewController: configuringViewController, blurEffect: nil)
-    self.configuringVisualEffectContainerViewController = visualEffectContainerController
-    
-    // Hide the buttons
-    self.hideElements { [weak self] in
-      if let strongSelf = self {
-        strongSelf.add(childViewController: visualEffectContainerController, intoContainerView: strongSelf.view)
-        
-        // Animate show the configuring view
-        let duration: TimeInterval = 0.3
-        strongSelf.configuringVisualEffectContainerViewController?.update(blurEffect: UIBlurEffect(style: .dark), duration: duration)
-        UIView.animate(withDuration: duration, animations: { [weak self] in
-          self?.configuringViewController?.view.alpha = 1
-        })
-      }
-    }
+    self.present(viewController: configuringViewController, withMode: .visualEffectFade, options: [ .withoutNavigationController ])
   }
   
   func hideConfiguringView() {
     
-    guard let _ = self.configuringViewController, let configuringVisualEffectContainerViewController = self.configuringVisualEffectContainerViewController else {
-      self.showElements()
+    guard let configuringViewController = self.configuringViewController else {
+      self.showAllElements()
+      self.enableAllElements()
       return
     }
     
-    // Animate hide the configuring view
-    let duration: TimeInterval = 0.3
-    UIView.animate(withDuration: duration, animations: { [weak self] in
-      self?.configuringViewController?.view.alpha = 0
-    })
-    
-    configuringVisualEffectContainerViewController.update(blurEffect: nil, duration: duration) { [weak self] in
-      self?.loadConfiguredNavigationBar()
-      self?.showElements()
-      if let configuringVisualEffectContainerViewController = self?.configuringVisualEffectContainerViewController {
-        self?.remove(childViewController: configuringVisualEffectContainerViewController)
-      }
+    // Dismiss the controller
+    configuringViewController.dismissController { [weak self] in
       self?.configuringViewController = nil
-      self?.configuringVisualEffectContainerViewController = nil
+      self?.enableAllElements()
+    }
+  }
+  
+  // MARK: - Showing and Enabling Views
+  
+  func showAllElements() {
+    self.aboveSafeAreaVisualEffectView.effect = UIBlurEffect(style: .dark)
+    self.listVisualEffectView.effect = UIBlurEffect(style: .light)
+    self.listButton.alpha = 1
+    self.addVisualEffectView.effect = UIBlurEffect(style: .light)
+    self.addButton.alpha = 1
+  }
+  
+  func enableAllElements() {
+    self.listButton.isUserInteractionEnabled = true
+    self.addButton.isUserInteractionEnabled = true
+    self.loadConfiguredNavigationBar()
+  }
+  
+  func disableAllElements() {
+    self.clearNavigationBar()
+    self.listButton.isUserInteractionEnabled = false
+    self.addButton.isUserInteractionEnabled = false
+  }
+  
+  func hideAllElements() {
+    self.aboveSafeAreaVisualEffectView.effect = nil
+    self.listVisualEffectView.effect = nil
+    self.listButton.alpha = 0
+    self.addVisualEffectView.effect = nil
+    self.addButton.alpha = 0
+  }
+}
+
+// MARK: - PresentingViewControllerDelegate
+
+extension MainViewController : PresentingViewControllerDelegate {
+  
+  func willPresentViewController(_ viewController: UIViewController) {
+    let contentViewController = (viewController as? UINavigationController)?.viewControllers.first ?? viewController
+    
+    // Disable and hide navigation elements when presenting configuring view
+    if let _ = contentViewController as? ConfiguringViewController {
+      self.disableAllElements()
+    }
+  }
+  
+  func isPresentingViewController(_ viewController: UIViewController?) {
+    let contentViewController = (viewController as? UINavigationController)?.viewControllers.first ?? viewController
+    
+    // Hide elements when prsenting configuring view
+    if let _ = contentViewController as? ConfiguringViewController {
+      self.hideAllElements()
+    }
+  }
+  
+  func didPresentViewController(_ viewController: UIViewController?) {}
+  
+  func willDismissViewController(_ viewController: UIViewController) {}
+  
+  func isDismissingViewController(_ viewController: UIViewController?) {
+    let contentViewController = (viewController as? UINavigationController)?.viewControllers.first ?? viewController
+    
+    // Show elements when prsenting configuring view
+    if let _ = contentViewController as? ConfiguringViewController {
+      self.showAllElements()
     }
   }
 }

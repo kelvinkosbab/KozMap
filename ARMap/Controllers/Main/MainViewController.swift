@@ -24,10 +24,8 @@ class MainViewController : BaseViewController {
   @IBOutlet weak var listVisualEffectView: UIVisualEffectView!
   @IBOutlet weak var listButton: UIButton!
   
-  var arViewController: ARViewController? = nil
-  
-  var configuringViewController: ConfiguringViewController? = nil
-  var configuringVisualEffectContainerViewController: VisualEffectContainerViewController? = nil
+  internal var arViewController: ARViewController? = nil
+  internal var configuringViewController: ConfiguringViewController?
   
   // MARK: - Lifecycle
   
@@ -157,38 +155,6 @@ class MainViewController : BaseViewController {
     let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: locationDetailViewController)
     let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
     self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
-  }
-  
-  // MARK: - Hiding and Showing Elements
-  
-  func showElements(completion: (() -> Void)? = nil) {
-    UIView.animate(withDuration: 0.3, animations: { [weak self] in
-      self?.aboveSafeAreaVisualEffectView.effect = UIBlurEffect(style: .dark)
-      self?.listVisualEffectView.effect = UIBlurEffect(style: .light)
-      self?.listButton.alpha = 1
-      self?.addVisualEffectView.effect = UIBlurEffect(style: .light)
-      self?.addButton.alpha = 1
-    }) { [weak self] _ in
-      self?.listButton.isUserInteractionEnabled = true
-      self?.addButton.isUserInteractionEnabled = true
-      self?.loadConfiguredNavigationBar()
-      completion?()
-    }
-  }
-  
-  func hideElements(completion: (() -> Void)? = nil) {
-    self.clearNavigationBar()
-    self.listButton.isUserInteractionEnabled = false
-    self.addButton.isUserInteractionEnabled = false
-    UIView.animate(withDuration: 0.3, animations: { [weak self] in
-      self?.aboveSafeAreaVisualEffectView.effect = nil
-      self?.listVisualEffectView.effect = nil
-      self?.listButton.alpha = 0
-      self?.addVisualEffectView.effect = nil
-      self?.addButton.alpha = 0
-    }) { _ in
-      completion?()
-    }
   }
   
   // MARK: - Keyboard
