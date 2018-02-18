@@ -119,7 +119,9 @@ class VisualEffectFadePresentationManager : NSObject, UIViewControllerTransition
           presentedViewController.setNeedsStatusBarAppearanceUpdate()
           self.presentingViewControllerDelegate?.isDismissingViewController(presentedViewController)
         }, completion: { _ in
-          self.presentingViewControllerDelegate?.didDismissViewController(presentedViewController)
+          if !transitionContext.transitionWasCancelled {
+            self.presentingViewControllerDelegate?.didDismissViewController(presentedViewController)
+          }
           transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         })
       }

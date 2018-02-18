@@ -139,7 +139,9 @@ class TopKnobVisualEffectPresentationManager : NSObject, UIViewControllerTransit
           presentedViewController.view.frame.origin.y += presentedYOffset
           self.presentingViewControllerDelegate?.isDismissingViewController(presentedViewController)
         }, completion: { (_) in
-          self.presentingViewControllerDelegate?.didDismissViewController(presentedViewController)
+          if !transitionContext.transitionWasCancelled {
+            self.presentingViewControllerDelegate?.didDismissViewController(presentedViewController)
+          }
           transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         })
       }

@@ -71,6 +71,14 @@ class SearchViewController : BaseViewController {
   
   // MARK: - Status Bar
   
+  override var prefersStatusBarHidden: Bool {
+    return true
+  }
+  
+  override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+    return .slide
+  }
+  
   override var preferredStatusBarStyle: UIStatusBarStyle {
     return .lightContent
   }
