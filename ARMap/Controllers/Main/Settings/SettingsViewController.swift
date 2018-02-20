@@ -8,18 +8,26 @@
 
 import UIKit
 
-class SettingsViewController : BaseViewController, DesiredContentHeightDelegate {
+class SettingsViewController : BaseViewController, DesiredContentHeightDelegate, DismissInteractable {
   
   // MARK: - Static Accessors
   
   static func newViewController() -> SettingsViewController {
-    return self.newViewController(fromStoryboardWithName: "Main")
+    let viewController = self.newViewController(fromStoryboardWithName: "Main")
+    viewController.preferredContentSize.height = viewController.desiredContentHeight
+    return viewController
   }
   
   // MARK: - DesiredContentHeightDelegate
   
   var desiredContentHeight: CGFloat {
     return 250
+  }
+  
+  // MARK: - DismissInteractable
+  
+  var dismissInteractiveView: UIView? {
+    return self.view
   }
   
   // MARK: - Properties
@@ -38,6 +46,20 @@ class SettingsViewController : BaseViewController, DesiredContentHeightDelegate 
     
     // Reload content
     self.reloadContent()
+  }
+  
+  // MARK: - Status Bar
+  
+  override var prefersStatusBarHidden: Bool {
+    return true
+  }
+  
+  override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+    return .slide
+  }
+  
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
   }
   
   // MARK: - Content

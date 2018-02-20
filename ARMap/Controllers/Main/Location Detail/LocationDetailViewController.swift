@@ -9,12 +9,14 @@
 import UIKit
 import CoreData
 
-class LocationDetailViewController : BaseViewController, NSFetchedResultsControllerDelegate, DesiredContentHeightDelegate {
+class LocationDetailViewController : BaseViewController, NSFetchedResultsControllerDelegate, DesiredContentHeightDelegate, DismissInteractable {
   
   // MARK: - Static Accessors
   
   private static func newViewController() -> LocationDetailViewController {
-    return self.newViewController(fromStoryboardWithName: "AddLocation")
+    let viewController = self.newViewController(fromStoryboardWithName: "AddLocation")
+    viewController.preferredContentSize.height = viewController.desiredContentHeight
+    return viewController
   }
   
   static func newViewController(placemark: Placemark) -> LocationDetailViewController {
@@ -27,6 +29,12 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
   
   var desiredContentHeight: CGFloat {
     return 271
+  }
+  
+  // MARK: - DismissInteractable
+  
+  var dismissInteractiveView: UIView? {
+    return self.view
   }
   
   // MARK: - Properties
@@ -78,6 +86,20 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
     
     MyDataManager.shared.saveMainContext()
     NotificationCenter.default.removeObserver(self)
+  }
+  
+  // MARK: - Status Bar
+  
+  override var prefersStatusBarHidden: Bool {
+    return true
+  }
+  
+  override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+    return .slide
+  }
+  
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
   }
   
   // MARK: - Notifications

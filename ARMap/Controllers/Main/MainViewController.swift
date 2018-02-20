@@ -24,10 +24,8 @@ class MainViewController : BaseViewController {
   @IBOutlet weak var listVisualEffectView: UIVisualEffectView!
   @IBOutlet weak var listButton: UIButton!
   
-  var arViewController: ARViewController? = nil
-  
-  var configuringViewController: ConfiguringViewController? = nil
-  var configuringVisualEffectContainerViewController: VisualEffectContainerViewController? = nil
+  internal var arViewController: ARViewController? = nil
+  internal var configuringViewController: ConfiguringViewController?
   
   // MARK: - Lifecycle
   
@@ -106,9 +104,7 @@ class MainViewController : BaseViewController {
     }
     
     let settingsViewController = SettingsViewController.newViewController()
-    let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: settingsViewController)
-    let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
-    self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
+    self.present(viewController: settingsViewController, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
   }
   
   func presentPlacemarkList() {
@@ -118,9 +114,7 @@ class MainViewController : BaseViewController {
     }
     
     let locationListViewController = LocationListViewController.newViewController(delegate: self)
-    let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: locationListViewController)
-    let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: locationListViewController.tableView)
-    self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
+    self.present(viewController: locationListViewController, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
   }
   
   func presentAddLocation() {
@@ -130,9 +124,7 @@ class MainViewController : BaseViewController {
     }
     
     let addLocationContainerViewController = AddLocationContainerViewController.newViewController(locationDetailDelegate: self, searchDelegate: self)
-    let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: addLocationContainerViewController)
-    let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
-    self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
+    self.present(viewController: addLocationContainerViewController, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
   }
   
   func presentAddLocation(mapItem: MapItem) {
@@ -142,9 +134,7 @@ class MainViewController : BaseViewController {
     }
     
     let addLocationViewController = AddLocationViewController.newViewController(mapItem: mapItem, delegate: self)
-    let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: addLocationViewController)
-    let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
-    self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
+    self.present(viewController: addLocationViewController, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
   }
   
   func presentLocationDetail(placemark: Placemark) {
@@ -154,41 +144,7 @@ class MainViewController : BaseViewController {
     }
     
     let locationDetailViewController = LocationDetailViewController.newViewController(placemark: placemark)
-    let viewControllerToPresent = TopKnobVisualEffectContainerViewController(embeddedViewController: locationDetailViewController)
-    let interactiveElement = InteractiveElement(size: viewControllerToPresent.desiredContentHeight, offset: 0, view: viewControllerToPresent.view)
-    self.present(viewController: viewControllerToPresent, withMode: .bottomUp, options: [ .withoutNavigationController, .dismissInteractiveElement(interactiveElement) ])
-  }
-  
-  // MARK: - Hiding and Showing Elements
-  
-  func showElements(completion: (() -> Void)? = nil) {
-    UIView.animate(withDuration: 0.3, animations: { [weak self] in
-      self?.aboveSafeAreaVisualEffectView.effect = UIBlurEffect(style: .dark)
-      self?.listVisualEffectView.effect = UIBlurEffect(style: .light)
-      self?.listButton.alpha = 1
-      self?.addVisualEffectView.effect = UIBlurEffect(style: .light)
-      self?.addButton.alpha = 1
-    }) { [weak self] _ in
-      self?.listButton.isUserInteractionEnabled = true
-      self?.addButton.isUserInteractionEnabled = true
-      self?.loadConfiguredNavigationBar()
-      completion?()
-    }
-  }
-  
-  func hideElements(completion: (() -> Void)? = nil) {
-    self.clearNavigationBar()
-    self.listButton.isUserInteractionEnabled = false
-    self.addButton.isUserInteractionEnabled = false
-    UIView.animate(withDuration: 0.3, animations: { [weak self] in
-      self?.aboveSafeAreaVisualEffectView.effect = nil
-      self?.listVisualEffectView.effect = nil
-      self?.listButton.alpha = 0
-      self?.addVisualEffectView.effect = nil
-      self?.addButton.alpha = 0
-    }) { _ in
-      completion?()
-    }
+    self.present(viewController: locationDetailViewController, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
   }
   
   // MARK: - Keyboard
@@ -214,13 +170,79 @@ class MainViewController : BaseViewController {
     
     // Calculate the new frame
     let xOffset = presentedViewController.view.frame.origin.x
-    let yOffset = self.view.bounds.height - keyboardOffset - presentedViewController.view.bounds.height
-    let newFrame = CGRect(x: xOffset, y: yOffset, width: presentedViewController.view.bounds.width, height: presentedViewController.view.bounds.height)
+    let presentedViewControllerHeight = presentedViewController.preferredContentSize.height > 0 ? presentedViewController.preferredContentSize.height : presentedViewController.view.bounds.height
+    let presentedViewControllerWidth = presentedViewController.preferredContentSize.width > 0 ? presentedViewController.preferredContentSize.width : presentedViewController.view.bounds.width
+    let yOffset = self.view.bounds.height - keyboardOffset - presentedViewControllerHeight
+    let newFrame = CGRect(x: xOffset, y: max(yOffset, 0), width: presentedViewControllerWidth, height: presentedViewControllerHeight)
     
     // Perform the animation
     UIView.animate(withDuration: duration, delay: 0, options: animationCurve, animations: { [weak self] in
       self?.presentedViewController?.view.frame = newFrame
     })
+  }
+  
+  // MARK: - Showing and Enabling Views
+  
+  func showAllElements() {
+    self.aboveSafeAreaVisualEffectView.effect = UIBlurEffect(style: .dark)
+    self.listVisualEffectView.effect = UIBlurEffect(style: .light)
+    self.listButton.alpha = 1
+    self.addVisualEffectView.effect = UIBlurEffect(style: .light)
+    self.addButton.alpha = 1
+  }
+  
+  func enableAllElements() {
+    self.listButton.isUserInteractionEnabled = true
+    self.addButton.isUserInteractionEnabled = true
+    self.loadConfiguredNavigationBar()
+  }
+  
+  func disableAllElements() {
+    self.clearNavigationBar()
+    self.listButton.isUserInteractionEnabled = false
+    self.addButton.isUserInteractionEnabled = false
+  }
+  
+  func hideAllElements() {
+    self.aboveSafeAreaVisualEffectView.effect = nil
+    self.listVisualEffectView.effect = nil
+    self.listButton.alpha = 0
+    self.addVisualEffectView.effect = nil
+    self.addButton.alpha = 0
+  }
+}
+
+// MARK: - PresentingViewControllerDelegate
+
+extension MainViewController : PresentingViewControllerDelegate {
+  
+  func willPresentViewController(_ viewController: UIViewController) {
+    self.disableAllElements()
+  }
+  
+  func isPresentingViewController(_ viewController: UIViewController?) {
+    self.hideAllElements()
+  }
+  
+  func didPresentViewController(_ viewController: UIViewController?) {}
+  
+  func willDismissViewController(_ viewController: UIViewController) {}
+  
+  func isDismissingViewController(_ viewController: UIViewController?) {
+    self.showAllElements()
+  }
+  
+  func didDismissViewController(_ viewController: UIViewController?) {
+    let contentViewController = (viewController as? UINavigationController)?.viewControllers.first ?? viewController
+    
+    // Disable and hide navigation elements when presenting configuring view
+    if let _ = contentViewController as? ConfiguringViewController {
+      self.configuringViewController = nil
+      
+    }
+    
+    // All presentations
+    self.enableAllElements()
   }
 }
 
