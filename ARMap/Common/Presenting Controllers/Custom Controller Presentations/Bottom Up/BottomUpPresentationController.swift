@@ -52,7 +52,7 @@ class BottomUpPresentationController : CustomPresentationController {
     }
     
     // Configure dismiss interaction
-    self.dismissInteractiveTransition = DragDownDismissInteractiveTransition(interactiveViews: self.allDismissInteractiveViews, contentSize: presentedViewController.preferredContentSize, delegate: self)
+    self.dismissInteractiveTransition = DragDownDismissInteractiveTransition(interactiveViews: self.allDismissInteractiveViews, options: [ .contentSize(self.presentedViewController.preferredContentSize) ], delegate: self)
   }
   
   override var frameOfPresentedViewInContainerView: CGRect {

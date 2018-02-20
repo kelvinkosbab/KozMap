@@ -52,7 +52,7 @@ class TopDownPresentationController : CustomPresentationController {
     }
     
     // Configure dismiss interaction
-    self.dismissInteractiveTransition = DragUpDismissInteractiveTransition(interactiveViews: self.allDismissInteractiveViews, contentSize: presentedViewController.preferredContentSize, delegate: self)
+    self.dismissInteractiveTransition = DragUpDismissInteractiveTransition(interactiveViews: self.allDismissInteractiveViews, options: [ .contentSize(self.presentedViewController.preferredContentSize) ], delegate: self)
   }
   
   override var frameOfPresentedViewInContainerView: CGRect {

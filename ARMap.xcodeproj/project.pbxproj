@@ -83,7 +83,7 @@
 		B686EFA620166F1300ACF075 /* InlineColorChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF9020166F1300ACF075 /* InlineColorChooserViewController.swift */; };
 		B6DCCDBD203B355C00201385 /* TopKnobBottomUpAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDBC203B355C00201385 /* TopKnobBottomUpAnimator.swift */; };
 		B6DCCDBF203B3DE700201385 /* TopKnobBottomUpPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDBE203B3DE600201385 /* TopKnobBottomUpPresentationController.swift */; };
-		B6DCCDC1203B63D500201385 /* InteractiveTransitionMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDC0203B63D500201385 /* InteractiveTransitionMode.swift */; };
+		B6DCCDC1203B63D500201385 /* InteractiveTransitionOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDC0203B63D500201385 /* InteractiveTransitionOption.swift */; };
 		B6DCCDC3203B68B800201385 /* InteractiveTransition+Subclasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDC2203B68B800201385 /* InteractiveTransition+Subclasses.swift */; };
 		B6DCCDC5203B6EA300201385 /* PresentableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDC4203B6EA300201385 /* PresentableManager.swift */; };
 		B6DCCDC7203B71CB00201385 /* PresentableAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDC6203B71CB00201385 /* PresentableAnimator.swift */; };
@@ -184,7 +184,7 @@
 		B686EF9020166F1300ACF075 /* InlineColorChooserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InlineColorChooserViewController.swift; sourceTree = "<group>"; };
 		B6DCCDBC203B355C00201385 /* TopKnobBottomUpAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopKnobBottomUpAnimator.swift; sourceTree = "<group>"; };
 		B6DCCDBE203B3DE600201385 /* TopKnobBottomUpPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopKnobBottomUpPresentationController.swift; sourceTree = "<group>"; };
-		B6DCCDC0203B63D500201385 /* InteractiveTransitionMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveTransitionMode.swift; sourceTree = "<group>"; };
+		B6DCCDC0203B63D500201385 /* InteractiveTransitionOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveTransitionOption.swift; sourceTree = "<group>"; };
 		B6DCCDC2203B68B800201385 /* InteractiveTransition+Subclasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InteractiveTransition+Subclasses.swift"; sourceTree = "<group>"; };
 		B6DCCDC4203B6EA300201385 /* PresentableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentableManager.swift; sourceTree = "<group>"; };
 		B6DCCDC6203B71CB00201385 /* PresentableAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentableAnimator.swift; sourceTree = "<group>"; };
@@ -385,7 +385,7 @@
 		B686EF2220166D8700ACF075 /* Interactive Transitions */ = {
 			isa = PBXGroup;
 			children = (
-				B6DCCDC0203B63D500201385 /* InteractiveTransitionMode.swift */,
+				B6DCCDC0203B63D500201385 /* InteractiveTransitionOption.swift */,
 				B686EF2720166D8700ACF075 /* InteractiveTransition.swift */,
 				B6DCCDC2203B68B800201385 /* InteractiveTransition+Subclasses.swift */,
 			);
@@ -678,7 +678,7 @@
 				B6DCCDE5203BED1D00201385 /* RightToLeftPresenationController.swift in Sources */,
 				B6DCCDE1203BE6C500201385 /* PresentableControllerOption.swift in Sources */,
 				B686EF0620166D5A00ACF075 /* Device.swift in Sources */,
-				B6DCCDC1203B63D500201385 /* InteractiveTransitionMode.swift in Sources */,
+				B6DCCDC1203B63D500201385 /* InteractiveTransitionOption.swift in Sources */,
 				B686EF9A20166F1300ACF075 /* MainViewController.swift in Sources */,
 				B6F451B220392AD50084AFC8 /* PresentingViewControllerDelegate.swift in Sources */,
 				B6F451B520393D470084AFC8 /* TopKnobVisualEffectView.swift in Sources */,

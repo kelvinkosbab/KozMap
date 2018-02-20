@@ -51,7 +51,7 @@ class LeftMenuPresentationController : CustomPresentationController {
     if completed {
       
       // Configure dismiss interaction
-      self.dismissInteractiveTransition = DragLeftDismissInteractiveTransition(interactiveViews: self.allDismissInteractiveViews, contentSize: presentedViewController.preferredContentSize, delegate: self)
+      self.dismissInteractiveTransition = DragLeftDismissInteractiveTransition(interactiveViews: self.allDismissInteractiveViews, options: [ .contentSize(self.presentedViewController.preferredContentSize) ], delegate: self)
     }
   }
   
