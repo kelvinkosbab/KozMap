@@ -33,8 +33,12 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
   
   // MARK: - DismissInteractable
   
-  var dismissInteractiveView: UIView? {
-    return self.view
+  var dismissInteractiveViews: [UIView] {
+    var views: [UIView] = []
+    if let view = self.view {
+      views.append(view)
+    }
+    return views
   }
   
   // MARK: - Properties

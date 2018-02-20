@@ -17,8 +17,12 @@ class TopKnobBottomUpPresentationController : CustomPresentationController, Dism
   
   // MARK: - DismissInteractable
   
-  var dismissInteractiveView: UIView? {
-    return self.topKnobVisualEffectView
+  var dismissInteractiveViews: [UIView] {
+    var views: [UIView] = []
+    if let topKnobVisualEffectView = self.topKnobVisualEffectView {
+      views.append(topKnobVisualEffectView)
+    }
+    return views
   }
   
   // MARK: - Fullscreen
@@ -58,7 +62,7 @@ class TopKnobBottomUpPresentationController : CustomPresentationController, Dism
     }
     
     // Configure presentation interaction
-    self.presentationInteractiveTransition = DragDownDismissInteractiveTransition(interactiveViews: self.presentationInteractiveViews, delegate: self)
+    self.presentationInteractiveTransition = DragDownDismissInteractiveTransition(interactiveViews: self.allPresentationInteractiveViews, delegate: self)
   }
   
   override func presentationTransitionDidEnd(_ completed: Bool) {
@@ -73,7 +77,7 @@ class TopKnobBottomUpPresentationController : CustomPresentationController, Dism
     }
     
     // Configure dismiss interaction
-    self.dismissInteractiveTransition = DragDownDismissInteractiveTransition(interactiveViews: self.dismissInteractiveViews, contentSize: presentedViewController.preferredContentSize, delegate: self)
+    self.dismissInteractiveTransition = DragDownDismissInteractiveTransition(interactiveViews: self.allDismissInteractiveViews, contentSize: presentedViewController.preferredContentSize, delegate: self)
   }
   
   override var frameOfPresentedViewInContainerView: CGRect {

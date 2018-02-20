@@ -11,13 +11,13 @@ import UIKit
 // MARK: - PresentationInteractable
 
 protocol PresentationInteractable : class {
-  var presentationInteractiveView: UIView? { get }
+  var presentationInteractiveViews: [UIView] { get }
 }
 
 // MARK: - DismissInteractable
 
 protocol DismissInteractable : class {
-  var dismissInteractiveView: UIView? { get }
+  var dismissInteractiveViews: [UIView] { get }
 }
 
 // MARK: - InteractiveTransitionDelegate

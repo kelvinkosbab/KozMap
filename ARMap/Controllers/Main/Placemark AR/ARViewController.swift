@@ -57,15 +57,6 @@ class ARViewController : UIViewController {
   private var currentCameraTrackingState: ARCamera.TrackingState? = nil {
     didSet {
       
-      // Check if the device supports ARKit
-      if let state = self.state {
-        switch state {
-        case .unsupported:
-          return
-        default: break
-        }
-      }
-      
       guard let currentCameraTrackingState = self.currentCameraTrackingState else {
         self.state = .configuring
         return
@@ -363,7 +354,9 @@ extension ARViewController : ARSCNViewDelegate {
   
   func session(_ session: ARSession, didFailWithError error: Error) {
     Log.extendedLog("Session did fail with error: \(error)")
-    self.state = .unsupported
+    
+    // Update the AR state
+    self.state = .error(error.localizedDescription)
   }
   
   func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {

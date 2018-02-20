@@ -500,8 +500,8 @@
 		B686EF8620166F1200ACF075 /* Placemark AR */ = {
 			isa = PBXGroup;
 			children = (
-				B686EF8720166F1200ACF075 /* ARViewController+Gestures.swift */,
 				B686EF8820166F1200ACF075 /* ARViewController.swift */,
+				B686EF8720166F1200ACF075 /* ARViewController+Gestures.swift */,
 			);
 			path = "Placemark AR";
 			sourceTree = "<group>";
