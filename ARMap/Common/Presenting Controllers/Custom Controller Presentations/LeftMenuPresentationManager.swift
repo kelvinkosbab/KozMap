@@ -95,7 +95,7 @@ class LeftMenuPresentationManager : NSObject, UIViewControllerTransitioningDeleg
           presentingViewController.setNeedsStatusBarAppearanceUpdate()
           presentedViewController.setNeedsStatusBarAppearanceUpdate()
           presentedViewController.view.frame.origin.x += presentedWidth
-        }, completion: { (_) in
+        }, completion: { _ in
           transitionContext.completeTransition(true)
         })
         
@@ -106,7 +106,7 @@ class LeftMenuPresentationManager : NSObject, UIViewControllerTransitioningDeleg
           presentingViewController.setNeedsStatusBarAppearanceUpdate()
           presentedViewController.setNeedsStatusBarAppearanceUpdate()
           presentedViewController.view.frame.origin.x -= presentedWidth
-        }, completion: { (_) in
+        }, completion: { _ in
           transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         })
       }

@@ -98,7 +98,7 @@ class HDFadeWithBlurPresentationManager : NSObject, UIViewControllerTransitionin
           
           // Additional animations based on presented scenario
           
-        }, completion: { (_) in
+        }, completion: { _ in
           transitionContext.completeTransition(true)
         })
         
@@ -113,7 +113,7 @@ class HDFadeWithBlurPresentationManager : NSObject, UIViewControllerTransitionin
           
           // Additional animations based on presented scenario
           
-        }, completion: { (_) in
+        }, completion: { _ in
           transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         })
       }

@@ -94,7 +94,7 @@ class RightToLeftPresentationManager : NSObject, UIViewControllerTransitioningDe
           presentedViewController.view.frame.origin.x -= containerView.frame.width
           presentingViewController.setNeedsStatusBarAppearanceUpdate()
           presentedViewController.setNeedsStatusBarAppearanceUpdate()
-        }, completion: { (_) in
+        }, completion: { _ in
           transitionContext.completeTransition(true)
         })
         
@@ -105,7 +105,7 @@ class RightToLeftPresentationManager : NSObject, UIViewControllerTransitioningDe
           presentedViewController.view.frame.origin.x += containerView.frame.width
           presentingViewController.setNeedsStatusBarAppearanceUpdate()
           presentedViewController.setNeedsStatusBarAppearanceUpdate()
-        }, completion: { (_) in
+        }, completion: { _ in
           transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         })
       }

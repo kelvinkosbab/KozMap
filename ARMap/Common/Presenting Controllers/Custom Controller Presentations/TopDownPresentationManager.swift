@@ -117,7 +117,7 @@ class TopDownPresentationManager : NSObject, UIViewControllerTransitioningDelega
           presentingViewController.setNeedsStatusBarAppearanceUpdate()
           presentedViewController.setNeedsStatusBarAppearanceUpdate()
           presentedViewController.view.frame.origin.y += presentedYOffset
-        }, completion: { (_) in
+        }, completion: { _ in
           transitionContext.completeTransition(true)
         })
         
@@ -128,7 +128,7 @@ class TopDownPresentationManager : NSObject, UIViewControllerTransitioningDelega
           presentingViewController.setNeedsStatusBarAppearanceUpdate()
           presentedViewController.setNeedsStatusBarAppearanceUpdate()
           presentedViewController.view.frame.origin.y -= presentedYOffset
-        }, completion: { (_) in
+        }, completion: { _ in
           transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         })
       }

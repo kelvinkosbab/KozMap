@@ -49,7 +49,7 @@ class TopKnobBottomUpPresentationController : UIPresentationController, DismissI
     // Setup blur view
     let dismissView = self.dismissView ?? self.createDismissView()
     self.dismissView = dismissView
-    dismissView.addToContainer(containerView, atIndex: 0)
+    dismissView.addToContainer(containerView)
     
     // Configure the top knob view
     if self.topKnobVisualEffectView == nil, let presentedView = self.presentedView {
@@ -79,10 +79,11 @@ class TopKnobBottomUpPresentationController : UIPresentationController, DismissI
   }
   
   override var frameOfPresentedViewInContainerView: CGRect {
-    let size = self.presentedViewController.preferredContentSize
+    let containerBounds = self.containerView?.bounds ?? UIScreen.main.bounds
+    let preferredHeight = self.presentedViewController.preferredContentSize.height
     let knobViewRequiredOffset = TopKnobVisualEffectView.topKnobSpace + TopKnobVisualEffectView.knobHeight + TopKnobVisualEffectView.bottomKnobSpace
-    let height: CGFloat = size.height + knobViewRequiredOffset
-    return CGRect(x: 0, y: size.height - height, width: size.width, height: height)
+    let height: CGFloat = preferredHeight + knobViewRequiredOffset
+    return CGRect(x: 0, y: containerBounds.height - height, width: containerBounds.width, height: height)
   }
   
   // MARK: - Actions

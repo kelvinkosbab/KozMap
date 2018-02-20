@@ -28,7 +28,7 @@ class VisualEffectFadeAnimator : NSObject, PresentableAnimator {
     }
     
     let isPresenting = toViewController.presentedViewController != fromViewController
-    let presentingViewController = isPresenting ? fromViewController : toViewController
+    _ = isPresenting ? fromViewController : toViewController
     let presentedViewController = isPresenting ? toViewController : fromViewController
     let containerView = transitionContext.containerView
     
@@ -41,8 +41,6 @@ class VisualEffectFadeAnimator : NSObject, PresentableAnimator {
       containerView.addSubview(presentedViewController.view)
       UIView.animate(withDuration: self.transitionDuration(using: transitionContext), animations: {
         presentedViewController.view.alpha = 1
-        presentingViewController.setNeedsStatusBarAppearanceUpdate()
-        presentedViewController.setNeedsStatusBarAppearanceUpdate()
         self.presentingViewControllerDelegate?.isPresentingViewController(presentedViewController)
       }, completion: { _ in
         self.presentingViewControllerDelegate?.didPresentViewController(presentedViewController)
@@ -55,8 +53,6 @@ class VisualEffectFadeAnimator : NSObject, PresentableAnimator {
       self.presentingViewControllerDelegate?.willDismissViewController(presentedViewController)
       UIView.animate(withDuration: self.transitionDuration(using: transitionContext), animations: {
         presentedViewController.view.alpha = 0
-        presentingViewController.setNeedsStatusBarAppearanceUpdate()
-        presentedViewController.setNeedsStatusBarAppearanceUpdate()
         self.presentingViewControllerDelegate?.isDismissingViewController(presentedViewController)
       }, completion: { _ in
         if !transitionContext.transitionWasCancelled {

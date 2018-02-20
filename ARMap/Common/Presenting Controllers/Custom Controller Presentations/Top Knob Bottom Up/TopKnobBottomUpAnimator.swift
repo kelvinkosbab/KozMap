@@ -28,7 +28,7 @@ class TopKnobBottomUpAnimator : NSObject, PresentableAnimator {
     }
     
     let isPresenting = toViewController.presentedViewController != fromViewController
-    let presentingViewController = isPresenting ? fromViewController : toViewController
+    _ = isPresenting ? fromViewController : toViewController
     let presentedViewController = isPresenting ? toViewController : fromViewController
     let containerView = transitionContext.containerView
     
@@ -46,11 +46,9 @@ class TopKnobBottomUpAnimator : NSObject, PresentableAnimator {
       
       // Animate the presentation
       UIView.animate(withDuration: self.transitionDuration(using: transitionContext), animations: {
-        presentingViewController.setNeedsStatusBarAppearanceUpdate()
-        presentedViewController.setNeedsStatusBarAppearanceUpdate()
         presentedViewController.view.frame.origin.y -= presentedYOffset
         self.presentingViewControllerDelegate?.isPresentingViewController(presentedViewController)
-      }, completion: { (_) in
+      }, completion: { _ in
         self.presentingViewControllerDelegate?.didPresentViewController(presentedViewController)
         transitionContext.completeTransition(true)
       })
@@ -60,11 +58,9 @@ class TopKnobBottomUpAnimator : NSObject, PresentableAnimator {
       // Currently dismissing
       self.presentingViewControllerDelegate?.willDismissViewController(presentedViewController)
       UIView.animate(withDuration: self.transitionDuration(using: transitionContext), animations: {
-        presentingViewController.setNeedsStatusBarAppearanceUpdate()
-        presentedViewController.setNeedsStatusBarAppearanceUpdate()
         presentedViewController.view.frame.origin.y += presentedYOffset
         self.presentingViewControllerDelegate?.isDismissingViewController(presentedViewController)
-      }, completion: { (_) in
+      }, completion: { _ in
         if !transitionContext.transitionWasCancelled {
           self.presentingViewControllerDelegate?.didDismissViewController(presentedViewController)
         }

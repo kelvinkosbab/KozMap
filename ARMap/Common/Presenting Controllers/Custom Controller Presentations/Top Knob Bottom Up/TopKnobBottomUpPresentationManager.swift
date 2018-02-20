@@ -12,13 +12,22 @@ class TopKnobBottomUpPresentationManager : NSObject, PresentableManager {
   
   // MARK: - PresentableManager
   
-  var presentationController: UIPresentationController?
+  var presentationController: UIPresentationController? {
+    didSet {
+      self.presentationInteractiveTransition = DragDownDismissInteractiveTransition(interactiveViews: self.presentationInteractiveViews, delegate: self)
+      self.dismissInteractiveTransition = DragDownDismissInteractiveTransition(interactiveViews: self.dismissInteractiveViews, delegate: self)
+    }
+  }
   
   var presentationInteractiveTransition: InteractiveTransition?
   var dismissInteractiveTransition: InteractiveTransition?
   
   weak var presentingViewControllerDelegate: PresentingViewControllerDelegate?
   weak var presentedViewControllerDelegate: PresentedViewControllerDelegate?
+  
+  /*
+   let dismissInteractiveTransition = DragDownDismissInteractiveTransition(interactiveViews: self.dismissInteractiveViews, delegate: self)
+   */
   
   // MARK: - UIViewControllerTransitioningDelegate
   
@@ -43,20 +52,14 @@ class TopKnobBottomUpPresentationManager : NSObject, PresentableManager {
   }
   
   func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-    if let presentationInteractiveTransition = self.presentationInteractiveTransition {
-      return presentationInteractiveTransition.hasStarted ? presentationInteractiveTransition : nil
-    } else if let presentationInteractiveTransition = DragDownDismissInteractiveTransition(interactiveViews: self.presentationInteractiveViews, delegate: self) {
-      self.presentationInteractiveTransition = presentationInteractiveTransition
+    if let presentationInteractiveTransition = self.presentationInteractiveTransition, presentationInteractiveTransition.hasStarted {
       return presentationInteractiveTransition
     }
     return nil
   }
   
   func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-    if let dismissInteractiveTransition = self.dismissInteractiveTransition {
-      return dismissInteractiveTransition.hasStarted ? dismissInteractiveTransition : nil
-    } else if let dismissInteractiveTransition = DragDownDismissInteractiveTransition(interactiveViews: self.dismissInteractiveViews, delegate: self) {
-      self.dismissInteractiveTransition = dismissInteractiveTransition
+    if let dismissInteractiveTransition = self.dismissInteractiveTransition, dismissInteractiveTransition.hasStarted {
       return dismissInteractiveTransition
     }
     return nil
