@@ -14,7 +14,7 @@ class BaseTableViewController : UITableViewController, PresentableController {
   
   var presentedMode: PresentationMode = .modal
   var presentationManager: UIViewControllerTransitioningDelegate? = nil
-  var currentFlowFirstController: PresentableController? = nil
+  var currentFlowInitialController: PresentableController? = nil
   
   // MARK: - UITableView
   

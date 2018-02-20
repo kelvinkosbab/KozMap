@@ -14,7 +14,7 @@ class BaseNavigationController : UINavigationController, PresentableController {
   
   var presentedMode: PresentationMode = .modal
   var presentationManager: UIViewControllerTransitioningDelegate? = nil
-  var currentFlowFirstController: PresentableController? = nil
+  var currentFlowInitialController: PresentableController? = nil
   
   // MARK: - Lifecycle
   

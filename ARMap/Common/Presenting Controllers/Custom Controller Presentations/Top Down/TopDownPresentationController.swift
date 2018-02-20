@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TopDownPresentationController : UIPresentationController {
+class TopDownPresentationController : CustomPresentationController {
   
   // MARK: - Properties
   
@@ -36,6 +36,10 @@ class TopDownPresentationController : UIPresentationController {
     dismissView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.dismissController)))
     self.dismissView = dismissView
     dismissView.addToContainer(containerView)
+    
+    // Interactive transitions
+    self.presentationInteractiveTransition = DragUpDismissInteractiveTransition(interactiveViews: self.presentationInteractiveViews, delegate: self)
+    self.dismissInteractiveTransition = DragUpDismissInteractiveTransition(interactiveViews: self.dismissInteractiveViews, contentSize: presentedViewController.preferredContentSize, delegate: self)
   }
   
   override func presentationTransitionDidEnd(_ completed: Bool) {
@@ -55,5 +59,21 @@ class TopDownPresentationController : UIPresentationController {
   
   @objc func dismissController() {
     self.presentingViewController.dismiss(animated: true, completion: nil)
+  }
+}
+
+// MARK: - InteractiveTransitionDelegate
+
+extension TopDownPresentationController : InteractiveTransitionDelegate {
+  
+  func interactionDidSurpassThreshold(_ interactiveTransition: InteractiveTransition) {
+    
+    // Presentation
+    if interactiveTransition == self.presentationInteractiveTransition {}
+    
+    // Dismissal
+    if interactiveTransition == self.dismissInteractiveTransition {
+      self.dismissController()
+    }
   }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TopKnobBottomUpPresentationController : UIPresentationController, DismissInteractable {
+class TopKnobBottomUpPresentationController : CustomPresentationController, DismissInteractable {
   
   // MARK: - Properties
   
@@ -56,6 +56,10 @@ class TopKnobBottomUpPresentationController : UIPresentationController, DismissI
       let containerBounds = self.containerView?.bounds ?? UIScreen.main.bounds
       self.presentedViewController.preferredContentSize.height = self.presentedViewController.preferredContentSize.height > 0 ? self.presentedViewController.preferredContentSize.height + knobViewRequiredOffset : containerBounds.height
     }
+    
+    // Interactive transitions
+    self.presentationInteractiveTransition = DragDownDismissInteractiveTransition(interactiveViews: self.presentationInteractiveViews, delegate: self)
+    self.dismissInteractiveTransition = DragDownDismissInteractiveTransition(interactiveViews: self.dismissInteractiveViews, contentSize: presentedViewController.preferredContentSize, delegate: self)
   }
   
   override func presentationTransitionDidEnd(_ completed: Bool) {
@@ -77,5 +81,21 @@ class TopKnobBottomUpPresentationController : UIPresentationController, DismissI
   
   @objc func dismissController() {
     self.presentingViewController.dismiss(animated: true, completion: nil)
+  }
+}
+
+// MARK: - InteractiveTransitionDelegate
+
+extension TopKnobBottomUpPresentationController : InteractiveTransitionDelegate {
+  
+  func interactionDidSurpassThreshold(_ interactiveTransition: InteractiveTransition) {
+    
+    // Presentation
+    if interactiveTransition == self.presentationInteractiveTransition {}
+    
+    // Dismissal
+    if interactiveTransition == self.dismissInteractiveTransition {
+      self.dismissController()
+    }
   }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class VisualEffectFadePresentationController : UIPresentationController {
+class VisualEffectFadePresentationController : CustomPresentationController {
   
   // MARK: - Properties
   
@@ -16,14 +16,6 @@ class VisualEffectFadePresentationController : UIPresentationController {
   
   override var shouldPresentInFullscreen: Bool {
     return true
-  }
-  
-  // MARK: - Blur View
-  
-  private func createBlurView() -> UIVisualEffectView {
-    let blurView = UIVisualEffectView(effect: nil)
-    blurView.frame = self.presentingViewController.view.bounds
-    return blurView
   }
   
   // MARK: - UIPresentationController
@@ -35,7 +27,8 @@ class VisualEffectFadePresentationController : UIPresentationController {
     }
     
     // Setup blur view
-    let blurView = self.blurView ?? self.createBlurView()
+    let blurView = UIVisualEffectView(effect: nil)
+    blurView.frame = self.presentingViewController.view.bounds
     self.blurView = blurView
     blurView.addToContainer(containerView, atIndex: 0)
     blurView.effect = nil

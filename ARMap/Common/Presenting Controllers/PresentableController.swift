@@ -8,69 +8,54 @@
 
 import UIKit
 
-// MARK: - PresentableControllerOption
-
-enum PresentableControllerOption {
-  case withoutNavigationController, presentingViewControllerDelegate(PresentingViewControllerDelegate), presentedViewControllerDelegate(PresentedViewControllerDelegate)
-}
-
-extension Sequence where Iterator.Element == PresentableControllerOption {
-  
-  var inNavigationController: Bool {
-    return !self.contains { option -> Bool in
-      switch option {
-      case .withoutNavigationController:
-        return true
-      default:
-        return false
-      }
-    }
-  }
-  
-  var presentingViewControllerDelegate: PresentingViewControllerDelegate? {
-    for option in self {
-      switch option {
-      case .presentingViewControllerDelegate(let presentingViewControllerDelegate):
-        return presentingViewControllerDelegate
-      default: break
-      }
-    }
-    return nil
-  }
-  
-  var presentedViewControllerDelegate: PresentedViewControllerDelegate? {
-    for option in self {
-      switch option {
-      case .presentedViewControllerDelegate(let presentedViewControllerDelegate):
-        return presentedViewControllerDelegate
-      default: break
-      }
-    }
-    return nil
-  }
-}
-
 // MARK: - PresentationMode
 
 enum PresentationMode {
-//  case  leftMenu, rightToLeft, topDown
-  
   case modal, modalOverCurrentContext, overCurrentContext
-  case topDown, bottomUp, topKnobBottomUp, visualEffectFade
+  case custom(CustomPresentationMode)
   case navStack
   
-  var presentationManager: PresentableManager? {
+  var isNavStack: Bool {
+    switch self {
+    case .navStack:
+      return true
+    default:
+      return false
+    }
+  }
+}
+
+enum CustomPresentationMode {
+  //  case  leftMenu, rightToLeft
+  case topDown, bottomUp, topKnobBottomUp, visualEffectFade
+  
+  var presentationAnimator: PresentableAnimator {
+    return self.dissmissAnimator
+  }
+  
+  var dissmissAnimator: PresentableAnimator {
     switch self {
     case .topDown:
-      return TopDownPresentationManager()
+      return TopDownAnimator()
     case .bottomUp:
-      return BottomUpPresentationManager()
+      return BottomUpAnimator()
     case .topKnobBottomUp:
-      return TopKnobBottomUpPresentationManager()
+      return TopKnobBottomUpAnimator()
     case .visualEffectFade:
-      return VisualEffectFadePresentationManager()
-    default:
-      return nil
+      return VisualEffectFadeAnimator()
+    }
+  }
+  
+  func getPresentationController(forPresented presented: UIViewController, presenting: UIViewController) -> CustomPresentationController {
+    switch self {
+    case .topDown:
+      return TopDownPresentationController(presentedViewController: presented, presenting: presenting)
+    case .bottomUp:
+      return BottomUpPresentationController(presentedViewController: presented, presenting: presenting)
+    case .topKnobBottomUp:
+      return TopKnobBottomUpPresentationController(presentedViewController: presented, presenting: presenting)
+    case .visualEffectFade:
+      return VisualEffectFadePresentationController(presentedViewController: presented, presenting: presenting)
     }
   }
 }
@@ -80,36 +65,29 @@ enum PresentationMode {
 protocol PresentableController : class {
   var presentedMode: PresentationMode { get set }
   var presentationManager: UIViewControllerTransitioningDelegate? { get set }
-  var currentFlowFirstController: PresentableController? { get set }
-  func present(viewController: UIViewController, withMode mode: PresentationMode, options: [PresentableControllerOption], completion: (() -> Void)?)
+  var currentFlowInitialController: PresentableController? { get set }
+  func present(viewController: UIViewController, withMode mode: PresentationMode, options: [PresentableControllerOption])
   func dismissController(completion: (() -> Void)?)
   func dismissCurrentNavigationFlow(completion: (() -> Void)?)
 }
 
 extension PresentableController where Self : UIViewController {
   
-  func present(viewController: UIViewController, withMode mode: PresentationMode, options: [PresentableControllerOption] = [], completion: (() -> Void)? = nil) {
+  func present(viewController: UIViewController, withMode mode: PresentationMode, options: [PresentableControllerOption] = []) {
     
     // Configure the view controller to present
     let inNavigationController = options.inNavigationController
-    let presentingPresentableController: PresentableController? = viewController as? PresentableController
-    presentingPresentableController?.presentedMode = mode
-    let viewControllerToPresent: UIViewController = mode != .navStack && inNavigationController ? BaseNavigationController(rootViewController: viewController) : viewController
+    let viewControllerToPresent: UIViewController = mode.isNavStack && inNavigationController ? BaseNavigationController(rootViewController: viewController) : viewController
     
-    // Presentation manager
-    if let presentationManager = mode.presentationManager {
-      presentationManager.presentingViewControllerDelegate = options.presentingViewControllerDelegate
-      presentationManager.presentedViewControllerDelegate = options.presentedViewControllerDelegate
-      viewControllerToPresent.transitioningDelegate = presentationManager
-      if let presentableController = viewControllerToPresent as? PresentableController {
-        presentableController.presentationManager = presentationManager
-      }
+    // Configure the initial flow controller
+    if let presentableController = viewController as? PresentableController, !mode.isNavStack {
+      presentableController.currentFlowInitialController = self
+      presentableController.presentedMode = mode
     }
     
     // Present the controller
     switch mode {
     case .modal:
-      presentingPresentableController?.currentFlowFirstController = self
       if UIDevice.current.isPhone {
         viewControllerToPresent.modalTransitionStyle = .coverVertical
         viewControllerToPresent.modalPresentationStyle = .overFullScreen
@@ -117,10 +95,9 @@ extension PresentableController where Self : UIViewController {
       } else {
         viewControllerToPresent.modalPresentationStyle = .formSheet
       }
-      self.present(viewControllerToPresent, animated: true, completion: completion)
+      self.present(viewControllerToPresent, animated: true, completion: nil)
       
     case .modalOverCurrentContext:
-      presentingPresentableController?.currentFlowFirstController = self
       if UIDevice.current.isPhone {
         viewControllerToPresent.modalTransitionStyle = .coverVertical
         viewControllerToPresent.modalPresentationStyle = .overFullScreen
@@ -128,16 +105,15 @@ extension PresentableController where Self : UIViewController {
       } else {
         viewControllerToPresent.modalPresentationStyle = .overCurrentContext
       }
-      self.present(viewControllerToPresent, animated: true, completion: completion)
+      self.present(viewControllerToPresent, animated: true, completion: nil)
       
     case .overCurrentContext:
-      presentingPresentableController?.currentFlowFirstController = self
       viewControllerToPresent.modalPresentationStyle = .overCurrentContext
       viewControllerToPresent.modalTransitionStyle = .crossDissolve
-      self.present(viewController, animated: true, completion: completion)
+      self.present(viewController, animated: true, completion: nil)
       
 //    case .leftMenu:
-//      presentingPresentableController?.currentFlowFirstController = self
+//      presentingPresentableController?.currentFlowInitialController = self
 //      let presentationManager = LeftMenuPresentationManager(dismissInteractor: DragLeftDismissInteractiveTransition(presentingController: viewControllerToPresent, interactiveView: dismissInteractiveElement?.view))
 //      presentationManager.presentingViewControllerDelegate = presentingViewControllerDelegate
 //      viewControllerToPresent.modalPresentationStyle = .custom
@@ -147,7 +123,7 @@ extension PresentableController where Self : UIViewController {
 //      self.present(viewControllerToPresent, animated: true, completion: completion)
 //
 //    case .rightToLeft:
-//      presentingPresentableController?.currentFlowFirstController = self
+//      presentingPresentableController?.currentFlowInitialController = self
 //      let presentationManager = RightToLeftPresentationManager(dismissInteractor: DragRightDismissInteractiveTransition(presentingController: viewControllerToPresent, interactiveView: dismissInteractiveElement?.view))
 //      presentationManager.presentingViewControllerDelegate = presentingViewControllerDelegate
 //      viewControllerToPresent.modalPresentationStyle = .custom
@@ -156,15 +132,22 @@ extension PresentableController where Self : UIViewController {
 //      viewControllerToPresentPresentableController?.presentationManager = presentationManager
 //      self.present(viewControllerToPresent, animated: true, completion: completion)
       
-    case .topDown, .bottomUp, .topKnobBottomUp, .visualEffectFade:
-      presentingPresentableController?.currentFlowFirstController = self
+    case .custom(let customPresentationMode):
       viewControllerToPresent.modalPresentationStyle = .custom
       viewControllerToPresent.modalPresentationCapturesStatusBarAppearance = true
-      self.present(viewControllerToPresent, animated: true, completion: completion)
+      
+      // Configure the presenation manager
+      let presentationManager = CustomPresentationManager(mode: customPresentationMode)
+      presentationManager.presentingViewControllerDelegate = options.presentingViewControllerDelegate
+      presentationManager.presentedViewControllerDelegate = options.presentedViewControllerDelegate
+      viewControllerToPresent.transitioningDelegate = presentationManager
+      if let presentedPresentableController = viewControllerToPresent as? PresentableController {
+        presentedPresentableController.presentationManager = presentationManager
+      }
+      self.present(viewControllerToPresent, animated: true, completion: nil)
       
     case .navStack:
       self.navigationController?.pushViewController(viewControllerToPresent, animated: true)
-      completion?()
     }
   }
   
@@ -187,10 +170,10 @@ extension PresentableController where Self : UIViewController {
   }
   
   func dismissCurrentNavigationFlow(completion: (() -> Void)? = nil) {
-    guard let currentFlowFirstController = self.currentFlowFirstController else {
+    guard let currentFlowInitialController = self.currentFlowInitialController else {
       self.dismissController(completion: completion)
       return
     }
-    currentFlowFirstController.dismissController(completion: completion)
+    currentFlowInitialController.dismissController(completion: completion)
   }
 }

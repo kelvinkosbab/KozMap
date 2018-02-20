@@ -104,7 +104,7 @@ class MainViewController : BaseViewController {
     }
     
     let settingsViewController = SettingsViewController.newViewController()
-    self.present(viewController: settingsViewController, withMode: .topKnobBottomUp, options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
+    self.present(viewController: settingsViewController, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
   }
   
   func presentPlacemarkList() {
@@ -114,7 +114,7 @@ class MainViewController : BaseViewController {
     }
     
     let locationListViewController = LocationListViewController.newViewController(delegate: self)
-    self.present(viewController: locationListViewController, withMode: .topKnobBottomUp, options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
+    self.present(viewController: locationListViewController, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
   }
   
   func presentAddLocation() {
@@ -124,7 +124,7 @@ class MainViewController : BaseViewController {
     }
     
     let addLocationContainerViewController = AddLocationContainerViewController.newViewController(locationDetailDelegate: self, searchDelegate: self)
-    self.present(viewController: addLocationContainerViewController, withMode: .topKnobBottomUp, options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
+    self.present(viewController: addLocationContainerViewController, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
   }
   
   func presentAddLocation(mapItem: MapItem) {
@@ -134,7 +134,7 @@ class MainViewController : BaseViewController {
     }
     
     let addLocationViewController = AddLocationViewController.newViewController(mapItem: mapItem, delegate: self)
-    self.present(viewController: addLocationViewController, withMode: .topKnobBottomUp, options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
+    self.present(viewController: addLocationViewController, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
   }
   
   func presentLocationDetail(placemark: Placemark) {
@@ -144,7 +144,7 @@ class MainViewController : BaseViewController {
     }
     
     let locationDetailViewController = LocationDetailViewController.newViewController(placemark: placemark)
-    self.present(viewController: locationDetailViewController, withMode: .topKnobBottomUp, options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
+    self.present(viewController: locationDetailViewController, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
   }
   
   // MARK: - Keyboard
