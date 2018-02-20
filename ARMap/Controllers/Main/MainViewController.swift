@@ -165,15 +165,15 @@ class MainViewController : BaseViewController {
     if (endFrame?.origin.y)! >= UIScreen.main.bounds.size.height {
       keyboardOffset = 0
     } else {
-      keyboardOffset = endFrame?.size.height ?? 0.0
+      let safeAreaOffset = self.view.safeAreaLayoutGuide.layoutFrame.origin.y / 4
+      keyboardOffset = (endFrame?.size.height ?? 0.0) - safeAreaOffset
     }
     
     // Calculate the new frame
     let xOffset = presentedViewController.view.frame.origin.x
     let presentedViewControllerHeight = presentedViewController.preferredContentSize.height > 0 ? presentedViewController.preferredContentSize.height : presentedViewController.view.bounds.height
-    let presentedViewControllerWidth = presentedViewController.preferredContentSize.width > 0 ? presentedViewController.preferredContentSize.width : presentedViewController.view.bounds.width
     let yOffset = self.view.bounds.height - keyboardOffset - presentedViewControllerHeight
-    let newFrame = CGRect(x: xOffset, y: max(yOffset, 0), width: presentedViewControllerWidth, height: presentedViewControllerHeight)
+    let newFrame = CGRect(x: xOffset, y: max(yOffset, 0), width: presentedViewController.view.bounds.width, height: presentedViewControllerHeight)
     
     // Perform the animation
     UIView.animate(withDuration: duration, delay: 0, options: animationCurve, animations: { [weak self] in
