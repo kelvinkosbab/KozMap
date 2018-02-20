@@ -27,17 +27,6 @@ class TopKnobBottomUpPresentationController : UIPresentationController, DismissI
     return false
   }
   
-  // MARK: - Blur View
-  
-  private func createDismissView() -> UIView {
-    let view = UIView()
-    view.backgroundColor = .clear
-    view.frame = self.presentingViewController.view.bounds
-    view.isUserInteractionEnabled = true
-    view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.dismissController)))
-    return view
-  }
-  
   // MARK: - UIPresentationController
   
   override func presentationTransitionWillBegin() {
@@ -46,8 +35,12 @@ class TopKnobBottomUpPresentationController : UIPresentationController, DismissI
       return
     }
     
-    // Setup blur view
-    let dismissView = self.dismissView ?? self.createDismissView()
+    // Setup dismiss view
+    let dismissView = UIView()
+    dismissView.backgroundColor = .clear
+    dismissView.frame = self.presentingViewController.view.bounds
+    dismissView.isUserInteractionEnabled = true
+    dismissView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.dismissController)))
     self.dismissView = dismissView
     dismissView.addToContainer(containerView)
     
@@ -61,7 +54,7 @@ class TopKnobBottomUpPresentationController : UIPresentationController, DismissI
       
       // Adjust the presented controller preferred content size
       let containerBounds = self.containerView?.bounds ?? UIScreen.main.bounds
-      self.presentedViewController.preferredContentSize.height = self.presentedViewController.preferredContentSize.height > 0 ? self.presentedViewController.preferredContentSize.height : containerBounds.height
+      self.presentedViewController.preferredContentSize.height = self.presentedViewController.preferredContentSize.height > 0 ? self.presentedViewController.preferredContentSize.height + knobViewRequiredOffset : containerBounds.height
     }
   }
   

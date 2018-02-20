@@ -1,5 +1,5 @@
 //
-//  BottomUpAnimator.swift
+//  TopDownAnimator.swift
 //  ARMap
 //
 //  Created by Kelvin Kosbab on 2/19/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BottomUpAnimator : NSObject, PresentableAnimator {
+class TopDownAnimator : NSObject, PresentableAnimator {
   
   // MARK: - PresentableAnimator
   
@@ -32,36 +32,26 @@ class BottomUpAnimator : NSObject, PresentableAnimator {
     let presentedViewController = isPresenting ? toViewController : fromViewController
     let containerView = transitionContext.containerView
     
-    // Preferred height of the presented controller
+    // Calculate preferred height
     let presentedYOffset: CGFloat = presentedViewController.preferredContentSize.height > 0 ? presentedViewController.preferredContentSize.height : containerView.bounds.height
     
     if isPresenting {
       
       // Currently presenting
-      self.presentingViewControllerDelegate?.willPresentViewController(presentedViewController)
-      presentedViewController.view.frame.origin.y = containerView.bounds.height
+      presentedViewController.view.frame.origin.y -= presentedYOffset
       containerView.addSubview(presentedViewController.view)
-      
-      // Animate the presentation
       UIView.animate(withDuration: self.transitionDuration(using: transitionContext), animations: {
-        presentedViewController.view.frame.origin.y -= presentedYOffset
-        self.presentingViewControllerDelegate?.isPresentingViewController(presentedViewController)
+        presentedViewController.view.frame.origin.y += presentedYOffset
       }, completion: { _ in
-        self.presentingViewControllerDelegate?.didPresentViewController(presentedViewController)
         transitionContext.completeTransition(true)
       })
       
     } else {
       
-      // Currently dismissing
-      self.presentingViewControllerDelegate?.willDismissViewController(presentedViewController)
+      // Currently not presenting
       UIView.animate(withDuration: self.transitionDuration(using: transitionContext), animations: {
-        presentedViewController.view.frame.origin.y += presentedYOffset
-        self.presentingViewControllerDelegate?.isDismissingViewController(presentedViewController)
+        presentedViewController.view.frame.origin.y -= presentedYOffset
       }, completion: { _ in
-        if !transitionContext.transitionWasCancelled {
-          self.presentingViewControllerDelegate?.didDismissViewController(presentedViewController)
-        }
         transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
       })
     }

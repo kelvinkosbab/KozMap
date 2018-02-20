@@ -1,5 +1,5 @@
 //
-//  BottomUpPresentationController.swift
+//  TopDownPresentationController.swift
 //  ARMap
 //
 //  Created by Kelvin Kosbab on 2/19/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BottomUpPresentationController : UIPresentationController {
+class TopDownPresentationController : UIPresentationController {
   
   // MARK: - Properties
   
@@ -48,7 +48,7 @@ class BottomUpPresentationController : UIPresentationController {
   override var frameOfPresentedViewInContainerView: CGRect {
     let containerBounds = self.containerView?.bounds ?? UIScreen.main.bounds
     let preferredHeight = self.presentedViewController.preferredContentSize.height
-    return CGRect(x: 0, y: containerBounds.height - preferredHeight, width: containerBounds.width, height: preferredHeight)
+    return CGRect(x: 0, y: 0, width: containerBounds.width, height: preferredHeight)
   }
   
   // MARK: - Actions

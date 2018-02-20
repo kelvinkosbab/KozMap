@@ -33,9 +33,7 @@ class TopKnobBottomUpAnimator : NSObject, PresentableAnimator {
     let containerView = transitionContext.containerView
     
     // Preferred height of the presented controller
-    let preferredHeight = presentedViewController.preferredContentSize.height
-    let knobViewRequiredOffset = TopKnobVisualEffectView.topKnobSpace + TopKnobVisualEffectView.knobHeight + TopKnobVisualEffectView.bottomKnobSpace
-    let presentedYOffset: CGFloat = preferredHeight + knobViewRequiredOffset
+    let presentedYOffset = presentedViewController.preferredContentSize.height > 0 ? presentedViewController.preferredContentSize.height : containerView.bounds.height
     
     if isPresenting {
       
