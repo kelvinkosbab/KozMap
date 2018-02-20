@@ -53,12 +53,16 @@ extension Sequence where Iterator.Element == PresentableControllerOption {
 // MARK: - PresentationMode
 
 enum PresentationMode {
-//  case modal, modalOverCurrentContext, overCurrentContext, leftMenu, rightToLeft, topDown, bottomUp, topKnobBottomUp, visualEffectFade, navStack
+//  case  leftMenu, rightToLeft, topDown
   
-  case modal, modalOverCurrentContext, overCurrentContext, topKnobBottomUp, visualEffectFade, navStack
+  case modal, modalOverCurrentContext, overCurrentContext
+  case bottomUp, topKnobBottomUp, visualEffectFade
+  case navStack
   
   var presentationManager: PresentableManager? {
     switch self {
+    case .bottomUp:
+      return BottomUpPresentationManager()
     case .topKnobBottomUp:
       return TopKnobBottomUpPresentationManager()
     case .visualEffectFade:
@@ -180,7 +184,7 @@ extension PresentableController where Self : UIViewController {
 //      viewControllerToPresentPresentableController?.presentationManager = presentationManager
 //      self.present(viewControllerToPresent, animated: true, completion: completion)
       
-    case .topKnobBottomUp, .visualEffectFade:
+    case .bottomUp, .topKnobBottomUp, .visualEffectFade:
       presentingPresentableController?.currentFlowFirstController = self
       viewControllerToPresent.modalPresentationStyle = .custom
       viewControllerToPresent.modalPresentationCapturesStatusBarAppearance = true

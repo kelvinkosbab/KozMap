@@ -1,5 +1,5 @@
 //
-//  TopKnobBottomUpPresentationController.swift
+//  BottomUpPresentationController.swift
 //  ARMap
 //
 //  Created by Kelvin Kosbab on 2/19/18.
@@ -8,18 +8,11 @@
 
 import UIKit
 
-class TopKnobBottomUpPresentationController : UIPresentationController, DismissInteractable {
+class BottomUpPresentationController : UIPresentationController {
   
   // MARK: - Properties
   
   private var dismissView: UIView? = nil
-  private var topKnobVisualEffectView: TopKnobVisualEffectView? = nil
-  
-  // MARK: - DismissInteractable
-  
-  var dismissInteractiveView: UIView? {
-    return self.topKnobVisualEffectView
-  }
   
   // MARK: - Fullscreen
   
@@ -50,34 +43,19 @@ class TopKnobBottomUpPresentationController : UIPresentationController, DismissI
     let dismissView = self.dismissView ?? self.createDismissView()
     self.dismissView = dismissView
     dismissView.addToContainer(containerView)
-    
-    // Configure the top knob view
-    if self.topKnobVisualEffectView == nil, let presentedView = self.presentedView {
-      
-      // Crate the knob view
-      let topKnobVisualEffectView = TopKnobVisualEffectView.newView()
-      let knobViewRequiredOffset = TopKnobVisualEffectView.topKnobSpace + TopKnobVisualEffectView.knobHeight + TopKnobVisualEffectView.bottomKnobSpace
-      topKnobVisualEffectView.addToContainer(presentedView, atIndex: 0, topMargin: -knobViewRequiredOffset)
-      
-      // Adjust the presented controller preferred content size
-      let containerBounds = self.containerView?.bounds ?? UIScreen.main.bounds
-      self.presentedViewController.preferredContentSize.height = self.presentedViewController.preferredContentSize.height > 0 ? self.presentedViewController.preferredContentSize.height : containerBounds.height
-    }
   }
   
   override func presentationTransitionDidEnd(_ completed: Bool) {
     if !completed {
       self.dismissView?.removeFromSuperview()
       self.dismissView = nil
-      self.topKnobVisualEffectView?.removeFromSuperview()
-      self.topKnobVisualEffectView = nil
     }
   }
   
   override var frameOfPresentedViewInContainerView: CGRect {
     let containerBounds = self.containerView?.bounds ?? UIScreen.main.bounds
-    let height: CGFloat = self.presentedViewController.preferredContentSize.height
-    return CGRect(x: 0, y: containerBounds.height - height, width: containerBounds.width, height: height)
+    let preferredHeight = self.presentedViewController.preferredContentSize.height
+    return CGRect(x: 0, y: containerBounds.height - preferredHeight, width: containerBounds.width, height: preferredHeight)
   }
   
   // MARK: - Actions

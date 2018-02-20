@@ -170,8 +170,10 @@ class MainViewController : BaseViewController {
     
     // Calculate the new frame
     let xOffset = presentedViewController.view.frame.origin.x
-    let yOffset = self.view.bounds.height - keyboardOffset - presentedViewController.view.bounds.height
-    let newFrame = CGRect(x: xOffset, y: max(yOffset, 0), width: presentedViewController.view.bounds.width, height: presentedViewController.view.bounds.height)
+    let presentedViewControllerHeight = presentedViewController.preferredContentSize.height > 0 ? presentedViewController.preferredContentSize.height : presentedViewController.view.bounds.height
+    let presentedViewControllerWidth = presentedViewController.preferredContentSize.width > 0 ? presentedViewController.preferredContentSize.width : presentedViewController.view.bounds.width
+    let yOffset = self.view.bounds.height - keyboardOffset - presentedViewControllerHeight
+    let newFrame = CGRect(x: xOffset, y: max(yOffset, 0), width: presentedViewControllerWidth, height: presentedViewControllerHeight)
     
     // Perform the animation
     UIView.animate(withDuration: duration, delay: 0, options: animationCurve, animations: { [weak self] in

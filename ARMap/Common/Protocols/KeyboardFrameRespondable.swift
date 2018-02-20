@@ -10,4 +10,5 @@ import UIKit
 
 protocol KeyboardFrameRespondable : class {
   var view: UIView! { get }
+  var preferredContentSize: CGSize { get }
 }
