@@ -24,8 +24,7 @@ enum PresentationMode {
 }
 
 enum CustomPresentationMode {
-  //  case  leftMenu
-  case topDown, bottomUp, topKnobBottomUp, visualEffectFade, rightToLeft
+  case topDown, bottomUp, topKnobBottomUp, visualEffectFade, rightToLeft, leftMenu
   
   var presentationAnimator: PresentableAnimator {
     return self.dissmissAnimator
@@ -43,6 +42,8 @@ enum CustomPresentationMode {
       return VisualEffectFadeAnimator()
     case .rightToLeft:
       return RightToLeftAnimator()
+    case .leftMenu:
+      return LeftMenuAnimator()
     }
   }
   
@@ -58,6 +59,8 @@ enum CustomPresentationMode {
       return VisualEffectFadePresentationController(presentedViewController: presented, presenting: presenting)
     case .rightToLeft:
       return RightToLeftPresentationController(presentedViewController: presented, presenting: presenting)
+    case .leftMenu:
+      return LeftMenuPresentationController(presentedViewController: presented, presenting: presenting)
     }
   }
 }

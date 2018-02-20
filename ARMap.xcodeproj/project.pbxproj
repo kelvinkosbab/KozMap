@@ -146,7 +146,6 @@
 		B686EF2020166D8700ACF075 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		B686EF2720166D8700ACF075 /* InteractiveTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractiveTransition.swift; sourceTree = "<group>"; };
 		B686EF2A20166D8700ACF075 /* PresentableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentableController.swift; sourceTree = "<group>"; };
-		B686EF2F20166D8700ACF075 /* LeftMenuPresentationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuPresentationManager.swift; sourceTree = "<group>"; };
 		B686EF3320166D8700ACF075 /* KeyboardFrameRespondable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardFrameRespondable.swift; sourceTree = "<group>"; };
 		B686EF3420166D8700ACF075 /* DesiredContentHeightDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesiredContentHeightDelegate.swift; sourceTree = "<group>"; };
 		B686EF3520166D8700ACF075 /* BatchUpdatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchUpdatable.swift; sourceTree = "<group>"; };
@@ -562,7 +561,6 @@
 		B6DCCDD2203BBE8700201385 /* Left Menu */ = {
 			isa = PBXGroup;
 			children = (
-				B686EF2F20166D8700ACF075 /* LeftMenuPresentationManager.swift */,
 				B6DCCDE6203BEDCA00201385 /* LeftMenuAnimator.swift */,
 				B6DCCDE8203BEDD500201385 /* LeftMenuPresentationController.swift */,
 			);

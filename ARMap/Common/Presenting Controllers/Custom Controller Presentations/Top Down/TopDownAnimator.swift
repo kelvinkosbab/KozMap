@@ -38,20 +38,34 @@ class TopDownAnimator : NSObject, PresentableAnimator {
     if isPresenting {
       
       // Currently presenting
+      self.presentingViewControllerDelegate?.willPresentViewController(presentedViewController)
+      self.presentedViewControllerDelegate?.willPresentViewController()
       presentedViewController.view.frame.origin.y -= presentedYOffset
       containerView.addSubview(presentedViewController.view)
       UIView.animate(withDuration: self.transitionDuration(using: transitionContext), animations: {
         presentedViewController.view.frame.origin.y += presentedYOffset
+        self.presentingViewControllerDelegate?.isPresentingViewController(presentedViewController)
+        self.presentedViewControllerDelegate?.isPresentingViewController()
       }, completion: { _ in
+        self.presentingViewControllerDelegate?.didPresentViewController(presentedViewController)
+        self.presentedViewControllerDelegate?.didPresentViewController()
         transitionContext.completeTransition(true)
       })
       
     } else {
       
-      // Currently not presenting
+      // Currently dismissing
+      self.presentingViewControllerDelegate?.willDismissViewController(presentedViewController)
+      self.presentedViewControllerDelegate?.willDismissViewController()
       UIView.animate(withDuration: self.transitionDuration(using: transitionContext), animations: {
         presentedViewController.view.frame.origin.y -= presentedYOffset
+        self.presentingViewControllerDelegate?.isDismissingViewController(presentedViewController)
+        self.presentedViewControllerDelegate?.isDismissingViewController()
       }, completion: { _ in
+        if !transitionContext.transitionWasCancelled {
+          self.presentingViewControllerDelegate?.didDismissViewController(presentedViewController)
+          self.presentedViewControllerDelegate?.didDismissViewController()
+        }
         transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
       })
     }

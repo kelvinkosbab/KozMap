@@ -58,26 +58,6 @@ extension PresentableController where Self : UIViewController {
       viewControllerToPresent.modalTransitionStyle = .crossDissolve
       self.present(viewController, animated: true, completion: nil)
       
-//    case .leftMenu:
-//      presentingPresentableController?.currentFlowInitialController = self
-//      let presentationManager = LeftMenuPresentationManager(dismissInteractor: DragLeftDismissInteractiveTransition(presentingController: viewControllerToPresent, interactiveView: dismissInteractiveElement?.view))
-//      presentationManager.presentingViewControllerDelegate = presentingViewControllerDelegate
-//      viewControllerToPresent.modalPresentationStyle = .custom
-//      viewControllerToPresent.modalPresentationCapturesStatusBarAppearance = true
-//      viewControllerToPresent.transitioningDelegate = presentationManager
-//      viewControllerToPresentPresentableController?.presentationManager = presentationManager
-//      self.present(viewControllerToPresent, animated: true, completion: completion)
-//
-//    case .rightToLeft:
-//      presentingPresentableController?.currentFlowInitialController = self
-//      let presentationManager = RightToLeftPresentationManager(dismissInteractor: DragRightDismissInteractiveTransition(presentingController: viewControllerToPresent, interactiveView: dismissInteractiveElement?.view))
-//      presentationManager.presentingViewControllerDelegate = presentingViewControllerDelegate
-//      viewControllerToPresent.modalPresentationStyle = .custom
-//      viewControllerToPresent.modalPresentationCapturesStatusBarAppearance = true
-//      viewControllerToPresent.transitioningDelegate = presentationManager
-//      viewControllerToPresentPresentableController?.presentationManager = presentationManager
-//      self.present(viewControllerToPresent, animated: true, completion: completion)
-      
     case .custom(let customPresentationMode):
       viewControllerToPresent.modalPresentationStyle = .custom
       viewControllerToPresent.modalPresentationCapturesStatusBarAppearance = true

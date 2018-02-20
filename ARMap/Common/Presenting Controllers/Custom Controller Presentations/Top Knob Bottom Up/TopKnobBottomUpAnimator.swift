@@ -39,6 +39,7 @@ class TopKnobBottomUpAnimator : NSObject, PresentableAnimator {
       
       // Currently presenting
       self.presentingViewControllerDelegate?.willPresentViewController(presentedViewController)
+      self.presentedViewControllerDelegate?.willPresentViewController()
       presentedViewController.view.frame.origin.y = containerView.bounds.height
       containerView.addSubview(presentedViewController.view)
       
@@ -46,8 +47,10 @@ class TopKnobBottomUpAnimator : NSObject, PresentableAnimator {
       UIView.animate(withDuration: self.transitionDuration(using: transitionContext), animations: {
         presentedViewController.view.frame.origin.y -= presentedYOffset
         self.presentingViewControllerDelegate?.isPresentingViewController(presentedViewController)
+        self.presentedViewControllerDelegate?.isPresentingViewController()
       }, completion: { _ in
         self.presentingViewControllerDelegate?.didPresentViewController(presentedViewController)
+        self.presentedViewControllerDelegate?.didPresentViewController()
         transitionContext.completeTransition(true)
       })
       
@@ -55,12 +58,15 @@ class TopKnobBottomUpAnimator : NSObject, PresentableAnimator {
       
       // Currently dismissing
       self.presentingViewControllerDelegate?.willDismissViewController(presentedViewController)
+      self.presentedViewControllerDelegate?.willDismissViewController()
       UIView.animate(withDuration: self.transitionDuration(using: transitionContext), animations: {
         presentedViewController.view.frame.origin.y += presentedYOffset
         self.presentingViewControllerDelegate?.isDismissingViewController(presentedViewController)
+        self.presentedViewControllerDelegate?.isDismissingViewController()
       }, completion: { _ in
         if !transitionContext.transitionWasCancelled {
           self.presentingViewControllerDelegate?.didDismissViewController(presentedViewController)
+          self.presentedViewControllerDelegate?.isDismissingViewController()
         }
         transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
       })

@@ -36,14 +36,17 @@ class VisualEffectFadeAnimator : NSObject, PresentableAnimator {
       
       // Currently presenting
       self.presentingViewControllerDelegate?.willPresentViewController(presentedViewController)
+      self.presentedViewControllerDelegate?.willPresentViewController()
       presentedViewController.view.backgroundColor = .clear
       presentedViewController.view.alpha = 0
       containerView.addSubview(presentedViewController.view)
       UIView.animate(withDuration: self.transitionDuration(using: transitionContext), animations: {
         presentedViewController.view.alpha = 1
         self.presentingViewControllerDelegate?.isPresentingViewController(presentedViewController)
+        self.presentedViewControllerDelegate?.isPresentingViewController()
       }, completion: { _ in
         self.presentingViewControllerDelegate?.didPresentViewController(presentedViewController)
+        self.presentedViewControllerDelegate?.isPresentingViewController()
         transitionContext.completeTransition(true)
       })
       
@@ -51,12 +54,15 @@ class VisualEffectFadeAnimator : NSObject, PresentableAnimator {
       
       // Currently not presenting
       self.presentingViewControllerDelegate?.willDismissViewController(presentedViewController)
+      self.presentedViewControllerDelegate?.willDismissViewController()
       UIView.animate(withDuration: self.transitionDuration(using: transitionContext), animations: {
         presentedViewController.view.alpha = 0
         self.presentingViewControllerDelegate?.isDismissingViewController(presentedViewController)
+        self.presentedViewControllerDelegate?.isDismissingViewController()
       }, completion: { _ in
         if !transitionContext.transitionWasCancelled {
           self.presentingViewControllerDelegate?.didDismissViewController(presentedViewController)
+          self.presentedViewControllerDelegate?.didDismissViewController()
         }
         transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
       })
