@@ -16,3 +16,12 @@ protocol PresentingViewControllerDelegate : class {
   func isDismissingViewController(_ viewController: UIViewController?)
   func didDismissViewController(_ viewController: UIViewController?)
 }
+
+protocol PresentedViewControllerDelegate : class {
+  func willPresentViewController()
+  func isPresentingViewController()
+  func didPresentViewController()
+  func willDismissViewController()
+  func isDismissingViewController()
+  func didDismissViewController()
+}

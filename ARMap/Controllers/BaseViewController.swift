@@ -13,7 +13,7 @@ class BaseViewController : UIViewController, PresentableController {
   // MARK: - PresentableController
   
   var presentedMode: PresentationMode = .modal
-  var transitioningDelegateReference: UIViewControllerTransitioningDelegate? = nil
+  var presentationManager: UIViewControllerTransitioningDelegate? = nil
   var currentFlowFirstController: PresentableController? = nil
 }
 

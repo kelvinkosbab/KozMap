@@ -8,18 +8,26 @@
 
 import UIKit
 
-class SettingsViewController : BaseViewController, DesiredContentHeightDelegate {
+class SettingsViewController : BaseViewController, DesiredContentHeightDelegate, DismissInteractable {
   
   // MARK: - Static Accessors
   
   static func newViewController() -> SettingsViewController {
-    return self.newViewController(fromStoryboardWithName: "Main")
+    let viewController = self.newViewController(fromStoryboardWithName: "Main")
+    viewController.preferredContentSize.height = viewController.desiredContentHeight
+    return viewController
   }
   
   // MARK: - DesiredContentHeightDelegate
   
   var desiredContentHeight: CGFloat {
     return 250
+  }
+  
+  // MARK: - DismissInteractable
+  
+  var dismissInteractiveView: UIView? {
+    return self.view
   }
   
   // MARK: - Properties

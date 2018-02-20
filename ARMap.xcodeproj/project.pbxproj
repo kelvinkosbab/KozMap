@@ -45,12 +45,6 @@
 		B686EF4820166D8700ACF075 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF2020166D8700ACF075 /* Style.swift */; };
 		B686EF4D20166D8700ACF075 /* InteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF2720166D8700ACF075 /* InteractiveTransition.swift */; };
 		B686EF5020166D8700ACF075 /* PresentableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF2A20166D8700ACF075 /* PresentableController.swift */; };
-		B686EF5120166D8700ACF075 /* PresenationManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF2C20166D8700ACF075 /* PresenationManagerProtocol.swift */; };
-		B686EF5220166D8700ACF075 /* HDFadeWithBlurPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF2D20166D8700ACF075 /* HDFadeWithBlurPresentationManager.swift */; };
-		B686EF5320166D8700ACF075 /* TopDownPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF2E20166D8700ACF075 /* TopDownPresentationManager.swift */; };
-		B686EF5420166D8700ACF075 /* LeftMenuPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF2F20166D8700ACF075 /* LeftMenuPresentationManager.swift */; };
-		B686EF5520166D8700ACF075 /* RightToLeftPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF3020166D8700ACF075 /* RightToLeftPresentationManager.swift */; };
-		B686EF5620166D8700ACF075 /* BottomUpPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF3120166D8700ACF075 /* BottomUpPresentationManager.swift */; };
 		B686EF5720166D8700ACF075 /* KeyboardFrameRespondable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF3320166D8700ACF075 /* KeyboardFrameRespondable.swift */; };
 		B686EF5820166D8700ACF075 /* DesiredContentHeightDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF3420166D8700ACF075 /* DesiredContentHeightDelegate.swift */; };
 		B686EF5920166D8700ACF075 /* BatchUpdatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF3520166D8700ACF075 /* BatchUpdatable.swift */; };
@@ -87,8 +81,16 @@
 		B686EFA420166F1300ACF075 /* PermissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF8D20166F1300ACF075 /* PermissionsViewController.swift */; };
 		B686EFA520166F1300ACF075 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF8E20166F1300ACF075 /* BaseNavigationController.swift */; };
 		B686EFA620166F1300ACF075 /* InlineColorChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF9020166F1300ACF075 /* InlineColorChooserViewController.swift */; };
-		B6F451AE203925ED0084AFC8 /* TopKnobVisualEffectPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F451AD203925ED0084AFC8 /* TopKnobVisualEffectPresentationManager.swift */; };
-		B6F451B0203927410084AFC8 /* VisualEffectFadePresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F451AF203927410084AFC8 /* VisualEffectFadePresentationManager.swift */; };
+		B6DCCDBB203B352300201385 /* TopKnobBottomUpPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F451AD203925ED0084AFC8 /* TopKnobBottomUpPresentationManager.swift */; };
+		B6DCCDBD203B355C00201385 /* TopKnobBottomUpAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDBC203B355C00201385 /* TopKnobBottomUpAnimator.swift */; };
+		B6DCCDBF203B3DE700201385 /* TopKnobBottomUpPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDBE203B3DE600201385 /* TopKnobBottomUpPresentationController.swift */; };
+		B6DCCDC1203B63D500201385 /* InteractiveTransitionMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDC0203B63D500201385 /* InteractiveTransitionMode.swift */; };
+		B6DCCDC3203B68B800201385 /* InteractiveTransition+Subclasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDC2203B68B800201385 /* InteractiveTransition+Subclasses.swift */; };
+		B6DCCDC5203B6EA300201385 /* PresentableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDC4203B6EA300201385 /* PresentableManager.swift */; };
+		B6DCCDC7203B71CB00201385 /* PresentableAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDC6203B71CB00201385 /* PresentableAnimator.swift */; };
+		B6DCCDCB203B9C8F00201385 /* VisualEffectFadePresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F451AF203927410084AFC8 /* VisualEffectFadePresentationManager.swift */; };
+		B6DCCDCD203B9CA200201385 /* VisualEffectFadeAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDCC203B9CA200201385 /* VisualEffectFadeAnimator.swift */; };
+		B6DCCDCF203B9CF400201385 /* VisualEffectFadePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDCE203B9CF400201385 /* VisualEffectFadePresentationController.swift */; };
 		B6F451B220392AD50084AFC8 /* PresentingViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F451B120392AD50084AFC8 /* PresentingViewControllerDelegate.swift */; };
 		B6F451B520393D470084AFC8 /* TopKnobVisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F451B420393D470084AFC8 /* TopKnobVisualEffectView.swift */; };
 		B6F451B720393E2F0084AFC8 /* TopKnobVisualEffectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6F451B620393E2F0084AFC8 /* TopKnobVisualEffectView.xib */; };
@@ -177,7 +179,15 @@
 		B686EF8D20166F1300ACF075 /* PermissionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsViewController.swift; sourceTree = "<group>"; };
 		B686EF8E20166F1300ACF075 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		B686EF9020166F1300ACF075 /* InlineColorChooserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InlineColorChooserViewController.swift; sourceTree = "<group>"; };
-		B6F451AD203925ED0084AFC8 /* TopKnobVisualEffectPresentationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopKnobVisualEffectPresentationManager.swift; sourceTree = "<group>"; };
+		B6DCCDBC203B355C00201385 /* TopKnobBottomUpAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopKnobBottomUpAnimator.swift; sourceTree = "<group>"; };
+		B6DCCDBE203B3DE600201385 /* TopKnobBottomUpPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopKnobBottomUpPresentationController.swift; sourceTree = "<group>"; };
+		B6DCCDC0203B63D500201385 /* InteractiveTransitionMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveTransitionMode.swift; sourceTree = "<group>"; };
+		B6DCCDC2203B68B800201385 /* InteractiveTransition+Subclasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InteractiveTransition+Subclasses.swift"; sourceTree = "<group>"; };
+		B6DCCDC4203B6EA300201385 /* PresentableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentableManager.swift; sourceTree = "<group>"; };
+		B6DCCDC6203B71CB00201385 /* PresentableAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentableAnimator.swift; sourceTree = "<group>"; };
+		B6DCCDCC203B9CA200201385 /* VisualEffectFadeAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectFadeAnimator.swift; sourceTree = "<group>"; };
+		B6DCCDCE203B9CF400201385 /* VisualEffectFadePresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectFadePresentationController.swift; sourceTree = "<group>"; };
+		B6F451AD203925ED0084AFC8 /* TopKnobBottomUpPresentationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopKnobBottomUpPresentationManager.swift; sourceTree = "<group>"; };
 		B6F451AF203927410084AFC8 /* VisualEffectFadePresentationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectFadePresentationManager.swift; sourceTree = "<group>"; };
 		B6F451B120392AD50084AFC8 /* PresentingViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentingViewControllerDelegate.swift; sourceTree = "<group>"; };
 		B6F451B420393D470084AFC8 /* TopKnobVisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopKnobVisualEffectView.swift; sourceTree = "<group>"; };
@@ -361,7 +371,9 @@
 		B686EF2220166D8700ACF075 /* Interactive Transitions */ = {
 			isa = PBXGroup;
 			children = (
+				B6DCCDC0203B63D500201385 /* InteractiveTransitionMode.swift */,
 				B686EF2720166D8700ACF075 /* InteractiveTransition.swift */,
+				B6DCCDC2203B68B800201385 /* InteractiveTransition+Subclasses.swift */,
 			);
 			path = "Interactive Transitions";
 			sourceTree = "<group>";
@@ -369,14 +381,16 @@
 		B686EF2B20166D8700ACF075 /* Custom Controller Presentations */ = {
 			isa = PBXGroup;
 			children = (
+				B6DCCDC4203B6EA300201385 /* PresentableManager.swift */,
+				B6DCCDC6203B71CB00201385 /* PresentableAnimator.swift */,
 				B686EF2C20166D8700ACF075 /* PresenationManagerProtocol.swift */,
 				B686EF2D20166D8700ACF075 /* HDFadeWithBlurPresentationManager.swift */,
 				B686EF2E20166D8700ACF075 /* TopDownPresentationManager.swift */,
 				B686EF2F20166D8700ACF075 /* LeftMenuPresentationManager.swift */,
 				B686EF3020166D8700ACF075 /* RightToLeftPresentationManager.swift */,
 				B686EF3120166D8700ACF075 /* BottomUpPresentationManager.swift */,
-				B6F451AF203927410084AFC8 /* VisualEffectFadePresentationManager.swift */,
-				B6F451AD203925ED0084AFC8 /* TopKnobVisualEffectPresentationManager.swift */,
+				B6DCCDCA203B9AF600201385 /* Visual Effect Fade */,
+				B6DCCDBA203B351000201385 /* Top Knob Bottom Up */,
 			);
 			path = "Custom Controller Presentations";
 			sourceTree = "<group>";
@@ -495,6 +509,26 @@
 			path = InlineColorChooser;
 			sourceTree = "<group>";
 		};
+		B6DCCDBA203B351000201385 /* Top Knob Bottom Up */ = {
+			isa = PBXGroup;
+			children = (
+				B6F451AD203925ED0084AFC8 /* TopKnobBottomUpPresentationManager.swift */,
+				B6DCCDBC203B355C00201385 /* TopKnobBottomUpAnimator.swift */,
+				B6DCCDBE203B3DE600201385 /* TopKnobBottomUpPresentationController.swift */,
+			);
+			path = "Top Knob Bottom Up";
+			sourceTree = "<group>";
+		};
+		B6DCCDCA203B9AF600201385 /* Visual Effect Fade */ = {
+			isa = PBXGroup;
+			children = (
+				B6F451AF203927410084AFC8 /* VisualEffectFadePresentationManager.swift */,
+				B6DCCDCC203B9CA200201385 /* VisualEffectFadeAnimator.swift */,
+				B6DCCDCE203B9CF400201385 /* VisualEffectFadePresentationController.swift */,
+			);
+			path = "Visual Effect Fade";
+			sourceTree = "<group>";
+		};
 		B6F451B320393C060084AFC8 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -580,32 +614,35 @@
 			buildActionMask = 2147483647;
 			files = (
 				B686EF4420166D8700ACF075 /* PlacemarkNode.swift in Sources */,
+				B6DCCDC5203B6EA300201385 /* PresentableManager.swift in Sources */,
 				B686EF3C20166D8700ACF075 /* UnitType.swift in Sources */,
 				B686EF4120166D8700ACF075 /* Plane.swift in Sources */,
 				B686EF5C20166D8700ACF075 /* CameraPermissionManager.swift in Sources */,
 				B686EF5A20166D8700ACF075 /* ViewControllerFromStoryboardProtocol.swift in Sources */,
 				B686EF9E20166F1300ACF075 /* LocationListViewController+Cells.swift in Sources */,
+				B6DCCDCB203B9C8F00201385 /* VisualEffectFadePresentationManager.swift in Sources */,
 				B686EF9220166F1300ACF075 /* BaseViewController.swift in Sources */,
-				B6F451B0203927410084AFC8 /* VisualEffectFadePresentationManager.swift in Sources */,
 				B686EF0F20166D5A00ACF075 /* UICollectionView+Util.swift in Sources */,
 				B686EF5820166D8700ACF075 /* DesiredContentHeightDelegate.swift in Sources */,
+				B6DCCDC3203B68B800201385 /* InteractiveTransition+Subclasses.swift in Sources */,
 				B686EF0720166D5A00ACF075 /* Distance.swift in Sources */,
 				B686EF0C20166D5A00ACF075 /* CGRect+Util.swift in Sources */,
 				B686EFA120166F1300ACF075 /* MainViewController+CoreLocation.swift in Sources */,
 				B686EF6420166D9D00ACF075 /* MyDataManager.swift in Sources */,
 				B686EF0620166D5A00ACF075 /* Device.swift in Sources */,
+				B6DCCDC1203B63D500201385 /* InteractiveTransitionMode.swift in Sources */,
 				B686EF9A20166F1300ACF075 /* MainViewController.swift in Sources */,
 				B6F451B220392AD50084AFC8 /* PresentingViewControllerDelegate.swift in Sources */,
 				B6F451B520393D470084AFC8 /* TopKnobVisualEffectView.swift in Sources */,
+				B6DCCDCD203B9CA200201385 /* VisualEffectFadeAnimator.swift in Sources */,
 				B686EF9820166F1300ACF075 /* AddLocationViewController.swift in Sources */,
 				B686EF5720166D8700ACF075 /* KeyboardFrameRespondable.swift in Sources */,
 				B686EED820166C7300ACF075 /* ARMap.xcdatamodeld in Sources */,
 				B686EF0520166D5A00ACF075 /* CLLocation+Util.swift in Sources */,
-				B686EF5220166D8700ACF075 /* HDFadeWithBlurPresentationManager.swift in Sources */,
+				B6DCCDC7203B71CB00201385 /* PresentableAnimator.swift in Sources */,
 				B686EF9120166F1300ACF075 /* ConfiguringViewController.swift in Sources */,
 				B686EFA020166F1300ACF075 /* ARViewController.swift in Sources */,
 				B686EFA420166F1300ACF075 /* PermissionsViewController.swift in Sources */,
-				B686EF5120166D8700ACF075 /* PresenationManagerProtocol.swift in Sources */,
 				B686EF4020166D8700ACF075 /* SCNMaterial+Util.swift in Sources */,
 				B686EF0E20166D5A00ACF075 /* UIDevice+Util.swift in Sources */,
 				B686EF9C20166F1300ACF075 /* SearchViewController+Cells.swift in Sources */,
@@ -615,22 +652,19 @@
 				B686EFA220166F1300ACF075 /* RootNavigationController.swift in Sources */,
 				B686EF4620166D8700ACF075 /* PinPlacemarkNode.swift in Sources */,
 				B686EEE920166D4500ACF075 /* BuildManager.swift in Sources */,
+				B6DCCDCF203B9CF400201385 /* VisualEffectFadePresentationController.swift in Sources */,
 				B686EFA620166F1300ACF075 /* InlineColorChooserViewController.swift in Sources */,
 				B686EF0820166D5A00ACF075 /* UIViewController+Util.swift in Sources */,
-				B686EF5320166D8700ACF075 /* TopDownPresentationManager.swift in Sources */,
 				B686EF0120166D5A00ACF075 /* CLPlacemark+Util.swift in Sources */,
 				B686EF6620166D9D00ACF075 /* MyManagedObjectProtocol.swift in Sources */,
 				B686EF4220166D8700ACF075 /* PlacemarkNodeContainer.swift in Sources */,
 				B686EF0220166D5A00ACF075 /* CurrentLocationUpdatableService.swift in Sources */,
-				B6F451AE203925ED0084AFC8 /* TopKnobVisualEffectPresentationManager.swift in Sources */,
 				B686EF3F20166D8700ACF075 /* ARSCNView+Util.swift in Sources */,
 				B686EF4320166D8700ACF075 /* AxisNode.swift in Sources */,
 				B686EFA320166F1300ACF075 /* BaseTableViewController.swift in Sources */,
 				B686EF9520166F1300ACF075 /* SettingsViewController.swift in Sources */,
-				B686EF5520166D8700ACF075 /* RightToLeftPresentationManager.swift in Sources */,
 				B686EF9F20166F1300ACF075 /* ARViewController+Gestures.swift in Sources */,
 				B686EF6720166D9D00ACF075 /* Color+MyManagedObjectProtocol.swift in Sources */,
-				B686EF5420166D8700ACF075 /* LeftMenuPresentationManager.swift in Sources */,
 				B686EF4D20166D8700ACF075 /* InteractiveTransition.swift in Sources */,
 				B686EF6520166D9D00ACF075 /* DataManagerProtocol.swift in Sources */,
 				B686EF9920166F1300ACF075 /* MainViewController+AR.swift in Sources */,
@@ -638,13 +672,14 @@
 				B686EF3D20166D8700ACF075 /* ARDistanceType.swift in Sources */,
 				B686EF0020166D5A00ACF075 /* CLLocationCoordinate2D+Util.swift in Sources */,
 				B686EF0920166D5A00ACF075 /* String+Util.swift in Sources */,
+				B6DCCDBB203B352300201385 /* TopKnobBottomUpPresentationManager.swift in Sources */,
 				B686EF0D20166D5A00ACF075 /* Double+Util.swift in Sources */,
 				B686EF9720166F1300ACF075 /* AddLocationContainerViewController.swift in Sources */,
 				B686EF0A20166D5A00ACF075 /* UIColor+Util.swift in Sources */,
 				B686EF9620166F1300ACF075 /* LocationDetailViewController.swift in Sources */,
+				B6DCCDBF203B3DE700201385 /* TopKnobBottomUpPresentationController.swift in Sources */,
 				B686EF9D20166F1300ACF075 /* LocationListViewController.swift in Sources */,
 				B686EF5020166D8700ACF075 /* PresentableController.swift in Sources */,
-				B686EF5620166D8700ACF075 /* BottomUpPresentationManager.swift in Sources */,
 				B686EFA520166F1300ACF075 /* BaseNavigationController.swift in Sources */,
 				B686EF4520166D8700ACF075 /* VirtualObject.swift in Sources */,
 				B686EF4720166D8700ACF075 /* SCNVector3+Util.swift in Sources */,
@@ -655,6 +690,7 @@
 				B686EF4820166D8700ACF075 /* Style.swift in Sources */,
 				B686EF9B20166F1300ACF075 /* SearchViewController.swift in Sources */,
 				B686EF5D20166D8700ACF075 /* PermissionManager.swift in Sources */,
+				B6DCCDBD203B355C00201385 /* TopKnobBottomUpAnimator.swift in Sources */,
 				B686EF0B20166D5A00ACF075 /* UIApplication+Util.swift in Sources */,
 				B686EF6820166D9D00ACF075 /* Placemark+MyManagedObjectProtocol.swift in Sources */,
 				B686EF0420166D5A00ACF075 /* LocationManager.swift in Sources */,

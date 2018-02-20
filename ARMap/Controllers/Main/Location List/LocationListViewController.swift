@@ -15,18 +15,32 @@ protocol LocationListViewControllerDelegate : class {
   func shouldDelete(placemark: Placemark)
 }
 
-class LocationListViewController : BaseTableViewController, NSFetchedResultsControllerDelegate {
+class LocationListViewController : BaseTableViewController, NSFetchedResultsControllerDelegate, DesiredContentHeightDelegate, DismissInteractable {
   
   // MARK: - Static Accessors
   
   private static func newViewController() -> LocationListViewController {
-    return self.newViewController(fromStoryboardWithName: "AddLocation")
+    let viewController = self.newViewController(fromStoryboardWithName: "AddLocation")
+    viewController.preferredContentSize.height = viewController.desiredContentHeight
+    return viewController
   }
   
   static func newViewController(delegate: LocationListViewControllerDelegate?) -> LocationListViewController {
     let viewController = self.newViewController()
     viewController.delegate = delegate
     return viewController
+  }
+  
+  // MARK: - DesiredContentHeightDelegate
+  
+  var desiredContentHeight: CGFloat {
+    return 450
+  }
+  
+  // MARK: - DismissInteractable
+  
+  var dismissInteractiveView: UIView? {
+    return self.tableView
   }
   
   // MARK: - Properties

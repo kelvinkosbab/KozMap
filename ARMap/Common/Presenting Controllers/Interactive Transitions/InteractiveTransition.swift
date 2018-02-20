@@ -8,33 +8,43 @@
 
 import UIKit
 
-enum InteractiveTransitionMode {
-  case percent, velocity
+// MARK: - PresentationInteractable
+
+protocol PresentationInteractable : class {
+  var presentationInteractiveView: UIView? { get }
 }
+
+// MARK: - DismissInteractable
+
+protocol DismissInteractable : class {
+  var dismissInteractiveView: UIView? { get }
+}
+
+// MARK: - InteractiveTransitionDelegate
+
+protocol InteractiveTransitionDelegate : class {
+  func interactionDidSurpassThreshold(_ interactiveTransition: InteractiveTransition)
+}
+
+// MARK: - InteractiveTransition
 
 class InteractiveTransition : UIPercentDrivenInteractiveTransition {
   
-  // MARK: - Static Constants
-  
-  static let defaultPercentThreshold: CGFloat = 0.3
-  static let defaultVelocityThreshold: CGFloat = 850
-  
   // MARK: - Properties
   
-  var hasStarted: Bool = false
-  var shouldFinish: Bool = false
-  
-  weak var presentingController: UIViewController?
-  var interactiveView: UIView?
-  var activeGestureRecognizer: UIGestureRecognizer?
-  
   let modes: [InteractiveTransitionMode]
-  let percentThreshold: CGFloat
-  let velocityThreshold: CGFloat
+  let interactiveViews: [UIView]
+  let axis: InteractiveTransition.InteractorAxis
+  let direction: InteractiveTransition.InteractorDirection
+  weak var delegate: InteractiveTransitionDelegate? = nil
   
-  var lastTranslation: CGPoint? = nil
-  var lastTranslationDate: Date? = nil
-  var lastVelocity: CGFloat? = nil
+  private(set) var hasStarted: Bool = false
+  private var shouldFinish: Bool = false
+  private var activeGestureRecognizer: UIGestureRecognizer?
+  
+  private var lastTranslation: CGPoint? = nil
+  private var lastTranslationDate: Date? = nil
+  private var lastVelocity: CGFloat? = nil
   
   enum InteractorAxis {
     case x, y, xy
@@ -44,47 +54,36 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
     case negative, positive
   }
   
-  var axis: InteractiveTransition.InteractorAxis {
-    return .xy
-  }
-  
-  var direction: InteractiveTransition.InteractorDirection {
-    return .positive
-  }
-  
   // MARK: - Init
   
-  init(presentingController: UIViewController, interactiveView: UIView?, modes: [InteractiveTransitionMode] = [ .percent, .velocity ], percentThreshold: CGFloat = InteractiveTransition.defaultPercentThreshold, velocityThreshold: CGFloat = InteractiveTransition.defaultVelocityThreshold) {
-    self.presentingController = presentingController
-    self.interactiveView = interactiveView
+  init?(interactiveViews: [UIView], axis: InteractiveTransition.InteractorAxis, direction: InteractiveTransition.InteractorDirection, modes: [InteractiveTransitionMode] = [ .percent(nil), .velocity(nil) ], delegate: InteractiveTransitionDelegate? = nil) {
+    
+    guard interactiveViews.count > 0 else {
+      return nil
+    }
+    
+    self.interactiveViews = interactiveViews
+    self.axis = axis
+    self.direction = direction
     self.modes = modes
-    self.percentThreshold = percentThreshold
-    self.velocityThreshold = velocityThreshold
+    self.delegate = delegate
     super.init()
     
-    // Configure the view for interaction
-    if let interactiveView = self.interactiveView {
-      interactiveView.isUserInteractionEnabled = true
+    // Configure the dismiss interactive gesture recognizer
+    for interactiveView in interactiveViews {
       let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.handleGesture(_:)))
+      interactiveView.isUserInteractionEnabled = true
       interactiveView.addGestureRecognizer(panGestureRecognizer)
       self.activeGestureRecognizer = panGestureRecognizer
       self.activeGestureRecognizer?.delegate = self
-    } else {
-      self.activeGestureRecognizer = nil
     }
-  }
-  
-  // MARK: - Dismiss
-  
-  final func dismissController(completion: (() -> Void)? = nil) {
-    self.presentingController?.dismiss(animated: true, completion: completion)
   }
   
   // MARK: - Gestures
   
-  @objc func handleGesture(_ sender: UIPanGestureRecognizer) {
+  @objc private func handleGesture(_ sender: UIPanGestureRecognizer) {
     
-    guard let view = self.interactiveView else {
+    guard let view = sender.view, self.interactiveViews.contains(view) else {
       return
     }
     
@@ -99,11 +98,11 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
     self.handleGestureState(gesture: sender, progress: progress)
   }
   
-  final func handleGestureState(gesture: UIPanGestureRecognizer, progress: CGFloat) {
+  private func handleGestureState(gesture: UIPanGestureRecognizer, progress: CGFloat) {
     switch gesture.state {
     case .began:
       self.hasStarted = true
-      self.dismissController()
+      self.delegate?.interactionDidSurpassThreshold(self)
     case .changed:
       self.update(progress)
       self.shouldFinish = self.calculateShouldFinish(progress: progress, velocity: self.lastVelocity)
@@ -135,7 +134,7 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
   
   // MARK: - Calculations
   
-  final func updateVelocityProperties(currentTranslation: CGPoint) {
+  private func updateVelocityProperties(currentTranslation: CGPoint) {
     let currentDate: Date = Date()
     if self.lastTranslation == nil && self.lastTranslationDate == nil {
       self.lastVelocity = nil
@@ -149,17 +148,16 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
     }
   }
   
-  final func calculateShouldFinish(progress: CGFloat, velocity: CGFloat?) -> Bool {
-    if self.modes.contains(.percent) && progress > self.percentThreshold {
+  private func calculateShouldFinish(progress: CGFloat, velocity: CGFloat?) -> Bool {
+    if let percentThreshold = self.modes.percentThreshold, progress > percentThreshold {
       return true
-    } else if self.modes.contains(.velocity), let velocity = velocity, abs(velocity) > self.velocityThreshold {
+    } else if let velocityThreshold = self.modes.velocityThreshold, let velocity = velocity, abs(velocity) > velocityThreshold {
       return true
-    } else {
-      return false
     }
+    return false
   }
   
-  final func calculateProgress(translation: CGPoint, in view: UIView) -> CGFloat {
+  private func calculateProgress(translation: CGPoint, in view: UIView) -> CGFloat {
     let xMovement = (self.direction == .negative ? -translation.x : translation.x) / view.bounds.width
     let yMovement = (self.direction == .negative ? -translation.y : translation.y) / view.bounds.height
     
@@ -175,7 +173,7 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
     return CGFloat(min(max(Double(movement), 0.0), 1.0))
   }
   
-  final func calculateVelocity(lastTranslation: CGPoint, lastTranslationDate: Date, currentTranslation: CGPoint, currentTranslationDate: Date) -> CGFloat? {
+  private func calculateVelocity(lastTranslation: CGPoint, lastTranslationDate: Date, currentTranslation: CGPoint, currentTranslationDate: Date) -> CGFloat? {
     
     let duration = currentTranslationDate.timeIntervalSince(lastTranslationDate)
     guard duration != 0 else {
@@ -214,57 +212,5 @@ extension InteractiveTransition : UIGestureRecognizerDelegate {
       }
     }
     return false
-  }
-}
-
-// MARK: - DragUpDismissInteractiveTransition -
-
-class DragUpDismissInteractiveTransition : InteractiveTransition {
-  
-  override var axis: InteractiveTransition.InteractorAxis {
-    return .y
-  }
-  
-  override var direction: InteractiveTransition.InteractorDirection {
-    return .negative
-  }
-}
-
-// MARK: - DragDownDismissInteractiveTransition -
-
-class DragDownDismissInteractiveTransition : InteractiveTransition {
-  
-  override var axis: InteractiveTransition.InteractorAxis {
-    return .y
-  }
-  
-  override var direction: InteractiveTransition.InteractorDirection {
-    return .positive
-  }
-}
-
-// MARK: - DragLeftDismissInteractiveTransition -
-
-class DragLeftDismissInteractiveTransition : InteractiveTransition {
-  
-  override var axis: InteractiveTransition.InteractorAxis {
-    return .x
-  }
-  
-  override var direction: InteractiveTransition.InteractorDirection {
-    return .negative
-  }
-}
-
-// MARK: - DragRightDismissInteractiveTransition -
-
-class DragRightDismissInteractiveTransition : InteractiveTransition {
-  
-  override var axis: InteractiveTransition.InteractorAxis {
-    return .x
-  }
-  
-  override var direction: InteractiveTransition.InteractorDirection {
-    return .positive
   }
 }

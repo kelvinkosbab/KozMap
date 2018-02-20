@@ -9,12 +9,14 @@
 import UIKit
 import CoreLocation
 
-class AddLocationContainerViewController : BaseViewController, DesiredContentHeightDelegate, KeyboardFrameRespondable {
+class AddLocationContainerViewController : BaseViewController, DesiredContentHeightDelegate, DismissInteractable, KeyboardFrameRespondable {
   
   // MARK: - Static Accessors
   
   private static func newViewController() -> AddLocationContainerViewController {
-    return self.newViewController(fromStoryboardWithName: "AddLocation")
+    let viewController = self.newViewController(fromStoryboardWithName: "AddLocation")
+    viewController.preferredContentSize.height = viewController.desiredContentHeight
+    return viewController
   }
   
   static func newViewController(locationDetailDelegate: AddLocationViewControllerDelegate?, searchDelegate: SearchViewControllerDelegate?) -> AddLocationContainerViewController {
@@ -28,6 +30,12 @@ class AddLocationContainerViewController : BaseViewController, DesiredContentHei
   
   var desiredContentHeight: CGFloat {
     return 378
+  }
+  
+  // MARK: - DismissInteractable
+  
+  var dismissInteractiveView: UIView? {
+    return self.view
   }
   
   // MARK: - Properties
