@@ -13,12 +13,14 @@ protocol AddLocationViewControllerDelegate : class {
   func didSave(placemark: Placemark)
 }
 
-class AddLocationViewController : BaseViewController, DesiredContentHeightDelegate {
+class AddLocationViewController : BaseViewController, DesiredContentHeightDelegate, DismissInteractable {
   
   // MARK: - Static Accessors
   
   private static func newViewController() -> AddLocationViewController {
-    return self.newViewController(fromStoryboardWithName: "AddLocation")
+    let viewController = self.newViewController(fromStoryboardWithName: "AddLocation")
+    viewController.preferredContentSize.height = viewController.desiredContentHeight
+    return viewController
   }
   
   static func newViewController(delegate: AddLocationViewControllerDelegate?) -> AddLocationViewController {
@@ -39,6 +41,12 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
   
   var desiredContentHeight: CGFloat {
     return 338
+  }
+  
+  // MARK: - DismissInteractable
+  
+  var dismissInteractiveView: UIView? {
+    return self.view
   }
   
   // MARK: - Properties
