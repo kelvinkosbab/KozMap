@@ -12,8 +12,8 @@ import UIKit
 
 class DragUpDismissInteractiveTransition : InteractiveTransition {
   
-  init?(interactiveViews: [UIView], modes: [InteractiveTransitionMode] = [ .percent(nil), .velocity(nil) ], delegate: InteractiveTransitionDelegate? = nil) {
-    super.init(interactiveViews: interactiveViews, axis: .y, direction: .negative, modes: modes, delegate: delegate)
+  init?(interactiveViews: [UIView], contentSize: CGSize? = nil, modes: [InteractiveTransitionMode] = [ .percent(nil), .velocity(nil) ], delegate: InteractiveTransitionDelegate? = nil) {
+    super.init(interactiveViews: interactiveViews, axis: .y, direction: .negative, contentSize: contentSize, modes: modes, delegate: delegate)
   }
 }
 
@@ -21,8 +21,8 @@ class DragUpDismissInteractiveTransition : InteractiveTransition {
 
 class DragDownDismissInteractiveTransition : InteractiveTransition {
   
-  init?(interactiveViews: [UIView], modes: [InteractiveTransitionMode] = [ .percent(nil), .velocity(nil) ], delegate: InteractiveTransitionDelegate? = nil) {
-    super.init(interactiveViews: interactiveViews, axis: .y, direction: .positive, modes: modes, delegate: delegate)
+  init?(interactiveViews: [UIView], contentSize: CGSize? = nil, modes: [InteractiveTransitionMode] = [ .percent(nil), .velocity(nil) ], delegate: InteractiveTransitionDelegate? = nil) {
+    super.init(interactiveViews: interactiveViews, axis: .y, direction: .positive, contentSize: contentSize, modes: modes, delegate: delegate)
   }
 }
 
@@ -30,8 +30,8 @@ class DragDownDismissInteractiveTransition : InteractiveTransition {
 
 class DragLeftDismissInteractiveTransition : InteractiveTransition {
   
-  init?(interactiveViews: [UIView], modes: [InteractiveTransitionMode] = [ .percent(nil), .velocity(nil) ], delegate: InteractiveTransitionDelegate? = nil) {
-    super.init(interactiveViews: interactiveViews, axis: .x, direction: .negative, modes: modes, delegate: delegate)
+  init?(interactiveViews: [UIView], contentSize: CGSize? = nil, modes: [InteractiveTransitionMode] = [ .percent(nil), .velocity(nil) ], delegate: InteractiveTransitionDelegate? = nil) {
+    super.init(interactiveViews: interactiveViews, axis: .x, direction: .negative, contentSize: contentSize, modes: modes, delegate: delegate)
   }
 }
 
@@ -39,7 +39,7 @@ class DragLeftDismissInteractiveTransition : InteractiveTransition {
 
 class DragRightDismissInteractiveTransition : InteractiveTransition {
   
-  init?(interactiveViews: [UIView], modes: [InteractiveTransitionMode] = [ .percent(nil), .velocity(nil) ], delegate: InteractiveTransitionDelegate? = nil) {
-    super.init(interactiveViews: interactiveViews, axis: .x, direction: .positive, modes: modes, delegate: delegate)
+  init?(interactiveViews: [UIView], contentSize: CGSize? = nil, modes: [InteractiveTransitionMode] = [ .percent(nil), .velocity(nil) ], delegate: InteractiveTransitionDelegate? = nil) {
+    super.init(interactiveViews: interactiveViews, axis: .x, direction: .positive, contentSize: contentSize, modes: modes, delegate: delegate)
   }
 }

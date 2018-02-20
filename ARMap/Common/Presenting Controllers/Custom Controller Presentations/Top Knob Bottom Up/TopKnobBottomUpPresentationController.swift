@@ -24,7 +24,7 @@ class TopKnobBottomUpPresentationController : UIPresentationController, DismissI
   // MARK: - Fullscreen
   
   override var shouldPresentInFullscreen: Bool {
-    return false
+    return true
   }
   
   // MARK: - Blur View
@@ -68,14 +68,6 @@ class TopKnobBottomUpPresentationController : UIPresentationController, DismissI
       self.topKnobVisualEffectView?.removeFromSuperview()
       self.topKnobVisualEffectView = nil
     }
-  }
-  
-  override func containerViewWillLayoutSubviews() {
-    super.containerViewWillLayoutSubviews()
-    
-    // Presented view
-    let frameOfPresentedViewInContainerView = self.frameOfPresentedViewInContainerView
-    self.presentedView?.frame = frameOfPresentedViewInContainerView
   }
   
   override var frameOfPresentedViewInContainerView: CGRect {

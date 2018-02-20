@@ -12,12 +12,7 @@ class TopKnobBottomUpPresentationManager : NSObject, PresentableManager {
   
   // MARK: - PresentableManager
   
-  var presentationController: UIPresentationController? {
-    didSet {
-      self.presentationInteractiveTransition = DragDownDismissInteractiveTransition(interactiveViews: self.presentationInteractiveViews, delegate: self)
-      self.dismissInteractiveTransition = DragDownDismissInteractiveTransition(interactiveViews: self.dismissInteractiveViews, delegate: self)
-    }
-  }
+  var presentationController: UIPresentationController?
   
   var presentationInteractiveTransition: InteractiveTransition?
   var dismissInteractiveTransition: InteractiveTransition?
@@ -25,15 +20,13 @@ class TopKnobBottomUpPresentationManager : NSObject, PresentableManager {
   weak var presentingViewControllerDelegate: PresentingViewControllerDelegate?
   weak var presentedViewControllerDelegate: PresentedViewControllerDelegate?
   
-  /*
-   let dismissInteractiveTransition = DragDownDismissInteractiveTransition(interactiveViews: self.dismissInteractiveViews, delegate: self)
-   */
-  
   // MARK: - UIViewControllerTransitioningDelegate
   
   func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
     let presentationController = TopKnobBottomUpPresentationController(presentedViewController: presented, presenting: source)
     self.presentationController = presentationController
+    self.presentationInteractiveTransition = DragDownDismissInteractiveTransition(interactiveViews: self.presentationInteractiveViews, delegate: self)
+    self.dismissInteractiveTransition = DragDownDismissInteractiveTransition(interactiveViews: self.dismissInteractiveViews, contentSize: presentedViewController?.preferredContentSize, delegate: self)
     return presentationController
   }
   

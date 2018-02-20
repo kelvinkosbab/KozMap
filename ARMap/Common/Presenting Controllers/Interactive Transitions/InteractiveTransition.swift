@@ -34,6 +34,7 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
   
   let modes: [InteractiveTransitionMode]
   let interactiveViews: [UIView]
+  let contentSize: CGSize?
   let axis: InteractiveTransition.InteractorAxis
   let direction: InteractiveTransition.InteractorDirection
   weak var delegate: InteractiveTransitionDelegate? = nil
@@ -56,7 +57,7 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
   
   // MARK: - Init
   
-  init?(interactiveViews: [UIView], axis: InteractiveTransition.InteractorAxis, direction: InteractiveTransition.InteractorDirection, modes: [InteractiveTransitionMode] = [ .percent(nil), .velocity(nil) ], delegate: InteractiveTransitionDelegate? = nil) {
+  init?(interactiveViews: [UIView], axis: InteractiveTransition.InteractorAxis, direction: InteractiveTransition.InteractorDirection, contentSize: CGSize? = nil, modes: [InteractiveTransitionMode] = [ .percent(nil), .velocity(nil) ], delegate: InteractiveTransitionDelegate? = nil) {
     
     guard interactiveViews.count > 0 else {
       return nil
@@ -65,6 +66,7 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
     self.interactiveViews = interactiveViews
     self.axis = axis
     self.direction = direction
+    self.contentSize = contentSize
     self.modes = modes
     self.delegate = delegate
     super.init()
@@ -158,8 +160,8 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
   }
   
   private func calculateProgress(translation: CGPoint, in view: UIView) -> CGFloat {
-    let xMovement = (self.direction == .negative ? -translation.x : translation.x) / view.bounds.width
-    let yMovement = (self.direction == .negative ? -translation.y : translation.y) / view.bounds.height
+    let xMovement = (self.direction == .negative ? -translation.x : translation.x) / (self.contentSize?.width ?? view.bounds.width)
+    let yMovement = (self.direction == .negative ? -translation.y : translation.y) / (self.contentSize?.height ?? view.bounds.height)
     
     let movement: CGFloat
     switch self.axis {
@@ -170,6 +172,7 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
     case .xy:
       movement = CGFloat(sqrt(pow(Double(xMovement), 2) + pow(Double(yMovement), 2)))
     }
+    
     return CGFloat(min(max(Double(movement), 0.0), 1.0))
   }
   

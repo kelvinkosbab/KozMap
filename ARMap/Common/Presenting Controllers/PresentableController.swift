@@ -53,7 +53,7 @@ extension Sequence where Iterator.Element == PresentableControllerOption {
 // MARK: - PresentationMode
 
 enum PresentationMode {
-//  case modal, modalOverCurrentContext, overCurrentContext, leftMenu, rightToLeft, fadeWithBlur, topDown, bottomUp, topKnobBottomUp, visualEffectFade, navStack
+//  case modal, modalOverCurrentContext, overCurrentContext, leftMenu, rightToLeft, topDown, bottomUp, topKnobBottomUp, visualEffectFade, navStack
   
   case modal, modalOverCurrentContext, overCurrentContext, topKnobBottomUp, visualEffectFade, navStack
   
