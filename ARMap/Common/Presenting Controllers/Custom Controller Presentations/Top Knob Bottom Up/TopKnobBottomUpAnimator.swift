@@ -64,9 +64,12 @@ class TopKnobBottomUpAnimator : NSObject, PresentableAnimator {
         self.presentingViewControllerDelegate?.isDismissingViewController(presentedViewController)
         self.presentedViewControllerDelegate?.isDismissingViewController()
       }, completion: { _ in
-        if !transitionContext.transitionWasCancelled {
+        if transitionContext.transitionWasCancelled {
+          self.presentingViewControllerDelegate?.didCancelDissmissViewController(presentedViewController)
+          self.presentedViewControllerDelegate?.didCancelDissmissViewController()
+        } else {
           self.presentingViewControllerDelegate?.didDismissViewController(presentedViewController)
-          self.presentedViewControllerDelegate?.isDismissingViewController()
+          self.presentedViewControllerDelegate?.didDismissViewController()
         }
         transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
       })

@@ -398,6 +398,7 @@
 				B6DCCDC4203B6EA300201385 /* PresentableManager.swift */,
 				B6DCCDC6203B71CB00201385 /* PresentableAnimator.swift */,
 				B6DCCDDE203BDF4400201385 /* CustomPresentationController.swift */,
+				B6F451B120392AD50084AFC8 /* PresentingViewControllerDelegate.swift */,
 				B6DCCDD2203BBE8700201385 /* Left Menu */,
 				B6DCCDD1203BBE7F00201385 /* Right to Left */,
 				B6DCCDD3203BBE9100201385 /* Top Down */,
@@ -416,7 +417,6 @@
 				B686EF3520166D8700ACF075 /* BatchUpdatable.swift */,
 				B686EF3620166D8700ACF075 /* ViewControllerFromStoryboardProtocol.swift */,
 				B686EF3720166D8700ACF075 /* Loggable.swift */,
-				B6F451B120392AD50084AFC8 /* PresentingViewControllerDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";

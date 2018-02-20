@@ -33,7 +33,8 @@ class MainViewController : BaseViewController {
     super.viewDidLoad()
     
     self.navigationItem.largeTitleDisplayMode = .never
-    self.clearNavigationBar()
+    self.hideAllElements()
+    self.disableAllElements()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -66,19 +67,6 @@ class MainViewController : BaseViewController {
       arViewController.trackingStateDelegate = self
       self.arViewController = arViewController
     }
-  }
-  
-  // MARK: - Navigation Items
-  
-  func loadConfiguredNavigationBar() {
-    self.navigationItem.title = BuildManager.shared.buildTarget.appName
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "assetOptions"), style: .plain, target: self, action: #selector(self.settingsButtonSelected))
-  }
-  
-  func clearNavigationBar() {
-    self.navigationItem.title = nil
-    self.navigationItem.leftBarButtonItem = nil
-    self.navigationItem.rightBarButtonItem = nil
   }
   
   // MARK: - Actions
@@ -189,18 +177,39 @@ class MainViewController : BaseViewController {
     self.listButton.alpha = 1
     self.addVisualEffectView.effect = UIBlurEffect(style: .light)
     self.addButton.alpha = 1
+    
+    // Navigation bar
+    self.navigationController?.navigationBar.alpha = 1
+    if self.navigationItem.title == nil {
+      self.navigationItem.title = BuildManager.shared.buildTarget.appName
+    }
+    if self.navigationItem.rightBarButtonItem == nil {
+      self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "assetOptions"), style: .plain, target: self, action: #selector(self.settingsButtonSelected))
+    }
   }
   
   func enableAllElements() {
     self.listButton.isUserInteractionEnabled = true
     self.addButton.isUserInteractionEnabled = true
-    self.loadConfiguredNavigationBar()
+    
+    // Navigation bar
+    self.navigationController?.navigationBar.alpha = 1
+    if self.navigationItem.title == nil {
+      self.navigationItem.title = BuildManager.shared.buildTarget.appName
+    }
+    if self.navigationItem.rightBarButtonItem == nil {
+      self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "assetOptions"), style: .plain, target: self, action: #selector(self.settingsButtonSelected))
+    }
   }
   
   func disableAllElements() {
-    self.clearNavigationBar()
     self.listButton.isUserInteractionEnabled = false
     self.addButton.isUserInteractionEnabled = false
+    
+    // Navigation bar
+    self.navigationController?.navigationBar.alpha = 0
+    self.navigationItem.title = nil
+    self.navigationItem.rightBarButtonItem = nil
   }
   
   func hideAllElements() {
@@ -209,6 +218,9 @@ class MainViewController : BaseViewController {
     self.listButton.alpha = 0
     self.addVisualEffectView.effect = nil
     self.addButton.alpha = 0
+    
+    // Navigation Bar
+    self.navigationController?.navigationBar.alpha = 0
   }
 }
 
@@ -224,7 +236,9 @@ extension MainViewController : PresentingViewControllerDelegate {
     self.hideAllElements()
   }
   
-  func didPresentViewController(_ viewController: UIViewController?) {}
+  func didPresentViewController(_ viewController: UIViewController?) {
+    self.hideAllElements()
+  }
   
   func willDismissViewController(_ viewController: UIViewController) {}
   
@@ -233,9 +247,9 @@ extension MainViewController : PresentingViewControllerDelegate {
   }
   
   func didDismissViewController(_ viewController: UIViewController?) {
-    let contentViewController = (viewController as? UINavigationController)?.viewControllers.first ?? viewController
     
     // Disable and hide navigation elements when presenting configuring view
+    let contentViewController = (viewController as? UINavigationController)?.viewControllers.first ?? viewController
     if let _ = contentViewController as? ConfiguringViewController {
       self.configuringViewController = nil
       
@@ -243,6 +257,11 @@ extension MainViewController : PresentingViewControllerDelegate {
     
     // All presentations
     self.enableAllElements()
+  }
+  
+  func didCancelDissmissViewController(_ viewController: UIViewController?) {
+    self.hideAllElements()
+    self.disableAllElements()
   }
 }
 
