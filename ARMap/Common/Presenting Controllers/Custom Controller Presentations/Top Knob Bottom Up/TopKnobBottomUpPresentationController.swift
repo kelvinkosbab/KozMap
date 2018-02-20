@@ -57,18 +57,23 @@ class TopKnobBottomUpPresentationController : CustomPresentationController, Dism
       self.presentedViewController.preferredContentSize.height = self.presentedViewController.preferredContentSize.height > 0 ? self.presentedViewController.preferredContentSize.height + knobViewRequiredOffset : containerBounds.height
     }
     
-    // Interactive transitions
+    // Configure presentation interaction
     self.presentationInteractiveTransition = DragDownDismissInteractiveTransition(interactiveViews: self.presentationInteractiveViews, delegate: self)
-    self.dismissInteractiveTransition = DragDownDismissInteractiveTransition(interactiveViews: self.dismissInteractiveViews, contentSize: presentedViewController.preferredContentSize, delegate: self)
   }
   
   override func presentationTransitionDidEnd(_ completed: Bool) {
-    if !completed {
+    super.presentationTransitionDidEnd(completed)
+    
+    guard completed else {
       self.dismissView?.removeFromSuperview()
       self.dismissView = nil
       self.topKnobVisualEffectView?.removeFromSuperview()
       self.topKnobVisualEffectView = nil
+      return
     }
+    
+    // Configure dismiss interaction
+    self.dismissInteractiveTransition = DragDownDismissInteractiveTransition(interactiveViews: self.dismissInteractiveViews, contentSize: presentedViewController.preferredContentSize, delegate: self)
   }
   
   override var frameOfPresentedViewInContainerView: CGRect {

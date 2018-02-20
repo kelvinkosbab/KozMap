@@ -23,6 +23,7 @@ class BottomUpPresentationController : CustomPresentationController {
   // MARK: - UIPresentationController
   
   override func presentationTransitionWillBegin() {
+    super.presentationTransitionWillBegin()
     
     guard let containerView = self.containerView else {
       return
@@ -37,16 +38,21 @@ class BottomUpPresentationController : CustomPresentationController {
     self.dismissView = dismissView
     dismissView.addToContainer(containerView)
     
-    // Interactive transitions
+    // Configure presentation interaction
     self.presentationInteractiveTransition = DragDownDismissInteractiveTransition(interactiveViews: self.presentationInteractiveViews, delegate: self)
-    self.dismissInteractiveTransition = DragDownDismissInteractiveTransition(interactiveViews: self.dismissInteractiveViews, contentSize: presentedViewController.preferredContentSize, delegate: self)
   }
   
   override func presentationTransitionDidEnd(_ completed: Bool) {
-    if !completed {
+    super.presentationTransitionDidEnd(completed)
+    
+    guard completed else {
       self.dismissView?.removeFromSuperview()
       self.dismissView = nil
+      return
     }
+    
+    // Configure dismiss interaction
+    self.dismissInteractiveTransition = DragDownDismissInteractiveTransition(interactiveViews: self.dismissInteractiveViews, contentSize: presentedViewController.preferredContentSize, delegate: self)
   }
   
   override var frameOfPresentedViewInContainerView: CGRect {

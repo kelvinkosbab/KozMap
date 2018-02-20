@@ -21,6 +21,7 @@ class VisualEffectFadePresentationController : CustomPresentationController {
   // MARK: - UIPresentationController
   
   override func presentationTransitionWillBegin() {
+    super.presentationTransitionWillBegin()
     
     guard let containerView = self.containerView else {
       return
@@ -40,6 +41,8 @@ class VisualEffectFadePresentationController : CustomPresentationController {
   }
   
   override func dismissalTransitionWillBegin() {
+    super.dismissalTransitionWillBegin()
+    
     self.presentedViewController.transitionCoordinator?.animate(alongsideTransition: { context in
       self.blurView?.effect = nil
     }, completion: nil)
