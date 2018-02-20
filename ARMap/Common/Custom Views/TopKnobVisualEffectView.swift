@@ -19,6 +19,7 @@ class TopKnobVisualEffectView : UIVisualEffectView {
   // MARK: - Properties
   
   @IBOutlet weak var knobVisualEffectView: UIVisualEffectView!
+  @IBOutlet weak var containerView: UIView!
   
   static let topKnobSpace: CGFloat = 5
   static let knobHeight: CGFloat = 3

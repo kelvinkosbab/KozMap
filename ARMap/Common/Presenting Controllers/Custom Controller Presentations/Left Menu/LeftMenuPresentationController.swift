@@ -29,9 +29,6 @@ class LeftMenuPresentationController : CustomPresentationController {
       return
     }
     
-    // Adjust the presented controller preferred content size
-    self.presentedViewController.preferredContentSize.width = 280
-    
     // Setup blur view
     let dismissView = UIVisualEffectView(effect: nil)
     dismissView.frame = self.presentingViewController.view.bounds
@@ -68,7 +65,7 @@ class LeftMenuPresentationController : CustomPresentationController {
   
   override var frameOfPresentedViewInContainerView: CGRect {
     let containerBounds = self.containerView?.bounds ?? UIScreen.main.bounds
-    return CGRect(x: 0, y: 0, width: self.presentedViewController.preferredContentSize.width, height: containerBounds.height)
+    return CGRect(x: 0, y: 0, width: 280, height: containerBounds.height)
   }
   
   // MARK: - Actions

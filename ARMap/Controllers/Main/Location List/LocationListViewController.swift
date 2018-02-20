@@ -15,7 +15,7 @@ protocol LocationListViewControllerDelegate : class {
   func shouldDelete(placemark: Placemark)
 }
 
-class LocationListViewController : BaseTableViewController, NSFetchedResultsControllerDelegate, DesiredContentHeightDelegate, DismissInteractable {
+class LocationListViewController : BaseViewController, NSFetchedResultsControllerDelegate, DesiredContentHeightDelegate, DismissInteractable {
   
   // MARK: - Static Accessors
   
@@ -45,6 +45,8 @@ class LocationListViewController : BaseTableViewController, NSFetchedResultsCont
   
   // MARK: - Properties
   
+  @IBOutlet weak var tableView: UITableView!
+  
   weak var delegate: LocationListViewControllerDelegate? = nil
   let rowHeight: CGFloat = 60
   
@@ -58,6 +60,15 @@ class LocationListViewController : BaseTableViewController, NSFetchedResultsCont
     try? controller.performFetch()
     return controller
   }()
+  
+  // MARK: - Lifecycle
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    self.tableView.delegate = self
+    self.tableView.dataSource = self
+  }
   
   // MARK: - Status Bar
   
@@ -113,21 +124,21 @@ class LocationListViewController : BaseTableViewController, NSFetchedResultsCont
 
 // MARK: - UITableView
 
-extension LocationListViewController {
+extension LocationListViewController : UITableViewDelegate, UITableViewDataSource {
   
-  override func numberOfSections(in tableView: UITableView) -> Int {
+  func numberOfSections(in tableView: UITableView) -> Int {
     return 1
   }
   
-  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return self.placemarks.count
   }
   
-  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return self.rowHeight
   }
   
-  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "LocationListViewControllerCell", for: indexPath) as! LocationListViewControllerCell
     cell.backgroundColor = .clear
     

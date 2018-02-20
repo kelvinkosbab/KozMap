@@ -29,14 +29,22 @@
                         </constraints>
                         <blurEffect style="dark"/>
                     </visualEffectView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mgc-08-u6V">
+                        <rect key="frame" x="0.0" y="18" width="240" height="110"/>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Vrd-Bb-W0w" firstAttribute="top" secondItem="B1O-ev-bhA" secondAttribute="top" constant="5" id="8X0-DY-zli"/>
+                    <constraint firstItem="Mgc-08-u6V" firstAttribute="top" secondItem="Vrd-Bb-W0w" secondAttribute="bottom" constant="10" id="HTa-Ca-lwc"/>
                     <constraint firstItem="Vrd-Bb-W0w" firstAttribute="centerX" secondItem="B1O-ev-bhA" secondAttribute="centerX" id="deE-hs-8h0"/>
+                    <constraint firstAttribute="trailing" secondItem="Mgc-08-u6V" secondAttribute="trailing" id="gZl-bO-RWa"/>
+                    <constraint firstAttribute="bottom" secondItem="Mgc-08-u6V" secondAttribute="bottom" id="nK7-iY-wie"/>
+                    <constraint firstItem="Mgc-08-u6V" firstAttribute="leading" secondItem="B1O-ev-bhA" secondAttribute="leading" id="uJy-Ay-TXZ"/>
                 </constraints>
             </view>
             <blurEffect style="prominent"/>
             <connections>
+                <outlet property="containerView" destination="Mgc-08-u6V" id="IMK-Rj-vVx"/>
                 <outlet property="knobVisualEffectView" destination="Vrd-Bb-W0w" id="F92-EH-eAU"/>
             </connections>
             <point key="canvasLocation" x="-16" y="-21"/>
