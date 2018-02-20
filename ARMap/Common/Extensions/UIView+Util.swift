@@ -10,6 +10,8 @@ import UIKit
 
 extension UIView {
   
+  // MARK: - Adding to Container
+  
   enum RelativeLayoutType {
     case safeArea, view
   }

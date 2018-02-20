@@ -69,6 +69,20 @@ class SearchViewController : BaseViewController {
     NotificationCenter.default.removeObserver(self)
   }
   
+  // MARK: - Status Bar
+  
+  override var prefersStatusBarHidden: Bool {
+    return true
+  }
+  
+  override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+    return .slide
+  }
+  
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
+  }
+  
   // MARK: - Notifications
   
   @objc func didReceiveUpdatedLocationNotification(_ notification: Notification) {
