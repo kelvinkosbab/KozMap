@@ -359,13 +359,13 @@
 				B686EF1620166D8700ACF075 /* Models.scnassets */,
 				B686EF1720166D8700ACF075 /* ARSCNView+Util.swift */,
 				B686EF1820166D8700ACF075 /* SCNMaterial+Util.swift */,
+				B686EF1F20166D8700ACF075 /* SCNVector3+Util.swift */,
 				B686EF1920166D8700ACF075 /* Plane.swift */,
 				B686EF1A20166D8700ACF075 /* PlacemarkNodeContainer.swift */,
 				B686EF1B20166D8700ACF075 /* AxisNode.swift */,
 				B686EF1C20166D8700ACF075 /* PlacemarkNode.swift */,
 				B686EF1D20166D8700ACF075 /* VirtualObject.swift */,
 				B686EF1E20166D8700ACF075 /* PinPlacemarkNode.swift */,
-				B686EF1F20166D8700ACF075 /* SCNVector3+Util.swift */,
 			);
 			path = SceneKit;
 			sourceTree = "<group>";
