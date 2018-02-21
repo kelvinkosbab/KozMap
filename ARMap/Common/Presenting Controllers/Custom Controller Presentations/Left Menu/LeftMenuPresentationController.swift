@@ -35,6 +35,10 @@ class LeftMenuPresentationController : CustomPresentationController {
     self.dismissView = dismissView
     dismissView.addToContainer(containerView, atIndex: 0)
     dismissView.effect = nil
+    dismissView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.dismissController)))
+    
+    let presentedWidth = max(min(containerView.bounds.width - 40, 360), 280)
+    self.presentedViewController.preferredContentSize.width = presentedWidth
     
     // Begin animation
     self.presentedViewController.transitionCoordinator?.animate(alongsideTransition: { context in
@@ -65,7 +69,8 @@ class LeftMenuPresentationController : CustomPresentationController {
   
   override var frameOfPresentedViewInContainerView: CGRect {
     let containerBounds = self.containerView?.bounds ?? UIScreen.main.bounds
-    return CGRect(x: 0, y: 0, width: 280, height: containerBounds.height)
+    let width = max(min(containerBounds.width - 40, 360), 280)
+    return CGRect(x: 0, y: 0, width: width, height: containerBounds.height)
   }
   
   // MARK: - Actions
