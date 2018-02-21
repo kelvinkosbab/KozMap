@@ -13,7 +13,7 @@ protocol SearchViewControllerDelegate : class {
   func shouldAdd(mapItem: MapItem)
 }
 
-class SearchViewController : BaseViewController {
+class SearchViewController : BaseViewController, DismissInteractable {
   
   // MARK: - Static Accessors
   
@@ -25,6 +25,19 @@ class SearchViewController : BaseViewController {
     let viewController = self.newViewController()
     viewController.delegate = delegate
     return viewController
+  }
+  
+  // MARK: - DismissInteractable
+  
+  var dismissInteractiveViews: [UIView] {
+    var views: [UIView] = []
+    if let view = self.view {
+      views.append(view)
+    }
+    if let tableView = self.tableView {
+      views.append(tableView)
+    }
+    return views
   }
   
   // MARK: - Properties

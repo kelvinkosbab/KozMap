@@ -39,8 +39,8 @@ class LocationListViewController : BaseViewController, NSFetchedResultsControlle
   
   // MARK: - DismissInteractable
   
-  var dismissInteractiveView: UIView? {
-    return self.tableView
+  var dismissInteractiveViews: [UIView] {
+    return [ self.tableView ]
   }
   
   // MARK: - Properties

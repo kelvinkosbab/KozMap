@@ -35,6 +35,10 @@ class LeftMenuPresentationController : CustomPresentationController {
     self.dismissView = dismissView
     dismissView.addToContainer(containerView, atIndex: 0)
     dismissView.effect = nil
+    dismissView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.dismissController)))
+    
+    let presentedWidth = max(min(containerView.bounds.width - 40, 360), 280)
+    self.presentedViewController.preferredContentSize.width = presentedWidth
     
     // Begin animation
     self.presentedViewController.transitionCoordinator?.animate(alongsideTransition: { context in
@@ -42,7 +46,7 @@ class LeftMenuPresentationController : CustomPresentationController {
     }, completion: nil)
     
     // Configure presentation interaction
-    self.presentationInteractiveTransition = DragLeftDismissInteractiveTransition(interactiveViews: self.presentationInteractiveViews, delegate: self)
+    self.presentationInteractiveTransition = DragLeftDismissInteractiveTransition(interactiveViews: self.allPresentationInteractiveViews, delegate: self)
   }
   
   override func presentationTransitionDidEnd(_ completed: Bool) {
@@ -51,7 +55,7 @@ class LeftMenuPresentationController : CustomPresentationController {
     if completed {
       
       // Configure dismiss interaction
-      self.dismissInteractiveTransition = DragLeftDismissInteractiveTransition(interactiveViews: self.dismissInteractiveViews, contentSize: presentedViewController.preferredContentSize, delegate: self)
+      self.dismissInteractiveTransition = DragLeftDismissInteractiveTransition(interactiveViews: self.allDismissInteractiveViews, options: [ .contentSize(self.presentedViewController.preferredContentSize) ], delegate: self)
     }
   }
   
@@ -65,7 +69,8 @@ class LeftMenuPresentationController : CustomPresentationController {
   
   override var frameOfPresentedViewInContainerView: CGRect {
     let containerBounds = self.containerView?.bounds ?? UIScreen.main.bounds
-    return CGRect(x: 0, y: 0, width: 280, height: containerBounds.height)
+    let width = max(min(containerBounds.width - 40, 360), 280)
+    return CGRect(x: 0, y: 0, width: width, height: containerBounds.height)
   }
   
   // MARK: - Actions

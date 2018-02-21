@@ -13,7 +13,7 @@ protocol ARStateDelegate : class {
 }
 
 enum ARState {
-  case configuring, normal, limited(Reason), notAvailable, unsupported
+  case configuring, normal, limited(Reason), notAvailable, error(String)
   
   enum Reason {
     case insufficientFeatures, excessiveMotion, initializing, relocalizing
@@ -33,8 +33,8 @@ enum ARState {
       return "Relocalizing"
     case .notAvailable:
       return "Not Available"
-    case .unsupported:
-      return "Unsupported Device"
+    case .error(_):
+      return "An Error Ocurred"
     case .normal:
       return nil
     }
@@ -48,8 +48,10 @@ enum ARState {
       return "Please hold the device steady pointing horizontally."
     case .limited(.initializing), .limited(.relocalizing):
       return "Please hold the device steady pointing horizontally in a well lit area."
-    case .notAvailable, .unsupported:
+    case .notAvailable:
       return "Only supported on Apple devices with an A9, A10, or A11 chip or newer. This includes all phones including the iPhone 6s/6s+ and newer as well as all iPad Pro models and the 2017 iPad."
+    case .error(let message):
+      return message
     case .normal, .configuring:
       return nil
     }

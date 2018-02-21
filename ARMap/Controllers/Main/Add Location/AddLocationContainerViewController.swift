@@ -34,8 +34,17 @@ class AddLocationContainerViewController : BaseViewController, DesiredContentHei
   
   // MARK: - DismissInteractable
   
-  var dismissInteractiveView: UIView? {
-    return self.view
+  var dismissInteractiveViews: [UIView] {
+    var views: [UIView] = []
+    if let view = self.view {
+      views.append(view)
+    }
+    for viewController in self.orderedViewControllers {
+      if let dismissInteractable = viewController as? DismissInteractable {
+        views += dismissInteractable.dismissInteractiveViews
+      }
+    }
+    return views
   }
   
   // MARK: - Properties

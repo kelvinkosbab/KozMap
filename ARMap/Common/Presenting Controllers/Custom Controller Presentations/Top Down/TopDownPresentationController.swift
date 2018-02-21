@@ -39,7 +39,7 @@ class TopDownPresentationController : CustomPresentationController {
     dismissView.addToContainer(containerView)
     
     // Configure presentation interaction
-    self.presentationInteractiveTransition = DragUpDismissInteractiveTransition(interactiveViews: self.presentationInteractiveViews, delegate: self)
+    self.presentationInteractiveTransition = DragUpDismissInteractiveTransition(interactiveViews: self.allPresentationInteractiveViews, delegate: self)
   }
   
   override func presentationTransitionDidEnd(_ completed: Bool) {
@@ -52,7 +52,7 @@ class TopDownPresentationController : CustomPresentationController {
     }
     
     // Configure dismiss interaction
-    self.dismissInteractiveTransition = DragUpDismissInteractiveTransition(interactiveViews: self.dismissInteractiveViews, contentSize: presentedViewController.preferredContentSize, delegate: self)
+    self.dismissInteractiveTransition = DragUpDismissInteractiveTransition(interactiveViews: self.allDismissInteractiveViews, options: [ .contentSize(self.presentedViewController.preferredContentSize) ], delegate: self)
   }
   
   override var frameOfPresentedViewInContainerView: CGRect {

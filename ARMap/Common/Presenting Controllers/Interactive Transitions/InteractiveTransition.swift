@@ -11,13 +11,13 @@ import UIKit
 // MARK: - PresentationInteractable
 
 protocol PresentationInteractable : class {
-  var presentationInteractiveView: UIView? { get }
+  var presentationInteractiveViews: [UIView] { get }
 }
 
 // MARK: - DismissInteractable
 
 protocol DismissInteractable : class {
-  var dismissInteractiveView: UIView? { get }
+  var dismissInteractiveViews: [UIView] { get }
 }
 
 // MARK: - InteractiveTransitionDelegate
@@ -32,32 +32,27 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
   
   // MARK: - Properties
   
-  let modes: [InteractiveTransitionMode]
   let interactiveViews: [UIView]
-  let contentSize: CGSize?
-  let axis: InteractiveTransition.InteractorAxis
-  let direction: InteractiveTransition.InteractorDirection
+  let axis: InteractiveTransition.Axis
+  let direction: InteractiveTransition.Direction
   weak var delegate: InteractiveTransitionDelegate? = nil
+  
+  let gestureType: InteractiveTransition.GestureType
+  let contentSize: CGSize?
+  let percentThreshold: CGFloat
+  let velocityThreshold: CGFloat
   
   private(set) var hasStarted: Bool = false
   private var shouldFinish: Bool = false
-  private var activeGestureRecognizer: UIGestureRecognizer?
+  private var activeGestureRecognizers: [UIPanGestureRecognizer] = []
   
   private var lastTranslation: CGPoint? = nil
   private var lastTranslationDate: Date? = nil
   private var lastVelocity: CGFloat? = nil
   
-  enum InteractorAxis {
-    case x, y, xy
-  }
-  
-  enum InteractorDirection {
-    case negative, positive
-  }
-  
   // MARK: - Init
   
-  init?(interactiveViews: [UIView], axis: InteractiveTransition.InteractorAxis, direction: InteractiveTransition.InteractorDirection, contentSize: CGSize? = nil, modes: [InteractiveTransitionMode] = [ .percent(nil), .velocity(nil) ], delegate: InteractiveTransitionDelegate? = nil) {
+  init?(interactiveViews: [UIView], axis: InteractiveTransition.Axis, direction: InteractiveTransition.Direction, gestureType: GestureType = .pan, options: [InteractiveTransition.Option] = [], delegate: InteractiveTransitionDelegate? = nil) {
     
     guard interactiveViews.count > 0 else {
       return nil
@@ -66,18 +61,22 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
     self.interactiveViews = interactiveViews
     self.axis = axis
     self.direction = direction
-    self.contentSize = contentSize
-    self.modes = modes
     self.delegate = delegate
+    
+    self.gestureType = options.gestureType
+    self.contentSize = options.contentSize
+    self.percentThreshold = options.percentThreshold
+    self.velocityThreshold = options.velocityThreshold
+    
     super.init()
     
     // Configure the dismiss interactive gesture recognizer
     for interactiveView in interactiveViews {
-      let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.handleGesture(_:)))
+      let gestureRecognizer = self.gestureType.createGestureRecognizer(target: self, action: #selector(self.handleGesture(_:)), axis: self.axis, direction: self.direction)
+      gestureRecognizer.delegate = self
       interactiveView.isUserInteractionEnabled = true
-      interactiveView.addGestureRecognizer(panGestureRecognizer)
-      self.activeGestureRecognizer = panGestureRecognizer
-      self.activeGestureRecognizer?.delegate = self
+      interactiveView.addGestureRecognizer(gestureRecognizer)
+      self.activeGestureRecognizers.append(gestureRecognizer)
     }
   }
   
@@ -151,9 +150,9 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
   }
   
   private func calculateShouldFinish(progress: CGFloat, velocity: CGFloat?) -> Bool {
-    if let percentThreshold = self.modes.percentThreshold, progress > percentThreshold {
+    if progress > self.percentThreshold {
       return true
-    } else if let velocityThreshold = self.modes.velocityThreshold, let velocity = velocity, abs(velocity) > velocityThreshold {
+    } else if let velocity = velocity, abs(velocity) > self.velocityThreshold {
       return true
     }
     return false

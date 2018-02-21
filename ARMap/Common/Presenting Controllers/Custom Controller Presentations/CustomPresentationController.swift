@@ -16,43 +16,33 @@ class CustomPresentationController : UIPresentationController {
 
 extension CustomPresentationController {
   
-  private var presentationInteractiveView: UIView? {
-    if let presentationInteractable = self.presentingViewController as? PresentationInteractable, let presentationInteractiveView = presentationInteractable.presentationInteractiveView {
-      return presentationInteractiveView
-    }
-    return nil
-  }
-  
-  internal var presentationInteractiveViews: [UIView] {
+  internal var allPresentationInteractiveViews: [UIView] {
     var interactiveViews: [UIView] = []
     
-    if let presentationInteractiveView = self.presentationInteractiveView {
-      interactiveViews.append(presentationInteractiveView)
+    // Presenting view controller
+    if let presentationInteractable = self.presentingViewController as? PresentationInteractable, presentationInteractable.presentationInteractiveViews.count > 0 {
+      interactiveViews += presentationInteractable.presentationInteractiveViews
     }
     
-    if let presentationInteractable = self as? PresentationInteractable, let presentationInteractiveView = presentationInteractable.presentationInteractiveView {
-      interactiveViews.append(presentationInteractiveView)
+    // Presenting controller
+    if let presentationInteractable = self as? PresentationInteractable, presentationInteractable.presentationInteractiveViews.count > 0 {
+      interactiveViews += presentationInteractable.presentationInteractiveViews
     }
     
     return interactiveViews
   }
   
-  private var dismissInteractiveView: UIView? {
-    if let dismissInteractable = self.presentedViewController as? DismissInteractable, let dismissInteractiveView = dismissInteractable.dismissInteractiveView {
-      return dismissInteractiveView
-    }
-    return nil
-  }
-  
-  internal var dismissInteractiveViews: [UIView] {
+  internal var allDismissInteractiveViews: [UIView] {
     var interactiveViews: [UIView] = []
     
-    if let dismissInteractiveView = self.dismissInteractiveView {
-      interactiveViews.append(dismissInteractiveView)
+    // Presented view controller
+    if let dismissInteractable = self.presentedViewController as? DismissInteractable, dismissInteractable.dismissInteractiveViews.count > 0 {
+      interactiveViews += dismissInteractable.dismissInteractiveViews
     }
     
-    if let dismissInteractable = self as? DismissInteractable, let dismissInteractiveView = dismissInteractable.dismissInteractiveView {
-      interactiveViews.append(dismissInteractiveView)
+    // Presenting controller
+    if let dismissInteractable = self as? DismissInteractable, dismissInteractable.dismissInteractiveViews.count > 0 {
+      interactiveViews += dismissInteractable.dismissInteractiveViews
     }
     
     return interactiveViews

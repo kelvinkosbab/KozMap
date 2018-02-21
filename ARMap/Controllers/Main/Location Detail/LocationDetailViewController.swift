@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class LocationDetailViewController : BaseViewController, NSFetchedResultsControllerDelegate, DesiredContentHeightDelegate, DismissInteractable {
+class LocationDetailViewController : BaseViewController, NSFetchedResultsControllerDelegate, DesiredContentHeightDelegate, DismissInteractable, KeyboardFrameRespondable {
   
   // MARK: - Static Accessors
   
@@ -33,8 +33,12 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
   
   // MARK: - DismissInteractable
   
-  var dismissInteractiveView: UIView? {
-    return self.view
+  var dismissInteractiveViews: [UIView] {
+    var views: [UIView] = []
+    if let view = self.view {
+      views.append(view)
+    }
+    return views
   }
   
   // MARK: - Properties
@@ -79,6 +83,12 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
     
     // Listen for updates to current location
     NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveUpdatedLocationNotification(_:)), name: .locationManagerDidUpdateCurrentLocation, object: nil)
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    
+    self.nameTextField.resignFirstResponder()
   }
   
   override func viewDidDisappear(_ animated: Bool) {

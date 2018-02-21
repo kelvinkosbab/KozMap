@@ -24,7 +24,7 @@ class RightToLeftPresentationController : CustomPresentationController {
     super.presentationTransitionWillBegin()
     
     // Configure presentation interaction
-    self.presentationInteractiveTransition = DragRightDismissInteractiveTransition(interactiveViews: self.presentationInteractiveViews, delegate: self)
+    self.presentationInteractiveTransition = DragRightDismissInteractiveTransition(interactiveViews: self.allPresentationInteractiveViews, options: [ .gestureType(.screenEdgePan) ], delegate: self)
   }
   
   override func presentationTransitionDidEnd(_ completed: Bool) {
@@ -37,7 +37,7 @@ class RightToLeftPresentationController : CustomPresentationController {
     }
     
     // Configure dismiss interaction
-    self.dismissInteractiveTransition = DragRightDismissInteractiveTransition(interactiveViews: self.dismissInteractiveViews, delegate: self)
+    self.dismissInteractiveTransition = DragRightDismissInteractiveTransition(interactiveViews: self.allDismissInteractiveViews, options: [ .gestureType(.screenEdgePan) ], delegate: self)
   }
   
   // MARK: - Actions
