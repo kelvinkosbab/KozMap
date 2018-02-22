@@ -9,5 +9,6 @@
 import UIKit
 
 protocol KeyboardFrameRespondable : class {
-  weak var view: UIView! { get }
+  var view: UIView! { get }
+  var preferredContentSize: CGSize { get }
 }

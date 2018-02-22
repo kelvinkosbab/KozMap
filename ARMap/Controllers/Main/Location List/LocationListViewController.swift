@@ -11,16 +11,18 @@ import CoreLocation
 import CoreData
 
 protocol LocationListViewControllerDelegate : class {
-  func shouldEdit(savedLocation: SavedLocation)
-  func shouldDelete(savedLocation: SavedLocation)
+  func shouldEdit(placemark: Placemark)
+  func shouldDelete(placemark: Placemark)
 }
 
-class LocationListViewController : BaseTableViewController, NSFetchedResultsControllerDelegate {
+class LocationListViewController : BaseViewController, NSFetchedResultsControllerDelegate, DesiredContentHeightDelegate, DismissInteractable {
   
   // MARK: - Static Accessors
   
   private static func newViewController() -> LocationListViewController {
-    return self.newViewController(fromStoryboardWithName: "AddLocation")
+    let viewController = self.newViewController(fromStoryboardWithName: "AddLocation")
+    viewController.preferredContentSize.height = viewController.desiredContentHeight
+    return viewController
   }
   
   static func newViewController(delegate: LocationListViewControllerDelegate?) -> LocationListViewController {
@@ -29,21 +31,58 @@ class LocationListViewController : BaseTableViewController, NSFetchedResultsCont
     return viewController
   }
   
+  // MARK: - DesiredContentHeightDelegate
+  
+  var desiredContentHeight: CGFloat {
+    return 450
+  }
+  
+  // MARK: - DismissInteractable
+  
+  var dismissInteractiveViews: [UIView] {
+    return [ self.tableView ]
+  }
+  
   // MARK: - Properties
+  
+  @IBOutlet weak var tableView: UITableView!
   
   weak var delegate: LocationListViewControllerDelegate? = nil
   let rowHeight: CGFloat = 60
   
-  var savedLocations: [SavedLocation] {
-    return self.savedLocationsFetchedResultsController?.fetchedObjects ?? []
+  var placemarks: [Placemark] {
+    return self.placemarksFetchedResultsController?.fetchedObjects ?? []
   }
   
-  private lazy var savedLocationsFetchedResultsController: NSFetchedResultsController<SavedLocation>? = {
-    let controller = SavedLocation.newFetchedResultsController()
+  private lazy var placemarksFetchedResultsController: NSFetchedResultsController<Placemark>? = {
+    let controller = Placemark.newFetchedResultsController()
     controller.delegate = self
     try? controller.performFetch()
     return controller
   }()
+  
+  // MARK: - Lifecycle
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    self.tableView.delegate = self
+    self.tableView.dataSource = self
+  }
+  
+  // MARK: - Status Bar
+  
+  override var prefersStatusBarHidden: Bool {
+    return true
+  }
+  
+  override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+    return .slide
+  }
+  
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
+  }
   
   // MARK: - NSFetchedResultsControllerDelegate
   
@@ -64,8 +103,8 @@ class LocationListViewController : BaseTableViewController, NSFetchedResultsCont
     case .update:
       if let indexPath = indexPath {
         if let cell = self.tableView.cellForRow(at: indexPath) as? LocationListViewControllerCell {
-          let savedLocation = self.savedLocations[indexPath.row]
-          cell.configure(savedLocation: savedLocation, unitType: Defaults.shared.unitType, delegate: self)
+          let placemark = self.placemarks[indexPath.row]
+          cell.configure(placemark: placemark, unitType: Defaults.shared.unitType, delegate: self)
         } else {
           self.tableView.reloadRows(at: [ indexPath ], with: .none)
         }
@@ -85,27 +124,27 @@ class LocationListViewController : BaseTableViewController, NSFetchedResultsCont
 
 // MARK: - UITableView
 
-extension LocationListViewController {
+extension LocationListViewController : UITableViewDelegate, UITableViewDataSource {
   
-  override func numberOfSections(in tableView: UITableView) -> Int {
+  func numberOfSections(in tableView: UITableView) -> Int {
     return 1
   }
   
-  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return self.savedLocations.count
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return self.placemarks.count
   }
   
-  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return self.rowHeight
   }
   
-  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "LocationListViewControllerCell", for: indexPath) as! LocationListViewControllerCell
     cell.backgroundColor = .clear
     
     // Saved location
-    let savedLocation = self.savedLocations[indexPath.row]
-    cell.configure(savedLocation: savedLocation, unitType: Defaults.shared.unitType, delegate: self)
+    let placemark = self.placemarks[indexPath.row]
+    cell.configure(placemark: placemark, unitType: Defaults.shared.unitType, delegate: self)
     
     return cell
   }
@@ -115,22 +154,22 @@ extension LocationListViewController {
 
 extension LocationListViewController : LocationListViewControllerCellDelegate {
   
-  func moreButtonSelected(savedLocation: SavedLocation, sender: UIView) {
-    self.presentMoreActionSheet(savedLocation: savedLocation, sender: sender)
+  func moreButtonSelected(placemark: Placemark, sender: UIView) {
+    self.presentMoreActionSheet(placemark: placemark, sender: sender)
   }
   
-  private func presentMoreActionSheet(savedLocation: SavedLocation, sender: UIView) {
-    let actionSheet = UIAlertController(title: savedLocation.name, message: nil, preferredStyle: .actionSheet)
+  private func presentMoreActionSheet(placemark: Placemark, sender: UIView) {
+    let actionSheet = UIAlertController(title: placemark.name, message: nil, preferredStyle: .actionSheet)
     
     // Edit
     let editAction = UIAlertAction(title: "Edit", style: .default) { [weak self] _ in
-      self?.delegate?.shouldEdit(savedLocation: savedLocation)
+      self?.delegate?.shouldEdit(placemark: placemark)
     }
     actionSheet.addAction(editAction)
     
     // Delete
     let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
-      self?.delegate?.shouldDelete(savedLocation: savedLocation)
+      self?.delegate?.shouldDelete(placemark: placemark)
     }
     actionSheet.addAction(deleteAction)
     

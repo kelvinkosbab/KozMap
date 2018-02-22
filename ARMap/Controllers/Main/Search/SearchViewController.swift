@@ -13,7 +13,7 @@ protocol SearchViewControllerDelegate : class {
   func shouldAdd(mapItem: MapItem)
 }
 
-class SearchViewController : BaseViewController {
+class SearchViewController : BaseViewController, DismissInteractable {
   
   // MARK: - Static Accessors
   
@@ -25,6 +25,19 @@ class SearchViewController : BaseViewController {
     let viewController = self.newViewController()
     viewController.delegate = delegate
     return viewController
+  }
+  
+  // MARK: - DismissInteractable
+  
+  var dismissInteractiveViews: [UIView] {
+    var views: [UIView] = []
+    if let view = self.view {
+      views.append(view)
+    }
+    if let tableView = self.tableView {
+      views.append(tableView)
+    }
+    return views
   }
   
   // MARK: - Properties
@@ -57,10 +70,30 @@ class SearchViewController : BaseViewController {
     NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveUpdatedLocationNotification(_:)), name: .locationManagerDidUpdateCurrentLocation, object: nil)
   }
   
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    
+    self.searchBar.resignFirstResponder()
+  }
+  
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
     
     NotificationCenter.default.removeObserver(self)
+  }
+  
+  // MARK: - Status Bar
+  
+  override var prefersStatusBarHidden: Bool {
+    return true
+  }
+  
+  override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+    return .slide
+  }
+  
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
   }
   
   // MARK: - Notifications
@@ -122,6 +155,7 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource {
 extension SearchViewController : UISearchBarDelegate {
   
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    searchBar.resignFirstResponder()
     self.performSearch(text: searchBar.text)
   }
   

@@ -22,8 +22,8 @@ extension ARViewController {
     let hitResults = self.sceneView.hitTest(tappedLocation, options: [:])
     
     // Check if the user tapped a placemark : Hierarchy = (*.scn contents) > VirtualObject Wrapper Node > PlacemarkNode
-    if let placemarkNode = hitResults.first?.node.parent?.parent as? PlacemarkNode, let savedLocationNode = self.placemarks.first(where: { $0.placemarkNode == placemarkNode }) {
-      self.delegate?.userDidTap(savedLocation: savedLocationNode.savedLocation)
+    if let placemarkNode = hitResults.first?.node.parent?.parent as? PlacemarkNode, let placemarkNodeContainer = self.placemarkNodeContainers.first(where: { $0.placemarkNode == placemarkNode }) {
+      self.delegate?.userDidTap(placemark: placemarkNodeContainer.placemark)
     }
   }
 }

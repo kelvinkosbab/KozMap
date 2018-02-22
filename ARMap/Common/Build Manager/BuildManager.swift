@@ -8,6 +8,28 @@
 
 import Foundation
 
+enum BuidTarget {
+  case tackmobile, kozinga
+  
+  var appName: String {
+    switch self {
+    case .tackmobile:
+      return "ARMap"
+    case .kozinga:
+      return "Koz Map"
+    }
+  }
+  
+  var companyName: String {
+    switch self {
+    case .tackmobile:
+      return "©Tack Mobile"
+    case .kozinga:
+      return "©Kozinga"
+    }
+  }
+}
+
 class BuildManager {
   
   // MARK: - Singleton
@@ -18,7 +40,7 @@ class BuildManager {
   
   // MARK: - Debug Build vs Release Build
   
-  static var isDebugBuild: Bool {
+  var isDebugBuild: Bool {
     #if DEBUG
       return true
     #else
@@ -26,7 +48,17 @@ class BuildManager {
     #endif
   }
   
-  static var isReleaseBuild: Bool {
+  var isReleaseBuild: Bool {
     return !self.isDebugBuild
+  }
+  
+  // MARK: - Build Target
+  
+  var buildTarget: BuidTarget {
+    #if KOZINGA
+    return .kozinga
+    #else
+    return .tackmobile
+    #endif
   }
 }

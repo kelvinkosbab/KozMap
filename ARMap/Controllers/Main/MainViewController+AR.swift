@@ -8,12 +8,16 @@
 
 import UIKit
 
+// MARK: - ARViewControllerDelegate
+
 extension MainViewController : ARViewControllerDelegate {
   
-  func userDidTap(savedLocation: SavedLocation) {
-    self.presentLocationDetail(savedLocation: savedLocation)
+  func userDidTap(placemark: Placemark) {
+    self.presentLocationDetail(placemark: placemark)
   }
 }
+
+// MARK: - ARStateDelegate
 
 extension MainViewController : ARStateDelegate {
   
@@ -35,7 +39,7 @@ extension MainViewController : ARStateDelegate {
     }
   }
   
-  // MARK: - Configuring View
+  // MARK: - Configuring Messages
   
   func showConfiguringView(state: ARState) {
     
@@ -47,46 +51,19 @@ extension MainViewController : ARStateDelegate {
     
     // Create the configuring view
     let configuringViewController = ConfiguringViewController.newViewController(state: .statusMessage(state.status, state.message))
-    configuringViewController.view.alpha = 0
     self.configuringViewController = configuringViewController
-    let visualEffectContainerController = VisualEffectContainerViewController(embeddedViewController: configuringViewController, blurEffect: nil)
-    self.configuringVisualEffectContainerViewController = visualEffectContainerController
-    
-    // Hide the buttons
-    self.hideElements { [weak self] in
-      if let strongSelf = self {
-        strongSelf.add(childViewController: visualEffectContainerController, intoContainerView: strongSelf.view)
-        
-        // Animate show the configuring view
-        let duration: TimeInterval = 0.3
-        strongSelf.configuringVisualEffectContainerViewController?.update(blurEffect: UIBlurEffect(style: .dark), duration: duration)
-        UIView.animate(withDuration: duration, animations: { [weak self] in
-          self?.configuringViewController?.view.alpha = 1
-        })
-      }
-    }
+    self.present(viewController: configuringViewController, withMode: .custom(.visualEffectFade), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
   }
   
   func hideConfiguringView() {
     
-    guard let _ = self.configuringViewController, let configuringVisualEffectContainerViewController = self.configuringVisualEffectContainerViewController else {
-      self.showElements()
+    guard let configuringViewController = self.configuringViewController else {
+      self.showAllElements()
+      self.enableAllElements()
       return
     }
     
-    // Animate hide the configuring view
-    let duration: TimeInterval = 0.3
-    UIView.animate(withDuration: duration, animations: { [weak self] in
-      self?.configuringViewController?.view.alpha = 0
-    })
-    configuringVisualEffectContainerViewController.update(blurEffect: nil, duration: duration) { [weak self] in
-      self?.loadConfiguredNavigationBar()
-      self?.showElements()
-      if let configuringVisualEffectContainerViewController = self?.configuringVisualEffectContainerViewController {
-        self?.remove(childViewController: configuringVisualEffectContainerViewController)
-      }
-      self?.configuringViewController = nil
-      self?.configuringVisualEffectContainerViewController = nil
-    }
+    // Dismiss the controller
+    configuringViewController.dismissController()
   }
 }

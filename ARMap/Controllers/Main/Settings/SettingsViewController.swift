@@ -8,18 +8,30 @@
 
 import UIKit
 
-class SettingsViewController : BaseViewController, DesiredContentHeightDelegate {
+class SettingsViewController : BaseViewController, DesiredContentHeightDelegate, DismissInteractable {
   
   // MARK: - Static Accessors
   
   static func newViewController() -> SettingsViewController {
-    return self.newViewController(fromStoryboardWithName: "Main")
+    let viewController = self.newViewController(fromStoryboardWithName: "Main")
+    viewController.preferredContentSize.height = viewController.desiredContentHeight
+    return viewController
   }
   
   // MARK: - DesiredContentHeightDelegate
   
   var desiredContentHeight: CGFloat {
     return 250
+  }
+  
+  // MARK: - DismissInteractable
+  
+  var dismissInteractiveViews: [UIView] {
+    var views: [UIView] = []
+    if let view = self.view {
+      views.append(view)
+    }
+    return views
   }
   
   // MARK: - Properties
@@ -29,6 +41,7 @@ class SettingsViewController : BaseViewController, DesiredContentHeightDelegate 
   @IBOutlet weak var unitTypeControl: UISegmentedControl!
   @IBOutlet weak var versionLabel: UILabel!
   @IBOutlet weak var companyLabel: UILabel!
+  @IBOutlet weak var showAxisSwitch: UISwitch!
   
   // MARK: - Lifecycle
   
@@ -39,6 +52,20 @@ class SettingsViewController : BaseViewController, DesiredContentHeightDelegate 
     self.reloadContent()
   }
   
+  // MARK: - Status Bar
+  
+  override var prefersStatusBarHidden: Bool {
+    return true
+  }
+  
+  override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+    return .slide
+  }
+  
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
+  }
+  
   // MARK: - Content
   
   func reloadContent() {
@@ -46,8 +73,14 @@ class SettingsViewController : BaseViewController, DesiredContentHeightDelegate 
     // Unit type
     self.unitTypeControl.selectedSegmentIndex = Defaults.shared.unitType.rawValue
     
+    // Show axis on start
+    self.showAxisSwitch.isOn = Defaults.shared.showAxis
+    
     // Version
     self.versionLabel.text = "Version \(UIApplication.shared.versionString ?? "N/A")"
+    
+    // Company
+    self.companyLabel.text = BuildManager.shared.buildTarget.companyName
   }
   
   // MARK: - Actions
@@ -63,7 +96,7 @@ class SettingsViewController : BaseViewController, DesiredContentHeightDelegate 
     }
   }
   
-  @IBAction func walkthroughButtonSelected() {
-    
+  @IBAction func showAxisSwitchValueChanged(_ sender: UISwitch) {
+    Defaults.shared.showAxis = sender.isOn
   }
 }

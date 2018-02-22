@@ -1,98 +1,96 @@
 //
 //  InteractiveTransition.swift
-//  TackARLocation
+//  ARMap
 //
-//  Created by Kelvin Kosbab on 10/30/17.
-//  Copyright © 2017 Tack Mobile. All rights reserved.
+//  Created by Kelvin Kosbab on 1/22/18.
+//  Copyright © 2018 Kozinga. All rights reserved.
 //
 
 import UIKit
 
-enum InteractiveTransitionMode {
-  case percent, velocity
+// MARK: - PresentationInteractable
+
+protocol PresentationInteractable : class {
+  var presentationInteractiveViews: [UIView] { get }
 }
+
+// MARK: - DismissInteractable
+
+protocol DismissInteractable : class {
+  var dismissInteractiveViews: [UIView] { get }
+}
+
+// MARK: - InteractiveTransitionDelegate
+
+protocol InteractiveTransitionDelegate : class {
+  func interactionDidSurpassThreshold(_ interactiveTransition: InteractiveTransition)
+}
+
+// MARK: - InteractiveTransition
 
 class InteractiveTransition : UIPercentDrivenInteractiveTransition {
   
-  // MARK: - Static Constants
+  // MARK: - Properties
   
-  static let defaultPercentThreshold: CGFloat = 0.3
-  static let defaultVelocityThreshold: CGFloat = 850
+  let interactiveViews: [UIView]
+  let axis: InteractiveTransition.Axis
+  let direction: InteractiveTransition.Direction
+  weak var delegate: InteractiveTransitionDelegate? = nil
   
-  // MARK: - Properties / Init
-  
-  enum InteractorAxis {
-    case x, y, xy
-  }
-  
-  enum InteractorDirection {
-    case negative, positive
-  }
-  
-  weak var presentingController: UIViewController?
-  var interactiveView: UIView?
-  var activeGestureRecognizer: UIGestureRecognizer?
-  
-  let modes: [InteractiveTransitionMode]
+  let gestureType: InteractiveTransition.GestureType
+  let contentSize: CGSize?
   let percentThreshold: CGFloat
   let velocityThreshold: CGFloat
   
-  var hasStarted: Bool = false
-  var shouldFinish: Bool = false
+  private(set) var hasStarted: Bool = false
+  private var shouldFinish: Bool = false
+  private var activeGestureRecognizers: [UIPanGestureRecognizer] = []
   
-  var lastTranslation: CGPoint? = nil
-  var lastTranslationDate: Date? = nil
-  var lastVelocity: CGFloat? = nil
+  private var lastTranslation: CGPoint? = nil
+  private var lastTranslationDate: Date? = nil
+  private var lastVelocity: CGFloat? = nil
   
-  var axis: InteractiveTransition.InteractorAxis {
-    return .xy
-  }
+  // MARK: - Init
   
-  var direction: InteractiveTransition.InteractorDirection {
-    return .positive
-  }
-  
-  convenience init(presentingController: UIViewController, interactiveController: UIViewController?, modes: [InteractiveTransitionMode] = [ .percent, .velocity ]) {
-    self.init(presentingController: presentingController, interactiveView: interactiveController?.view ?? nil, modes: modes)
-  }
-  
-  init(presentingController: UIViewController, interactiveView: UIView?, modes: [InteractiveTransitionMode] = [ .percent, .velocity ], percentThreshold: CGFloat = InteractiveTransition.defaultPercentThreshold, velocityThreshold: CGFloat = InteractiveTransition.defaultVelocityThreshold) {
-    self.presentingController = presentingController
-    self.interactiveView = interactiveView
-    self.modes = modes
-    self.percentThreshold = percentThreshold
-    self.velocityThreshold = velocityThreshold
+  init?(interactiveViews: [UIView], axis: InteractiveTransition.Axis, direction: InteractiveTransition.Direction, gestureType: GestureType = .pan, options: [InteractiveTransition.Option] = [], delegate: InteractiveTransitionDelegate? = nil) {
+    
+    guard interactiveViews.count > 0 else {
+      return nil
+    }
+    
+    self.interactiveViews = interactiveViews
+    self.axis = axis
+    self.direction = direction
+    self.delegate = delegate
+    
+    self.gestureType = options.gestureType
+    self.contentSize = options.contentSize
+    self.percentThreshold = options.percentThreshold
+    self.velocityThreshold = options.velocityThreshold
+    
     super.init()
     
-    // Configure the view for interaction
-    if let interactiveView = self.interactiveView {
+    // Configure the dismiss interactive gesture recognizer
+    for interactiveView in interactiveViews {
+      let gestureRecognizer = self.gestureType.createGestureRecognizer(target: self, action: #selector(self.handleGesture(_:)), axis: self.axis, direction: self.direction)
+      gestureRecognizer.delegate = self
       interactiveView.isUserInteractionEnabled = true
-      let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.handleGesture(_:)))
-      interactiveView.addGestureRecognizer(panGestureRecognizer)
-      self.activeGestureRecognizer = panGestureRecognizer
-    } else {
-      self.activeGestureRecognizer = nil
+      interactiveView.addGestureRecognizer(gestureRecognizer)
+      self.activeGestureRecognizers.append(gestureRecognizer)
     }
-  }
-  
-  // MARK: - Dismiss
-  
-  final func dismissController(completion: (() -> Void)? = nil) {
-    self.presentingController?.dismiss(animated: true, completion: completion)
   }
   
   // MARK: - Gestures
   
-  @objc func handleGesture(_ sender: UIPanGestureRecognizer) {
+  @objc private func handleGesture(_ sender: UIPanGestureRecognizer) {
     
-    guard let view = self.interactiveView else {
+    guard let view = sender.view, self.interactiveViews.contains(view) else {
       return
     }
     
     // Convert position to progress
     let translation = sender.translation(in: view)
     let progress = self.calculateProgress(translation: translation, in: view)
-    //    sender.location(in: view)
     
     // Velocity calculations
     self.updateVelocityProperties(currentTranslation: translation)
@@ -101,30 +99,21 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
     self.handleGestureState(gesture: sender, progress: progress)
   }
   
-  final func handleGestureState(gesture: UIPanGestureRecognizer, progress: CGFloat) {
+  private func handleGestureState(gesture: UIPanGestureRecognizer, progress: CGFloat) {
     switch gesture.state {
     case .began:
       self.hasStarted = true
-      self.dismissController()
-      break
-      
+      self.delegate?.interactionDidSurpassThreshold(self)
     case .changed:
       self.update(progress)
       self.shouldFinish = self.calculateShouldFinish(progress: progress, velocity: self.lastVelocity)
-      break
-      
     case .cancelled:
       self.hasStarted = false
       self.cancel()
-      break
-      
     case .ended:
       self.hasStarted = false
       self.shouldFinish ? self.finish() : self.cancel()
-      break
-      
-    default:
-      break
+    default: break
     }
   }
   
@@ -146,7 +135,7 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
   
   // MARK: - Calculations
   
-  final func updateVelocityProperties(currentTranslation: CGPoint) {
+  private func updateVelocityProperties(currentTranslation: CGPoint) {
     let currentDate: Date = Date()
     if self.lastTranslation == nil && self.lastTranslationDate == nil {
       self.lastVelocity = nil
@@ -160,36 +149,33 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
     }
   }
   
-  final func calculateShouldFinish(progress: CGFloat, velocity: CGFloat?) -> Bool {
-    if self.modes.contains(.percent) && progress > self.percentThreshold {
+  private func calculateShouldFinish(progress: CGFloat, velocity: CGFloat?) -> Bool {
+    if progress > self.percentThreshold {
       return true
-    } else if self.modes.contains(.velocity), let velocity = velocity, abs(velocity) > self.velocityThreshold {
+    } else if let velocity = velocity, abs(velocity) > self.velocityThreshold {
       return true
-    } else {
-      return false
     }
+    return false
   }
   
-  final func calculateProgress(translation: CGPoint, in view: UIView) -> CGFloat {
-    let xMovement = (self.direction == .negative ? -translation.x : translation.x) / view.bounds.width
-    let yMovement = (self.direction == .negative ? -translation.y : translation.y) / view.bounds.height
+  private func calculateProgress(translation: CGPoint, in view: UIView) -> CGFloat {
+    let xMovement = (self.direction == .negative ? -translation.x : translation.x) / (self.contentSize?.width ?? view.bounds.width)
+    let yMovement = (self.direction == .negative ? -translation.y : translation.y) / (self.contentSize?.height ?? view.bounds.height)
     
     let movement: CGFloat
     switch self.axis {
     case .x:
       movement = xMovement
-      break
     case .y:
       movement = yMovement
-      break
     case .xy:
       movement = CGFloat(sqrt(pow(Double(xMovement), 2) + pow(Double(yMovement), 2)))
-      break
     }
+    
     return CGFloat(min(max(Double(movement), 0.0), 1.0))
   }
   
-  final func calculateVelocity(lastTranslation: CGPoint, lastTranslationDate: Date, currentTranslation: CGPoint, currentTranslationDate: Date) -> CGFloat? {
+  private func calculateVelocity(lastTranslation: CGPoint, lastTranslationDate: Date, currentTranslation: CGPoint, currentTranslationDate: Date) -> CGFloat? {
     
     let duration = currentTranslationDate.timeIntervalSince(lastTranslationDate)
     guard duration != 0 else {
@@ -202,12 +188,31 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
     switch self.axis {
     case .x:
       return CGFloat(xVelocity)
-      
     case .y:
       return CGFloat(yVelocity)
-      
     case .xy:
       return sqrt(CGFloat(pow(xVelocity, 2) + pow(yVelocity, 2)))
     }
+  }
+}
+
+// MARK: - UIGestureRecognizerDelegate
+
+extension InteractiveTransition : UIGestureRecognizerDelegate {
+  
+  func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    // gestureRecognizer is the activeGestureRecognizer associated with this interactive transition
+    if gestureRecognizer.view == otherGestureRecognizer.view, let scrollView = gestureRecognizer.view as? UIScrollView {
+      if self.axis == .y && self.direction == .positive && scrollView.contentOffset.y <= 0 {
+        return true
+      } else if self.axis == .y && self.direction == .negative && scrollView.contentOffset.y >= scrollView.contentSize.height {
+        return true
+      } else if self.axis == .x && self.direction == .positive && scrollView.contentOffset.x <= 0 {
+        return true
+      } else if self.axis == .x && self.direction == .negative && scrollView.contentOffset.x >= scrollView.contentSize.width {
+        return true
+      }
+    }
+    return false
   }
 }

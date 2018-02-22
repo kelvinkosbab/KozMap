@@ -26,14 +26,14 @@ class CurrentLocationUpdatableService : NSObject, NSFetchedResultsControllerDele
   
   private var isListening: Bool = false
   
-  private var savedLocations: [SavedLocation] {
-    return self.savedLocationsFetchedResultsController?.fetchedObjects ?? []
+  private var placemarks: [Placemark] {
+    return self.placemarksFetchedResultsController?.fetchedObjects ?? []
   }
   
   // MARK: - NSFetchedResultsControllerDelegate
   
-  private lazy var savedLocationsFetchedResultsController: NSFetchedResultsController<SavedLocation>? = {
-    let controller = SavedLocation.newFetchedResultsController()
+  private lazy var placemarksFetchedResultsController: NSFetchedResultsController<Placemark>? = {
+    let controller = Placemark.newFetchedResultsController()
     controller.delegate = self
     try? controller.performFetch()
     return controller
@@ -81,10 +81,10 @@ class CurrentLocationUpdatableService : NSObject, NSFetchedResultsControllerDele
   // MARK: - Updating the model
   
   private func updateSavedLocationDistances(currentLocation: CLLocation) {
-    for savedLocation in self.savedLocations {
-      let updatedDistance = savedLocation.location.distance(from: currentLocation)
-      if savedLocation.lastDistance != updatedDistance {
-        savedLocation.lastDistance = updatedDistance
+    for placemark in self.placemarks {
+      let updatedDistance = placemark.location.distance(from: currentLocation)
+      if placemark.lastDistance != updatedDistance {
+        placemark.lastDistance = updatedDistance
       }
     }
     MyDataManager.shared.saveMainContext()

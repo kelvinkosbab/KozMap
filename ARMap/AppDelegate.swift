@@ -1,13 +1,12 @@
 //
 //  AppDelegate.swift
-//  TackARLocation
+//  ARMap
 //
-//  Created by Kelvin Kosbab on 10/30/17.
-//  Copyright © 2017 Tack Mobile. All rights reserved.
+//  Created by Kelvin Kosbab on 1/22/18.
+//  Copyright © 2018 Tack Mobile. All rights reserved.
 //
 
 import UIKit
-import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // Check if we don't have the correct permissions
     if !PermissionManager.shared.isAccessAuthorized {
-      let permissionsViewController = PermissionsViewController.newViewController()
+      let permissionsViewController = PermissionsViewController.newViewController(delegate: self)
       RootNavigationController.shared.viewControllers = [ permissionsViewController ]
     }
     
@@ -53,5 +52,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
     MyDataManager.shared.saveMainContext()
+  }
+}
+
+// MARK: - PermissionsViewControllerDelegate
+
+extension AppDelegate : PermissionsViewControllerDelegate {
+  
+  func didAuthorizeAllPermissions() {
+    self.showMainController()
+  }
+  
+  private func showMainController() {
+    let mainViewController = MainViewController.newViewController()
+    mainViewController.navigationItem.hidesBackButton = true
+    RootNavigationController.shared.pushViewController(mainViewController, animated: true)
   }
 }

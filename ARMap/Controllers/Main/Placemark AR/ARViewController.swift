@@ -12,7 +12,7 @@ import CoreLocation
 import CoreData
 
 protocol ARViewControllerDelegate : class {
-  func userDidTap(savedLocation: SavedLocation)
+  func userDidTap(placemark: Placemark)
 }
 
 class ARViewController : UIViewController {
@@ -25,16 +25,28 @@ class ARViewController : UIViewController {
   weak var trackingStateDelegate: ARStateDelegate? = nil
   private let session = ARSession()
   private let sessionConfig = ARWorldTrackingConfiguration()
-  public private(set) weak var sceneNode: SCNNode?
-  public private(set) weak var basePlane: SCNNode?
-  internal var placemarks = Set<SavedLocationNode>()
+  public private(set) var sceneNode: SCNNode?
+  public private(set) var basePlane: SCNNode?
+  public private(set) var axisNode: AxisNode?
+  internal var placemarkNodeContainers = Set<PlacemarkNodeContainer>()
   
-  var savedLocations: [SavedLocation] {
-    return self.savedLocationsFetchedResultsController?.fetchedObjects ?? []
+  var placemarks: [Placemark] {
+    return self.savedLocationsFetchedResultsController.fetchedObjects ?? []
   }
   
-  private lazy var savedLocationsFetchedResultsController: NSFetchedResultsController<SavedLocation>? = {
-    let controller = SavedLocation.newFetchedResultsController()
+  private lazy var savedLocationsFetchedResultsController: NSFetchedResultsController<Placemark> = {
+    let controller = Placemark.newFetchedResultsController()
+    controller.delegate = self
+    try? controller.performFetch()
+    return controller
+  }()
+  
+  var defaults: Defaults? {
+    return self.defaultsFetchedResultsController.fetchedObjects?.first
+  }
+  
+  private lazy var defaultsFetchedResultsController: NSFetchedResultsController<Defaults> = {
+    let controller = Defaults.newFetchedResultsController()
     controller.delegate = self
     try? controller.performFetch()
     return controller
@@ -44,15 +56,6 @@ class ARViewController : UIViewController {
   
   private var currentCameraTrackingState: ARCamera.TrackingState? = nil {
     didSet {
-      
-      // Check if the device supports ARKit
-      if let state = self.state {
-        switch state {
-        case .unsupported:
-          return
-        default: break
-        }
-      }
       
       guard let currentCameraTrackingState = self.currentCameraTrackingState else {
         self.state = .configuring
@@ -66,6 +69,8 @@ class ARViewController : UIViewController {
         self.state = .limited(.excessiveMotion)
       case .limited(.initializing):
         self.state = .limited(.initializing)
+//      case .limited(.relocalizing):
+//        self.state = .limited(.relocalizing)
       case .normal:
         self.state = .normal
       case .notAvailable:
@@ -154,12 +159,10 @@ class ARViewController : UIViewController {
   // MARK: - Notifications
   
   @objc func didReceiveUpdatedLocationNotification(_ notification: Notification) {
-    self.updatePlacemarks(updatePosition: true)
+    self.updatePlacemarkNodes(updatePosition: true)
   }
   
-  @objc func didReceiveUpdatedHeadingNotification(_ notification: Notification) {
-    
-  }
+  @objc func didReceiveUpdatedHeadingNotification(_ notification: Notification) {}
   
   // MARK: - Scene
   
@@ -170,9 +173,15 @@ class ARViewController : UIViewController {
   @objc func restartPlaneDetection() {
     
     // Remove all nodes
+    self.sceneNode?.removeFromParentNode()
     self.sceneNode = nil
+    self.basePlane?.removeFromParentNode()
     self.basePlane = nil
-    self.placemarks.removeAll()
+    for placemarkNodeContainer in self.placemarkNodeContainers {
+      placemarkNodeContainer.placemarkNode?.removeFromParentNode()
+      placemarkNodeContainer.placemarkNode = nil
+    }
+    self.placemarkNodeContainers.removeAll()
     self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
       node.removeFromParentNode()
     }
@@ -184,32 +193,32 @@ class ARViewController : UIViewController {
     self.session.run(self.sessionConfig, options: [.resetTracking, .removeExistingAnchors])
   }
   
-  // MARK: - Placemarks
+  // MARK: - Placemark Node Containers
   
-  private func add(placemark: SavedLocationNode) {
-    self.placemarks.insert(placemark)
-    self.update(placemark: placemark, animated: true, updatePosition: true)
+  private func add(placemarkNodeContainer: PlacemarkNodeContainer) {
+    self.placemarkNodeContainers.insert(placemarkNodeContainer)
+    self.update(placemarkNodeContainer: placemarkNodeContainer, animated: true, updatePosition: true)
   }
   
-  internal func updatePlacemarks(updatePosition: Bool = true) {
-    for placemark in self.placemarks {
-      self.update(placemark: placemark, animated: true, updatePosition: updatePosition)
+  internal func updatePlacemarkNodes(updatePosition: Bool = true) {
+    for placemarkNodeContainer in self.placemarkNodeContainers {
+      self.update(placemarkNodeContainer: placemarkNodeContainer, animated: true, updatePosition: updatePosition)
     }
   }
   
   // MARK: - Updating placemarks
   
-  internal func update(placemark: SavedLocationNode, animated: Bool = false, updatePosition: Bool = true) {
-    Log.log("Updating placemark \(placemark.savedLocation.name ?? "nil name") at location \(placemark.savedLocation.location.coordinate)")
+  internal func update(placemarkNodeContainer: PlacemarkNodeContainer, animated: Bool = false, updatePosition: Bool = true) {
+    Log.log("Updating placemark \(placemarkNodeContainer.placemark.name ?? "nil name") at location \(placemarkNodeContainer.placemark.location.coordinate)")
     
     // Refresh saved location properties
-    placemark.refreshContent()
+    placemarkNodeContainer.refreshContent()
     
     // Scene location updates
     if updatePosition, let currentScenePosition = self.currentScenePosition, let currentLocation = self.currentLocation {
       
       // Distance to the saved location object
-      let distance = placemark.savedLocation.location.distance(from: currentLocation)
+      let distance = placemarkNodeContainer.placemark.location.distance(from: currentLocation)
       let distanceType = ARDistanceType(distance: distance)
       
       // Update the active placemark node
@@ -218,46 +227,46 @@ class ARViewController : UIViewController {
       
       switch distanceType {
       case .close:
-        if !placemark.isDefaultPlacemarkNode {
+        if !placemarkNodeContainer.isDefaultPlacemarkNode {
           dispatchGroup.enter()
           let defaultPlacemarkNode = PlacemarkNode()
           defaultPlacemarkNode.loadModel { [weak self] in
-            placemark.placemarkNode?.removeFromParentNode()
-            placemark.placemarkNode = defaultPlacemarkNode
+            placemarkNodeContainer.placemarkNode?.removeFromParentNode()
+            placemarkNodeContainer.placemarkNode = defaultPlacemarkNode
             
-            placemark.refreshContent()
+            placemarkNodeContainer.refreshContent()
             self?.sceneNode?.addChildNode(defaultPlacemarkNode)
             dispatchGroup.leave()
           }
         }
       case .medium:
-        if !placemark.isPinPlacemarkNode {
+        if !placemarkNodeContainer.isPinPlacemarkNode {
           dispatchGroup.enter()
           let pinPlacemarkNode = PinPlacemarkNode()
           pinPlacemarkNode.loadModel { [weak self] in
-            placemark.placemarkNode?.removeFromParentNode()
-            placemark.placemarkNode = pinPlacemarkNode
+            placemarkNodeContainer.placemarkNode?.removeFromParentNode()
+            placemarkNodeContainer.placemarkNode = pinPlacemarkNode
             pinPlacemarkNode.beamTransparency = 0.25
             
-            placemark.refreshContent()
+            placemarkNodeContainer.refreshContent()
             self?.sceneNode?.addChildNode(pinPlacemarkNode)
             dispatchGroup.leave()
           }
         }
       case .far:
-        placemark.placemarkNode?.removeFromParentNode()
-        placemark.placemarkNode = nil
+        placemarkNodeContainer.placemarkNode?.removeFromParentNode()
+        placemarkNodeContainer.placemarkNode = nil
       }
       
       // Wait until the active placemark node has been set
-      dispatchGroup.notify(queue: .main) {
+      dispatchGroup.notify(queue: .main) { [weak placemarkNodeContainer] in
         
-        guard let placemarkNode = placemark.placemarkNode else {
+        guard let placemarkNodeContainer = placemarkNodeContainer, let placemarkNode = placemarkNodeContainer.placemarkNode else {
           return
         }
         
         // Translated location
-        let locationTranslation = currentLocation.translation(toLocation: placemark.savedLocation.location)
+        let locationTranslation = currentLocation.translation(toLocation: placemarkNodeContainer.placemark.location)
         
         // Update the placemark based on the distance
         switch distanceType {
@@ -318,8 +327,7 @@ extension ARViewController : ARSCNViewDelegate {
         scene.rootNode.addChildNode(sceneNode)
         
         // Axes node
-        let axesNode = AxesNode()
-        self.sceneNode?.addChildNode(axesNode)
+        self.configureAxisNode()
         
         // Base plane
         let basePlane = Plane(width: 3000, length: 3000)
@@ -328,8 +336,8 @@ extension ARViewController : ARSCNViewDelegate {
         self.sceneNode?.addChildNode(basePlane)
         
         // Update placemarks
-        self.updateSavedLocations()
-        self.updatePlacemarks(updatePosition: true)
+        self.updatePlacemarks()
+        self.updatePlacemarkNodes(updatePosition: true)
         
       default: break
       }
@@ -346,7 +354,9 @@ extension ARViewController : ARSCNViewDelegate {
   
   func session(_ session: ARSession, didFailWithError error: Error) {
     Log.extendedLog("Session did fail with error: \(error)")
-    self.state = .unsupported
+    
+    // Update the AR state
+    self.state = .error(error.localizedDescription)
   }
   
   func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
@@ -358,6 +368,8 @@ extension ARViewController : ARSCNViewDelegate {
       Log.extendedLog("Camera did change tracking state: limited, excessive motion")
     case .limited(.initializing):
       Log.extendedLog("Camera did change tracking state: limited, initializing")
+//    case .limited(.relocalizing):
+//      Log.extendedLog("Camera did change tracking state: limited, relocalizing")
     case .normal:
       Log.extendedLog("Camera did change tracking state: normal")
     case .notAvailable:
@@ -375,54 +387,81 @@ extension ARViewController : NSFetchedResultsControllerDelegate {
   func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
     switch type {
     case .insert:
-      if let savedLocation = anObject as? SavedLocation {
-        self.add(savedLocation: savedLocation)
+      if let placemark = anObject as? Placemark {
+        self.add(placemark: placemark)
       }
       
     case .delete:
-      if let savedLocation = anObject as? SavedLocation {
-        self.remove(savedLocation: savedLocation)
+      if let placemark = anObject as? Placemark {
+        self.remove(placemark: placemark)
       }
       
     case .update, .move:
-      if let savedLocation = anObject as? SavedLocation {
-        self.update(savedLocation: savedLocation)
+      if let placemark = anObject as? Placemark {
+        self.update(placemark: placemark)
       }
     }
   }
   
-  func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {}
-  
-  // MARK: - Saved Locations
-  
-  func updateSavedLocations() {
-    for savedLocation in self.savedLocations {
-      self.update(savedLocation: savedLocation)
+  func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    if controller == self.defaultsFetchedResultsController {
+      self.configureAxisNode()
     }
   }
   
-  private func add(savedLocation: SavedLocation) {
-    
-    // Add placemark
-    let placemark = SavedLocationNode(savedLocation: savedLocation)
-    self.add(placemark: placemark)
-  }
+  // MARK: - Axis Node
   
-  private func update(savedLocation: SavedLocation) {
+  func configureAxisNode() {
     
-    guard let placemark = self.placemarks.first(where: { $0.savedLocation == savedLocation }) else {
-      self.add(savedLocation: savedLocation)
+    guard let defaults = self.defaults else {
       return
     }
     
-    self.update(placemark: placemark)
+    if defaults.showAxis {
+      if self.axisNode == nil {
+        let axisNode = AxisNode()
+        self.axisNode = axisNode
+        if let pointOfView = self.sceneView.pointOfView {
+          axisNode.position = pointOfView.position
+        }
+        self.sceneNode?.addChildNode(axisNode)
+      }
+    } else {
+      self.axisNode?.removeFromParentNode()
+      self.axisNode = nil
+    }
   }
   
-  private func remove(savedLocation: SavedLocation) {
-    if let placemark = self.placemarks.first(where: { $0.savedLocation == savedLocation }) {
-      Log.log("Removing \(savedLocation.name ?? "nil name") at location \(savedLocation.location.coordinate)")
-      self.placemarks.remove(placemark)
-      placemark.placemarkNode?.removeFromParentNode()
+  // MARK: - Placemarks
+  
+  func updatePlacemarks() {
+    for placemark in self.placemarks {
+      self.update(placemark: placemark)
+    }
+  }
+  
+  private func add(placemark: Placemark) {
+    
+    // Add placemark
+    let placemarkNodeContainer = PlacemarkNodeContainer(placemark: placemark)
+    self.add(placemarkNodeContainer: placemarkNodeContainer)
+  }
+  
+  private func update(placemark: Placemark) {
+    
+    guard let placemarkNodeContainer = self.placemarkNodeContainers.first(where: { $0.placemark == placemark }) else {
+      self.add(placemark: placemark)
+      return
+    }
+    
+    self.update(placemarkNodeContainer: placemarkNodeContainer)
+  }
+  
+  private func remove(placemark: Placemark) {
+    if let placemarkNodeContainer = self.placemarkNodeContainers.first(where: { $0.placemark == placemark }) {
+      Log.log("Removing \(placemark.name ?? "nil name") at location \(placemark.location.coordinate)")
+      self.placemarkNodeContainers.remove(placemarkNodeContainer)
+      placemarkNodeContainer.placemarkNode?.removeFromParentNode()
     }
   }
 }
