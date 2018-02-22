@@ -39,7 +39,7 @@ class VisualEffectFadeAnimator : NSObject, PresentableAnimator {
       self.presentedViewControllerDelegate?.willPresentViewController()
       presentedViewController.view.backgroundColor = .clear
       presentedViewController.view.alpha = 0
-      containerView.addSubview(presentedViewController.view)
+      presentedViewController.view.addToContainer(containerView)
       UIView.animate(withDuration: self.transitionDuration(using: transitionContext), animations: {
         presentedViewController.view.alpha = 1
         self.presentingViewControllerDelegate?.isPresentingViewController(presentedViewController)

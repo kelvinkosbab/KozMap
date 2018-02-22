@@ -180,12 +180,6 @@ class MainViewController : BaseViewController {
     
     // Navigation bar
     self.navigationController?.navigationBar.alpha = 1
-    if self.navigationItem.title == nil {
-      self.navigationItem.title = BuildManager.shared.buildTarget.appName
-    }
-    if self.navigationItem.rightBarButtonItem == nil {
-      self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "assetOptions"), style: .plain, target: self, action: #selector(self.settingsButtonSelected))
-    }
   }
   
   func enableAllElements() {

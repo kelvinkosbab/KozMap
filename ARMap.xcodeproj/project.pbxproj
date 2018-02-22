@@ -217,6 +217,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B619F4BD203E7EF800DD8BA7 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				B686EED920166C7300ACF075 /* Assets.xcassets */,
+				B686EF1620166D8700ACF075 /* Models.scnassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
 		B686EEC320166C7300ACF075 = {
 			isa = PBXGroup;
 			children = (
@@ -239,6 +248,7 @@
 				B686EECF20166C7300ACF075 /* AppDelegate.swift */,
 				B686EEE420166CF500ACF075 /* Common */,
 				B686EEE520166CFA00ACF075 /* Controllers */,
+				B619F4BD203E7EF800DD8BA7 /* Assets */,
 				B686EEE620166CFF00ACF075 /* Supporting Files */,
 			);
 			path = ARMap;
@@ -285,7 +295,6 @@
 		B686EEE620166CFF00ACF075 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				B686EED920166C7300ACF075 /* Assets.xcassets */,
 				B686EF6A20166DCF00ACF075 /* LaunchScreen.storyboard */,
 				B686EEDE20166C7300ACF075 /* Info.plist */,
 			);
@@ -356,7 +365,6 @@
 		B686EF1520166D8700ACF075 /* SceneKit */ = {
 			isa = PBXGroup;
 			children = (
-				B686EF1620166D8700ACF075 /* Models.scnassets */,
 				B686EF1720166D8700ACF075 /* ARSCNView+Util.swift */,
 				B686EF1820166D8700ACF075 /* SCNMaterial+Util.swift */,
 				B686EF1F20166D8700ACF075 /* SCNVector3+Util.swift */,
@@ -760,6 +768,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -822,6 +831,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -876,7 +886,7 @@
 		B686EEE220166C7300ACF075 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-tackmobile";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 9B83N8S7VW;
@@ -896,7 +906,7 @@
 		B686EEE320166C7300ACF075 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-tackmobile";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
@@ -919,6 +929,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -980,7 +991,7 @@
 		B6EE24652038D3F400380AAA /* Koz - Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-kozinga";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Kelvin  Kosbab (8Z5225C74A)";
 				CODE_SIGN_STYLE = Manual;
@@ -1002,6 +1013,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1056,7 +1068,7 @@
 		B6EE24672038D40000380AAA /* Koz - Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-kozinga";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Kozinga Ltd. (6SS93B87P2)";
 				CODE_SIGN_STYLE = Manual;
