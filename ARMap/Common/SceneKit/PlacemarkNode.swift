@@ -15,6 +15,41 @@ class PlacemarkNode : VirtualObject {
     return "PlacemarkNode"
   }
   
+  // MARK: - Text Alignment
+  
+  internal var nameTextAlignment: SCNTextAlignment? = nil
+  internal var distanceTextAlignment: SCNTextAlignment? = nil
+  internal var unitTextTextAlignment: SCNTextAlignment? = nil
+  
+  // MARK: - Init
+  
+  convenience init(primaryName: String? = nil, distanceText: String? = nil, unitText: String? = nil, beamColor: UIColor = .kozRed, beamTransparency: CGFloat = 0.7) {
+    self.init()
+    self.primaryName = primaryName
+    self.distanceText = distanceText
+    self.unitText = unitText
+    self.beamColor = beamColor
+    self.beamTransparency = beamTransparency
+  }
+  
+  override init() {
+    super.init()
+    
+    // Set up bilboard constraint so always facing user
+    let billboardConstraint = SCNBillboardConstraint()
+    billboardConstraint.freeAxes = .Y
+    self.constraints = [ billboardConstraint ]
+    
+    // Text alignment properties
+    self.nameTextAlignment = nil
+    self.distanceTextAlignment = .center
+    self.unitTextTextAlignment = .center
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
   // MARK: - Properties
   
   var scalableNode: SCNNode? {
@@ -51,29 +86,6 @@ class PlacemarkNode : VirtualObject {
     }
   }
   
-  // MARK: - Init
-  
-  convenience init(primaryName: String? = nil, distanceText: String? = nil, unitText: String? = nil, beamColor: UIColor = .kozRed, beamTransparency: CGFloat = 0.7) {
-    self.init()
-    self.primaryName = primaryName
-    self.distanceText = distanceText
-    self.unitText = unitText
-    self.beamColor = beamColor
-    self.beamTransparency = beamTransparency
-  }
-  
-  override init() {
-    super.init()
-    
-    let billboardConstraint = SCNBillboardConstraint()
-    billboardConstraint.freeAxes = .Y
-    self.constraints = [ billboardConstraint ]
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-  
   // MARK: - Child Nodes
   
   final internal var nameTextNode: SCNNode? {
@@ -105,12 +117,23 @@ class PlacemarkNode : VirtualObject {
   }
   
   internal func updatePrimaryName() {
-    if let textGeometry = self.nameTextNode?.geometry as? SCNText {
+    if let textGeometry = self.nameTextNode?.geometry as? SCNText, textGeometry.string as? String != self.primaryName {
       textGeometry.alignmentMode = kCAAlignmentCenter
-      textGeometry.truncationMode = kCATruncationEnd
-      
-      if textGeometry.string as? String != self.primaryName {
-        textGeometry.string = self.primaryName
+      textGeometry.string = self.primaryName
+    }
+    
+    // Adjustments for text alignment
+    if let nameTextAlignment = self.nameTextAlignment {
+      switch nameTextAlignment {
+      case .left(let xOffset): // Left align the text
+        if let nameTextNode = self.nameTextNode {
+          nameTextNode.position = SCNVector3(x: xOffset, y: nameTextNode.position.y, z: nameTextNode.position.z)
+        }
+      case .center: // Center the node on the x-axis
+        if let nameTextNode = self.nameTextNode {
+          let dx = -(nameTextNode.boundingBox.max.x - nameTextNode.boundingBox.min.x) * nameTextNode.scale.x / 2
+          nameTextNode.position = SCNVector3(x: dx, y: nameTextNode.position.y, z: nameTextNode.position.z)
+        }
       }
     }
   }
@@ -121,26 +144,41 @@ class PlacemarkNode : VirtualObject {
       textGeometry.string = self.distanceText
     }
     
-    // Center the node on the x-axis
-    if let distanceTextNode = self.distanceTextNode {
-      let dx = -(distanceTextNode.boundingBox.max.x - distanceTextNode.boundingBox.min.x) * distanceTextNode.scale.x / 2
-      distanceTextNode.position = SCNVector3(x: dx, y: distanceTextNode.position.y, z: distanceTextNode.position.z)
+    // Adjustments for text alignment
+    if let distanceTextAlignment = self.distanceTextAlignment {
+      switch distanceTextAlignment {
+      case .left(let xOffset): // Left align the text
+        if let distanceTextNode = self.distanceTextNode {
+          distanceTextNode.position = SCNVector3(x: xOffset, y: distanceTextNode.position.y, z: distanceTextNode.position.z)
+        }
+      case .center: // Center the node on the x-axis
+        if let distanceTextNode = self.distanceTextNode {
+          let dx = -(distanceTextNode.boundingBox.max.x - distanceTextNode.boundingBox.min.x) * distanceTextNode.scale.x / 2
+          distanceTextNode.position = SCNVector3(x: dx, y: distanceTextNode.position.y, z: distanceTextNode.position.z)
+        }
+      }
     }
   }
   
   internal func updateUnitText() {
-    if let textGeometry = self.unitTextNode?.geometry as? SCNText {
+    if let textGeometry = self.unitTextNode?.geometry as? SCNText, textGeometry.string as? String != self.unitText {
       textGeometry.alignmentMode = kCAAlignmentCenter
-      
-      if textGeometry.string as? String != self.unitText {
-        textGeometry.string = self.unitText
-      }
+      textGeometry.string = self.unitText
     }
     
-    // Center the node on the x-axis
-    if let unitTextNode = self.unitTextNode {
-      let dx = -(unitTextNode.boundingBox.max.x - unitTextNode.boundingBox.min.x) * unitTextNode.scale.x / 2
-      unitTextNode.position = SCNVector3(x: dx, y: unitTextNode.position.y, z: unitTextNode.position.z)
+    // Adjustments for text alignment
+    if let unitTextTextAlignment = self.unitTextTextAlignment {
+      switch unitTextTextAlignment {
+      case .left(let xOffset): // Left align the text
+        if let unitTextNode = self.unitTextNode {
+          unitTextNode.position = SCNVector3(x: xOffset, y: unitTextNode.position.y, z: unitTextNode.position.z)
+        }
+      case .center: // Center the node on the x-axis
+        if let unitTextNode = self.unitTextNode {
+          let dx = -(unitTextNode.boundingBox.max.x - unitTextNode.boundingBox.min.x) * unitTextNode.scale.x / 2
+          unitTextNode.position = SCNVector3(x: dx, y: unitTextNode.position.y, z: unitTextNode.position.z)
+        }
+      }
     }
   }
   

@@ -22,8 +22,7 @@ extension PresentableController where Self : UIViewController {
   func present(viewController: UIViewController, withMode mode: PresentationMode, options: [PresentableControllerOption] = []) {
     
     // Configure the view controller to present
-    let inNavigationController = options.inNavigationController
-    let viewControllerToPresent: UIViewController = mode.isNavStack && inNavigationController ? BaseNavigationController(rootViewController: viewController) : viewController
+    let viewControllerToPresent: UIViewController = mode.isNavStack ? viewController : options.inNavigationController ? BaseNavigationController(rootViewController: viewController) : viewController
     
     // Configure the initial flow controller
     if let presentableController = viewController as? PresentableController, !mode.isNavStack {
@@ -103,3 +102,4 @@ extension PresentableController where Self : UIViewController {
     currentFlowInitialController.dismissController(completion: completion)
   }
 }
+
