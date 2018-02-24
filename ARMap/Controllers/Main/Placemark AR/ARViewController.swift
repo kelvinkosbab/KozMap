@@ -240,16 +240,16 @@ class ARViewController : UIViewController {
           }
         }
       case .medium:
-        if !placemarkNodeContainer.isPinPlacemarkNode {
+        if !placemarkNodeContainer.isTextFlagPlacemarkNode {
           dispatchGroup.enter()
-          let pinPlacemarkNode = PinPlacemarkNode()
-          pinPlacemarkNode.loadModel { [weak self] in
+          let textFlagPlacemarkNode = TextFlagPlacemarkNode()
+          textFlagPlacemarkNode.loadModel { [weak self] in
             placemarkNodeContainer.placemarkNode?.removeFromParentNode()
-            placemarkNodeContainer.placemarkNode = pinPlacemarkNode
-            pinPlacemarkNode.beamTransparency = 0.25
+            placemarkNodeContainer.placemarkNode = textFlagPlacemarkNode
+            textFlagPlacemarkNode.beamTransparency = 0.25
             
             placemarkNodeContainer.refreshContent()
-            self?.sceneNode?.addChildNode(pinPlacemarkNode)
+            self?.sceneNode?.addChildNode(textFlagPlacemarkNode)
             dispatchGroup.leave()
           }
         }

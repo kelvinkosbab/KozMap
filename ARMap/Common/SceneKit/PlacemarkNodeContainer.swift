@@ -38,6 +38,8 @@ class PlacemarkNodeContainer : Hashable {
   var isDefaultPlacemarkNode: Bool {
     if let _ = self.placemarkNode as? PinPlacemarkNode {
       return false
+    } else if let _ = self.placemarkNode as? TextFlagPlacemarkNode {
+        return false
     } else if let _ = self.placemarkNode {
       return true
     }
@@ -46,6 +48,13 @@ class PlacemarkNodeContainer : Hashable {
   
   var isPinPlacemarkNode: Bool {
     if let _ = self.placemarkNode as? PinPlacemarkNode {
+      return true
+    }
+    return false
+  }
+  
+  var isTextFlagPlacemarkNode: Bool {
+    if let _ = self.placemarkNode as? TextFlagPlacemarkNode {
       return true
     }
     return false
