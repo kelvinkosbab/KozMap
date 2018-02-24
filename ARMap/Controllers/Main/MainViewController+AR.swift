@@ -41,6 +41,10 @@ extension MainViewController : ARStateDelegate {
   
   // MARK: - Configuring Messages
   
+  private var configuringViewController: ConfiguringViewController? {
+    return self.presentedViewController as? ConfiguringViewController
+  }
+  
   func showConfiguringView(state: ARState) {
     
     // Check if already showing the configuring view
@@ -49,9 +53,18 @@ extension MainViewController : ARStateDelegate {
       return
     }
     
-    // Create the configuring view
+    // Dismiss any other presented controllers
+    if let _ = self.presentedViewController {
+      self.dismiss(animated: true) { [weak self] in
+        self?.presentConfiguringViewController(state: state)
+      }
+    } else {
+      self.presentConfiguringViewController(state: state)
+    }
+  }
+  
+  private func presentConfiguringViewController(state: ARState) {
     let configuringViewController = ConfiguringViewController.newViewController(state: .statusMessage(state.status, state.message))
-    self.configuringViewController = configuringViewController
     self.present(viewController: configuringViewController, withMode: .custom(.visualEffectFade), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
   }
   

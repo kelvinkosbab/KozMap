@@ -25,7 +25,6 @@ class MainViewController : BaseViewController {
   @IBOutlet weak var listButton: UIButton!
   
   internal var arViewController: ARViewController? = nil
-  internal var configuringViewController: ConfiguringViewController?
   
   // MARK: - Lifecycle
   
