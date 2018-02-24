@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14101" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="swK-ic-q7G">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="swK-ic-q7G">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,16 +17,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="assetAppIcon" translatesAutoresizingMaskIntoConstraints="NO" id="LHy-j7-4OU">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="assetLandscape" translatesAutoresizingMaskIntoConstraints="NO" id="LHy-j7-4OU">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rPc-DI-9Aq">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ejs-Yq-gO9">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="LHy-j7-4OU" firstAttribute="trailing" secondItem="4Ar-d5-2qc" secondAttribute="trailing" id="2wQ-So-3wQ"/>
-                            <constraint firstItem="LHy-j7-4OU" firstAttribute="leading" secondItem="4Ar-d5-2qc" secondAttribute="leading" id="A55-fm-HTX"/>
+                            <constraint firstItem="LHy-j7-4OU" firstAttribute="leading" secondItem="pQZ-qv-kXA" secondAttribute="leading" id="Ge5-Gf-LOD"/>
                             <constraint firstAttribute="bottom" secondItem="LHy-j7-4OU" secondAttribute="bottom" id="Z0V-0a-k5N"/>
+                            <constraint firstAttribute="trailing" secondItem="rPc-DI-9Aq" secondAttribute="trailing" id="bVN-Op-bDa"/>
                             <constraint firstItem="LHy-j7-4OU" firstAttribute="top" secondItem="pQZ-qv-kXA" secondAttribute="top" id="dVO-ik-u2W"/>
+                            <constraint firstItem="rPc-DI-9Aq" firstAttribute="leading" secondItem="pQZ-qv-kXA" secondAttribute="leading" id="dqb-sa-tcd"/>
+                            <constraint firstAttribute="trailing" secondItem="LHy-j7-4OU" secondAttribute="trailing" id="fA1-Hj-u0A"/>
+                            <constraint firstAttribute="bottom" secondItem="rPc-DI-9Aq" secondAttribute="bottom" id="wd9-7e-5sk"/>
+                            <constraint firstItem="rPc-DI-9Aq" firstAttribute="top" secondItem="pQZ-qv-kXA" secondAttribute="top" id="zR5-3f-Tje"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4Ar-d5-2qc"/>
                     </view>
@@ -37,6 +49,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="assetAppIcon" width="2010" height="2010"/>
+        <image name="assetLandscape" width="1000" height="666"/>
     </resources>
 </document>

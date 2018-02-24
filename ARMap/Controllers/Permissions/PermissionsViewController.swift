@@ -55,6 +55,9 @@ class PermissionsViewController : UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    self.title = "Permissions"
+    self.navigationItem.largeTitleDisplayMode = .never
+    
     self.locationActivityIndicatorView.isHidden = true
     self.cameraActivityIndicatorView.isHidden = true
   }
