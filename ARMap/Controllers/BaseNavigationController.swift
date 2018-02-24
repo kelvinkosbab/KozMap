@@ -61,11 +61,22 @@ class BaseNavigationController : UINavigationController, PresentableController {
     var titleTextAttributes: [NSAttributedStringKey : Any]? {
       switch self {
       case .standard:
-        return [ NSAttributedStringKey.font: UIFont.systemFont(ofSize: 17, weight: .medium), NSAttributedStringKey.foregroundColor: UIColor.black ]
+        return [ NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20, weight: .regular), NSAttributedStringKey.foregroundColor: UIColor.black ]
       case .transparent:
-        return [ NSAttributedStringKey.font: UIFont.systemFont(ofSize: 17, weight: .medium), NSAttributedStringKey.foregroundColor: UIColor.white ]
+        return [ NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20, weight: .regular), NSAttributedStringKey.foregroundColor: UIColor.white ]
       case .transparentBlack:
-        return [ NSAttributedStringKey.font: UIFont.systemFont(ofSize: 17, weight: .medium), NSAttributedStringKey.foregroundColor: UIColor.black ]
+        return [ NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20, weight: .regular), NSAttributedStringKey.foregroundColor: UIColor.black ]
+      }
+    }
+    
+    var largeTitleTextAttributes: [NSAttributedStringKey : Any]? {
+      switch self {
+      case .standard:
+        return [ NSAttributedStringKey.foregroundColor: UIColor.black ]
+      case .transparent:
+        return [ NSAttributedStringKey.foregroundColor: UIColor.white ]
+      case .transparentBlack:
+        return [ NSAttributedStringKey.foregroundColor: UIColor.black ]
       }
     }
     
@@ -104,12 +115,8 @@ class BaseNavigationController : UINavigationController, PresentableController {
     self.navigationBar.barTintColor = self.navigationBarStyle.barTintColor
     self.navigationBar.tintColor = self.navigationBarStyle.tintColor
     self.navigationBar.titleTextAttributes = self.navigationBarStyle.titleTextAttributes
+    self.navigationBar.largeTitleTextAttributes = self.navigationBarStyle.largeTitleTextAttributes
     self.navigationBar.isTranslucent = self.navigationBarStyle.isTranslucent
-    
-    // Back button
-    //self.navigationBar.backIndicatorImage = self.navigationBarStyle.backIndicator
-    //self.navigationBar.backIndicatorTransitionMaskImage = self.navigationBarStyle.backIndicator
-    //self.navigationBar.backItem?.title = "Back"
     
     switch self.navigationBarStyle {
     case .transparent:

@@ -183,7 +183,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="assetAppIcon" translatesAutoresizingMaskIntoConstraints="NO" id="SUC-dA-Hko">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="assetLandscape" translatesAutoresizingMaskIntoConstraints="NO" id="SUC-dA-Hko">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="whO-p3-r5W">
@@ -191,23 +191,12 @@
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="AF7-ux-ABG">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Permissions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gn7-QP-Bgt">
-                                            <rect key="frame" x="135.5" y="40" width="105" height="24"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="gn7-QP-Bgt" firstAttribute="top" secondItem="AF7-ux-ABG" secondAttribute="top" constant="40" id="3Lv-iC-aYB"/>
-                                        <constraint firstItem="gn7-QP-Bgt" firstAttribute="centerX" secondItem="AF7-ux-ABG" secondAttribute="centerX" id="IOk-yF-b4c"/>
-                                    </constraints>
                                 </view>
                                 <blurEffect style="dark"/>
                             </visualEffectView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UUY-Ab-d1h">
-                                <rect key="frame" x="111" y="278.5" width="153" height="30"/>
+                                <rect key="frame" x="102" y="277" width="171" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Allow Location Access">
                                     <color key="titleColor" name="SeaBlue"/>
                                 </state>
@@ -220,7 +209,8 @@
                                 <color key="color" name="SeaBlue"/>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oIR-3d-g9M">
-                                <rect key="frame" x="113.5" y="358.5" width="148" height="30"/>
+                                <rect key="frame" x="105" y="357" width="165" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Allow Camera Access">
                                     <color key="titleColor" name="SeaBlue"/>
                                 </state>
@@ -233,7 +223,7 @@
                                 <color key="color" name="SeaBlue"/>
                             </activityIndicatorView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="whO-p3-r5W" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="6Fv-kl-FsI"/>
                             <constraint firstItem="5xe-Pa-z4L" firstAttribute="centerX" secondItem="oIR-3d-g9M" secondAttribute="centerX" id="85y-sA-eba"/>
@@ -263,7 +253,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-786" y="-684"/>
+            <point key="canvasLocation" x="-786.39999999999998" y="-684.10794602698661"/>
         </scene>
         <!--Configuring View Controller-->
         <scene sceneID="dHe-9e-Fzr">
@@ -274,14 +264,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QnS-bt-iYg">
-                                <rect key="frame" x="50" y="323.5" width="275" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="50" y="322" width="275" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JeC-ml-DRX">
-                                <rect key="frame" x="50" y="364" width="275" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <rect key="frame" x="50" y="366" width="275" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -470,7 +460,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="assetAppIcon" width="2010" height="2010"/>
+        <image name="assetLandscape" width="1000" height="666"/>
         <image name="assetList" width="24" height="14"/>
         <image name="assetPlus" width="24" height="24"/>
         <namedColor name="SeaBlue">

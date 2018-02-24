@@ -32,20 +32,10 @@ class MainViewController : BaseViewController {
     super.viewDidLoad()
     
     self.navigationItem.largeTitleDisplayMode = .never
-    self.hideAllElements()
-    self.disableAllElements()
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    
-    // Style visual effect views
-    self.addVisualEffectView.layer.cornerRadius = 28
-    self.addVisualEffectView.layer.masksToBounds = true
-    self.addVisualEffectView.clipsToBounds = true
-    self.listVisualEffectView.layer.cornerRadius = 28
-    self.listVisualEffectView.layer.masksToBounds = true
-    self.listVisualEffectView.clipsToBounds = true
     
     // Notifications
     NotificationCenter.default.addObserver(self, selector: #selector(self.handleKeyboardNotification(_:)), name: .UIKeyboardWillShow, object: nil)
@@ -56,6 +46,21 @@ class MainViewController : BaseViewController {
     super.viewDidDisappear(animated)
     
     NotificationCenter.default.removeObserver(self)
+  }
+  
+  override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+    
+    if self.addVisualEffectView.layer.cornerRadius != 28 {
+      self.addVisualEffectView.layer.cornerRadius = 28
+      self.addVisualEffectView.layer.masksToBounds = true
+      self.addVisualEffectView.clipsToBounds = true
+    }
+    if self.listVisualEffectView.layer.cornerRadius != 28 {
+      self.listVisualEffectView.layer.cornerRadius = 28
+      self.listVisualEffectView.layer.masksToBounds = true
+      self.listVisualEffectView.clipsToBounds = true
+    }
   }
   
   // MARK: - Navigation
@@ -240,13 +245,6 @@ extension MainViewController : PresentingViewControllerDelegate {
   }
   
   func didDismissViewController(_ viewController: UIViewController?) {
-    
-    // Disable and hide navigation elements when presenting configuring view
-    let contentViewController = (viewController as? UINavigationController)?.viewControllers.first ?? viewController
-    if let _ = contentViewController as? ConfiguringViewController {
-      self.configuringViewController = nil
-      
-    }
     
     // All presentations
     self.enableAllElements()
