@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "assetAppIcon.png",
+      "filename" : "AppIcon.png",
       "scale" : "1x"
     },
     {
