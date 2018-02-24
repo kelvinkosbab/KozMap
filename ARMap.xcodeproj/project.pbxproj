@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B64423FB20410BE9006E524A /* TextFlagPlacemarkNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64423FA20410BE9006E524A /* TextFlagPlacemarkNode.swift */; };
+		B6442400204110D4006E524A /* SCNTextAlignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64423FF204110D4006E524A /* SCNTextAlignment.swift */; };
 		B686EED020166C7300ACF075 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EECF20166C7300ACF075 /* AppDelegate.swift */; };
 		B686EED820166C7300ACF075 /* ARMap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B686EED620166C7300ACF075 /* ARMap.xcdatamodeld */; };
 		B686EEDA20166C7300ACF075 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B686EED920166C7300ACF075 /* Assets.xcassets */; };
@@ -106,6 +108,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B64423FA20410BE9006E524A /* TextFlagPlacemarkNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFlagPlacemarkNode.swift; sourceTree = "<group>"; };
+		B64423FF204110D4006E524A /* SCNTextAlignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNTextAlignment.swift; sourceTree = "<group>"; };
 		B686EECC20166C7300ACF075 /* ARMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B686EECF20166C7300ACF075 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B686EED720166C7300ACF075 /* ARMap.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ARMap.xcdatamodel; sourceTree = "<group>"; };
@@ -224,6 +228,17 @@
 				B686EF1620166D8700ACF075 /* Models.scnassets */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		B64423FE20410C16006E524A /* SceneKit Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B686EF1720166D8700ACF075 /* ARSCNView+Util.swift */,
+				B686EF1820166D8700ACF075 /* SCNMaterial+Util.swift */,
+				B686EF1F20166D8700ACF075 /* SCNVector3+Util.swift */,
+				B64423FF204110D4006E524A /* SCNTextAlignment.swift */,
+			);
+			path = "SceneKit Extensions";
 			sourceTree = "<group>";
 		};
 		B686EEC320166C7300ACF075 = {
@@ -365,15 +380,14 @@
 		B686EF1520166D8700ACF075 /* SceneKit */ = {
 			isa = PBXGroup;
 			children = (
-				B686EF1720166D8700ACF075 /* ARSCNView+Util.swift */,
-				B686EF1820166D8700ACF075 /* SCNMaterial+Util.swift */,
-				B686EF1F20166D8700ACF075 /* SCNVector3+Util.swift */,
+				B64423FE20410C16006E524A /* SceneKit Extensions */,
+				B686EF1D20166D8700ACF075 /* VirtualObject.swift */,
 				B686EF1920166D8700ACF075 /* Plane.swift */,
 				B686EF1A20166D8700ACF075 /* PlacemarkNodeContainer.swift */,
 				B686EF1B20166D8700ACF075 /* AxisNode.swift */,
 				B686EF1C20166D8700ACF075 /* PlacemarkNode.swift */,
-				B686EF1D20166D8700ACF075 /* VirtualObject.swift */,
 				B686EF1E20166D8700ACF075 /* PinPlacemarkNode.swift */,
+				B64423FA20410BE9006E524A /* TextFlagPlacemarkNode.swift */,
 			);
 			path = SceneKit;
 			sourceTree = "<group>";
@@ -703,6 +717,7 @@
 				B686EF4020166D8700ACF075 /* SCNMaterial+Util.swift in Sources */,
 				B686EF0E20166D5A00ACF075 /* UIDevice+Util.swift in Sources */,
 				B686EF9C20166F1300ACF075 /* SearchViewController+Cells.swift in Sources */,
+				B64423FB20410BE9006E524A /* TextFlagPlacemarkNode.swift in Sources */,
 				B686EF1020166D5A00ACF075 /* UIView+Util.swift in Sources */,
 				B6DCCDD5203BD4CA00201385 /* BottomUpAnimator.swift in Sources */,
 				B686EF3B20166D8700ACF075 /* ARState.swift in Sources */,
@@ -716,6 +731,7 @@
 				B686EFA620166F1300ACF075 /* InlineColorChooserViewController.swift in Sources */,
 				B686EF0820166D5A00ACF075 /* UIViewController+Util.swift in Sources */,
 				B686EF0120166D5A00ACF075 /* CLPlacemark+Util.swift in Sources */,
+				B6442400204110D4006E524A /* SCNTextAlignment.swift in Sources */,
 				B686EF6620166D9D00ACF075 /* MyManagedObjectProtocol.swift in Sources */,
 				B6DCCDE9203BEDD500201385 /* LeftMenuPresentationController.swift in Sources */,
 				B686EF4220166D8700ACF075 /* PlacemarkNodeContainer.swift in Sources */,

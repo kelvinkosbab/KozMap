@@ -17,39 +17,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="assetSpherical" translatesAutoresizingMaskIntoConstraints="NO" id="Xiz-jO-ykn">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="assetAppIcon" translatesAutoresizingMaskIntoConstraints="NO" id="LHy-j7-4OU">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="juN-wc-uRx">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="mKd-Nm-BQy">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="assetAppIcon" translatesAutoresizingMaskIntoConstraints="NO" id="LHy-j7-4OU">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                        </imageView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="LHy-j7-4OU" secondAttribute="bottom" id="1bw-nE-jay"/>
-                                        <constraint firstItem="LHy-j7-4OU" firstAttribute="leading" secondItem="mKd-Nm-BQy" secondAttribute="leading" id="CAX-p5-DrJ"/>
-                                        <constraint firstAttribute="trailing" secondItem="LHy-j7-4OU" secondAttribute="trailing" id="OZZ-E9-Oai"/>
-                                        <constraint firstItem="LHy-j7-4OU" firstAttribute="top" secondItem="mKd-Nm-BQy" secondAttribute="top" id="ere-aW-qCa"/>
-                                    </constraints>
-                                </view>
-                                <blurEffect style="dark"/>
-                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="4Ar-d5-2qc" firstAttribute="bottom" secondItem="Xiz-jO-ykn" secondAttribute="bottom" id="38S-NI-IF9"/>
-                            <constraint firstItem="juN-wc-uRx" firstAttribute="top" secondItem="pQZ-qv-kXA" secondAttribute="top" id="5Ws-7d-ph7"/>
-                            <constraint firstItem="Xiz-jO-ykn" firstAttribute="leading" secondItem="4Ar-d5-2qc" secondAttribute="leading" id="8XV-tL-5xF"/>
-                            <constraint firstItem="juN-wc-uRx" firstAttribute="leading" secondItem="4Ar-d5-2qc" secondAttribute="leading" id="XEs-rT-tfn"/>
-                            <constraint firstAttribute="bottom" secondItem="juN-wc-uRx" secondAttribute="bottom" id="Xpo-bQ-Gb9"/>
-                            <constraint firstItem="4Ar-d5-2qc" firstAttribute="trailing" secondItem="Xiz-jO-ykn" secondAttribute="trailing" id="e3z-Fe-K90"/>
-                            <constraint firstItem="Xiz-jO-ykn" firstAttribute="top" secondItem="pQZ-qv-kXA" secondAttribute="top" id="gRd-Zt-vHQ"/>
-                            <constraint firstItem="4Ar-d5-2qc" firstAttribute="trailing" secondItem="juN-wc-uRx" secondAttribute="trailing" id="jnb-aQ-dRf"/>
+                            <constraint firstItem="LHy-j7-4OU" firstAttribute="trailing" secondItem="4Ar-d5-2qc" secondAttribute="trailing" id="2wQ-So-3wQ"/>
+                            <constraint firstItem="LHy-j7-4OU" firstAttribute="leading" secondItem="4Ar-d5-2qc" secondAttribute="leading" id="A55-fm-HTX"/>
+                            <constraint firstAttribute="bottom" secondItem="LHy-j7-4OU" secondAttribute="bottom" id="Z0V-0a-k5N"/>
+                            <constraint firstItem="LHy-j7-4OU" firstAttribute="top" secondItem="pQZ-qv-kXA" secondAttribute="top" id="dVO-ik-u2W"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4Ar-d5-2qc"/>
                     </view>
@@ -60,7 +37,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="assetAppIcon" width="1024" height="1024"/>
-        <image name="assetSpherical" width="3584" height="1792"/>
+        <image name="assetAppIcon" width="2010" height="2010"/>
     </resources>
 </document>
