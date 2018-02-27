@@ -17,19 +17,19 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>15</string>
+	<string>16</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Camera access is required.</string>
+	<string>Your camera is needed to catpure view the AR experience and view placemarks with your phone.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Location access is required.</string>
+	<string>Your location is required to determine the direction and distance away from placemarks.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Location access is required.</string>
+	<string>Your location is required to determine the direction and distance away from placemarks.</string>
 	<key>NSLocationUsageDescription</key>
-	<string>Location access is required.</string>
+	<string>Your location is required to determine the direction and distance away from placemarks.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Location access is required.</string>
+	<string>Your location is required to determine the direction and distance away from placemarks.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
