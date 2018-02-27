@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14101" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Yg3-Eg-XZo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Yg3-Eg-XZo">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -194,6 +194,28 @@
                                 </view>
                                 <blurEffect style="dark"/>
                             </visualEffectView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HAJ-3y-AVc">
+                                <rect key="frame" x="0.0" y="30" width="375" height="122"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="350" id="J2p-ag-X1D"/>
+                                </constraints>
+                                <string key="text">Your camera and your location are needed to determine your position position relative to placemarks around you.
+
+Select the permission buttons below and get started!</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="J2p-ag-X1D"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="J2p-ag-X1D"/>
+                                    </mask>
+                                </variation>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UUY-Ab-d1h">
                                 <rect key="frame" x="102" y="277" width="171" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -230,6 +252,7 @@
                             <constraint firstItem="UUY-Ab-d1h" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9Bv-KX-qOE"/>
                             <constraint firstItem="oIR-3d-g9M" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="CaT-58-UEf"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="whO-p3-r5W" secondAttribute="trailing" id="Cxr-AH-UOY"/>
+                            <constraint firstItem="HAJ-3y-AVc" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="D3D-EJ-7cp"/>
                             <constraint firstItem="b9j-tb-DyK" firstAttribute="centerY" secondItem="UUY-Ab-d1h" secondAttribute="centerY" id="Fun-Hb-YHf"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="SUC-dA-Hko" secondAttribute="bottom" id="I7Z-hy-YPA"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SUC-dA-Hko" secondAttribute="trailing" id="Jcn-F1-7DV"/>
@@ -237,12 +260,33 @@
                             <constraint firstItem="5xe-Pa-z4L" firstAttribute="centerY" secondItem="oIR-3d-g9M" secondAttribute="centerY" id="Npg-wZ-xua"/>
                             <constraint firstItem="UUY-Ab-d1h" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-40" id="PJO-SQ-skU"/>
                             <constraint firstAttribute="bottom" secondItem="whO-p3-r5W" secondAttribute="bottom" id="XeK-tj-tQU"/>
+                            <constraint firstItem="HAJ-3y-AVc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Ydl-WS-hrL"/>
+                            <constraint firstItem="HAJ-3y-AVc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Zb1-Yq-g9t"/>
                             <constraint firstItem="whO-p3-r5W" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="gC6-97-ass"/>
                             <constraint firstItem="SUC-dA-Hko" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="mMh-wj-Lag"/>
                             <constraint firstItem="oIR-3d-g9M" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="40" id="pak-6k-bKC"/>
                             <constraint firstItem="SUC-dA-Hko" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="rUD-AR-JIa"/>
+                            <constraint firstItem="HAJ-3y-AVc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="seS-1W-bDE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="D3D-EJ-7cp"/>
+                                <exclude reference="Ydl-WS-hrL"/>
+                                <exclude reference="Zb1-Yq-g9t"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="D3D-EJ-7cp"/>
+                                <include reference="Ydl-WS-hrL"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="constraints">
+                                <include reference="Zb1-Yq-g9t"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="cameraActivityIndicatorView" destination="5xe-Pa-z4L" id="57t-w1-jTg"/>
@@ -253,7 +297,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-786.39999999999998" y="-684.10794602698661"/>
+            <point key="canvasLocation" x="-788" y="-685.00749625187416"/>
         </scene>
         <!--Configuring View Controller-->
         <scene sceneID="dHe-9e-Fzr">
@@ -264,13 +308,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QnS-bt-iYg">
-                                <rect key="frame" x="50" y="322" width="275" height="24"/>
+                                <rect key="frame" x="50" y="321.5" width="275" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JeC-ml-DRX">
-                                <rect key="frame" x="50" y="366" width="275" height="20.5"/>
+                                <rect key="frame" x="50" y="365.5" width="275" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -342,12 +386,12 @@
                                 <rect key="frame" x="24" y="53" width="351" height="52"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Units" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nPg-bv-g34">
-                                        <rect key="frame" x="0.0" y="16" width="88.5" height="21"/>
+                                        <rect key="frame" x="0.0" y="16" width="88" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="yAR-Ng-QlP">
-                                        <rect key="frame" x="88.5" y="11.5" width="254.5" height="29"/>
+                                        <rect key="frame" x="88" y="11.5" width="255" height="29"/>
                                         <segments>
                                             <segment title="Imperial"/>
                                             <segment title="Metric"/>
