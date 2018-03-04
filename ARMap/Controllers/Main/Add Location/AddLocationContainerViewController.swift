@@ -50,9 +50,8 @@ class AddLocationContainerViewController : BaseViewController, DesiredContentHei
   // MARK: - Properties
   
   @IBOutlet weak var segmentedControl: UISegmentedControl!
-  @IBOutlet weak var pagingContainerView: UIView!
   
-  var pageViewController: UIPageViewController? = nil
+  private(set) var pageViewController: UIPageViewController? = nil
   weak var locationDetailDelegate: AddLocationViewControllerDelegate? = nil
   weak var searchDelegate: SearchViewControllerDelegate? = nil
   
@@ -70,28 +69,33 @@ class AddLocationContainerViewController : BaseViewController, DesiredContentHei
     self.title = "Add Placemark"
     
     self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(self.closeButtonSelected))
-    
-    // Configure the page view controller
-    let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-    self.add(childViewController: pageViewController, intoContainerView: self.pagingContainerView)
-    self.pageViewController = pageViewController
-    pageViewController.dataSource = self
-    pageViewController.delegate = self
-    if let firstViewController = self.orderedViewControllers.first {
-      pageViewController.setViewControllers([ firstViewController ], direction: .forward, animated: true, completion: nil)
-    }
   }
   
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    super.prepare(for: segue, sender: sender)
     
-    self.orderedViewControllers.first?.viewWillAppear(animated)
+    guard let identifier = segue.identifier else {
+      return
+    }
+    
+    switch identifier {
+    case "EmbedPageController":
+      if let pageViewController = segue.destination as? UIPageViewController {
+        self.pageViewController = pageViewController
+        pageViewController.dataSource = self
+        pageViewController.delegate = self
+        if let firstViewController = self.orderedViewControllers.first {
+          pageViewController.setViewControllers([ firstViewController ], direction: .forward, animated: true, completion: nil)
+        }
+      }
+    default: break
+    }
   }
   
   // MARK: - Status Bar
   
   override var prefersStatusBarHidden: Bool {
-    return true
+    return UIDevice.current.isPhone
   }
   
   override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {

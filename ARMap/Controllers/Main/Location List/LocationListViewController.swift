@@ -73,10 +73,16 @@ class LocationListViewController : BaseViewController, NSFetchedResultsControlle
     self.tableView.dataSource = self
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    self.reloadContent()
+  }
+  
   // MARK: - Status Bar
   
   override var prefersStatusBarHidden: Bool {
-    return true
+    return UIDevice.current.isPhone
   }
   
   override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
@@ -88,6 +94,10 @@ class LocationListViewController : BaseViewController, NSFetchedResultsControlle
   }
   
   // MARK: - Actions
+  
+  func reloadContent() {
+    self.tableView.reloadData()
+  }
   
   @objc func closeButtonSelected() {
     self.dismissController()
@@ -251,31 +261,32 @@ extension LocationListViewController : LocationListViewControllerCellDelegate {
   }
   
   private func presentMoreActionSheet(placemark: Placemark, sender: UIView) {
-    let actionSheet = UIAlertController(title: placemark.name, message: nil, preferredStyle: UIDevice.current.isPhone ? .actionSheet : .alert)
+    let alertController = UIAlertController(title: placemark.name, message: nil, preferredStyle: UIDevice.current.isPhone ? .actionSheet : .alert)
     
     // Edit
     let editAction = UIAlertAction(title: "Edit", style: .default) { [weak self] _ in
       self?.transitionToDetail(placemark: placemark)
     }
-    actionSheet.addAction(editAction)
+    alertController.addAction(editAction)
     
     // Delete
     let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
-      self?.deletePlacemark(placemark)
+      self?.promptDeletePlacemark(placemark: placemark)
     }
-    actionSheet.addAction(deleteAction)
+    alertController.addAction(deleteAction)
     
     // Cancel
     let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-    actionSheet.addAction(cancelAction)
+    alertController.addAction(cancelAction)
     
+    // Present the alert controller
     if UIDevice.current.isPhone {
-      self.present(actionSheet, animated: true, completion: nil)
+      self.present(alertController, animated: true, completion: nil)
     } else {
-      actionSheet.modalPresentationStyle = .popover
-      actionSheet.popoverPresentationController?.sourceView = sender
-      actionSheet.popoverPresentationController?.sourceRect = sender.frame
-      self.present(actionSheet, animated: true, completion: nil)
+      alertController.modalPresentationStyle = .popover
+      alertController.popoverPresentationController?.sourceView = sender
+      alertController.popoverPresentationController?.sourceRect = sender.frame
+      self.present(alertController, animated: true, completion: nil)
     }
   }
 }

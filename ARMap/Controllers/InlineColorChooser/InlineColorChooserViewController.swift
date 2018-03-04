@@ -34,7 +34,7 @@ class InlineColorChooserViewController : UICollectionViewController, UICollectio
   // MARK: - Properties
   
   weak var delegate: InlineColorChooserViewControllerDelegate? = nil
-  var colors: [UIColor] = []
+  let colors: [UIColor] = [ .kozRed, .kozOrange, .kozYellow, .kozGreen, .kozBlue, .kozPurple ]
   
   var selectedColor: UIColor = .kozRed {
     didSet {
@@ -67,22 +67,48 @@ class InlineColorChooserViewController : UICollectionViewController, UICollectio
     self.collectionView?.dataSource = self
   }
   
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
     
-    self.loadItems()
+    // Update the layout parameters for the collection view
+    self.adjustedTotalViewWidth = self.view.bounds.width
   }
   
-  // MARK: - Content
+  // MARK: - SectionType
   
-  func loadItems() {
-    self.perform(dataSourceUpdates: { [weak self] in
-      let colors: [UIColor] = [ .kozRed, .kozOrange, .kozYellow, .kozGreen, .kozBlue, .kozPurple ]
-      self?.colors = colors
-    }, batchUpdates: { [weak self] in
-      let indexSet = IndexSet(integer: 0)
-      self?.collectionView?.reloadSections(indexSet)
-    })
+  enum SectionType {
+    case colors([UIColor])
+  }
+  
+  func getSectionType(section: Int) -> SectionType? {
+    switch section {
+    case 0:
+      return .colors(self.colors)
+    default:
+      return nil
+    }
+  }
+  
+  // MARK: - RowType
+  
+  enum RowType {
+    case color(UIColor)
+  }
+  
+  func getRowType(at indexPath: IndexPath) -> RowType? {
+    
+    guard let sectionType = self.getSectionType(section: indexPath.section) else {
+      return nil
+    }
+    
+    switch sectionType {
+    case .colors(let colors):
+      if indexPath.row < colors.count {
+        let color = colors[indexPath.row]
+        return .color(color)
+      }
+      return nil
+    }
   }
   
   // MARK: - UICollectionView
@@ -92,31 +118,59 @@ class InlineColorChooserViewController : UICollectionViewController, UICollectio
   }
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return self.colors.count
+    
+    guard let sectionType = self.getSectionType(section: section) else {
+      return 0
+    }
+    
+    switch sectionType {
+    case .colors(let colors):
+      return colors.count
+    }
   }
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InlineColorChooserCollectionViewCell", for: indexPath) as! InlineColorChooserCollectionViewCell
-    let color = self.colors[indexPath.row]
-    cell.colorView.backgroundColor = color
-    cell.update(isSelected: self.selectedColor == color, animated: false)
-    return cell
+    
+    guard let rowType = self.getRowType(at: indexPath) else {
+      cell.colorView.backgroundColor = .clear
+      cell.update(isSelected: false, animated: false)
+      return cell
+    }
+    
+    switch rowType {
+    case .color(let color):
+      cell.colorView.backgroundColor = color
+      cell.update(isSelected: self.selectedColor == color, animated: false)
+      return cell
+    }
   }
   
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     
-    // Selected color
-    let color = self.colors[indexPath.row]
-    self.selectedColor = color
+    guard let rowType = self.getRowType(at: indexPath) else {
+      return
+    }
     
-    // Notify the delegate
-    self.delegate?.didSelect(color: color)
+    switch rowType {
+    case .color(let color):
+      
+      // Selected color
+      self.selectedColor = color
+      
+      // Notify the delegate
+      self.delegate?.didSelect(color: color)
+    }
   }
   
   // MARK: - UICollectionViewDelegateFlowLayout
   
-  var adjustedTotalViewWidth: CGFloat {
-    return self.view.bounds.width
+  var adjustedTotalViewWidth: CGFloat = UIScreen.main.bounds.width {
+    didSet {
+      if self.isViewLoaded, self.adjustedTotalViewWidth != oldValue {
+        self.collectionView?.collectionViewLayout.invalidateLayout()
+      }
+    }
   }
   
   var cellDimension: CGFloat {

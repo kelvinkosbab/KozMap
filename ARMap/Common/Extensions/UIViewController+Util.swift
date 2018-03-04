@@ -36,6 +36,7 @@ extension UIViewController {
   // MARK: - Top View Controller
   
   var topViewController: UIViewController {
+    
     var topViewController = self
     while let presentedViewController = topViewController.presentedViewController {
       topViewController = presentedViewController

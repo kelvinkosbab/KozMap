@@ -22,6 +22,9 @@
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qoO-4Z-DP2">
                                 <rect key="frame" x="0.0" y="58" width="375" height="609"/>
+                                <connections>
+                                    <segue destination="DGL-dv-9KV" kind="embed" identifier="EmbedPageController" id="BDR-T7-2dp"/>
+                                </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E08-W3-fDS">
                                 <rect key="frame" x="0.0" y="20" width="375" height="38"/>
@@ -60,13 +63,20 @@
                         <viewLayoutGuide key="safeArea" id="asm-Ok-eHL"/>
                     </view>
                     <connections>
-                        <outlet property="pagingContainerView" destination="qoO-4Z-DP2" id="6Pq-qD-Zoz"/>
                         <outlet property="segmentedControl" destination="owW-MX-2qr" id="Ylw-Am-SaS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1ks-9H-bhY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="172" y="287.40629685157421"/>
+        </scene>
+        <!--Page View Controller-->
+        <scene sceneID="3Ab-YL-E6s">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="DGL-dv-9KV" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ffo-G6-Y8s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="900" y="287"/>
         </scene>
         <!--Add Location View Controller-->
         <scene sceneID="h3C-5s-CFC">
@@ -269,7 +279,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6sW-a9-crM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="602" y="287"/>
+            <point key="canvasLocation" x="1636" y="287"/>
         </scene>
         <!--Location List View Controller-->
         <scene sceneID="ueq-TO-HkU">
@@ -452,7 +462,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pnr-Hz-xQ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1030" y="287"/>
+            <point key="canvasLocation" x="2330" y="287"/>
         </scene>
         <!--Location Detail View Controller-->
         <scene sceneID="PhV-5c-X9Y">
@@ -640,7 +650,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="96V-Ui-WYG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="602" y="1026"/>
+            <point key="canvasLocation" x="900" y="1026"/>
         </scene>
     </scenes>
     <resources>

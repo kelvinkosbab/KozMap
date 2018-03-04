@@ -72,7 +72,7 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
     
     self.title = self.placemark?.name
     
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete", style: .plain, target: self, action: #selector(self.deleteButtonSelected))
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(self.deleteButtonSelected))
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -97,19 +97,19 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
     super.viewWillDisappear(animated)
     
     self.nameTextField.resignFirstResponder()
+    MyDataManager.shared.saveMainContext()
   }
   
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
     
-    MyDataManager.shared.saveMainContext()
     NotificationCenter.default.removeObserver(self)
   }
   
   // MARK: - Status Bar
   
   override var prefersStatusBarHidden: Bool {
-    return true
+    return UIDevice.current.isPhone
   }
   
   override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
@@ -124,19 +124,6 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
   
   @objc func didReceiveUpdatedLocationNotification(_ notification: Notification) {
     self.reloadContent()
-  }
-  
-  // MARK: - Actions
-  
-  @objc func deleteButtonSelected() {
-    
-    // Delete the placemark
-    if let placemark = self.placemark {
-      self.deletePlacemark(placemark)
-    }
-    
-    // Dismiss
-    self.dismissController()
   }
   
   // MARK: - NSFetchedResultsControllerDelegate
@@ -215,6 +202,18 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
   
   @IBAction func nameTextFieldEditingChanged(_ sender: UITextField) {
     self.placemark?.name = sender.text
+  }
+  
+  @objc func deleteButtonSelected() {
+    
+    // Delete the placemark
+    if let placemark = self.placemark {
+      self.promptDeletePlacemark(placemark: placemark) { [weak self] in
+        
+        // Dismiss
+        self?.dismissController()
+      }
+    }
   }
 }
 
