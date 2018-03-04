@@ -1,6 +1,6 @@
 //
 //  PresentationMode.swift
-// KozMap
+//  KozMap
 //
 //  Created by Kelvin Kosbab on 2/19/18.
 //  Copyright © 2018 Kozinga. All rights reserved.
@@ -9,7 +9,7 @@
 import UIKit
 
 enum PresentationMode {
-  case modal, modalOverCurrentContext, overCurrentContext
+  case modal(UIModalPresentationStyle, UIModalTransitionStyle)
   case custom(CustomPresentationMode)
   case navStack
   

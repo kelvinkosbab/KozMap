@@ -1,6 +1,6 @@
 //
 //  SCNMaterial+Util.swift
-// KozMap
+//  KozMap
 //
 //  Created by Kelvin Kosbab on 1/20/18.
 //  Copyright © 2018 Kozinga. All rights reserved.

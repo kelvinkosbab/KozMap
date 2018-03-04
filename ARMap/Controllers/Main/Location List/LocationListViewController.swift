@@ -12,10 +12,10 @@ import CoreData
 
 protocol LocationListViewControllerDelegate : class {
   func shouldEdit(placemark: Placemark)
-  func shouldDelete(placemark: Placemark)
+  func shouldTransitionToAddPlacemark()
 }
 
-class LocationListViewController : BaseViewController, NSFetchedResultsControllerDelegate, DesiredContentHeightDelegate, DismissInteractable {
+class LocationListViewController : BaseViewController, NSFetchedResultsControllerDelegate, DesiredContentHeightDelegate, DismissInteractable, LocationDetailNavigationDelegate, PlacemarkAPIDelegate {
   
   // MARK: - Static Accessors
   
@@ -66,14 +66,24 @@ class LocationListViewController : BaseViewController, NSFetchedResultsControlle
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    self.title = "My Placemarks"
+    
+    self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(self.closeButtonSelected))
+    
     self.tableView.delegate = self
     self.tableView.dataSource = self
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    self.reloadContent()
   }
   
   // MARK: - Status Bar
   
   override var prefersStatusBarHidden: Bool {
-    return true
+    return UIDevice.current.isPhone
   }
   
   override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
@@ -82,6 +92,16 @@ class LocationListViewController : BaseViewController, NSFetchedResultsControlle
   
   override var preferredStatusBarStyle: UIStatusBarStyle {
     return .lightContent
+  }
+  
+  // MARK: - Actions
+  
+  func reloadContent() {
+    self.tableView.reloadData()
+  }
+  
+  @objc func closeButtonSelected() {
+    self.dismissController()
   }
   
   // MARK: - NSFetchedResultsControllerDelegate
@@ -104,7 +124,7 @@ class LocationListViewController : BaseViewController, NSFetchedResultsControlle
       if let indexPath = indexPath {
         if let cell = self.tableView.cellForRow(at: indexPath) as? LocationListViewControllerCell {
           let placemark = self.placemarks[indexPath.row]
-          cell.configure(placemark: placemark, unitType: Defaults.shared.unitType, delegate: self)
+          cell.configure(placemark: placemark, unitType: Defaults.shared.unitType, delegate: self, hideMoreButton: !UIDevice.current.isPhone)
         } else {
           self.tableView.reloadRows(at: [ indexPath ], with: .none)
         }
@@ -120,6 +140,57 @@ class LocationListViewController : BaseViewController, NSFetchedResultsControlle
   func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
     self.tableView.endUpdates()
   }
+  
+  // MARK: - Navigation
+  
+  func transitionToDetail(placemark: Placemark) {
+    if UIDevice.current.isPhone {
+      self.delegate?.shouldEdit(placemark: placemark)
+    } else {
+      let viewController = self.getPlacemarkDetailViewController(placemark: placemark)
+      viewController.view.backgroundColor = .white
+      self.present(viewController: viewController, withMode: .navStack)
+    }
+  }
+}
+
+// MARK: - SectionType / RowType
+
+extension LocationListViewController {
+  
+  enum SectionType {
+    case placemarks([Placemark])
+  }
+  
+  func getSectionType(section: Int) -> SectionType? {
+    switch section {
+    case 0:
+      let placemarks = self.placemarks
+      return .placemarks(placemarks)
+    default:
+      return nil
+    }
+  }
+  
+  enum RowType {
+    case placemark(Placemark)
+  }
+  
+  func getRowType(at indexPath: IndexPath) -> RowType? {
+    
+    guard let sectionType = self.getSectionType(section: indexPath.section) else {
+      return nil
+    }
+    
+    switch sectionType {
+    case .placemarks(let placemarks):
+      if indexPath.row < placemarks.count {
+        let placemark = placemarks[indexPath.row]
+        return .placemark(placemark)
+      }
+      return nil
+    }
+  }
 }
 
 // MARK: - UITableView
@@ -130,8 +201,44 @@ extension LocationListViewController : UITableViewDelegate, UITableViewDataSourc
     return 1
   }
   
+  func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    
+    guard let sectionType = self.getSectionType(section: section) else {
+      return nil
+    }
+    
+    switch sectionType {
+    case .placemarks(_):
+      let cell = tableView.dequeueReusableCell(withIdentifier: LocationListAddPlacemarkCell.name) as! LocationListAddPlacemarkCell
+      cell.delegate = self
+      cell.backgroundColor = .clear
+      cell.contentView.backgroundColor = .clear
+      return cell
+    }
+  }
+  
+  func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    
+    guard let sectionType = self.getSectionType(section: section) else {
+      return 0
+    }
+    
+    switch sectionType {
+    case .placemarks(_):
+      return 70
+    }
+  }
+  
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return self.placemarks.count
+    
+    guard let sectionType = self.getSectionType(section: section) else {
+      return 0
+    }
+    
+    switch sectionType {
+    case .placemarks(let placemarks):
+      return placemarks.count
+    }
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -139,14 +246,38 @@ extension LocationListViewController : UITableViewDelegate, UITableViewDataSourc
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "LocationListViewControllerCell", for: indexPath) as! LocationListViewControllerCell
-    cell.backgroundColor = .clear
     
-    // Saved location
-    let placemark = self.placemarks[indexPath.row]
-    cell.configure(placemark: placemark, unitType: Defaults.shared.unitType, delegate: self)
+    guard let rowType = self.getRowType(at: indexPath) else {
+      let cell = UITableViewCell()
+      cell.backgroundColor = tableView.backgroundColor
+      return cell
+    }
     
-    return cell
+    switch rowType {
+    case .placemark(let placemark):
+      let cell = tableView.dequeueReusableCell(withIdentifier: LocationListViewControllerCell.name, for: indexPath) as! LocationListViewControllerCell
+      cell.backgroundColor = .clear
+      cell.configure(placemark: placemark, unitType: Defaults.shared.unitType, delegate: self, hideMoreButton: !UIDevice.current.isPhone)
+      return cell
+    }
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    tableView.deselectRow(at: indexPath, animated: true)
+    
+    guard let rowType = self.getRowType(at: indexPath) else {
+      return
+    }
+    
+    // Check for phone vs pad
+    guard !UIDevice.current.isPhone else {
+      return
+    }
+    
+    switch rowType {
+    case .placemark(let placemark):
+      self.transitionToDetail(placemark: placemark)
+    }
   }
 }
 
@@ -159,31 +290,41 @@ extension LocationListViewController : LocationListViewControllerCellDelegate {
   }
   
   private func presentMoreActionSheet(placemark: Placemark, sender: UIView) {
-    let actionSheet = UIAlertController(title: placemark.name, message: nil, preferredStyle: .actionSheet)
+    let alertController = UIAlertController(title: placemark.name, message: nil, preferredStyle: UIDevice.current.isPhone ? .actionSheet : .alert)
     
     // Edit
     let editAction = UIAlertAction(title: "Edit", style: .default) { [weak self] _ in
-      self?.delegate?.shouldEdit(placemark: placemark)
+      self?.transitionToDetail(placemark: placemark)
     }
-    actionSheet.addAction(editAction)
+    alertController.addAction(editAction)
     
     // Delete
     let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
-      self?.delegate?.shouldDelete(placemark: placemark)
+      self?.promptDeletePlacemark(placemark: placemark)
     }
-    actionSheet.addAction(deleteAction)
+    alertController.addAction(deleteAction)
     
     // Cancel
     let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-    actionSheet.addAction(cancelAction)
+    alertController.addAction(cancelAction)
     
+    // Present the alert controller
     if UIDevice.current.isPhone {
-      self.present(actionSheet, animated: true, completion: nil)
+      self.present(alertController, animated: true, completion: nil)
     } else {
-      actionSheet.modalPresentationStyle = .popover
-      actionSheet.popoverPresentationController?.sourceView = sender
-      actionSheet.popoverPresentationController?.sourceRect = sender.frame
-      self.present(actionSheet, animated: true, completion: nil)
+      alertController.modalPresentationStyle = .popover
+      alertController.popoverPresentationController?.sourceView = sender
+      alertController.popoverPresentationController?.sourceRect = sender.frame
+      self.present(alertController, animated: true, completion: nil)
     }
+  }
+}
+
+// MARK: - LocationListAddPlacemarkCellDelegate
+
+extension LocationListViewController : LocationListAddPlacemarkCellDelegate {
+  
+  func didSelectAddPlacemark() {
+    self.delegate?.shouldTransitionToAddPlacemark()
   }
 }

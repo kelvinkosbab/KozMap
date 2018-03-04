@@ -85,7 +85,7 @@ class SearchViewController : BaseViewController, DismissInteractable {
   // MARK: - Status Bar
   
   override var prefersStatusBarHidden: Bool {
-    return true
+    return UIDevice.current.isPhone
   }
   
   override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {

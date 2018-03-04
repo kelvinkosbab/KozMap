@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController : BaseViewController {
+class MainViewController : BaseViewController, LocationDetailNavigationDelegate {
   
   // MARK: - Static Accessors
   
@@ -96,7 +96,11 @@ class MainViewController : BaseViewController {
     }
     
     let settingsViewController = SettingsViewController.newViewController()
-    self.present(viewController: settingsViewController, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
+    if UIDevice.current.isPhone {
+      self.present(viewController: settingsViewController, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
+    } else {
+      self.present(viewController: settingsViewController, withMode: .modal(.formSheet, .coverVertical), options: [])
+    }
   }
   
   func presentPlacemarkList() {
@@ -106,7 +110,11 @@ class MainViewController : BaseViewController {
     }
     
     let locationListViewController = LocationListViewController.newViewController(delegate: self)
-    self.present(viewController: locationListViewController, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
+    if UIDevice.current.isPhone {
+      self.present(viewController: locationListViewController, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
+    } else {
+      self.present(viewController: locationListViewController, withMode: .modal(.formSheet, .coverVertical), options: [])
+    }
   }
   
   func presentAddLocation() {
@@ -116,7 +124,11 @@ class MainViewController : BaseViewController {
     }
     
     let addLocationContainerViewController = AddLocationContainerViewController.newViewController(locationDetailDelegate: self, searchDelegate: self)
-    self.present(viewController: addLocationContainerViewController, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
+    if UIDevice.current.isPhone {
+      self.present(viewController: addLocationContainerViewController, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
+    } else {
+      self.present(viewController: addLocationContainerViewController, withMode: .modal(.formSheet, .coverVertical), options: [])
+    }
   }
   
   func presentAddLocation(mapItem: MapItem) {
@@ -126,7 +138,11 @@ class MainViewController : BaseViewController {
     }
     
     let addLocationViewController = AddLocationViewController.newViewController(mapItem: mapItem, delegate: self)
-    self.present(viewController: addLocationViewController, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
+    if UIDevice.current.isPhone {
+      self.present(viewController: addLocationViewController, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
+    } else {
+      self.present(viewController: addLocationViewController, withMode: .modal(.formSheet, .coverVertical), options: [])
+    }
   }
   
   func presentLocationDetail(placemark: Placemark) {
@@ -135,8 +151,12 @@ class MainViewController : BaseViewController {
       return
     }
     
-    let locationDetailViewController = LocationDetailViewController.newViewController(placemark: placemark)
-    self.present(viewController: locationDetailViewController, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
+    let locationDetailViewController = self.getPlacemarkDetailViewController(placemark: placemark)
+    if UIDevice.current.isPhone {
+      self.present(viewController: locationDetailViewController, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
+    } else {
+      self.present(viewController: locationDetailViewController, withMode: .modal(.formSheet, .coverVertical), options: [])
+    }
   }
   
   // MARK: - Keyboard

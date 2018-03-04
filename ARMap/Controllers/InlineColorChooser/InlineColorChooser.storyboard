@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Inline Color Chooser View Controller-->
+        <scene sceneID="4dI-fc-TL5">
+            <objects>
+                <collectionViewController storyboardIdentifier="InlineColorChooserViewController" id="Dr8-QM-ndK" customClass="InlineColorChooserViewController" customModule="KozMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" id="Uad-8O-BXD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="DTI-6v-48B">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="InlineColorChooserCollectionViewCell" id="x1v-4a-hyC" customClass="InlineColorChooserCollectionViewCell" customModule="KozMap" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rQL-5x-1y6">
+                                            <rect key="frame" x="2" y="2" width="46" height="46"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="assetCircle" translatesAutoresizingMaskIntoConstraints="NO" id="MtZ-vv-oXb">
+                                                    <rect key="frame" x="13" y="13" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="idB-mS-59U"/>
+                                                        <constraint firstAttribute="width" constant="20" id="x6z-ep-R1t"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="MtZ-vv-oXb" firstAttribute="centerX" secondItem="rQL-5x-1y6" secondAttribute="centerX" id="Bhz-4h-Uef"/>
+                                                <constraint firstItem="MtZ-vv-oXb" firstAttribute="centerY" secondItem="rQL-5x-1y6" secondAttribute="centerY" id="JuO-xQ-hwI"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="rQL-5x-1y6" firstAttribute="top" secondItem="x1v-4a-hyC" secondAttribute="top" constant="2" id="DOr-8Y-Tmv"/>
+                                    <constraint firstAttribute="bottom" secondItem="rQL-5x-1y6" secondAttribute="bottom" constant="2" id="G5A-7z-rWr"/>
+                                    <constraint firstItem="rQL-5x-1y6" firstAttribute="leading" secondItem="x1v-4a-hyC" secondAttribute="leading" constant="2" id="ZA0-nQ-Y38"/>
+                                    <constraint firstAttribute="trailing" secondItem="rQL-5x-1y6" secondAttribute="trailing" constant="2" id="wrc-Sw-noh"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="colorView" destination="rQL-5x-1y6" id="NyZ-OC-QRO"/>
+                                    <outlet property="selectedCircleView" destination="MtZ-vv-oXb" id="gIC-gv-bnv"/>
+                                    <outlet property="selectedCircleViewHeight" destination="idB-mS-59U" id="9rK-YJ-POZ"/>
+                                    <outlet property="selectedCircleViewWidth" destination="x6z-ep-R1t" id="5tU-U8-umj"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="Dr8-QM-ndK" id="BhQ-nM-GZL"/>
+                            <outlet property="delegate" destination="Dr8-QM-ndK" id="SpZ-VF-WqK"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1dt-Zr-b8o" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="959" y="29"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="assetCircle" width="20" height="20"/>
+    </resources>
+</document>

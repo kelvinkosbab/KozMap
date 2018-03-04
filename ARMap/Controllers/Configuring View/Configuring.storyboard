@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Configuring View Controller-->
+        <scene sceneID="PR8-mI-tR0">
+            <objects>
+                <viewController storyboardIdentifier="ConfiguringViewController" id="UbE-Ms-Iyn" customClass="ConfiguringViewController" customModule="KozMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7Un-Fq-tX9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7tk-w7-UOm">
+                                <rect key="frame" x="50" y="321.5" width="275" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OCf-oy-ZAz">
+                                <rect key="frame" x="50" y="365.5" width="275" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.83137254900000002" green="0.83137254900000002" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Fb0-Dk-f0G" firstAttribute="trailing" secondItem="7tk-w7-UOm" secondAttribute="trailing" constant="50" id="0Hh-6v-Lqs"/>
+                            <constraint firstItem="7tk-w7-UOm" firstAttribute="leading" secondItem="Fb0-Dk-f0G" secondAttribute="leading" constant="50" id="6rg-Ff-tK2"/>
+                            <constraint firstItem="Fb0-Dk-f0G" firstAttribute="trailing" secondItem="OCf-oy-ZAz" secondAttribute="trailing" constant="50" id="FtO-eX-ygA"/>
+                            <constraint firstItem="7tk-w7-UOm" firstAttribute="centerY" secondItem="7Un-Fq-tX9" secondAttribute="centerY" id="Ldb-ck-ypN"/>
+                            <constraint firstItem="OCf-oy-ZAz" firstAttribute="leading" secondItem="Fb0-Dk-f0G" secondAttribute="leading" constant="50" id="iEh-xJ-a3h"/>
+                            <constraint firstItem="OCf-oy-ZAz" firstAttribute="top" secondItem="7tk-w7-UOm" secondAttribute="bottom" constant="20" id="yJZ-NM-39a"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Fb0-Dk-f0G"/>
+                    </view>
+                    <connections>
+                        <outlet property="messageLabel" destination="OCf-oy-ZAz" id="nPd-rd-VOj"/>
+                        <outlet property="statusLabel" destination="7tk-w7-UOm" id="gVY-Ht-28F"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CxH-rg-L3K" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="38" y="-684"/>
+        </scene>
+    </scenes>
+</document>

@@ -30,7 +30,7 @@ extension MainViewController : AddLocationViewControllerDelegate {
   }
   
   private func presentLocationSavedAlert(placemark: Placemark) {
-    let title = "Location Saved"
+    let title = "Placemark Saved"
     let message: String?
     if let name = placemark.name {
       message = "\(name) has been saved."
@@ -72,10 +72,10 @@ extension MainViewController : LocationListViewControllerDelegate {
     }
   }
   
-  func shouldDelete(placemark: Placemark) {
-    
-    // Delete this location from core data
-    Placemark.deleteOne(placemark)
+  func shouldTransitionToAddPlacemark() {
+    self.dismiss(animated: true) { [weak self] in
+      self?.presentAddLocation()
+    }
   }
 }
 

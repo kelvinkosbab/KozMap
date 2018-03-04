@@ -1,6 +1,6 @@
 //
 //  LocationDetailViewController.swift
-// KozMap
+//  KozMap
 //
 //  Created by Kelvin Kosbab on 1/20/18.
 //  Copyright © 2018 Kozinga. All rights reserved.
@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class LocationDetailViewController : BaseViewController, NSFetchedResultsControllerDelegate, DesiredContentHeightDelegate, DismissInteractable, KeyboardFrameRespondable {
+class LocationDetailViewController : BaseViewController, NSFetchedResultsControllerDelegate, DesiredContentHeightDelegate, DismissInteractable, KeyboardFrameRespondable, PlacemarkAPIDelegate {
   
   // MARK: - Static Accessors
   
@@ -67,6 +67,14 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
   
   // MARK: - Lifecycle
   
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    self.title = self.placemark?.name
+    
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(self.deleteButtonSelected))
+  }
+  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
@@ -89,19 +97,19 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
     super.viewWillDisappear(animated)
     
     self.nameTextField.resignFirstResponder()
+    MyDataManager.shared.saveMainContext()
   }
   
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
     
-    MyDataManager.shared.saveMainContext()
     NotificationCenter.default.removeObserver(self)
   }
   
   // MARK: - Status Bar
   
   override var prefersStatusBarHidden: Bool {
-    return true
+    return UIDevice.current.isPhone
   }
   
   override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
@@ -122,7 +130,12 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
   
   func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
     if controller == self.placemarksFetchedResultsController {
-      self.placemark = self.placemarksFetchedResultsController?.fetchedObjects?.first
+      
+      guard let placemark = self.placemarksFetchedResultsController?.fetchedObjects?.first else {
+        return
+      }
+      
+      self.placemark = placemark
       self.reloadContent()
     }
   }
@@ -147,6 +160,7 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
     
     // Check if there is a location to populate
     guard let placemark = self.placemark else {
+      self.title = nil
       self.latitudeLabel.text = "NA"
       self.longitudeLabel.text = "NA"
       self.distanceLabel.text = "NA"
@@ -155,6 +169,7 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
     }
     
     // Name
+    self.title = placemark.name
     self.nameTextField.text = placemark.name
     
     // Color
@@ -187,6 +202,18 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
   
   @IBAction func nameTextFieldEditingChanged(_ sender: UITextField) {
     self.placemark?.name = sender.text
+  }
+  
+  @objc func deleteButtonSelected() {
+    
+    // Delete the placemark
+    if let placemark = self.placemark {
+      self.promptDeletePlacemark(placemark: placemark) { [weak self] in
+        
+        // Dismiss
+        self?.dismissController()
+      }
+    }
   }
 }
 
