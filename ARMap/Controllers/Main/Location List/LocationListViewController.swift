@@ -12,6 +12,7 @@ import CoreData
 
 protocol LocationListViewControllerDelegate : class {
   func shouldEdit(placemark: Placemark)
+  func shouldTransitionToAddPlacemark()
 }
 
 class LocationListViewController : BaseViewController, NSFetchedResultsControllerDelegate, DesiredContentHeightDelegate, DismissInteractable, LocationDetailNavigationDelegate, PlacemarkAPIDelegate {
@@ -200,6 +201,34 @@ extension LocationListViewController : UITableViewDelegate, UITableViewDataSourc
     return 1
   }
   
+  func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    
+    guard let sectionType = self.getSectionType(section: section) else {
+      return nil
+    }
+    
+    switch sectionType {
+    case .placemarks(_):
+      let cell = tableView.dequeueReusableCell(withIdentifier: LocationListAddPlacemarkCell.name) as! LocationListAddPlacemarkCell
+      cell.delegate = self
+      cell.backgroundColor = .clear
+      cell.contentView.backgroundColor = .clear
+      return cell
+    }
+  }
+  
+  func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    
+    guard let sectionType = self.getSectionType(section: section) else {
+      return 0
+    }
+    
+    switch sectionType {
+    case .placemarks(_):
+      return 70
+    }
+  }
+  
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
     guard let sectionType = self.getSectionType(section: section) else {
@@ -226,7 +255,7 @@ extension LocationListViewController : UITableViewDelegate, UITableViewDataSourc
     
     switch rowType {
     case .placemark(let placemark):
-      let cell = tableView.dequeueReusableCell(withIdentifier: "LocationListViewControllerCell", for: indexPath) as! LocationListViewControllerCell
+      let cell = tableView.dequeueReusableCell(withIdentifier: LocationListViewControllerCell.name, for: indexPath) as! LocationListViewControllerCell
       cell.backgroundColor = .clear
       cell.configure(placemark: placemark, unitType: Defaults.shared.unitType, delegate: self, hideMoreButton: !UIDevice.current.isPhone)
       return cell
@@ -288,5 +317,14 @@ extension LocationListViewController : LocationListViewControllerCellDelegate {
       alertController.popoverPresentationController?.sourceRect = sender.frame
       self.present(alertController, animated: true, completion: nil)
     }
+  }
+}
+
+// MARK: - LocationListAddPlacemarkCellDelegate
+
+extension LocationListViewController : LocationListAddPlacemarkCellDelegate {
+  
+  func didSelectAddPlacemark() {
+    self.delegate?.shouldTransitionToAddPlacemark()
   }
 }

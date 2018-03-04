@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol LocationDetailNavigationDelegate {}
+protocol LocationDetailNavigationDelegate : class {}
 extension LocationDetailNavigationDelegate where Self : UIViewController {
   
   func getPlacemarkDetailViewController(placemark: Placemark) -> LocationDetailViewController {

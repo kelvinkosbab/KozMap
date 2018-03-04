@@ -71,6 +71,12 @@ extension MainViewController : LocationListViewControllerDelegate {
       self?.presentLocationDetail(placemark: placemark)
     }
   }
+  
+  func shouldTransitionToAddPlacemark() {
+    self.dismiss(animated: true) { [weak self] in
+      self?.presentAddLocation()
+    }
+  }
 }
 
 // MARK: - SearchViewControllerDelegate

@@ -8,11 +8,13 @@
 
 import UIKit
 
+// MARK: - LocationListViewControllerCell
+
 protocol LocationListViewControllerCellDelegate : class {
   func moreButtonSelected(placemark: Placemark, sender: UIView)
 }
 
-class LocationListViewControllerCell : UITableViewCell {
+class LocationListViewControllerCell : UITableViewCell, ClassNamable {
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var detailLabel: UILabel!
   @IBOutlet weak var colorView: UIView!
@@ -64,5 +66,20 @@ class LocationListViewControllerCell : UITableViewCell {
     if let placemark = self.placemark {
       self.delegate?.moreButtonSelected(placemark: placemark, sender: sender)
     }
+  }
+}
+
+// MARK: - LocationListAddPlacemarkCell
+
+protocol LocationListAddPlacemarkCellDelegate : class {
+  func didSelectAddPlacemark()
+}
+
+class LocationListAddPlacemarkCell : UITableViewCell, ClassNamable {
+  @IBOutlet weak var addButton: UIButton!
+  weak var delegate: LocationListAddPlacemarkCellDelegate? = nil
+  
+  @IBAction func didSelectAddButton() {
+    self.delegate?.didSelectAddPlacemark()
   }
 }
