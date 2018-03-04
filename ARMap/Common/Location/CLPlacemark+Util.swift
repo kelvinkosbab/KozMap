@@ -1,6 +1,6 @@
 //
 //  CLPlacemark+Util.swift
-//  ARMap
+// KozMap
 //
 //  Created by Kelvin Kosbab on 1/21/18.
 //  Copyright © 2018 Kozinga. All rights reserved.

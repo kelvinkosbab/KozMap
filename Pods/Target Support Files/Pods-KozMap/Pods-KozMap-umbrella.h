@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_ARMapVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_ARMapVersionString[];
+FOUNDATION_EXPORT double Pods_KozMapVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_KozMapVersionString[];
 

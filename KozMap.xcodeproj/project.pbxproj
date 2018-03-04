@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4CAB96F3BD6BA24294579FB2 /* Pods_KozMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CB719DD0FC2BDBA88151D6A /* Pods_KozMap.framework */; };
 		B64423FB20410BE9006E524A /* TextFlagPlacemarkNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64423FA20410BE9006E524A /* TextFlagPlacemarkNode.swift */; };
 		B6442400204110D4006E524A /* SCNTextAlignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64423FF204110D4006E524A /* SCNTextAlignment.swift */; };
 		B686EED020166C7300ACF075 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EECF20166C7300ACF075 /* AppDelegate.swift */; };
@@ -113,16 +114,19 @@
 		B6F451B220392AD50084AFC8 /* PresentingViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F451B120392AD50084AFC8 /* PresentingViewControllerDelegate.swift */; };
 		B6F451B520393D470084AFC8 /* TopKnobVisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F451B420393D470084AFC8 /* TopKnobVisualEffectView.swift */; };
 		B6F451B720393E2F0084AFC8 /* TopKnobVisualEffectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6F451B620393E2F0084AFC8 /* TopKnobVisualEffectView.xib */; };
-		CAA23C0322C4622E91BCE6D4 /* Pods_ARMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5FD9317E79EEF842F494EEA /* Pods_ARMap.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1CB719DD0FC2BDBA88151D6A /* Pods_KozMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KozMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		260AB567AE87520DEA22090D /* Pods-ARMap.koz - debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARMap.koz - debug.xcconfig"; path = "Pods/Target Support Files/Pods-ARMap/Pods-ARMap.koz - debug.xcconfig"; sourceTree = "<group>"; };
 		3629996ECE316BF4910A57A6 /* Pods-ARMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARMap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ARMap/Pods-ARMap.debug.xcconfig"; sourceTree = "<group>"; };
+		3E87C20D3F9CD4FA6E1E7449 /* Pods-KozMap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KozMap.release.xcconfig"; path = "Pods/Target Support Files/Pods-KozMap/Pods-KozMap.release.xcconfig"; sourceTree = "<group>"; };
+		47A14A32F7FA20DD02261679 /* Pods-KozMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KozMap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KozMap/Pods-KozMap.debug.xcconfig"; sourceTree = "<group>"; };
+		8438AF4D777D654EBDBBD394 /* Pods-KozMap.koz - release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KozMap.koz - release.xcconfig"; path = "Pods/Target Support Files/Pods-KozMap/Pods-KozMap.koz - release.xcconfig"; sourceTree = "<group>"; };
 		A4C83F8AC6F29F40129B562F /* Pods-ARMap.koz - release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARMap.koz - release.xcconfig"; path = "Pods/Target Support Files/Pods-ARMap/Pods-ARMap.koz - release.xcconfig"; sourceTree = "<group>"; };
 		B64423FA20410BE9006E524A /* TextFlagPlacemarkNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFlagPlacemarkNode.swift; sourceTree = "<group>"; };
 		B64423FF204110D4006E524A /* SCNTextAlignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNTextAlignment.swift; sourceTree = "<group>"; };
-		B686EECC20166C7300ACF075 /* ARMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B686EECC20166C7300ACF075 /* KozMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KozMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B686EECF20166C7300ACF075 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B686EED720166C7300ACF075 /* ARMap.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ARMap.xcdatamodel; sourceTree = "<group>"; };
 		B686EED920166C7300ACF075 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -228,8 +232,8 @@
 		B6F451B120392AD50084AFC8 /* PresentingViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentingViewControllerDelegate.swift; sourceTree = "<group>"; };
 		B6F451B420393D470084AFC8 /* TopKnobVisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopKnobVisualEffectView.swift; sourceTree = "<group>"; };
 		B6F451B620393E2F0084AFC8 /* TopKnobVisualEffectView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopKnobVisualEffectView.xib; sourceTree = "<group>"; };
-		D5FD9317E79EEF842F494EEA /* Pods_ARMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F20C34CD6FFED3DFBAD8759F /* Pods-ARMap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARMap.release.xcconfig"; path = "Pods/Target Support Files/Pods-ARMap/Pods-ARMap.release.xcconfig"; sourceTree = "<group>"; };
+		FF9DEB98585905ECE425245B /* Pods-KozMap.koz - debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KozMap.koz - debug.xcconfig"; path = "Pods/Target Support Files/Pods-KozMap/Pods-KozMap.koz - debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,7 +241,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAA23C0322C4622E91BCE6D4 /* Pods_ARMap.framework in Frameworks */,
+				4CAB96F3BD6BA24294579FB2 /* Pods_KozMap.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,7 +251,7 @@
 		23DC56D8DC87F760852F588E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D5FD9317E79EEF842F494EEA /* Pods_ARMap.framework */,
+				1CB719DD0FC2BDBA88151D6A /* Pods_KozMap.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -259,6 +263,10 @@
 				260AB567AE87520DEA22090D /* Pods-ARMap.koz - debug.xcconfig */,
 				F20C34CD6FFED3DFBAD8759F /* Pods-ARMap.release.xcconfig */,
 				A4C83F8AC6F29F40129B562F /* Pods-ARMap.koz - release.xcconfig */,
+				47A14A32F7FA20DD02261679 /* Pods-KozMap.debug.xcconfig */,
+				FF9DEB98585905ECE425245B /* Pods-KozMap.koz - debug.xcconfig */,
+				3E87C20D3F9CD4FA6E1E7449 /* Pods-KozMap.release.xcconfig */,
+				8438AF4D777D654EBDBBD394 /* Pods-KozMap.koz - release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -296,7 +304,7 @@
 		B686EECD20166C7300ACF075 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B686EECC20166C7300ACF075 /* ARMap.app */,
+				B686EECC20166C7300ACF075 /* KozMap.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -678,24 +686,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B686EECB20166C7300ACF075 /* ARMap */ = {
+		B686EECB20166C7300ACF075 /* KozMap */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B686EEE120166C7300ACF075 /* Build configuration list for PBXNativeTarget "ARMap" */;
+			buildConfigurationList = B686EEE120166C7300ACF075 /* Build configuration list for PBXNativeTarget "KozMap" */;
 			buildPhases = (
-				DE411A3ECD1E46EA32DF671B /* [CP] Check Pods Manifest.lock */,
+				05B2EF79F38ABD15D17E2612 /* [CP] Check Pods Manifest.lock */,
 				B686EEC820166C7300ACF075 /* Sources */,
 				B686EEC920166C7300ACF075 /* Frameworks */,
 				B686EECA20166C7300ACF075 /* Resources */,
-				C3CD0557D2A5CD62EE994245 /* [CP] Embed Pods Frameworks */,
-				EDE6F2CEB88662DBE39E95FA /* [CP] Copy Pods Resources */,
+				274664658833806BAE895BF6 /* [CP] Embed Pods Frameworks */,
+				0F184E156F0F6B0B53585825 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = ARMap;
+			name = KozMap;
 			productName = ARMap;
-			productReference = B686EECC20166C7300ACF075 /* ARMap.app */;
+			productReference = B686EECC20166C7300ACF075 /* KozMap.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -714,7 +722,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B686EEC720166C7300ACF075 /* Build configuration list for PBXProject "ARMap" */;
+			buildConfigurationList = B686EEC720166C7300ACF075 /* Build configuration list for PBXProject "KozMap" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -727,7 +735,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B686EECB20166C7300ACF075 /* ARMap */,
+				B686EECB20166C7300ACF075 /* KozMap */,
 			);
 		};
 /* End PBXProject section */
@@ -749,25 +757,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		C3CD0557D2A5CD62EE994245 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ARMap/Pods-ARMap-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ARMap/Pods-ARMap-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DE411A3ECD1E46EA32DF671B /* [CP] Check Pods Manifest.lock */ = {
+		05B2EF79F38ABD15D17E2612 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -778,14 +768,14 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ARMap-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-KozMap-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EDE6F2CEB88662DBE39E95FA /* [CP] Copy Pods Resources */ = {
+		0F184E156F0F6B0B53585825 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -797,7 +787,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ARMap/Pods-ARMap-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KozMap/Pods-KozMap-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		274664658833806BAE895BF6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-KozMap/Pods-KozMap-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KozMap/Pods-KozMap-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -970,6 +978,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-DTACK";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1026,6 +1035,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "-DTACK";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
@@ -1034,7 +1044,7 @@
 		};
 		B686EEE220166C7300ACF075 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3629996ECE316BF4910A57A6 /* Pods-ARMap.debug.xcconfig */;
+			baseConfigurationReference = 47A14A32F7FA20DD02261679 /* Pods-KozMap.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -1043,7 +1053,6 @@
 				INFOPLIST_FILE = "$(SRCROOT)/ARMap/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_SWIFT_FLAGS = "-DTACK";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tackmobile.ARMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "eec3bafe-33fc-4b56-b768-1bb12c3ac6ab";
@@ -1055,7 +1064,7 @@
 		};
 		B686EEE320166C7300ACF075 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F20C34CD6FFED3DFBAD8759F /* Pods-ARMap.release.xcconfig */;
+			baseConfigurationReference = 3E87C20D3F9CD4FA6E1E7449 /* Pods-KozMap.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -1066,7 +1075,6 @@
 				INFOPLIST_FILE = "$(SRCROOT)/ARMap/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_SWIFT_FLAGS = "-DTACK";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tackmobile.ARMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c8a6b06f-f9fb-4585-b236-34ca721bd997";
@@ -1133,6 +1141,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-DKOZINGA";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1141,7 +1150,7 @@
 		};
 		B6EE24652038D3F400380AAA /* Koz - Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 260AB567AE87520DEA22090D /* Pods-ARMap.koz - debug.xcconfig */;
+			baseConfigurationReference = FF9DEB98585905ECE425245B /* Pods-KozMap.koz - debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -1151,7 +1160,6 @@
 				INFOPLIST_FILE = "$(SRCROOT)/ARMap/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_SWIFT_FLAGS = "-DKOZINGA";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kozinga.KozMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "0380666e-1360-480f-aae8-31b4f9090590";
@@ -1211,6 +1219,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "-DKOZINGA";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
@@ -1219,7 +1228,7 @@
 		};
 		B6EE24672038D40000380AAA /* Koz - Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A4C83F8AC6F29F40129B562F /* Pods-ARMap.koz - release.xcconfig */;
+			baseConfigurationReference = 8438AF4D777D654EBDBBD394 /* Pods-KozMap.koz - release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -1229,7 +1238,6 @@
 				INFOPLIST_FILE = "$(SRCROOT)/ARMap/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_SWIFT_FLAGS = "-DKOZINGA";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kozinga.KozMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "9599f5f2-9f54-4e69-8b4d-2748530eb5ba";
@@ -1242,7 +1250,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B686EEC720166C7300ACF075 /* Build configuration list for PBXProject "ARMap" */ = {
+		B686EEC720166C7300ACF075 /* Build configuration list for PBXProject "KozMap" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B686EEDF20166C7300ACF075 /* Debug */,
@@ -1253,7 +1261,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B686EEE120166C7300ACF075 /* Build configuration list for PBXNativeTarget "ARMap" */ = {
+		B686EEE120166C7300ACF075 /* Build configuration list for PBXNativeTarget "KozMap" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B686EEE220166C7300ACF075 /* Debug */,

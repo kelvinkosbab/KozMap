@@ -15,17 +15,18 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B686EECB20166C7300ACF075"
-               BuildableName = "ARMap.app"
-               BlueprintName = "ARMap"
-               ReferencedContainer = "container:ARMap.xcodeproj">
+               BuildableName = "KozMap.app"
+               BlueprintName = "KozMap"
+               ReferencedContainer = "container:KozMap.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      buildConfiguration = "Koz - Debug"
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
@@ -33,18 +34,19 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B686EECB20166C7300ACF075"
-            BuildableName = "ARMap.app"
-            BlueprintName = "ARMap"
-            ReferencedContainer = "container:ARMap.xcodeproj">
+            BuildableName = "KozMap.app"
+            BlueprintName = "KozMap"
+            ReferencedContainer = "container:KozMap.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Koz - Debug"
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -56,16 +58,16 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B686EECB20166C7300ACF075"
-            BuildableName = "ARMap.app"
-            BlueprintName = "ARMap"
-            ReferencedContainer = "container:ARMap.xcodeproj">
+            BuildableName = "KozMap.app"
+            BlueprintName = "KozMap"
+            ReferencedContainer = "container:KozMap.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Koz - Release"
+      buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
@@ -75,17 +77,17 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B686EECB20166C7300ACF075"
-            BuildableName = "ARMap.app"
-            BlueprintName = "ARMap"
-            ReferencedContainer = "container:ARMap.xcodeproj">
+            BuildableName = "KozMap.app"
+            BlueprintName = "KozMap"
+            ReferencedContainer = "container:KozMap.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "Koz - Debug">
+      buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Koz - Release"
+      buildConfiguration = "Release"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

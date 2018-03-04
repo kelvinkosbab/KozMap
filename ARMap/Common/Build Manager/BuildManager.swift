@@ -3,7 +3,7 @@
 //  KozMap
 //
 //  Created by Kelvin Kosbab on 1/10/18.
-//  Copyright © 2018 Tack Mobile. All rights reserved.
+//  Copyright © 2018 Kozinga. All rights reserved.
 //
 
 import Foundation
