@@ -98,6 +98,7 @@
 		B6A8ABD9204B9AEC007FDAEC /* Configuring.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6A8ABD8204B9AEC007FDAEC /* Configuring.storyboard */; };
 		B6A8ABDB204BA791007FDAEC /* LocationDetailNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A8ABDA204BA791007FDAEC /* LocationDetailNavigationDelegate.swift */; };
 		B6A8ABDD204BB073007FDAEC /* PlacemarkAPIDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A8ABDC204BB073007FDAEC /* PlacemarkAPIDelegate.swift */; };
+		B6D85DEA204C99090043BC9F /* DayNight.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D85DE9204C99090043BC9F /* DayNight.swift */; };
 		B6DCCDBD203B355C00201385 /* TopKnobBottomUpAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDBC203B355C00201385 /* TopKnobBottomUpAnimator.swift */; };
 		B6DCCDBF203B3DE700201385 /* TopKnobBottomUpPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDBE203B3DE600201385 /* TopKnobBottomUpPresentationController.swift */; };
 		B6DCCDC1203B63D500201385 /* InteractiveTransitionOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDC0203B63D500201385 /* InteractiveTransitionOption.swift */; };
@@ -222,6 +223,7 @@
 		B6A8ABD8204B9AEC007FDAEC /* Configuring.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Configuring.storyboard; sourceTree = "<group>"; };
 		B6A8ABDA204BA791007FDAEC /* LocationDetailNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailNavigationDelegate.swift; sourceTree = "<group>"; };
 		B6A8ABDC204BB073007FDAEC /* PlacemarkAPIDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacemarkAPIDelegate.swift; sourceTree = "<group>"; };
+		B6D85DE9204C99090043BC9F /* DayNight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayNight.swift; sourceTree = "<group>"; };
 		B6DCCDBC203B355C00201385 /* TopKnobBottomUpAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopKnobBottomUpAnimator.swift; sourceTree = "<group>"; };
 		B6DCCDBE203B3DE600201385 /* TopKnobBottomUpPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopKnobBottomUpPresentationController.swift; sourceTree = "<group>"; };
 		B6DCCDC0203B63D500201385 /* InteractiveTransitionOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveTransitionOption.swift; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 				B686EF1520166D8700ACF075 /* SceneKit */,
 				B686EF1120166D7200ACF075 /* Model */,
 				B6F451B320393C060084AFC8 /* Custom Views */,
+				B6D85DE9204C99090043BC9F /* DayNight.swift */,
 				B686EF2020166D8700ACF075 /* Style.swift */,
 				B686EF1320166D8600ACF075 /* UnitType.swift */,
 				B686EF1420166D8600ACF075 /* ARDistanceType.swift */,
@@ -391,12 +394,12 @@
 		B686EEEA20166D5A00ACF075 /* Location */ = {
 			isa = PBXGroup;
 			children = (
+				B686EEF020166D5A00ACF075 /* LocationManager.swift */,
+				B686EEEE20166D5A00ACF075 /* CurrentLocationUpdatableService.swift */,
+				B686EEEF20166D5A00ACF075 /* LocationSearchService.swift */,
 				B686EEEB20166D5A00ACF075 /* MapItem.swift */,
 				B686EEEC20166D5A00ACF075 /* CLLocationCoordinate2D+Util.swift */,
 				B686EEED20166D5A00ACF075 /* CLPlacemark+Util.swift */,
-				B686EEEE20166D5A00ACF075 /* CurrentLocationUpdatableService.swift */,
-				B686EEEF20166D5A00ACF075 /* LocationSearchService.swift */,
-				B686EEF020166D5A00ACF075 /* LocationManager.swift */,
 				B686EEF120166D5A00ACF075 /* CLLocation+Util.swift */,
 			);
 			path = Location;
@@ -946,6 +949,7 @@
 				B6DCCDE7203BEDCA00201385 /* LeftMenuAnimator.swift in Sources */,
 				B686EF0B20166D5A00ACF075 /* UIApplication+Util.swift in Sources */,
 				B686EF6820166D9D00ACF075 /* Placemark+MyManagedObjectProtocol.swift in Sources */,
+				B6D85DEA204C99090043BC9F /* DayNight.swift in Sources */,
 				B686EF0420166D5A00ACF075 /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

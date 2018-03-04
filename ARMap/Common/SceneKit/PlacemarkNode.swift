@@ -21,6 +21,10 @@ class PlacemarkNode : VirtualObject {
   internal var distanceTextAlignment: SCNTextAlignment? = nil
   internal var unitTextTextAlignment: SCNTextAlignment? = nil
   
+  internal var nameTextRespondsToDayNight: Bool = false
+  internal var distanceTextRespondsToDayNight: Bool = false
+  internal var unitTextRespondsToDayNight: Bool = false
+  
   // MARK: - Init
   
   convenience init(primaryName: String? = nil, distanceText: String? = nil, unitText: String? = nil, beamColor: UIColor = .kozRed, beamTransparency: CGFloat = 0.7) {
@@ -117,9 +121,16 @@ class PlacemarkNode : VirtualObject {
   }
   
   internal func updatePrimaryName() {
+    
+    // Update text
     if let textGeometry = self.nameTextNode?.geometry as? SCNText, textGeometry.string as? String != self.primaryName {
       textGeometry.alignmentMode = kCAAlignmentCenter
       textGeometry.string = self.primaryName
+    }
+    
+    // Day / Night
+    if let textGeometry = self.nameTextNode?.geometry as? SCNText, self.nameTextRespondsToDayNight {
+      textGeometry.firstMaterial?.diffuse.contents = DayNight.isNight ? UIColor.white : UIColor.black
     }
     
     // Adjustments for text alignment
@@ -139,9 +150,16 @@ class PlacemarkNode : VirtualObject {
   }
   
   internal func updateDistanceText() {
+    
+    // Update text
     if let textGeometry = self.distanceTextNode?.geometry as? SCNText, textGeometry.string as? String != self.distanceText {
       textGeometry.alignmentMode = kCAAlignmentCenter
       textGeometry.string = self.distanceText
+    }
+    
+    // Day / Night
+    if let textGeometry = self.distanceTextNode?.geometry as? SCNText, self.distanceTextRespondsToDayNight {
+      textGeometry.firstMaterial?.diffuse.contents = DayNight.isNight ? UIColor.white : UIColor.black
     }
     
     // Adjustments for text alignment
@@ -161,9 +179,16 @@ class PlacemarkNode : VirtualObject {
   }
   
   internal func updateUnitText() {
+    
+    // Update text
     if let textGeometry = self.unitTextNode?.geometry as? SCNText, textGeometry.string as? String != self.unitText {
       textGeometry.alignmentMode = kCAAlignmentCenter
       textGeometry.string = self.unitText
+    }
+    
+    // Day / Night
+    if let textGeometry = self.unitTextNode?.geometry as? SCNText, self.unitTextRespondsToDayNight {
+      textGeometry.firstMaterial?.diffuse.contents = DayNight.isNight ? UIColor.white : UIColor.black
     }
     
     // Adjustments for text alignment
