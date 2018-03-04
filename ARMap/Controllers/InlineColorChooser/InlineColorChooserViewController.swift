@@ -67,8 +67,8 @@ class InlineColorChooserViewController : UICollectionViewController, UICollectio
     self.collectionView?.dataSource = self
   }
   
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
     
     self.loadItems()
   }
@@ -76,9 +76,9 @@ class InlineColorChooserViewController : UICollectionViewController, UICollectio
   // MARK: - Content
   
   func loadItems() {
-    let newColors: [UIColor] = [ .kozRed, .kozOrange, .kozYellow, .kozGreen, .kozBlue, .kozPurple ]
     self.perform(dataSourceUpdates: { [weak self] in
-      self?.colors = newColors
+      let colors: [UIColor] = [ .kozRed, .kozOrange, .kozYellow, .kozGreen, .kozBlue, .kozPurple ]
+      self?.colors = colors
     }, batchUpdates: { [weak self] in
       let indexSet = IndexSet(integer: 0)
       self?.collectionView?.reloadSections(indexSet)
@@ -134,6 +134,7 @@ class InlineColorChooserViewController : UICollectionViewController, UICollectio
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    
     // Asks the delegate for the spacing between successive rows or columns of a section.
     let cellDimension = self.cellDimension
     let totalCellWidth = cellDimension * CGFloat(self.colors.count)

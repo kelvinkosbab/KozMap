@@ -82,6 +82,12 @@ class AddLocationContainerViewController : BaseViewController, DesiredContentHei
     }
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    self.orderedViewControllers.first?.viewWillAppear(animated)
+  }
+  
   // MARK: - Status Bar
   
   override var prefersStatusBarHidden: Bool {

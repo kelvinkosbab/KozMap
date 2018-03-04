@@ -95,11 +95,6 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
-    // Configure the color chooser
-    if self.colorChooserController == nil {
-      self.configureColorChooser()
-    }
-    
     // Style button
     self.addLocationButton.layer.cornerRadius = 5
     self.addLocationButton.layer.masksToBounds = true
@@ -125,6 +120,15 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
     super.viewDidDisappear(animated)
     
     NotificationCenter.default.removeObserver(self)
+  }
+  
+  override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+    
+    // Configure the color chooser
+    if self.colorChooserController == nil {
+      self.configureColorChooser()
+    }
   }
   
   // MARK: - Notifications
