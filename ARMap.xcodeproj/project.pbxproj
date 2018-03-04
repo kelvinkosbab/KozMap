@@ -51,7 +51,7 @@
 		B686EF5820166D8700ACF075 /* DesiredContentHeightDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF3420166D8700ACF075 /* DesiredContentHeightDelegate.swift */; };
 		B686EF5920166D8700ACF075 /* BatchUpdatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF3520166D8700ACF075 /* BatchUpdatable.swift */; };
 		B686EF5A20166D8700ACF075 /* ViewControllerFromStoryboardProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF3620166D8700ACF075 /* ViewControllerFromStoryboardProtocol.swift */; };
-		B686EF5B20166D8700ACF075 /* Loggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF3720166D8700ACF075 /* Loggable.swift */; };
+		B686EF5B20166D8700ACF075 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF3720166D8700ACF075 /* Log.swift */; };
 		B686EF5C20166D8700ACF075 /* CameraPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF3920166D8700ACF075 /* CameraPermissionManager.swift */; };
 		B686EF5D20166D8700ACF075 /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF3A20166D8700ACF075 /* PermissionManager.swift */; };
 		B686EF6420166D9D00ACF075 /* MyDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF5E20166D9C00ACF075 /* MyDataManager.swift */; };
@@ -83,6 +83,14 @@
 		B686EFA420166F1300ACF075 /* PermissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF8D20166F1300ACF075 /* PermissionsViewController.swift */; };
 		B686EFA520166F1300ACF075 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF8E20166F1300ACF075 /* BaseNavigationController.swift */; };
 		B686EFA620166F1300ACF075 /* InlineColorChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF9020166F1300ACF075 /* InlineColorChooserViewController.swift */; };
+		B6A8ABC8204B8851007FDAEC /* ServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A8ABC2204B8850007FDAEC /* ServiceResponse.swift */; };
+		B6A8ABC9204B8851007FDAEC /* Loggable+Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A8ABC3204B8850007FDAEC /* Loggable+Service.swift */; };
+		B6A8ABCA204B8851007FDAEC /* Data+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A8ABC4204B8851007FDAEC /* Data+JSON.swift */; };
+		B6A8ABCB204B8851007FDAEC /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A8ABC5204B8851007FDAEC /* SessionManager.swift */; };
+		B6A8ABCC204B8851007FDAEC /* AuthenticationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A8ABC6204B8851007FDAEC /* AuthenticationState.swift */; };
+		B6A8ABCD204B8851007FDAEC /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A8ABC7204B8851007FDAEC /* Service.swift */; };
+		B6A8ABCF204B8992007FDAEC /* String+Base64.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A8ABCE204B8992007FDAEC /* String+Base64.swift */; };
+		B6A8ABD1204B89C2007FDAEC /* ClassNamable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A8ABD0204B89C2007FDAEC /* ClassNamable.swift */; };
 		B6DCCDBD203B355C00201385 /* TopKnobBottomUpAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDBC203B355C00201385 /* TopKnobBottomUpAnimator.swift */; };
 		B6DCCDBF203B3DE700201385 /* TopKnobBottomUpPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDBE203B3DE600201385 /* TopKnobBottomUpPresentationController.swift */; };
 		B6DCCDC1203B63D500201385 /* InteractiveTransitionOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDC0203B63D500201385 /* InteractiveTransitionOption.swift */; };
@@ -105,9 +113,13 @@
 		B6F451B220392AD50084AFC8 /* PresentingViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F451B120392AD50084AFC8 /* PresentingViewControllerDelegate.swift */; };
 		B6F451B520393D470084AFC8 /* TopKnobVisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F451B420393D470084AFC8 /* TopKnobVisualEffectView.swift */; };
 		B6F451B720393E2F0084AFC8 /* TopKnobVisualEffectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6F451B620393E2F0084AFC8 /* TopKnobVisualEffectView.xib */; };
+		CAA23C0322C4622E91BCE6D4 /* Pods_ARMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5FD9317E79EEF842F494EEA /* Pods_ARMap.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		260AB567AE87520DEA22090D /* Pods-ARMap.koz - debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARMap.koz - debug.xcconfig"; path = "Pods/Target Support Files/Pods-ARMap/Pods-ARMap.koz - debug.xcconfig"; sourceTree = "<group>"; };
+		3629996ECE316BF4910A57A6 /* Pods-ARMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARMap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ARMap/Pods-ARMap.debug.xcconfig"; sourceTree = "<group>"; };
+		A4C83F8AC6F29F40129B562F /* Pods-ARMap.koz - release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARMap.koz - release.xcconfig"; path = "Pods/Target Support Files/Pods-ARMap/Pods-ARMap.koz - release.xcconfig"; sourceTree = "<group>"; };
 		B64423FA20410BE9006E524A /* TextFlagPlacemarkNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFlagPlacemarkNode.swift; sourceTree = "<group>"; };
 		B64423FF204110D4006E524A /* SCNTextAlignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNTextAlignment.swift; sourceTree = "<group>"; };
 		B686EECC20166C7300ACF075 /* ARMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,7 +166,7 @@
 		B686EF3420166D8700ACF075 /* DesiredContentHeightDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesiredContentHeightDelegate.swift; sourceTree = "<group>"; };
 		B686EF3520166D8700ACF075 /* BatchUpdatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchUpdatable.swift; sourceTree = "<group>"; };
 		B686EF3620166D8700ACF075 /* ViewControllerFromStoryboardProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerFromStoryboardProtocol.swift; sourceTree = "<group>"; };
-		B686EF3720166D8700ACF075 /* Loggable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loggable.swift; sourceTree = "<group>"; };
+		B686EF3720166D8700ACF075 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		B686EF3920166D8700ACF075 /* CameraPermissionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraPermissionManager.swift; sourceTree = "<group>"; };
 		B686EF3A20166D8700ACF075 /* PermissionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
 		B686EF5E20166D9C00ACF075 /* MyDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDataManager.swift; sourceTree = "<group>"; };
@@ -186,6 +198,14 @@
 		B686EF8D20166F1300ACF075 /* PermissionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsViewController.swift; sourceTree = "<group>"; };
 		B686EF8E20166F1300ACF075 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		B686EF9020166F1300ACF075 /* InlineColorChooserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InlineColorChooserViewController.swift; sourceTree = "<group>"; };
+		B6A8ABC2204B8850007FDAEC /* ServiceResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceResponse.swift; sourceTree = "<group>"; };
+		B6A8ABC3204B8850007FDAEC /* Loggable+Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Loggable+Service.swift"; sourceTree = "<group>"; };
+		B6A8ABC4204B8851007FDAEC /* Data+JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+JSON.swift"; sourceTree = "<group>"; };
+		B6A8ABC5204B8851007FDAEC /* SessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		B6A8ABC6204B8851007FDAEC /* AuthenticationState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationState.swift; sourceTree = "<group>"; };
+		B6A8ABC7204B8851007FDAEC /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		B6A8ABCE204B8992007FDAEC /* String+Base64.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Base64.swift"; sourceTree = "<group>"; };
+		B6A8ABD0204B89C2007FDAEC /* ClassNamable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassNamable.swift; sourceTree = "<group>"; };
 		B6DCCDBC203B355C00201385 /* TopKnobBottomUpAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopKnobBottomUpAnimator.swift; sourceTree = "<group>"; };
 		B6DCCDBE203B3DE600201385 /* TopKnobBottomUpPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopKnobBottomUpPresentationController.swift; sourceTree = "<group>"; };
 		B6DCCDC0203B63D500201385 /* InteractiveTransitionOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveTransitionOption.swift; sourceTree = "<group>"; };
@@ -208,6 +228,8 @@
 		B6F451B120392AD50084AFC8 /* PresentingViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentingViewControllerDelegate.swift; sourceTree = "<group>"; };
 		B6F451B420393D470084AFC8 /* TopKnobVisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopKnobVisualEffectView.swift; sourceTree = "<group>"; };
 		B6F451B620393E2F0084AFC8 /* TopKnobVisualEffectView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopKnobVisualEffectView.xib; sourceTree = "<group>"; };
+		D5FD9317E79EEF842F494EEA /* Pods_ARMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F20C34CD6FFED3DFBAD8759F /* Pods-ARMap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARMap.release.xcconfig"; path = "Pods/Target Support Files/Pods-ARMap/Pods-ARMap.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,12 +237,32 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAA23C0322C4622E91BCE6D4 /* Pods_ARMap.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		23DC56D8DC87F760852F588E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D5FD9317E79EEF842F494EEA /* Pods_ARMap.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AF8ACFD42430778891FCE4AD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3629996ECE316BF4910A57A6 /* Pods-ARMap.debug.xcconfig */,
+				260AB567AE87520DEA22090D /* Pods-ARMap.koz - debug.xcconfig */,
+				F20C34CD6FFED3DFBAD8759F /* Pods-ARMap.release.xcconfig */,
+				A4C83F8AC6F29F40129B562F /* Pods-ARMap.koz - release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		B619F4BD203E7EF800DD8BA7 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -246,6 +288,8 @@
 			children = (
 				B686EECE20166C7300ACF075 /* ARMap */,
 				B686EECD20166C7300ACF075 /* Products */,
+				AF8ACFD42430778891FCE4AD /* Pods */,
+				23DC56D8DC87F760852F588E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -272,8 +316,9 @@
 		B686EEE420166CF500ACF075 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				B6A8ABC1204B883C007FDAEC /* 3rd Party Libraries */,
 				B686EEE720166D4500ACF075 /* Build Manager */,
-				B686EEF220166D5A00ACF075 /* Device */,
+				B6A8ABC0204B8833007FDAEC /* Service */,
 				B686EF2120166D8700ACF075 /* Presenting Controllers */,
 				B686EEF420166D5A00ACF075 /* Extensions */,
 				B686EF3220166D8700ACF075 /* Protocols */,
@@ -356,6 +401,7 @@
 				B686EEF920166D5A00ACF075 /* UIApplication+Util.swift */,
 				B686EEFA20166D5A00ACF075 /* CGRect+Util.swift */,
 				B686EEFB20166D5A00ACF075 /* Double+Util.swift */,
+				B6A8ABCE204B8992007FDAEC /* String+Base64.swift */,
 				B686EEFC20166D5A00ACF075 /* UIDevice+Util.swift */,
 				B686EEFD20166D5A00ACF075 /* UICollectionView+Util.swift */,
 				B686EEFE20166D5A00ACF075 /* UIView+Util.swift */,
@@ -438,7 +484,8 @@
 				B686EF3420166D8700ACF075 /* DesiredContentHeightDelegate.swift */,
 				B686EF3520166D8700ACF075 /* BatchUpdatable.swift */,
 				B686EF3620166D8700ACF075 /* ViewControllerFromStoryboardProtocol.swift */,
-				B686EF3720166D8700ACF075 /* Loggable.swift */,
+				B6A8ABD0204B89C2007FDAEC /* ClassNamable.swift */,
+				B686EF3720166D8700ACF075 /* Log.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -544,6 +591,27 @@
 			path = InlineColorChooser;
 			sourceTree = "<group>";
 		};
+		B6A8ABC0204B8833007FDAEC /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				B6A8ABC7204B8851007FDAEC /* Service.swift */,
+				B6A8ABC5204B8851007FDAEC /* SessionManager.swift */,
+				B6A8ABC6204B8851007FDAEC /* AuthenticationState.swift */,
+				B6A8ABC2204B8850007FDAEC /* ServiceResponse.swift */,
+				B6A8ABC3204B8850007FDAEC /* Loggable+Service.swift */,
+				B6A8ABC4204B8851007FDAEC /* Data+JSON.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		B6A8ABC1204B883C007FDAEC /* 3rd Party Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				B686EEF220166D5A00ACF075 /* Device */,
+			);
+			path = "3rd Party Libraries";
+			sourceTree = "<group>";
+		};
 		B6DCCDBA203B351000201385 /* Top Knob Bottom Up */ = {
 			isa = PBXGroup;
 			children = (
@@ -614,9 +682,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B686EEE120166C7300ACF075 /* Build configuration list for PBXNativeTarget "ARMap" */;
 			buildPhases = (
+				DE411A3ECD1E46EA32DF671B /* [CP] Check Pods Manifest.lock */,
 				B686EEC820166C7300ACF075 /* Sources */,
 				B686EEC920166C7300ACF075 /* Frameworks */,
 				B686EECA20166C7300ACF075 /* Resources */,
+				C3CD0557D2A5CD62EE994245 /* [CP] Embed Pods Frameworks */,
+				EDE6F2CEB88662DBE39E95FA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -677,6 +748,60 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		C3CD0557D2A5CD62EE994245 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ARMap/Pods-ARMap-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ARMap/Pods-ARMap-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DE411A3ECD1E46EA32DF671B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ARMap-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EDE6F2CEB88662DBE39E95FA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ARMap/Pods-ARMap-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B686EEC820166C7300ACF075 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -691,9 +816,12 @@
 				B686EF9E20166F1300ACF075 /* LocationListViewController+Cells.swift in Sources */,
 				B686EF9220166F1300ACF075 /* BaseViewController.swift in Sources */,
 				B686EF0F20166D5A00ACF075 /* UICollectionView+Util.swift in Sources */,
+				B6A8ABC8204B8851007FDAEC /* ServiceResponse.swift in Sources */,
 				B686EF5820166D8700ACF075 /* DesiredContentHeightDelegate.swift in Sources */,
+				B6A8ABCA204B8851007FDAEC /* Data+JSON.swift in Sources */,
 				B6DCCDC3203B68B800201385 /* InteractiveTransition+Subclasses.swift in Sources */,
 				B686EF0720166D5A00ACF075 /* Distance.swift in Sources */,
+				B6A8ABCB204B8851007FDAEC /* SessionManager.swift in Sources */,
 				B686EF0C20166D5A00ACF075 /* CGRect+Util.swift in Sources */,
 				B686EFA120166F1300ACF075 /* MainViewController+CoreLocation.swift in Sources */,
 				B686EF6420166D9D00ACF075 /* MyDataManager.swift in Sources */,
@@ -701,6 +829,8 @@
 				B6DCCDE1203BE6C500201385 /* PresentableControllerOption.swift in Sources */,
 				B686EF0620166D5A00ACF075 /* Device.swift in Sources */,
 				B6DCCDC1203B63D500201385 /* InteractiveTransitionOption.swift in Sources */,
+				B6A8ABCC204B8851007FDAEC /* AuthenticationState.swift in Sources */,
+				B6A8ABC9204B8851007FDAEC /* Loggable+Service.swift in Sources */,
 				B686EF9A20166F1300ACF075 /* MainViewController.swift in Sources */,
 				B6F451B220392AD50084AFC8 /* PresentingViewControllerDelegate.swift in Sources */,
 				B6F451B520393D470084AFC8 /* TopKnobVisualEffectView.swift in Sources */,
@@ -720,11 +850,13 @@
 				B64423FB20410BE9006E524A /* TextFlagPlacemarkNode.swift in Sources */,
 				B686EF1020166D5A00ACF075 /* UIView+Util.swift in Sources */,
 				B6DCCDD5203BD4CA00201385 /* BottomUpAnimator.swift in Sources */,
+				B6A8ABCD204B8851007FDAEC /* Service.swift in Sources */,
 				B686EF3B20166D8700ACF075 /* ARState.swift in Sources */,
 				B686EEFF20166D5A00ACF075 /* MapItem.swift in Sources */,
 				B686EFA220166F1300ACF075 /* RootNavigationController.swift in Sources */,
 				B686EF4620166D8700ACF075 /* PinPlacemarkNode.swift in Sources */,
 				B686EEE920166D4500ACF075 /* BuildManager.swift in Sources */,
+				B6A8ABCF204B8992007FDAEC /* String+Base64.swift in Sources */,
 				B6DCCDDD203BDC1200201385 /* TopDownPresentationController.swift in Sources */,
 				B6DCCDCF203B9CF400201385 /* VisualEffectFadePresentationController.swift in Sources */,
 				B6DCCDEB203BEE1200201385 /* PresentationMode.swift in Sources */,
@@ -762,10 +894,11 @@
 				B686EF0320166D5A00ACF075 /* LocationSearchService.swift in Sources */,
 				B6DCCDE3203BED1100201385 /* RightToLeftAnimator.swift in Sources */,
 				B686EED020166C7300ACF075 /* AppDelegate.swift in Sources */,
-				B686EF5B20166D8700ACF075 /* Loggable.swift in Sources */,
+				B686EF5B20166D8700ACF075 /* Log.swift in Sources */,
 				B6DCCDD7203BD4D200201385 /* BottomUpPresentationController.swift in Sources */,
 				B686EF5920166D8700ACF075 /* BatchUpdatable.swift in Sources */,
 				B6DCCDDB203BDC0800201385 /* TopDownAnimator.swift in Sources */,
+				B6A8ABD1204B89C2007FDAEC /* ClassNamable.swift in Sources */,
 				B686EF4820166D8700ACF075 /* Style.swift in Sources */,
 				B686EF9B20166F1300ACF075 /* SearchViewController.swift in Sources */,
 				B686EF5D20166D8700ACF075 /* PermissionManager.swift in Sources */,
@@ -901,6 +1034,7 @@
 		};
 		B686EEE220166C7300ACF075 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3629996ECE316BF4910A57A6 /* Pods-ARMap.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -921,6 +1055,7 @@
 		};
 		B686EEE320166C7300ACF075 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F20C34CD6FFED3DFBAD8759F /* Pods-ARMap.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -1006,6 +1141,7 @@
 		};
 		B6EE24652038D3F400380AAA /* Koz - Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 260AB567AE87520DEA22090D /* Pods-ARMap.koz - debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -1083,6 +1219,7 @@
 		};
 		B6EE24672038D40000380AAA /* Koz - Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A4C83F8AC6F29F40129B562F /* Pods-ARMap.koz - release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
