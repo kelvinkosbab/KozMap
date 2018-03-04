@@ -17,7 +17,7 @@ class ConfiguringViewController : BaseViewController {
   // MARK: - Static Accessors
   
   private static func newViewController() -> ConfiguringViewController {
-    return self.newViewController(fromStoryboardWithName: "Main")
+    return self.newViewController(fromStoryboardWithName: "Configuring")
   }
   
   static func newViewController(state: ConfiguringState) -> ConfiguringViewController {

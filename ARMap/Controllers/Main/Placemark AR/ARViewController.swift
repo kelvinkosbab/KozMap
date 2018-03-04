@@ -81,6 +81,14 @@ class ARViewController : UIViewController {
   
   var state: ARState? = nil {
     didSet {
+      
+      // Check if running on simulator
+      if UIDevice.current.isSimulator {
+        self.state = .normal
+        self.trackingStateDelegate?.arStateDidUpdate(.normal)
+        return
+      }
+      
       if let state = self.state {
         self.trackingStateDelegate?.arStateDidUpdate(state)
       }

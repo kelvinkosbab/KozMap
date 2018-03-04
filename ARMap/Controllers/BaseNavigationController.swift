@@ -12,7 +12,7 @@ class BaseNavigationController : UINavigationController, PresentableController {
   
   // MARK: - PresentableController
   
-  var presentedMode: PresentationMode = .modal
+  var presentedMode: PresentationMode = .modal(.formSheet, .coverVertical)
   var presentationManager: UIViewControllerTransitioningDelegate? = nil
   var currentFlowInitialController: PresentableController? = nil
   
@@ -50,7 +50,7 @@ class BaseNavigationController : UINavigationController, PresentableController {
     var tintColor: UIColor {
       switch self {
       case .standard:
-        return .blue
+        return .kozBlue
       case .transparent:
         return .white
       case .transparentBlack:
@@ -135,7 +135,16 @@ class BaseNavigationController : UINavigationController, PresentableController {
   override var preferredStatusBarStyle: UIStatusBarStyle {
     switch self.navigationBarStyle {
     case .standard, .transparentBlack:
-      return .default
+      if UIDevice.current.isPhone {
+        return .default
+      } else {
+        switch self.presentedMode {
+        case .modal(.fullScreen, _), .modal(.overFullScreen, _):
+          return .default
+        default:
+          return .lightContent
+        }
+      }
     case .transparent:
       return .lightContent
     }

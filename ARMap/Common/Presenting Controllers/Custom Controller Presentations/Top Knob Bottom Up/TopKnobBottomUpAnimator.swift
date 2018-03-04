@@ -1,9 +1,9 @@
 //
 //  TopKnobBottomUpAnimator.swift
-//  ARMap
+//  KozMap
 //
 //  Created by Kelvin Kosbab on 2/19/18.
-//  Copyright © 2018 Tack Mobile. All rights reserved.
+//  Copyright © 2018 Kozinga. All rights reserved.
 //
 
 import UIKit
@@ -41,6 +41,7 @@ class TopKnobBottomUpAnimator : NSObject, PresentableAnimator {
       self.presentingViewControllerDelegate?.willPresentViewController(presentedViewController)
       self.presentedViewControllerDelegate?.willPresentViewController()
       presentedViewController.view.frame.origin.y = containerView.bounds.height
+      presentedViewController.view.backgroundColor = .clear
       containerView.addSubview(presentedViewController.view)
       
       // Animate the presentation

@@ -13,7 +13,7 @@ class SettingsViewController : BaseViewController, DesiredContentHeightDelegate,
   // MARK: - Static Accessors
   
   static func newViewController() -> SettingsViewController {
-    let viewController = self.newViewController(fromStoryboardWithName: "Main")
+    let viewController = self.newViewController(fromStoryboardWithName: "Settings")
     viewController.preferredContentSize.height = viewController.desiredContentHeight
     return viewController
   }
@@ -45,6 +45,14 @@ class SettingsViewController : BaseViewController, DesiredContentHeightDelegate,
   
   // MARK: - Lifecycle
   
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    self.title = "Settings"
+    
+    self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(self.closeButtonSelected))
+  }
+  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
@@ -55,7 +63,7 @@ class SettingsViewController : BaseViewController, DesiredContentHeightDelegate,
   // MARK: - Status Bar
   
   override var prefersStatusBarHidden: Bool {
-    return true
+    return UIDevice.current.isPhone
   }
   
   override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
@@ -69,6 +77,9 @@ class SettingsViewController : BaseViewController, DesiredContentHeightDelegate,
   // MARK: - Content
   
   func reloadContent() {
+    
+    // Settings label
+    self.settingsLabel.isHidden = !UIDevice.current.isPhone
     
     // Unit type
     self.unitTypeControl.selectedSegmentIndex = Defaults.shared.unitType.rawValue
@@ -84,6 +95,10 @@ class SettingsViewController : BaseViewController, DesiredContentHeightDelegate,
   }
   
   // MARK: - Actions
+  
+  @objc func closeButtonSelected() {
+    self.dismissController()
+  }
   
   @IBAction func segmentedControlValueChanged(_ control: UISegmentedControl) {
     switch control {

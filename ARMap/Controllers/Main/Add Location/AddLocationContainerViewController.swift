@@ -50,9 +50,8 @@ class AddLocationContainerViewController : BaseViewController, DesiredContentHei
   // MARK: - Properties
   
   @IBOutlet weak var segmentedControl: UISegmentedControl!
-  @IBOutlet weak var pagingContainerView: UIView!
   
-  var pageViewController: UIPageViewController? = nil
+  private(set) var pageViewController: UIPageViewController? = nil
   weak var locationDetailDelegate: AddLocationViewControllerDelegate? = nil
   weak var searchDelegate: SearchViewControllerDelegate? = nil
   
@@ -67,21 +66,36 @@ class AddLocationContainerViewController : BaseViewController, DesiredContentHei
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    // Configure the page view controller
-    let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-    self.add(childViewController: pageViewController, intoContainerView: self.pagingContainerView)
-    self.pageViewController = pageViewController
-    pageViewController.dataSource = self
-    pageViewController.delegate = self
-    if let firstViewController = self.orderedViewControllers.first {
-      pageViewController.setViewControllers([ firstViewController ], direction: .forward, animated: true, completion: nil)
+    self.title = "Add Placemark"
+    
+    self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(self.closeButtonSelected))
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    super.prepare(for: segue, sender: sender)
+    
+    guard let identifier = segue.identifier else {
+      return
+    }
+    
+    switch identifier {
+    case "EmbedPageController":
+      if let pageViewController = segue.destination as? UIPageViewController {
+        self.pageViewController = pageViewController
+        pageViewController.dataSource = self
+        pageViewController.delegate = self
+        if let firstViewController = self.orderedViewControllers.first {
+          pageViewController.setViewControllers([ firstViewController ], direction: .forward, animated: true, completion: nil)
+        }
+      }
+    default: break
     }
   }
   
   // MARK: - Status Bar
   
   override var prefersStatusBarHidden: Bool {
-    return true
+    return UIDevice.current.isPhone
   }
   
   override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
@@ -107,6 +121,10 @@ class AddLocationContainerViewController : BaseViewController, DesiredContentHei
   }
   
   // MARK: - Actions
+  
+  @objc func closeButtonSelected() {
+    self.dismissController()
+  }
   
   @IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl) {
     switch sender.selectedSegmentIndex {
