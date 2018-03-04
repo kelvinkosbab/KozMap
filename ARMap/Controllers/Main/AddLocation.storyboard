@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14092" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14081.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -15,7 +15,7 @@
         <!--Add Location Container View Controller-->
         <scene sceneID="WxG-EZ-eRk">
             <objects>
-                <viewController storyboardIdentifier="AddLocationContainerViewController" id="SbQ-yx-8tD" customClass="AddLocationContainerViewController" customModule="ARMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddLocationContainerViewController" id="SbQ-yx-8tD" customClass="AddLocationContainerViewController" customModule="KozMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="faJ-gU-qJh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -71,7 +71,7 @@
         <!--Add Location View Controller-->
         <scene sceneID="h3C-5s-CFC">
             <objects>
-                <viewController storyboardIdentifier="AddLocationViewController" id="OJW-ZR-sig" customClass="AddLocationViewController" customModule="ARMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddLocationViewController" id="OJW-ZR-sig" customClass="AddLocationViewController" customModule="KozMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lXr-1W-zNk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -271,75 +271,10 @@
             </objects>
             <point key="canvasLocation" x="896.79999999999995" y="286.50674662668666"/>
         </scene>
-        <!--Inline Color Chooser View Controller-->
-        <scene sceneID="SaP-i9-LZU">
-            <objects>
-                <collectionViewController storyboardIdentifier="InlineColorChooserViewController" id="TYx-U1-xg1" customClass="InlineColorChooserViewController" customModule="ARMap" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" id="20d-pS-3B9">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="sXE-c7-F8h">
-                            <size key="itemSize" width="50" height="50"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="InlineColorChooserCollectionViewCell" id="h0h-aT-I9v" customClass="InlineColorChooserCollectionViewCell" customModule="ARMap" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <view alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Spj-M1-8Hu">
-                                            <rect key="frame" x="2" y="2" width="46" height="46"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="assetCircle" translatesAutoresizingMaskIntoConstraints="NO" id="xVg-Qs-Syu">
-                                                    <rect key="frame" x="13" y="13" width="20" height="20"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="20" id="GQw-X7-JtU"/>
-                                                        <constraint firstAttribute="width" constant="20" id="zpg-GJ-ff7"/>
-                                                    </constraints>
-                                                </imageView>
-                                            </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <constraints>
-                                                <constraint firstItem="xVg-Qs-Syu" firstAttribute="centerY" secondItem="Spj-M1-8Hu" secondAttribute="centerY" id="LUc-2n-xEx"/>
-                                                <constraint firstItem="xVg-Qs-Syu" firstAttribute="centerX" secondItem="Spj-M1-8Hu" secondAttribute="centerX" id="Yau-vU-Ojx"/>
-                                            </constraints>
-                                        </view>
-                                    </subviews>
-                                </view>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="Spj-M1-8Hu" secondAttribute="bottom" constant="2" id="VC2-Qg-Pof"/>
-                                    <constraint firstItem="Spj-M1-8Hu" firstAttribute="top" secondItem="h0h-aT-I9v" secondAttribute="top" constant="2" id="a8X-5K-lLi"/>
-                                    <constraint firstItem="Spj-M1-8Hu" firstAttribute="leading" secondItem="h0h-aT-I9v" secondAttribute="leading" constant="2" id="aQ7-m7-NNL"/>
-                                    <constraint firstAttribute="trailing" secondItem="Spj-M1-8Hu" secondAttribute="trailing" constant="2" id="uqn-zC-KJd"/>
-                                </constraints>
-                                <connections>
-                                    <outlet property="colorView" destination="Spj-M1-8Hu" id="3CY-I3-ekp"/>
-                                    <outlet property="selectedCircleView" destination="xVg-Qs-Syu" id="kwg-MB-rbK"/>
-                                    <outlet property="selectedCircleViewHeight" destination="GQw-X7-JtU" id="u41-6Y-H0L"/>
-                                    <outlet property="selectedCircleViewWidth" destination="zpg-GJ-ff7" id="qyS-pC-TgA"/>
-                                </connections>
-                            </collectionViewCell>
-                        </cells>
-                        <connections>
-                            <outlet property="dataSource" destination="TYx-U1-xg1" id="XEM-jI-Cdt"/>
-                            <outlet property="delegate" destination="TYx-U1-xg1" id="a5e-VU-BSe"/>
-                        </connections>
-                    </collectionView>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0cL-22-fPj" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1601" y="287"/>
-        </scene>
         <!--Location List View Controller-->
         <scene sceneID="ueq-TO-HkU">
             <objects>
-                <viewController storyboardIdentifier="LocationListViewController" id="sMF-hH-R8I" customClass="LocationListViewController" customModule="ARMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LocationListViewController" id="sMF-hH-R8I" customClass="LocationListViewController" customModule="KozMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pwf-X4-gAP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -348,7 +283,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="LocationListViewControllerCell" id="a2v-l3-hJw" customClass="LocationListViewControllerCell" customModule="ARMap" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="LocationListViewControllerCell" id="a2v-l3-hJw" customClass="LocationListViewControllerCell" customModule="KozMap" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="a2v-l3-hJw" id="E8x-Kq-Y7l">
@@ -430,7 +365,7 @@
         <!--Search View Controller-->
         <scene sceneID="P9m-ND-ho0">
             <objects>
-                <viewController storyboardIdentifier="SearchViewController" id="Wz6-6U-ft3" customClass="SearchViewController" customModule="ARMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchViewController" id="Wz6-6U-ft3" customClass="SearchViewController" customModule="KozMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lHv-JK-tdL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -450,7 +385,7 @@
                                 <rect key="frame" x="0.0" y="84" width="375" height="583"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="SearchViewControllerCell" id="Rji-ZD-rMx" customClass="SearchViewControllerCell" customModule="ARMap" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="SearchViewControllerCell" id="Rji-ZD-rMx" customClass="SearchViewControllerCell" customModule="KozMap" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Rji-ZD-rMx" id="tFO-Ek-V1R">
@@ -522,7 +457,7 @@
         <!--Location Detail View Controller-->
         <scene sceneID="PhV-5c-X9Y">
             <objects>
-                <viewController storyboardIdentifier="LocationDetailViewController" id="fSQ-zA-U5V" customClass="LocationDetailViewController" customModule="ARMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LocationDetailViewController" id="fSQ-zA-U5V" customClass="LocationDetailViewController" customModule="KozMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cTE-FT-yjl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -709,7 +644,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="assetCircle" width="20" height="20"/>
         <image name="assetMore" width="20" height="20"/>
         <namedColor name="SeaBlue">
             <color red="0.28999999165534973" green="0.56499999761581421" blue="0.88599997758865356" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

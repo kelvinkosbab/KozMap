@@ -17,7 +17,7 @@ class PermissionsViewController : UIViewController {
   // MARK: - Static Accessors
   
   private static func newViewController() -> PermissionsViewController {
-    return self.newViewController(fromStoryboardWithName: "Main")
+    return self.newViewController(fromStoryboardWithName: "Permissions")
   }
   
   static func newViewController(delegate: PermissionsViewControllerDelegate?) -> PermissionsViewController {

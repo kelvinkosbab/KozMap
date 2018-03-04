@@ -92,6 +92,10 @@
 		B6A8ABCD204B8851007FDAEC /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A8ABC7204B8851007FDAEC /* Service.swift */; };
 		B6A8ABCF204B8992007FDAEC /* String+Base64.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A8ABCE204B8992007FDAEC /* String+Base64.swift */; };
 		B6A8ABD1204B89C2007FDAEC /* ClassNamable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A8ABD0204B89C2007FDAEC /* ClassNamable.swift */; };
+		B6A8ABD3204B9A5B007FDAEC /* Permissions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6A8ABD2204B9A5B007FDAEC /* Permissions.storyboard */; };
+		B6A8ABD5204B9A92007FDAEC /* InlineColorChooser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6A8ABD4204B9A92007FDAEC /* InlineColorChooser.storyboard */; };
+		B6A8ABD7204B9AA9007FDAEC /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6A8ABD6204B9AA9007FDAEC /* Settings.storyboard */; };
+		B6A8ABD9204B9AEC007FDAEC /* Configuring.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6A8ABD8204B9AEC007FDAEC /* Configuring.storyboard */; };
 		B6DCCDBD203B355C00201385 /* TopKnobBottomUpAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDBC203B355C00201385 /* TopKnobBottomUpAnimator.swift */; };
 		B6DCCDBF203B3DE700201385 /* TopKnobBottomUpPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDBE203B3DE600201385 /* TopKnobBottomUpPresentationController.swift */; };
 		B6DCCDC1203B63D500201385 /* InteractiveTransitionOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDC0203B63D500201385 /* InteractiveTransitionOption.swift */; };
@@ -210,6 +214,10 @@
 		B6A8ABC7204B8851007FDAEC /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		B6A8ABCE204B8992007FDAEC /* String+Base64.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Base64.swift"; sourceTree = "<group>"; };
 		B6A8ABD0204B89C2007FDAEC /* ClassNamable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassNamable.swift; sourceTree = "<group>"; };
+		B6A8ABD2204B9A5B007FDAEC /* Permissions.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Permissions.storyboard; sourceTree = "<group>"; };
+		B6A8ABD4204B9A92007FDAEC /* InlineColorChooser.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = InlineColorChooser.storyboard; sourceTree = "<group>"; };
+		B6A8ABD6204B9AA9007FDAEC /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		B6A8ABD8204B9AEC007FDAEC /* Configuring.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Configuring.storyboard; sourceTree = "<group>"; };
 		B6DCCDBC203B355C00201385 /* TopKnobBottomUpAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopKnobBottomUpAnimator.swift; sourceTree = "<group>"; };
 		B6DCCDBE203B3DE600201385 /* TopKnobBottomUpPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopKnobBottomUpPresentationController.swift; sourceTree = "<group>"; };
 		B6DCCDC0203B63D500201385 /* InteractiveTransitionOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveTransitionOption.swift; sourceTree = "<group>"; };
@@ -346,8 +354,6 @@
 		B686EEE520166CFA00ACF075 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				B686EF6C20166F0400ACF075 /* Main.storyboard */,
-				B686EF6E20166F0B00ACF075 /* AddLocation.storyboard */,
 				B686EF8E20166F1300ACF075 /* BaseNavigationController.swift */,
 				B686EF8B20166F1300ACF075 /* BaseTableViewController.swift */,
 				B686EF7220166F1200ACF075 /* BaseViewController.swift */,
@@ -510,6 +516,7 @@
 		B686EF7020166F1200ACF075 /* Configuring View */ = {
 			isa = PBXGroup;
 			children = (
+				B6A8ABD8204B9AEC007FDAEC /* Configuring.storyboard */,
 				B686EF7120166F1200ACF075 /* ConfiguringViewController.swift */,
 			);
 			path = "Configuring View";
@@ -518,6 +525,8 @@
 		B686EF7620166F1200ACF075 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				B686EF6C20166F0400ACF075 /* Main.storyboard */,
+				B686EF6E20166F0B00ACF075 /* AddLocation.storyboard */,
 				B686EF7F20166F1200ACF075 /* MainViewController.swift */,
 				B686EF8920166F1200ACF075 /* MainViewController+CoreLocation.swift */,
 				B686EF7E20166F1200ACF075 /* MainViewController+AR.swift */,
@@ -534,6 +543,7 @@
 		B686EF7720166F1200ACF075 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				B6A8ABD6204B9AA9007FDAEC /* Settings.storyboard */,
 				B686EF7820166F1200ACF075 /* SettingsViewController.swift */,
 			);
 			path = Settings;
@@ -586,6 +596,7 @@
 		B686EF8C20166F1300ACF075 /* Permissions */ = {
 			isa = PBXGroup;
 			children = (
+				B6A8ABD2204B9A5B007FDAEC /* Permissions.storyboard */,
 				B686EF8D20166F1300ACF075 /* PermissionsViewController.swift */,
 			);
 			path = Permissions;
@@ -594,6 +605,7 @@
 		B686EF8F20166F1300ACF075 /* InlineColorChooser */ = {
 			isa = PBXGroup;
 			children = (
+				B6A8ABD4204B9A92007FDAEC /* InlineColorChooser.storyboard */,
 				B686EF9020166F1300ACF075 /* InlineColorChooserViewController.swift */,
 			);
 			path = InlineColorChooser;
@@ -748,8 +760,12 @@
 				B686EF6B20166DCF00ACF075 /* LaunchScreen.storyboard in Resources */,
 				B6F451B720393E2F0084AFC8 /* TopKnobVisualEffectView.xib in Resources */,
 				B686EF3E20166D8700ACF075 /* Models.scnassets in Resources */,
+				B6A8ABD3204B9A5B007FDAEC /* Permissions.storyboard in Resources */,
 				B686EEDA20166C7300ACF075 /* Assets.xcassets in Resources */,
+				B6A8ABD5204B9A92007FDAEC /* InlineColorChooser.storyboard in Resources */,
+				B6A8ABD7204B9AA9007FDAEC /* Settings.storyboard in Resources */,
 				B686EF6D20166F0500ACF075 /* Main.storyboard in Resources */,
+				B6A8ABD9204B9AEC007FDAEC /* Configuring.storyboard in Resources */,
 				B686EF6F20166F0C00ACF075 /* AddLocation.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

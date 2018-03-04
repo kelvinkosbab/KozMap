@@ -13,7 +13,7 @@ class SettingsViewController : BaseViewController, DesiredContentHeightDelegate,
   // MARK: - Static Accessors
   
   static func newViewController() -> SettingsViewController {
-    let viewController = self.newViewController(fromStoryboardWithName: "Main")
+    let viewController = self.newViewController(fromStoryboardWithName: "Settings")
     viewController.preferredContentSize.height = viewController.desiredContentHeight
     return viewController
   }

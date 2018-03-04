@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Permissions View Controller-->
+        <scene sceneID="Ycx-GW-gIu">
+            <objects>
+                <viewController storyboardIdentifier="PermissionsViewController" id="Vqj-Q8-qpJ" customClass="PermissionsViewController" customModule="KozMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hQx-sJ-BQx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="assetLandscape" translatesAutoresizingMaskIntoConstraints="NO" id="DGh-hj-Xa4">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jS6-I8-RT4">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="FS0-5Y-Nrj">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="dark"/>
+                            </visualEffectView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dPH-o3-cef">
+                                <rect key="frame" x="0.0" y="30" width="375" height="122"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="350" id="EwB-3x-rNR"/>
+                                </constraints>
+                                <string key="text">Your camera and your location are needed to determine your position position relative to placemarks around you.
+
+Select the permission buttons below and get started!</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="EwB-3x-rNR"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="EwB-3x-rNR"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rff-an-LQA">
+                                <rect key="frame" x="102" y="277" width="171" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Allow Location Access">
+                                    <color key="titleColor" name="SeaBlue"/>
+                                </state>
+                                <connections>
+                                    <action selector="locationPermissionButtonSelected" destination="Vqj-Q8-qpJ" eventType="touchUpInside" id="M7b-rs-Cct"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="9iM-A8-2dl">
+                                <rect key="frame" x="177" y="283.5" width="20" height="20"/>
+                                <color key="color" name="SeaBlue"/>
+                            </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4rr-xW-jmJ">
+                                <rect key="frame" x="105" y="357" width="165" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Allow Camera Access">
+                                    <color key="titleColor" name="SeaBlue"/>
+                                </state>
+                                <connections>
+                                    <action selector="cameraPermissionButtonSelected" destination="Vqj-Q8-qpJ" eventType="touchUpInside" id="6WJ-d7-bCF"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="frU-B8-ig4">
+                                <rect key="frame" x="177.5" y="363" width="20" height="20"/>
+                                <color key="color" name="SeaBlue"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="4iS-Ur-aaK" firstAttribute="bottom" secondItem="DGh-hj-Xa4" secondAttribute="bottom" id="0Qf-I0-Rlg"/>
+                            <constraint firstItem="4iS-Ur-aaK" firstAttribute="trailing" secondItem="DGh-hj-Xa4" secondAttribute="trailing" id="EAJ-aH-Ixz"/>
+                            <constraint firstItem="frU-B8-ig4" firstAttribute="centerX" secondItem="4rr-xW-jmJ" secondAttribute="centerX" id="Fhh-wM-loq"/>
+                            <constraint firstItem="DGh-hj-Xa4" firstAttribute="top" secondItem="hQx-sJ-BQx" secondAttribute="top" id="Kja-XK-gGa"/>
+                            <constraint firstItem="frU-B8-ig4" firstAttribute="centerY" secondItem="4rr-xW-jmJ" secondAttribute="centerY" id="Red-AN-hHD"/>
+                            <constraint firstItem="4rr-xW-jmJ" firstAttribute="centerY" secondItem="hQx-sJ-BQx" secondAttribute="centerY" constant="40" id="VQr-lO-HSY"/>
+                            <constraint firstItem="dPH-o3-cef" firstAttribute="leading" secondItem="4iS-Ur-aaK" secondAttribute="leading" id="Wxe-TH-LJQ"/>
+                            <constraint firstItem="Rff-an-LQA" firstAttribute="centerY" secondItem="hQx-sJ-BQx" secondAttribute="centerY" constant="-40" id="ZX3-Eh-wjV"/>
+                            <constraint firstItem="4iS-Ur-aaK" firstAttribute="trailing" secondItem="jS6-I8-RT4" secondAttribute="trailing" id="eC4-7S-7aZ"/>
+                            <constraint firstItem="jS6-I8-RT4" firstAttribute="top" secondItem="hQx-sJ-BQx" secondAttribute="top" id="eqe-9D-eiF"/>
+                            <constraint firstItem="9iM-A8-2dl" firstAttribute="centerY" secondItem="Rff-an-LQA" secondAttribute="centerY" id="gAu-fh-EwW"/>
+                            <constraint firstItem="dPH-o3-cef" firstAttribute="centerX" secondItem="hQx-sJ-BQx" secondAttribute="centerX" id="hgO-Xx-Ncx"/>
+                            <constraint firstItem="DGh-hj-Xa4" firstAttribute="leading" secondItem="4iS-Ur-aaK" secondAttribute="leading" id="hzW-Ug-YCW"/>
+                            <constraint firstItem="jS6-I8-RT4" firstAttribute="leading" secondItem="4iS-Ur-aaK" secondAttribute="leading" id="jAp-ii-SH1"/>
+                            <constraint firstItem="dPH-o3-cef" firstAttribute="top" secondItem="4iS-Ur-aaK" secondAttribute="top" constant="10" id="jrg-vF-gBi"/>
+                            <constraint firstItem="Rff-an-LQA" firstAttribute="centerX" secondItem="hQx-sJ-BQx" secondAttribute="centerX" id="kLq-4X-wRn"/>
+                            <constraint firstItem="4rr-xW-jmJ" firstAttribute="centerX" secondItem="hQx-sJ-BQx" secondAttribute="centerX" id="ooJ-Vm-yhu"/>
+                            <constraint firstItem="9iM-A8-2dl" firstAttribute="centerX" secondItem="Rff-an-LQA" secondAttribute="centerX" id="tGX-x5-b8D"/>
+                            <constraint firstItem="dPH-o3-cef" firstAttribute="trailing" secondItem="4iS-Ur-aaK" secondAttribute="trailing" id="wc8-SC-EOF"/>
+                            <constraint firstAttribute="bottom" secondItem="jS6-I8-RT4" secondAttribute="bottom" id="ykn-9b-ox4"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="4iS-Ur-aaK"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="wc8-SC-EOF"/>
+                                <exclude reference="Wxe-TH-LJQ"/>
+                                <exclude reference="hgO-Xx-Ncx"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="wc8-SC-EOF"/>
+                                <include reference="Wxe-TH-LJQ"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="constraints">
+                                <include reference="hgO-Xx-Ncx"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="cameraActivityIndicatorView" destination="frU-B8-ig4" id="5GF-z2-MX2"/>
+                        <outlet property="cameraPermissionButton" destination="4rr-xW-jmJ" id="Yca-6R-Lb0"/>
+                        <outlet property="locationActivityIndicatorView" destination="9iM-A8-2dl" id="HGi-fc-Pt8"/>
+                        <outlet property="locationPermissionButton" destination="Rff-an-LQA" id="7Fn-DE-DJH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qqk-g7-tvF" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-786" y="-672"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="assetLandscape" width="1000" height="666"/>
+        <namedColor name="SeaBlue">
+            <color red="0.28999999170000001" green="0.56499999759999997" blue="0.88599997760000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

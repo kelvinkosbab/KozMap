@@ -17,7 +17,7 @@ class InlineColorChooserViewController : UICollectionViewController, UICollectio
   // MARK: - Static Accessors
   
   static func newViewController() -> InlineColorChooserViewController {
-    return self.newViewController(fromStoryboardWithName: "AddLocation")
+    return self.newViewController(fromStoryboardWithName: "InlineColorChooser")
   }
   
   static func newViewController(delegate: InlineColorChooserViewControllerDelegate) -> InlineColorChooserViewController {
