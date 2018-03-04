@@ -30,7 +30,7 @@ class LocationListViewControllerCell : UITableViewCell {
     }
   }
   
-  func configure(placemark: Placemark, unitType: UnitType, delegate: LocationListViewControllerCellDelegate?) {
+  func configure(placemark: Placemark, unitType: UnitType, delegate: LocationListViewControllerCellDelegate?, hideMoreButton: Bool) {
     
     // Delegate
     self.delegate = delegate
@@ -54,6 +54,10 @@ class LocationListViewControllerCell : UITableViewCell {
     } else {
       self.colorView.backgroundColor = .kozRed
     }
+    
+    // More button
+    self.moreButton.isUserInteractionEnabled = !hideMoreButton
+    self.moreButton.isHidden = hideMoreButton
   }
   
   @IBAction func moreButtonSelected(_ sender: UIView) {

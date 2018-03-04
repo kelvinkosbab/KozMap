@@ -96,6 +96,8 @@
 		B6A8ABD5204B9A92007FDAEC /* InlineColorChooser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6A8ABD4204B9A92007FDAEC /* InlineColorChooser.storyboard */; };
 		B6A8ABD7204B9AA9007FDAEC /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6A8ABD6204B9AA9007FDAEC /* Settings.storyboard */; };
 		B6A8ABD9204B9AEC007FDAEC /* Configuring.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6A8ABD8204B9AEC007FDAEC /* Configuring.storyboard */; };
+		B6A8ABDB204BA791007FDAEC /* LocationDetailNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A8ABDA204BA791007FDAEC /* LocationDetailNavigationDelegate.swift */; };
+		B6A8ABDD204BB073007FDAEC /* PlacemarkAPIDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A8ABDC204BB073007FDAEC /* PlacemarkAPIDelegate.swift */; };
 		B6DCCDBD203B355C00201385 /* TopKnobBottomUpAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDBC203B355C00201385 /* TopKnobBottomUpAnimator.swift */; };
 		B6DCCDBF203B3DE700201385 /* TopKnobBottomUpPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDBE203B3DE600201385 /* TopKnobBottomUpPresentationController.swift */; };
 		B6DCCDC1203B63D500201385 /* InteractiveTransitionOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDC0203B63D500201385 /* InteractiveTransitionOption.swift */; };
@@ -218,6 +220,8 @@
 		B6A8ABD4204B9A92007FDAEC /* InlineColorChooser.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = InlineColorChooser.storyboard; sourceTree = "<group>"; };
 		B6A8ABD6204B9AA9007FDAEC /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		B6A8ABD8204B9AEC007FDAEC /* Configuring.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Configuring.storyboard; sourceTree = "<group>"; };
+		B6A8ABDA204BA791007FDAEC /* LocationDetailNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailNavigationDelegate.swift; sourceTree = "<group>"; };
+		B6A8ABDC204BB073007FDAEC /* PlacemarkAPIDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacemarkAPIDelegate.swift; sourceTree = "<group>"; };
 		B6DCCDBC203B355C00201385 /* TopKnobBottomUpAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopKnobBottomUpAnimator.swift; sourceTree = "<group>"; };
 		B6DCCDBE203B3DE600201385 /* TopKnobBottomUpPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopKnobBottomUpPresentationController.swift; sourceTree = "<group>"; };
 		B6DCCDC0203B63D500201385 /* InteractiveTransitionOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveTransitionOption.swift; sourceTree = "<group>"; };
@@ -332,6 +336,7 @@
 		B686EEE420166CF500ACF075 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				B6A8ABDE204BB0A8007FDAEC /* API */,
 				B6A8ABC1204B883C007FDAEC /* 3rd Party Libraries */,
 				B686EEE720166D4500ACF075 /* Build Manager */,
 				B6A8ABC0204B8833007FDAEC /* Service */,
@@ -552,6 +557,7 @@
 		B686EF7920166F1200ACF075 /* Location Detail */ = {
 			isa = PBXGroup;
 			children = (
+				B6A8ABDA204BA791007FDAEC /* LocationDetailNavigationDelegate.swift */,
 				B686EF7A20166F1200ACF075 /* LocationDetailViewController.swift */,
 			);
 			path = "Location Detail";
@@ -630,6 +636,14 @@
 				B686EEF220166D5A00ACF075 /* Device */,
 			);
 			path = "3rd Party Libraries";
+			sourceTree = "<group>";
+		};
+		B6A8ABDE204BB0A8007FDAEC /* API */ = {
+			isa = PBXGroup;
+			children = (
+				B6A8ABDC204BB073007FDAEC /* PlacemarkAPIDelegate.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 		B6DCCDBA203B351000201385 /* Top Knob Bottom Up */ = {
@@ -847,6 +861,7 @@
 				B686EF0720166D5A00ACF075 /* Distance.swift in Sources */,
 				B6A8ABCB204B8851007FDAEC /* SessionManager.swift in Sources */,
 				B686EF0C20166D5A00ACF075 /* CGRect+Util.swift in Sources */,
+				B6A8ABDD204BB073007FDAEC /* PlacemarkAPIDelegate.swift in Sources */,
 				B686EFA120166F1300ACF075 /* MainViewController+CoreLocation.swift in Sources */,
 				B686EF6420166D9D00ACF075 /* MyDataManager.swift in Sources */,
 				B6DCCDE5203BED1D00201385 /* RightToLeftPresenationController.swift in Sources */,
@@ -857,6 +872,7 @@
 				B6A8ABC9204B8851007FDAEC /* Loggable+Service.swift in Sources */,
 				B686EF9A20166F1300ACF075 /* MainViewController.swift in Sources */,
 				B6F451B220392AD50084AFC8 /* PresentingViewControllerDelegate.swift in Sources */,
+				B6A8ABDB204BA791007FDAEC /* LocationDetailNavigationDelegate.swift in Sources */,
 				B6F451B520393D470084AFC8 /* TopKnobVisualEffectView.swift in Sources */,
 				B6DCCDCD203B9CA200201385 /* VisualEffectFadeAnimator.swift in Sources */,
 				B686EF9820166F1300ACF075 /* AddLocationViewController.swift in Sources */,

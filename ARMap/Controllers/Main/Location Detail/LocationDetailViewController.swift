@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class LocationDetailViewController : BaseViewController, NSFetchedResultsControllerDelegate, DesiredContentHeightDelegate, DismissInteractable, KeyboardFrameRespondable {
+class LocationDetailViewController : BaseViewController, NSFetchedResultsControllerDelegate, DesiredContentHeightDelegate, DismissInteractable, KeyboardFrameRespondable, PlacemarkAPIDelegate {
   
   // MARK: - Static Accessors
   
@@ -67,6 +67,14 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
   
   // MARK: - Lifecycle
   
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    self.title = self.placemark?.name
+    
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete", style: .plain, target: self, action: #selector(self.deleteButtonSelected))
+  }
+  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
@@ -118,11 +126,29 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
     self.reloadContent()
   }
   
+  // MARK: - Actions
+  
+  @objc func deleteButtonSelected() {
+    
+    // Delete the placemark
+    if let placemark = self.placemark {
+      self.deletePlacemark(placemark)
+    }
+    
+    // Dismiss
+    self.dismissController()
+  }
+  
   // MARK: - NSFetchedResultsControllerDelegate
   
   func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
     if controller == self.placemarksFetchedResultsController {
-      self.placemark = self.placemarksFetchedResultsController?.fetchedObjects?.first
+      
+      guard let placemark = self.placemarksFetchedResultsController?.fetchedObjects?.first else {
+        return
+      }
+      
+      self.placemark = placemark
       self.reloadContent()
     }
   }
@@ -147,6 +173,7 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
     
     // Check if there is a location to populate
     guard let placemark = self.placemark else {
+      self.title = nil
       self.latitudeLabel.text = "NA"
       self.longitudeLabel.text = "NA"
       self.distanceLabel.text = "NA"
@@ -155,6 +182,7 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
     }
     
     // Name
+    self.title = placemark.name
     self.nameTextField.text = placemark.name
     
     // Color

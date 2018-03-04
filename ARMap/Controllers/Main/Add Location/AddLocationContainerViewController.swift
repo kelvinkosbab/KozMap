@@ -67,6 +67,10 @@ class AddLocationContainerViewController : BaseViewController, DesiredContentHei
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    self.title = "Add Placemark"
+    
+    self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(self.closeButtonSelected))
+    
     // Configure the page view controller
     let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     self.add(childViewController: pageViewController, intoContainerView: self.pagingContainerView)
@@ -107,6 +111,10 @@ class AddLocationContainerViewController : BaseViewController, DesiredContentHei
   }
   
   // MARK: - Actions
+  
+  @objc func closeButtonSelected() {
+    self.dismissController()
+  }
   
   @IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl) {
     switch sender.selectedSegmentIndex {

@@ -47,7 +47,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="asm-Ok-eHL" firstAttribute="bottom" secondItem="qoO-4Z-DP2" secondAttribute="bottom" id="5Tp-ky-XX6"/>
                             <constraint firstItem="asm-Ok-eHL" firstAttribute="trailing" secondItem="qoO-4Z-DP2" secondAttribute="trailing" id="9Vc-ZF-42e"/>
@@ -269,7 +269,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6sW-a9-crM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="896.79999999999995" y="286.50674662668666"/>
+            <point key="canvasLocation" x="602" y="287"/>
         </scene>
         <!--Location List View Controller-->
         <scene sceneID="ueq-TO-HkU">
@@ -345,7 +345,7 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="jjw-7q-YNH" firstAttribute="leading" secondItem="UKc-1f-A8T" secondAttribute="leading" id="ckK-cP-bRH"/>
                             <constraint firstAttribute="bottom" secondItem="jjw-7q-YNH" secondAttribute="bottom" id="pSQ-S6-WVI"/>
@@ -360,7 +360,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tEM-Ip-IJB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="172" y="955"/>
+            <point key="canvasLocation" x="172" y="1026"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="P9m-ND-ho0">
@@ -452,7 +452,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pnr-Hz-xQ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="897" y="-406"/>
+            <point key="canvasLocation" x="1030" y="287"/>
         </scene>
         <!--Location Detail View Controller-->
         <scene sceneID="PhV-5c-X9Y">
@@ -640,7 +640,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="96V-Ui-WYG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="897" y="955"/>
+            <point key="canvasLocation" x="602" y="1026"/>
         </scene>
     </scenes>
     <resources>
