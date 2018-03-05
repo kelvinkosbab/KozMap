@@ -148,6 +148,7 @@ class MainViewController : BaseViewController, LocationDetailNavigationDelegate 
     if UIDevice.current.isPhone {
       self.present(viewController: addLocationViewController, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
     } else {
+      addLocationViewController.view.backgroundColor = .white
       self.present(viewController: addLocationViewController, withMode: .modal(.formSheet, .coverVertical), options: [])
     }
   }
