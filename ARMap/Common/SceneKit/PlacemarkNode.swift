@@ -25,6 +25,10 @@ class PlacemarkNode : VirtualObject {
   internal var distanceTextRespondsToDayNight: Bool = false
   internal var unitTextRespondsToDayNight: Bool = false
   
+  internal var currentLocation: CLLocation? {
+    return LocationManager.shared.currentLocation
+  }
+  
   // MARK: - Init
   
   convenience init(primaryName: String? = nil, distanceText: String? = nil, unitText: String? = nil, beamColor: UIColor = .kozRed, beamTransparency: CGFloat = 0.7) {
@@ -130,7 +134,8 @@ class PlacemarkNode : VirtualObject {
     
     // Day / Night
     if let textGeometry = self.nameTextNode?.geometry as? SCNText, self.nameTextRespondsToDayNight {
-      textGeometry.firstMaterial?.diffuse.contents = DayNight.isNight ? UIColor.white : UIColor.black
+      let isNight = self.currentLocation?.isNightTime ?? true
+      textGeometry.firstMaterial?.diffuse.contents = isNight ? UIColor.white : UIColor.black
     }
     
     // Adjustments for text alignment
@@ -159,7 +164,8 @@ class PlacemarkNode : VirtualObject {
     
     // Day / Night
     if let textGeometry = self.distanceTextNode?.geometry as? SCNText, self.distanceTextRespondsToDayNight {
-      textGeometry.firstMaterial?.diffuse.contents = DayNight.isNight ? UIColor.white : UIColor.black
+      let isNight = self.currentLocation?.isNightTime ?? true
+      textGeometry.firstMaterial?.diffuse.contents = isNight ? UIColor.white : UIColor.black
     }
     
     // Adjustments for text alignment
@@ -188,7 +194,8 @@ class PlacemarkNode : VirtualObject {
     
     // Day / Night
     if let textGeometry = self.unitTextNode?.geometry as? SCNText, self.unitTextRespondsToDayNight {
-      textGeometry.firstMaterial?.diffuse.contents = DayNight.isNight ? UIColor.white : UIColor.black
+      let isNight = self.currentLocation?.isNightTime ?? true
+      textGeometry.firstMaterial?.diffuse.contents = isNight ? UIColor.white : UIColor.black
     }
     
     // Adjustments for text alignment
