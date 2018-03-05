@@ -89,6 +89,10 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    self.title = "Add Placemark"
+    
+    self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(self.closeButtonSelected))
+    
     self.nameTextField.delegate = self
   }
   
@@ -195,6 +199,10 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
   }
   
   // MARK: - Actions
+  
+  @objc func closeButtonSelected() {
+    self.dismissController()
+  }
   
   @IBAction func addLocationButtonSelected() {
     self.saveLocation()
