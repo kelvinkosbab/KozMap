@@ -45,7 +45,6 @@
 		B686EF4520166D8700ACF075 /* VirtualObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF1D20166D8700ACF075 /* VirtualObject.swift */; };
 		B686EF4620166D8700ACF075 /* PinPlacemarkNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF1E20166D8700ACF075 /* PinPlacemarkNode.swift */; };
 		B686EF4720166D8700ACF075 /* SCNVector3+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF1F20166D8700ACF075 /* SCNVector3+Util.swift */; };
-		B686EF4820166D8700ACF075 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF2020166D8700ACF075 /* Style.swift */; };
 		B686EF4D20166D8700ACF075 /* InteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF2720166D8700ACF075 /* InteractiveTransition.swift */; };
 		B686EF5020166D8700ACF075 /* PresentableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF2A20166D8700ACF075 /* PresentableController.swift */; };
 		B686EF5720166D8700ACF075 /* KeyboardFrameRespondable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF3320166D8700ACF075 /* KeyboardFrameRespondable.swift */; };
@@ -170,7 +169,6 @@
 		B686EF1D20166D8700ACF075 /* VirtualObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VirtualObject.swift; sourceTree = "<group>"; };
 		B686EF1E20166D8700ACF075 /* PinPlacemarkNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinPlacemarkNode.swift; sourceTree = "<group>"; };
 		B686EF1F20166D8700ACF075 /* SCNVector3+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Util.swift"; sourceTree = "<group>"; };
-		B686EF2020166D8700ACF075 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		B686EF2720166D8700ACF075 /* InteractiveTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractiveTransition.swift; sourceTree = "<group>"; };
 		B686EF2A20166D8700ACF075 /* PresentableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentableController.swift; sourceTree = "<group>"; };
 		B686EF3320166D8700ACF075 /* KeyboardFrameRespondable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardFrameRespondable.swift; sourceTree = "<group>"; };
@@ -350,7 +348,6 @@
 				B686EF1520166D8700ACF075 /* SceneKit */,
 				B686EF1120166D7200ACF075 /* Model */,
 				B6F451B320393C060084AFC8 /* Custom Views */,
-				B686EF2020166D8700ACF075 /* Style.swift */,
 				B686EF1320166D8600ACF075 /* UnitType.swift */,
 				B686EF1420166D8600ACF075 /* ARDistanceType.swift */,
 				B686EF1220166D8600ACF075 /* ARState.swift */,
@@ -945,7 +942,6 @@
 				B686EF5920166D8700ACF075 /* BatchUpdatable.swift in Sources */,
 				B6DCCDDB203BDC0800201385 /* TopDownAnimator.swift in Sources */,
 				B6A8ABD1204B89C2007FDAEC /* ClassNamable.swift in Sources */,
-				B686EF4820166D8700ACF075 /* Style.swift in Sources */,
 				B686EF9B20166F1300ACF075 /* SearchViewController.swift in Sources */,
 				B686EF5D20166D8700ACF075 /* PermissionManager.swift in Sources */,
 				B6DCCDBD203B355C00201385 /* TopKnobBottomUpAnimator.swift in Sources */,
