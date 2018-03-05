@@ -32,6 +32,13 @@ class MainViewController : BaseViewController, LocationDetailNavigationDelegate 
     super.viewDidLoad()
     
     self.navigationItem.largeTitleDisplayMode = .never
+    
+    // For simulators add an image view to give simulated location context
+    if UIDevice.current.isSimulator {
+      let imageView = UIImageView(image: #imageLiteral(resourceName: "denverCityScape"))
+      imageView.contentMode = .scaleAspectFill
+      imageView.addToContainer(self.view, atIndex: 1)
+    }
   }
   
   override func viewWillAppear(_ animated: Bool) {
