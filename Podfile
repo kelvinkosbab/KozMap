@@ -6,4 +6,5 @@ target 'KozMap' do
 
   # Pods for KozMap
   pod 'Alamofire', '~> 4.5'
+  pod 'Solar'
 end
