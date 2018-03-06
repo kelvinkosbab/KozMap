@@ -18,6 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Crash reporting
     CrashManager.shared.appDidFinishLaunching()
     
+    // Analytics
+    AnalyticsManager.shared.appDidFinishLaunching()
+    
     // Check if we don't have the correct permissions
     if !PermissionManager.shared.isAccessAuthorized {
       let permissionsViewController = PermissionsViewController.newViewController(delegate: self)

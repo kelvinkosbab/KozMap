@@ -11,6 +11,11 @@
 		B64423FB20410BE9006E524A /* TextFlagPlacemarkNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64423FA20410BE9006E524A /* TextFlagPlacemarkNode.swift */; };
 		B6442400204110D4006E524A /* SCNTextAlignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64423FF204110D4006E524A /* SCNTextAlignment.swift */; };
 		B64D121A204E5F8A008E5C5F /* CrashManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64D1219204E5F8A008E5C5F /* CrashManager.swift */; };
+		B64D121C204E65D6008E5C5F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B64D121B204E65D6008E5C5F /* GoogleService-Info.plist */; };
+		B64D121E204E666D008E5C5F /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64D121D204E666D008E5C5F /* AnalyticsManager.swift */; };
+		B64D1220204E670B008E5C5F /* AnalyticsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64D121F204E670B008E5C5F /* AnalyticsScreen.swift */; };
+		B64D1222204E673A008E5C5F /* AnalyticsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64D1221204E673A008E5C5F /* AnalyticsItem.swift */; };
+		B64D1224204E6744008E5C5F /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64D1223204E6744008E5C5F /* AnalyticsEvent.swift */; };
 		B686EED020166C7300ACF075 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EECF20166C7300ACF075 /* AppDelegate.swift */; };
 		B686EED820166C7300ACF075 /* ARMap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B686EED620166C7300ACF075 /* ARMap.xcdatamodeld */; };
 		B686EEDA20166C7300ACF075 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B686EED920166C7300ACF075 /* Assets.xcassets */; };
@@ -134,6 +139,11 @@
 		B64423FA20410BE9006E524A /* TextFlagPlacemarkNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFlagPlacemarkNode.swift; sourceTree = "<group>"; };
 		B64423FF204110D4006E524A /* SCNTextAlignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNTextAlignment.swift; sourceTree = "<group>"; };
 		B64D1219204E5F8A008E5C5F /* CrashManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashManager.swift; sourceTree = "<group>"; };
+		B64D121B204E65D6008E5C5F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B64D121D204E666D008E5C5F /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
+		B64D121F204E670B008E5C5F /* AnalyticsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsScreen.swift; sourceTree = "<group>"; };
+		B64D1221204E673A008E5C5F /* AnalyticsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsItem.swift; sourceTree = "<group>"; };
+		B64D1223204E6744008E5C5F /* AnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
 		B686EECC20166C7300ACF075 /* KozMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KozMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B686EECF20166C7300ACF075 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B686EED720166C7300ACF075 /* ARMap.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ARMap.xcdatamodel; sourceTree = "<group>"; };
@@ -309,6 +319,10 @@
 			isa = PBXGroup;
 			children = (
 				B64D1219204E5F8A008E5C5F /* CrashManager.swift */,
+				B64D121D204E666D008E5C5F /* AnalyticsManager.swift */,
+				B64D121F204E670B008E5C5F /* AnalyticsScreen.swift */,
+				B64D1221204E673A008E5C5F /* AnalyticsItem.swift */,
+				B64D1223204E6744008E5C5F /* AnalyticsEvent.swift */,
 			);
 			path = "Analytics and Crash Reporting";
 			sourceTree = "<group>";
@@ -386,6 +400,7 @@
 			children = (
 				B686EF6A20166DCF00ACF075 /* LaunchScreen.storyboard */,
 				B686EEDE20166C7300ACF075 /* Info.plist */,
+				B64D121B204E65D6008E5C5F /* GoogleService-Info.plist */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -791,6 +806,7 @@
 				B6A8ABD5204B9A92007FDAEC /* InlineColorChooser.storyboard in Resources */,
 				B6A8ABD7204B9AA9007FDAEC /* Settings.storyboard in Resources */,
 				B686EF6D20166F0500ACF075 /* Main.storyboard in Resources */,
+				B64D121C204E65D6008E5C5F /* GoogleService-Info.plist in Resources */,
 				B6A8ABD9204B9AEC007FDAEC /* Configuring.storyboard in Resources */,
 				B686EF6F20166F0C00ACF075 /* AddLocation.storyboard in Resources */,
 			);
@@ -883,6 +899,7 @@
 				B686EF4420166D8700ACF075 /* PlacemarkNode.swift in Sources */,
 				B6DCCDC5203B6EA300201385 /* PresentableManager.swift in Sources */,
 				B686EF3C20166D8700ACF075 /* UnitType.swift in Sources */,
+				B64D1222204E673A008E5C5F /* AnalyticsItem.swift in Sources */,
 				B64D121A204E5F8A008E5C5F /* CrashManager.swift in Sources */,
 				B686EF4120166D8700ACF075 /* Plane.swift in Sources */,
 				B686EF5C20166D8700ACF075 /* CameraPermissionManager.swift in Sources */,
@@ -914,6 +931,7 @@
 				B6DCCDCD203B9CA200201385 /* VisualEffectFadeAnimator.swift in Sources */,
 				B686EF9820166F1300ACF075 /* AddLocationViewController.swift in Sources */,
 				B686EF5720166D8700ACF075 /* KeyboardFrameRespondable.swift in Sources */,
+				B64D1220204E670B008E5C5F /* AnalyticsScreen.swift in Sources */,
 				B6DCCDDF203BDF4400201385 /* CustomPresentationController.swift in Sources */,
 				B686EED820166C7300ACF075 /* ARMap.xcdatamodeld in Sources */,
 				B686EF0520166D5A00ACF075 /* CLLocation+Util.swift in Sources */,
@@ -947,6 +965,7 @@
 				B686EF0220166D5A00ACF075 /* CurrentLocationUpdatableService.swift in Sources */,
 				B686EF3F20166D8700ACF075 /* ARSCNView+Util.swift in Sources */,
 				B686EF4320166D8700ACF075 /* AxisNode.swift in Sources */,
+				B64D1224204E6744008E5C5F /* AnalyticsEvent.swift in Sources */,
 				B686EFA320166F1300ACF075 /* BaseTableViewController.swift in Sources */,
 				B686EF9520166F1300ACF075 /* SettingsViewController.swift in Sources */,
 				B686EF9F20166F1300ACF075 /* ARViewController+Gestures.swift in Sources */,
@@ -972,6 +991,7 @@
 				B6DCCDE3203BED1100201385 /* RightToLeftAnimator.swift in Sources */,
 				B686EED020166C7300ACF075 /* AppDelegate.swift in Sources */,
 				B686EF5B20166D8700ACF075 /* Log.swift in Sources */,
+				B64D121E204E666D008E5C5F /* AnalyticsManager.swift in Sources */,
 				B6DCCDD7203BD4D200201385 /* BottomUpPresentationController.swift in Sources */,
 				B686EF5920166D8700ACF075 /* BatchUpdatable.swift in Sources */,
 				B6DCCDDB203BDC0800201385 /* TopDownAnimator.swift in Sources */,
