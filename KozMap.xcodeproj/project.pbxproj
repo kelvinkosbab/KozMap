@@ -10,6 +10,7 @@
 		4CAB96F3BD6BA24294579FB2 /* Pods_KozMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CB719DD0FC2BDBA88151D6A /* Pods_KozMap.framework */; };
 		B64423FB20410BE9006E524A /* TextFlagPlacemarkNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64423FA20410BE9006E524A /* TextFlagPlacemarkNode.swift */; };
 		B6442400204110D4006E524A /* SCNTextAlignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64423FF204110D4006E524A /* SCNTextAlignment.swift */; };
+		B64D121A204E5F8A008E5C5F /* CrashManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64D1219204E5F8A008E5C5F /* CrashManager.swift */; };
 		B686EED020166C7300ACF075 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EECF20166C7300ACF075 /* AppDelegate.swift */; };
 		B686EED820166C7300ACF075 /* ARMap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B686EED620166C7300ACF075 /* ARMap.xcdatamodeld */; };
 		B686EEDA20166C7300ACF075 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B686EED920166C7300ACF075 /* Assets.xcassets */; };
@@ -132,6 +133,7 @@
 		A4C83F8AC6F29F40129B562F /* Pods-ARMap.koz - release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARMap.koz - release.xcconfig"; path = "Pods/Target Support Files/Pods-ARMap/Pods-ARMap.koz - release.xcconfig"; sourceTree = "<group>"; };
 		B64423FA20410BE9006E524A /* TextFlagPlacemarkNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFlagPlacemarkNode.swift; sourceTree = "<group>"; };
 		B64423FF204110D4006E524A /* SCNTextAlignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNTextAlignment.swift; sourceTree = "<group>"; };
+		B64D1219204E5F8A008E5C5F /* CrashManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashManager.swift; sourceTree = "<group>"; };
 		B686EECC20166C7300ACF075 /* KozMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KozMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B686EECF20166C7300ACF075 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B686EED720166C7300ACF075 /* ARMap.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ARMap.xcdatamodel; sourceTree = "<group>"; };
@@ -303,6 +305,14 @@
 			path = "SceneKit Extensions";
 			sourceTree = "<group>";
 		};
+		B64D1218204E5F6B008E5C5F /* Analytics and Crash Reporting */ = {
+			isa = PBXGroup;
+			children = (
+				B64D1219204E5F8A008E5C5F /* CrashManager.swift */,
+			);
+			path = "Analytics and Crash Reporting";
+			sourceTree = "<group>";
+		};
 		B686EEC320166C7300ACF075 = {
 			isa = PBXGroup;
 			children = (
@@ -336,6 +346,7 @@
 		B686EEE420166CF500ACF075 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				B64D1218204E5F6B008E5C5F /* Analytics and Crash Reporting */,
 				B6A8ABDE204BB0A8007FDAEC /* API */,
 				B6A8ABC1204B883C007FDAEC /* 3rd Party Libraries */,
 				B686EEE720166D4500ACF075 /* Build Manager */,
@@ -722,6 +733,7 @@
 				B686EECA20166C7300ACF075 /* Resources */,
 				274664658833806BAE895BF6 /* [CP] Embed Pods Frameworks */,
 				0F184E156F0F6B0B53585825 /* [CP] Copy Pods Resources */,
+				B64D1217204E5EBA008E5C5F /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -828,17 +840,38 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-KozMap/Pods-KozMap-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/Solar/Solar.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Solar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KozMap/Pods-KozMap-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		B64D1217204E5EBA008E5C5F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 889d1028eff3c482b9172d727918b7cbf39bcd80 9c8b9a75077f4e1a183b7fa99ebb2aa0af92003ce1c0a7302b367859ed2d7d75";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -850,6 +883,7 @@
 				B686EF4420166D8700ACF075 /* PlacemarkNode.swift in Sources */,
 				B6DCCDC5203B6EA300201385 /* PresentableManager.swift in Sources */,
 				B686EF3C20166D8700ACF075 /* UnitType.swift in Sources */,
+				B64D121A204E5F8A008E5C5F /* CrashManager.swift in Sources */,
 				B686EF4120166D8700ACF075 /* Plane.swift in Sources */,
 				B686EF5C20166D8700ACF075 /* CameraPermissionManager.swift in Sources */,
 				B686EF5A20166D8700ACF075 /* ViewControllerFromStoryboardProtocol.swift in Sources */,
