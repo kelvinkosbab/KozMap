@@ -52,12 +52,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="asm-Ok-eHL" firstAttribute="bottom" secondItem="qoO-4Z-DP2" secondAttribute="bottom" id="5Tp-ky-XX6"/>
                             <constraint firstItem="asm-Ok-eHL" firstAttribute="trailing" secondItem="qoO-4Z-DP2" secondAttribute="trailing" id="9Vc-ZF-42e"/>
                             <constraint firstItem="qoO-4Z-DP2" firstAttribute="leading" secondItem="asm-Ok-eHL" secondAttribute="leading" id="AWf-JL-sov"/>
                             <constraint firstItem="asm-Ok-eHL" firstAttribute="trailing" secondItem="E08-W3-fDS" secondAttribute="trailing" id="EjE-4r-aV7"/>
                             <constraint firstItem="qoO-4Z-DP2" firstAttribute="top" secondItem="E08-W3-fDS" secondAttribute="bottom" id="QxA-0R-TJs"/>
                             <constraint firstItem="E08-W3-fDS" firstAttribute="leading" secondItem="asm-Ok-eHL" secondAttribute="leading" id="jo1-l3-fql"/>
+                            <constraint firstAttribute="bottom" secondItem="qoO-4Z-DP2" secondAttribute="bottom" id="ohl-3A-SH6"/>
                             <constraint firstItem="E08-W3-fDS" firstAttribute="top" secondItem="asm-Ok-eHL" secondAttribute="top" id="xq5-B1-C9q"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="asm-Ok-eHL"/>
@@ -681,9 +681,6 @@
     </scenes>
     <resources>
         <image name="assetMore" width="20" height="20"/>
-        <namedColor name="SeaBlue">
-            <color red="0.28999999165534973" green="0.56499999761581421" blue="0.88599997758865356" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="SeaBlue">
             <color red="0.28999999165534973" green="0.56499999761581421" blue="0.88599997758865356" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

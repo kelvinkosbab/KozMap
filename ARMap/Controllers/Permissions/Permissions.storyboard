@@ -30,7 +30,7 @@
                                 <blurEffect style="dark"/>
                             </visualEffectView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dPH-o3-cef">
-                                <rect key="frame" x="0.0" y="30" width="375" height="122"/>
+                                <rect key="frame" x="20" y="30" width="335" height="122"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="350" id="EwB-3x-rNR"/>
                                 </constraints>
@@ -88,7 +88,7 @@ Select the permission buttons below and get started!</string>
                             <constraint firstItem="DGh-hj-Xa4" firstAttribute="top" secondItem="hQx-sJ-BQx" secondAttribute="top" id="Kja-XK-gGa"/>
                             <constraint firstItem="frU-B8-ig4" firstAttribute="centerY" secondItem="4rr-xW-jmJ" secondAttribute="centerY" id="Red-AN-hHD"/>
                             <constraint firstItem="4rr-xW-jmJ" firstAttribute="centerY" secondItem="hQx-sJ-BQx" secondAttribute="centerY" constant="40" id="VQr-lO-HSY"/>
-                            <constraint firstItem="dPH-o3-cef" firstAttribute="leading" secondItem="4iS-Ur-aaK" secondAttribute="leading" id="Wxe-TH-LJQ"/>
+                            <constraint firstItem="dPH-o3-cef" firstAttribute="leading" secondItem="4iS-Ur-aaK" secondAttribute="leading" constant="20" id="Wxe-TH-LJQ"/>
                             <constraint firstItem="Rff-an-LQA" firstAttribute="centerY" secondItem="hQx-sJ-BQx" secondAttribute="centerY" constant="-40" id="ZX3-Eh-wjV"/>
                             <constraint firstItem="4iS-Ur-aaK" firstAttribute="trailing" secondItem="jS6-I8-RT4" secondAttribute="trailing" id="eC4-7S-7aZ"/>
                             <constraint firstItem="jS6-I8-RT4" firstAttribute="top" secondItem="hQx-sJ-BQx" secondAttribute="top" id="eqe-9D-eiF"/>
@@ -100,21 +100,21 @@ Select the permission buttons below and get started!</string>
                             <constraint firstItem="Rff-an-LQA" firstAttribute="centerX" secondItem="hQx-sJ-BQx" secondAttribute="centerX" id="kLq-4X-wRn"/>
                             <constraint firstItem="4rr-xW-jmJ" firstAttribute="centerX" secondItem="hQx-sJ-BQx" secondAttribute="centerX" id="ooJ-Vm-yhu"/>
                             <constraint firstItem="9iM-A8-2dl" firstAttribute="centerX" secondItem="Rff-an-LQA" secondAttribute="centerX" id="tGX-x5-b8D"/>
-                            <constraint firstItem="dPH-o3-cef" firstAttribute="trailing" secondItem="4iS-Ur-aaK" secondAttribute="trailing" id="wc8-SC-EOF"/>
+                            <constraint firstItem="dPH-o3-cef" firstAttribute="trailing" secondItem="4iS-Ur-aaK" secondAttribute="trailing" constant="-20" id="wc8-SC-EOF"/>
                             <constraint firstAttribute="bottom" secondItem="jS6-I8-RT4" secondAttribute="bottom" id="ykn-9b-ox4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4iS-Ur-aaK"/>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="wc8-SC-EOF"/>
                                 <exclude reference="Wxe-TH-LJQ"/>
                                 <exclude reference="hgO-Xx-Ncx"/>
+                                <exclude reference="wc8-SC-EOF"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="constraints">
-                                <include reference="wc8-SC-EOF"/>
                                 <include reference="Wxe-TH-LJQ"/>
+                                <include reference="wc8-SC-EOF"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
