@@ -165,7 +165,7 @@ extension SearchViewController : UISearchBarDelegate {
   
   private func performSearch(text: String?) {
     
-    guard let text = searchBar.text, let currentLocation = self.currentLocation else {
+    guard let text = self.searchBar.text, let currentLocation = self.currentLocation else {
       return
     }
     
