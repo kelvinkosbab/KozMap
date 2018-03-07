@@ -29,7 +29,7 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
   // MARK: - DesiredContentHeightDelegate
   
   var desiredContentHeight: CGFloat {
-    return 271
+    return UIScreen.main.bounds.height
   }
   
   // MARK: - DismissInteractable

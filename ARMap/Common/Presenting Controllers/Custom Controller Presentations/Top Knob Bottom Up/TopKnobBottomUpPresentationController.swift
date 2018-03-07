@@ -83,7 +83,10 @@ class TopKnobBottomUpPresentationController : CustomPresentationController, Dism
   override var frameOfPresentedViewInContainerView: CGRect {
     let containerBounds = self.containerView?.bounds ?? UIScreen.main.bounds
     let height: CGFloat = self.presentedViewController.preferredContentSize.height
-    return CGRect(x: 0, y: containerBounds.height - height, width: containerBounds.width, height: height)
+    let desiredYOffset = containerBounds.height - height
+    let minimumYOffset: CGFloat = 100
+    let adjustedYOffset = desiredYOffset < minimumYOffset ? minimumYOffset : desiredYOffset
+    return CGRect(x: 0, y: adjustedYOffset, width: containerBounds.width, height: height)
   }
   
   // MARK: - Actions

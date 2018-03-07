@@ -175,9 +175,9 @@ class MainViewController : BaseViewController, LocationDetailNavigationDelegate 
     
     // Calculate the new frame
     let xOffset = presentedViewController.view.frame.origin.x
-    let presentedViewControllerHeight = presentedViewController.preferredContentSize.height > 0 ? presentedViewController.preferredContentSize.height : presentedViewController.view.bounds.height
+    let presentedViewControllerHeight = presentedViewController.view.bounds.height
     let yOffset = self.view.bounds.height - keyboardOffset - presentedViewControllerHeight
-    let newFrame = CGRect(x: xOffset, y: max(yOffset, 0), width: presentedViewController.view.bounds.width, height: presentedViewControllerHeight)
+    let newFrame = CGRect(x: xOffset, y: max(yOffset, 100), width: presentedViewController.view.bounds.width, height: presentedViewControllerHeight)
     
     // Perform the animation
     UIView.animate(withDuration: duration, delay: 0, options: animationCurve, animations: { [weak self] in
