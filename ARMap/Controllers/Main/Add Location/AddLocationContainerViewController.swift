@@ -57,8 +57,11 @@ class AddLocationContainerViewController : BaseViewController, DesiredContentHei
   
   private(set) lazy var orderedViewControllers: [UIViewController] = {
     let currentLocationViewController = AddLocationViewController.newViewController(delegate: self.locationDetailDelegate)
+    currentLocationViewController.view.backgroundColor = .clear
     let searchViewController = SearchViewController.newViewController(delegate: self.searchDelegate)
+    searchViewController.view.backgroundColor = .clear
     let mapViewController = AddLocationMapViewController.newViewController(delegate: self.searchDelegate)
+    mapViewController.view.backgroundColor = .clear
     return [ currentLocationViewController, searchViewController, mapViewController ]
   }()
   

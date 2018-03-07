@@ -226,7 +226,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="geC-nL-Tjs">
-                                <rect key="frame" x="16" y="609" width="343" height="50"/>
+                                <rect key="frame" x="16" y="601" width="343" height="50"/>
                                 <color key="backgroundColor" name="SeaBlue"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="4ga-Ng-fu9"/>
@@ -249,10 +249,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="ygX-Xc-ydc" firstAttribute="trailing" secondItem="epq-nX-2vQ" secondAttribute="trailing" constant="16" id="86l-k1-weY"/>
                             <constraint firstItem="ygX-Xc-ydc" firstAttribute="trailing" secondItem="FcY-da-jPy" secondAttribute="trailing" constant="16" id="BdH-0d-dri"/>
-                            <constraint firstItem="ygX-Xc-ydc" firstAttribute="bottom" secondItem="geC-nL-Tjs" secondAttribute="bottom" constant="8" id="DwV-xi-0bJ"/>
+                            <constraint firstItem="ygX-Xc-ydc" firstAttribute="bottom" secondItem="geC-nL-Tjs" secondAttribute="bottom" constant="16" id="DwV-xi-0bJ"/>
                             <constraint firstItem="ygX-Xc-ydc" firstAttribute="trailing" secondItem="Kyp-c2-McU" secondAttribute="trailing" constant="16" id="GG6-wu-6K6"/>
                             <constraint firstItem="Wwm-FW-ofI" firstAttribute="leading" secondItem="ygX-Xc-ydc" secondAttribute="leading" constant="16" id="GM6-dx-dMK"/>
                             <constraint firstItem="FcY-da-jPy" firstAttribute="top" secondItem="epq-nX-2vQ" secondAttribute="bottom" constant="13" id="NEd-Lx-kF3"/>
@@ -386,7 +387,7 @@
                                 <rect key="frame" x="0.0" y="30" width="375" height="637"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qym-tY-UZ0">
-                                <rect key="frame" x="16" y="609" width="343" height="50"/>
+                                <rect key="frame" x="16" y="601" width="343" height="50"/>
                                 <color key="backgroundColor" name="SeaBlue"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="cqZ-H5-uJZ"/>
@@ -409,7 +410,7 @@
                             <constraint firstAttribute="bottom" secondItem="h4W-xp-ryF" secondAttribute="bottom" id="ZSz-jQ-VAm"/>
                             <constraint firstItem="Qym-tY-UZ0" firstAttribute="leading" secondItem="ptW-Rb-tDi" secondAttribute="leading" constant="16" id="bW4-dy-jUx"/>
                             <constraint firstItem="h4W-xp-ryF" firstAttribute="centerX" secondItem="3X7-HF-8b5" secondAttribute="centerX" id="fJd-BI-OIK"/>
-                            <constraint firstItem="ptW-Rb-tDi" firstAttribute="bottom" secondItem="Qym-tY-UZ0" secondAttribute="bottom" constant="8" id="ufr-0o-gnR"/>
+                            <constraint firstItem="ptW-Rb-tDi" firstAttribute="bottom" secondItem="Qym-tY-UZ0" secondAttribute="bottom" constant="16" id="ufr-0o-gnR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ptW-Rb-tDi"/>
                     </view>

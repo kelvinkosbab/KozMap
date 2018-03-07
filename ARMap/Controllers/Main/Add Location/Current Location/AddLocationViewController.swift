@@ -89,6 +89,10 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    self.title = "Add Placemark"
+    
+    self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(self.closeButtonSelected))
+    
     self.nameTextField.delegate = self
   }
   
@@ -125,6 +129,20 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
     super.viewDidDisappear(animated)
     
     NotificationCenter.default.removeObserver(self)
+  }
+  
+  // MARK: - Status Bar
+  
+  override var prefersStatusBarHidden: Bool {
+    return UIDevice.current.isPhone
+  }
+  
+  override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+    return .slide
+  }
+  
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
   }
   
   // MARK: - Notifications
@@ -195,6 +213,10 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
   }
   
   // MARK: - Actions
+  
+  @objc func closeButtonSelected() {
+    self.dismissController()
+  }
   
   @IBAction func addLocationButtonSelected() {
     self.saveLocation()
