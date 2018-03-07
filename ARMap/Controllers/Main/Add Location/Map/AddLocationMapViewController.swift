@@ -39,12 +39,27 @@ class AddLocationMapViewController : BaseViewController, DismissInteractable {
   
   weak var delegate: SearchViewControllerDelegate? = nil
   
+  var locationManager: LocationManager {
+    return LocationManager.shared
+  }
+  
   // MARK: - Lifecycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    // Configure map
     self.mapView.delegate = self
+    self.setMapInitialLocation()
+  }
+  
+  // MARK: - MKMapView
+  
+  func setMapInitialLocation() {
+    let regionRadius: CLLocationDistance = 800 // 800 meters ~ 0.5 miles
+    let desiredCoordinate = self.locationManager.currentLocation?.coordinate ?? CLLocationCoordinate2D.denver80202
+    let coordinateRegion = MKCoordinateRegionMakeWithDistance(desiredCoordinate, regionRadius, regionRadius)
+    self.mapView.setRegion(coordinateRegion, animated: true)
   }
 }
 

@@ -11,6 +11,8 @@ import CoreLocation
 
 extension CLLocationCoordinate2D {
   
+  static let denver80202 = CLLocationCoordinate2D(latitude: 39.754103, longitude: -105.000224)
+  
   func coordinateWithBearing(bearing: Double, distanceMeters: Double) -> CLLocationCoordinate2D {
     //The numbers for earth radius may be _off_ here
     //but this gives a reasonably accurate result..
