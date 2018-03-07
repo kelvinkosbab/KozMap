@@ -20,7 +20,7 @@ class LocationListViewController : BaseViewController, NSFetchedResultsControlle
   // MARK: - Static Accessors
   
   private static func newViewController() -> LocationListViewController {
-    let viewController = self.newViewController(fromStoryboardWithName: "AddLocation")
+    let viewController = self.newViewController(fromStoryboardWithName: "LocationList")
     viewController.preferredContentSize.height = viewController.desiredContentHeight
     return viewController
   }
