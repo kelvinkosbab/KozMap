@@ -58,7 +58,8 @@ class AddLocationContainerViewController : BaseViewController, DesiredContentHei
   private(set) lazy var orderedViewControllers: [UIViewController] = {
     let currentLocationViewController = AddLocationViewController.newViewController(delegate: self.locationDetailDelegate)
     let searchViewController = SearchViewController.newViewController(delegate: self.searchDelegate)
-    return [ currentLocationViewController, searchViewController ]
+    let mapViewController = AddLocationMapViewController.newViewController(delegate: self.searchDelegate)
+    return [ currentLocationViewController, searchViewController, mapViewController ]
   }()
   
   // MARK: - Lifecycle
@@ -111,9 +112,12 @@ class AddLocationContainerViewController : BaseViewController, DesiredContentHei
   var currentSelectedIndex: Int {
     if let _ = self.pageViewController?.viewControllers?.first as? AddLocationViewController {
       return 0
-    } else {
+    } else if let _ = self.pageViewController?.viewControllers?.first as? SearchViewController {
       return 1
+    } else if let _ = self.pageViewController?.viewControllers?.first as? AddLocationMapViewController {
+      return 2
     }
+    return 0
   }
   
   func reloadContent() {
@@ -133,11 +137,18 @@ class AddLocationContainerViewController : BaseViewController, DesiredContentHei
         let viewController = self.orderedViewControllers[0]
         self.pageViewController?.setViewControllers([ viewController ], direction: .reverse, animated: true, completion: nil)
       }
-    default:
+    case 1:
       if self.currentSelectedIndex != 1 {
         let viewController = self.orderedViewControllers[1]
+        let direction: UIPageViewControllerNavigationDirection = self.currentSelectedIndex < 1 ? .forward : .reverse
+        self.pageViewController?.setViewControllers([ viewController ], direction: direction, animated: true, completion: nil)
+      }
+    case 2:
+      if self.currentSelectedIndex != 2 {
+        let viewController = self.orderedViewControllers[2]
         self.pageViewController?.setViewControllers([ viewController ], direction: .forward, animated: true, completion: nil)
       }
+    default: break
     }
   }
 }

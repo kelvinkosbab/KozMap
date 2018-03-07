@@ -14,7 +14,7 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
   // MARK: - Static Accessors
   
   private static func newViewController() -> LocationDetailViewController {
-    let viewController = self.newViewController(fromStoryboardWithName: "AddLocation")
+    let viewController = self.newViewController(fromStoryboardWithName: "LocationDetail")
     viewController.preferredContentSize.height = viewController.desiredContentHeight
     return viewController
   }
