@@ -168,17 +168,24 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="wyL-Ph-2Kh">
+                                <rect key="frame" x="0.0" y="273" width="375" height="394"/>
+                            </mapView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="hNR-dQ-yk1" firstAttribute="top" secondItem="m31-m5-fuP" secondAttribute="bottom" constant="13" id="1W2-x8-S5r"/>
                             <constraint firstItem="hNR-dQ-yk1" firstAttribute="leading" secondItem="XUE-LN-d3D" secondAttribute="leading" constant="16" id="1bF-L7-NBM"/>
                             <constraint firstItem="XUE-LN-d3D" firstAttribute="trailing" secondItem="m31-m5-fuP" secondAttribute="trailing" constant="16" id="8Ny-Fc-Nfj"/>
                             <constraint firstItem="m31-m5-fuP" firstAttribute="top" secondItem="lHg-W5-p6s" secondAttribute="bottom" constant="13" id="8W3-fK-qYb"/>
+                            <constraint firstAttribute="bottom" secondItem="wyL-Ph-2Kh" secondAttribute="bottom" id="C83-u9-Zhp"/>
                             <constraint firstItem="kec-hB-OLb" firstAttribute="top" secondItem="hNR-dQ-yk1" secondAttribute="bottom" constant="13" id="Cwf-UL-bgv"/>
+                            <constraint firstItem="wyL-Ph-2Kh" firstAttribute="leading" secondItem="5Nr-jJ-XJF" secondAttribute="leading" id="EL4-Oj-qYE"/>
                             <constraint firstItem="kec-hB-OLb" firstAttribute="leading" secondItem="XUE-LN-d3D" secondAttribute="leading" constant="16" id="Hby-o4-jXl"/>
                             <constraint firstItem="lHg-W5-p6s" firstAttribute="leading" secondItem="XUE-LN-d3D" secondAttribute="leading" constant="16" id="Phw-2G-Vsf"/>
                             <constraint firstItem="XUE-LN-d3D" firstAttribute="trailing" secondItem="lHg-W5-p6s" secondAttribute="trailing" constant="16" id="QoQ-v2-vPr"/>
+                            <constraint firstAttribute="trailing" secondItem="wyL-Ph-2Kh" secondAttribute="trailing" id="S5R-b7-L50"/>
                             <constraint firstItem="XUE-LN-d3D" firstAttribute="trailing" secondItem="hNR-dQ-yk1" secondAttribute="trailing" constant="16" id="ZCR-lv-vfz"/>
+                            <constraint firstItem="wyL-Ph-2Kh" firstAttribute="top" secondItem="kec-hB-OLb" secondAttribute="bottom" constant="13" id="aVK-qI-1dB"/>
                             <constraint firstItem="lHg-W5-p6s" firstAttribute="top" secondItem="XUE-LN-d3D" secondAttribute="top" constant="16" id="oJW-4Q-wmI"/>
                             <constraint firstItem="XUE-LN-d3D" firstAttribute="trailing" secondItem="kec-hB-OLb" secondAttribute="trailing" constant="16" id="tj4-mw-Bc6"/>
                             <constraint firstItem="m31-m5-fuP" firstAttribute="leading" secondItem="XUE-LN-d3D" secondAttribute="leading" constant="16" id="z79-5C-xlw"/>
@@ -191,6 +198,7 @@
                         <outlet property="latitudeLabel" destination="AF3-Ok-A6d" id="5id-DP-hLy"/>
                         <outlet property="locationDescriptionLabel" destination="kec-hB-OLb" id="pJ8-lr-q5c"/>
                         <outlet property="longitudeLabel" destination="bGS-gY-BVn" id="3iD-zt-5pD"/>
+                        <outlet property="mapView" destination="wyL-Ph-2Kh" id="pSE-Ng-hSH"/>
                         <outlet property="nameTextField" destination="lHg-W5-p6s" id="oza-W1-9T5"/>
                     </connections>
                 </viewController>

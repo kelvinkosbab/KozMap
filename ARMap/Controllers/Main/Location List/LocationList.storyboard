@@ -90,23 +90,20 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dxp-nq-NS0">
-                                                    <rect key="frame" x="129" y="14" width="116" height="30"/>
-                                                    <state key="normal" title="Add a Placemark">
-                                                        <color key="titleColor" name="SeaBlue"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="didSelectAddButton" destination="hkW-IS-P1p" eventType="touchUpInside" id="Jo3-Zd-ds6"/>
-                                                    </connections>
-                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a Placemark" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S7h-VZ-AtW">
+                                                    <rect key="frame" x="129.5" y="20.5" width="115.5" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" name="SeaBlue"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="dxp-nq-NS0" firstAttribute="centerY" secondItem="Tk5-cV-cz1" secondAttribute="centerY" id="pbx-DO-W3P"/>
-                                                <constraint firstItem="dxp-nq-NS0" firstAttribute="centerX" secondItem="Tk5-cV-cz1" secondAttribute="centerX" id="we6-Ih-exj"/>
+                                                <constraint firstItem="S7h-VZ-AtW" firstAttribute="centerX" secondItem="Tk5-cV-cz1" secondAttribute="centerX" id="COn-ae-A5j"/>
+                                                <constraint firstItem="S7h-VZ-AtW" firstAttribute="centerY" secondItem="Tk5-cV-cz1" secondAttribute="centerY" id="GSq-XU-Bne"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="addButton" destination="dxp-nq-NS0" id="wta-3P-o0G"/>
+                                            <outlet property="addLabel" destination="S7h-VZ-AtW" id="RwC-a6-Fjd"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -133,7 +130,7 @@
     <resources>
         <image name="assetMore" width="20" height="20"/>
         <namedColor name="SeaBlue">
-            <color red="0.28999999170000001" green="0.56499999759999997" blue="0.88599997760000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.28999999165534973" green="0.56499999761581421" blue="0.88599997758865356" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
