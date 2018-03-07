@@ -34,7 +34,10 @@ class LocationListViewController : BaseViewController, NSFetchedResultsControlle
   // MARK: - DesiredContentHeightDelegate
   
   var desiredContentHeight: CGFloat {
-    return 450
+    let totalPlacemarks = Placemark.countAll()
+    let requiredTableHeight = CGFloat(totalPlacemarks + 1) * self.rowHeight
+    let padding: CGFloat = 50
+    return requiredTableHeight + padding
   }
   
   // MARK: - DismissInteractable
@@ -159,7 +162,7 @@ class LocationListViewController : BaseViewController, NSFetchedResultsControlle
 extension LocationListViewController {
   
   enum SectionType {
-    case placemarks([Placemark])
+    case placemarks([Placemark]), addPlacemark
   }
   
   func getSectionType(section: Int) -> SectionType? {
@@ -167,13 +170,15 @@ extension LocationListViewController {
     case 0:
       let placemarks = self.placemarks
       return .placemarks(placemarks)
+    case 1:
+      return .addPlacemark
     default:
       return nil
     }
   }
   
   enum RowType {
-    case placemark(Placemark)
+    case placemark(Placemark), addPlacemark
   }
   
   func getRowType(at indexPath: IndexPath) -> RowType? {
@@ -189,6 +194,13 @@ extension LocationListViewController {
         return .placemark(placemark)
       }
       return nil
+    case .addPlacemark:
+      switch indexPath.row {
+      case 0:
+        return .addPlacemark
+      default:
+        return nil
+      }
     }
   }
 }
@@ -198,35 +210,7 @@ extension LocationListViewController {
 extension LocationListViewController : UITableViewDelegate, UITableViewDataSource {
   
   func numberOfSections(in tableView: UITableView) -> Int {
-    return 1
-  }
-  
-  func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-    
-    guard let sectionType = self.getSectionType(section: section) else {
-      return nil
-    }
-    
-    switch sectionType {
-    case .placemarks(_):
-      let cell = tableView.dequeueReusableCell(withIdentifier: LocationListAddPlacemarkCell.name) as! LocationListAddPlacemarkCell
-      cell.delegate = self
-      cell.backgroundColor = .clear
-      cell.contentView.backgroundColor = .clear
-      return cell
-    }
-  }
-  
-  func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-    
-    guard let sectionType = self.getSectionType(section: section) else {
-      return 0
-    }
-    
-    switch sectionType {
-    case .placemarks(_):
-      return 70
-    }
+    return 2
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -238,6 +222,8 @@ extension LocationListViewController : UITableViewDelegate, UITableViewDataSourc
     switch sectionType {
     case .placemarks(let placemarks):
       return placemarks.count
+    case .addPlacemark:
+      return 1
     }
   }
   
@@ -259,6 +245,12 @@ extension LocationListViewController : UITableViewDelegate, UITableViewDataSourc
       cell.backgroundColor = .clear
       cell.configure(placemark: placemark, unitType: Defaults.shared.unitType, delegate: self, hideMoreButton: !UIDevice.current.isPhone)
       return cell
+      
+    case .addPlacemark:
+      let cell = tableView.dequeueReusableCell(withIdentifier: LocationListAddPlacemarkCell.name, for: indexPath) as! LocationListAddPlacemarkCell
+      cell.backgroundColor = .clear
+      cell.contentView.backgroundColor = .clear
+      return cell
     }
   }
   
@@ -277,6 +269,8 @@ extension LocationListViewController : UITableViewDelegate, UITableViewDataSourc
     switch rowType {
     case .placemark(let placemark):
       self.transitionToDetail(placemark: placemark)
+    case .addPlacemark:
+      self.delegate?.shouldTransitionToAddPlacemark()
     }
   }
 }
@@ -317,14 +311,5 @@ extension LocationListViewController : LocationListViewControllerCellDelegate {
       alertController.popoverPresentationController?.sourceRect = sender.frame
       self.present(alertController, animated: true, completion: nil)
     }
-  }
-}
-
-// MARK: - LocationListAddPlacemarkCellDelegate
-
-extension LocationListViewController : LocationListAddPlacemarkCellDelegate {
-  
-  func didSelectAddPlacemark() {
-    self.delegate?.shouldTransitionToAddPlacemark()
   }
 }

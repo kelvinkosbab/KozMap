@@ -71,15 +71,6 @@ class LocationListViewControllerCell : UITableViewCell, ClassNamable {
 
 // MARK: - LocationListAddPlacemarkCell
 
-protocol LocationListAddPlacemarkCellDelegate : class {
-  func didSelectAddPlacemark()
-}
-
 class LocationListAddPlacemarkCell : UITableViewCell, ClassNamable {
-  @IBOutlet weak var addButton: UIButton!
-  weak var delegate: LocationListAddPlacemarkCellDelegate? = nil
-  
-  @IBAction func didSelectAddButton() {
-    self.delegate?.didSelectAddPlacemark()
-  }
+  @IBOutlet weak var addLabel: UILabel!
 }
