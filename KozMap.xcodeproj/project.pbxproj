@@ -11,6 +11,9 @@
 		B6299B82204F8F6500043CD1 /* LocationList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6299B81204F8F6500043CD1 /* LocationList.storyboard */; };
 		B6299B84204F8FA900043CD1 /* LocationDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6299B83204F8FA900043CD1 /* LocationDetail.storyboard */; };
 		B6299B88204F901D00043CD1 /* AddLocationMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6299B87204F901D00043CD1 /* AddLocationMapViewController.swift */; };
+		B6299B8B204FE16600043CD1 /* ModeChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6299B8A204FE16600043CD1 /* ModeChooserViewController.swift */; };
+		B6299B8D204FE17E00043CD1 /* ModeChooser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6299B8C204FE17E00043CD1 /* ModeChooser.storyboard */; };
+		B6299B8F204FED2F00043CD1 /* MainViewController+AppMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6299B8E204FED2F00043CD1 /* MainViewController+AppMode.swift */; };
 		B64423FB20410BE9006E524A /* TextFlagPlacemarkNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64423FA20410BE9006E524A /* TextFlagPlacemarkNode.swift */; };
 		B6442400204110D4006E524A /* SCNTextAlignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64423FF204110D4006E524A /* SCNTextAlignment.swift */; };
 		B64D121A204E5F8A008E5C5F /* CrashManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64D1219204E5F8A008E5C5F /* CrashManager.swift */; };
@@ -142,6 +145,9 @@
 		B6299B81204F8F6500043CD1 /* LocationList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationList.storyboard; sourceTree = "<group>"; };
 		B6299B83204F8FA900043CD1 /* LocationDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationDetail.storyboard; sourceTree = "<group>"; };
 		B6299B87204F901D00043CD1 /* AddLocationMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationMapViewController.swift; sourceTree = "<group>"; };
+		B6299B8A204FE16600043CD1 /* ModeChooserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeChooserViewController.swift; sourceTree = "<group>"; };
+		B6299B8C204FE17E00043CD1 /* ModeChooser.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ModeChooser.storyboard; sourceTree = "<group>"; };
+		B6299B8E204FED2F00043CD1 /* MainViewController+AppMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+AppMode.swift"; sourceTree = "<group>"; };
 		B64423FA20410BE9006E524A /* TextFlagPlacemarkNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFlagPlacemarkNode.swift; sourceTree = "<group>"; };
 		B64423FF204110D4006E524A /* SCNTextAlignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNTextAlignment.swift; sourceTree = "<group>"; };
 		B64D1219204E5F8A008E5C5F /* CrashManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashManager.swift; sourceTree = "<group>"; };
@@ -324,6 +330,15 @@
 				B6299B87204F901D00043CD1 /* AddLocationMapViewController.swift */,
 			);
 			path = Map;
+			sourceTree = "<group>";
+		};
+		B6299B89204FE15400043CD1 /* Mode Chooser */ = {
+			isa = PBXGroup;
+			children = (
+				B6299B8C204FE17E00043CD1 /* ModeChooser.storyboard */,
+				B6299B8A204FE16600043CD1 /* ModeChooserViewController.swift */,
+			);
+			path = "Mode Chooser";
 			sourceTree = "<group>";
 		};
 		B64423FE20410C16006E524A /* SceneKit Extensions */ = {
@@ -582,6 +597,8 @@
 				B686EF7F20166F1200ACF075 /* MainViewController.swift */,
 				B686EF8920166F1200ACF075 /* MainViewController+CoreLocation.swift */,
 				B686EF7E20166F1200ACF075 /* MainViewController+AR.swift */,
+				B6299B8E204FED2F00043CD1 /* MainViewController+AppMode.swift */,
+				B6299B89204FE15400043CD1 /* Mode Chooser */,
 				B686EF8620166F1200ACF075 /* Placemark AR */,
 				B686EF7720166F1200ACF075 /* Settings */,
 				B686EF8320166F1200ACF075 /* Location List */,
@@ -830,6 +847,7 @@
 				B686EEDA20166C7300ACF075 /* Assets.xcassets in Resources */,
 				B6A8ABD5204B9A92007FDAEC /* InlineColorChooser.storyboard in Resources */,
 				B6A8ABD7204B9AA9007FDAEC /* Settings.storyboard in Resources */,
+				B6299B8D204FE17E00043CD1 /* ModeChooser.storyboard in Resources */,
 				B6299B84204F8FA900043CD1 /* LocationDetail.storyboard in Resources */,
 				B686EF6D20166F0500ACF075 /* Main.storyboard in Resources */,
 				B64D121C204E65D6008E5C5F /* GoogleService-Info.plist in Resources */,
@@ -924,6 +942,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6299B8B204FE16600043CD1 /* ModeChooserViewController.swift in Sources */,
 				B686EF4420166D8700ACF075 /* PlacemarkNode.swift in Sources */,
 				B6DCCDC5203B6EA300201385 /* PresentableManager.swift in Sources */,
 				B686EF3C20166D8700ACF075 /* UnitType.swift in Sources */,
@@ -1003,6 +1022,7 @@
 				B6299B88204F901D00043CD1 /* AddLocationMapViewController.swift in Sources */,
 				B686EF9920166F1300ACF075 /* MainViewController+AR.swift in Sources */,
 				B686EF6920166D9D00ACF075 /* Defaults+MyManagedObjectProtocol.swift in Sources */,
+				B6299B8F204FED2F00043CD1 /* MainViewController+AppMode.swift in Sources */,
 				B686EF3D20166D8700ACF075 /* ARDistanceType.swift in Sources */,
 				B686EF0020166D5A00ACF075 /* CLLocationCoordinate2D+Util.swift in Sources */,
 				B686EF0920166D5A00ACF075 /* String+Util.swift in Sources */,

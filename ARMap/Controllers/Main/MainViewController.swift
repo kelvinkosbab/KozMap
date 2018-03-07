@@ -111,6 +111,10 @@ class MainViewController : BaseViewController, LocationDetailNavigationDelegate 
   
   func presentAddLocation() {
     
+    let modeChooserViewController = ModeChooserViewController.newViewController(delegate: self)
+    self.present(viewController: modeChooserViewController, withMode: .custom(.visualEffectFade), options: [ .presentingViewControllerDelegate(self) ])
+    return
+    
     guard self.presentedViewController == nil else {
       return
     }
