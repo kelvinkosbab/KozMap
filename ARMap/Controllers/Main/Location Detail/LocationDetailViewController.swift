@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import MapKit
 
 class LocationDetailViewController : BaseViewController, NSFetchedResultsControllerDelegate, DesiredContentHeightDelegate, DismissInteractable, KeyboardFrameRespondable, PlacemarkAPIDelegate {
   
@@ -49,6 +50,7 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
   @IBOutlet weak var distanceLabel: UILabel!
   @IBOutlet weak var locationDescriptionLabel: UILabel!
   @IBOutlet weak var colorChooserContainer: UIView!
+  @IBOutlet weak var mapView: MKMapView!
   
   var placemark: Placemark? = nil
   var colorChooserController: InlineColorChooserViewController? = nil
@@ -196,7 +198,32 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
     location.getPlacemark { [weak self] placemark in
       self?.locationDescriptionLabel.text = address ?? placemark?.address
     }
+    
+    // Map placemark
+    
+    if let mapAnnotation = self.mapAnnotation, mapAnnotation.coordinate.latitude == placemark.coordinate.latitude && mapAnnotation.coordinate.longitude == placemark.coordinate.longitude {
+      // do nothing
+    } else {
+      
+      // Need to create/update the current annotation
+      if let mapAnnotation = self.mapAnnotation {
+        self.mapView.removeAnnotation(mapAnnotation)
+      }
+      
+      // Create the map annotation
+      let annotation = MKPointAnnotation()
+      annotation.coordinate = placemark.coordinate
+      self.mapAnnotation = annotation
+      self.mapView.addAnnotation(annotation)
+      
+      // Set the map region
+      let regionRadius: CLLocationDistance = 800 // 800 meters ~ 0.5 miles
+      let coordinateRegion = MKCoordinateRegionMakeWithDistance(placemark.coordinate, regionRadius, regionRadius)
+      self.mapView.setRegion(coordinateRegion, animated: true)
+    }
   }
+  
+  var mapAnnotation: MKAnnotation? = nil
   
   // MARK: - Actions
   

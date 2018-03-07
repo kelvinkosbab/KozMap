@@ -603,8 +603,8 @@
 		B686EF7920166F1200ACF075 /* Location Detail */ = {
 			isa = PBXGroup;
 			children = (
-				B6299B83204F8FA900043CD1 /* LocationDetail.storyboard */,
 				B6A8ABDA204BA791007FDAEC /* LocationDetailNavigationDelegate.swift */,
+				B6299B83204F8FA900043CD1 /* LocationDetail.storyboard */,
 				B686EF7A20166F1200ACF075 /* LocationDetailViewController.swift */,
 			);
 			path = "Location Detail";
