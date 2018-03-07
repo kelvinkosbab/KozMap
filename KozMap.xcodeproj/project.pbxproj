@@ -13,7 +13,6 @@
 		B6299B88204F901D00043CD1 /* AddLocationMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6299B87204F901D00043CD1 /* AddLocationMapViewController.swift */; };
 		B6299B8B204FE16600043CD1 /* ModeChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6299B8A204FE16600043CD1 /* ModeChooserViewController.swift */; };
 		B6299B8D204FE17E00043CD1 /* ModeChooser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6299B8C204FE17E00043CD1 /* ModeChooser.storyboard */; };
-		B6299B8F204FED2F00043CD1 /* MainViewController+AppMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6299B8E204FED2F00043CD1 /* MainViewController+AppMode.swift */; };
 		B64423FB20410BE9006E524A /* TextFlagPlacemarkNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64423FA20410BE9006E524A /* TextFlagPlacemarkNode.swift */; };
 		B6442400204110D4006E524A /* SCNTextAlignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64423FF204110D4006E524A /* SCNTextAlignment.swift */; };
 		B64D121A204E5F8A008E5C5F /* CrashManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64D1219204E5F8A008E5C5F /* CrashManager.swift */; };
@@ -22,6 +21,8 @@
 		B64D1220204E670B008E5C5F /* AnalyticsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64D121F204E670B008E5C5F /* AnalyticsScreen.swift */; };
 		B64D1222204E673A008E5C5F /* AnalyticsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64D1221204E673A008E5C5F /* AnalyticsItem.swift */; };
 		B64D1224204E6744008E5C5F /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64D1223204E6744008E5C5F /* AnalyticsEvent.swift */; };
+		B664AE0D20503B6400719D5A /* HomeTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B664AE0C20503B6400719D5A /* HomeTabBarView.swift */; };
+		B664AE0F20503B8200719D5A /* HomeTabBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B664AE0E20503B8200719D5A /* HomeTabBarView.xib */; };
 		B686EED020166C7300ACF075 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EECF20166C7300ACF075 /* AppDelegate.swift */; };
 		B686EED820166C7300ACF075 /* ARMap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B686EED620166C7300ACF075 /* ARMap.xcdatamodeld */; };
 		B686EEDA20166C7300ACF075 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B686EED920166C7300ACF075 /* Assets.xcassets */; };
@@ -147,7 +148,6 @@
 		B6299B87204F901D00043CD1 /* AddLocationMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationMapViewController.swift; sourceTree = "<group>"; };
 		B6299B8A204FE16600043CD1 /* ModeChooserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeChooserViewController.swift; sourceTree = "<group>"; };
 		B6299B8C204FE17E00043CD1 /* ModeChooser.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ModeChooser.storyboard; sourceTree = "<group>"; };
-		B6299B8E204FED2F00043CD1 /* MainViewController+AppMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+AppMode.swift"; sourceTree = "<group>"; };
 		B64423FA20410BE9006E524A /* TextFlagPlacemarkNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFlagPlacemarkNode.swift; sourceTree = "<group>"; };
 		B64423FF204110D4006E524A /* SCNTextAlignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNTextAlignment.swift; sourceTree = "<group>"; };
 		B64D1219204E5F8A008E5C5F /* CrashManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashManager.swift; sourceTree = "<group>"; };
@@ -156,6 +156,8 @@
 		B64D121F204E670B008E5C5F /* AnalyticsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsScreen.swift; sourceTree = "<group>"; };
 		B64D1221204E673A008E5C5F /* AnalyticsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsItem.swift; sourceTree = "<group>"; };
 		B64D1223204E6744008E5C5F /* AnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
+		B664AE0C20503B6400719D5A /* HomeTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarView.swift; sourceTree = "<group>"; };
+		B664AE0E20503B8200719D5A /* HomeTabBarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTabBarView.xib; sourceTree = "<group>"; };
 		B686EECC20166C7300ACF075 /* KozMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KozMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B686EECF20166C7300ACF075 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B686EED720166C7300ACF075 /* ARMap.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ARMap.xcdatamodel; sourceTree = "<group>"; };
@@ -362,6 +364,24 @@
 				B64D1223204E6744008E5C5F /* AnalyticsEvent.swift */,
 			);
 			path = "Analytics and Crash Reporting";
+			sourceTree = "<group>";
+		};
+		B664AE0A20503B3500719D5A /* Top Knob Visual Effect View */ = {
+			isa = PBXGroup;
+			children = (
+				B6F451B420393D470084AFC8 /* TopKnobVisualEffectView.swift */,
+				B6F451B620393E2F0084AFC8 /* TopKnobVisualEffectView.xib */,
+			);
+			path = "Top Knob Visual Effect View";
+			sourceTree = "<group>";
+		};
+		B664AE0B20503B4900719D5A /* Home Tab Bar */ = {
+			isa = PBXGroup;
+			children = (
+				B664AE0C20503B6400719D5A /* HomeTabBarView.swift */,
+				B664AE0E20503B8200719D5A /* HomeTabBarView.xib */,
+			);
+			path = "Home Tab Bar";
 			sourceTree = "<group>";
 		};
 		B686EEC320166C7300ACF075 = {
@@ -597,7 +617,6 @@
 				B686EF7F20166F1200ACF075 /* MainViewController.swift */,
 				B686EF8920166F1200ACF075 /* MainViewController+CoreLocation.swift */,
 				B686EF7E20166F1200ACF075 /* MainViewController+AR.swift */,
-				B6299B8E204FED2F00043CD1 /* MainViewController+AppMode.swift */,
 				B6299B89204FE15400043CD1 /* Mode Chooser */,
 				B686EF8620166F1200ACF075 /* Placemark AR */,
 				B686EF7720166F1200ACF075 /* Settings */,
@@ -771,8 +790,8 @@
 		B6F451B320393C060084AFC8 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
-				B6F451B420393D470084AFC8 /* TopKnobVisualEffectView.swift */,
-				B6F451B620393E2F0084AFC8 /* TopKnobVisualEffectView.xib */,
+				B664AE0B20503B4900719D5A /* Home Tab Bar */,
+				B664AE0A20503B3500719D5A /* Top Knob Visual Effect View */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -845,6 +864,7 @@
 				B686EF3E20166D8700ACF075 /* Models.scnassets in Resources */,
 				B6A8ABD3204B9A5B007FDAEC /* Permissions.storyboard in Resources */,
 				B686EEDA20166C7300ACF075 /* Assets.xcassets in Resources */,
+				B664AE0F20503B8200719D5A /* HomeTabBarView.xib in Resources */,
 				B6A8ABD5204B9A92007FDAEC /* InlineColorChooser.storyboard in Resources */,
 				B6A8ABD7204B9AA9007FDAEC /* Settings.storyboard in Resources */,
 				B6299B8D204FE17E00043CD1 /* ModeChooser.storyboard in Resources */,
@@ -1022,7 +1042,6 @@
 				B6299B88204F901D00043CD1 /* AddLocationMapViewController.swift in Sources */,
 				B686EF9920166F1300ACF075 /* MainViewController+AR.swift in Sources */,
 				B686EF6920166D9D00ACF075 /* Defaults+MyManagedObjectProtocol.swift in Sources */,
-				B6299B8F204FED2F00043CD1 /* MainViewController+AppMode.swift in Sources */,
 				B686EF3D20166D8700ACF075 /* ARDistanceType.swift in Sources */,
 				B686EF0020166D5A00ACF075 /* CLLocationCoordinate2D+Util.swift in Sources */,
 				B686EF0920166D5A00ACF075 /* String+Util.swift in Sources */,
@@ -1034,6 +1053,7 @@
 				B686EF9D20166F1300ACF075 /* LocationListViewController.swift in Sources */,
 				B686EF5020166D8700ACF075 /* PresentableController.swift in Sources */,
 				B686EFA520166F1300ACF075 /* BaseNavigationController.swift in Sources */,
+				B664AE0D20503B6400719D5A /* HomeTabBarView.swift in Sources */,
 				B686EF4520166D8700ACF075 /* VirtualObject.swift in Sources */,
 				B686EF4720166D8700ACF075 /* SCNVector3+Util.swift in Sources */,
 				B686EF0320166D5A00ACF075 /* LocationSearchService.swift in Sources */,

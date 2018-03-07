@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14105" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -46,7 +46,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="140.5"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="assetPlacemark" translatesAutoresizingMaskIntoConstraints="NO" id="nVZ-zo-HSV">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="assetPlacemarkLarge" translatesAutoresizingMaskIntoConstraints="NO" id="nVZ-zo-HSV">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="140.5"/>
                                                         </imageView>
                                                     </subviews>
@@ -108,7 +108,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="assetFork" translatesAutoresizingMaskIntoConstraints="NO" id="cyp-fI-OYg">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="assetForkKnifeLarge" translatesAutoresizingMaskIntoConstraints="NO" id="cyp-fI-OYg">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
                                                         </imageView>
                                                     </subviews>
@@ -170,7 +170,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="140.5"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="assetMountains" translatesAutoresizingMaskIntoConstraints="NO" id="Bi2-Lv-lbs">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="assetMountainsLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Bi2-Lv-lbs">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="140.5"/>
                                                         </imageView>
                                                     </subviews>
@@ -264,20 +264,20 @@
                         <viewLayoutGuide key="safeArea" id="FMP-zX-I59"/>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="3Uy-fx-b6t"/>
+                                <exclude reference="pKz-mB-JQy"/>
                                 <exclude reference="LRa-nm-tRo"/>
                                 <exclude reference="QUF-4h-pYU"/>
                                 <exclude reference="RPJ-dC-OvQ"/>
                                 <exclude reference="o8k-gt-WcZ"/>
-                                <exclude reference="3Uy-fx-b6t"/>
-                                <exclude reference="pKz-mB-JQy"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="constraints">
-                                <include reference="LRa-nm-tRo"/>
-                                <include reference="RPJ-dC-OvQ"/>
                                 <include reference="3Uy-fx-b6t"/>
                                 <include reference="pKz-mB-JQy"/>
+                                <include reference="LRa-nm-tRo"/>
+                                <include reference="RPJ-dC-OvQ"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
@@ -299,8 +299,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="assetFork" width="512" height="512"/>
-        <image name="assetMountains" width="512" height="512"/>
-        <image name="assetPlacemark" width="512" height="512"/>
+        <image name="assetForkKnifeLarge" width="512" height="512"/>
+        <image name="assetMountainsLarge" width="512" height="512"/>
+        <image name="assetPlacemarkLarge" width="512" height="512"/>
     </resources>
 </document>

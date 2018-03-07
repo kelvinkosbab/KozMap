@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Yg3-Eg-XZo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14105" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Yg3-Eg-XZo">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -48,63 +48,14 @@
                                 <blurEffect style="light"/>
                             </visualEffectView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z40-JH-Lgu">
-                                <rect key="frame" x="16" y="599" width="343" height="68"/>
+                                <rect key="frame" x="16" y="607" width="343" height="52"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="GGZ-rj-zhF">
-                                    <rect key="frame" x="0.0" y="0.0" width="343" height="68"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="343" height="52"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xq0-oX-NLO">
-                                            <rect key="frame" x="0.0" y="8" width="52" height="52"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="52" id="0W7-Bf-nqV"/>
-                                                <constraint firstAttribute="height" constant="52" id="rbh-ok-4zD"/>
-                                            </constraints>
-                                            <state key="normal" image="assetOptions">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="settingsButtonSelected" destination="G2c-OT-CDt" eventType="touchUpInside" id="7Op-xY-9dO"/>
-                                            </connections>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wNG-t2-g00">
-                                            <rect key="frame" x="291" y="8" width="52" height="52"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="52" id="gRS-dl-nsR"/>
-                                                <constraint firstAttribute="height" constant="52" id="y7e-sT-1yc"/>
-                                            </constraints>
-                                            <state key="normal" image="assetPlus">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="addButtonSelected" destination="G2c-OT-CDt" eventType="touchUpInside" id="85U-4m-Mao"/>
-                                            </connections>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aHm-aL-4Tw">
-                                            <rect key="frame" x="145" y="8" width="52" height="52"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="52" id="V7i-xh-CUw"/>
-                                                <constraint firstAttribute="width" constant="52" id="x5P-uw-TKQ"/>
-                                            </constraints>
-                                            <state key="normal" image="assetList">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="listButtonSelected" destination="G2c-OT-CDt" eventType="touchUpInside" id="vwk-6C-I7W"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="aHm-aL-4Tw" firstAttribute="top" secondItem="GGZ-rj-zhF" secondAttribute="top" constant="8" id="777-c4-DaX"/>
-                                        <constraint firstItem="wNG-t2-g00" firstAttribute="top" secondItem="GGZ-rj-zhF" secondAttribute="top" constant="8" id="FcI-UU-CJk"/>
-                                        <constraint firstAttribute="trailing" secondItem="wNG-t2-g00" secondAttribute="trailing" id="GWg-xF-hGb"/>
-                                        <constraint firstItem="xq0-oX-NLO" firstAttribute="leading" secondItem="GGZ-rj-zhF" secondAttribute="leading" id="Udw-Rl-5d4"/>
-                                        <constraint firstAttribute="bottom" secondItem="wNG-t2-g00" secondAttribute="bottom" constant="8" id="b9b-PB-aAl"/>
-                                        <constraint firstItem="xq0-oX-NLO" firstAttribute="top" secondItem="GGZ-rj-zhF" secondAttribute="top" constant="8" id="ki8-ZZ-7Jb"/>
-                                        <constraint firstItem="aHm-aL-4Tw" firstAttribute="centerX" secondItem="GGZ-rj-zhF" secondAttribute="centerX" id="t3x-sa-ToR"/>
-                                        <constraint firstAttribute="bottom" secondItem="xq0-oX-NLO" secondAttribute="bottom" constant="8" id="uaS-xf-rsj"/>
-                                        <constraint firstAttribute="bottom" secondItem="aHm-aL-4Tw" secondAttribute="bottom" constant="8" id="wRO-kU-PO7"/>
-                                    </constraints>
                                 </view>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="3a2-v0-DjI"/>
+                                </constraints>
                                 <vibrancyEffect>
                                     <blurEffect style="light"/>
                                 </vibrancyEffect>
@@ -121,16 +72,14 @@
                             <constraint firstItem="het-qu-p0b" firstAttribute="top" secondItem="LJa-2v-V0U" secondAttribute="top" id="MZS-66-LJa"/>
                             <constraint firstAttribute="bottom" secondItem="rGr-qN-HFQ" secondAttribute="bottom" id="TP8-k7-WJu"/>
                             <constraint firstItem="rGr-qN-HFQ" firstAttribute="leading" secondItem="NAi-Z9-fak" secondAttribute="leading" id="ese-dc-EpS"/>
-                            <constraint firstItem="NAi-Z9-fak" firstAttribute="bottom" secondItem="z40-JH-Lgu" secondAttribute="bottom" id="piG-uQ-sjY"/>
-                            <constraint firstItem="rGr-qN-HFQ" firstAttribute="top" secondItem="z40-JH-Lgu" secondAttribute="top" id="svu-N7-Xy0"/>
+                            <constraint firstItem="NAi-Z9-fak" firstAttribute="bottom" secondItem="z40-JH-Lgu" secondAttribute="bottom" constant="8" id="piG-uQ-sjY"/>
+                            <constraint firstItem="rGr-qN-HFQ" firstAttribute="top" secondItem="z40-JH-Lgu" secondAttribute="top" constant="-8" id="svu-N7-Xy0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="NAi-Z9-fak"/>
                     </view>
                     <navigationItem key="navigationItem" id="HmH-7e-Xab"/>
                     <connections>
-                        <outlet property="addButton" destination="wNG-t2-g00" id="Qtm-ZX-E6w"/>
-                        <outlet property="listButton" destination="aHm-aL-4Tw" id="HRC-F8-cho"/>
-                        <outlet property="settingsButton" destination="xq0-oX-NLO" id="5TA-KF-ZLt"/>
+                        <outlet property="homeTabBarContainerView" destination="GGZ-rj-zhF" id="3Gl-5x-HOI"/>
                         <outlet property="tabBarVisualEffectView" destination="rGr-qN-HFQ" id="uCU-Dc-weR"/>
                     </connections>
                 </viewController>
@@ -168,9 +117,4 @@
             <point key="canvasLocation" x="783" y="-10"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="assetList" width="24" height="14"/>
-        <image name="assetOptions" width="24" height="24"/>
-        <image name="assetPlus" width="24" height="24"/>
-    </resources>
 </document>
