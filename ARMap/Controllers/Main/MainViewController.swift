@@ -18,11 +18,10 @@ class MainViewController : BaseViewController, LocationDetailNavigationDelegate 
   
   // MARK: - Properties
   
-  @IBOutlet weak var aboveSafeAreaVisualEffectView: UIVisualEffectView!
-  @IBOutlet weak var addVisualEffectView: UIVisualEffectView!
+  @IBOutlet weak var tabBarVisualEffectView: UIVisualEffectView!
   @IBOutlet weak var addButton: UIButton!
-  @IBOutlet weak var listVisualEffectView: UIVisualEffectView!
   @IBOutlet weak var listButton: UIButton!
+  @IBOutlet weak var settingsButton: UIButton!
   
   internal var arViewController: ARViewController? = nil
   
@@ -31,6 +30,7 @@ class MainViewController : BaseViewController, LocationDetailNavigationDelegate 
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    self.navigationItem.title = nil
     self.navigationItem.largeTitleDisplayMode = .never
     
     // For simulators add an image view to give simulated location context
@@ -55,21 +55,6 @@ class MainViewController : BaseViewController, LocationDetailNavigationDelegate 
     NotificationCenter.default.removeObserver(self)
   }
   
-  override func viewWillLayoutSubviews() {
-    super.viewWillLayoutSubviews()
-    
-    if self.addVisualEffectView.layer.cornerRadius != 28 {
-      self.addVisualEffectView.layer.cornerRadius = 28
-      self.addVisualEffectView.layer.masksToBounds = true
-      self.addVisualEffectView.clipsToBounds = true
-    }
-    if self.listVisualEffectView.layer.cornerRadius != 28 {
-      self.listVisualEffectView.layer.cornerRadius = 28
-      self.listVisualEffectView.layer.masksToBounds = true
-      self.listVisualEffectView.clipsToBounds = true
-    }
-  }
-  
   // MARK: - Navigation
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -90,7 +75,7 @@ class MainViewController : BaseViewController, LocationDetailNavigationDelegate 
     self.presentPlacemarkList()
   }
   
-  @objc func settingsButtonSelected() {
+  @IBAction func settingsButtonSelected() {
     self.presentSettings()
   }
   
@@ -203,49 +188,29 @@ class MainViewController : BaseViewController, LocationDetailNavigationDelegate 
   // MARK: - Showing and Enabling Views
   
   func showAllElements() {
-    self.aboveSafeAreaVisualEffectView.effect = UIBlurEffect(style: .dark)
-    self.listVisualEffectView.effect = UIBlurEffect(style: .light)
+    self.tabBarVisualEffectView.effect = UIBlurEffect(style: .light)
     self.listButton.alpha = 1
-    self.addVisualEffectView.effect = UIBlurEffect(style: .light)
     self.addButton.alpha = 1
-    
-    // Navigation bar
-    self.navigationController?.navigationBar.alpha = 1
+    self.settingsButton.alpha = 1
   }
   
   func enableAllElements() {
     self.listButton.isUserInteractionEnabled = true
     self.addButton.isUserInteractionEnabled = true
-    
-    // Navigation bar
-    self.navigationController?.navigationBar.alpha = 1
-    if self.navigationItem.title == nil {
-      self.navigationItem.title = BuildManager.shared.buildTarget.appName
-    }
-    if self.navigationItem.rightBarButtonItem == nil {
-      self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "assetOptions"), style: .plain, target: self, action: #selector(self.settingsButtonSelected))
-    }
+    self.settingsButton.isUserInteractionEnabled = true
   }
   
   func disableAllElements() {
     self.listButton.isUserInteractionEnabled = false
     self.addButton.isUserInteractionEnabled = false
-    
-    // Navigation bar
-    self.navigationController?.navigationBar.alpha = 0
-    self.navigationItem.title = nil
-    self.navigationItem.rightBarButtonItem = nil
+    self.settingsButton.isUserInteractionEnabled = false
   }
   
   func hideAllElements() {
-    self.aboveSafeAreaVisualEffectView.effect = nil
-    self.listVisualEffectView.effect = nil
+    self.tabBarVisualEffectView.effect = nil
     self.listButton.alpha = 0
-    self.addVisualEffectView.effect = nil
     self.addButton.alpha = 0
-    
-    // Navigation Bar
-    self.navigationController?.navigationBar.alpha = 0
+    self.settingsButton.alpha = 0
   }
 }
 
