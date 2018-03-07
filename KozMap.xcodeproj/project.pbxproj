@@ -360,10 +360,9 @@
 		B686EEE420166CF500ACF075 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				B64D1218204E5F6B008E5C5F /* Analytics and Crash Reporting */,
-				B6A8ABDE204BB0A8007FDAEC /* API */,
 				B6A8ABC1204B883C007FDAEC /* 3rd Party Libraries */,
 				B686EEE720166D4500ACF075 /* Build Manager */,
+				B64D1218204E5F6B008E5C5F /* Analytics and Crash Reporting */,
 				B6A8ABC0204B8833007FDAEC /* Service */,
 				B686EF2120166D8700ACF075 /* Presenting Controllers */,
 				B686EEF420166D5A00ACF075 /* Extensions */,
@@ -373,6 +372,7 @@
 				B686EF1520166D8700ACF075 /* SceneKit */,
 				B686EF1120166D7200ACF075 /* Model */,
 				B6F451B320393C060084AFC8 /* Custom Views */,
+				B6A8ABDE204BB0A8007FDAEC /* API */,
 				B686EF1320166D8600ACF075 /* UnitType.swift */,
 				B686EF1420166D8600ACF075 /* ARDistanceType.swift */,
 				B686EF1220166D8600ACF075 /* ARState.swift */,
@@ -748,7 +748,7 @@
 				B686EECA20166C7300ACF075 /* Resources */,
 				274664658833806BAE895BF6 /* [CP] Embed Pods Frameworks */,
 				0F184E156F0F6B0B53585825 /* [CP] Copy Pods Resources */,
-				B64D1217204E5EBA008E5C5F /* ShellScript */,
+				B64D1217204E5EBA008E5C5F /* Crashlytics Run Script */,
 			);
 			buildRules = (
 			);
@@ -876,18 +876,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KozMap/Pods-KozMap-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B64D1217204E5EBA008E5C5F /* ShellScript */ = {
+		B64D1217204E5EBA008E5C5F /* Crashlytics Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Crashlytics Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 889d1028eff3c482b9172d727918b7cbf39bcd80 9c8b9a75077f4e1a183b7fa99ebb2aa0af92003ce1c0a7302b367859ed2d7d75";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 05416dc4edda44974a71be7016600285b91582f5 85ad5e06e76e0391bcb5746e799aa944a3abdadb6217ccc7e2d82c64551fb59e ";
 		};
 /* End PBXShellScriptBuildPhase section */
 
