@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -66,6 +67,15 @@
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="assetPlacemarkLarge" translatesAutoresizingMaskIntoConstraints="NO" id="nVZ-zo-HSV">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="140.5"/>
                                                         </imageView>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QeG-18-Coz">
+                                                            <rect key="frame" x="82" y="0.0" width="211" height="140.5"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="QeG-18-Coz" secondAttribute="height" multiplier="1.5:1" id="WL2-BQ-3iC"/>
+                                                            </constraints>
+                                                            <connections>
+                                                                <action selector="myPlacemarksButtonSelected" destination="33l-QV-U0o" eventType="touchUpInside" id="9E8-6P-lZZ"/>
+                                                            </connections>
+                                                        </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="miV-NL-LDL">
                                                             <rect key="frame" x="319" y="100.5" width="40" height="40"/>
                                                             <constraints>
@@ -73,13 +83,19 @@
                                                                 <constraint firstAttribute="width" constant="40" id="aOA-0T-bnx"/>
                                                             </constraints>
                                                             <state key="normal" image="assetInfo"/>
+                                                            <connections>
+                                                                <action selector="myPlacemarksInfoButtonSelected" destination="33l-QV-U0o" eventType="touchUpInside" id="WFM-tY-NZ5"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="nVZ-zo-HSV" firstAttribute="leading" secondItem="j4R-vf-oWh" secondAttribute="leading" id="0pN-9J-Tzf"/>
                                                         <constraint firstAttribute="trailing" secondItem="nVZ-zo-HSV" secondAttribute="trailing" id="8VH-Mg-xty"/>
+                                                        <constraint firstItem="QeG-18-Coz" firstAttribute="centerX" secondItem="j4R-vf-oWh" secondAttribute="centerX" id="CMz-4A-ure"/>
                                                         <constraint firstAttribute="bottom" secondItem="miV-NL-LDL" secondAttribute="bottom" id="N7O-6C-hba"/>
                                                         <constraint firstItem="nVZ-zo-HSV" firstAttribute="top" secondItem="j4R-vf-oWh" secondAttribute="top" id="Vhr-d8-6bT"/>
+                                                        <constraint firstItem="QeG-18-Coz" firstAttribute="top" secondItem="j4R-vf-oWh" secondAttribute="top" id="fXq-Y8-q5R"/>
+                                                        <constraint firstAttribute="bottom" secondItem="QeG-18-Coz" secondAttribute="bottom" id="jhV-6E-lDy"/>
                                                         <constraint firstAttribute="trailing" secondItem="miV-NL-LDL" secondAttribute="trailing" constant="16" id="mV8-xy-vxx"/>
                                                         <constraint firstAttribute="bottom" secondItem="nVZ-zo-HSV" secondAttribute="bottom" id="zUJ-Z1-DLm"/>
                                                     </constraints>
@@ -88,22 +104,12 @@
                                                     <blurEffect style="dark"/>
                                                 </vibrancyEffect>
                                             </visualEffectView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QeG-18-Coz">
-                                                <rect key="frame" x="0.0" y="24" width="375" height="140.5"/>
-                                                <connections>
-                                                    <action selector="myPlacemarksButtonSelected" destination="33l-QV-U0o" eventType="touchUpInside" id="9E8-6P-lZZ"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="QeG-18-Coz" firstAttribute="top" secondItem="f8S-8K-hxr" secondAttribute="top" id="24b-mp-Njj"/>
-                                            <constraint firstItem="QeG-18-Coz" firstAttribute="leading" secondItem="f8S-8K-hxr" secondAttribute="leading" id="TjC-RN-MON"/>
-                                            <constraint firstItem="QeG-18-Coz" firstAttribute="trailing" secondItem="f8S-8K-hxr" secondAttribute="trailing" id="XI7-I5-VQJ"/>
                                             <constraint firstAttribute="trailing" secondItem="f8S-8K-hxr" secondAttribute="trailing" id="hMv-7j-X1a"/>
                                             <constraint firstItem="f8S-8K-hxr" firstAttribute="top" secondItem="2r5-9z-8tz" secondAttribute="top" constant="24" id="iVB-ue-n71"/>
                                             <constraint firstAttribute="bottom" secondItem="f8S-8K-hxr" secondAttribute="bottom" constant="24" id="sba-kr-jaS"/>
                                             <constraint firstItem="f8S-8K-hxr" firstAttribute="leading" secondItem="2r5-9z-8tz" secondAttribute="leading" id="u5I-sG-tv1"/>
-                                            <constraint firstItem="QeG-18-Coz" firstAttribute="bottom" secondItem="f8S-8K-hxr" secondAttribute="bottom" id="zwp-V2-jaO"/>
                                         </constraints>
                                     </view>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="urj-b3-Mvm">
@@ -129,6 +135,15 @@
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="assetForkKnifeLarge" translatesAutoresizingMaskIntoConstraints="NO" id="cyp-fI-OYg">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
                                                         </imageView>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lGR-o0-jyf">
+                                                            <rect key="frame" x="82" y="-0.5" width="211" height="140.5"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="lGR-o0-jyf" secondAttribute="height" multiplier="1.5:1" id="ZQg-hE-eAS"/>
+                                                            </constraints>
+                                                            <connections>
+                                                                <action selector="foodNearMeButtonSelected" destination="33l-QV-U0o" eventType="touchUpInside" id="kSg-dC-RVa"/>
+                                                            </connections>
+                                                        </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ad-ed-m87">
                                                             <rect key="frame" x="319" y="100" width="40" height="40"/>
                                                             <constraints>
@@ -136,14 +151,20 @@
                                                                 <constraint firstAttribute="width" constant="40" id="ta3-zs-Gjx"/>
                                                             </constraints>
                                                             <state key="normal" image="assetInfo"/>
+                                                            <connections>
+                                                                <action selector="foodNearMeInfoButtonSelected" destination="33l-QV-U0o" eventType="touchUpInside" id="f0b-BB-eE2"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <constraints>
+                                                        <constraint firstItem="lGR-o0-jyf" firstAttribute="top" secondItem="3p7-g8-4Op" secondAttribute="top" id="6ha-bh-z0K"/>
                                                         <constraint firstAttribute="trailing" secondItem="cyp-fI-OYg" secondAttribute="trailing" id="7Rk-rf-Gtz"/>
+                                                        <constraint firstAttribute="bottom" secondItem="lGR-o0-jyf" secondAttribute="bottom" id="Gyt-9C-20M"/>
                                                         <constraint firstAttribute="bottom" secondItem="cyp-fI-OYg" secondAttribute="bottom" id="OSw-7L-IDV"/>
                                                         <constraint firstItem="cyp-fI-OYg" firstAttribute="top" secondItem="3p7-g8-4Op" secondAttribute="top" id="UpZ-ie-Ah5"/>
                                                         <constraint firstAttribute="trailing" secondItem="7ad-ed-m87" secondAttribute="trailing" constant="16" id="a3N-pN-vPD"/>
                                                         <constraint firstItem="cyp-fI-OYg" firstAttribute="leading" secondItem="3p7-g8-4Op" secondAttribute="leading" id="eUe-DV-Hiz"/>
+                                                        <constraint firstItem="lGR-o0-jyf" firstAttribute="centerX" secondItem="3p7-g8-4Op" secondAttribute="centerX" id="f8D-BP-pLD"/>
                                                         <constraint firstAttribute="bottom" secondItem="7ad-ed-m87" secondAttribute="bottom" id="m7J-PU-geX"/>
                                                     </constraints>
                                                 </view>
@@ -151,22 +172,12 @@
                                                     <blurEffect style="dark"/>
                                                 </vibrancyEffect>
                                             </visualEffectView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lGR-o0-jyf">
-                                                <rect key="frame" x="0.0" y="23.5" width="375" height="140.5"/>
-                                                <connections>
-                                                    <action selector="foodNearMeButtonSelected" destination="33l-QV-U0o" eventType="touchUpInside" id="kSg-dC-RVa"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="Mii-WC-oIx" secondAttribute="bottom" constant="24" id="29e-mO-o9W"/>
                                             <constraint firstItem="Mii-WC-oIx" firstAttribute="leading" secondItem="XhV-Fh-QxP" secondAttribute="leading" id="57j-c8-ntk"/>
-                                            <constraint firstItem="Mii-WC-oIx" firstAttribute="trailing" secondItem="lGR-o0-jyf" secondAttribute="trailing" id="ImV-TS-oV6"/>
                                             <constraint firstItem="Mii-WC-oIx" firstAttribute="top" secondItem="XhV-Fh-QxP" secondAttribute="top" constant="24" id="O0v-uc-Xnk"/>
                                             <constraint firstAttribute="trailing" secondItem="Mii-WC-oIx" secondAttribute="trailing" id="cg9-M5-hLo"/>
-                                            <constraint firstItem="Mii-WC-oIx" firstAttribute="top" secondItem="lGR-o0-jyf" secondAttribute="top" id="gMD-ff-S5q"/>
-                                            <constraint firstItem="Mii-WC-oIx" firstAttribute="bottom" secondItem="lGR-o0-jyf" secondAttribute="bottom" id="juU-sv-hgp"/>
-                                            <constraint firstItem="Mii-WC-oIx" firstAttribute="leading" secondItem="lGR-o0-jyf" secondAttribute="leading" id="yfT-Sb-Bn7"/>
                                         </constraints>
                                     </view>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z7c-Wd-Plh">
@@ -192,6 +203,15 @@
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="assetMountainsLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Bi2-Lv-lbs">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="140.5"/>
                                                         </imageView>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GPe-27-7ej">
+                                                            <rect key="frame" x="81.5" y="-0.5" width="212.5" height="141.5"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="GPe-27-7ej" secondAttribute="height" multiplier="1.5:1" id="9j2-nA-Eoh"/>
+                                                            </constraints>
+                                                            <connections>
+                                                                <action selector="mountainViewerButtonSelected" destination="33l-QV-U0o" eventType="touchUpInside" id="nFm-CR-JUs"/>
+                                                            </connections>
+                                                        </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zhG-5y-R3k">
                                                             <rect key="frame" x="319" y="100.5" width="40" height="40"/>
                                                             <constraints>
@@ -199,14 +219,20 @@
                                                                 <constraint firstAttribute="width" constant="40" id="8CI-h4-PmO"/>
                                                             </constraints>
                                                             <state key="normal" image="assetInfo"/>
+                                                            <connections>
+                                                                <action selector="mountainViewerInfoButtonSelected" destination="33l-QV-U0o" eventType="touchUpInside" id="dDH-de-JuA"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <constraints>
+                                                        <constraint firstItem="GPe-27-7ej" firstAttribute="top" secondItem="KSI-hw-TeM" secondAttribute="top" id="92X-6S-Zzv"/>
                                                         <constraint firstItem="Bi2-Lv-lbs" firstAttribute="leading" secondItem="KSI-hw-TeM" secondAttribute="leading" id="FVu-kK-JP5"/>
                                                         <constraint firstItem="Bi2-Lv-lbs" firstAttribute="top" secondItem="KSI-hw-TeM" secondAttribute="top" id="Jqm-YM-muk"/>
                                                         <constraint firstAttribute="trailing" secondItem="zhG-5y-R3k" secondAttribute="trailing" constant="16" id="P1g-Wm-QC1"/>
                                                         <constraint firstAttribute="bottom" secondItem="Bi2-Lv-lbs" secondAttribute="bottom" id="W2I-ri-hvT"/>
                                                         <constraint firstAttribute="bottom" secondItem="zhG-5y-R3k" secondAttribute="bottom" id="Y13-4s-BcI"/>
+                                                        <constraint firstItem="GPe-27-7ej" firstAttribute="centerX" secondItem="KSI-hw-TeM" secondAttribute="centerX" id="acG-SJ-7cr"/>
+                                                        <constraint firstAttribute="bottom" secondItem="GPe-27-7ej" secondAttribute="bottom" id="c02-yg-FGz"/>
                                                         <constraint firstAttribute="trailing" secondItem="Bi2-Lv-lbs" secondAttribute="trailing" id="uwc-rj-bYu"/>
                                                     </constraints>
                                                 </view>
@@ -214,22 +240,12 @@
                                                     <blurEffect style="dark"/>
                                                 </vibrancyEffect>
                                             </visualEffectView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GPe-27-7ej">
-                                                <rect key="frame" x="0.0" y="23.5" width="375" height="140.5"/>
-                                                <connections>
-                                                    <action selector="mountainViewerButtonSelected" destination="33l-QV-U0o" eventType="touchUpInside" id="nFm-CR-JUs"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="kml-hL-v1u" firstAttribute="top" secondItem="z3q-zY-rKY" secondAttribute="top" constant="24" id="4iw-3k-K8C"/>
-                                            <constraint firstItem="kml-hL-v1u" firstAttribute="trailing" secondItem="GPe-27-7ej" secondAttribute="trailing" id="61D-nZ-J2L"/>
                                             <constraint firstAttribute="bottom" secondItem="kml-hL-v1u" secondAttribute="bottom" constant="24" id="Hyv-mM-rrx"/>
                                             <constraint firstItem="kml-hL-v1u" firstAttribute="leading" secondItem="z3q-zY-rKY" secondAttribute="leading" id="Z9s-Xb-wT0"/>
-                                            <constraint firstItem="kml-hL-v1u" firstAttribute="leading" secondItem="GPe-27-7ej" secondAttribute="leading" id="auv-Kl-NGq"/>
-                                            <constraint firstItem="kml-hL-v1u" firstAttribute="bottom" secondItem="GPe-27-7ej" secondAttribute="bottom" id="gAj-1r-G4a"/>
                                             <constraint firstAttribute="trailing" secondItem="kml-hL-v1u" secondAttribute="trailing" id="mRn-5Z-h70"/>
-                                            <constraint firstItem="kml-hL-v1u" firstAttribute="top" secondItem="GPe-27-7ej" secondAttribute="top" id="ndc-aq-aaM"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -309,8 +325,11 @@
                     </view>
                     <connections>
                         <outlet property="foodNearMeButton" destination="lGR-o0-jyf" id="YQG-5f-hVn"/>
+                        <outlet property="foodNearMeInfoButton" destination="7ad-ed-m87" id="cUm-cT-pw9"/>
                         <outlet property="mountainViewerButton" destination="GPe-27-7ej" id="ZZH-jo-5ng"/>
+                        <outlet property="mountainViewerInfoButton" destination="zhG-5y-R3k" id="mjN-nT-M0V"/>
                         <outlet property="myPlacemarksButton" destination="QeG-18-Coz" id="GMO-a6-CE3"/>
+                        <outlet property="myPlacemarksInfoButton" destination="miV-NL-LDL" id="uCF-nR-xQD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VDv-qx-BDz" userLabel="First Responder" sceneMemberID="firstResponder"/>

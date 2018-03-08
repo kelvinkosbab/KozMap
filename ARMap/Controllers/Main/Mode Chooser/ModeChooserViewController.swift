@@ -33,8 +33,11 @@ class ModeChooserViewController : BaseViewController {
   // MARK: - Properties
   
   @IBOutlet weak var myPlacemarksButton: UIButton!
+  @IBOutlet weak var myPlacemarksInfoButton: UIButton!
   @IBOutlet weak var foodNearMeButton: UIButton!
+  @IBOutlet weak var foodNearMeInfoButton: UIButton!
   @IBOutlet weak var mountainViewerButton: UIButton!
+  @IBOutlet weak var mountainViewerInfoButton: UIButton!
   
   weak var delegate: ModeChooserDelegate? = nil
   
@@ -67,11 +70,17 @@ class ModeChooserViewController : BaseViewController {
     self.delegate?.didChooseMode(.myPlacemarks, sender: self)
   }
   
+  @IBAction func myPlacemarksInfoButtonSelected() {}
+  
   @IBAction func foodNearMeButtonSelected() {
     self.delegate?.didChooseMode(.foodNearby, sender: self)
   }
   
+  @IBAction func foodNearMeInfoButtonSelected() {}
+  
   @IBAction func mountainViewerButtonSelected() {
     self.delegate?.didChooseMode(.mountainViewer, sender: self)
   }
+  
+  @IBAction func mountainViewerInfoButtonSelected() {}
 }
