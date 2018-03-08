@@ -38,6 +38,7 @@ class ModeChooserViewController : BaseViewController {
   @IBOutlet weak var foodNearMeInfoButton: UIButton!
   @IBOutlet weak var mountainViewerButton: UIButton!
   @IBOutlet weak var mountainViewerInfoButton: UIButton!
+  @IBOutlet weak var arrowDownButton: UIButton!
   
   weak var delegate: ModeChooserDelegate? = nil
   
@@ -49,7 +50,6 @@ class ModeChooserViewController : BaseViewController {
     self.title = nil
     self.navigationItem.largeTitleDisplayMode = .never
     self.baseNavigationController?.navigationBarStyle = .transparent
-    self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(self.closeButtonSelected))
     
     self.view.backgroundColor = .clear
   }
@@ -62,7 +62,7 @@ class ModeChooserViewController : BaseViewController {
   
   // MARK: - Actions
   
-  @objc func closeButtonSelected() {
+  @IBAction func arrowDownButtonSelected() {
     self.dismissController()
   }
   
