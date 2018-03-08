@@ -11,6 +11,13 @@ import MapKit
 import CoreLocation
 
 struct MapItem {
+  
+  // MARK: - Static Utilities
+  
+  static let defaultRegionRadius: CLLocationDistance = 800 // 800 meters ~ 0.5 miles
+  
+  // MARK: - Properties
+  
   let mkMapItem: MKMapItem
   var currentLocation: CLLocation?
   
@@ -47,5 +54,27 @@ struct MapItem {
       return self.currentLocation?.distance(from: mapItemLocation)
     }
     return nil
+  }
+  
+  // MARK: - Maps App
+  
+  func openInMaps(customName: String? = nil) {
+    let mapItem = self.mkMapItem
+    
+    // Custom name
+    if let customName = customName {
+      mapItem.name = customName
+    }
+    
+    // Launch options
+    let regionDistance = MapItem.defaultRegionRadius
+    let regionSpan = MKCoordinateRegionMakeWithDistance(mapItem.placemark.coordinate, regionDistance, regionDistance)
+    let launchOptions: [String : Any] = [
+      MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
+      MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
+    ]
+    
+    // Open in maps
+    mapItem.openInMaps(launchOptions: launchOptions)
   }
 }

@@ -255,11 +255,17 @@ extension MainViewController : UIPopoverPresentationControllerDelegate {
 extension MainViewController : ModeChooserDelegate {
   
   func didChooseMode(_ mode: AppMode, sender: PresentableController) {
-    self.appMode = mode
-    self.homeTabBarView?.mode = mode
     
     // Dismiss the sender
     sender.dismissController(completion: nil)
+    
+    guard self.appMode != mode else {
+      return
+    }
+    
+    // Update the mode and the home tab bar
+    self.appMode = mode
+    self.homeTabBarView?.mode = mode
   }
 }
 

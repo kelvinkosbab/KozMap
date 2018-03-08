@@ -39,6 +39,9 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
     if let view = self.view {
       views.append(view)
     }
+    if let mapView = self.mapView {
+      views.append(mapView)
+    }
     return views
   }
   
@@ -51,9 +54,21 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
   @IBOutlet weak var locationDescriptionLabel: UILabel!
   @IBOutlet weak var colorChooserContainer: UIView!
   @IBOutlet weak var mapView: MKMapView!
+  @IBOutlet weak var openInMapsButton: UIButton!
   
   var placemark: Placemark? = nil
   var colorChooserController: InlineColorChooserViewController? = nil
+  
+  var mapItem: MapItem? {
+    
+    guard let placemark = self.placemark else {
+      return nil
+    }
+    
+    let mkPlacemark = MKPlacemark(coordinate: placemark.location.coordinate)
+    let mkMapItem = MKMapItem(placemark: mkPlacemark)
+    return MapItem(mkMapItem: mkMapItem, currentLocation: LocationManager.shared.currentLocation)
+  }
   
   private lazy var placemarksFetchedResultsController: NSFetchedResultsController<Placemark>? = {
     
@@ -75,6 +90,11 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
     self.title = self.placemark?.name
     
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(self.deleteButtonSelected))
+    
+    // Style open in maps button
+    self.openInMapsButton.layer.cornerRadius = 5
+    self.openInMapsButton.layer.masksToBounds = true
+    self.openInMapsButton.clipsToBounds = true
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -199,7 +219,7 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
       self?.locationDescriptionLabel.text = address ?? placemark?.address
     }
     
-    // Map placemark
+    // Map annotion
     
     if let mapAnnotation = self.mapAnnotation, mapAnnotation.coordinate.latitude == placemark.coordinate.latitude && mapAnnotation.coordinate.longitude == placemark.coordinate.longitude {
       // do nothing
@@ -215,9 +235,12 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
       annotation.coordinate = placemark.coordinate
       self.mapAnnotation = annotation
       self.mapView.addAnnotation(annotation)
+      self.mapView.showsUserLocation = true
+      self.mapView.isScrollEnabled = false
+      self.mapView.isUserInteractionEnabled = false
       
       // Set the map region
-      let regionRadius: CLLocationDistance = 800 // 800 meters ~ 0.5 miles
+      let regionRadius: CLLocationDistance = MapItem.defaultRegionRadius
       let coordinateRegion = MKCoordinateRegionMakeWithDistance(placemark.coordinate, regionRadius, regionRadius)
       self.mapView.setRegion(coordinateRegion, animated: true)
     }
@@ -241,6 +264,12 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
         self?.dismissController()
       }
     }
+  }
+  
+  @IBAction func openInMapsButtonSelected() {
+    
+    // Open in maps
+    self.mapItem?.openInMaps(customName: self.placemark?.name)
   }
 }
 

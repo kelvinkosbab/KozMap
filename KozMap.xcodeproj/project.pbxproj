@@ -110,6 +110,8 @@
 		B6A8ABD9204B9AEC007FDAEC /* Configuring.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6A8ABD8204B9AEC007FDAEC /* Configuring.storyboard */; };
 		B6A8ABDB204BA791007FDAEC /* LocationDetailNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A8ABDA204BA791007FDAEC /* LocationDetailNavigationDelegate.swift */; };
 		B6A8ABDD204BB073007FDAEC /* PlacemarkAPIDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A8ABDC204BB073007FDAEC /* PlacemarkAPIDelegate.swift */; };
+		B6C01FED2050CD3600437B45 /* Placemark+CoreLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C01FEC2050CD3600437B45 /* Placemark+CoreLocation.swift */; };
+		B6C01FEF2050CD6000437B45 /* Placemark+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C01FEE2050CD6000437B45 /* Placemark+Util.swift */; };
 		B6DCCDBD203B355C00201385 /* TopKnobBottomUpAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDBC203B355C00201385 /* TopKnobBottomUpAnimator.swift */; };
 		B6DCCDBF203B3DE700201385 /* TopKnobBottomUpPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDBE203B3DE600201385 /* TopKnobBottomUpPresentationController.swift */; };
 		B6DCCDC1203B63D500201385 /* InteractiveTransitionOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDC0203B63D500201385 /* InteractiveTransitionOption.swift */; };
@@ -247,6 +249,8 @@
 		B6A8ABD8204B9AEC007FDAEC /* Configuring.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Configuring.storyboard; sourceTree = "<group>"; };
 		B6A8ABDA204BA791007FDAEC /* LocationDetailNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailNavigationDelegate.swift; sourceTree = "<group>"; };
 		B6A8ABDC204BB073007FDAEC /* PlacemarkAPIDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacemarkAPIDelegate.swift; sourceTree = "<group>"; };
+		B6C01FEC2050CD3600437B45 /* Placemark+CoreLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Placemark+CoreLocation.swift"; sourceTree = "<group>"; };
+		B6C01FEE2050CD6000437B45 /* Placemark+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Placemark+Util.swift"; sourceTree = "<group>"; };
 		B6DCCDBC203B355C00201385 /* TopKnobBottomUpAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopKnobBottomUpAnimator.swift; sourceTree = "<group>"; };
 		B6DCCDBE203B3DE600201385 /* TopKnobBottomUpPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopKnobBottomUpPresentationController.swift; sourceTree = "<group>"; };
 		B6DCCDC0203B63D500201385 /* InteractiveTransitionOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveTransitionOption.swift; sourceTree = "<group>"; };
@@ -520,7 +524,7 @@
 				B686EF6020166D9D00ACF075 /* MyManagedObjectProtocol.swift */,
 				B686EF6320166D9D00ACF075 /* Defaults+MyManagedObjectProtocol.swift */,
 				B686EF6120166D9D00ACF075 /* Color+MyManagedObjectProtocol.swift */,
-				B686EF6220166D9D00ACF075 /* Placemark+MyManagedObjectProtocol.swift */,
+				B6C01FEB2050CD2500437B45 /* Placemark */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -731,6 +735,16 @@
 				B6A8ABDC204BB073007FDAEC /* PlacemarkAPIDelegate.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		B6C01FEB2050CD2500437B45 /* Placemark */ = {
+			isa = PBXGroup;
+			children = (
+				B686EF6220166D9D00ACF075 /* Placemark+MyManagedObjectProtocol.swift */,
+				B6C01FEE2050CD6000437B45 /* Placemark+Util.swift */,
+				B6C01FEC2050CD3600437B45 /* Placemark+CoreLocation.swift */,
+			);
+			path = Placemark;
 			sourceTree = "<group>";
 		};
 		B6DCCDBA203B351000201385 /* Top Knob Bottom Up */ = {
@@ -986,6 +1000,7 @@
 				B686EFA120166F1300ACF075 /* MainViewController+CoreLocation.swift in Sources */,
 				B686EF6420166D9D00ACF075 /* MyDataManager.swift in Sources */,
 				B6DCCDE5203BED1D00201385 /* RightToLeftPresenationController.swift in Sources */,
+				B6C01FEF2050CD6000437B45 /* Placemark+Util.swift in Sources */,
 				B6DCCDE1203BE6C500201385 /* PresentableControllerOption.swift in Sources */,
 				B686EF0620166D5A00ACF075 /* Device.swift in Sources */,
 				B6DCCDC1203B63D500201385 /* InteractiveTransitionOption.swift in Sources */,
@@ -1006,6 +1021,7 @@
 				B686EF9120166F1300ACF075 /* ConfiguringViewController.swift in Sources */,
 				B686EFA020166F1300ACF075 /* ARViewController.swift in Sources */,
 				B686EFA420166F1300ACF075 /* PermissionsViewController.swift in Sources */,
+				B6C01FED2050CD3600437B45 /* Placemark+CoreLocation.swift in Sources */,
 				B686EF4020166D8700ACF075 /* SCNMaterial+Util.swift in Sources */,
 				B686EF0E20166D5A00ACF075 /* UIDevice+Util.swift in Sources */,
 				B686EF9C20166F1300ACF075 /* SearchViewController+Cells.swift in Sources */,

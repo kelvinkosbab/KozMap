@@ -66,11 +66,21 @@
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="assetPlacemarkLarge" translatesAutoresizingMaskIntoConstraints="NO" id="nVZ-zo-HSV">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="140.5"/>
                                                         </imageView>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="miV-NL-LDL">
+                                                            <rect key="frame" x="319" y="100.5" width="40" height="40"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="40" id="Ymk-Kz-u62"/>
+                                                                <constraint firstAttribute="width" constant="40" id="aOA-0T-bnx"/>
+                                                            </constraints>
+                                                            <state key="normal" image="assetInfo"/>
+                                                        </button>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="nVZ-zo-HSV" firstAttribute="leading" secondItem="j4R-vf-oWh" secondAttribute="leading" id="0pN-9J-Tzf"/>
                                                         <constraint firstAttribute="trailing" secondItem="nVZ-zo-HSV" secondAttribute="trailing" id="8VH-Mg-xty"/>
+                                                        <constraint firstAttribute="bottom" secondItem="miV-NL-LDL" secondAttribute="bottom" id="N7O-6C-hba"/>
                                                         <constraint firstItem="nVZ-zo-HSV" firstAttribute="top" secondItem="j4R-vf-oWh" secondAttribute="top" id="Vhr-d8-6bT"/>
+                                                        <constraint firstAttribute="trailing" secondItem="miV-NL-LDL" secondAttribute="trailing" constant="16" id="mV8-xy-vxx"/>
                                                         <constraint firstAttribute="bottom" secondItem="nVZ-zo-HSV" secondAttribute="bottom" id="zUJ-Z1-DLm"/>
                                                     </constraints>
                                                 </view>
@@ -119,12 +129,22 @@
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="assetForkKnifeLarge" translatesAutoresizingMaskIntoConstraints="NO" id="cyp-fI-OYg">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
                                                         </imageView>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ad-ed-m87">
+                                                            <rect key="frame" x="319" y="100" width="40" height="40"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="40" id="YZT-uX-87M"/>
+                                                                <constraint firstAttribute="width" constant="40" id="ta3-zs-Gjx"/>
+                                                            </constraints>
+                                                            <state key="normal" image="assetInfo"/>
+                                                        </button>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="cyp-fI-OYg" secondAttribute="trailing" id="7Rk-rf-Gtz"/>
                                                         <constraint firstAttribute="bottom" secondItem="cyp-fI-OYg" secondAttribute="bottom" id="OSw-7L-IDV"/>
                                                         <constraint firstItem="cyp-fI-OYg" firstAttribute="top" secondItem="3p7-g8-4Op" secondAttribute="top" id="UpZ-ie-Ah5"/>
+                                                        <constraint firstAttribute="trailing" secondItem="7ad-ed-m87" secondAttribute="trailing" constant="16" id="a3N-pN-vPD"/>
                                                         <constraint firstItem="cyp-fI-OYg" firstAttribute="leading" secondItem="3p7-g8-4Op" secondAttribute="leading" id="eUe-DV-Hiz"/>
+                                                        <constraint firstAttribute="bottom" secondItem="7ad-ed-m87" secondAttribute="bottom" id="m7J-PU-geX"/>
                                                     </constraints>
                                                 </view>
                                                 <vibrancyEffect>
@@ -172,11 +192,21 @@
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="assetMountainsLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Bi2-Lv-lbs">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="140.5"/>
                                                         </imageView>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zhG-5y-R3k">
+                                                            <rect key="frame" x="319" y="100.5" width="40" height="40"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="40" id="6Bs-JH-1Mx"/>
+                                                                <constraint firstAttribute="width" constant="40" id="8CI-h4-PmO"/>
+                                                            </constraints>
+                                                            <state key="normal" image="assetInfo"/>
+                                                        </button>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="Bi2-Lv-lbs" firstAttribute="leading" secondItem="KSI-hw-TeM" secondAttribute="leading" id="FVu-kK-JP5"/>
                                                         <constraint firstItem="Bi2-Lv-lbs" firstAttribute="top" secondItem="KSI-hw-TeM" secondAttribute="top" id="Jqm-YM-muk"/>
+                                                        <constraint firstAttribute="trailing" secondItem="zhG-5y-R3k" secondAttribute="trailing" constant="16" id="P1g-Wm-QC1"/>
                                                         <constraint firstAttribute="bottom" secondItem="Bi2-Lv-lbs" secondAttribute="bottom" id="W2I-ri-hvT"/>
+                                                        <constraint firstAttribute="bottom" secondItem="zhG-5y-R3k" secondAttribute="bottom" id="Y13-4s-BcI"/>
                                                         <constraint firstAttribute="trailing" secondItem="Bi2-Lv-lbs" secondAttribute="trailing" id="uwc-rj-bYu"/>
                                                     </constraints>
                                                 </view>
@@ -290,6 +320,7 @@
     </scenes>
     <resources>
         <image name="assetForkKnifeLarge" width="512" height="512"/>
+        <image name="assetInfo" width="24" height="24"/>
         <image name="assetMountainsLarge" width="512" height="512"/>
         <image name="assetPlacemarkLarge" width="512" height="512"/>
     </resources>
