@@ -81,11 +81,12 @@ class AddLocationMapViewController : BaseViewController, DismissInteractable {
   // MARK: - MKMapView
   
   func setMapInitialLocation() {
-    let regionRadius: CLLocationDistance = 800 // 800 meters ~ 0.5 miles
+    let regionRadius: CLLocationDistance = MapItem.defaultRegionRadius
     let currentLocation = self.locationManager.currentLocation
     let desiredCoordinate = currentLocation?.coordinate ?? CLLocationCoordinate2D.denver80202
     let coordinateRegion = MKCoordinateRegionMakeWithDistance(desiredCoordinate, regionRadius, regionRadius)
     self.mapView.setRegion(coordinateRegion, animated: true)
+    self.mapView.showsUserLocation = true
     
     // Set the current map item as the user's current position if available
     if let currentLocation = currentLocation {

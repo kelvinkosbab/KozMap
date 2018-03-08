@@ -19,26 +19,23 @@ class MainViewController : BaseViewController, LocationDetailNavigationDelegate 
   // MARK: - Properties
   
   @IBOutlet weak var tabBarVisualEffectView: UIVisualEffectView!
-  @IBOutlet weak var addButton: UIButton!
-  @IBOutlet weak var listButton: UIButton!
-  @IBOutlet weak var settingsButton: UIButton!
+  @IBOutlet weak var homeTabBarContainerView: UIView!
+  weak var homeTabBarView: HomeTabBarView?
   
   internal var arViewController: ARViewController? = nil
+  internal var appMode: AppMode = .myPlacemarks
   
   // MARK: - Lifecycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    // Navigation bar
     self.navigationItem.title = nil
     self.navigationItem.largeTitleDisplayMode = .never
     
-    // For simulators add an image view to give simulated location context
-    if UIDevice.current.isSimulator {
-      let imageView = UIImageView(image: #imageLiteral(resourceName: "denverCityScape"))
-      imageView.contentMode = .scaleAspectFill
-      imageView.addToContainer(self.view, atIndex: 1)
-    }
+    // Configure views
+    self.configureView()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -55,6 +52,24 @@ class MainViewController : BaseViewController, LocationDetailNavigationDelegate 
     NotificationCenter.default.removeObserver(self)
   }
   
+  // MARK: - Views
+  
+  func configureView() {
+    
+    // Configure the home tab bar view
+    let homeTabBarView = HomeTabBarView.newView(mode: self.appMode, delegate: self)
+    homeTabBarView.backgroundColor = .clear
+    self.homeTabBarView = homeTabBarView
+    homeTabBarView.addToContainer(self.homeTabBarContainerView)
+    
+    // For simulators add an image view to give simulated location context
+    if UIDevice.current.isSimulator {
+      let imageView = UIImageView(image: #imageLiteral(resourceName: "denverCityScape"))
+      imageView.contentMode = .scaleAspectFill
+      imageView.addToContainer(self.view, atIndex: 1)
+    }
+  }
+  
   // MARK: - Navigation
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -63,20 +78,6 @@ class MainViewController : BaseViewController, LocationDetailNavigationDelegate 
       arViewController.trackingStateDelegate = self
       self.arViewController = arViewController
     }
-  }
-  
-  // MARK: - Actions
-  
-  @IBAction func addButtonSelected() {
-    self.presentAddLocation()
-  }
-  
-  @IBAction func listButtonSelected() {
-    self.presentPlacemarkList()
-  }
-  
-  @IBAction func settingsButtonSelected() {
-    self.presentSettings()
   }
   
   // MARK: - Navigation
@@ -189,28 +190,20 @@ class MainViewController : BaseViewController, LocationDetailNavigationDelegate 
   
   func showAllElements() {
     self.tabBarVisualEffectView.effect = UIBlurEffect(style: .light)
-    self.listButton.alpha = 1
-    self.addButton.alpha = 1
-    self.settingsButton.alpha = 1
+    self.homeTabBarContainerView.alpha = 1
   }
   
   func enableAllElements() {
-    self.listButton.isUserInteractionEnabled = true
-    self.addButton.isUserInteractionEnabled = true
-    self.settingsButton.isUserInteractionEnabled = true
+    self.homeTabBarContainerView.isUserInteractionEnabled = true
   }
   
   func disableAllElements() {
-    self.listButton.isUserInteractionEnabled = false
-    self.addButton.isUserInteractionEnabled = false
-    self.settingsButton.isUserInteractionEnabled = false
+    self.homeTabBarContainerView.isUserInteractionEnabled = false
   }
   
   func hideAllElements() {
     self.tabBarVisualEffectView.effect = nil
-    self.listButton.alpha = 0
-    self.addButton.alpha = 0
-    self.settingsButton.alpha = 0
+    self.homeTabBarContainerView.alpha = 0
   }
 }
 
@@ -254,5 +247,55 @@ extension MainViewController : UIPopoverPresentationControllerDelegate {
   
   func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
     return .none
+  }
+}
+
+// MARK: - ModeChooserDelegate
+
+extension MainViewController : ModeChooserDelegate {
+  
+  func didChooseMode(_ mode: AppMode, sender: PresentableController) {
+    
+    // Dismiss the sender
+    sender.dismissController(completion: nil)
+    
+    guard self.appMode != mode else {
+      return
+    }
+    
+    // Update the mode and the home tab bar
+    self.appMode = mode
+    self.homeTabBarView?.mode = mode
+  }
+}
+
+// MARK: - HomeTabBarViewDelegate
+
+extension MainViewController : HomeTabBarViewDelegate {
+  
+  func tabButtonSelected(type: HomeTabBarButtonType, mode: AppMode) {
+    self.appMode = mode
+    
+    switch type {
+    case .mode:
+      let modeChooserViewController = ModeChooserViewController.newViewController(delegate: self)
+      self.present(viewController: modeChooserViewController, withMode: .custom(.visualEffectFade), options: [ .presentingViewControllerDelegate(self) ])
+    case .add:
+      switch mode {
+      case .myPlacemarks:
+        self.presentAddLocation()
+      case .foodNearby: break
+      case .mountainViewer: break
+      }
+    case .list:
+      switch mode {
+      case .myPlacemarks:
+        self.presentPlacemarkList()
+      case .foodNearby: break
+      case .mountainViewer: break
+      }
+    case .settings:
+      self.presentSettings()
+    }
   }
 }

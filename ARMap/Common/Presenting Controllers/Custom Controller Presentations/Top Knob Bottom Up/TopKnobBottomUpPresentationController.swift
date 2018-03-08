@@ -85,8 +85,20 @@ class TopKnobBottomUpPresentationController : CustomPresentationController, Dism
     let height: CGFloat = self.presentedViewController.preferredContentSize.height
     let desiredYOffset = containerBounds.height - height
     let minimumYOffset: CGFloat = 100
-    let adjustedYOffset = desiredYOffset < minimumYOffset ? minimumYOffset : desiredYOffset
-    return CGRect(x: 0, y: adjustedYOffset, width: containerBounds.width, height: height)
+    let adjustedYOffset: CGFloat
+    let adjustedHeight: CGFloat
+    if desiredYOffset < minimumYOffset {
+      adjustedYOffset = minimumYOffset
+      adjustedHeight = containerBounds.height - 100
+    } else {
+      adjustedYOffset = desiredYOffset
+      adjustedHeight = height
+    }
+    if self.presentedViewController.preferredContentSize.height != adjustedHeight {
+      let newSize = CGSize(width: self.presentedViewController.preferredContentSize.width, height: adjustedHeight)
+      self.presentedViewController.preferredContentSize = newSize
+    }
+    return CGRect(x: 0, y: adjustedYOffset, width: containerBounds.width, height: adjustedHeight)
   }
   
   // MARK: - Actions

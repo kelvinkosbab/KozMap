@@ -6,6 +6,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -168,13 +169,28 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="wyL-Ph-2Kh">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wyL-Ph-2Kh">
                                 <rect key="frame" x="0.0" y="273" width="375" height="394"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Coz-4S-NBm">
+                                <rect key="frame" x="16" y="601" width="343" height="50"/>
+                                <color key="backgroundColor" name="SeaBlue"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="QzR-4U-u24"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <state key="normal" title="Get Directions">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="openInMapsButtonSelected" destination="nAJ-wc-0sz" eventType="touchUpInside" id="sL6-4O-5ql"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="hNR-dQ-yk1" firstAttribute="top" secondItem="m31-m5-fuP" secondAttribute="bottom" constant="13" id="1W2-x8-S5r"/>
                             <constraint firstItem="hNR-dQ-yk1" firstAttribute="leading" secondItem="XUE-LN-d3D" secondAttribute="leading" constant="16" id="1bF-L7-NBM"/>
+                            <constraint firstItem="XUE-LN-d3D" firstAttribute="bottom" secondItem="Coz-4S-NBm" secondAttribute="bottom" constant="16" id="6dB-c9-MPJ"/>
                             <constraint firstItem="XUE-LN-d3D" firstAttribute="trailing" secondItem="m31-m5-fuP" secondAttribute="trailing" constant="16" id="8Ny-Fc-Nfj"/>
                             <constraint firstItem="m31-m5-fuP" firstAttribute="top" secondItem="lHg-W5-p6s" secondAttribute="bottom" constant="13" id="8W3-fK-qYb"/>
                             <constraint firstAttribute="bottom" secondItem="wyL-Ph-2Kh" secondAttribute="bottom" id="C83-u9-Zhp"/>
@@ -184,9 +200,11 @@
                             <constraint firstItem="lHg-W5-p6s" firstAttribute="leading" secondItem="XUE-LN-d3D" secondAttribute="leading" constant="16" id="Phw-2G-Vsf"/>
                             <constraint firstItem="XUE-LN-d3D" firstAttribute="trailing" secondItem="lHg-W5-p6s" secondAttribute="trailing" constant="16" id="QoQ-v2-vPr"/>
                             <constraint firstAttribute="trailing" secondItem="wyL-Ph-2Kh" secondAttribute="trailing" id="S5R-b7-L50"/>
+                            <constraint firstItem="Coz-4S-NBm" firstAttribute="leading" secondItem="XUE-LN-d3D" secondAttribute="leading" constant="16" id="WJV-XN-n3b"/>
                             <constraint firstItem="XUE-LN-d3D" firstAttribute="trailing" secondItem="hNR-dQ-yk1" secondAttribute="trailing" constant="16" id="ZCR-lv-vfz"/>
                             <constraint firstItem="wyL-Ph-2Kh" firstAttribute="top" secondItem="kec-hB-OLb" secondAttribute="bottom" constant="13" id="aVK-qI-1dB"/>
                             <constraint firstItem="lHg-W5-p6s" firstAttribute="top" secondItem="XUE-LN-d3D" secondAttribute="top" constant="16" id="oJW-4Q-wmI"/>
+                            <constraint firstItem="XUE-LN-d3D" firstAttribute="trailing" secondItem="Coz-4S-NBm" secondAttribute="trailing" constant="16" id="tWM-SY-2Du"/>
                             <constraint firstItem="XUE-LN-d3D" firstAttribute="trailing" secondItem="kec-hB-OLb" secondAttribute="trailing" constant="16" id="tj4-mw-Bc6"/>
                             <constraint firstItem="m31-m5-fuP" firstAttribute="leading" secondItem="XUE-LN-d3D" secondAttribute="leading" constant="16" id="z79-5C-xlw"/>
                         </constraints>
@@ -200,6 +218,7 @@
                         <outlet property="longitudeLabel" destination="bGS-gY-BVn" id="3iD-zt-5pD"/>
                         <outlet property="mapView" destination="wyL-Ph-2Kh" id="pSE-Ng-hSH"/>
                         <outlet property="nameTextField" destination="lHg-W5-p6s" id="oza-W1-9T5"/>
+                        <outlet property="openInMapsButton" destination="Coz-4S-NBm" id="Jdu-sY-d3P"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2fm-BP-68t" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -207,4 +226,9 @@
             <point key="canvasLocation" x="900" y="1026"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="SeaBlue">
+            <color red="0.28999999170000001" green="0.56499999759999997" blue="0.88599997760000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

@@ -47,6 +47,8 @@ class ConfiguringViewController : BaseViewController {
     self.updateContent()
   }
   
+  // MARK: - Status Bar
+  
   override var preferredStatusBarStyle: UIStatusBarStyle {
     return .lightContent
   }
