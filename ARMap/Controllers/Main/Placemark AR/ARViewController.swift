@@ -195,7 +195,6 @@ class ARViewController : UIViewController {
     }
     
     // Configure session
-    self.sessionConfig.planeDetection = .horizontal
     self.sessionConfig.isLightEstimationEnabled = true
     self.sessionConfig.worldAlignment = .gravityAndHeading
     self.session.run(self.sessionConfig, options: [.resetTracking, .removeExistingAnchors])
