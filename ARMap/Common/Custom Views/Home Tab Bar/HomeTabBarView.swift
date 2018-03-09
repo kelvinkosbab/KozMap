@@ -9,11 +9,14 @@
 import UIKit
 
 enum HomeTabBarButtonType {
-  case settings, list, add, mode
+  case settings, mode
+  case myPlacemarkList, myPlacemarkAdd
+  case foodNearbyList, foodNearbyFavorites
+  case mountainList
 }
 
 protocol HomeTabBarViewDelegate : class {
-  func tabButtonSelected(type: HomeTabBarButtonType, mode: AppMode)
+  func tabButtonSelected(type: HomeTabBarButtonType)
 }
 
 class HomeTabBarView : UIView {
@@ -24,24 +27,24 @@ class HomeTabBarView : UIView {
     return UINib(nibName: "HomeTabBarView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! HomeTabBarView
   }
   
-  static func newView(mode: AppMode, delegate: HomeTabBarViewDelegate?) -> HomeTabBarView {
+  static func newView(appMode: AppMode, delegate: HomeTabBarViewDelegate?) -> HomeTabBarView {
     let view = self.newView()
-    view.mode = mode
+    view.appMode = appMode
     view.delegate = delegate
     return view
   }
   
   // MARK: - Properties
   
-  @IBOutlet weak var settingsButton: UIButton!
-  @IBOutlet weak var addButton: UIButton!
-  @IBOutlet weak var listButton: UIButton!
-  @IBOutlet weak var centerListButton: UIButton!
-  @IBOutlet weak var modeButton: UIButton!
+  @IBOutlet weak var farLeftButton: UIButton!
+  @IBOutlet weak var centerLeftButton: UIButton!
+  @IBOutlet weak var centerButton: UIButton!
+  @IBOutlet weak var centerRightButton: UIButton!
+  @IBOutlet weak var farRightButton: UIButton!
   
   weak var delegate: HomeTabBarViewDelegate? = nil
   
-  var mode: AppMode = .myPlacemarks {
+  var appMode: AppMode = .myPlacemarks {
     didSet {
       self.updateViewBasedOnMode()
     }
@@ -50,49 +53,75 @@ class HomeTabBarView : UIView {
   // MARK: - Actions
   
   func updateViewBasedOnMode() {
-    switch self.mode {
+    switch self.appMode {
     case .myPlacemarks:
-      self.addButton.isHidden = false
-      self.addButton.isUserInteractionEnabled = true
-      self.listButton.isHidden = false
-      self.listButton.isUserInteractionEnabled = true
-      self.centerListButton.isHidden = true
-      self.centerListButton.isUserInteractionEnabled = false
-      self.modeButton.setImage(#imageLiteral(resourceName: "assetPlacemark"), for: .normal)
+      self.centerLeftButton.setImage(#imageLiteral(resourceName: "assetList"), for: .normal)
+      self.centerLeftButton.isHidden = false
+      self.centerLeftButton.isUserInteractionEnabled = true
+      self.centerRightButton.setImage(#imageLiteral(resourceName: "assetPlus"), for: .normal)
+      self.centerRightButton.isHidden = false
+      self.centerRightButton.isUserInteractionEnabled = true
+      self.centerButton.isHidden = true
+      self.centerButton.isUserInteractionEnabled = false
+      self.farRightButton.setImage(#imageLiteral(resourceName: "assetPlacemark"), for: .normal)
     case .foodNearby:
-      self.addButton.isHidden = true
-      self.addButton.isUserInteractionEnabled = false
-      self.listButton.isHidden = true
-      self.listButton.isUserInteractionEnabled = false
-      self.centerListButton.isHidden = false
-      self.centerListButton.isUserInteractionEnabled = true
-      self.modeButton.setImage(#imageLiteral(resourceName: "assetForkKnife"), for: .normal)
+      self.centerLeftButton.setImage(#imageLiteral(resourceName: "assetStar"), for: .normal)
+      self.centerLeftButton.isHidden = false
+      self.centerLeftButton.isUserInteractionEnabled = true
+      self.centerRightButton.setImage(#imageLiteral(resourceName: "assetList"), for: .normal)
+      self.centerRightButton.isHidden = false
+      self.centerRightButton.isUserInteractionEnabled = true
+      self.centerButton.isHidden = true
+      self.centerButton.isUserInteractionEnabled = false
+      self.farRightButton.setImage(#imageLiteral(resourceName: "assetForkKnife"), for: .normal)
     case .mountainViewer:
-      self.addButton.isHidden = true
-      self.addButton.isUserInteractionEnabled = false
-      self.listButton.isHidden = true
-      self.listButton.isUserInteractionEnabled = false
-      self.centerListButton.isHidden = false
-      self.centerListButton.isUserInteractionEnabled = true
-      self.modeButton.setImage(#imageLiteral(resourceName: "assetMountains"), for: .normal)
+      self.centerLeftButton.isHidden = true
+      self.centerLeftButton.isUserInteractionEnabled = false
+      self.centerRightButton.isHidden = true
+      self.centerRightButton.isUserInteractionEnabled = false
+      self.centerButton.setImage(#imageLiteral(resourceName: "assetList"), for: .normal)
+      self.centerButton.isHidden = false
+      self.centerButton.isUserInteractionEnabled = true
+      self.farRightButton.setImage(#imageLiteral(resourceName: "assetMountains"), for: .normal)
     }
   }
   
   // MARK: - Actions
   
-  @IBAction func settingsButtonSelected() {
-    self.delegate?.tabButtonSelected(type: .settings, mode: self.mode)
+  @IBAction func farLeftButtonSelected() {
+    self.delegate?.tabButtonSelected(type: .settings)
   }
   
-  @IBAction func addButtonSelected() {
-    self.delegate?.tabButtonSelected(type: .add, mode: self.mode)
+  @IBAction func centerLeftButtonSelected() {
+    switch self.appMode {
+    case .myPlacemarks:
+      self.delegate?.tabButtonSelected(type: .myPlacemarkList)
+    case .foodNearby:
+      self.delegate?.tabButtonSelected(type: .foodNearbyFavorites)
+    case .mountainViewer: break
+    }
   }
   
-  @IBAction func listButtonSelected() {
-    self.delegate?.tabButtonSelected(type: .list, mode: self.mode)
+  @IBAction func centerButtonSelected() {
+    switch self.appMode {
+    case .myPlacemarks: break
+    case .foodNearby: break
+    case .mountainViewer:
+      self.delegate?.tabButtonSelected(type: .mountainList)
+    }
   }
   
-  @IBAction func modeButtonSelected() {
-    self.delegate?.tabButtonSelected(type: .mode, mode: self.mode)
+  @IBAction func centerRightButtonSelected() {
+    switch self.appMode {
+    case .myPlacemarks:
+      self.delegate?.tabButtonSelected(type: .myPlacemarkAdd)
+    case .foodNearby:
+      self.delegate?.tabButtonSelected(type: .foodNearbyList)
+    case .mountainViewer: break
+    }
+  }
+  
+  @IBAction func farRightButtonSelected() {
+    self.delegate?.tabButtonSelected(type: .mode)
   }
 }

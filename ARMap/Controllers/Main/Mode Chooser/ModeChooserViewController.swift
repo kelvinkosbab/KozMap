@@ -13,7 +13,7 @@ enum AppMode {
 }
 
 protocol ModeChooserDelegate : class {
-  func didChooseMode(_ mode: AppMode, sender: PresentableController)
+  func didChooseMode(_ appMode: AppMode, sender: PresentableController)
 }
 
 class ModeChooserViewController : BaseViewController {

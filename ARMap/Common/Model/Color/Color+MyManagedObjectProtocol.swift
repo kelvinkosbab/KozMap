@@ -63,6 +63,18 @@ extension Color : MyManagedObjectProtocol {
     return color
   }
   
+  static var white: Color {
+    let color = Color.create()
+    color.color = .white
+    return color
+  }
+  
+  static var black: Color {
+    let color = Color.create()
+    color.color = .black
+    return color
+  }
+  
   // MARK: - Helpers
   
   var color: UIColor {

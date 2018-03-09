@@ -57,7 +57,7 @@ class MainViewController : BaseViewController, LocationDetailNavigationDelegate 
   func configureView() {
     
     // Configure the home tab bar view
-    let homeTabBarView = HomeTabBarView.newView(mode: self.appMode, delegate: self)
+    let homeTabBarView = HomeTabBarView.newView(appMode: self.appMode, delegate: self)
     homeTabBarView.backgroundColor = .clear
     self.homeTabBarView = homeTabBarView
     homeTabBarView.addToContainer(self.homeTabBarContainerView)
@@ -254,18 +254,18 @@ extension MainViewController : UIPopoverPresentationControllerDelegate {
 
 extension MainViewController : ModeChooserDelegate {
   
-  func didChooseMode(_ mode: AppMode, sender: PresentableController) {
+  func didChooseMode(_ appMode: AppMode, sender: PresentableController) {
     
     // Dismiss the sender
     sender.dismissController(completion: nil)
     
-    guard self.appMode != mode else {
+    guard self.appMode != appMode else {
       return
     }
     
     // Update the mode and the home tab bar
-    self.appMode = mode
-    self.homeTabBarView?.mode = mode
+    self.appMode = appMode
+    self.homeTabBarView?.appMode = appMode
   }
 }
 
@@ -273,29 +273,23 @@ extension MainViewController : ModeChooserDelegate {
 
 extension MainViewController : HomeTabBarViewDelegate {
   
-  func tabButtonSelected(type: HomeTabBarButtonType, mode: AppMode) {
-    self.appMode = mode
-    
+  func tabButtonSelected(type: HomeTabBarButtonType) {
     switch type {
     case .mode:
       let modeChooserViewController = ModeChooserViewController.newViewController(delegate: self)
       self.present(viewController: modeChooserViewController, withMode: .custom(.visualEffectFade), options: [ .presentingViewControllerDelegate(self) ])
-    case .add:
-      switch mode {
-      case .myPlacemarks:
-        self.presentAddLocation()
-      case .foodNearby: break
-      case .mountainViewer: break
-      }
-    case .list:
-      switch mode {
-      case .myPlacemarks:
-        self.presentPlacemarkList()
-      case .foodNearby: break
-      case .mountainViewer: break
-      }
     case .settings:
       self.presentSettings()
+      
+    case .myPlacemarkAdd:
+      self.presentAddLocation()
+    case .myPlacemarkList:
+      self.presentPlacemarkList()
+      
+    case .foodNearbyFavorites: break
+    case .foodNearbyList: break
+      
+    case .mountainList: break
     }
   }
 }

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		4CAB96F3BD6BA24294579FB2 /* Pods_KozMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CB719DD0FC2BDBA88151D6A /* Pods_KozMap.framework */; };
+		B607C7B52052686700E57A63 /* MountainPlacemark+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B607C7B42052686700E57A63 /* MountainPlacemark+Util.swift */; };
+		B607C7B92052689B00E57A63 /* FoodPlacemark+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B607C7B82052689B00E57A63 /* FoodPlacemark+Util.swift */; };
+		B607C7BB205268CA00E57A63 /* Placemark+Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = B607C7BA205268CA00E57A63 /* Placemark+Type.swift */; };
 		B6299B82204F8F6500043CD1 /* LocationList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6299B81204F8F6500043CD1 /* LocationList.storyboard */; };
 		B6299B84204F8FA900043CD1 /* LocationDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6299B83204F8FA900043CD1 /* LocationDetail.storyboard */; };
 		B6299B88204F901D00043CD1 /* AddLocationMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6299B87204F901D00043CD1 /* AddLocationMapViewController.swift */; };
@@ -145,6 +148,10 @@
 		47A14A32F7FA20DD02261679 /* Pods-KozMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KozMap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KozMap/Pods-KozMap.debug.xcconfig"; sourceTree = "<group>"; };
 		8438AF4D777D654EBDBBD394 /* Pods-KozMap.koz - release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KozMap.koz - release.xcconfig"; path = "Pods/Target Support Files/Pods-KozMap/Pods-KozMap.koz - release.xcconfig"; sourceTree = "<group>"; };
 		A4C83F8AC6F29F40129B562F /* Pods-ARMap.koz - release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARMap.koz - release.xcconfig"; path = "Pods/Target Support Files/Pods-ARMap/Pods-ARMap.koz - release.xcconfig"; sourceTree = "<group>"; };
+		B607C7B32052673D00E57A63 /* ARMap 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ARMap 2.xcdatamodel"; sourceTree = "<group>"; };
+		B607C7B42052686700E57A63 /* MountainPlacemark+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MountainPlacemark+Util.swift"; sourceTree = "<group>"; };
+		B607C7B82052689B00E57A63 /* FoodPlacemark+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoodPlacemark+Util.swift"; sourceTree = "<group>"; };
+		B607C7BA205268CA00E57A63 /* Placemark+Type.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Placemark+Type.swift"; sourceTree = "<group>"; };
 		B6299B81204F8F6500043CD1 /* LocationList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationList.storyboard; sourceTree = "<group>"; };
 		B6299B83204F8FA900043CD1 /* LocationDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationDetail.storyboard; sourceTree = "<group>"; };
 		B6299B87204F901D00043CD1 /* AddLocationMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationMapViewController.swift; sourceTree = "<group>"; };
@@ -311,6 +318,54 @@
 				8438AF4D777D654EBDBBD394 /* Pods-KozMap.koz - release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		B607C7AF2052662100E57A63 /* My Placemarks */ = {
+			isa = PBXGroup;
+			children = (
+				B686EF8320166F1200ACF075 /* Location List */,
+				B686EF7920166F1200ACF075 /* Location Detail */,
+				B686EF7B20166F1200ACF075 /* Add Location */,
+			);
+			path = "My Placemarks";
+			sourceTree = "<group>";
+		};
+		B607C7B02052663800E57A63 /* Mountain Viewer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Mountain Viewer";
+			sourceTree = "<group>";
+		};
+		B607C7B12052664200E57A63 /* Food Nearby */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Food Nearby";
+			sourceTree = "<group>";
+		};
+		B607C7B22052671F00E57A63 /* Mountain */ = {
+			isa = PBXGroup;
+			children = (
+				B607C7B42052686700E57A63 /* MountainPlacemark+Util.swift */,
+			);
+			path = Mountain;
+			sourceTree = "<group>";
+		};
+		B607C7B72052687800E57A63 /* Food */ = {
+			isa = PBXGroup;
+			children = (
+				B607C7B82052689B00E57A63 /* FoodPlacemark+Util.swift */,
+			);
+			path = Food;
+			sourceTree = "<group>";
+		};
+		B607C7BC20526A8F00E57A63 /* Color */ = {
+			isa = PBXGroup;
+			children = (
+				B686EF6120166D9D00ACF075 /* Color+MyManagedObjectProtocol.swift */,
+			);
+			path = Color;
 			sourceTree = "<group>";
 		};
 		B619F4BD203E7EF800DD8BA7 /* Assets */ = {
@@ -523,7 +578,7 @@
 				B686EF5E20166D9C00ACF075 /* MyDataManager.swift */,
 				B686EF6020166D9D00ACF075 /* MyManagedObjectProtocol.swift */,
 				B686EF6320166D9D00ACF075 /* Defaults+MyManagedObjectProtocol.swift */,
-				B686EF6120166D9D00ACF075 /* Color+MyManagedObjectProtocol.swift */,
+				B607C7BC20526A8F00E57A63 /* Color */,
 				B6C01FEB2050CD2500437B45 /* Placemark */,
 			);
 			path = Model;
@@ -624,9 +679,9 @@
 				B6299B89204FE15400043CD1 /* Mode Chooser */,
 				B686EF8620166F1200ACF075 /* Placemark AR */,
 				B686EF7720166F1200ACF075 /* Settings */,
-				B686EF8320166F1200ACF075 /* Location List */,
-				B686EF7920166F1200ACF075 /* Location Detail */,
-				B686EF7B20166F1200ACF075 /* Add Location */,
+				B607C7AF2052662100E57A63 /* My Placemarks */,
+				B607C7B02052663800E57A63 /* Mountain Viewer */,
+				B607C7B12052664200E57A63 /* Food Nearby */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -743,6 +798,9 @@
 				B686EF6220166D9D00ACF075 /* Placemark+MyManagedObjectProtocol.swift */,
 				B6C01FEE2050CD6000437B45 /* Placemark+Util.swift */,
 				B6C01FEC2050CD3600437B45 /* Placemark+CoreLocation.swift */,
+				B607C7BA205268CA00E57A63 /* Placemark+Type.swift */,
+				B607C7B22052671F00E57A63 /* Mountain */,
+				B607C7B72052687800E57A63 /* Food */,
 			);
 			path = Placemark;
 			sourceTree = "<group>";
@@ -982,8 +1040,10 @@
 				B686EF3C20166D8700ACF075 /* UnitType.swift in Sources */,
 				B64D1222204E673A008E5C5F /* AnalyticsItem.swift in Sources */,
 				B64D121A204E5F8A008E5C5F /* CrashManager.swift in Sources */,
+				B607C7BB205268CA00E57A63 /* Placemark+Type.swift in Sources */,
 				B686EF4120166D8700ACF075 /* Plane.swift in Sources */,
 				B686EF5C20166D8700ACF075 /* CameraPermissionManager.swift in Sources */,
+				B607C7B92052689B00E57A63 /* FoodPlacemark+Util.swift in Sources */,
 				B686EF5A20166D8700ACF075 /* ViewControllerFromStoryboardProtocol.swift in Sources */,
 				B686EF9E20166F1300ACF075 /* LocationListViewController+Cells.swift in Sources */,
 				B686EF9220166F1300ACF075 /* BaseViewController.swift in Sources */,
@@ -991,6 +1051,7 @@
 				B6A8ABC8204B8851007FDAEC /* ServiceResponse.swift in Sources */,
 				B686EF5820166D8700ACF075 /* DesiredContentHeightDelegate.swift in Sources */,
 				B6A8ABCA204B8851007FDAEC /* Data+JSON.swift in Sources */,
+				B607C7B52052686700E57A63 /* MountainPlacemark+Util.swift in Sources */,
 				B6DCCDC3203B68B800201385 /* InteractiveTransition+Subclasses.swift in Sources */,
 				B686EF0720166D5A00ACF075 /* Distance.swift in Sources */,
 				B6FD0774204D18B3007D677A /* CLLocation+Solar.swift in Sources */,
@@ -1451,9 +1512,10 @@
 		B686EED620166C7300ACF075 /* ARMap.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				B607C7B32052673D00E57A63 /* ARMap 2.xcdatamodel */,
 				B686EED720166C7300ACF075 /* ARMap.xcdatamodel */,
 			);
-			currentVersion = B686EED720166C7300ACF075 /* ARMap.xcdatamodel */;
+			currentVersion = B607C7B32052673D00E57A63 /* ARMap 2.xcdatamodel */;
 			path = ARMap.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
