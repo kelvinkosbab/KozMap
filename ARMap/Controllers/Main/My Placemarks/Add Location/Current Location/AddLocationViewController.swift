@@ -89,7 +89,13 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.navigationItem.title = "Here"
+    self.navigationItem.largeTitleDisplayMode = .never
+    if let _ = self.mapItem {
+      self.navigationItem.title = "Add Location"
+    } else {
+      self.navigationItem.title = "Here"
+    }
+    
     
     self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(self.closeButtonSelected))
     

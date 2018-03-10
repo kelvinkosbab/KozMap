@@ -175,10 +175,21 @@ class ARViewController : UIViewController {
   // MARK: - Scene
   
   @objc func pauseScene() {
+    
+    guard !UIDevice.current.isSimulator else {
+      self.state = .normal
+      return
+    }
+    
     self.session.pause()
   }
   
   @objc func restartPlaneDetection() {
+    
+    guard !UIDevice.current.isSimulator else {
+      self.state = .normal
+      return
+    }
     
     // Remove all nodes
     self.sceneNode?.removeFromParentNode()
