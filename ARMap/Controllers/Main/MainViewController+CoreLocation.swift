@@ -37,12 +37,7 @@ extension MainViewController : AddLocationViewControllerDelegate {
     } else {
       message = nil
     }
-    let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-    self.present(alertController, animated: true) {
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) { [weak self] in
-        self?.dismiss(animated: true, completion: nil)
-      }
-    }
+    self.presentPopupAlert(title: title, message: message)
   }
   
   private func presentLocationUpdatedAlert(placemark: Placemark) {
@@ -53,12 +48,7 @@ extension MainViewController : AddLocationViewControllerDelegate {
     } else {
       message = nil
     }
-    let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-    self.present(alertController, animated: true) {
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) { [weak self] in
-        self?.dismiss(animated: true, completion: nil)
-      }
-    }
+    self.presentPopupAlert(title: title, message: message)
   }
 }
 
@@ -74,7 +64,12 @@ extension MainViewController : LocationListViewControllerDelegate {
   
   func shouldTransitionToAddPlacemark() {
     self.dismiss(animated: true) { [weak self] in
-      self?.presentAddLocation()
+      
+      guard let strongSelf = self else {
+        return
+      }
+      
+      strongSelf.presentAddLocation(addLocationDelegate: strongSelf, searchDelegate: strongSelf, options: [ .presentingViewControllerDelegate(strongSelf) ])
     }
   }
 }
@@ -85,7 +80,12 @@ extension MainViewController : MyPlacemarkSearchViewControllerDelegate {
   
   func shouldAdd(mapItem: MapItem) {
     self.dismiss(animated: true) { [weak self] in
-      self?.presentAddLocation(mapItem: mapItem)
+      
+      guard let strongSelf = self else {
+        return
+      }
+      
+      strongSelf.presentAddLocation(mapItem: mapItem, delegate: strongSelf, options: [ .presentingViewControllerDelegate(strongSelf) ])
     }
   }
 }

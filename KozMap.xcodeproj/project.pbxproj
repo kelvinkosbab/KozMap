@@ -11,6 +11,9 @@
 		B607C7B52052686700E57A63 /* MountainPlacemark+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B607C7B42052686700E57A63 /* MountainPlacemark+Util.swift */; };
 		B607C7B92052689B00E57A63 /* FoodPlacemark+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B607C7B82052689B00E57A63 /* FoodPlacemark+Util.swift */; };
 		B607C7BB205268CA00E57A63 /* Placemark+Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = B607C7BA205268CA00E57A63 /* Placemark+Type.swift */; };
+		B6082DF6205487CE0022943F /* SettingsNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6082DF5205487CE0022943F /* SettingsNavigationDelegate.swift */; };
+		B6082DF8205489510022943F /* MyPlacemarksNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6082DF7205489510022943F /* MyPlacemarksNavigationDelegate.swift */; };
+		B6082DFA205496320022943F /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6082DF9205496320022943F /* UIViewController+Alert.swift */; };
 		B6299B82204F8F6500043CD1 /* LocationList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6299B81204F8F6500043CD1 /* LocationList.storyboard */; };
 		B6299B84204F8FA900043CD1 /* LocationDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6299B83204F8FA900043CD1 /* LocationDetail.storyboard */; };
 		B6299B88204F901D00043CD1 /* AddLocationMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6299B87204F901D00043CD1 /* AddLocationMapViewController.swift */; };
@@ -111,7 +114,6 @@
 		B6A8ABD5204B9A92007FDAEC /* InlineColorChooser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6A8ABD4204B9A92007FDAEC /* InlineColorChooser.storyboard */; };
 		B6A8ABD7204B9AA9007FDAEC /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6A8ABD6204B9AA9007FDAEC /* Settings.storyboard */; };
 		B6A8ABD9204B9AEC007FDAEC /* Configuring.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6A8ABD8204B9AEC007FDAEC /* Configuring.storyboard */; };
-		B6A8ABDB204BA791007FDAEC /* LocationDetailNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A8ABDA204BA791007FDAEC /* LocationDetailNavigationDelegate.swift */; };
 		B6A8ABDD204BB073007FDAEC /* PlacemarkAPIDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A8ABDC204BB073007FDAEC /* PlacemarkAPIDelegate.swift */; };
 		B6BEF50220537BF4002FD2AA /* FoodNearby.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6BEF50120537BF4002FD2AA /* FoodNearby.storyboard */; };
 		B6BEF50420537C10002FD2AA /* SearchFoodNearbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BEF50320537C10002FD2AA /* SearchFoodNearbyViewController.swift */; };
@@ -156,6 +158,9 @@
 		B607C7B42052686700E57A63 /* MountainPlacemark+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MountainPlacemark+Util.swift"; sourceTree = "<group>"; };
 		B607C7B82052689B00E57A63 /* FoodPlacemark+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoodPlacemark+Util.swift"; sourceTree = "<group>"; };
 		B607C7BA205268CA00E57A63 /* Placemark+Type.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Placemark+Type.swift"; sourceTree = "<group>"; };
+		B6082DF5205487CE0022943F /* SettingsNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsNavigationDelegate.swift; sourceTree = "<group>"; };
+		B6082DF7205489510022943F /* MyPlacemarksNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPlacemarksNavigationDelegate.swift; sourceTree = "<group>"; };
+		B6082DF9205496320022943F /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		B6299B81204F8F6500043CD1 /* LocationList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationList.storyboard; sourceTree = "<group>"; };
 		B6299B83204F8FA900043CD1 /* LocationDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationDetail.storyboard; sourceTree = "<group>"; };
 		B6299B87204F901D00043CD1 /* AddLocationMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationMapViewController.swift; sourceTree = "<group>"; };
@@ -258,7 +263,6 @@
 		B6A8ABD4204B9A92007FDAEC /* InlineColorChooser.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = InlineColorChooser.storyboard; sourceTree = "<group>"; };
 		B6A8ABD6204B9AA9007FDAEC /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		B6A8ABD8204B9AEC007FDAEC /* Configuring.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Configuring.storyboard; sourceTree = "<group>"; };
-		B6A8ABDA204BA791007FDAEC /* LocationDetailNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailNavigationDelegate.swift; sourceTree = "<group>"; };
 		B6A8ABDC204BB073007FDAEC /* PlacemarkAPIDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacemarkAPIDelegate.swift; sourceTree = "<group>"; };
 		B6BEF50120537BF4002FD2AA /* FoodNearby.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FoodNearby.storyboard; sourceTree = "<group>"; };
 		B6BEF50320537C10002FD2AA /* SearchFoodNearbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFoodNearbyViewController.swift; sourceTree = "<group>"; };
@@ -331,6 +335,7 @@
 		B607C7AF2052662100E57A63 /* My Placemarks */ = {
 			isa = PBXGroup;
 			children = (
+				B6082DF7205489510022943F /* MyPlacemarksNavigationDelegate.swift */,
 				B686EF8320166F1200ACF075 /* Location List */,
 				B686EF7920166F1200ACF075 /* Location Detail */,
 				B686EF7B20166F1200ACF075 /* Add Location */,
@@ -569,6 +574,7 @@
 			children = (
 				B686EEF520166D5A00ACF075 /* Distance.swift */,
 				B686EEF620166D5A00ACF075 /* UIViewController+Util.swift */,
+				B6082DF9205496320022943F /* UIViewController+Alert.swift */,
 				B686EEF720166D5A00ACF075 /* String+Util.swift */,
 				B686EEF820166D5A00ACF075 /* UIColor+Util.swift */,
 				B686EEF920166D5A00ACF075 /* UIApplication+Util.swift */,
@@ -701,6 +707,7 @@
 		B686EF7720166F1200ACF075 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				B6082DF5205487CE0022943F /* SettingsNavigationDelegate.swift */,
 				B6A8ABD6204B9AA9007FDAEC /* Settings.storyboard */,
 				B686EF7820166F1200ACF075 /* SettingsViewController.swift */,
 			);
@@ -710,7 +717,6 @@
 		B686EF7920166F1200ACF075 /* Location Detail */ = {
 			isa = PBXGroup;
 			children = (
-				B6A8ABDA204BA791007FDAEC /* LocationDetailNavigationDelegate.swift */,
 				B6299B83204F8FA900043CD1 /* LocationDetail.storyboard */,
 				B686EF7A20166F1200ACF075 /* LocationDetailViewController.swift */,
 			);
@@ -1058,6 +1064,7 @@
 				B6299B8B204FE16600043CD1 /* ModeChooserViewController.swift in Sources */,
 				B686EF4420166D8700ACF075 /* PlacemarkNode.swift in Sources */,
 				B6DCCDC5203B6EA300201385 /* PresentableManager.swift in Sources */,
+				B6082DF8205489510022943F /* MyPlacemarksNavigationDelegate.swift in Sources */,
 				B686EF3C20166D8700ACF075 /* UnitType.swift in Sources */,
 				B64D1222204E673A008E5C5F /* AnalyticsItem.swift in Sources */,
 				B64D121A204E5F8A008E5C5F /* CrashManager.swift in Sources */,
@@ -1069,6 +1076,7 @@
 				B686EF9E20166F1300ACF075 /* LocationListViewController+Cells.swift in Sources */,
 				B686EF9220166F1300ACF075 /* BaseViewController.swift in Sources */,
 				B686EF0F20166D5A00ACF075 /* UICollectionView+Util.swift in Sources */,
+				B6082DFA205496320022943F /* UIViewController+Alert.swift in Sources */,
 				B6A8ABC8204B8851007FDAEC /* ServiceResponse.swift in Sources */,
 				B686EF5820166D8700ACF075 /* DesiredContentHeightDelegate.swift in Sources */,
 				B6A8ABCA204B8851007FDAEC /* Data+JSON.swift in Sources */,
@@ -1090,7 +1098,6 @@
 				B6A8ABC9204B8851007FDAEC /* Loggable+Service.swift in Sources */,
 				B686EF9A20166F1300ACF075 /* MainViewController.swift in Sources */,
 				B6F451B220392AD50084AFC8 /* PresentingViewControllerDelegate.swift in Sources */,
-				B6A8ABDB204BA791007FDAEC /* LocationDetailNavigationDelegate.swift in Sources */,
 				B6F451B520393D470084AFC8 /* TopKnobVisualEffectView.swift in Sources */,
 				B6DCCDCD203B9CA200201385 /* VisualEffectFadeAnimator.swift in Sources */,
 				B686EF9820166F1300ACF075 /* AddLocationViewController.swift in Sources */,
@@ -1147,6 +1154,7 @@
 				B686EF0920166D5A00ACF075 /* String+Util.swift in Sources */,
 				B686EF0D20166D5A00ACF075 /* Double+Util.swift in Sources */,
 				B6BEF50420537C10002FD2AA /* SearchFoodNearbyViewController.swift in Sources */,
+				B6082DF6205487CE0022943F /* SettingsNavigationDelegate.swift in Sources */,
 				B686EF9720166F1300ACF075 /* AddLocationContainerViewController.swift in Sources */,
 				B686EF0A20166D5A00ACF075 /* UIColor+Util.swift in Sources */,
 				B686EF9620166F1300ACF075 /* LocationDetailViewController.swift in Sources */,

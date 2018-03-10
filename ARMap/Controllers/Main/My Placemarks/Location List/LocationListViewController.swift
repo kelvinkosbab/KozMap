@@ -15,7 +15,7 @@ protocol LocationListViewControllerDelegate : class {
   func shouldTransitionToAddPlacemark()
 }
 
-class LocationListViewController : BaseTableViewController, NSFetchedResultsControllerDelegate, DesiredContentHeightDelegate, DismissInteractable, LocationDetailNavigationDelegate, PlacemarkAPIDelegate {
+class LocationListViewController : BaseTableViewController, NSFetchedResultsControllerDelegate, DesiredContentHeightDelegate, DismissInteractable, PlacemarkAPIDelegate, MyPlacemarksNavigationDelegate {
   
   // MARK: - Static Accessors
   
@@ -172,9 +172,7 @@ class LocationListViewController : BaseTableViewController, NSFetchedResultsCont
     if UIDevice.current.isPhone {
       self.delegate?.shouldEdit(placemark: placemark)
     } else {
-      let viewController = self.getPlacemarkDetailViewController(placemark: placemark)
-      viewController.view.backgroundColor = .white
-      viewController.presentIn(self, withMode: .navStack)
+      self.pushLocationDetail(placemark: placemark)
     }
   }
 }

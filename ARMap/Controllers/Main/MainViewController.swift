@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController : BaseViewController, LocationDetailNavigationDelegate {
+class MainViewController : BaseViewController {
   
   // MARK: - Static Accessors
   
@@ -77,78 +77,6 @@ class MainViewController : BaseViewController, LocationDetailNavigationDelegate 
       arViewController.delegate = self
       arViewController.trackingStateDelegate = self
       self.arViewController = arViewController
-    }
-  }
-  
-  // MARK: - Navigation
-  
-  func presentSettings() {
-    
-    guard self.presentedViewController == nil else {
-      return
-    }
-    
-    let settingsViewController = SettingsViewController.newViewController()
-    if UIDevice.current.isPhone {
-      settingsViewController.presentIn(self, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
-    } else {
-      settingsViewController.presentIn(self, withMode: .modal(.formSheet, .coverVertical), options: [])
-    }
-  }
-  
-  func presentPlacemarkList() {
-    
-    guard self.presentedViewController == nil else {
-      return
-    }
-    
-    let locationListViewController = LocationListViewController.newViewController(delegate: self)
-    if UIDevice.current.isPhone {
-      locationListViewController.presentIn(self, withMode: .custom(.topKnobBottomUp), options: [ .presentingViewControllerDelegate(self) ])
-    } else {
-      locationListViewController.presentIn(self, withMode: .modal(.formSheet, .coverVertical), options: [])
-    }
-  }
-  
-  func presentAddLocation() {
-    
-    guard self.presentedViewController == nil else {
-      return
-    }
-    
-    let addLocationContainerViewController = AddLocationContainerViewController.newViewController(locationDetailDelegate: self, searchDelegate: self)
-    if UIDevice.current.isPhone {
-      addLocationContainerViewController.presentIn(self, withMode: .custom(.topKnobBottomUp), options: [ .presentingViewControllerDelegate(self) ])
-    } else {
-      addLocationContainerViewController.presentIn(self, withMode: .modal(.formSheet, .coverVertical), options: [])
-    }
-  }
-  
-  func presentAddLocation(mapItem: MapItem) {
-    
-    guard self.presentedViewController == nil else {
-      return
-    }
-    
-    let addLocationViewController = AddLocationViewController.newViewController(mapItem: mapItem, delegate: self)
-    if UIDevice.current.isPhone {
-      addLocationViewController.presentIn(self, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
-    } else {
-      addLocationViewController.presentIn(self, withMode: .modal(.formSheet, .coverVertical), options: [])
-    }
-  }
-  
-  func presentLocationDetail(placemark: Placemark) {
-    
-    guard self.presentedViewController == nil else {
-      return
-    }
-    
-    let locationDetailViewController = self.getPlacemarkDetailViewController(placemark: placemark)
-    if UIDevice.current.isPhone {
-      locationDetailViewController.presentIn(self, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
-    } else {
-      locationDetailViewController.presentIn(self, withMode: .modal(.formSheet, .coverVertical), options: [])
     }
   }
   
@@ -272,19 +200,19 @@ extension MainViewController : ModeChooserDelegate {
 
 // MARK: - HomeTabBarViewDelegate
 
-extension MainViewController : HomeTabBarViewDelegate, ModeChooserNavigationDelegate, FoodNearbyNavigationDelegate {
+extension MainViewController : HomeTabBarViewDelegate, SettingsNavigationDelegate, ModeChooserNavigationDelegate, MyPlacemarksNavigationDelegate, FoodNearbyNavigationDelegate {
   
   func tabButtonSelected(type: HomeTabBarButtonType) {
     switch type {
     case .mode:
       self.presentModeChooser(delegate: self, options: [ .presentingViewControllerDelegate(self) ])
     case .settings:
-      self.presentSettings()
+      self.presentSettings(options: [ .presentingViewControllerDelegate(self) ])
       
     case .myPlacemarkAdd:
-      self.presentAddLocation()
+      self.presentAddLocation(addLocationDelegate: self, searchDelegate: self, options: [ .presentingViewControllerDelegate(self) ])
     case .myPlacemarkList:
-      self.presentPlacemarkList()
+      self.presentPlacemarkList(delegate: self, options: [ .presentingViewControllerDelegate(self) ])
       
     case .foodNearbyFavorites: break
     case .foodNearbyList:
