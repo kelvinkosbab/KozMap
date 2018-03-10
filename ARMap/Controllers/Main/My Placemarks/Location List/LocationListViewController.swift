@@ -152,7 +152,7 @@ class LocationListViewController : BaseViewController, NSFetchedResultsControlle
     } else {
       let viewController = self.getPlacemarkDetailViewController(placemark: placemark)
       viewController.view.backgroundColor = .white
-      self.present(viewController: viewController, withMode: .navStack)
+      viewController.presentIn(self, withMode: .navStack)
     }
   }
 }

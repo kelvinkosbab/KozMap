@@ -65,7 +65,7 @@ extension MainViewController : ARStateDelegate {
   
   private func presentConfiguringViewController(state: ARState) {
     let configuringViewController = ConfiguringViewController.newViewController(state: .statusMessage(state.status, state.message))
-    self.present(viewController: configuringViewController, withMode: .custom(.visualEffectFade), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
+    configuringViewController.presentIn(self, withMode: .custom(.visualEffectFade), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
   }
   
   func hideConfiguringView() {

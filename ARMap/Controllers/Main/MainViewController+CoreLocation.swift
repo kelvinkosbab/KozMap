@@ -89,3 +89,14 @@ extension MainViewController : SearchViewControllerDelegate {
     }
   }
 }
+
+// MARK: - SearchFoodNearbyViewControllerDelegate
+
+extension MainViewController : SearchFoodNearbyViewControllerDelegate {
+  
+  func shouldAdd(foodNearybyMapItem mapItem: MapItem) {
+    self.dismiss(animated: true) { [weak self] in
+//      self?.presentAddLocation(mapItem: mapItem)
+    }
+  }
+}

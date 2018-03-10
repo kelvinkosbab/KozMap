@@ -113,6 +113,10 @@
 		B6A8ABD9204B9AEC007FDAEC /* Configuring.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6A8ABD8204B9AEC007FDAEC /* Configuring.storyboard */; };
 		B6A8ABDB204BA791007FDAEC /* LocationDetailNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A8ABDA204BA791007FDAEC /* LocationDetailNavigationDelegate.swift */; };
 		B6A8ABDD204BB073007FDAEC /* PlacemarkAPIDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A8ABDC204BB073007FDAEC /* PlacemarkAPIDelegate.swift */; };
+		B6BEF50220537BF4002FD2AA /* FoodNearby.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6BEF50120537BF4002FD2AA /* FoodNearby.storyboard */; };
+		B6BEF50420537C10002FD2AA /* SearchFoodNearbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BEF50320537C10002FD2AA /* SearchFoodNearbyViewController.swift */; };
+		B6BEF50620537E50002FD2AA /* FoodNearbyNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BEF50520537E50002FD2AA /* FoodNearbyNavigationDelegate.swift */; };
+		B6BEF50820538391002FD2AA /* ModeChooserNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BEF50720538391002FD2AA /* ModeChooserNavigationDelegate.swift */; };
 		B6C01FED2050CD3600437B45 /* Placemark+CoreLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C01FEC2050CD3600437B45 /* Placemark+CoreLocation.swift */; };
 		B6C01FEF2050CD6000437B45 /* Placemark+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C01FEE2050CD6000437B45 /* Placemark+Util.swift */; };
 		B6DCCDBD203B355C00201385 /* TopKnobBottomUpAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDBC203B355C00201385 /* TopKnobBottomUpAnimator.swift */; };
@@ -256,6 +260,10 @@
 		B6A8ABD8204B9AEC007FDAEC /* Configuring.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Configuring.storyboard; sourceTree = "<group>"; };
 		B6A8ABDA204BA791007FDAEC /* LocationDetailNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailNavigationDelegate.swift; sourceTree = "<group>"; };
 		B6A8ABDC204BB073007FDAEC /* PlacemarkAPIDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacemarkAPIDelegate.swift; sourceTree = "<group>"; };
+		B6BEF50120537BF4002FD2AA /* FoodNearby.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FoodNearby.storyboard; sourceTree = "<group>"; };
+		B6BEF50320537C10002FD2AA /* SearchFoodNearbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFoodNearbyViewController.swift; sourceTree = "<group>"; };
+		B6BEF50520537E50002FD2AA /* FoodNearbyNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodNearbyNavigationDelegate.swift; sourceTree = "<group>"; };
+		B6BEF50720538391002FD2AA /* ModeChooserNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeChooserNavigationDelegate.swift; sourceTree = "<group>"; };
 		B6C01FEC2050CD3600437B45 /* Placemark+CoreLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Placemark+CoreLocation.swift"; sourceTree = "<group>"; };
 		B6C01FEE2050CD6000437B45 /* Placemark+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Placemark+Util.swift"; sourceTree = "<group>"; };
 		B6DCCDBC203B355C00201385 /* TopKnobBottomUpAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopKnobBottomUpAnimator.swift; sourceTree = "<group>"; };
@@ -340,6 +348,9 @@
 		B607C7B12052664200E57A63 /* Food Nearby */ = {
 			isa = PBXGroup;
 			children = (
+				B6BEF50120537BF4002FD2AA /* FoodNearby.storyboard */,
+				B6BEF50520537E50002FD2AA /* FoodNearbyNavigationDelegate.swift */,
+				B6BEF50020537BC1002FD2AA /* Search */,
 			);
 			path = "Food Nearby";
 			sourceTree = "<group>";
@@ -397,6 +408,7 @@
 			isa = PBXGroup;
 			children = (
 				B6299B8C204FE17E00043CD1 /* ModeChooser.storyboard */,
+				B6BEF50720538391002FD2AA /* ModeChooserNavigationDelegate.swift */,
 				B6299B8A204FE16600043CD1 /* ModeChooserViewController.swift */,
 			);
 			path = "Mode Chooser";
@@ -792,6 +804,14 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		B6BEF50020537BC1002FD2AA /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				B6BEF50320537C10002FD2AA /* SearchFoodNearbyViewController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		B6C01FEB2050CD2500437B45 /* Placemark */ = {
 			isa = PBXGroup;
 			children = (
@@ -936,6 +956,7 @@
 				B686EF3E20166D8700ACF075 /* Models.scnassets in Resources */,
 				B6A8ABD3204B9A5B007FDAEC /* Permissions.storyboard in Resources */,
 				B686EEDA20166C7300ACF075 /* Assets.xcassets in Resources */,
+				B6BEF50220537BF4002FD2AA /* FoodNearby.storyboard in Resources */,
 				B664AE0F20503B8200719D5A /* HomeTabBarView.xib in Resources */,
 				B6A8ABD5204B9A92007FDAEC /* InlineColorChooser.storyboard in Resources */,
 				B6A8ABD7204B9AA9007FDAEC /* Settings.storyboard in Resources */,
@@ -1075,6 +1096,7 @@
 				B686EF9820166F1300ACF075 /* AddLocationViewController.swift in Sources */,
 				B686EF5720166D8700ACF075 /* KeyboardFrameRespondable.swift in Sources */,
 				B64D1220204E670B008E5C5F /* AnalyticsScreen.swift in Sources */,
+				B6BEF50820538391002FD2AA /* ModeChooserNavigationDelegate.swift in Sources */,
 				B6DCCDDF203BDF4400201385 /* CustomPresentationController.swift in Sources */,
 				B686EED820166C7300ACF075 /* ARMap.xcdatamodeld in Sources */,
 				B686EF0520166D5A00ACF075 /* CLLocation+Util.swift in Sources */,
@@ -1110,6 +1132,7 @@
 				B686EF3F20166D8700ACF075 /* ARSCNView+Util.swift in Sources */,
 				B686EF4320166D8700ACF075 /* AxisNode.swift in Sources */,
 				B64D1224204E6744008E5C5F /* AnalyticsEvent.swift in Sources */,
+				B6BEF50620537E50002FD2AA /* FoodNearbyNavigationDelegate.swift in Sources */,
 				B686EFA320166F1300ACF075 /* BaseTableViewController.swift in Sources */,
 				B686EF9520166F1300ACF075 /* SettingsViewController.swift in Sources */,
 				B686EF9F20166F1300ACF075 /* ARViewController+Gestures.swift in Sources */,
@@ -1123,6 +1146,7 @@
 				B686EF0020166D5A00ACF075 /* CLLocationCoordinate2D+Util.swift in Sources */,
 				B686EF0920166D5A00ACF075 /* String+Util.swift in Sources */,
 				B686EF0D20166D5A00ACF075 /* Double+Util.swift in Sources */,
+				B6BEF50420537C10002FD2AA /* SearchFoodNearbyViewController.swift in Sources */,
 				B686EF9720166F1300ACF075 /* AddLocationContainerViewController.swift in Sources */,
 				B686EF0A20166D5A00ACF075 /* UIColor+Util.swift in Sources */,
 				B686EF9620166F1300ACF075 /* LocationDetailViewController.swift in Sources */,

@@ -90,9 +90,9 @@ class MainViewController : BaseViewController, LocationDetailNavigationDelegate 
     
     let settingsViewController = SettingsViewController.newViewController()
     if UIDevice.current.isPhone {
-      self.present(viewController: settingsViewController, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
+      settingsViewController.presentIn(self, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
     } else {
-      self.present(viewController: settingsViewController, withMode: .modal(.formSheet, .coverVertical), options: [])
+      settingsViewController.presentIn(self, withMode: .modal(.formSheet, .coverVertical), options: [])
     }
   }
   
@@ -104,9 +104,9 @@ class MainViewController : BaseViewController, LocationDetailNavigationDelegate 
     
     let locationListViewController = LocationListViewController.newViewController(delegate: self)
     if UIDevice.current.isPhone {
-      self.present(viewController: locationListViewController, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
+      locationListViewController.presentIn(self, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
     } else {
-      self.present(viewController: locationListViewController, withMode: .modal(.formSheet, .coverVertical), options: [])
+      locationListViewController.presentIn(self, withMode: .modal(.formSheet, .coverVertical), options: [])
     }
   }
   
@@ -118,9 +118,9 @@ class MainViewController : BaseViewController, LocationDetailNavigationDelegate 
     
     let addLocationContainerViewController = AddLocationContainerViewController.newViewController(locationDetailDelegate: self, searchDelegate: self)
     if UIDevice.current.isPhone {
-      self.present(viewController: addLocationContainerViewController, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
+      addLocationContainerViewController.presentIn(self, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
     } else {
-      self.present(viewController: addLocationContainerViewController, withMode: .modal(.formSheet, .coverVertical), options: [])
+      addLocationContainerViewController.presentIn(self, withMode: .modal(.formSheet, .coverVertical), options: [])
     }
   }
   
@@ -132,9 +132,9 @@ class MainViewController : BaseViewController, LocationDetailNavigationDelegate 
     
     let addLocationViewController = AddLocationViewController.newViewController(mapItem: mapItem, delegate: self)
     if UIDevice.current.isPhone {
-      self.present(viewController: addLocationViewController, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
+      addLocationViewController.presentIn(self, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
     } else {
-      self.present(viewController: addLocationViewController, withMode: .modal(.formSheet, .coverVertical), options: [])
+      addLocationViewController.presentIn(self, withMode: .modal(.formSheet, .coverVertical), options: [])
     }
   }
   
@@ -146,9 +146,9 @@ class MainViewController : BaseViewController, LocationDetailNavigationDelegate 
     
     let locationDetailViewController = self.getPlacemarkDetailViewController(placemark: placemark)
     if UIDevice.current.isPhone {
-      self.present(viewController: locationDetailViewController, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
+      locationDetailViewController.presentIn(self, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
     } else {
-      self.present(viewController: locationDetailViewController, withMode: .modal(.formSheet, .coverVertical), options: [])
+      locationDetailViewController.presentIn(self, withMode: .modal(.formSheet, .coverVertical), options: [])
     }
   }
   
@@ -254,11 +254,12 @@ extension MainViewController : UIPopoverPresentationControllerDelegate {
 
 extension MainViewController : ModeChooserDelegate {
   
-  func didChooseMode(_ appMode: AppMode, sender: PresentableController) {
+  func didChooseMode(_ appMode: AppMode, sender: UIViewController) {
     
     // Dismiss the sender
-    sender.dismissController(completion: nil)
+    sender.dismiss(animated: true, completion: nil)
     
+    // Check change in app mode
     guard self.appMode != appMode else {
       return
     }
@@ -271,13 +272,12 @@ extension MainViewController : ModeChooserDelegate {
 
 // MARK: - HomeTabBarViewDelegate
 
-extension MainViewController : HomeTabBarViewDelegate {
+extension MainViewController : HomeTabBarViewDelegate, ModeChooserNavigationDelegate, FoodNearbyNavigationDelegate {
   
   func tabButtonSelected(type: HomeTabBarButtonType) {
     switch type {
     case .mode:
-      let modeChooserViewController = ModeChooserViewController.newViewController(delegate: self)
-      self.present(viewController: modeChooserViewController, withMode: .custom(.visualEffectFade), options: [ .presentingViewControllerDelegate(self) ])
+      self.presentModeChooser(delegate: self, options: [ .presentingViewControllerDelegate(self) ])
     case .settings:
       self.presentSettings()
       
@@ -287,7 +287,8 @@ extension MainViewController : HomeTabBarViewDelegate {
       self.presentPlacemarkList()
       
     case .foodNearbyFavorites: break
-    case .foodNearbyList: break
+    case .foodNearbyList:
+      self.presentFoodNearbySearch(delegate: self, options: [ .presentingViewControllerDelegate(self) ])
       
     case .mountainList: break
     }
