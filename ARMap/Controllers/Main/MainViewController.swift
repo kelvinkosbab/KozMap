@@ -118,7 +118,7 @@ class MainViewController : BaseViewController, LocationDetailNavigationDelegate 
     
     let addLocationContainerViewController = AddLocationContainerViewController.newViewController(locationDetailDelegate: self, searchDelegate: self)
     if UIDevice.current.isPhone {
-      addLocationContainerViewController.presentIn(self, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
+      addLocationContainerViewController.presentIn(self, withMode: .custom(.topKnobBottomUp), options: [ .presentingViewControllerDelegate(self) ])
     } else {
       addLocationContainerViewController.presentIn(self, withMode: .modal(.formSheet, .coverVertical), options: [])
     }

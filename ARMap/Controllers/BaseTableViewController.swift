@@ -22,3 +22,10 @@ class BaseTableViewController : UITableViewController, PresentableController {
     return 60
   }
 }
+
+extension BaseTableViewController {
+  
+  var baseNavigationController: BaseNavigationController? {
+    return self.navigationController as? BaseNavigationController
+  }
+}

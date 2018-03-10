@@ -87,8 +87,8 @@
 		B686EF9820166F1300ACF075 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF7D20166F1200ACF075 /* AddLocationViewController.swift */; };
 		B686EF9920166F1300ACF075 /* MainViewController+AR.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF7E20166F1200ACF075 /* MainViewController+AR.swift */; };
 		B686EF9A20166F1300ACF075 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF7F20166F1200ACF075 /* MainViewController.swift */; };
-		B686EF9B20166F1300ACF075 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF8120166F1200ACF075 /* SearchViewController.swift */; };
-		B686EF9C20166F1300ACF075 /* SearchViewController+Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF8220166F1200ACF075 /* SearchViewController+Cells.swift */; };
+		B686EF9B20166F1300ACF075 /* MyPlacemarkSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF8120166F1200ACF075 /* MyPlacemarkSearchViewController.swift */; };
+		B686EF9C20166F1300ACF075 /* MyPlacemarkSearchViewController+Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF8220166F1200ACF075 /* MyPlacemarkSearchViewController+Cells.swift */; };
 		B686EF9D20166F1300ACF075 /* LocationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF8420166F1200ACF075 /* LocationListViewController.swift */; };
 		B686EF9E20166F1300ACF075 /* LocationListViewController+Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF8520166F1200ACF075 /* LocationListViewController+Cells.swift */; };
 		B686EF9F20166F1300ACF075 /* ARViewController+Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF8720166F1200ACF075 /* ARViewController+Gestures.swift */; };
@@ -234,8 +234,8 @@
 		B686EF7D20166F1200ACF075 /* AddLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
 		B686EF7E20166F1200ACF075 /* MainViewController+AR.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MainViewController+AR.swift"; sourceTree = "<group>"; };
 		B686EF7F20166F1200ACF075 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		B686EF8120166F1200ACF075 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		B686EF8220166F1200ACF075 /* SearchViewController+Cells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SearchViewController+Cells.swift"; sourceTree = "<group>"; };
+		B686EF8120166F1200ACF075 /* MyPlacemarkSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPlacemarkSearchViewController.swift; sourceTree = "<group>"; };
+		B686EF8220166F1200ACF075 /* MyPlacemarkSearchViewController+Cells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MyPlacemarkSearchViewController+Cells.swift"; sourceTree = "<group>"; };
 		B686EF8420166F1200ACF075 /* LocationListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationListViewController.swift; sourceTree = "<group>"; };
 		B686EF8520166F1200ACF075 /* LocationListViewController+Cells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LocationListViewController+Cells.swift"; sourceTree = "<group>"; };
 		B686EF8720166F1200ACF075 /* ARViewController+Gestures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ARViewController+Gestures.swift"; sourceTree = "<group>"; };
@@ -692,8 +692,8 @@
 				B686EF8620166F1200ACF075 /* Placemark AR */,
 				B686EF7720166F1200ACF075 /* Settings */,
 				B607C7AF2052662100E57A63 /* My Placemarks */,
-				B607C7B02052663800E57A63 /* Mountain Viewer */,
 				B607C7B12052664200E57A63 /* Food Nearby */,
+				B607C7B02052663800E57A63 /* Mountain Viewer */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -732,8 +732,8 @@
 		B686EF8020166F1200ACF075 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				B686EF8120166F1200ACF075 /* SearchViewController.swift */,
-				B686EF8220166F1200ACF075 /* SearchViewController+Cells.swift */,
+				B686EF8120166F1200ACF075 /* MyPlacemarkSearchViewController.swift */,
+				B686EF8220166F1200ACF075 /* MyPlacemarkSearchViewController+Cells.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -1107,7 +1107,7 @@
 				B6C01FED2050CD3600437B45 /* Placemark+CoreLocation.swift in Sources */,
 				B686EF4020166D8700ACF075 /* SCNMaterial+Util.swift in Sources */,
 				B686EF0E20166D5A00ACF075 /* UIDevice+Util.swift in Sources */,
-				B686EF9C20166F1300ACF075 /* SearchViewController+Cells.swift in Sources */,
+				B686EF9C20166F1300ACF075 /* MyPlacemarkSearchViewController+Cells.swift in Sources */,
 				B64423FB20410BE9006E524A /* TextFlagPlacemarkNode.swift in Sources */,
 				B686EF1020166D5A00ACF075 /* UIView+Util.swift in Sources */,
 				B6DCCDD5203BD4CA00201385 /* BottomUpAnimator.swift in Sources */,
@@ -1166,7 +1166,7 @@
 				B686EF5920166D8700ACF075 /* BatchUpdatable.swift in Sources */,
 				B6DCCDDB203BDC0800201385 /* TopDownAnimator.swift in Sources */,
 				B6A8ABD1204B89C2007FDAEC /* ClassNamable.swift in Sources */,
-				B686EF9B20166F1300ACF075 /* SearchViewController.swift in Sources */,
+				B686EF9B20166F1300ACF075 /* MyPlacemarkSearchViewController.swift in Sources */,
 				B686EF5D20166D8700ACF075 /* PermissionManager.swift in Sources */,
 				B6DCCDBD203B355C00201385 /* TopKnobBottomUpAnimator.swift in Sources */,
 				B6DCCDE7203BEDCA00201385 /* LeftMenuAnimator.swift in Sources */,

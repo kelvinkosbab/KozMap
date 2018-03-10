@@ -13,7 +13,7 @@ protocol SearchFoodNearbyViewControllerDelegate : class {
   func shouldAdd(foodNearybyMapItem mapItem: MapItem)
 }
 
-class SearchFoodNearbyViewController : BaseViewController, DismissInteractable {
+class SearchFoodNearbyViewController : BaseTableViewController, DismissInteractable {
   
   // MARK: - Static Accessors
   
@@ -34,6 +34,9 @@ class SearchFoodNearbyViewController : BaseViewController, DismissInteractable {
     if let view = self.view {
       views.append(view)
     }
+    if let navigationBar = self.navigationController?.navigationBar {
+      views.append(navigationBar)
+    }
     if let tableView = self.tableView {
       views.append(tableView)
     }
@@ -41,9 +44,6 @@ class SearchFoodNearbyViewController : BaseViewController, DismissInteractable {
   }
   
   // MARK: - Properties
-  
-  @IBOutlet weak var searchBar: UISearchBar!
-  @IBOutlet weak var tableView: UITableView!
   
   weak var delegate: SearchFoodNearbyViewControllerDelegate? = nil
   let locationSearchService = LocationSearchService()
@@ -54,30 +54,63 @@ class SearchFoodNearbyViewController : BaseViewController, DismissInteractable {
     return LocationManager.shared.currentLocation
   }
   
+  var searchBar: UISearchBar? {
+    return self.navigationItem.searchController?.searchBar
+  }
+  
+  override var navigationController: UINavigationController? {
+    return super.navigationController ?? self.parent?.navigationController
+  }
+  
   // MARK: - Lifecycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.tableView.delegate = self
-    self.tableView.dataSource = self
-    self.searchBar.delegate = self
+    self.navigationItem.title = "Search"
+    
+    if !UIDevice.current.isPhone {
+      self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(self.closeButtonSelected))
+    }
+    
+    // Configure the search bar
+    let searchController = UISearchController(searchResultsController: nil)
+    searchController.hidesNavigationBarDuringPresentation = false
+    searchController.obscuresBackgroundDuringPresentation = false
+    searchController.searchResultsUpdater = nil
+    searchController.searchBar.placeholder = "Search for..."
+    self.navigationItem.searchController = searchController
+    searchController.searchBar.delegate = self
+    
+    // Configure navigation bar
+    self.baseNavigationController?.navigationBarStyle = .transparentBlueTint
+    self.navigationItem.largeTitleDisplayMode = .never
+    self.navigationItem.hidesSearchBarWhenScrolling = false
+    
+    // Styles based on presentation mode
+    switch self.presentedMode {
+    case .custom(.topKnobBottomUp):
+      self.navigationController?.view.backgroundColor = .clear
+      self.view.backgroundColor = .clear
+      self.tableView.backgroundColor = .clear
+    default: break
+    }
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
-    // Listen for current location updates
+    // Listen for updates to current location
     NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveUpdatedLocationNotification(_:)), name: .locationManagerDidUpdateCurrentLocation, object: nil)
     
-    // Pre-fill data
+    // Pre-fetch nearby food
     self.performSearch(text: "food")
   }
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     
-    self.searchBar.resignFirstResponder()
+    self.searchBar?.resignFirstResponder()
   }
   
   override func viewDidDisappear(_ animated: Bool) {
@@ -112,25 +145,31 @@ class SearchFoodNearbyViewController : BaseViewController, DismissInteractable {
     self.mapItems = mapItems
     self.tableView.reloadData()
   }
+  
+  // MARK: - Actions
+  
+  @objc func closeButtonSelected() {
+    self.dismissController()
+  }
 }
 
 // MARK: - UITableView
 
-extension SearchFoodNearbyViewController : UITableViewDelegate, UITableViewDataSource {
+extension SearchFoodNearbyViewController {
   
-  func numberOfSections(in tableView: UITableView) -> Int {
+  override func numberOfSections(in tableView: UITableView) -> Int {
     return 1
   }
   
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return self.mapItems.count
   }
   
-  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 50
   }
   
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "SearchViewControllerCell", for: indexPath) as! SearchViewControllerCell
     cell.backgroundColor = .clear
     
@@ -145,7 +184,7 @@ extension SearchFoodNearbyViewController : UITableViewDelegate, UITableViewDataS
     return cell
   }
   
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
     
     // Add the map item
@@ -169,7 +208,7 @@ extension SearchFoodNearbyViewController : UISearchBarDelegate {
   
   func performSearch(text: String?) {
     
-    guard let text = self.searchBar.text, let currentLocation = self.currentLocation else {
+    guard let text = text, let currentLocation = self.currentLocation else {
       return
     }
     

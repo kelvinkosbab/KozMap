@@ -81,7 +81,7 @@ extension MainViewController : LocationListViewControllerDelegate {
 
 // MARK: - SearchViewControllerDelegate
 
-extension MainViewController : SearchViewControllerDelegate {
+extension MainViewController : MyPlacemarkSearchViewControllerDelegate {
   
   func shouldAdd(mapItem: MapItem) {
     self.dismiss(animated: true) { [weak self] in

@@ -17,7 +17,7 @@ class AddLocationMapViewController : BaseViewController, DismissInteractable {
     return self.newViewController(fromStoryboardWithName: "AddLocation")
   }
   
-  static func newViewController(delegate: SearchViewControllerDelegate?) -> AddLocationMapViewController {
+  static func newViewController(delegate: MyPlacemarkSearchViewControllerDelegate?) -> AddLocationMapViewController {
     let viewController = self.newViewController()
     viewController.delegate = delegate
     return viewController
@@ -38,7 +38,7 @@ class AddLocationMapViewController : BaseViewController, DismissInteractable {
   @IBOutlet weak var mapView: MKMapView!
   @IBOutlet weak var addLocationButton: UIButton!
   
-  weak var delegate: SearchViewControllerDelegate? = nil
+  weak var delegate: MyPlacemarkSearchViewControllerDelegate? = nil
   
   var locationManager: LocationManager {
     return LocationManager.shared
@@ -66,6 +66,8 @@ class AddLocationMapViewController : BaseViewController, DismissInteractable {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    self.navigationItem.title = "Map"
     
     // Configure map
     self.mapView.delegate = self

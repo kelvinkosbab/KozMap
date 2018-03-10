@@ -19,7 +19,7 @@ extension FoodNearbyNavigationDelegate where Self : BaseViewController {
     
     let searchFoodNearbyViewController = SearchFoodNearbyViewController.newViewController(delegate: delegate)
     if UIDevice.current.isPhone {
-      searchFoodNearbyViewController.presentIn(self, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController ] + options)
+      searchFoodNearbyViewController.presentIn(self, withMode: .custom(.topKnobBottomUp), options: options)
     } else {
       searchFoodNearbyViewController.presentIn(self, withMode: .modal(.formSheet, .coverVertical), options: options)
     }

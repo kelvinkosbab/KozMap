@@ -19,7 +19,7 @@ class AddLocationContainerViewController : BaseViewController, DesiredContentHei
     return viewController
   }
   
-  static func newViewController(locationDetailDelegate: AddLocationViewControllerDelegate?, searchDelegate: SearchViewControllerDelegate?) -> AddLocationContainerViewController {
+  static func newViewController(locationDetailDelegate: AddLocationViewControllerDelegate?, searchDelegate: MyPlacemarkSearchViewControllerDelegate?) -> AddLocationContainerViewController {
     let viewController = self.newViewController()
     viewController.locationDetailDelegate = locationDetailDelegate
     viewController.searchDelegate = searchDelegate
@@ -39,6 +39,9 @@ class AddLocationContainerViewController : BaseViewController, DesiredContentHei
     if let view = self.view {
       views.append(view)
     }
+    if let navigationBar = self.navigationController?.navigationBar {
+      views.append(navigationBar)
+    }
     for viewController in self.orderedViewControllers {
       if let dismissInteractable = viewController as? DismissInteractable {
         views += dismissInteractable.dismissInteractiveViews
@@ -49,19 +52,24 @@ class AddLocationContainerViewController : BaseViewController, DesiredContentHei
   
   // MARK: - Properties
   
-  @IBOutlet weak var segmentedControl: UISegmentedControl!
-  
   private(set) var pageViewController: UIPageViewController? = nil
   weak var locationDetailDelegate: AddLocationViewControllerDelegate? = nil
-  weak var searchDelegate: SearchViewControllerDelegate? = nil
+  weak var searchDelegate: MyPlacemarkSearchViewControllerDelegate? = nil
   
   private(set) lazy var orderedViewControllers: [UIViewController] = {
+    
+    // Current location
     let currentLocationViewController = AddLocationViewController.newViewController(delegate: self.locationDetailDelegate)
     currentLocationViewController.view.backgroundColor = .clear
-    let searchViewController = SearchViewController.newViewController(delegate: self.searchDelegate)
+    
+    // Search
+    let searchViewController = MyPlacemarkSearchViewController.newViewController(delegate: self.searchDelegate)
     searchViewController.view.backgroundColor = .clear
+    
+    // Map
     let mapViewController = AddLocationMapViewController.newViewController(delegate: self.searchDelegate)
     mapViewController.view.backgroundColor = .clear
+    
     return [ currentLocationViewController, searchViewController, mapViewController ]
   }()
   
@@ -70,9 +78,24 @@ class AddLocationContainerViewController : BaseViewController, DesiredContentHei
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.title = "Add Placemark"
+    self.view.backgroundColor = .clear
+    if UIDevice.current.isPhone {
+      self.baseNavigationController?.navigationBarStyle = .transparentBlueTint
+    } else {
+      self.baseNavigationController?.navigationBarStyle = .standard
+      self.view.backgroundColor = .white
+    }
     
-    self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(self.closeButtonSelected))
+    self.navigationItem.largeTitleDisplayMode = .never
+    
+    if !UIDevice.current.isPhone {
+      self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(self.closeButtonSelected))
+    }
+  }
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    self.reloadContent()
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -115,7 +138,7 @@ class AddLocationContainerViewController : BaseViewController, DesiredContentHei
   var currentSelectedIndex: Int {
     if let _ = self.pageViewController?.viewControllers?.first as? AddLocationViewController {
       return 0
-    } else if let _ = self.pageViewController?.viewControllers?.first as? SearchViewController {
+    } else if let _ = self.pageViewController?.viewControllers?.first as? MyPlacemarkSearchViewController {
       return 1
     } else if let _ = self.pageViewController?.viewControllers?.first as? AddLocationMapViewController {
       return 2
@@ -124,7 +147,29 @@ class AddLocationContainerViewController : BaseViewController, DesiredContentHei
   }
   
   func reloadContent() {
-    self.segmentedControl.selectedSegmentIndex = self.currentSelectedIndex
+    switch self.currentSelectedIndex {
+    case 0:
+      let searchButton = UIBarButtonItem(title: "Search", style: .plain, target: self, action: #selector(self.searchNavigationButtonSelected))
+      let mapButton = UIBarButtonItem(title: "Map", style: .plain, target: self, action: #selector(self.mapNavigationButtonSelected))
+      self.navigationItem.rightBarButtonItems = [ mapButton, searchButton ]
+      self.navigationItem.title = "Here"
+    case 1:
+      let hereButton = UIBarButtonItem(title: "Here", style: .plain, target: self, action: #selector(self.hereNavigationButtonSelected))
+      let mapButton = UIBarButtonItem(title: "Map", style: .plain, target: self, action: #selector(self.mapNavigationButtonSelected))
+      self.navigationItem.rightBarButtonItems = [ mapButton, hereButton ]
+      self.navigationItem.title = "Search"
+    case 2:
+      let hereButton = UIBarButtonItem(title: "Here", style: .plain, target: self, action: #selector(self.hereNavigationButtonSelected))
+      let searchButton = UIBarButtonItem(title: "Search", style: .plain, target: self, action: #selector(self.searchNavigationButtonSelected))
+      self.navigationItem.rightBarButtonItems = [ searchButton, hereButton ]
+      self.navigationItem.title = "Map"
+    default:
+      self.navigationItem.rightBarButtonItems = nil
+    }
+    
+    // Configure search controller
+    self.navigationItem.searchController = self.pageViewController?.viewControllers?.first?.navigationItem.searchController
+    self.navigationItem.hidesSearchBarWhenScrolling = self.pageViewController?.viewControllers?.first?.navigationItem.hidesSearchBarWhenScrolling ?? true
   }
   
   // MARK: - Actions
@@ -133,26 +178,23 @@ class AddLocationContainerViewController : BaseViewController, DesiredContentHei
     self.dismissController()
   }
   
-  @IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl) {
-    switch sender.selectedSegmentIndex {
-    case 0:
-      if self.currentSelectedIndex != 0 {
-        let viewController = self.orderedViewControllers[0]
-        self.pageViewController?.setViewControllers([ viewController ], direction: .reverse, animated: true, completion: nil)
-      }
-    case 1:
-      if self.currentSelectedIndex != 1 {
-        let viewController = self.orderedViewControllers[1]
-        let direction: UIPageViewControllerNavigationDirection = self.currentSelectedIndex < 1 ? .forward : .reverse
-        self.pageViewController?.setViewControllers([ viewController ], direction: direction, animated: true, completion: nil)
-      }
-    case 2:
-      if self.currentSelectedIndex != 2 {
-        let viewController = self.orderedViewControllers[2]
-        self.pageViewController?.setViewControllers([ viewController ], direction: .forward, animated: true, completion: nil)
-      }
-    default: break
-    }
+  @objc func hereNavigationButtonSelected() {
+    let viewController = self.orderedViewControllers[0]
+    self.pageViewController?.setViewControllers([ viewController ], direction: .reverse, animated: true, completion: nil)
+    self.reloadContent()
+  }
+  
+  @objc func searchNavigationButtonSelected() {
+    let viewController = self.orderedViewControllers[1]
+    let direction: UIPageViewControllerNavigationDirection = self.currentSelectedIndex < 1 ? .forward : .reverse
+    self.pageViewController?.setViewControllers([ viewController ], direction: direction, animated: true, completion: nil)
+    self.reloadContent()
+  }
+  
+  @objc func mapNavigationButtonSelected() {
+    let viewController = self.orderedViewControllers[2]
+    self.pageViewController?.setViewControllers([ viewController ], direction: .forward, animated: true, completion: nil)
+    self.reloadContent()
   }
 }
 

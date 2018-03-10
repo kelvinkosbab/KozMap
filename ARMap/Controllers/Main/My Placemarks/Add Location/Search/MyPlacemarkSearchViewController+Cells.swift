@@ -1,5 +1,5 @@
 //
-//  SearchViewController+Cells.swift
+//  MyPlacemarkSearchViewController+Cells.swift
 //  KozMap
 //
 //  Created by Kelvin Kosbab on 11/17/17.
