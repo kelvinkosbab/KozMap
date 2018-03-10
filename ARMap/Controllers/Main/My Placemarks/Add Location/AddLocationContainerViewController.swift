@@ -78,15 +78,14 @@ class AddLocationContainerViewController : BaseViewController, DesiredContentHei
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.view.backgroundColor = .clear
+    self.navigationItem.largeTitleDisplayMode = .never
     if UIDevice.current.isPhone {
       self.baseNavigationController?.navigationBarStyle = .transparentBlueTint
+      self.view.backgroundColor = .clear
     } else {
       self.baseNavigationController?.navigationBarStyle = .standard
       self.view.backgroundColor = .white
     }
-    
-    self.navigationItem.largeTitleDisplayMode = .never
     
     if !UIDevice.current.isPhone {
       self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(self.closeButtonSelected))

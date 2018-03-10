@@ -15,7 +15,7 @@ protocol LocationListViewControllerDelegate : class {
   func shouldTransitionToAddPlacemark()
 }
 
-class LocationListViewController : BaseViewController, NSFetchedResultsControllerDelegate, DesiredContentHeightDelegate, DismissInteractable, LocationDetailNavigationDelegate, PlacemarkAPIDelegate {
+class LocationListViewController : BaseTableViewController, NSFetchedResultsControllerDelegate, DesiredContentHeightDelegate, DismissInteractable, LocationDetailNavigationDelegate, PlacemarkAPIDelegate {
   
   // MARK: - Static Accessors
   
@@ -43,12 +43,20 @@ class LocationListViewController : BaseViewController, NSFetchedResultsControlle
   // MARK: - DismissInteractable
   
   var dismissInteractiveViews: [UIView] {
-    return [ self.tableView ]
+    var views: [UIView] = []
+    if let view = self.view {
+      views.append(view)
+    }
+    if let tableView = self.tableView {
+      views.append(tableView)
+    }
+    if let navigationBar = self.navigationController?.navigationBar {
+      views.append(navigationBar)
+    }
+    return views
   }
   
   // MARK: - Properties
-  
-  @IBOutlet weak var tableView: UITableView!
   
   weak var delegate: LocationListViewControllerDelegate? = nil
   let rowHeight: CGFloat = 60
@@ -71,10 +79,20 @@ class LocationListViewController : BaseViewController, NSFetchedResultsControlle
     
     self.title = "My Placemarks"
     
-    self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(self.closeButtonSelected))
+    self.navigationItem.largeTitleDisplayMode = .never
+    if UIDevice.current.isPhone {
+      self.baseNavigationController?.navigationBarStyle = .transparentBlueTint
+      self.view.backgroundColor = .clear
+    } else {
+      self.baseNavigationController?.navigationBarStyle = .standard
+      self.view.backgroundColor = .white
+    }
     
-    self.tableView.delegate = self
-    self.tableView.dataSource = self
+    // Navigation items
+    if !UIDevice.current.isPhone {
+      self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(self.closeButtonSelected))
+    }
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addButtonSelected))
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -105,6 +123,10 @@ class LocationListViewController : BaseViewController, NSFetchedResultsControlle
   
   @objc func closeButtonSelected() {
     self.dismissController()
+  }
+  
+  @objc func addButtonSelected() {
+    self.delegate?.shouldTransitionToAddPlacemark()
   }
   
   // MARK: - NSFetchedResultsControllerDelegate
@@ -162,7 +184,7 @@ class LocationListViewController : BaseViewController, NSFetchedResultsControlle
 extension LocationListViewController {
   
   enum SectionType {
-    case placemarks([Placemark]), addPlacemark
+    case placemarks([Placemark])
   }
   
   func getSectionType(section: Int) -> SectionType? {
@@ -170,15 +192,13 @@ extension LocationListViewController {
     case 0:
       let placemarks = self.placemarks
       return .placemarks(placemarks)
-    case 1:
-      return .addPlacemark
     default:
       return nil
     }
   }
   
   enum RowType {
-    case placemark(Placemark), addPlacemark
+    case placemark(Placemark)
   }
   
   func getRowType(at indexPath: IndexPath) -> RowType? {
@@ -194,26 +214,19 @@ extension LocationListViewController {
         return .placemark(placemark)
       }
       return nil
-    case .addPlacemark:
-      switch indexPath.row {
-      case 0:
-        return .addPlacemark
-      default:
-        return nil
-      }
     }
   }
 }
 
 // MARK: - UITableView
 
-extension LocationListViewController : UITableViewDelegate, UITableViewDataSource {
+extension LocationListViewController {
   
-  func numberOfSections(in tableView: UITableView) -> Int {
-    return 2
+  override func numberOfSections(in tableView: UITableView) -> Int {
+    return 1
   }
   
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
     guard let sectionType = self.getSectionType(section: section) else {
       return 0
@@ -222,16 +235,14 @@ extension LocationListViewController : UITableViewDelegate, UITableViewDataSourc
     switch sectionType {
     case .placemarks(let placemarks):
       return placemarks.count
-    case .addPlacemark:
-      return 1
     }
   }
   
-  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return self.rowHeight
   }
   
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     guard let rowType = self.getRowType(at: indexPath) else {
       let cell = UITableViewCell()
@@ -245,16 +256,10 @@ extension LocationListViewController : UITableViewDelegate, UITableViewDataSourc
       cell.backgroundColor = .clear
       cell.configure(placemark: placemark, unitType: Defaults.shared.unitType, delegate: self, hideMoreButton: !UIDevice.current.isPhone)
       return cell
-      
-    case .addPlacemark:
-      let cell = tableView.dequeueReusableCell(withIdentifier: LocationListAddPlacemarkCell.name, for: indexPath) as! LocationListAddPlacemarkCell
-      cell.backgroundColor = .clear
-      cell.contentView.backgroundColor = .clear
-      return cell
     }
   }
   
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
     
     guard let rowType = self.getRowType(at: indexPath) else {
@@ -269,8 +274,6 @@ extension LocationListViewController : UITableViewDelegate, UITableViewDataSourc
     switch rowType {
     case .placemark(let placemark):
       self.transitionToDetail(placemark: placemark)
-    case .addPlacemark:
-      self.delegate?.shouldTransitionToAddPlacemark()
     }
   }
 }

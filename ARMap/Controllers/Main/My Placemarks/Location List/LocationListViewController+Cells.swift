@@ -68,9 +68,3 @@ class LocationListViewControllerCell : UITableViewCell, ClassNamable {
     }
   }
 }
-
-// MARK: - LocationListAddPlacemarkCell
-
-class LocationListAddPlacemarkCell : UITableViewCell, ClassNamable {
-  @IBOutlet weak var addLabel: UILabel!
-}

@@ -104,7 +104,7 @@ class MainViewController : BaseViewController, LocationDetailNavigationDelegate 
     
     let locationListViewController = LocationListViewController.newViewController(delegate: self)
     if UIDevice.current.isPhone {
-      locationListViewController.presentIn(self, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController, .presentingViewControllerDelegate(self) ])
+      locationListViewController.presentIn(self, withMode: .custom(.topKnobBottomUp), options: [ .presentingViewControllerDelegate(self) ])
     } else {
       locationListViewController.presentIn(self, withMode: .modal(.formSheet, .coverVertical), options: [])
     }
