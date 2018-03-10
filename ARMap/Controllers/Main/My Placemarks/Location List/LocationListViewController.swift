@@ -35,7 +35,7 @@ class LocationListViewController : BaseTableViewController, NSFetchedResultsCont
   
   var desiredContentHeight: CGFloat {
     let totalPlacemarks = Placemark.countAll()
-    let requiredTableHeight = CGFloat(totalPlacemarks + 1) * self.rowHeight
+    let requiredTableHeight = CGFloat(totalPlacemarks) * self.rowHeight
     let padding: CGFloat = 50
     return requiredTableHeight + padding
   }
