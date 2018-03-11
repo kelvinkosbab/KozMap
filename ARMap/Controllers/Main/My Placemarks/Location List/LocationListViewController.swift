@@ -79,7 +79,7 @@ class LocationListViewController : BaseTableViewController, NSFetchedResultsCont
     
     self.title = "My Placemarks"
     
-    self.navigationItem.largeTitleDisplayMode = .never
+    self.navigationItem.largeTitleDisplayMode = UIDevice.current.isPhone ? .never : .always
     if UIDevice.current.isPhone {
       self.baseNavigationController?.navigationBarStyle = .transparentBlueTint
       self.view.backgroundColor = .clear

@@ -14,7 +14,7 @@ extension SettingsNavigationDelegate where Self : UIViewController {
   func presentSettings(options: [PresentableControllerOption] = []) {
     let settingsViewController = SettingsViewController.newViewController()
     if UIDevice.current.isPhone {
-      settingsViewController.presentIn(self, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController ] + options)
+      settingsViewController.presentIn(self, withMode: .custom(.topKnobBottomUp), options: options)
     } else {
       settingsViewController.presentIn(self, withMode: .modal(.formSheet, .coverVertical), options: options)
     }

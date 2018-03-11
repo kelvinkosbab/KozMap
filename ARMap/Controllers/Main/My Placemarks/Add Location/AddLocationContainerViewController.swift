@@ -78,7 +78,7 @@ class AddLocationContainerViewController : BaseViewController, DesiredContentHei
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.navigationItem.largeTitleDisplayMode = .never
+    self.navigationItem.largeTitleDisplayMode = UIDevice.current.isPhone ? .never : .always
     if UIDevice.current.isPhone {
       self.baseNavigationController?.navigationBarStyle = .transparentBlueTint
       self.view.backgroundColor = .clear

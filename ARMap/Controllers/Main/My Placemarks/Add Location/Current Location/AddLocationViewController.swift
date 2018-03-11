@@ -89,7 +89,7 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.navigationItem.largeTitleDisplayMode = .never
+    self.navigationItem.largeTitleDisplayMode = UIDevice.current.isPhone ? .never : .always
     if let _ = self.mapItem {
       self.navigationItem.title = "Add Location"
     } else {

@@ -21,7 +21,7 @@ class SettingsViewController : BaseViewController, DesiredContentHeightDelegate,
   // MARK: - DesiredContentHeightDelegate
   
   var desiredContentHeight: CGFloat {
-    return 250
+    return 200
   }
   
   // MARK: - DismissInteractable
@@ -31,12 +31,14 @@ class SettingsViewController : BaseViewController, DesiredContentHeightDelegate,
     if let view = self.view {
       views.append(view)
     }
+    if let navigationBar = self.navigationController?.navigationBar {
+      views.append(navigationBar)
+    }
     return views
   }
   
   // MARK: - Properties
   
-  @IBOutlet weak var settingsLabel: UILabel!
   @IBOutlet weak var unitLabel: UILabel!
   @IBOutlet weak var unitTypeControl: UISegmentedControl!
   @IBOutlet weak var versionLabel: UILabel!
@@ -50,7 +52,18 @@ class SettingsViewController : BaseViewController, DesiredContentHeightDelegate,
     
     self.title = "Settings"
     
-    self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(self.closeButtonSelected))
+    self.navigationItem.largeTitleDisplayMode = UIDevice.current.isPhone ? .never : .always
+    if UIDevice.current.isPhone {
+      self.baseNavigationController?.navigationBarStyle = .transparentBlueTint
+      self.view.backgroundColor = .clear
+    } else {
+      self.baseNavigationController?.navigationBarStyle = .standard
+      self.view.backgroundColor = .white
+    }
+    
+    if !UIDevice.current.isPhone {
+      self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(self.closeButtonSelected))
+    }
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -77,9 +90,6 @@ class SettingsViewController : BaseViewController, DesiredContentHeightDelegate,
   // MARK: - Content
   
   func reloadContent() {
-    
-    // Settings label
-    self.settingsLabel.isHidden = !UIDevice.current.isPhone
     
     // Unit type
     self.unitTypeControl.selectedSegmentIndex = Defaults.shared.unitType.rawValue

@@ -11,6 +11,8 @@ import UIKit
 protocol MyPlacemarksNavigationDelegate : class {}
 extension MyPlacemarksNavigationDelegate where Self : UIViewController {
   
+  // MARK: - Placemark List
+  
   func presentPlacemarkList(delegate: LocationListViewControllerDelegate?, options: [PresentableControllerOption] = []) {
     let locationListViewController = LocationListViewController.newViewController(delegate: delegate)
     if UIDevice.current.isPhone {
@@ -19,6 +21,8 @@ extension MyPlacemarksNavigationDelegate where Self : UIViewController {
       locationListViewController.presentIn(self, withMode: .modal(.formSheet, .coverVertical), options: options)
     }
   }
+  
+  // MARK: - Add Placemark
   
   func presentAddLocation(addLocationDelegate: AddLocationViewControllerDelegate?, searchDelegate: MyPlacemarkSearchViewControllerDelegate?, options: [PresentableControllerOption] = []) {
     let addLocationContainerViewController = AddLocationContainerViewController.newViewController(locationDetailDelegate: addLocationDelegate, searchDelegate: searchDelegate)
@@ -38,7 +42,7 @@ extension MyPlacemarksNavigationDelegate where Self : UIViewController {
     }
   }
   
-  // MARK: - Location Detail
+  // MARK: - Placemark Detail
   
   private func getLocationDetailViewController(placemark: Placemark) -> LocationDetailViewController {
     return LocationDetailViewController.newViewController(placemark: placemark)
