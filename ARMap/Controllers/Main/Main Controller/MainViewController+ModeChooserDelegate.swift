@@ -22,6 +22,14 @@ extension MainViewController : ModeChooserDelegate {
       return
     }
     
+    // Custom configurations based on app mode
+    switch appMode {
+    case .myPlacemark: break
+    case .food:
+      Defaults.shared.lastFoodSearchText = Defaults.shared.defaultFoodSearchText
+    case .mountain: break
+    }
+    
     // Update the mode and the home tab bar
     Defaults.shared.appMode = appMode
     self.appMode = appMode

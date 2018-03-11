@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // Set the initial app mode
     Defaults.shared.appMode = .myPlacemark
+    Defaults.shared.lastFoodSearchText = Defaults.shared.defaultFoodSearchText
     
     return true
   }

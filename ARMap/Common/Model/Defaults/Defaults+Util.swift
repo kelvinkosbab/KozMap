@@ -61,4 +61,10 @@ extension Defaults {
       MyDataManager.shared.saveMainContext()
     }
   }
+  
+  // MARK: - Food Nearby
+  
+  var defaultFoodSearchText: String {
+    return "food"
+  }
 }

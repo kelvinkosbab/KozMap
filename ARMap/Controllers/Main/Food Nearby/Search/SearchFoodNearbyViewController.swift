@@ -103,8 +103,10 @@ class SearchFoodNearbyViewController : BaseTableViewController, DismissInteracta
     // Listen for updates to current location
     NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveUpdatedLocationNotification(_:)), name: .locationManagerDidUpdateCurrentLocation, object: nil)
     
-    // Pre-fetch nearby food
-    self.performSearch(text: "food")
+    // Pre-fetch last search
+    self.performSearch(text: Defaults.shared.lastFoodSearchText)
+    
+    self.searchBar?.text = Defaults.shared.lastFoodSearchText == Defaults.shared.defaultFoodSearchText ? "" : Defaults.shared.lastFoodSearchText
   }
   
   override func viewWillDisappear(_ animated: Bool) {
@@ -212,6 +214,10 @@ extension SearchFoodNearbyViewController : UISearchBarDelegate {
       return
     }
     
+    // Update the last search result
+    Defaults.shared.lastFoodSearchText = text
+    
+    // Query for food nearby
     self.locationSearchService.queryLocations(query: text, currentLocation: currentLocation) { [weak self] mapItems in
       self?.reloadContent(mapItems: mapItems)
     }

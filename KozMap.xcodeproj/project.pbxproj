@@ -19,6 +19,7 @@
 		B6082E022054D4B30022943F /* MainViewController+ModeChooserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6082E012054D4B30022943F /* MainViewController+ModeChooserDelegate.swift */; };
 		B6082E042054D4D20022943F /* MainViewController+HomeTabBarViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6082E032054D4D20022943F /* MainViewController+HomeTabBarViewDelegate.swift */; };
 		B6082E062054D5050022943F /* MainViewController+UIPopoverPresentationControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6082E052054D5050022943F /* MainViewController+UIPopoverPresentationControllerDelegate.swift */; };
+		B6082E0A2055EC360022943F /* UINavigationController+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6082E092055EC360022943F /* UINavigationController+Util.swift */; };
 		B6299B82204F8F6500043CD1 /* LocationList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6299B81204F8F6500043CD1 /* LocationList.storyboard */; };
 		B6299B84204F8FA900043CD1 /* LocationDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6299B83204F8FA900043CD1 /* LocationDetail.storyboard */; };
 		B6299B88204F901D00043CD1 /* AddLocationMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6299B87204F901D00043CD1 /* AddLocationMapViewController.swift */; };
@@ -172,6 +173,8 @@
 		B6082E012054D4B30022943F /* MainViewController+ModeChooserDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+ModeChooserDelegate.swift"; sourceTree = "<group>"; };
 		B6082E032054D4D20022943F /* MainViewController+HomeTabBarViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+HomeTabBarViewDelegate.swift"; sourceTree = "<group>"; };
 		B6082E052054D5050022943F /* MainViewController+UIPopoverPresentationControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+UIPopoverPresentationControllerDelegate.swift"; sourceTree = "<group>"; };
+		B6082E082055EA220022943F /* ARMap 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ARMap 4.xcdatamodel"; sourceTree = "<group>"; };
+		B6082E092055EC360022943F /* UINavigationController+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Util.swift"; sourceTree = "<group>"; };
 		B6299B81204F8F6500043CD1 /* LocationList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationList.storyboard; sourceTree = "<group>"; };
 		B6299B83204F8FA900043CD1 /* LocationDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationDetail.storyboard; sourceTree = "<group>"; };
 		B6299B87204F901D00043CD1 /* AddLocationMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationMapViewController.swift; sourceTree = "<group>"; };
@@ -608,6 +611,7 @@
 			isa = PBXGroup;
 			children = (
 				B686EEF520166D5A00ACF075 /* Distance.swift */,
+				B6082E092055EC360022943F /* UINavigationController+Util.swift */,
 				B686EEF620166D5A00ACF075 /* UIViewController+Util.swift */,
 				B6082DF9205496320022943F /* UIViewController+Alert.swift */,
 				B686EEF720166D5A00ACF075 /* String+Util.swift */,
@@ -1174,6 +1178,7 @@
 				B686EF3F20166D8700ACF075 /* ARSCNView+Util.swift in Sources */,
 				B686EF4320166D8700ACF075 /* AxisNode.swift in Sources */,
 				B64D1224204E6744008E5C5F /* AnalyticsEvent.swift in Sources */,
+				B6082E0A2055EC360022943F /* UINavigationController+Util.swift in Sources */,
 				B6BEF50620537E50002FD2AA /* FoodNearbyNavigationDelegate.swift in Sources */,
 				B686EFA320166F1300ACF075 /* BaseTableViewController.swift in Sources */,
 				B686EF9520166F1300ACF075 /* SettingsViewController.swift in Sources */,
@@ -1581,11 +1586,12 @@
 		B686EED620166C7300ACF075 /* ARMap.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				B6082E082055EA220022943F /* ARMap 4.xcdatamodel */,
 				B6082DFB2054D1840022943F /* ARMap 3.xcdatamodel */,
 				B607C7B32052673D00E57A63 /* ARMap 2.xcdatamodel */,
 				B686EED720166C7300ACF075 /* ARMap.xcdatamodel */,
 			);
-			currentVersion = B6082DFB2054D1840022943F /* ARMap 3.xcdatamodel */;
+			currentVersion = B6082E082055EA220022943F /* ARMap 4.xcdatamodel */;
 			path = ARMap.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
