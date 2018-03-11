@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import CoreData
 
-class MainViewController : BaseViewController {
+class MainViewController : BaseViewController, NSFetchedResultsControllerDelegate {
   
   // MARK: - Static Accessors
   
@@ -24,14 +25,26 @@ class MainViewController : BaseViewController {
   
   internal var arViewController: ARViewController? = nil
   
-  internal var appMode: AppMode = .myPlacemark {
+  internal var appMode: AppMode = Defaults.shared.appMode {
     didSet {
       if self.appMode != oldValue {
-        self.arViewController?.appMode = self.appMode
         self.homeTabBarView?.appMode = appMode
       }
     }
   }
+  
+  // MARK: - Defaults
+  
+  var defaults: Defaults {
+    return self.defaultsFetchedResultsController.fetchedObjects?.first ?? Defaults.shared
+  }
+  
+  private lazy var defaultsFetchedResultsController: NSFetchedResultsController<Defaults> = {
+    let controller = Defaults.newFetchedResultsController()
+    controller.delegate = self
+    try? controller.performFetch()
+    return controller
+  }()
   
   // MARK: - Lifecycle
   
@@ -44,9 +57,6 @@ class MainViewController : BaseViewController {
     
     // Configure views
     self.configureView()
-    
-    // Configure the current app mode
-    self.appMode = Defaults.shared.appMode
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -81,13 +91,20 @@ class MainViewController : BaseViewController {
     }
   }
   
+  // MARK: - NSFetchedResultsControllerDelegate
+  
+  func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    if controller == self.defaultsFetchedResultsController {
+      self.appMode = self.defaults.appMode
+    }
+  }
+  
   // MARK: - Navigation
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if let arViewController = segue.destination as? ARViewController {
       arViewController.delegate = self
       arViewController.trackingStateDelegate = self
-      arViewController.appMode = self.appMode
       self.arViewController = arViewController
     }
   }

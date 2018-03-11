@@ -31,12 +31,58 @@ class ARViewController : UIViewController {
   
   // MARK: - Defaults
   
-  var defaults: Defaults? {
-    return self.defaultsFetchedResultsController.fetchedObjects?.first
+  var appMode: AppMode = Defaults.shared.appMode {
+    didSet {
+      if self.appMode != oldValue {
+        self.removeAllNodesFromScene()
+        self.updatePlacemarks()
+      }
+    }
+  }
+  
+  var defaults: Defaults {
+    return self.defaultsFetchedResultsController.fetchedObjects?.first ?? Defaults.shared
   }
   
   private lazy var defaultsFetchedResultsController: NSFetchedResultsController<Defaults> = {
     let controller = Defaults.newFetchedResultsController()
+    controller.delegate = self
+    try? controller.performFetch()
+    return controller
+  }()
+  
+  // MARK: - Placemark Data Source
+  
+  internal var placemarkNodeContainers = Set<PlacemarkNodeContainer>()
+  
+  var myPlacemarks: [Placemark] {
+    return self.myPlacemarksFetchedResultsController.fetchedObjects ?? []
+  }
+  
+  private lazy var myPlacemarksFetchedResultsController: NSFetchedResultsController<Placemark> = {
+    let controller = Placemark.newFetchedResultsController()
+    controller.delegate = self
+    try? controller.performFetch()
+    return controller
+  }()
+  
+  var foodPlacemarks: [FoodPlacemark] {
+    return self.foodPlacemarksFetchedResultsController.fetchedObjects ?? []
+  }
+  
+  private lazy var foodPlacemarksFetchedResultsController: NSFetchedResultsController<FoodPlacemark> = {
+    let controller = FoodPlacemark.newFetchedResultsController()
+    controller.delegate = self
+    try? controller.performFetch()
+    return controller
+  }()
+  
+  var mountainPlacemarks: [MountainPlacemark] {
+    return self.mountainPlacemarksFetchedResultsController.fetchedObjects ?? []
+  }
+  
+  private lazy var mountainPlacemarksFetchedResultsController: NSFetchedResultsController<MountainPlacemark> = {
+    let controller = MountainPlacemark.newFetchedResultsController()
     controller.delegate = self
     try? controller.performFetch()
     return controller
@@ -162,29 +208,6 @@ class ARViewController : UIViewController {
   
   @objc func didReceiveUpdatedHeadingNotification(_ notification: Notification) {}
   
-  // MARK: - Placemark Data Source
-  
-  var appMode: AppMode = .myPlacemark {
-    didSet {
-      if self.appMode != oldValue {
-        // TODO: - KAK Update the nodes in the scene
-      }
-    }
-  }
-  
-  internal var placemarkNodeContainers = Set<PlacemarkNodeContainer>()
-  
-  var placemarks: [Placemark] {
-    return self.savedLocationsFetchedResultsController.fetchedObjects ?? []
-  }
-  
-  private lazy var savedLocationsFetchedResultsController: NSFetchedResultsController<Placemark> = {
-    let controller = Placemark.newFetchedResultsController()
-    controller.delegate = self
-    try? controller.performFetch()
-    return controller
-  }()
-  
   // MARK: - Scene
   
   @objc func pauseScene() {
@@ -205,6 +228,15 @@ class ARViewController : UIViewController {
     }
     
     // Remove all nodes
+    self.removeAllNodesFromScene()
+    
+    // Configure session
+    self.sessionConfig.isLightEstimationEnabled = true
+    self.sessionConfig.worldAlignment = .gravityAndHeading
+    self.session.run(self.sessionConfig, options: [.resetTracking, .removeExistingAnchors])
+  }
+  
+  func removeAllNodesFromScene() {
     self.sceneNode?.removeFromParentNode()
     self.sceneNode = nil
     self.basePlane?.removeFromParentNode()
@@ -217,11 +249,6 @@ class ARViewController : UIViewController {
     self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
       node.removeFromParentNode()
     }
-    
-    // Configure session
-    self.sessionConfig.isLightEstimationEnabled = true
-    self.sessionConfig.worldAlignment = .gravityAndHeading
-    self.session.run(self.sessionConfig, options: [.resetTracking, .removeExistingAnchors])
   }
   
   // MARK: - Placemark Node Containers
@@ -416,6 +443,11 @@ extension ARViewController : NSFetchedResultsControllerDelegate {
   func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {}
   
   func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+    
+    guard (self.appMode == .myPlacemark && controller == self.myPlacemarksFetchedResultsController) || (self.appMode == .food && controller == self.foodPlacemarksFetchedResultsController) || (self.appMode == .mountain && controller == self.mountainPlacemarksFetchedResultsController) else {
+      return
+    }
+    
     switch type {
     case .insert:
       if let placemark = anObject as? Placemark {
@@ -437,6 +469,7 @@ extension ARViewController : NSFetchedResultsControllerDelegate {
   func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
     if controller == self.defaultsFetchedResultsController {
       self.configureAxisNode()
+      self.appMode = self.defaults.appMode
     }
   }
   
@@ -444,30 +477,43 @@ extension ARViewController : NSFetchedResultsControllerDelegate {
   
   func configureAxisNode() {
     
-    guard let defaults = self.defaults else {
+    // Check if should remove the show axis
+    guard self.defaults.showAxis else {
+      self.axisNode?.removeFromParentNode()
+      self.axisNode = nil
       return
     }
     
-    if defaults.showAxis {
-      if self.axisNode == nil {
-        let axisNode = AxisNode()
-        self.axisNode = axisNode
-        if let pointOfView = self.sceneView.pointOfView {
-          axisNode.position = pointOfView.position
-        }
-        self.sceneNode?.addChildNode(axisNode)
-      }
-    } else {
-      self.axisNode?.removeFromParentNode()
-      self.axisNode = nil
+    // Check if axis node has already been created
+    guard self.axisNode == nil else {
+      return
     }
+    
+    // Create the axis node
+    let axisNode = AxisNode()
+    self.axisNode = axisNode
+    if let pointOfView = self.sceneView.pointOfView {
+      axisNode.position = pointOfView.position
+    }
+    self.sceneNode?.addChildNode(axisNode)
   }
   
   // MARK: - Placemarks
   
   func updatePlacemarks() {
-    for placemark in self.placemarks {
-      self.update(placemark: placemark)
+    switch self.appMode {
+    case .myPlacemark:
+      for placemark in self.myPlacemarks {
+        self.update(placemark: placemark)
+      }
+    case .food:
+      for placemark in self.foodPlacemarks {
+        self.update(placemark: placemark)
+      }
+    case .mountain:
+      for placemark in self.mountainPlacemarks {
+        self.update(placemark: placemark)
+      }
     }
   }
   
