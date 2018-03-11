@@ -15,6 +15,12 @@ class BaseViewController : UIViewController, PresentableController {
   var presentedMode: PresentationMode = .modal(.formSheet, .coverVertical)
   var presentationManager: UIViewControllerTransitioningDelegate? = nil
   var currentFlowInitialController: PresentableController? = nil
+  
+  // MARK: - Status Bar
+  
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
+  }
 }
 
 extension BaseViewController {

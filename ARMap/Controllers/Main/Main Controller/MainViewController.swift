@@ -23,7 +23,15 @@ class MainViewController : BaseViewController {
   weak var homeTabBarView: HomeTabBarView?
   
   internal var arViewController: ARViewController? = nil
-  internal var appMode: AppMode = .myPlacemarks
+  
+  internal var appMode: AppMode = .myPlacemark {
+    didSet {
+      if self.appMode != oldValue {
+        self.arViewController?.appMode = self.appMode
+        self.homeTabBarView?.appMode = appMode
+      }
+    }
+  }
   
   // MARK: - Lifecycle
   
@@ -36,6 +44,9 @@ class MainViewController : BaseViewController {
     
     // Configure views
     self.configureView()
+    
+    // Configure the current app mode
+    self.appMode = Defaults.shared.appMode
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -76,6 +87,7 @@ class MainViewController : BaseViewController {
     if let arViewController = segue.destination as? ARViewController {
       arViewController.delegate = self
       arViewController.trackingStateDelegate = self
+      arViewController.appMode = self.appMode
       self.arViewController = arViewController
     }
   }
@@ -132,93 +144,5 @@ class MainViewController : BaseViewController {
   func hideAllElements() {
     self.tabBarVisualEffectView.effect = nil
     self.homeTabBarContainerView.alpha = 0
-  }
-}
-
-// MARK: - PresentingViewControllerDelegate
-
-extension MainViewController : PresentingViewControllerDelegate {
-  
-  func willPresentViewController(_ viewController: UIViewController) {
-    self.disableAllElements()
-  }
-  
-  func isPresentingViewController(_ viewController: UIViewController?) {
-    self.hideAllElements()
-  }
-  
-  func didPresentViewController(_ viewController: UIViewController?) {
-    self.hideAllElements()
-  }
-  
-  func willDismissViewController(_ viewController: UIViewController) {}
-  
-  func isDismissingViewController(_ viewController: UIViewController?) {
-    self.showAllElements()
-  }
-  
-  func didDismissViewController(_ viewController: UIViewController?) {
-    
-    // All presentations
-    self.enableAllElements()
-  }
-  
-  func didCancelDissmissViewController(_ viewController: UIViewController?) {
-    self.hideAllElements()
-    self.disableAllElements()
-  }
-}
-
-// MARK: - UIPopoverPresentationControllerDelegate
-
-extension MainViewController : UIPopoverPresentationControllerDelegate {
-  
-  func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-    return .none
-  }
-}
-
-// MARK: - ModeChooserDelegate
-
-extension MainViewController : ModeChooserDelegate {
-  
-  func didChooseMode(_ appMode: AppMode, sender: UIViewController) {
-    
-    // Dismiss the sender
-    sender.dismiss(animated: true, completion: nil)
-    
-    // Check change in app mode
-    guard self.appMode != appMode else {
-      return
-    }
-    
-    // Update the mode and the home tab bar
-    self.appMode = appMode
-    self.homeTabBarView?.appMode = appMode
-  }
-}
-
-// MARK: - HomeTabBarViewDelegate
-
-extension MainViewController : HomeTabBarViewDelegate, SettingsNavigationDelegate, ModeChooserNavigationDelegate, MyPlacemarksNavigationDelegate, FoodNearbyNavigationDelegate {
-  
-  func tabButtonSelected(type: HomeTabBarButtonType) {
-    switch type {
-    case .mode:
-      self.presentModeChooser(delegate: self, options: [ .presentingViewControllerDelegate(self) ])
-    case .settings:
-      self.presentSettings(options: [ .presentingViewControllerDelegate(self) ])
-      
-    case .myPlacemarkAdd:
-      self.presentAddLocation(addLocationDelegate: self, searchDelegate: self, options: [ .presentingViewControllerDelegate(self) ])
-    case .myPlacemarkList:
-      self.presentPlacemarkList(delegate: self, options: [ .presentingViewControllerDelegate(self) ])
-      
-    case .foodNearbyFavorites: break
-    case .foodNearbyList:
-      self.presentFoodNearbySearch(delegate: self, options: [ .presentingViewControllerDelegate(self) ])
-      
-    case .mountainList: break
-    }
   }
 }

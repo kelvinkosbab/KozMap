@@ -1,21 +1,14 @@
 //
-//  Defaults+MyManagedObjectProtocol.swift
-//  TackARLocation
+//  Defaults+Util.swift
+//  KozMap
 //
-//  Created by Kelvin Kosbab on 10/30/17.
-//  Copyright © 2017 Tack Mobile. All rights reserved.
+//  Created by Kelvin Kosbab on 3/10/18.
+//  Copyright © 2018 Tack Mobile. All rights reserved.
 //
 
 import Foundation
-import CoreData
 
-extension Defaults : MyManagedObjectProtocol {
-  
-  // MARK: - MyManagedObjectProtocol
-  
-  static var sortDescriptors: [NSSortDescriptor] {
-    return [ NSSortDescriptor(key: "unitTypeValue", ascending: true) ]
-  }
+extension Defaults {
   
   // MARK: - Singleton
   
@@ -49,6 +42,22 @@ extension Defaults : MyManagedObjectProtocol {
     }
     set {
       self.unitTypeValue = Int16(newValue.rawValue)
+      MyDataManager.shared.saveMainContext()
+    }
+  }
+  
+  var appMode: AppMode {
+    get {
+      if let appMode = AppMode(rawValue: self.appModeValue) {
+        return appMode
+      }
+      
+      // Set default unit type
+      self.appMode = .myPlacemark
+      return self.appMode
+    }
+    set {
+      self.appModeValue = newValue.rawValue
       MyDataManager.shared.saveMainContext()
     }
   }

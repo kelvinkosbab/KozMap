@@ -8,6 +8,8 @@
 
 import Foundation
 
+typealias AppMode = PlacemarkType
+
 enum PlacemarkType : Int16 {
   case myPlacemark = 0
   case mountain = 1

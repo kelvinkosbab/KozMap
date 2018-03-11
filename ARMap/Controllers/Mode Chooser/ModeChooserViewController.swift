@@ -8,10 +8,6 @@
 
 import UIKit
 
-enum AppMode {
-  case myPlacemarks, foodNearby, mountainViewer
-}
-
 protocol ModeChooserDelegate : class {
   func didChooseMode(_ appMode: AppMode, sender: UIViewController)
 }
@@ -67,19 +63,19 @@ class ModeChooserViewController : BaseViewController {
   }
   
   @IBAction func myPlacemarksButtonSelected() {
-    self.delegate?.didChooseMode(.myPlacemarks, sender: self)
+    self.delegate?.didChooseMode(.myPlacemark, sender: self)
   }
   
   @IBAction func myPlacemarksInfoButtonSelected() {}
   
   @IBAction func foodNearMeButtonSelected() {
-    self.delegate?.didChooseMode(.foodNearby, sender: self)
+    self.delegate?.didChooseMode(.food, sender: self)
   }
   
   @IBAction func foodNearMeInfoButtonSelected() {}
   
   @IBAction func mountainViewerButtonSelected() {
-    self.delegate?.didChooseMode(.mountainViewer, sender: self)
+    self.delegate?.didChooseMode(.mountain, sender: self)
   }
   
   @IBAction func mountainViewerInfoButtonSelected() {}

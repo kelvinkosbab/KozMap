@@ -28,18 +28,8 @@ class ARViewController : UIViewController {
   public private(set) var sceneNode: SCNNode?
   public private(set) var basePlane: SCNNode?
   public private(set) var axisNode: AxisNode?
-  internal var placemarkNodeContainers = Set<PlacemarkNodeContainer>()
   
-  var placemarks: [Placemark] {
-    return self.savedLocationsFetchedResultsController.fetchedObjects ?? []
-  }
-  
-  private lazy var savedLocationsFetchedResultsController: NSFetchedResultsController<Placemark> = {
-    let controller = Placemark.newFetchedResultsController()
-    controller.delegate = self
-    try? controller.performFetch()
-    return controller
-  }()
+  // MARK: - Defaults
   
   var defaults: Defaults? {
     return self.defaultsFetchedResultsController.fetchedObjects?.first
@@ -171,6 +161,29 @@ class ARViewController : UIViewController {
   }
   
   @objc func didReceiveUpdatedHeadingNotification(_ notification: Notification) {}
+  
+  // MARK: - Placemark Data Source
+  
+  var appMode: AppMode = .myPlacemark {
+    didSet {
+      if self.appMode != oldValue {
+        // TODO: - KAK Update the nodes in the scene
+      }
+    }
+  }
+  
+  internal var placemarkNodeContainers = Set<PlacemarkNodeContainer>()
+  
+  var placemarks: [Placemark] {
+    return self.savedLocationsFetchedResultsController.fetchedObjects ?? []
+  }
+  
+  private lazy var savedLocationsFetchedResultsController: NSFetchedResultsController<Placemark> = {
+    let controller = Placemark.newFetchedResultsController()
+    controller.delegate = self
+    try? controller.performFetch()
+    return controller
+  }()
   
   // MARK: - Scene
   

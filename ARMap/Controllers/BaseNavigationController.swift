@@ -135,15 +135,11 @@ class BaseNavigationController : UINavigationController, PresentableController {
   override var preferredStatusBarStyle: UIStatusBarStyle {
     switch self.navigationBarStyle {
     case .standard, .transparentBlueTint:
-      if UIDevice.current.isPhone {
+      switch self.presentedMode {
+      case .modal(.fullScreen, _), .modal(.overFullScreen, _):
         return .default
-      } else {
-        switch self.presentedMode {
-        case .modal(.fullScreen, _), .modal(.overFullScreen, _):
-          return .default
-        default:
-          return .lightContent
-        }
+      default:
+        return .lightContent
       }
     case .transparent:
       return .lightContent

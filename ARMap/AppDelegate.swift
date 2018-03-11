@@ -27,6 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       RootNavigationController.shared.viewControllers = [ permissionsViewController ]
     }
     
+    // Set the initial app mode
+    Defaults.shared.appMode = .myPlacemark
+    
     return true
   }
   

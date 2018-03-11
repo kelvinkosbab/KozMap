@@ -14,6 +14,11 @@
 		B6082DF6205487CE0022943F /* SettingsNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6082DF5205487CE0022943F /* SettingsNavigationDelegate.swift */; };
 		B6082DF8205489510022943F /* MyPlacemarksNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6082DF7205489510022943F /* MyPlacemarksNavigationDelegate.swift */; };
 		B6082DFA205496320022943F /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6082DF9205496320022943F /* UIViewController+Alert.swift */; };
+		B6082DFE2054D1EE0022943F /* Defaults+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6082DFD2054D1EE0022943F /* Defaults+Util.swift */; };
+		B6082E002054D4820022943F /* MainViewController+PresentingViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6082DFF2054D4820022943F /* MainViewController+PresentingViewControllerDelegate.swift */; };
+		B6082E022054D4B30022943F /* MainViewController+ModeChooserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6082E012054D4B30022943F /* MainViewController+ModeChooserDelegate.swift */; };
+		B6082E042054D4D20022943F /* MainViewController+HomeTabBarViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6082E032054D4D20022943F /* MainViewController+HomeTabBarViewDelegate.swift */; };
+		B6082E062054D5050022943F /* MainViewController+UIPopoverPresentationControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6082E052054D5050022943F /* MainViewController+UIPopoverPresentationControllerDelegate.swift */; };
 		B6299B82204F8F6500043CD1 /* LocationList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6299B81204F8F6500043CD1 /* LocationList.storyboard */; };
 		B6299B84204F8FA900043CD1 /* LocationDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6299B83204F8FA900043CD1 /* LocationDetail.storyboard */; };
 		B6299B88204F901D00043CD1 /* AddLocationMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6299B87204F901D00043CD1 /* AddLocationMapViewController.swift */; };
@@ -161,6 +166,12 @@
 		B6082DF5205487CE0022943F /* SettingsNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsNavigationDelegate.swift; sourceTree = "<group>"; };
 		B6082DF7205489510022943F /* MyPlacemarksNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPlacemarksNavigationDelegate.swift; sourceTree = "<group>"; };
 		B6082DF9205496320022943F /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
+		B6082DFB2054D1840022943F /* ARMap 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ARMap 3.xcdatamodel"; sourceTree = "<group>"; };
+		B6082DFD2054D1EE0022943F /* Defaults+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+Util.swift"; sourceTree = "<group>"; };
+		B6082DFF2054D4820022943F /* MainViewController+PresentingViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+PresentingViewControllerDelegate.swift"; sourceTree = "<group>"; };
+		B6082E012054D4B30022943F /* MainViewController+ModeChooserDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+ModeChooserDelegate.swift"; sourceTree = "<group>"; };
+		B6082E032054D4D20022943F /* MainViewController+HomeTabBarViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+HomeTabBarViewDelegate.swift"; sourceTree = "<group>"; };
+		B6082E052054D5050022943F /* MainViewController+UIPopoverPresentationControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+UIPopoverPresentationControllerDelegate.swift"; sourceTree = "<group>"; };
 		B6299B81204F8F6500043CD1 /* LocationList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationList.storyboard; sourceTree = "<group>"; };
 		B6299B83204F8FA900043CD1 /* LocationDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationDetail.storyboard; sourceTree = "<group>"; };
 		B6299B87204F901D00043CD1 /* AddLocationMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationMapViewController.swift; sourceTree = "<group>"; };
@@ -384,6 +395,29 @@
 			path = Color;
 			sourceTree = "<group>";
 		};
+		B6082DFC2054D1CA0022943F /* Defaults */ = {
+			isa = PBXGroup;
+			children = (
+				B686EF6320166D9D00ACF075 /* Defaults+MyManagedObjectProtocol.swift */,
+				B6082DFD2054D1EE0022943F /* Defaults+Util.swift */,
+			);
+			path = Defaults;
+			sourceTree = "<group>";
+		};
+		B6082E072054D5F40022943F /* Main Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B686EF7F20166F1200ACF075 /* MainViewController.swift */,
+				B686EF7E20166F1200ACF075 /* MainViewController+AR.swift */,
+				B686EF8920166F1200ACF075 /* MainViewController+CoreLocation.swift */,
+				B6082E032054D4D20022943F /* MainViewController+HomeTabBarViewDelegate.swift */,
+				B6082E012054D4B30022943F /* MainViewController+ModeChooserDelegate.swift */,
+				B6082DFF2054D4820022943F /* MainViewController+PresentingViewControllerDelegate.swift */,
+				B6082E052054D5050022943F /* MainViewController+UIPopoverPresentationControllerDelegate.swift */,
+			);
+			path = "Main Controller";
+			sourceTree = "<group>";
+		};
 		B619F4BD203E7EF800DD8BA7 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -523,6 +557,7 @@
 				B686EF7020166F1200ACF075 /* Configuring View */,
 				B686EF8F20166F1300ACF075 /* InlineColorChooser */,
 				B686EF8C20166F1300ACF075 /* Permissions */,
+				B6299B89204FE15400043CD1 /* Mode Chooser */,
 				B686EF7620166F1200ACF075 /* Main */,
 			);
 			path = Controllers;
@@ -595,7 +630,7 @@
 				B686EF5F20166D9C00ACF075 /* DataManagerProtocol.swift */,
 				B686EF5E20166D9C00ACF075 /* MyDataManager.swift */,
 				B686EF6020166D9D00ACF075 /* MyManagedObjectProtocol.swift */,
-				B686EF6320166D9D00ACF075 /* Defaults+MyManagedObjectProtocol.swift */,
+				B6082DFC2054D1CA0022943F /* Defaults */,
 				B607C7BC20526A8F00E57A63 /* Color */,
 				B6C01FEB2050CD2500437B45 /* Placemark */,
 			);
@@ -691,10 +726,7 @@
 			isa = PBXGroup;
 			children = (
 				B686EF6C20166F0400ACF075 /* Main.storyboard */,
-				B686EF7F20166F1200ACF075 /* MainViewController.swift */,
-				B686EF8920166F1200ACF075 /* MainViewController+CoreLocation.swift */,
-				B686EF7E20166F1200ACF075 /* MainViewController+AR.swift */,
-				B6299B89204FE15400043CD1 /* Mode Chooser */,
+				B6082E072054D5F40022943F /* Main Controller */,
 				B686EF8620166F1200ACF075 /* Placemark AR */,
 				B686EF7720166F1200ACF075 /* Settings */,
 				B607C7AF2052662100E57A63 /* My Placemarks */,
@@ -1073,6 +1105,7 @@
 				B686EF5C20166D8700ACF075 /* CameraPermissionManager.swift in Sources */,
 				B607C7B92052689B00E57A63 /* FoodPlacemark+Util.swift in Sources */,
 				B686EF5A20166D8700ACF075 /* ViewControllerFromStoryboardProtocol.swift in Sources */,
+				B6082E062054D5050022943F /* MainViewController+UIPopoverPresentationControllerDelegate.swift in Sources */,
 				B686EF9E20166F1300ACF075 /* LocationListViewController+Cells.swift in Sources */,
 				B686EF9220166F1300ACF075 /* BaseViewController.swift in Sources */,
 				B686EF0F20166D5A00ACF075 /* UICollectionView+Util.swift in Sources */,
@@ -1111,11 +1144,13 @@
 				B686EF9120166F1300ACF075 /* ConfiguringViewController.swift in Sources */,
 				B686EFA020166F1300ACF075 /* ARViewController.swift in Sources */,
 				B686EFA420166F1300ACF075 /* PermissionsViewController.swift in Sources */,
+				B6082E002054D4820022943F /* MainViewController+PresentingViewControllerDelegate.swift in Sources */,
 				B6C01FED2050CD3600437B45 /* Placemark+CoreLocation.swift in Sources */,
 				B686EF4020166D8700ACF075 /* SCNMaterial+Util.swift in Sources */,
 				B686EF0E20166D5A00ACF075 /* UIDevice+Util.swift in Sources */,
 				B686EF9C20166F1300ACF075 /* MyPlacemarkSearchViewController+Cells.swift in Sources */,
 				B64423FB20410BE9006E524A /* TextFlagPlacemarkNode.swift in Sources */,
+				B6082DFE2054D1EE0022943F /* Defaults+Util.swift in Sources */,
 				B686EF1020166D5A00ACF075 /* UIView+Util.swift in Sources */,
 				B6DCCDD5203BD4CA00201385 /* BottomUpAnimator.swift in Sources */,
 				B6A8ABCD204B8851007FDAEC /* Service.swift in Sources */,
@@ -1145,6 +1180,7 @@
 				B686EF9F20166F1300ACF075 /* ARViewController+Gestures.swift in Sources */,
 				B686EF6720166D9D00ACF075 /* Color+MyManagedObjectProtocol.swift in Sources */,
 				B686EF4D20166D8700ACF075 /* InteractiveTransition.swift in Sources */,
+				B6082E022054D4B30022943F /* MainViewController+ModeChooserDelegate.swift in Sources */,
 				B686EF6520166D9D00ACF075 /* DataManagerProtocol.swift in Sources */,
 				B6299B88204F901D00043CD1 /* AddLocationMapViewController.swift in Sources */,
 				B686EF9920166F1300ACF075 /* MainViewController+AR.swift in Sources */,
@@ -1178,6 +1214,7 @@
 				B686EF5D20166D8700ACF075 /* PermissionManager.swift in Sources */,
 				B6DCCDBD203B355C00201385 /* TopKnobBottomUpAnimator.swift in Sources */,
 				B6DCCDE7203BEDCA00201385 /* LeftMenuAnimator.swift in Sources */,
+				B6082E042054D4D20022943F /* MainViewController+HomeTabBarViewDelegate.swift in Sources */,
 				B686EF0B20166D5A00ACF075 /* UIApplication+Util.swift in Sources */,
 				B686EF6820166D9D00ACF075 /* Placemark+MyManagedObjectProtocol.swift in Sources */,
 				B686EF0420166D5A00ACF075 /* LocationManager.swift in Sources */,
@@ -1544,10 +1581,11 @@
 		B686EED620166C7300ACF075 /* ARMap.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				B6082DFB2054D1840022943F /* ARMap 3.xcdatamodel */,
 				B607C7B32052673D00E57A63 /* ARMap 2.xcdatamodel */,
 				B686EED720166C7300ACF075 /* ARMap.xcdatamodel */,
 			);
-			currentVersion = B607C7B32052673D00E57A63 /* ARMap 2.xcdatamodel */;
+			currentVersion = B6082DFB2054D1840022943F /* ARMap 3.xcdatamodel */;
 			path = ARMap.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
