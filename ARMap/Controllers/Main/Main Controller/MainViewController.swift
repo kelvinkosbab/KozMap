@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class MainViewController : BaseViewController, NSFetchedResultsControllerDelegate {
+class MainViewController : BaseViewController {
   
   // MARK: - Static Accessors
   
@@ -24,27 +24,7 @@ class MainViewController : BaseViewController, NSFetchedResultsControllerDelegat
   weak var homeTabBarView: HomeTabBarView?
   
   internal var arViewController: ARViewController? = nil
-  
-  internal var appMode: AppMode = Defaults.shared.appMode {
-    didSet {
-      if self.appMode != oldValue {
-        self.homeTabBarView?.appMode = appMode
-      }
-    }
-  }
-  
-  // MARK: - Defaults
-  
-  var defaults: Defaults {
-    return self.defaultsFetchedResultsController.fetchedObjects?.first ?? Defaults.shared
-  }
-  
-  private lazy var defaultsFetchedResultsController: NSFetchedResultsController<Defaults> = {
-    let controller = Defaults.newFetchedResultsController()
-    controller.delegate = self
-    try? controller.performFetch()
-    return controller
-  }()
+  internal var appMode: AppMode = .myPlacemark
   
   // MARK: - Lifecycle
   
@@ -88,14 +68,6 @@ class MainViewController : BaseViewController, NSFetchedResultsControllerDelegat
       let imageView = UIImageView(image: #imageLiteral(resourceName: "denverCityScape"))
       imageView.contentMode = .scaleAspectFill
       imageView.addToContainer(self.view, atIndex: 1)
-    }
-  }
-  
-  // MARK: - NSFetchedResultsControllerDelegate
-  
-  func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-    if controller == self.defaultsFetchedResultsController {
-      self.appMode = self.defaults.appMode
     }
   }
   

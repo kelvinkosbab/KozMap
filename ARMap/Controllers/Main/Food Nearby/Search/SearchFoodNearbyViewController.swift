@@ -7,24 +7,15 @@
 //
 
 import UIKit
+import CoreData
 import CoreLocation
-
-protocol SearchFoodNearbyViewControllerDelegate : class {
-  func shouldAdd(foodNearybyMapItem mapItem: MapItem)
-}
 
 class SearchFoodNearbyViewController : BaseTableViewController, DismissInteractable {
   
   // MARK: - Static Accessors
   
-  private static func newViewController() -> SearchFoodNearbyViewController {
+  static func newViewController() -> SearchFoodNearbyViewController {
     return self.newViewController(fromStoryboardWithName: "FoodNearby")
-  }
-  
-  static func newViewController(delegate: SearchFoodNearbyViewControllerDelegate?) -> SearchFoodNearbyViewController {
-    let viewController = self.newViewController()
-    viewController.delegate = delegate
-    return viewController
   }
   
   // MARK: - DismissInteractable
@@ -45,13 +36,11 @@ class SearchFoodNearbyViewController : BaseTableViewController, DismissInteracta
   
   // MARK: - Properties
   
-  weak var delegate: SearchFoodNearbyViewControllerDelegate? = nil
-  let locationSearchService = LocationSearchService()
   var resultSearchController: UISearchController? = nil
   var mapItems: [MapItem] = []
   
-  var currentLocation: CLLocation? {
-    return LocationManager.shared.currentLocation
+  var foodNearbyService: FoodNearbyService {
+    return FoodNearbyService.shared
   }
   
   var searchBar: UISearchBar? {
@@ -61,6 +50,17 @@ class SearchFoodNearbyViewController : BaseTableViewController, DismissInteracta
   override var navigationController: UINavigationController? {
     return super.navigationController ?? self.parent?.navigationController
   }
+  
+  var foodPlacemarks: [FoodPlacemark] {
+    return self.foodPlacemarksFetchedResultsController.fetchedObjects ?? []
+  }
+  
+  private lazy var foodPlacemarksFetchedResultsController: NSFetchedResultsController<FoodPlacemark> = {
+    let controller = FoodPlacemark.newFetchedResultsController()
+    controller.delegate = self
+    try? controller.performFetch()
+    return controller
+  }()
   
   // MARK: - Lifecycle
   
@@ -103,10 +103,8 @@ class SearchFoodNearbyViewController : BaseTableViewController, DismissInteracta
     // Listen for updates to current location
     NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveUpdatedLocationNotification(_:)), name: .locationManagerDidUpdateCurrentLocation, object: nil)
     
-    // Pre-fetch last search
-    self.performSearch(text: Defaults.shared.lastFoodSearchText)
-    
-    self.searchBar?.text = Defaults.shared.lastFoodSearchText == Defaults.shared.defaultFoodSearchText ? "" : Defaults.shared.lastFoodSearchText
+    // Configure the search bar
+    self.searchBar?.text = self.foodNearbyService.displaySearchText
   }
   
   override func viewWillDisappear(_ animated: Bool) {
@@ -153,18 +151,65 @@ class SearchFoodNearbyViewController : BaseTableViewController, DismissInteracta
   @objc func closeButtonSelected() {
     self.dismissController()
   }
-}
-
-// MARK: - UITableView
-
-extension SearchFoodNearbyViewController {
+  
+  func reloadContent() {
+    self.tableView.reloadData()
+  }
+  
+  // MARK: - SectionType
+  
+  enum SectionType {
+    case foodPlacemarks([FoodPlacemark])
+  }
+  
+  func getSectionType(section: Int) -> SectionType? {
+    switch section {
+    case 0:
+      let foodPlacemarks = self.foodPlacemarks
+      return .foodPlacemarks(foodPlacemarks)
+    default:
+      return nil
+    }
+  }
+  
+  // MARK: - RowType
+  
+  enum RowType {
+    case foodPlacemark(FoodPlacemark)
+  }
+  
+  func getRowType(at indexPath: IndexPath) -> RowType? {
+    
+    guard let sectionType = self.getSectionType(section: indexPath.section) else {
+      return nil
+    }
+    
+    switch sectionType {
+    case .foodPlacemarks(let foodPlacemarks):
+      if indexPath.row < foodPlacemarks.count {
+        let foodPlacemark = foodPlacemarks[indexPath.row]
+        return .foodPlacemark(foodPlacemark)
+      }
+      return nil
+    }
+  }
+  
+  // MARK: - UITableView
   
   override func numberOfSections(in tableView: UITableView) -> Int {
     return 1
   }
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return self.mapItems.count
+    
+    guard let sectionType = self.getSectionType(section: section) else {
+      return 0
+    }
+    
+    switch sectionType {
+    case .foodPlacemarks(let foodPlacemarks):
+      return foodPlacemarks.count
+    }
   }
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -172,26 +217,47 @@ extension SearchFoodNearbyViewController {
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "SearchViewControllerCell", for: indexPath) as! SearchViewControllerCell
+    let cell = tableView.dequeueReusableCell(withIdentifier: SearchViewControllerCell.name, for: indexPath) as! SearchViewControllerCell
     cell.backgroundColor = .clear
     
-    let mapItem = self.mapItems[indexPath.row]
-    cell.titleLabel.text = mapItem.name
-    cell.detailLabel.text = mapItem.address
+    guard let rowType = self.getRowType(at: indexPath) else {
+      cell.titleLabel.text = ""
+      cell.detailLabel.text = ""
+      cell.rightDetailLabel.text = ""
+      return cell
+    }
     
-    // Distance label
-    let readibleDistance = mapItem.distance?.getDistanceString(unitType: Defaults.shared.unitType, displayType: .numbericUnits(false))
-    cell.rightDetailLabel.text = readibleDistance
-    
-    return cell
+    switch rowType {
+    case .foodPlacemark(let foodPlacemark):
+      
+      cell.titleLabel.text = foodPlacemark.name
+      cell.detailLabel.text = foodPlacemark.address
+      
+      // Distance label
+      let readibleDistance = foodPlacemark.lastDistance.getDistanceString(unitType: Defaults.shared.unitType, displayType: .numbericUnits(false))
+      cell.rightDetailLabel.text = readibleDistance
+      
+      return cell
+    }
   }
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
     
-    // Add the map item
-    let mapItem = self.mapItems[indexPath.row]
-    self.delegate?.shouldAdd(foodNearybyMapItem: mapItem)
+    guard let rowType = self.getRowType(at: indexPath) else {
+      return
+    }
+    
+    // TODO: Favorite this item?
+  }
+}
+
+// MARK: - NSFetchedResultsControllerDelegate
+
+extension SearchFoodNearbyViewController : NSFetchedResultsControllerDelegate {
+  
+  func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    self.reloadContent()
   }
 }
 
@@ -208,18 +274,9 @@ extension SearchFoodNearbyViewController : UISearchBarDelegate {
     self.performSearch(text: searchText)
   }
   
-  func performSearch(text: String?) {
-    
-    guard let text = text, let currentLocation = self.currentLocation else {
-      return
-    }
+  private func performSearch(text: String?) {
     
     // Update the last search result
-    Defaults.shared.lastFoodSearchText = text
-    
-    // Query for food nearby
-    self.locationSearchService.queryLocations(query: text, currentLocation: currentLocation) { [weak self] mapItems in
-      self?.reloadContent(mapItems: mapItems)
-    }
+    self.foodNearbyService.currentSearchText = text
   }
 }

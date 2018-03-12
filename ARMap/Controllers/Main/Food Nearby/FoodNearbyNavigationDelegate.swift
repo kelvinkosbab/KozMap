@@ -11,13 +11,13 @@ import UIKit
 protocol FoodNearbyNavigationDelegate : class {}
 extension FoodNearbyNavigationDelegate where Self : BaseViewController {
   
-  func presentFoodNearbySearch(delegate: SearchFoodNearbyViewControllerDelegate?, options: [PresentableControllerOption] = []) {
+  func presentFoodNearbySearch(options: [PresentableControllerOption] = []) {
     
     guard self.presentedViewController == nil else {
       return
     }
     
-    let searchFoodNearbyViewController = SearchFoodNearbyViewController.newViewController(delegate: delegate)
+    let searchFoodNearbyViewController = SearchFoodNearbyViewController.newViewController()
     if UIDevice.current.isPhone {
       searchFoodNearbyViewController.presentIn(self, withMode: .custom(.topKnobBottomUp), options: options)
     } else {

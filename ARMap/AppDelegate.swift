@@ -28,8 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     // Set the initial app mode
+    FoodNearbyService.shared.configure()
     Defaults.shared.appMode = .myPlacemark
-    Defaults.shared.lastFoodSearchText = Defaults.shared.defaultFoodSearchText
     
     return true
   }

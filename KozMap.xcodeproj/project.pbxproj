@@ -20,6 +20,7 @@
 		B6082E042054D4D20022943F /* MainViewController+HomeTabBarViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6082E032054D4D20022943F /* MainViewController+HomeTabBarViewDelegate.swift */; };
 		B6082E062054D5050022943F /* MainViewController+UIPopoverPresentationControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6082E052054D5050022943F /* MainViewController+UIPopoverPresentationControllerDelegate.swift */; };
 		B6082E0A2055EC360022943F /* UINavigationController+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6082E092055EC360022943F /* UINavigationController+Util.swift */; };
+		B6082E0F205643840022943F /* FoodNearbyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6082E0E205643840022943F /* FoodNearbyService.swift */; };
 		B6299B82204F8F6500043CD1 /* LocationList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6299B81204F8F6500043CD1 /* LocationList.storyboard */; };
 		B6299B84204F8FA900043CD1 /* LocationDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6299B83204F8FA900043CD1 /* LocationDetail.storyboard */; };
 		B6299B88204F901D00043CD1 /* AddLocationMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6299B87204F901D00043CD1 /* AddLocationMapViewController.swift */; };
@@ -160,6 +161,7 @@
 		47A14A32F7FA20DD02261679 /* Pods-KozMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KozMap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KozMap/Pods-KozMap.debug.xcconfig"; sourceTree = "<group>"; };
 		8438AF4D777D654EBDBBD394 /* Pods-KozMap.koz - release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KozMap.koz - release.xcconfig"; path = "Pods/Target Support Files/Pods-KozMap/Pods-KozMap.koz - release.xcconfig"; sourceTree = "<group>"; };
 		A4C83F8AC6F29F40129B562F /* Pods-ARMap.koz - release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARMap.koz - release.xcconfig"; path = "Pods/Target Support Files/Pods-ARMap/Pods-ARMap.koz - release.xcconfig"; sourceTree = "<group>"; };
+		B6066B4020565505007C8AB9 /* ARMap 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ARMap 5.xcdatamodel"; sourceTree = "<group>"; };
 		B607C7B32052673D00E57A63 /* ARMap 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ARMap 2.xcdatamodel"; sourceTree = "<group>"; };
 		B607C7B42052686700E57A63 /* MountainPlacemark+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MountainPlacemark+Util.swift"; sourceTree = "<group>"; };
 		B607C7B82052689B00E57A63 /* FoodPlacemark+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoodPlacemark+Util.swift"; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 		B6082E052054D5050022943F /* MainViewController+UIPopoverPresentationControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+UIPopoverPresentationControllerDelegate.swift"; sourceTree = "<group>"; };
 		B6082E082055EA220022943F /* ARMap 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ARMap 4.xcdatamodel"; sourceTree = "<group>"; };
 		B6082E092055EC360022943F /* UINavigationController+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Util.swift"; sourceTree = "<group>"; };
+		B6082E0E205643840022943F /* FoodNearbyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodNearbyService.swift; sourceTree = "<group>"; };
 		B6299B81204F8F6500043CD1 /* LocationList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationList.storyboard; sourceTree = "<group>"; };
 		B6299B83204F8FA900043CD1 /* LocationDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationDetail.storyboard; sourceTree = "<group>"; };
 		B6299B87204F901D00043CD1 /* AddLocationMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationMapViewController.swift; sourceTree = "<group>"; };
@@ -421,6 +424,16 @@
 			path = "Main Controller";
 			sourceTree = "<group>";
 		};
+		B6082E0D205643680022943F /* Content Services */ = {
+			isa = PBXGroup;
+			children = (
+				B686EEEE20166D5A00ACF075 /* CurrentLocationUpdatableService.swift */,
+				B686EEEF20166D5A00ACF075 /* LocationSearchService.swift */,
+				B6082E0E205643840022943F /* FoodNearbyService.swift */,
+			);
+			path = "Content Services";
+			sourceTree = "<group>";
+		};
 		B619F4BD203E7EF800DD8BA7 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -520,6 +533,7 @@
 			children = (
 				B686EECF20166C7300ACF075 /* AppDelegate.swift */,
 				B686EEE420166CF500ACF075 /* Common */,
+				B6082E0D205643680022943F /* Content Services */,
 				B686EEE520166CFA00ACF075 /* Controllers */,
 				B619F4BD203E7EF800DD8BA7 /* Assets */,
 				B686EEE620166CFF00ACF075 /* Supporting Files */,
@@ -588,8 +602,6 @@
 			isa = PBXGroup;
 			children = (
 				B686EEF020166D5A00ACF075 /* LocationManager.swift */,
-				B686EEEE20166D5A00ACF075 /* CurrentLocationUpdatableService.swift */,
-				B686EEEF20166D5A00ACF075 /* LocationSearchService.swift */,
 				B686EEEB20166D5A00ACF075 /* MapItem.swift */,
 				B686EEEC20166D5A00ACF075 /* CLLocationCoordinate2D+Util.swift */,
 				B686EEED20166D5A00ACF075 /* CLPlacemark+Util.swift */,
@@ -1185,6 +1197,7 @@
 				B686EF9F20166F1300ACF075 /* ARViewController+Gestures.swift in Sources */,
 				B686EF6720166D9D00ACF075 /* Color+MyManagedObjectProtocol.swift in Sources */,
 				B686EF4D20166D8700ACF075 /* InteractiveTransition.swift in Sources */,
+				B6082E0F205643840022943F /* FoodNearbyService.swift in Sources */,
 				B6082E022054D4B30022943F /* MainViewController+ModeChooserDelegate.swift in Sources */,
 				B686EF6520166D9D00ACF075 /* DataManagerProtocol.swift in Sources */,
 				B6299B88204F901D00043CD1 /* AddLocationMapViewController.swift in Sources */,
@@ -1586,12 +1599,13 @@
 		B686EED620166C7300ACF075 /* ARMap.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				B6066B4020565505007C8AB9 /* ARMap 5.xcdatamodel */,
 				B6082E082055EA220022943F /* ARMap 4.xcdatamodel */,
 				B6082DFB2054D1840022943F /* ARMap 3.xcdatamodel */,
 				B607C7B32052673D00E57A63 /* ARMap 2.xcdatamodel */,
 				B686EED720166C7300ACF075 /* ARMap.xcdatamodel */,
 			);
-			currentVersion = B6082E082055EA220022943F /* ARMap 4.xcdatamodel */;
+			currentVersion = B6066B4020565505007C8AB9 /* ARMap 5.xcdatamodel */;
 			path = ARMap.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

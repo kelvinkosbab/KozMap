@@ -145,4 +145,16 @@ class BaseNavigationController : UINavigationController, PresentableController {
       return .lightContent
     }
   }
+  override var prefersStatusBarHidden: Bool {
+    
+    guard let topViewController = self.viewControllers.last else {
+      return false
+    }
+    
+    return topViewController.prefersStatusBarHidden
+  }
+  
+  override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+    return .slide
+  }
 }

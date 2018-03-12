@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchViewControllerCell : UITableViewCell {
+class SearchViewControllerCell : UITableViewCell, ClassNamable {
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var detailLabel: UILabel!
   @IBOutlet weak var rightDetailLabel: UILabel!

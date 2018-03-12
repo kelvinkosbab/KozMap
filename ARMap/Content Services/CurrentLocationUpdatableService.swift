@@ -26,14 +26,36 @@ class CurrentLocationUpdatableService : NSObject, NSFetchedResultsControllerDele
   
   private var isListening: Bool = false
   
-  private var placemarks: [Placemark] {
-    return self.placemarksFetchedResultsController?.fetchedObjects ?? []
-  }
-  
   // MARK: - NSFetchedResultsControllerDelegate
   
-  private lazy var placemarksFetchedResultsController: NSFetchedResultsController<Placemark>? = {
+  private var myPlacemarks: [Placemark] {
+    return self.myPlacemarksFetchedResultsController?.fetchedObjects ?? []
+  }
+  
+  private lazy var myPlacemarksFetchedResultsController: NSFetchedResultsController<Placemark>? = {
     let controller = Placemark.newFetchedResultsController()
+    controller.delegate = self
+    try? controller.performFetch()
+    return controller
+  }()
+  
+  private var foodPlacemarks: [FoodPlacemark] {
+    return self.foodPlacemarksFetchedResultsController?.fetchedObjects ?? []
+  }
+  
+  private lazy var foodPlacemarksFetchedResultsController: NSFetchedResultsController<FoodPlacemark>? = {
+    let controller = FoodPlacemark.newFetchedResultsController()
+    controller.delegate = self
+    try? controller.performFetch()
+    return controller
+  }()
+  
+  private var mountainPlacemarks: [MountainPlacemark] {
+    return self.mountainPlacemarksFetchedResultsController?.fetchedObjects ?? []
+  }
+  
+  private lazy var mountainPlacemarksFetchedResultsController: NSFetchedResultsController<MountainPlacemark>? = {
+    let controller = MountainPlacemark.newFetchedResultsController()
     controller.delegate = self
     try? controller.performFetch()
     return controller
@@ -80,13 +102,25 @@ class CurrentLocationUpdatableService : NSObject, NSFetchedResultsControllerDele
   
   // MARK: - Updating the model
   
+  private var allPlacemarks: [Placemark] {
+    return self.myPlacemarks + self.foodPlacemarks as [Placemark] + self.mountainPlacemarks as [Placemark]
+  }
+  
   private func updateSavedLocationDistances(currentLocation: CLLocation) {
-    for placemark in self.placemarks {
-      let updatedDistance = placemark.location.distance(from: currentLocation)
-      if placemark.lastDistance != updatedDistance {
-        placemark.lastDistance = updatedDistance
-      }
+    
+    // Update all placemark types
+    for placemark in self.allPlacemarks {
+      self.updateLastDistance(placemark: placemark, currentLocation: currentLocation)
     }
+    
+    // Mountain placemarks
     MyDataManager.shared.saveMainContext()
+  }
+  
+  private func updateLastDistance(placemark: Placemark, currentLocation: CLLocation) {
+    let updatedDistance = placemark.location.distance(from: currentLocation)
+    if placemark.lastDistance != updatedDistance {
+      placemark.lastDistance = updatedDistance
+    }
   }
 }

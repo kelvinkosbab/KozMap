@@ -20,10 +20,11 @@ extension Placemark : MyManagedObjectProtocol {
   
   // MARK: - Creating
   
-  static func create(name: String, location: CLLocation, color: Color, distance: Double?, uuid: String = UUID().uuidString) -> Placemark {
+  static func create(name: String, location: CLLocation, color: Color, distance: Double?, phoneNumber: String? = nil, placemarkType: PlacemarkType = .myPlacemark, uuid: String = UUID().uuidString) -> Placemark {
     let object = self.create()
     object.uuid = uuid
-    object.update(name: name, location: location, color: color, distance: distance)
+    object.placemarkType = placemarkType
+    object.update(name: name, location: location, color: color, distance: distance, phoneNumber: phoneNumber)
     return object
   }
   
@@ -36,6 +37,11 @@ extension Placemark : MyManagedObjectProtocol {
   
   static func newFetchedResultsController(placemark: Placemark) -> NSFetchedResultsController<Placemark> {
     let predicate = NSPredicate(format: "SELF == %@", placemark)
+    return self.newFetchedResultsController(predicate: predicate)
+  }
+  
+  static func newFetchedResultsController(placemarkType: PlacemarkType) -> NSFetchedResultsController<Placemark> {
+    let predicate = NSPredicate(format: "placemarkTypeValue == %d", PlacemarkType.myPlacemark.rawValue)
     return self.newFetchedResultsController(predicate: predicate)
   }
 }

@@ -66,7 +66,7 @@ class LocationListViewController : BaseTableViewController, NSFetchedResultsCont
   }
   
   private lazy var placemarksFetchedResultsController: NSFetchedResultsController<Placemark>? = {
-    let controller = Placemark.newFetchedResultsController()
+    let controller = Placemark.newFetchedResultsController(placemarkType: .myPlacemark)
     controller.delegate = self
     try? controller.performFetch()
     return controller
