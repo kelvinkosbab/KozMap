@@ -91,7 +91,7 @@ class FoodNearbyService : NSObject {
     
     // Query for food nearby
     Log.log("Querying \(searchText)")
-    self.locationSearchService.queryLocations(query: searchText, currentLocation: currentLocation) { [weak self] mapItems in
+    self.locationSearchService.queryLocations(query: searchText, currentLocation: currentLocation, coordinateSpan: .small) { [weak self] mapItems in
       
       // Check if the results match the current value search text in cases where it has changed
       guard let currentSearchText = self?.currentSearchText, searchText == currentSearchText else {
