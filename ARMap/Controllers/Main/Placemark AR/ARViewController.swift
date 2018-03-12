@@ -31,9 +31,22 @@ class ARViewController : UIViewController {
   
   // MARK: - Defaults
   
-  var appMode: AppMode = Defaults.shared.appMode {
+  var appMode: AppMode? = nil {
     didSet {
-      if self.appMode != oldValue {
+      
+      guard let appMode = self.appMode else {
+        self.appMode = self.defaults.appMode
+        return
+      }
+      
+      // Check if the app mode has changed
+      guard self.appMode != oldValue else {
+        return
+      }
+      
+      // Updates based on appMode
+      self.placemarksFetchedResultsController = Placemark.newFetchedResultsController(placemarkType: appMode)
+      if self.isViewLoaded {
         self.removeAllNodesFromScene()
         self.updatePlacemarks()
       }
@@ -55,38 +68,22 @@ class ARViewController : UIViewController {
   
   internal var placemarkNodeContainers = Set<PlacemarkNodeContainer>()
   
-  var myPlacemarks: [Placemark] {
-    return self.myPlacemarksFetchedResultsController.fetchedObjects ?? []
+  var placemarks: [Placemark] {
+    
+    guard let placemarksFetchedResultsController = self.placemarksFetchedResultsController else {
+      self.appMode = self.defaults.appMode
+      return []
+    }
+    
+    return placemarksFetchedResultsController.fetchedObjects ?? []
   }
   
-  private lazy var myPlacemarksFetchedResultsController: NSFetchedResultsController<Placemark> = {
-    let controller = Placemark.newFetchedResultsController()
-    controller.delegate = self
-    try? controller.performFetch()
-    return controller
-  }()
-  
-  var foodPlacemarks: [FoodPlacemark] {
-    return self.foodPlacemarksFetchedResultsController.fetchedObjects ?? []
+  private var placemarksFetchedResultsController: NSFetchedResultsController<Placemark>? = nil {
+    didSet {
+      self.placemarksFetchedResultsController?.delegate = self
+      try? self.placemarksFetchedResultsController?.performFetch()
+    }
   }
-  
-  private lazy var foodPlacemarksFetchedResultsController: NSFetchedResultsController<FoodPlacemark> = {
-    let controller = FoodPlacemark.newFetchedResultsController()
-    controller.delegate = self
-    try? controller.performFetch()
-    return controller
-  }()
-  
-  var mountainPlacemarks: [MountainPlacemark] {
-    return self.mountainPlacemarksFetchedResultsController.fetchedObjects ?? []
-  }
-  
-  private lazy var mountainPlacemarksFetchedResultsController: NSFetchedResultsController<MountainPlacemark> = {
-    let controller = MountainPlacemark.newFetchedResultsController()
-    controller.delegate = self
-    try? controller.performFetch()
-    return controller
-  }()
   
   // MARK: - AR Scene Properties
   
@@ -141,6 +138,8 @@ class ARViewController : UIViewController {
     }
     return nil
   }
+  
+  // MARK: - Location Properties
   
   var currentLocation: CLLocation? {
     return LocationManager.shared.currentLocation
@@ -237,6 +236,11 @@ class ARViewController : UIViewController {
   }
   
   func removeAllNodesFromScene() {
+    
+    guard self.isViewLoaded else {
+      return
+    }
+    
     self.sceneNode?.removeFromParentNode()
     self.sceneNode = nil
     self.basePlane?.removeFromParentNode()
@@ -444,7 +448,7 @@ extension ARViewController : NSFetchedResultsControllerDelegate {
   
   func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
     
-    guard (self.appMode == .myPlacemark && controller == self.myPlacemarksFetchedResultsController) || (self.appMode == .food && controller == self.foodPlacemarksFetchedResultsController) || (self.appMode == .mountain && controller == self.mountainPlacemarksFetchedResultsController) else {
+    guard controller == self.placemarksFetchedResultsController else {
       return
     }
     
@@ -501,19 +505,13 @@ extension ARViewController : NSFetchedResultsControllerDelegate {
   // MARK: - Placemarks
   
   func updatePlacemarks() {
-    switch self.appMode {
-    case .myPlacemark:
-      for placemark in self.myPlacemarks {
-        self.update(placemark: placemark)
-      }
-    case .food:
-      for placemark in self.foodPlacemarks {
-        self.update(placemark: placemark)
-      }
-    case .mountain:
-      for placemark in self.mountainPlacemarks {
-        self.update(placemark: placemark)
-      }
+    
+    guard self.isViewLoaded else {
+      return
+    }
+    
+    for placemark in self.placemarks {
+      self.update(placemark: placemark)
     }
   }
   

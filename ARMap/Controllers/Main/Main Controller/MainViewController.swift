@@ -77,6 +77,7 @@ class MainViewController : BaseViewController {
     if let arViewController = segue.destination as? ARViewController {
       arViewController.delegate = self
       arViewController.trackingStateDelegate = self
+      arViewController.appMode = self.appMode
       self.arViewController = arViewController
     }
   }
