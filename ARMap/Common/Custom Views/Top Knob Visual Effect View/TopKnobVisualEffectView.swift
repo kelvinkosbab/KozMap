@@ -31,8 +31,8 @@ class TopKnobVisualEffectView : UIVisualEffectView {
   override func layoutSubviews() {
     super.layoutSubviews()
     
-    if self.knobVisualEffectView.layer.cornerRadius != TopKnobVisualEffectView.knobHeight / 2 {
-      self.knobVisualEffectView.layer.cornerRadius = TopKnobVisualEffectView.knobHeight / 2
-    }
+    self.knobVisualEffectView.layer.cornerRadius = TopKnobVisualEffectView.knobHeight / 2
+    self.knobVisualEffectView.layer.masksToBounds = true
+    self.knobVisualEffectView.clipsToBounds = true
   }
 }

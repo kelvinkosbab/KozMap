@@ -68,7 +68,7 @@ extension Sequence where Iterator.Element == InteractiveTransition.Option {
       default: break
       }
     }
-    return 0.3
+    return InteractiveTransition.Option.defaultPercentThreshold
   }
   
   var velocityThreshold: CGFloat {
@@ -79,7 +79,7 @@ extension Sequence where Iterator.Element == InteractiveTransition.Option {
       default: break
       }
     }
-    return 850
+    return InteractiveTransition.Option.defaultVelocityThreshold
   }
   
   var gestureType: InteractiveTransition.GestureType {

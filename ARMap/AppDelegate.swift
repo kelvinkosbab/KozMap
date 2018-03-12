@@ -27,6 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       RootNavigationController.shared.viewControllers = [ permissionsViewController ]
     }
     
+    // Set the initial app mode
+    FoodNearbyService.shared.configure()
+    Defaults.shared.appMode = .myPlacemark
+    
     return true
   }
   
