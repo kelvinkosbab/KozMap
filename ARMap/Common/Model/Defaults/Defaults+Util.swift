@@ -65,6 +65,6 @@ extension Defaults {
   // MARK: - Food Nearby
   
   var defaultFoodSearchText: String {
-    return "food"
+    return "restaurants"
   }
 }

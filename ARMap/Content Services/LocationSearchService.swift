@@ -10,16 +10,27 @@ import Foundation
 import MapKit
 import CoreLocation
 
-extension MKCoordinateSpan {
-  static let standard = MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
+enum CoordinateSpan {
+  case xs, small, standard
+  
+  var value: MKCoordinateSpan{
+    switch self {
+    case .xs:
+      return MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+    case .small:
+      return MKCoordinateSpan(latitudeDelta: 0.25, longitudeDelta: 0.25)
+    case .standard:
+      return MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
+    }
+  }
 }
 
 struct LocationSearchService {
   
-  func queryLocations(query: String?, currentLocation: CLLocation, completion: @escaping (_ mapItems: [MapItem]) -> Void) {
+  func queryLocations(query: String?, currentLocation: CLLocation, coordinateSpan: CoordinateSpan = .standard, completion: @escaping (_ mapItems: [MapItem]) -> Void) {
     let request = MKLocalSearchRequest()
     request.naturalLanguageQuery = query
-    request.region = MKCoordinateRegion(center: currentLocation.coordinate, span: MKCoordinateSpan.standard)
+    request.region = MKCoordinateRegion(center: currentLocation.coordinate, span: coordinateSpan.value)
     let search = MKLocalSearch(request: request)
     search.start { (response, error) in
       

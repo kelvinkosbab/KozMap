@@ -18,14 +18,13 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
   // MARK: - Static Accessors
   
   private static func newViewController() -> AddLocationViewController {
-    let viewController = self.newViewController(fromStoryboardWithName: "AddLocation")
-    viewController.preferredContentSize.height = viewController.desiredContentHeight
-    return viewController
+    return self.newViewController(fromStoryboardWithName: "AddLocation")
   }
   
   static func newViewController(delegate: AddLocationViewControllerDelegate?) -> AddLocationViewController {
     let viewController = self.newViewController()
     viewController.delegate = delegate
+    viewController.preferredContentSize.height = viewController.desiredContentHeight
     return viewController
   }
   
@@ -68,10 +67,24 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
   
   var mapItem: MapItem? = nil
   var locationColor: UIColor = .kozRed
+  
+  var clPlacemark: CLPlacemark? = nil {
+    didSet {
+      if self.isViewLoaded {
+        self.reloadContent()
+      }
+    }
+  }
+  
   var location: CLLocation? = nil {
     didSet {
       if self.isViewLoaded && self.state == .creating {
         self.reloadContent()
+        
+        // Update the placemark
+        self.location?.getPlacemark { [weak self] placemark in
+          self?.clPlacemark = placemark
+        }
       }
     }
   }
@@ -96,7 +109,6 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
       self.navigationItem.title = "Here"
     }
     
-    
     self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(self.closeButtonSelected))
     
     self.nameTextField.delegate = self
@@ -117,6 +129,11 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
     
     // Content
     self.reloadContent()
+    
+    // Placemark address
+    self.location?.getPlacemark { [weak self] placemark in
+      self?.clPlacemark = placemark
+    }
     
     // Location updates
     if self.state == .creating {
@@ -212,10 +229,8 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
     let distance = currentLocation?.distance(from: location)
     self.distanceLabel.text = distance?.getDistanceString(unitType: Defaults.shared.unitType, displayType: .numbericUnits(false)) ?? "NA"
     
-    // Location address
-    location.getPlacemark { [weak self] placemark in
-      self?.locationDescriptionLabel.text = placemark?.address
-    }
+    // Update the address
+    self.locationDescriptionLabel.text = self.mapItem?.address ?? self.clPlacemark?.address
   }
   
   // MARK: - Actions
@@ -248,15 +263,14 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
     color.color = self.locationColor
     
     // Address
-    let address = self.mapItem?.address
+    let address = self.mapItem?.address ?? self.clPlacemark?.address
     
     // Distance
     let currentLocation = LocationManager.shared.currentLocation
     let distance = currentLocation?.distance(from: location)
     
     // Create the location
-    let placemark = Placemark.create(name: name, location: location, color: color, distance: distance)
-    placemark.address = address
+    let placemark = Placemark.create(placemarkType: .myPlacemark, name: name, location: location, color: color, distance: distance, address: address)
     MyDataManager.shared.saveMainContext()
     self.delegate?.didSave(placemark: placemark)
   }

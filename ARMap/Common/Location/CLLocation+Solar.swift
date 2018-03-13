@@ -32,3 +32,4 @@ extension CLLocation {
     return self.solar?.isNighttime ?? true
   }
 }
+

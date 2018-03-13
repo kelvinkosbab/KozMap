@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension MainViewController : HomeTabBarViewDelegate, SettingsNavigationDelegate, ModeChooserNavigationDelegate, MyPlacemarksNavigationDelegate, FoodNearbyNavigationDelegate {
+extension MainViewController : HomeTabBarViewDelegate, SettingsNavigationDelegate, ModeChooserNavigationDelegate, PlacemarkDetailNavigationDelegate, PlacemarkListNavigationDelegate, MyPlacemarksNavigationDelegate, FoodNearbyNavigationDelegate {
   
   func tabButtonSelected(type: HomeTabBarButtonType) {
     switch type {
@@ -20,13 +20,59 @@ extension MainViewController : HomeTabBarViewDelegate, SettingsNavigationDelegat
     case .myPlacemarkAdd:
       self.presentAddLocation(addLocationDelegate: self, searchDelegate: self, options: [ .presentingViewControllerDelegate(self) ])
     case .myPlacemarkList:
-      self.presentPlacemarkList(delegate: self, options: [ .presentingViewControllerDelegate(self) ])
+      self.presentPlacemarkList(appMode: self.appMode, delegate: self, options: [ .presentingViewControllerDelegate(self) ])
       
-    case .foodNearbyFavorites: break
+    case .foodNearbyFavorites:
+      self.presentPlacemarkList(appMode: self.appMode, delegate: self, options: [ .presentingViewControllerDelegate(self) ])
     case .foodNearbyList:
-      self.presentFoodNearbySearch(options: [ .presentingViewControllerDelegate(self) ])
+      self.presentFoodNearbySearch(delegate: self, options: [ .presentingViewControllerDelegate(self) ])
       
     case .mountainList: break
+    }
+  }
+}
+
+// MARK: - LocationListViewControllerDelegate
+
+extension MainViewController : LocationListViewControllerDelegate {
+  
+  func shouldShowPlacemarkDetail(placemark: Placemark, sender: UIViewController) {
+    self.dismissPresented { [weak self] in
+      
+      // Present an alert
+      self?.presentLocationDetail(placemark: placemark)
+    }
+  }
+  
+  func shouldTransitionToAdd(sender: UIViewController) {
+    self.dismissPresented { [weak self] in
+      
+      guard let strongSelf = self else {
+        return
+      }
+      
+      switch strongSelf.appMode {
+      case .myPlacemark:
+        strongSelf.presentAddLocation(addLocationDelegate: strongSelf, searchDelegate: strongSelf, options: [ .presentingViewControllerDelegate(strongSelf) ])
+      case .food: break
+      case .mountain: break
+      }
+    }
+  }
+  
+  func shouldTransitionToSearch(sender: UIViewController) {
+    self.dismissPresented { [weak self] in
+      
+      guard let strongSelf = self else {
+        return
+      }
+      
+      switch strongSelf.appMode {
+      case .myPlacemark: break
+      case .food:
+        strongSelf.presentFoodNearbySearch(delegate: strongSelf, options: [ .presentingViewControllerDelegate(strongSelf) ])
+      case .mountain: break
+      }
     }
   }
 }

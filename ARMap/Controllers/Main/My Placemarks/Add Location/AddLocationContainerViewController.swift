@@ -14,15 +14,14 @@ class AddLocationContainerViewController : BaseViewController, DesiredContentHei
   // MARK: - Static Accessors
   
   private static func newViewController() -> AddLocationContainerViewController {
-    let viewController = self.newViewController(fromStoryboardWithName: "AddLocation")
-    viewController.preferredContentSize.height = viewController.desiredContentHeight
-    return viewController
+    return self.newViewController(fromStoryboardWithName: "AddLocation")
   }
   
   static func newViewController(locationDetailDelegate: AddLocationViewControllerDelegate?, searchDelegate: MyPlacemarkSearchViewControllerDelegate?) -> AddLocationContainerViewController {
     let viewController = self.newViewController()
     viewController.locationDetailDelegate = locationDetailDelegate
     viewController.searchDelegate = searchDelegate
+    viewController.preferredContentSize.height = viewController.desiredContentHeight
     return viewController
   }
   
@@ -148,18 +147,18 @@ class AddLocationContainerViewController : BaseViewController, DesiredContentHei
   func reloadContent() {
     switch self.currentSelectedIndex {
     case 0:
-      let searchButton = UIBarButtonItem(title: "Search", style: .plain, target: self, action: #selector(self.searchNavigationButtonSelected))
-      let mapButton = UIBarButtonItem(title: "Map", style: .plain, target: self, action: #selector(self.mapNavigationButtonSelected))
+      let searchButton = UIBarButtonItem(image: #imageLiteral(resourceName: "assetSearch"), style: .plain, target: self, action: #selector(self.searchNavigationButtonSelected))
+      let mapButton = UIBarButtonItem(image: #imageLiteral(resourceName: "assetMapPlacemark"), style: .plain, target: self, action: #selector(self.mapNavigationButtonSelected))
       self.navigationItem.rightBarButtonItems = [ mapButton, searchButton ]
-      self.navigationItem.title = "Here"
+      self.navigationItem.title = "Current"
     case 1:
-      let hereButton = UIBarButtonItem(title: "Here", style: .plain, target: self, action: #selector(self.hereNavigationButtonSelected))
-      let mapButton = UIBarButtonItem(title: "Map", style: .plain, target: self, action: #selector(self.mapNavigationButtonSelected))
+      let hereButton = UIBarButtonItem(image: #imageLiteral(resourceName: "assetPlacemark"), style: .plain, target: self, action: #selector(self.hereNavigationButtonSelected))
+      let mapButton = UIBarButtonItem(image: #imageLiteral(resourceName: "assetMapPlacemark"), style: .plain, target: self, action: #selector(self.mapNavigationButtonSelected))
       self.navigationItem.rightBarButtonItems = [ mapButton, hereButton ]
       self.navigationItem.title = "Search"
     case 2:
-      let hereButton = UIBarButtonItem(title: "Here", style: .plain, target: self, action: #selector(self.hereNavigationButtonSelected))
-      let searchButton = UIBarButtonItem(title: "Search", style: .plain, target: self, action: #selector(self.searchNavigationButtonSelected))
+      let hereButton = UIBarButtonItem(image: #imageLiteral(resourceName: "assetPlacemark"), style: .plain, target: self, action: #selector(self.hereNavigationButtonSelected))
+      let searchButton = UIBarButtonItem(image: #imageLiteral(resourceName: "assetSearch"), style: .plain, target: self, action: #selector(self.searchNavigationButtonSelected))
       self.navigationItem.rightBarButtonItems = [ searchButton, hereButton ]
       self.navigationItem.title = "Map"
     default:

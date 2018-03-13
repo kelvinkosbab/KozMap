@@ -76,7 +76,7 @@ class FoodNearbyService : NSObject {
   private func updateFoodPlacemarks(searchText: String?) {
     
     // Delete all the current non-favorite food placemarks
-    FoodPlacemark.deleteMany(isFavorite: false)
+    Placemark.deleteMany(placemarkType: .food, isFavorite: false)
     MyDataManager.shared.saveMainContext()
     
     // Check for presence of search text
@@ -91,7 +91,7 @@ class FoodNearbyService : NSObject {
     
     // Query for food nearby
     Log.log("Querying \(searchText)")
-    self.locationSearchService.queryLocations(query: searchText, currentLocation: currentLocation) { [weak self] mapItems in
+    self.locationSearchService.queryLocations(query: searchText, currentLocation: currentLocation, coordinateSpan: .xs) { [weak self] mapItems in
       
       // Check if the results match the current value search text in cases where it has changed
       guard let currentSearchText = self?.currentSearchText, searchText == currentSearchText else {
@@ -109,7 +109,7 @@ class FoodNearbyService : NSObject {
         }
         
         // Create the food placemark
-        _ = FoodPlacemark.create(name: name, location: location, distance: mapItem.distance, address: mapItem.address, phoneNumber: mapItem.phoneNumber)
+        _ = Placemark.create(placemarkType: .food, name: name, location: location, color: Color.red, distance: mapItem.distance, address: mapItem.address, phoneNumber: mapItem.phoneNumber, isFavorite: false)
       }
       MyDataManager.shared.saveMainContext()
     }

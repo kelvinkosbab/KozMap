@@ -12,11 +12,6 @@ protocol ModeChooserNavigationDelegate : class {}
 extension ModeChooserNavigationDelegate where Self : UIViewController {
   
   func presentModeChooser(delegate: ModeChooserDelegate?, options: [PresentableControllerOption] = []) {
-    
-    guard self.presentedViewController == nil else {
-      return
-    }
-    
     let modeChooserViewController = ModeChooserViewController.newViewController(delegate: delegate)
     modeChooserViewController.presentIn(self, withMode: .custom(.visualEffectFade), options: options)
   }
