@@ -193,6 +193,7 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
     // Name
     self.title = placemark.name
     self.nameTextField.text = placemark.name
+    self.nameTextField.isUserInteractionEnabled = placemark.placemarkType == .myPlacemark
     
     // Color
     if let color = placemark.color?.color {

@@ -10,12 +10,22 @@ import UIKit
 import CoreData
 import CoreLocation
 
+protocol SearchFoodNearbyViewControllerDelegate : class {
+  func didSelectPlacemark(_ placemark: Placemark, sender: UIViewController)
+}
+
 class SearchFoodNearbyViewController : BaseTableViewController, DismissInteractable {
   
   // MARK: - Static Accessors
   
-  static func newViewController() -> SearchFoodNearbyViewController {
+  private static func newViewController() -> SearchFoodNearbyViewController {
     return self.newViewController(fromStoryboardWithName: "FoodNearby")
+  }
+  
+  static func newViewController(delegate: SearchFoodNearbyViewControllerDelegate?) -> SearchFoodNearbyViewController {
+    let viewController = self.newViewController()
+    viewController.delegate = delegate
+    return viewController
   }
   
   // MARK: - DismissInteractable
@@ -28,6 +38,9 @@ class SearchFoodNearbyViewController : BaseTableViewController, DismissInteracta
     if let navigationBar = self.navigationController?.navigationBar {
       views.append(navigationBar)
     }
+    if let searchBar = self.searchBar {
+      views.append(searchBar)
+    }
     if let tableView = self.tableView {
       views.append(tableView)
     }
@@ -38,6 +51,7 @@ class SearchFoodNearbyViewController : BaseTableViewController, DismissInteracta
   
   var resultSearchController: UISearchController? = nil
   var mapItems: [MapItem] = []
+  weak var delegate: SearchFoodNearbyViewControllerDelegate? = nil
   
   var foodNearbyService: FoodNearbyService {
     return FoodNearbyService.shared
@@ -248,7 +262,10 @@ class SearchFoodNearbyViewController : BaseTableViewController, DismissInteracta
       return
     }
     
-    // TODO: Favorite this item?
+    switch rowType {
+    case .foodPlacemark(let foodPlacemark):
+      self.delegate?.didSelectPlacemark(foodPlacemark, sender: self)
+    }
   }
 }
 

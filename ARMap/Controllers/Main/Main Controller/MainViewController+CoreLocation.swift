@@ -14,15 +14,7 @@ import CoreLocation
 extension MainViewController : AddLocationViewControllerDelegate {
   
   func didSave(placemark: Placemark) {
-    let dispatchGroup = DispatchGroup()
-    if let _ = self.presentedViewController {
-      dispatchGroup.enter()
-      self.dismiss(animated: true) {
-        dispatchGroup.leave()
-      }
-    }
-    
-    dispatchGroup.notify(queue: .main) { [weak self] in
+    self.dismissPresented { [weak self] in
       
       // Present an alert
       self?.presentLocationSavedAlert(placemark: placemark)
@@ -57,13 +49,15 @@ extension MainViewController : AddLocationViewControllerDelegate {
 extension MainViewController : LocationListViewControllerDelegate {
   
   func shouldEdit(placemark: Placemark) {
-    self.dismiss(animated: true) { [weak self] in
+    self.dismissPresented { [weak self] in
+      
+      // Present an alert
       self?.presentLocationDetail(placemark: placemark)
     }
   }
   
   func shouldTransitionToAddPlacemark() {
-    self.dismiss(animated: true) { [weak self] in
+    self.dismissPresented { [weak self] in
       
       guard let strongSelf = self else {
         return
@@ -79,13 +73,29 @@ extension MainViewController : LocationListViewControllerDelegate {
 extension MainViewController : MyPlacemarkSearchViewControllerDelegate {
   
   func shouldAdd(mapItem: MapItem) {
-    self.dismiss(animated: true) { [weak self] in
+    self.dismissPresented { [weak self] in
       
       guard let strongSelf = self else {
         return
       }
       
       strongSelf.presentAddLocation(mapItem: mapItem, delegate: strongSelf, options: [ .presentingViewControllerDelegate(strongSelf) ])
+    }
+  }
+}
+
+// MARK: - SearchFoodNearbyViewControllerDelegate
+
+extension MainViewController : SearchFoodNearbyViewControllerDelegate {
+  
+  func didSelectPlacemark(_ placemark: Placemark, sender: UIViewController) {
+    self.dismissPresented { [weak self] in
+      
+      guard let strongSelf = self else {
+        return
+      }
+      
+      strongSelf.presentLocationDetail(placemark: placemark, options: [ .presentingViewControllerDelegate(strongSelf) ])
     }
   }
 }

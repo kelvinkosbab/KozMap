@@ -13,7 +13,7 @@ import UIKit
 extension MainViewController : ARViewControllerDelegate {
   
   func userDidTap(placemark: Placemark) {
-    self.presentLocationDetail(placemark: placemark)
+    self.presentLocationDetail(placemark: placemark, options: [ .presentingViewControllerDelegate(self) ])
   }
 }
 
@@ -54,12 +54,8 @@ extension MainViewController : ARStateDelegate {
     }
     
     // Dismiss any other presented controllers
-    if let _ = self.presentedViewController {
-      self.dismiss(animated: true) { [weak self] in
-        self?.presentConfiguringViewController(state: state)
-      }
-    } else {
-      self.presentConfiguringViewController(state: state)
+    self.dismissPresented { [weak self] in
+      self?.presentConfiguringViewController(state: state)
     }
   }
   

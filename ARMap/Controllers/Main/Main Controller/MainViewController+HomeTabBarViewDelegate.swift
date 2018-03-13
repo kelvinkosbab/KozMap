@@ -24,7 +24,7 @@ extension MainViewController : HomeTabBarViewDelegate, SettingsNavigationDelegat
       
     case .foodNearbyFavorites: break
     case .foodNearbyList:
-      self.presentFoodNearbySearch(options: [ .presentingViewControllerDelegate(self) ])
+      self.presentFoodNearbySearch(delegate: self, options: [ .presentingViewControllerDelegate(self) ])
       
     case .mountainList: break
     }
