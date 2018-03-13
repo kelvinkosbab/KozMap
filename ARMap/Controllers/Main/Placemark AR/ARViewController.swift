@@ -32,23 +32,44 @@ class ARViewController : UIViewController {
   // MARK: - Defaults
   
   var appMode: AppMode? = nil {
+    willSet {
+      
+      guard self.isViewLoaded else {
+        return
+      }
+      
+      guard self.appMode != newValue || self.placemarksFetchedResultsController != nil else {
+        return
+      }
+      
+      // Clear the scene
+      self.removeAllNodesFromScene()
+      for placemark in self.placemarks {
+        self.remove(placemark: placemark)
+      }
+      self.placemarksFetchedResultsController = nil
+    }
     didSet {
       
-      guard let appMode = self.appMode else {
-        self.appMode = self.defaults.appMode
+      guard self.isViewLoaded, let appMode = self.appMode else {
         return
       }
       
       // Check if the app mode has changed
-      guard appMode != oldValue else {
+      guard appMode != oldValue || self.placemarksFetchedResultsController == nil else {
         return
       }
       
-      // Updates based on appMode
+      // Update the placemarks data source
       self.placemarksFetchedResultsController = Placemark.newFetchedResultsController(placemarkType: appMode)
-      if self.isViewLoaded {
-        self.removeAllNodesFromScene()
-        self.updatePlacemarks()
+      
+      // Update the placemarks in the view if the tracking state is normal
+      if let state = self.state {
+        switch state {
+        case .normal:
+          self.updatePlacemarks()
+        default: break
+        }
       }
     }
   }
@@ -102,8 +123,8 @@ class ARViewController : UIViewController {
         self.state = .limited(.excessiveMotion)
       case .limited(.initializing):
         self.state = .limited(.initializing)
-//      case .limited(.relocalizing):
-//        self.state = .limited(.relocalizing)
+      case .limited(.relocalizing):
+        self.state = .limited(.relocalizing)
       case .normal:
         self.state = .normal
       case .notAvailable:
@@ -155,6 +176,7 @@ class ARViewController : UIViewController {
     super.viewDidLoad()
     
     // Setup the scene
+    self.appMode = self.defaults.appMode
     self.sceneView.setUp(delegate: self, session: self.session)
     
     // Listen for gestures
@@ -236,11 +258,6 @@ class ARViewController : UIViewController {
   }
   
   func removeAllNodesFromScene() {
-    
-    guard self.isViewLoaded else {
-      return
-    }
-    
     self.sceneNode?.removeFromParentNode()
     self.sceneNode = nil
     self.basePlane?.removeFromParentNode()
@@ -430,8 +447,8 @@ extension ARViewController : ARSCNViewDelegate {
       Log.extendedLog("Camera did change tracking state: limited, excessive motion")
     case .limited(.initializing):
       Log.extendedLog("Camera did change tracking state: limited, initializing")
-//    case .limited(.relocalizing):
-//      Log.extendedLog("Camera did change tracking state: limited, relocalizing")
+    case .limited(.relocalizing):
+      Log.extendedLog("Camera did change tracking state: limited, relocalizing")
     case .normal:
       Log.extendedLog("Camera did change tracking state: normal")
     case .notAvailable:
@@ -505,11 +522,6 @@ extension ARViewController : NSFetchedResultsControllerDelegate {
   // MARK: - Placemarks
   
   func updatePlacemarks() {
-    
-    guard self.isViewLoaded else {
-      return
-    }
-    
     for placemark in self.placemarks {
       self.update(placemark: placemark)
     }
