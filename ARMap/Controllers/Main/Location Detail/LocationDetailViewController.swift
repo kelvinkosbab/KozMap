@@ -52,12 +52,14 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
   @IBOutlet weak var longitudeLabel: UILabel!
   @IBOutlet weak var distanceLabel: UILabel!
   @IBOutlet weak var locationDescriptionLabel: UILabel!
+  @IBOutlet weak var locationDescriptionLabelHeightConstraint: NSLayoutConstraint!
   @IBOutlet weak var colorChooserContainer: UIView!
   @IBOutlet weak var mapView: MKMapView!
   @IBOutlet weak var openInMapsButton: UIButton!
   
   var placemark: Placemark? = nil
   var colorChooserController: InlineColorChooserViewController? = nil
+  var mapAnnotation: MKAnnotation? = nil
   
   var mapItem: MapItem? {
     
@@ -110,6 +112,7 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
     
     // Update content
     self.reloadContent()
+    self.fetchUpdatedAddress()
     
     // Listen for updates to current location
     NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveUpdatedLocationNotification(_:)), name: .locationManagerDidUpdateCurrentLocation, object: nil)
@@ -178,6 +181,16 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
   
   // MARK: - Content
   
+  func fetchUpdatedAddress() {
+    self.placemark?.location.getPlacemark { [weak self] clPlacemark in
+      if let address = clPlacemark?.address, self?.placemark?.address != address {
+        self?.placemark?.address = address
+        MyDataManager.shared.saveMainContext()
+        self?.reloadContent()
+      }
+    }
+  }
+  
   func reloadContent() {
     
     // Check if there is a location to populate
@@ -213,15 +226,11 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
     let distance = currentLocation?.distance(from: location)
     self.distanceLabel.text = distance?.getDistanceString(unitType: Defaults.shared.unitType, displayType: .numbericUnits(false)) ?? "NA"
     
-    // Location address
-    let address = placemark.address
-    self.locationDescriptionLabel.text = address
-    location.getPlacemark { [weak self] placemark in
-      self?.locationDescriptionLabel.text = address ?? placemark?.address
-    }
+    // Placemark description
+    self.locationDescriptionLabel.text = self.placemarkDescription
+    self.locationDescriptionLabelHeightConstraint.constant = self.placemarkDescription?.calculateHeight(forLabel: self.locationDescriptionLabel) ?? 0
     
     // Map annotion
-    
     if let mapAnnotation = self.mapAnnotation, mapAnnotation.coordinate.latitude == placemark.coordinate.latitude && mapAnnotation.coordinate.longitude == placemark.coordinate.longitude {
       // do nothing
     } else {
@@ -247,7 +256,24 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
     }
   }
   
-  var mapAnnotation: MKAnnotation? = nil
+  var placemarkDescription: String? {
+    
+    guard let placemark = self.placemark, placemark.address != nil || placemark.phoneNumber != nil else {
+      return nil
+    }
+    
+    var placemarkDescription: String = ""
+    if let address = placemark.address {
+      placemarkDescription += address
+    }
+    if let phoneNumber = placemark.phoneNumber {
+      if placemark.address != nil {
+        placemarkDescription += "\n"
+      }
+      placemarkDescription += phoneNumber
+    }
+    return placemarkDescription
+  }
   
   // MARK: - Actions
   

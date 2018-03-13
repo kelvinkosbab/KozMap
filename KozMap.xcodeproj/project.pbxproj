@@ -109,6 +109,7 @@
 		B686EFA420166F1300ACF075 /* PermissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF8D20166F1300ACF075 /* PermissionsViewController.swift */; };
 		B686EFA520166F1300ACF075 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF8E20166F1300ACF075 /* BaseNavigationController.swift */; };
 		B686EFA620166F1300ACF075 /* InlineColorChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF9020166F1300ACF075 /* InlineColorChooserViewController.swift */; };
+		B69E7BFE2057CD7E008318FC /* String+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69E7BFD2057CD7E008318FC /* String+UIKit.swift */; };
 		B6A8ABC8204B8851007FDAEC /* ServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A8ABC2204B8850007FDAEC /* ServiceResponse.swift */; };
 		B6A8ABC9204B8851007FDAEC /* Loggable+Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A8ABC3204B8850007FDAEC /* Loggable+Service.swift */; };
 		B6A8ABCA204B8851007FDAEC /* Data+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A8ABC4204B8851007FDAEC /* Data+JSON.swift */; };
@@ -268,6 +269,7 @@
 		B686EF8D20166F1300ACF075 /* PermissionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsViewController.swift; sourceTree = "<group>"; };
 		B686EF8E20166F1300ACF075 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		B686EF9020166F1300ACF075 /* InlineColorChooserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InlineColorChooserViewController.swift; sourceTree = "<group>"; };
+		B69E7BFD2057CD7E008318FC /* String+UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+UIKit.swift"; sourceTree = "<group>"; };
 		B6A8ABC2204B8850007FDAEC /* ServiceResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceResponse.swift; sourceTree = "<group>"; };
 		B6A8ABC3204B8850007FDAEC /* Loggable+Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Loggable+Service.swift"; sourceTree = "<group>"; };
 		B6A8ABC4204B8851007FDAEC /* Data+JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+JSON.swift"; sourceTree = "<group>"; };
@@ -354,7 +356,6 @@
 			children = (
 				B6082DF7205489510022943F /* MyPlacemarksNavigationDelegate.swift */,
 				B686EF8320166F1200ACF075 /* Location List */,
-				B686EF7920166F1200ACF075 /* Location Detail */,
 				B686EF7B20166F1200ACF075 /* Add Location */,
 			);
 			path = "My Placemarks";
@@ -627,6 +628,7 @@
 				B686EEF620166D5A00ACF075 /* UIViewController+Util.swift */,
 				B6082DF9205496320022943F /* UIViewController+Alert.swift */,
 				B686EEF720166D5A00ACF075 /* String+Util.swift */,
+				B69E7BFD2057CD7E008318FC /* String+UIKit.swift */,
 				B686EEF820166D5A00ACF075 /* UIColor+Util.swift */,
 				B686EEF920166D5A00ACF075 /* UIApplication+Util.swift */,
 				B686EEFA20166D5A00ACF075 /* CGRect+Util.swift */,
@@ -745,6 +747,7 @@
 				B6082E072054D5F40022943F /* Main Controller */,
 				B686EF8620166F1200ACF075 /* Placemark AR */,
 				B686EF7720166F1200ACF075 /* Settings */,
+				B686EF7920166F1200ACF075 /* Location Detail */,
 				B607C7AF2052662100E57A63 /* My Placemarks */,
 				B607C7B12052664200E57A63 /* Food Nearby */,
 				B607C7B02052663800E57A63 /* Mountain Viewer */,
@@ -1194,6 +1197,7 @@
 				B6BEF50620537E50002FD2AA /* FoodNearbyNavigationDelegate.swift in Sources */,
 				B686EFA320166F1300ACF075 /* BaseTableViewController.swift in Sources */,
 				B686EF9520166F1300ACF075 /* SettingsViewController.swift in Sources */,
+				B69E7BFE2057CD7E008318FC /* String+UIKit.swift in Sources */,
 				B686EF9F20166F1300ACF075 /* ARViewController+Gestures.swift in Sources */,
 				B686EF6720166D9D00ACF075 /* Color+MyManagedObjectProtocol.swift in Sources */,
 				B686EF4D20166D8700ACF075 /* InteractiveTransition.swift in Sources */,

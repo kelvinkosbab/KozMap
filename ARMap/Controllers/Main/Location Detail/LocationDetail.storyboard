@@ -160,8 +160,8 @@
                                     <constraint firstAttribute="bottom" secondItem="hya-VB-Qqe" secondAttribute="bottom" id="zgN-0M-MVh"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12345" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kec-hB-OLb">
-                                <rect key="frame" x="16" y="230" width="343" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12345" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kec-hB-OLb">
+                                <rect key="frame" x="16" y="225" width="343" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Dqz-Gk-erL"/>
                                 </constraints>
@@ -170,7 +170,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wyL-Ph-2Kh">
-                                <rect key="frame" x="0.0" y="273" width="375" height="394"/>
+                                <rect key="frame" x="0.0" y="263" width="375" height="404"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Coz-4S-NBm">
                                 <rect key="frame" x="16" y="601" width="343" height="50"/>
@@ -194,7 +194,7 @@
                             <constraint firstItem="XUE-LN-d3D" firstAttribute="trailing" secondItem="m31-m5-fuP" secondAttribute="trailing" constant="16" id="8Ny-Fc-Nfj"/>
                             <constraint firstItem="m31-m5-fuP" firstAttribute="top" secondItem="lHg-W5-p6s" secondAttribute="bottom" constant="13" id="8W3-fK-qYb"/>
                             <constraint firstAttribute="bottom" secondItem="wyL-Ph-2Kh" secondAttribute="bottom" id="C83-u9-Zhp"/>
-                            <constraint firstItem="kec-hB-OLb" firstAttribute="top" secondItem="hNR-dQ-yk1" secondAttribute="bottom" constant="13" id="Cwf-UL-bgv"/>
+                            <constraint firstItem="kec-hB-OLb" firstAttribute="top" secondItem="hNR-dQ-yk1" secondAttribute="bottom" constant="8" id="Cwf-UL-bgv"/>
                             <constraint firstItem="wyL-Ph-2Kh" firstAttribute="leading" secondItem="5Nr-jJ-XJF" secondAttribute="leading" id="EL4-Oj-qYE"/>
                             <constraint firstItem="kec-hB-OLb" firstAttribute="leading" secondItem="XUE-LN-d3D" secondAttribute="leading" constant="16" id="Hby-o4-jXl"/>
                             <constraint firstItem="lHg-W5-p6s" firstAttribute="leading" secondItem="XUE-LN-d3D" secondAttribute="leading" constant="16" id="Phw-2G-Vsf"/>
@@ -202,7 +202,7 @@
                             <constraint firstAttribute="trailing" secondItem="wyL-Ph-2Kh" secondAttribute="trailing" id="S5R-b7-L50"/>
                             <constraint firstItem="Coz-4S-NBm" firstAttribute="leading" secondItem="XUE-LN-d3D" secondAttribute="leading" constant="16" id="WJV-XN-n3b"/>
                             <constraint firstItem="XUE-LN-d3D" firstAttribute="trailing" secondItem="hNR-dQ-yk1" secondAttribute="trailing" constant="16" id="ZCR-lv-vfz"/>
-                            <constraint firstItem="wyL-Ph-2Kh" firstAttribute="top" secondItem="kec-hB-OLb" secondAttribute="bottom" constant="13" id="aVK-qI-1dB"/>
+                            <constraint firstItem="wyL-Ph-2Kh" firstAttribute="top" secondItem="kec-hB-OLb" secondAttribute="bottom" constant="8" id="aVK-qI-1dB"/>
                             <constraint firstItem="lHg-W5-p6s" firstAttribute="top" secondItem="XUE-LN-d3D" secondAttribute="top" constant="16" id="oJW-4Q-wmI"/>
                             <constraint firstItem="XUE-LN-d3D" firstAttribute="trailing" secondItem="Coz-4S-NBm" secondAttribute="trailing" constant="16" id="tWM-SY-2Du"/>
                             <constraint firstItem="XUE-LN-d3D" firstAttribute="trailing" secondItem="kec-hB-OLb" secondAttribute="trailing" constant="16" id="tj4-mw-Bc6"/>
@@ -215,6 +215,7 @@
                         <outlet property="distanceLabel" destination="22R-xd-9BZ" id="C7s-OH-HNW"/>
                         <outlet property="latitudeLabel" destination="AF3-Ok-A6d" id="5id-DP-hLy"/>
                         <outlet property="locationDescriptionLabel" destination="kec-hB-OLb" id="pJ8-lr-q5c"/>
+                        <outlet property="locationDescriptionLabelHeightConstraint" destination="Dqz-Gk-erL" id="5KF-67-THb"/>
                         <outlet property="longitudeLabel" destination="bGS-gY-BVn" id="3iD-zt-5pD"/>
                         <outlet property="mapView" destination="wyL-Ph-2Kh" id="pSE-Ng-hSH"/>
                         <outlet property="nameTextField" destination="lHg-W5-p6s" id="oza-W1-9T5"/>
