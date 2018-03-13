@@ -31,49 +31,6 @@ class ARViewController : UIViewController {
   
   // MARK: - Defaults
   
-  var appMode: AppMode? = nil {
-    willSet {
-      
-      guard self.isViewLoaded else {
-        return
-      }
-      
-      guard self.appMode != newValue || self.placemarksFetchedResultsController != nil else {
-        return
-      }
-      
-      // Clear the scene
-      self.removeAllNodesFromScene()
-      for placemark in self.placemarks {
-        self.remove(placemark: placemark)
-      }
-      self.placemarksFetchedResultsController = nil
-    }
-    didSet {
-      
-      guard self.isViewLoaded, let appMode = self.appMode else {
-        return
-      }
-      
-      // Check if the app mode has changed
-      guard appMode != oldValue || self.placemarksFetchedResultsController == nil else {
-        return
-      }
-      
-      // Update the placemarks data source
-      self.placemarksFetchedResultsController = Placemark.newFetchedResultsController(placemarkType: appMode)
-      
-      // Update the placemarks in the view if the tracking state is normal
-      if let state = self.state {
-        switch state {
-        case .normal:
-          self.updatePlacemarks()
-        default: break
-        }
-      }
-    }
-  }
-  
   var defaults: Defaults {
     return self.defaultsFetchedResultsController.fetchedObjects?.first ?? Defaults.shared
   }
@@ -90,21 +47,15 @@ class ARViewController : UIViewController {
   internal var placemarkNodeContainers = Set<PlacemarkNodeContainer>()
   
   var placemarks: [Placemark] {
-    
-    guard let placemarksFetchedResultsController = self.placemarksFetchedResultsController else {
-      self.appMode = self.defaults.appMode
-      return []
-    }
-    
-    return placemarksFetchedResultsController.fetchedObjects ?? []
+    return self.placemarksFetchedResultsController.fetchedObjects ?? []
   }
   
-  private var placemarksFetchedResultsController: NSFetchedResultsController<Placemark>? = nil {
-    didSet {
-      self.placemarksFetchedResultsController?.delegate = self
-      try? self.placemarksFetchedResultsController?.performFetch()
-    }
-  }
+  private lazy var placemarksFetchedResultsController: NSFetchedResultsController<Placemark> = {
+    let controller = Placemark.newFetchedResultsController()
+    controller.delegate = self
+    try? controller.performFetch()
+    return controller
+  }()
   
   // MARK: - AR Scene Properties
   
@@ -176,7 +127,6 @@ class ARViewController : UIViewController {
     super.viewDidLoad()
     
     // Setup the scene
-    self.appMode = self.defaults.appMode
     self.sceneView.setUp(delegate: self, session: self.session)
     
     // Listen for gestures
@@ -224,7 +174,17 @@ class ARViewController : UIViewController {
   // MARK: - Notifications
   
   @objc func didReceiveUpdatedLocationNotification(_ notification: Notification) {
-    self.updatePlacemarkNodes(updatePosition: true)
+    
+    guard let state = self.state else {
+      return
+    }
+    
+    switch state {
+    case .normal:
+      self.updatePlacemarkNodes(updatePosition: true)
+      
+    default: break
+    }
   }
   
   @objc func didReceiveUpdatedHeadingNotification(_ notification: Notification) {}
@@ -289,6 +249,13 @@ class ARViewController : UIViewController {
   
   internal func update(placemarkNodeContainer: PlacemarkNodeContainer, animated: Bool = false, updatePosition: Bool = true) {
     Log.log("Updating placemark \(placemarkNodeContainer.placemark.name ?? "nil name") at location \(placemarkNodeContainer.placemark.location.coordinate)")
+    
+    // Check if this node is hidden by the
+    guard self.defaults.appMode == placemarkNodeContainer.placemark.placemarkType else {
+      placemarkNodeContainer.placemarkNode?.removeFromParentNode()
+      placemarkNodeContainer.placemarkNode = nil
+      return
+    }
     
     // Refresh saved location properties
     placemarkNodeContainer.refreshContent()
@@ -465,32 +432,53 @@ extension ARViewController : NSFetchedResultsControllerDelegate {
   
   func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
     
+    guard let state = self.state else {
+      return
+    }
+    
     guard controller == self.placemarksFetchedResultsController else {
       return
     }
     
-    switch type {
-    case .insert:
-      if let placemark = anObject as? Placemark {
-        self.add(placemark: placemark)
+    switch state {
+    case .normal:
+      switch type {
+      case .insert:
+        if let placemark = anObject as? Placemark {
+          self.add(placemark: placemark)
+        }
+        
+      case .delete:
+        if let placemark = anObject as? Placemark {
+          self.remove(placemark: placemark)
+        }
+        
+      case .update, .move:
+        if let placemark = anObject as? Placemark {
+          self.update(placemark: placemark)
+        }
       }
       
-    case .delete:
-      if let placemark = anObject as? Placemark {
-        self.remove(placemark: placemark)
-      }
-      
-    case .update, .move:
-      if let placemark = anObject as? Placemark {
-        self.update(placemark: placemark)
-      }
+    default: break
     }
   }
   
   func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-    if controller == self.defaultsFetchedResultsController {
+    
+    guard let state = self.state else {
+      return
+    }
+    
+    guard controller == self.defaultsFetchedResultsController else {
+      return
+    }
+    
+    switch state {
+    case .normal:
       self.configureAxisNode()
-      self.appMode = self.defaults.appMode
+      self.updatePlacemarks()
+      
+    default: break
     }
   }
   
