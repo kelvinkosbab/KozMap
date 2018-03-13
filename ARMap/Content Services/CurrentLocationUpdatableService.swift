@@ -28,34 +28,12 @@ class CurrentLocationUpdatableService : NSObject, NSFetchedResultsControllerDele
   
   // MARK: - NSFetchedResultsControllerDelegate
   
-  private var myPlacemarks: [Placemark] {
+  private var placemarks: [Placemark] {
     return self.myPlacemarksFetchedResultsController?.fetchedObjects ?? []
   }
   
   private lazy var myPlacemarksFetchedResultsController: NSFetchedResultsController<Placemark>? = {
     let controller = Placemark.newFetchedResultsController()
-    controller.delegate = self
-    try? controller.performFetch()
-    return controller
-  }()
-  
-  private var foodPlacemarks: [FoodPlacemark] {
-    return self.foodPlacemarksFetchedResultsController?.fetchedObjects ?? []
-  }
-  
-  private lazy var foodPlacemarksFetchedResultsController: NSFetchedResultsController<FoodPlacemark>? = {
-    let controller = FoodPlacemark.newFetchedResultsController()
-    controller.delegate = self
-    try? controller.performFetch()
-    return controller
-  }()
-  
-  private var mountainPlacemarks: [MountainPlacemark] {
-    return self.mountainPlacemarksFetchedResultsController?.fetchedObjects ?? []
-  }
-  
-  private lazy var mountainPlacemarksFetchedResultsController: NSFetchedResultsController<MountainPlacemark>? = {
-    let controller = MountainPlacemark.newFetchedResultsController()
     controller.delegate = self
     try? controller.performFetch()
     return controller
@@ -102,18 +80,12 @@ class CurrentLocationUpdatableService : NSObject, NSFetchedResultsControllerDele
   
   // MARK: - Updating the model
   
-  private var allPlacemarks: [Placemark] {
-    return self.myPlacemarks + self.foodPlacemarks as [Placemark] + self.mountainPlacemarks as [Placemark]
-  }
-  
   private func updateSavedLocationDistances(currentLocation: CLLocation) {
     
-    // Update all placemark types
-    for placemark in self.allPlacemarks {
+    // Update all placemarks
+    for placemark in self.placemarks {
       self.updateLastDistance(placemark: placemark, currentLocation: currentLocation)
     }
-    
-    // Mountain placemarks
     MyDataManager.shared.saveMainContext()
   }
   

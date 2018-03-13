@@ -40,7 +40,7 @@ class ARViewController : UIViewController {
       }
       
       // Check if the app mode has changed
-      guard self.appMode != oldValue else {
+      guard appMode != oldValue else {
         return
       }
       

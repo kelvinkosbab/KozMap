@@ -18,7 +18,7 @@ extension Placemark {
   
   // MARK: - Updating
   
-  func update(name: String, location: CLLocation, color: Color, distance: Double?, phoneNumber: String? = nil) {
+  func update(name: String, location: CLLocation, color: Color, distance: Double?, address: String?, phoneNumber: String?, isFavorite: Bool) {
     self.name = name
     self.location = location
     if let oldColor = self.color, oldColor != color {
@@ -26,6 +26,8 @@ extension Placemark {
     }
     self.color = color
     self.lastDistance = distance ?? -1
+    self.address = address
     self.phoneNumber = phoneNumber
+    self.isFavorite = isFavorite
   }
 }

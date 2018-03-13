@@ -14,15 +14,14 @@ class AddLocationContainerViewController : BaseViewController, DesiredContentHei
   // MARK: - Static Accessors
   
   private static func newViewController() -> AddLocationContainerViewController {
-    let viewController = self.newViewController(fromStoryboardWithName: "AddLocation")
-    viewController.preferredContentSize.height = viewController.desiredContentHeight
-    return viewController
+    return self.newViewController(fromStoryboardWithName: "AddLocation")
   }
   
   static func newViewController(locationDetailDelegate: AddLocationViewControllerDelegate?, searchDelegate: MyPlacemarkSearchViewControllerDelegate?) -> AddLocationContainerViewController {
     let viewController = self.newViewController()
     viewController.locationDetailDelegate = locationDetailDelegate
     viewController.searchDelegate = searchDelegate
+    viewController.preferredContentSize.height = viewController.desiredContentHeight
     return viewController
   }
   

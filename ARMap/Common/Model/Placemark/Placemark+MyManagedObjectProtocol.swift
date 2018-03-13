@@ -20,12 +20,33 @@ extension Placemark : MyManagedObjectProtocol {
   
   // MARK: - Creating
   
-  static func create(name: String, location: CLLocation, color: Color, distance: Double?, phoneNumber: String? = nil, placemarkType: PlacemarkType = .myPlacemark, uuid: String = UUID().uuidString) -> Placemark {
+  static func create(placemarkType: PlacemarkType, name: String, location: CLLocation, color: Color, distance: Double?, address: String?, phoneNumber: String? = nil, isFavorite: Bool = false, uuid: String = UUID().uuidString) -> Placemark {
     let object = self.create()
     object.uuid = uuid
     object.placemarkType = placemarkType
-    object.update(name: name, location: location, color: color, distance: distance, phoneNumber: phoneNumber)
+    object.update(name: name, location: location, color: color, distance: distance, address: address, phoneNumber: phoneNumber, isFavorite: isFavorite)
     return object
+  }
+  
+  // MARK: - Fetch
+  
+  static func fetchMany(placemarkType: PlacemarkType, isFavorite: Bool) -> [Placemark] {
+    let predicate = NSPredicate(format: "placemarkTypeValue == %d && isFavorite == %@", placemarkType.rawValue, NSNumber(value: isFavorite))
+    return self.fetchMany(predicate: predicate)
+  }
+  
+  // MARK: - Count
+  
+  static func countMany(placemarkType: PlacemarkType, isFavorite: Bool) -> Int {
+    let predicate = NSPredicate(format: "placemarkTypeValue == %d && isFavorite == %@", placemarkType.rawValue, NSNumber(value: isFavorite))
+    return self.fetchMany(predicate: predicate).count
+  }
+  
+  // MARK: - Delete
+  
+  static func deleteMany(placemarkType: PlacemarkType, isFavorite: Bool) {
+    let predicate = NSPredicate(format: "placemarkTypeValue == %d && isFavorite == %@", placemarkType.rawValue, NSNumber(value: isFavorite))
+    self.deleteMany(predicate: predicate)
   }
   
   // MARK: - NSFetechedResultsController
@@ -41,7 +62,12 @@ extension Placemark : MyManagedObjectProtocol {
   }
   
   static func newFetchedResultsController(placemarkType: PlacemarkType) -> NSFetchedResultsController<Placemark> {
-    let predicate = NSPredicate(format: "placemarkTypeValue == %d", PlacemarkType.myPlacemark.rawValue)
+    let predicate = NSPredicate(format: "placemarkTypeValue == %d", placemarkType.rawValue)
+    return self.newFetchedResultsController(predicate: predicate)
+  }
+  
+  static func newFetchedResultsController(placemarkType: PlacemarkType, isFavorite: Bool) -> NSFetchedResultsController<Placemark> {
+    let predicate = NSPredicate(format: "isFavorite == %@", NSNumber(value: isFavorite))
     return self.newFetchedResultsController(predicate: predicate)
   }
 }

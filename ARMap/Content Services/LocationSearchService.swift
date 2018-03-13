@@ -11,15 +11,16 @@ import MapKit
 import CoreLocation
 
 enum CoordinateSpan {
-  case standard
-  case small
+  case xs, small, standard
   
   var value: MKCoordinateSpan{
     switch self {
-    case .standard:
-      return MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
+    case .xs:
+      return MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
     case .small:
       return MKCoordinateSpan(latitudeDelta: 0.25, longitudeDelta: 0.25)
+    case .standard:
+      return MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
     }
   }
 }

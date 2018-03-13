@@ -44,30 +44,6 @@ extension MainViewController : AddLocationViewControllerDelegate {
   }
 }
 
-// MARK: - LocationListViewControllerDelegate
-
-extension MainViewController : LocationListViewControllerDelegate {
-  
-  func shouldEdit(placemark: Placemark) {
-    self.dismissPresented { [weak self] in
-      
-      // Present an alert
-      self?.presentLocationDetail(placemark: placemark)
-    }
-  }
-  
-  func shouldTransitionToAddPlacemark() {
-    self.dismissPresented { [weak self] in
-      
-      guard let strongSelf = self else {
-        return
-      }
-      
-      strongSelf.presentAddLocation(addLocationDelegate: strongSelf, searchDelegate: strongSelf, options: [ .presentingViewControllerDelegate(strongSelf) ])
-    }
-  }
-}
-
 // MARK: - SearchViewControllerDelegate
 
 extension MainViewController : MyPlacemarkSearchViewControllerDelegate {

@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4CAB96F3BD6BA24294579FB2 /* Pods_KozMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CB719DD0FC2BDBA88151D6A /* Pods_KozMap.framework */; };
-		B607C7B52052686700E57A63 /* MountainPlacemark+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B607C7B42052686700E57A63 /* MountainPlacemark+Util.swift */; };
-		B607C7B92052689B00E57A63 /* FoodPlacemark+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B607C7B82052689B00E57A63 /* FoodPlacemark+Util.swift */; };
+		8C4EB3CFA88C5937134EA0A6 /* Pods_KozMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A89F83A0E4D5106EDD432D8 /* Pods_KozMap.framework */; };
 		B607C7BB205268CA00E57A63 /* Placemark+Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = B607C7BA205268CA00E57A63 /* Placemark+Type.swift */; };
 		B6082DF6205487CE0022943F /* SettingsNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6082DF5205487CE0022943F /* SettingsNavigationDelegate.swift */; };
 		B6082DF8205489510022943F /* MyPlacemarksNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6082DF7205489510022943F /* MyPlacemarksNavigationDelegate.swift */; };
@@ -110,6 +108,8 @@
 		B686EFA520166F1300ACF075 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF8E20166F1300ACF075 /* BaseNavigationController.swift */; };
 		B686EFA620166F1300ACF075 /* InlineColorChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF9020166F1300ACF075 /* InlineColorChooserViewController.swift */; };
 		B69E7BFE2057CD7E008318FC /* String+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69E7BFD2057CD7E008318FC /* String+UIKit.swift */; };
+		B69E7C002057D49C008318FC /* PlacemarkDetailNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69E7BFF2057D49C008318FC /* PlacemarkDetailNavigationDelegate.swift */; };
+		B69E7C022057DA0D008318FC /* PlacemarkListNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69E7C012057DA0D008318FC /* PlacemarkListNavigationDelegate.swift */; };
 		B6A8ABC8204B8851007FDAEC /* ServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A8ABC2204B8850007FDAEC /* ServiceResponse.swift */; };
 		B6A8ABC9204B8851007FDAEC /* Loggable+Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A8ABC3204B8850007FDAEC /* Loggable+Service.swift */; };
 		B6A8ABCA204B8851007FDAEC /* Data+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A8ABC4204B8851007FDAEC /* Data+JSON.swift */; };
@@ -155,17 +155,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1CB719DD0FC2BDBA88151D6A /* Pods_KozMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KozMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		260AB567AE87520DEA22090D /* Pods-ARMap.koz - debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARMap.koz - debug.xcconfig"; path = "Pods/Target Support Files/Pods-ARMap/Pods-ARMap.koz - debug.xcconfig"; sourceTree = "<group>"; };
-		3629996ECE316BF4910A57A6 /* Pods-ARMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARMap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ARMap/Pods-ARMap.debug.xcconfig"; sourceTree = "<group>"; };
-		3E87C20D3F9CD4FA6E1E7449 /* Pods-KozMap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KozMap.release.xcconfig"; path = "Pods/Target Support Files/Pods-KozMap/Pods-KozMap.release.xcconfig"; sourceTree = "<group>"; };
-		47A14A32F7FA20DD02261679 /* Pods-KozMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KozMap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KozMap/Pods-KozMap.debug.xcconfig"; sourceTree = "<group>"; };
-		8438AF4D777D654EBDBBD394 /* Pods-KozMap.koz - release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KozMap.koz - release.xcconfig"; path = "Pods/Target Support Files/Pods-KozMap/Pods-KozMap.koz - release.xcconfig"; sourceTree = "<group>"; };
-		A4C83F8AC6F29F40129B562F /* Pods-ARMap.koz - release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARMap.koz - release.xcconfig"; path = "Pods/Target Support Files/Pods-ARMap/Pods-ARMap.koz - release.xcconfig"; sourceTree = "<group>"; };
+		3385C60C4E7063B2356468E1 /* Pods-KozMap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KozMap.release.xcconfig"; path = "Pods/Target Support Files/Pods-KozMap/Pods-KozMap.release.xcconfig"; sourceTree = "<group>"; };
+		7A89F83A0E4D5106EDD432D8 /* Pods_KozMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KozMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6066B4020565505007C8AB9 /* ARMap 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ARMap 5.xcdatamodel"; sourceTree = "<group>"; };
 		B607C7B32052673D00E57A63 /* ARMap 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ARMap 2.xcdatamodel"; sourceTree = "<group>"; };
-		B607C7B42052686700E57A63 /* MountainPlacemark+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MountainPlacemark+Util.swift"; sourceTree = "<group>"; };
-		B607C7B82052689B00E57A63 /* FoodPlacemark+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoodPlacemark+Util.swift"; sourceTree = "<group>"; };
 		B607C7BA205268CA00E57A63 /* Placemark+Type.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Placemark+Type.swift"; sourceTree = "<group>"; };
 		B6082DF5205487CE0022943F /* SettingsNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsNavigationDelegate.swift; sourceTree = "<group>"; };
 		B6082DF7205489510022943F /* MyPlacemarksNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPlacemarksNavigationDelegate.swift; sourceTree = "<group>"; };
@@ -186,6 +179,7 @@
 		B6299B8C204FE17E00043CD1 /* ModeChooser.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ModeChooser.storyboard; sourceTree = "<group>"; };
 		B64423FA20410BE9006E524A /* TextFlagPlacemarkNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFlagPlacemarkNode.swift; sourceTree = "<group>"; };
 		B64423FF204110D4006E524A /* SCNTextAlignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNTextAlignment.swift; sourceTree = "<group>"; };
+		B64C7BDD2057ED0D006B3EF5 /* ARMap 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ARMap 6.xcdatamodel"; sourceTree = "<group>"; };
 		B64D1219204E5F8A008E5C5F /* CrashManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashManager.swift; sourceTree = "<group>"; };
 		B64D121B204E65D6008E5C5F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B64D121D204E666D008E5C5F /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
@@ -270,6 +264,8 @@
 		B686EF8E20166F1300ACF075 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		B686EF9020166F1300ACF075 /* InlineColorChooserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InlineColorChooserViewController.swift; sourceTree = "<group>"; };
 		B69E7BFD2057CD7E008318FC /* String+UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+UIKit.swift"; sourceTree = "<group>"; };
+		B69E7BFF2057D49C008318FC /* PlacemarkDetailNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacemarkDetailNavigationDelegate.swift; sourceTree = "<group>"; };
+		B69E7C012057DA0D008318FC /* PlacemarkListNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacemarkListNavigationDelegate.swift; sourceTree = "<group>"; };
 		B6A8ABC2204B8850007FDAEC /* ServiceResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceResponse.swift; sourceTree = "<group>"; };
 		B6A8ABC3204B8850007FDAEC /* Loggable+Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Loggable+Service.swift"; sourceTree = "<group>"; };
 		B6A8ABC4204B8851007FDAEC /* Data+JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+JSON.swift"; sourceTree = "<group>"; };
@@ -312,8 +308,7 @@
 		B6F451B420393D470084AFC8 /* TopKnobVisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopKnobVisualEffectView.swift; sourceTree = "<group>"; };
 		B6F451B620393E2F0084AFC8 /* TopKnobVisualEffectView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopKnobVisualEffectView.xib; sourceTree = "<group>"; };
 		B6FD0773204D18B3007D677A /* CLLocation+Solar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Solar.swift"; sourceTree = "<group>"; };
-		F20C34CD6FFED3DFBAD8759F /* Pods-ARMap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARMap.release.xcconfig"; path = "Pods/Target Support Files/Pods-ARMap/Pods-ARMap.release.xcconfig"; sourceTree = "<group>"; };
-		FF9DEB98585905ECE425245B /* Pods-KozMap.koz - debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KozMap.koz - debug.xcconfig"; path = "Pods/Target Support Files/Pods-KozMap/Pods-KozMap.koz - debug.xcconfig"; sourceTree = "<group>"; };
+		C3A714045B2051DB4E79A7C1 /* Pods-KozMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KozMap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KozMap/Pods-KozMap.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -321,41 +316,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4CAB96F3BD6BA24294579FB2 /* Pods_KozMap.framework in Frameworks */,
+				8C4EB3CFA88C5937134EA0A6 /* Pods_KozMap.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		23DC56D8DC87F760852F588E /* Frameworks */ = {
+		725F645F5EAADDA3FB6B17B8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1CB719DD0FC2BDBA88151D6A /* Pods_KozMap.framework */,
+				7A89F83A0E4D5106EDD432D8 /* Pods_KozMap.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		AF8ACFD42430778891FCE4AD /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				3629996ECE316BF4910A57A6 /* Pods-ARMap.debug.xcconfig */,
-				260AB567AE87520DEA22090D /* Pods-ARMap.koz - debug.xcconfig */,
-				F20C34CD6FFED3DFBAD8759F /* Pods-ARMap.release.xcconfig */,
-				A4C83F8AC6F29F40129B562F /* Pods-ARMap.koz - release.xcconfig */,
-				47A14A32F7FA20DD02261679 /* Pods-KozMap.debug.xcconfig */,
-				FF9DEB98585905ECE425245B /* Pods-KozMap.koz - debug.xcconfig */,
-				3E87C20D3F9CD4FA6E1E7449 /* Pods-KozMap.release.xcconfig */,
-				8438AF4D777D654EBDBBD394 /* Pods-KozMap.koz - release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 		B607C7AF2052662100E57A63 /* My Placemarks */ = {
 			isa = PBXGroup;
 			children = (
 				B6082DF7205489510022943F /* MyPlacemarksNavigationDelegate.swift */,
-				B686EF8320166F1200ACF075 /* Location List */,
 				B686EF7B20166F1200ACF075 /* Add Location */,
 			);
 			path = "My Placemarks";
@@ -376,22 +355,6 @@
 				B6BEF50020537BC1002FD2AA /* Search */,
 			);
 			path = "Food Nearby";
-			sourceTree = "<group>";
-		};
-		B607C7B22052671F00E57A63 /* Mountain */ = {
-			isa = PBXGroup;
-			children = (
-				B607C7B42052686700E57A63 /* MountainPlacemark+Util.swift */,
-			);
-			path = Mountain;
-			sourceTree = "<group>";
-		};
-		B607C7B72052687800E57A63 /* Food */ = {
-			isa = PBXGroup;
-			children = (
-				B607C7B82052689B00E57A63 /* FoodPlacemark+Util.swift */,
-			);
-			path = Food;
 			sourceTree = "<group>";
 		};
 		B607C7BC20526A8F00E57A63 /* Color */ = {
@@ -516,8 +479,8 @@
 			children = (
 				B686EECE20166C7300ACF075 /* ARMap */,
 				B686EECD20166C7300ACF075 /* Products */,
-				AF8ACFD42430778891FCE4AD /* Pods */,
-				23DC56D8DC87F760852F588E /* Frameworks */,
+				C7BD082BB04474265C735CAD /* Pods */,
+				725F645F5EAADDA3FB6B17B8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -747,7 +710,8 @@
 				B6082E072054D5F40022943F /* Main Controller */,
 				B686EF8620166F1200ACF075 /* Placemark AR */,
 				B686EF7720166F1200ACF075 /* Settings */,
-				B686EF7920166F1200ACF075 /* Location Detail */,
+				B686EF8320166F1200ACF075 /* Placemark List */,
+				B686EF7920166F1200ACF075 /* Placemark Detail */,
 				B607C7AF2052662100E57A63 /* My Placemarks */,
 				B607C7B12052664200E57A63 /* Food Nearby */,
 				B607C7B02052663800E57A63 /* Mountain Viewer */,
@@ -765,13 +729,14 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
-		B686EF7920166F1200ACF075 /* Location Detail */ = {
+		B686EF7920166F1200ACF075 /* Placemark Detail */ = {
 			isa = PBXGroup;
 			children = (
+				B69E7BFF2057D49C008318FC /* PlacemarkDetailNavigationDelegate.swift */,
 				B6299B83204F8FA900043CD1 /* LocationDetail.storyboard */,
 				B686EF7A20166F1200ACF075 /* LocationDetailViewController.swift */,
 			);
-			path = "Location Detail";
+			path = "Placemark Detail";
 			sourceTree = "<group>";
 		};
 		B686EF7B20166F1200ACF075 /* Add Location */ = {
@@ -795,14 +760,15 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
-		B686EF8320166F1200ACF075 /* Location List */ = {
+		B686EF8320166F1200ACF075 /* Placemark List */ = {
 			isa = PBXGroup;
 			children = (
+				B69E7C012057DA0D008318FC /* PlacemarkListNavigationDelegate.swift */,
 				B6299B81204F8F6500043CD1 /* LocationList.storyboard */,
 				B686EF8420166F1200ACF075 /* LocationListViewController.swift */,
 				B686EF8520166F1200ACF075 /* LocationListViewController+Cells.swift */,
 			);
-			path = "Location List";
+			path = "Placemark List";
 			sourceTree = "<group>";
 		};
 		B686EF8620166F1200ACF075 /* Placemark AR */ = {
@@ -876,8 +842,6 @@
 				B6C01FEE2050CD6000437B45 /* Placemark+Util.swift */,
 				B6C01FEC2050CD3600437B45 /* Placemark+CoreLocation.swift */,
 				B607C7BA205268CA00E57A63 /* Placemark+Type.swift */,
-				B607C7B22052671F00E57A63 /* Mountain */,
-				B607C7B72052687800E57A63 /* Food */,
 			);
 			path = Placemark;
 			sourceTree = "<group>";
@@ -945,6 +909,15 @@
 			path = "Custom Views";
 			sourceTree = "<group>";
 		};
+		C7BD082BB04474265C735CAD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C3A714045B2051DB4E79A7C1 /* Pods-KozMap.debug.xcconfig */,
+				3385C60C4E7063B2356468E1 /* Pods-KozMap.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -952,12 +925,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B686EEE120166C7300ACF075 /* Build configuration list for PBXNativeTarget "KozMap" */;
 			buildPhases = (
-				05B2EF79F38ABD15D17E2612 /* [CP] Check Pods Manifest.lock */,
+				8C2D2177D0351BC67ACA5865 /* [CP] Check Pods Manifest.lock */,
 				B686EEC820166C7300ACF075 /* Sources */,
 				B686EEC920166C7300ACF075 /* Frameworks */,
 				B686EECA20166C7300ACF075 /* Resources */,
-				274664658833806BAE895BF6 /* [CP] Embed Pods Frameworks */,
-				0F184E156F0F6B0B53585825 /* [CP] Copy Pods Resources */,
+				F21D81CC31F352D68CA4D33C /* [CP] Embed Pods Frameworks */,
+				C5DAC3EFA15A03616627D1FF /* [CP] Copy Pods Resources */,
 				B64D1217204E5EBA008E5C5F /* Crashlytics Run Script */,
 			);
 			buildRules = (
@@ -1030,7 +1003,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		05B2EF79F38ABD15D17E2612 /* [CP] Check Pods Manifest.lock */ = {
+		8C2D2177D0351BC67ACA5865 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1048,7 +1021,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		0F184E156F0F6B0B53585825 /* [CP] Copy Pods Resources */ = {
+		B64D1217204E5EBA008E5C5F /* Crashlytics Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Crashlytics Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 05416dc4edda44974a71be7016600285b91582f5 85ad5e06e76e0391bcb5746e799aa944a3abdadb6217ccc7e2d82c64551fb59e ";
+		};
+		C5DAC3EFA15A03616627D1FF /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1063,7 +1050,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KozMap/Pods-KozMap-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		274664658833806BAE895BF6 /* [CP] Embed Pods Frameworks */ = {
+		F21D81CC31F352D68CA4D33C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1091,20 +1078,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KozMap/Pods-KozMap-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B64D1217204E5EBA008E5C5F /* Crashlytics Run Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Crashlytics Run Script";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 05416dc4edda44974a71be7016600285b91582f5 85ad5e06e76e0391bcb5746e799aa944a3abdadb6217ccc7e2d82c64551fb59e ";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1122,7 +1095,6 @@
 				B607C7BB205268CA00E57A63 /* Placemark+Type.swift in Sources */,
 				B686EF4120166D8700ACF075 /* Plane.swift in Sources */,
 				B686EF5C20166D8700ACF075 /* CameraPermissionManager.swift in Sources */,
-				B607C7B92052689B00E57A63 /* FoodPlacemark+Util.swift in Sources */,
 				B686EF5A20166D8700ACF075 /* ViewControllerFromStoryboardProtocol.swift in Sources */,
 				B6082E062054D5050022943F /* MainViewController+UIPopoverPresentationControllerDelegate.swift in Sources */,
 				B686EF9E20166F1300ACF075 /* LocationListViewController+Cells.swift in Sources */,
@@ -1132,7 +1104,6 @@
 				B6A8ABC8204B8851007FDAEC /* ServiceResponse.swift in Sources */,
 				B686EF5820166D8700ACF075 /* DesiredContentHeightDelegate.swift in Sources */,
 				B6A8ABCA204B8851007FDAEC /* Data+JSON.swift in Sources */,
-				B607C7B52052686700E57A63 /* MountainPlacemark+Util.swift in Sources */,
 				B6DCCDC3203B68B800201385 /* InteractiveTransition+Subclasses.swift in Sources */,
 				B686EF0720166D5A00ACF075 /* Distance.swift in Sources */,
 				B6FD0774204D18B3007D677A /* CLLocation+Solar.swift in Sources */,
@@ -1195,6 +1166,7 @@
 				B64D1224204E6744008E5C5F /* AnalyticsEvent.swift in Sources */,
 				B6082E0A2055EC360022943F /* UINavigationController+Util.swift in Sources */,
 				B6BEF50620537E50002FD2AA /* FoodNearbyNavigationDelegate.swift in Sources */,
+				B69E7C002057D49C008318FC /* PlacemarkDetailNavigationDelegate.swift in Sources */,
 				B686EFA320166F1300ACF075 /* BaseTableViewController.swift in Sources */,
 				B686EF9520166F1300ACF075 /* SettingsViewController.swift in Sources */,
 				B69E7BFE2057CD7E008318FC /* String+UIKit.swift in Sources */,
@@ -1204,6 +1176,7 @@
 				B6082E0F205643840022943F /* FoodNearbyService.swift in Sources */,
 				B6082E022054D4B30022943F /* MainViewController+ModeChooserDelegate.swift in Sources */,
 				B686EF6520166D9D00ACF075 /* DataManagerProtocol.swift in Sources */,
+				B69E7C022057DA0D008318FC /* PlacemarkListNavigationDelegate.swift in Sources */,
 				B6299B88204F901D00043CD1 /* AddLocationMapViewController.swift in Sources */,
 				B686EF9920166F1300ACF075 /* MainViewController+AR.swift in Sources */,
 				B686EF6920166D9D00ACF075 /* Defaults+MyManagedObjectProtocol.swift in Sources */,
@@ -1312,7 +1285,7 @@
 		};
 		B6EE24652038D3F400380AAA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FF9DEB98585905ECE425245B /* Pods-KozMap.koz - debug.xcconfig */;
+			baseConfigurationReference = C3A714045B2051DB4E79A7C1 /* Pods-KozMap.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -1391,7 +1364,7 @@
 		};
 		B6EE24672038D40000380AAA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8438AF4D777D654EBDBBD394 /* Pods-KozMap.koz - release.xcconfig */;
+			baseConfigurationReference = 3385C60C4E7063B2356468E1 /* Pods-KozMap.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -1438,13 +1411,14 @@
 		B686EED620166C7300ACF075 /* ARMap.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				B64C7BDD2057ED0D006B3EF5 /* ARMap 6.xcdatamodel */,
 				B6066B4020565505007C8AB9 /* ARMap 5.xcdatamodel */,
 				B6082E082055EA220022943F /* ARMap 4.xcdatamodel */,
 				B6082DFB2054D1840022943F /* ARMap 3.xcdatamodel */,
 				B607C7B32052673D00E57A63 /* ARMap 2.xcdatamodel */,
 				B686EED720166C7300ACF075 /* ARMap.xcdatamodel */,
 			);
-			currentVersion = B6066B4020565505007C8AB9 /* ARMap 5.xcdatamodel */;
+			currentVersion = B64C7BDD2057ED0D006B3EF5 /* ARMap 6.xcdatamodel */;
 			path = ARMap.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

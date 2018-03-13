@@ -65,12 +65,12 @@ class SearchFoodNearbyViewController : BaseTableViewController, DismissInteracta
     return super.navigationController ?? self.parent?.navigationController
   }
   
-  var foodPlacemarks: [FoodPlacemark] {
-    return self.foodPlacemarksFetchedResultsController.fetchedObjects ?? []
+  var placemarks: [Placemark] {
+    return self.placemarksFetchedResultsController.fetchedObjects ?? []
   }
   
-  private lazy var foodPlacemarksFetchedResultsController: NSFetchedResultsController<FoodPlacemark> = {
-    let controller = FoodPlacemark.newFetchedResultsController()
+  private lazy var placemarksFetchedResultsController: NSFetchedResultsController<Placemark> = {
+    let controller = Placemark.newFetchedResultsController(placemarkType: .food)
     controller.delegate = self
     try? controller.performFetch()
     return controller
@@ -173,14 +173,14 @@ class SearchFoodNearbyViewController : BaseTableViewController, DismissInteracta
   // MARK: - SectionType
   
   enum SectionType {
-    case foodPlacemarks([FoodPlacemark])
+    case placemarks([Placemark])
   }
   
   func getSectionType(section: Int) -> SectionType? {
     switch section {
     case 0:
-      let foodPlacemarks = self.foodPlacemarks
-      return .foodPlacemarks(foodPlacemarks)
+      let placemarks = self.placemarks
+      return .placemarks(placemarks)
     default:
       return nil
     }
@@ -189,7 +189,7 @@ class SearchFoodNearbyViewController : BaseTableViewController, DismissInteracta
   // MARK: - RowType
   
   enum RowType {
-    case foodPlacemark(FoodPlacemark)
+    case placemark(Placemark)
   }
   
   func getRowType(at indexPath: IndexPath) -> RowType? {
@@ -199,10 +199,10 @@ class SearchFoodNearbyViewController : BaseTableViewController, DismissInteracta
     }
     
     switch sectionType {
-    case .foodPlacemarks(let foodPlacemarks):
-      if indexPath.row < foodPlacemarks.count {
-        let foodPlacemark = foodPlacemarks[indexPath.row]
-        return .foodPlacemark(foodPlacemark)
+    case .placemarks(let placemarks):
+      if indexPath.row < placemarks.count {
+        let placemark = placemarks[indexPath.row]
+        return .placemark(placemark)
       }
       return nil
     }
@@ -221,8 +221,8 @@ class SearchFoodNearbyViewController : BaseTableViewController, DismissInteracta
     }
     
     switch sectionType {
-    case .foodPlacemarks(let foodPlacemarks):
-      return foodPlacemarks.count
+    case .placemarks(let placemarks):
+      return placemarks.count
     }
   }
   
@@ -242,13 +242,13 @@ class SearchFoodNearbyViewController : BaseTableViewController, DismissInteracta
     }
     
     switch rowType {
-    case .foodPlacemark(let foodPlacemark):
+    case .placemark(let placemark):
       
-      cell.titleLabel.text = foodPlacemark.name
-      cell.detailLabel.text = foodPlacemark.address
+      cell.titleLabel.text = placemark.name
+      cell.detailLabel.text = placemark.address
       
       // Distance label
-      let readibleDistance = foodPlacemark.lastDistance.getDistanceString(unitType: Defaults.shared.unitType, displayType: .numbericUnits(false))
+      let readibleDistance = placemark.lastDistance.getDistanceString(unitType: Defaults.shared.unitType, displayType: .numbericUnits(false))
       cell.rightDetailLabel.text = readibleDistance
       
       return cell
@@ -263,8 +263,8 @@ class SearchFoodNearbyViewController : BaseTableViewController, DismissInteracta
     }
     
     switch rowType {
-    case .foodPlacemark(let foodPlacemark):
-      self.delegate?.didSelectPlacemark(foodPlacemark, sender: self)
+    case .placemark(let placemark):
+      self.delegate?.didSelectPlacemark(placemark, sender: self)
     }
   }
 }
