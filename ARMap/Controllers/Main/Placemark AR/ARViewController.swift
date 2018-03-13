@@ -174,7 +174,17 @@ class ARViewController : UIViewController {
   // MARK: - Notifications
   
   @objc func didReceiveUpdatedLocationNotification(_ notification: Notification) {
-    self.updatePlacemarkNodes(updatePosition: true)
+    
+    guard let state = self.state else {
+      return
+    }
+    
+    switch state {
+    case .normal:
+      self.updatePlacemarkNodes(updatePosition: true)
+      
+    default: break
+    }
   }
   
   @objc func didReceiveUpdatedHeadingNotification(_ notification: Notification) {}
@@ -422,32 +432,53 @@ extension ARViewController : NSFetchedResultsControllerDelegate {
   
   func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
     
+    guard let state = self.state else {
+      return
+    }
+    
     guard controller == self.placemarksFetchedResultsController else {
       return
     }
     
-    switch type {
-    case .insert:
-      if let placemark = anObject as? Placemark {
-        self.add(placemark: placemark)
+    switch state {
+    case .normal:
+      switch type {
+      case .insert:
+        if let placemark = anObject as? Placemark {
+          self.add(placemark: placemark)
+        }
+        
+      case .delete:
+        if let placemark = anObject as? Placemark {
+          self.remove(placemark: placemark)
+        }
+        
+      case .update, .move:
+        if let placemark = anObject as? Placemark {
+          self.update(placemark: placemark)
+        }
       }
       
-    case .delete:
-      if let placemark = anObject as? Placemark {
-        self.remove(placemark: placemark)
-      }
-      
-    case .update, .move:
-      if let placemark = anObject as? Placemark {
-        self.update(placemark: placemark)
-      }
+    default: break
     }
   }
   
   func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-    if controller == self.defaultsFetchedResultsController {
+    
+    guard let state = self.state else {
+      return
+    }
+    
+    guard controller == self.defaultsFetchedResultsController else {
+      return
+    }
+    
+    switch state {
+    case .normal:
       self.configureAxisNode()
       self.updatePlacemarks()
+      
+    default: break
     }
   }
   
