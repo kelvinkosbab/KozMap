@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import StoreKit
 
 class SettingsViewController : BaseViewController, DesiredContentHeightDelegate, DismissInteractable {
   
@@ -21,7 +22,7 @@ class SettingsViewController : BaseViewController, DesiredContentHeightDelegate,
   // MARK: - DesiredContentHeightDelegate
   
   var desiredContentHeight: CGFloat {
-    return 200
+    return 308
   }
   
   // MARK: - DismissInteractable
@@ -44,6 +45,8 @@ class SettingsViewController : BaseViewController, DesiredContentHeightDelegate,
   @IBOutlet weak var versionLabel: UILabel!
   @IBOutlet weak var companyLabel: UILabel!
   @IBOutlet weak var showAxisSwitch: UISwitch!
+  @IBOutlet weak var rateButton: UIButton!
+  @IBOutlet weak var contactButton: UIButton!
   
   // MARK: - Lifecycle
   
@@ -102,6 +105,12 @@ class SettingsViewController : BaseViewController, DesiredContentHeightDelegate,
     
     // Company
     self.companyLabel.text = BuildManager.shared.buildTarget.companyName
+    
+    // Rate button
+    self.rateButton.setTitle("Rate \(BuildManager.shared.buildTarget.appName)", for: .normal)
+    
+    // Contact button
+    self.contactButton.setTitle("Give Feedback", for: .normal)
   }
   
   // MARK: - Actions
@@ -123,5 +132,18 @@ class SettingsViewController : BaseViewController, DesiredContentHeightDelegate,
   
   @IBAction func showAxisSwitchValueChanged(_ sender: UISwitch) {
     Defaults.shared.showAxis = sender.isOn
+  }
+  
+  @IBAction func rateButtonSelected() {
+    SKStoreReviewController.requestReview()
+  }
+  
+  @IBAction func contactButtonSelected() {
+    
+    guard let url = URL(string: BuildManager.shared.buildTarget.giveFeedbackUrlString) else {
+      return
+    }
+    
+    UIApplication.shared.open(url, options: [:], completionHandler: nil)
   }
 }

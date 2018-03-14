@@ -28,6 +28,15 @@ enum BuidTarget {
       return "©Kozinga"
     }
   }
+  
+  var giveFeedbackUrlString: String {
+    switch self {
+    case .tackmobile:
+      return "http://tackmobile.com"
+    case .kozinga:
+      return "http://kozinga.net/contact"
+    }
+  }
 }
 
 class BuildManager {
