@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import MapKit
 
 protocol AddLocationViewControllerDelegate : class {
   func didSave(placemark: Placemark)
@@ -33,13 +34,14 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
     viewController.mapItem = mapItem
     viewController.location = mapItem.placemark.location
     viewController.delegate = delegate
+    viewController.preferredContentSize.height = viewController.desiredContentHeight
     return viewController
   }
   
   // MARK: - DesiredContentHeightDelegate
   
   var desiredContentHeight: CGFloat {
-    return 338
+    return UIScreen.main.bounds.height
   }
   
   // MARK: - DismissInteractable
@@ -48,6 +50,9 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
     var views: [UIView] = []
     if let view = self.view {
       views.append(view)
+    }
+    if let mapView = self.mapView {
+      views.append(mapView)
     }
     return views
   }
@@ -59,14 +64,17 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
   @IBOutlet weak var longitudeLabel: UILabel!
   @IBOutlet weak var distanceLabel: UILabel!
   @IBOutlet weak var locationDescriptionLabel: UILabel!
+  @IBOutlet weak var locationDescriptionLabelHeightConstraint: NSLayoutConstraint!
   @IBOutlet weak var addLocationButton: UIButton!
   @IBOutlet weak var colorChooserContainer: UIView!
+  @IBOutlet weak var mapView: MKMapView!
   
   weak var delegate: AddLocationViewControllerDelegate? = nil
   var colorChooserController: InlineColorChooserViewController? = nil
   
   var mapItem: MapItem? = nil
   var locationColor: UIColor = .kozRed
+  var mapAnnotation: MKAnnotation? = nil
   
   var clPlacemark: CLPlacemark? = nil {
     didSet {
@@ -102,14 +110,26 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    // Navigatino bar styles
     self.navigationItem.largeTitleDisplayMode = UIDevice.current.isPhone ? .never : .always
-    if let _ = self.mapItem {
-      self.navigationItem.title = "Add Location"
+    if UIDevice.current.isPhone {
+      self.baseNavigationController?.navigationBarStyle = .transparentBlueTint
+      self.view.backgroundColor = .clear
     } else {
-      self.navigationItem.title = "Here"
+      self.baseNavigationController?.navigationBarStyle = .standard
+      self.view.backgroundColor = .white
     }
     
-    self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(self.closeButtonSelected))
+    // Title
+    if let _ = self.mapItem {
+      self.navigationItem.title = "Add Placemark"
+    } else {
+      self.navigationItem.title = "Current"
+    }
+    
+    if !UIDevice.current.isPhone {
+      self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(self.closeButtonSelected))
+    }
     
     self.nameTextField.delegate = self
   }
@@ -200,7 +220,7 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
     
     // Map Item
     if let mapItem = self.mapItem {
-      self.nameTextField.text = mapItem.name
+      self.nameTextField.text = (self.nameTextField.text?.isEmpty ?? true) && mapItem.name == "Unknown Location" ? nil : mapItem.name
       self.location = mapItem.placemark.location
     }
     
@@ -229,8 +249,60 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
     let distance = currentLocation?.distance(from: location)
     self.distanceLabel.text = distance?.getDistanceString(unitType: Defaults.shared.unitType, displayType: .numbericUnits(false)) ?? "NA"
     
-    // Update the address
-    self.locationDescriptionLabel.text = self.mapItem?.address ?? self.clPlacemark?.address
+    // Placemark description
+    self.locationDescriptionLabel.text = self.placemarkDescription
+    self.locationDescriptionLabelHeightConstraint.constant = self.placemarkDescription?.calculateHeight(forLabel: self.locationDescriptionLabel) ?? 0
+    
+    // Check if view not tall enough for mapView
+    guard self.view.bounds.height > 600 else {
+      self.mapView.isHidden = true
+      return
+    }
+    
+    // Insure map view is displayed
+    if self.mapView.isHidden {
+      self.mapView.isHidden = false
+    }
+    
+    // Map annotion
+    if let mapAnnotation = self.mapAnnotation, mapAnnotation.coordinate.latitude == coordinate.latitude && mapAnnotation.coordinate.longitude == coordinate.longitude {
+      // do nothing
+    } else {
+      
+      // Need to create/update the current annotation
+      if let mapAnnotation = self.mapAnnotation {
+        self.mapView.removeAnnotation(mapAnnotation)
+      }
+      
+      // Create the map annotation
+      let annotation = MKPointAnnotation()
+      annotation.coordinate = coordinate
+      self.mapAnnotation = annotation
+      self.mapView.addAnnotation(annotation)
+      self.mapView.showsUserLocation = true
+      self.mapView.isScrollEnabled = false
+      self.mapView.isUserInteractionEnabled = false
+      
+      // Set the map region
+      let regionRadius: CLLocationDistance = MapItem.defaultRegionRadius
+      let coordinateRegion = MKCoordinateRegionMakeWithDistance(coordinate, regionRadius, regionRadius)
+      self.mapView.setRegion(coordinateRegion, animated: true)
+    }
+  }
+  
+  var placemarkDescription: String? {
+    var placemarkDescription: String = ""
+    let address = self.mapItem?.address ?? self.clPlacemark?.address
+    if let address = address {
+      placemarkDescription += address
+    }
+    if let phoneNumber = self.mapItem?.phoneNumber {
+      if address != nil {
+        placemarkDescription += "\n"
+      }
+      placemarkDescription += phoneNumber
+    }
+    return placemarkDescription.count > 0 ? placemarkDescription : nil
   }
   
   // MARK: - Actions

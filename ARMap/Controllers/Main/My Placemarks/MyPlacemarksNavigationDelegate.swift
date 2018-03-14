@@ -25,7 +25,7 @@ extension MyPlacemarksNavigationDelegate where Self : UIViewController {
   func presentAddLocation(mapItem: MapItem, delegate: AddLocationViewControllerDelegate?, options: [PresentableControllerOption] = []) {
     let addLocationViewController = AddLocationViewController.newViewController(mapItem: mapItem, delegate: delegate)
     if UIDevice.current.isPhone {
-      addLocationViewController.presentIn(self, withMode: .custom(.topKnobBottomUp), options: [ .withoutNavigationController ] + options)
+      addLocationViewController.presentIn(self, withMode: .custom(.topKnobBottomUp), options: options)
     } else {
       addLocationViewController.presentIn(self, withMode: .modal(.formSheet, .coverVertical), options: options)
     }
