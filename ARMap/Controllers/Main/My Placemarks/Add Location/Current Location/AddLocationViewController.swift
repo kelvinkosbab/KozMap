@@ -34,13 +34,14 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
     viewController.mapItem = mapItem
     viewController.location = mapItem.placemark.location
     viewController.delegate = delegate
+    viewController.preferredContentSize.height = viewController.desiredContentHeight
     return viewController
   }
   
   // MARK: - DesiredContentHeightDelegate
   
   var desiredContentHeight: CGFloat {
-    return 338
+    return UIScreen.main.bounds.height
   }
   
   // MARK: - DismissInteractable
@@ -63,6 +64,7 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
   @IBOutlet weak var longitudeLabel: UILabel!
   @IBOutlet weak var distanceLabel: UILabel!
   @IBOutlet weak var locationDescriptionLabel: UILabel!
+  @IBOutlet weak var locationDescriptionLabelHeightConstraint: NSLayoutConstraint!
   @IBOutlet weak var addLocationButton: UIButton!
   @IBOutlet weak var colorChooserContainer: UIView!
   @IBOutlet weak var mapView: MKMapView!
@@ -120,7 +122,7 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
     
     // Title
     if let _ = self.mapItem {
-      self.navigationItem.title = "Add Location"
+      self.navigationItem.title = "Add Placemark"
     } else {
       self.navigationItem.title = "Current"
     }
@@ -218,7 +220,7 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
     
     // Map Item
     if let mapItem = self.mapItem {
-      self.nameTextField.text = mapItem.name
+      self.nameTextField.text = (self.nameTextField.text?.isEmpty ?? true) && mapItem.name == "Unknown Location" ? nil : mapItem.name
       self.location = mapItem.placemark.location
     }
     
@@ -247,8 +249,9 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
     let distance = currentLocation?.distance(from: location)
     self.distanceLabel.text = distance?.getDistanceString(unitType: Defaults.shared.unitType, displayType: .numbericUnits(false)) ?? "NA"
     
-    // Update the address
-    self.locationDescriptionLabel.text = self.mapItem?.address ?? self.clPlacemark?.address
+    // Placemark description
+    self.locationDescriptionLabel.text = self.placemarkDescription
+    self.locationDescriptionLabelHeightConstraint.constant = self.placemarkDescription?.calculateHeight(forLabel: self.locationDescriptionLabel) ?? 0
     
     // Check if view not tall enough for mapView
     guard self.view.bounds.height > 600 else {
@@ -285,6 +288,21 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
       let coordinateRegion = MKCoordinateRegionMakeWithDistance(coordinate, regionRadius, regionRadius)
       self.mapView.setRegion(coordinateRegion, animated: true)
     }
+  }
+  
+  var placemarkDescription: String? {
+    var placemarkDescription: String = ""
+    let address = self.mapItem?.address ?? self.clPlacemark?.address
+    if let address = address {
+      placemarkDescription += address
+    }
+    if let phoneNumber = self.mapItem?.phoneNumber {
+      if address != nil {
+        placemarkDescription += "\n"
+      }
+      placemarkDescription += phoneNumber
+    }
+    return placemarkDescription.count > 0 ? placemarkDescription : nil
   }
   
   // MARK: - Actions
