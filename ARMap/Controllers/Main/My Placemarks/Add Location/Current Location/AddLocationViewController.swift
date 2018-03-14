@@ -110,7 +110,7 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    // Navigatino bar styles
+    // Navigation bar styles
     self.navigationItem.largeTitleDisplayMode = UIDevice.current.isPhone ? .never : .always
     if UIDevice.current.isPhone {
       self.baseNavigationController?.navigationBarStyle = .transparentBlueTint
@@ -127,11 +127,16 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
       self.navigationItem.title = "Current"
     }
     
+    // Navigation buttons
     if !UIDevice.current.isPhone {
       self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(self.closeButtonSelected))
     }
     
+    // UITextFieldDelegate
     self.nameTextField.delegate = self
+    
+    // Set the initial name for the placemark
+    self.nameTextField.text = (self.nameTextField.text?.isEmpty ?? true) && self.mapItem?.name == "Unknown Location" ? nil : self.mapItem?.name
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -220,7 +225,6 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
     
     // Map Item
     if let mapItem = self.mapItem {
-      self.nameTextField.text = (self.nameTextField.text?.isEmpty ?? true) && mapItem.name == "Unknown Location" ? nil : mapItem.name
       self.location = mapItem.placemark.location
     }
     
