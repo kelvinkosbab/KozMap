@@ -7,6 +7,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -96,36 +97,106 @@
                                     <constraint firstItem="rOx-9N-oLH" firstAttribute="leading" secondItem="qIo-Ck-Xv5" secondAttribute="trailing" constant="5" id="yj0-ae-CaH"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="52e-fF-KT4">
+                                <rect key="frame" x="24" y="132" width="351" height="52"/>
+                                <subviews>
+                                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xd3-5o-5ws">
+                                        <rect key="frame" x="0.0" y="51" width="351" height="1"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="ehW-Om-dyX"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hI9-G2-svW">
+                                        <rect key="frame" x="0.0" y="11" width="327" height="30"/>
+                                        <state key="normal" title="Lorem Ipsum">
+                                            <color key="titleColor" name="SeaBlue"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="rateButtonSelected" destination="xSl-9d-1Wj" eventType="touchUpInside" id="DLb-7Y-9ds"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Xd3-5o-5ws" secondAttribute="bottom" id="0yb-Qk-m16"/>
+                                    <constraint firstItem="hI9-G2-svW" firstAttribute="leading" secondItem="52e-fF-KT4" secondAttribute="leading" id="CEm-Pd-7KT"/>
+                                    <constraint firstAttribute="trailing" secondItem="hI9-G2-svW" secondAttribute="trailing" constant="24" id="DAa-6d-K7b"/>
+                                    <constraint firstAttribute="height" constant="52" id="GsM-w8-Ywf"/>
+                                    <constraint firstAttribute="trailing" secondItem="Xd3-5o-5ws" secondAttribute="trailing" id="gLv-a3-6NM"/>
+                                    <constraint firstItem="hI9-G2-svW" firstAttribute="centerY" secondItem="52e-fF-KT4" secondAttribute="centerY" id="tNb-Tq-Feb"/>
+                                    <constraint firstItem="Xd3-5o-5ws" firstAttribute="leading" secondItem="52e-fF-KT4" secondAttribute="leading" id="whe-qx-9Jz"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WZt-QE-0P9">
+                                <rect key="frame" x="24" y="184" width="351" height="52"/>
+                                <subviews>
+                                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="03b-OP-ai0">
+                                        <rect key="frame" x="0.0" y="51" width="351" height="1"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="2lX-zR-BTW"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cGl-UR-rsf">
+                                        <rect key="frame" x="0.0" y="11" width="327" height="30"/>
+                                        <state key="normal" title="Lorem Ipsum">
+                                            <color key="titleColor" name="SeaBlue"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="contactButtonSelected" destination="xSl-9d-1Wj" eventType="touchUpInside" id="FN1-y1-212"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="cGl-UR-rsf" firstAttribute="leading" secondItem="WZt-QE-0P9" secondAttribute="leading" id="Hl8-4y-eBA"/>
+                                    <constraint firstAttribute="trailing" secondItem="03b-OP-ai0" secondAttribute="trailing" id="QTY-bN-7Di"/>
+                                    <constraint firstItem="cGl-UR-rsf" firstAttribute="centerY" secondItem="WZt-QE-0P9" secondAttribute="centerY" id="cge-kv-X5R"/>
+                                    <constraint firstItem="03b-OP-ai0" firstAttribute="leading" secondItem="WZt-QE-0P9" secondAttribute="leading" id="gw8-mf-5sm"/>
+                                    <constraint firstAttribute="bottom" secondItem="03b-OP-ai0" secondAttribute="bottom" id="o5U-pk-Db4"/>
+                                    <constraint firstAttribute="trailing" secondItem="cGl-UR-rsf" secondAttribute="trailing" constant="24" id="qQf-hu-chL"/>
+                                    <constraint firstAttribute="height" constant="52" id="tVe-5Q-Pp0"/>
+                                </constraints>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KvH-bU-c7Y">
-                                <rect key="frame" x="12" y="147" width="351" height="16"/>
+                                <rect key="frame" x="12" y="252" width="351" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y3h-zt-THc">
-                                <rect key="frame" x="12" y="171" width="351" height="16"/>
+                                <rect key="frame" x="12" y="276" width="351" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="KvH-bU-c7Y" firstAttribute="top" secondItem="ejU-qa-ixx" secondAttribute="bottom" constant="15" id="3e3-FO-3zd"/>
                             <constraint firstItem="HSl-9x-6LA" firstAttribute="top" secondItem="x4H-hA-OSi" secondAttribute="top" constant="8" id="Aha-7I-YN1"/>
                             <constraint firstItem="x4H-hA-OSi" firstAttribute="trailing" secondItem="Y3h-zt-THc" secondAttribute="trailing" constant="12" id="DWb-Cg-W16"/>
                             <constraint firstItem="x4H-hA-OSi" firstAttribute="trailing" secondItem="HSl-9x-6LA" secondAttribute="trailing" id="GDi-hc-Eau"/>
                             <constraint firstItem="KvH-bU-c7Y" firstAttribute="leading" secondItem="x4H-hA-OSi" secondAttribute="leading" constant="12" id="K5x-NX-j3U"/>
+                            <constraint firstItem="WZt-QE-0P9" firstAttribute="top" secondItem="52e-fF-KT4" secondAttribute="bottom" id="Rf7-gL-JYY"/>
                             <constraint firstItem="Y3h-zt-THc" firstAttribute="top" secondItem="KvH-bU-c7Y" secondAttribute="bottom" constant="8" id="Ssp-0a-sPZ"/>
+                            <constraint firstItem="WZt-QE-0P9" firstAttribute="trailing" secondItem="x4H-hA-OSi" secondAttribute="trailing" id="TWj-Pm-xOt"/>
                             <constraint firstItem="Y3h-zt-THc" firstAttribute="leading" secondItem="x4H-hA-OSi" secondAttribute="leading" constant="12" id="UQ6-xs-U3a"/>
+                            <constraint firstItem="WZt-QE-0P9" firstAttribute="leading" secondItem="x4H-hA-OSi" secondAttribute="leading" constant="24" id="cgJ-Va-ssl"/>
+                            <constraint firstItem="52e-fF-KT4" firstAttribute="leading" secondItem="x4H-hA-OSi" secondAttribute="leading" constant="24" id="exz-dn-4dW"/>
                             <constraint firstItem="ejU-qa-ixx" firstAttribute="top" secondItem="HSl-9x-6LA" secondAttribute="bottom" id="hdO-aj-ybT"/>
+                            <constraint firstItem="52e-fF-KT4" firstAttribute="top" secondItem="ejU-qa-ixx" secondAttribute="bottom" id="isA-Cw-U9z"/>
                             <constraint firstItem="x4H-hA-OSi" firstAttribute="trailing" secondItem="ejU-qa-ixx" secondAttribute="trailing" id="jRj-Nc-Hse"/>
                             <constraint firstItem="ejU-qa-ixx" firstAttribute="leading" secondItem="x4H-hA-OSi" secondAttribute="leading" constant="24" id="kuM-F4-ZXe"/>
+                            <constraint firstItem="x4H-hA-OSi" firstAttribute="trailing" secondItem="52e-fF-KT4" secondAttribute="trailing" id="lUb-op-XnD"/>
                             <constraint firstItem="x4H-hA-OSi" firstAttribute="trailing" secondItem="KvH-bU-c7Y" secondAttribute="trailing" constant="12" id="sMa-fE-o9T"/>
                             <constraint firstItem="HSl-9x-6LA" firstAttribute="leading" secondItem="x4H-hA-OSi" secondAttribute="leading" constant="24" id="t9w-jr-z7J"/>
+                            <constraint firstItem="KvH-bU-c7Y" firstAttribute="top" secondItem="WZt-QE-0P9" secondAttribute="bottom" constant="16" id="zRG-18-XpN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="x4H-hA-OSi"/>
                     </view>
                     <connections>
                         <outlet property="companyLabel" destination="Y3h-zt-THc" id="HWB-xO-KaE"/>
+                        <outlet property="contactButton" destination="cGl-UR-rsf" id="Jd7-QV-t9x"/>
+                        <outlet property="rateButton" destination="hI9-G2-svW" id="ulA-qP-cb6"/>
                         <outlet property="showAxisSwitch" destination="rOx-9N-oLH" id="DY5-R6-Ql1"/>
                         <outlet property="unitLabel" destination="ZT5-YA-MtM" id="Lhr-qw-eHD"/>
                         <outlet property="unitTypeControl" destination="75z-Hk-AFI" id="oET-Wb-Xiq"/>
@@ -137,4 +208,12 @@
             <point key="canvasLocation" x="1477.5999999999999" y="-10.344827586206897"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="SeaBlue">
+            <color red="0.28999999170000001" green="0.56499999759999997" blue="0.88599997760000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="SeaBlue">
+            <color red="0.28999999165534973" green="0.56499999761581421" blue="0.88599997758865356" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
