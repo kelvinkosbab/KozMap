@@ -43,35 +43,3 @@ extension MainViewController : AddLocationViewControllerDelegate {
     self.presentPopupAlert(title: title, message: message)
   }
 }
-
-// MARK: - SearchViewControllerDelegate
-
-extension MainViewController : MyPlacemarkSearchViewControllerDelegate {
-  
-  func shouldAdd(mapItem: MapItem) {
-    self.dismissPresented { [weak self] in
-      
-      guard let strongSelf = self else {
-        return
-      }
-      
-      strongSelf.presentAddLocation(mapItem: mapItem, delegate: strongSelf, options: [ .presentingViewControllerDelegate(strongSelf) ])
-    }
-  }
-}
-
-// MARK: - SearchFoodNearbyViewControllerDelegate
-
-extension MainViewController : SearchFoodNearbyViewControllerDelegate {
-  
-  func didSelectPlacemark(_ placemark: Placemark, sender: UIViewController) {
-    self.dismissPresented { [weak self] in
-      
-      guard let strongSelf = self else {
-        return
-      }
-      
-      strongSelf.presentLocationDetail(placemark: placemark, options: [ .presentingViewControllerDelegate(strongSelf) ])
-    }
-  }
-}

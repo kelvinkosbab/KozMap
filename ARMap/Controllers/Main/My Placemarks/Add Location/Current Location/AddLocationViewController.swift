@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import MapKit
 
 protocol AddLocationViewControllerDelegate : class {
   func didSave(placemark: Placemark)
@@ -49,6 +50,9 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
     if let view = self.view {
       views.append(view)
     }
+    if let mapView = self.mapView {
+      views.append(mapView)
+    }
     return views
   }
   
@@ -61,12 +65,14 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
   @IBOutlet weak var locationDescriptionLabel: UILabel!
   @IBOutlet weak var addLocationButton: UIButton!
   @IBOutlet weak var colorChooserContainer: UIView!
+  @IBOutlet weak var mapView: MKMapView!
   
   weak var delegate: AddLocationViewControllerDelegate? = nil
   var colorChooserController: InlineColorChooserViewController? = nil
   
   var mapItem: MapItem? = nil
   var locationColor: UIColor = .kozRed
+  var mapAnnotation: MKAnnotation? = nil
   
   var clPlacemark: CLPlacemark? = nil {
     didSet {
@@ -102,14 +108,26 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    // Navigatino bar styles
     self.navigationItem.largeTitleDisplayMode = UIDevice.current.isPhone ? .never : .always
+    if UIDevice.current.isPhone {
+      self.baseNavigationController?.navigationBarStyle = .transparentBlueTint
+      self.view.backgroundColor = .clear
+    } else {
+      self.baseNavigationController?.navigationBarStyle = .standard
+      self.view.backgroundColor = .white
+    }
+    
+    // Title
     if let _ = self.mapItem {
       self.navigationItem.title = "Add Location"
     } else {
-      self.navigationItem.title = "Here"
+      self.navigationItem.title = "Current"
     }
     
-    self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(self.closeButtonSelected))
+    if !UIDevice.current.isPhone {
+      self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(self.closeButtonSelected))
+    }
     
     self.nameTextField.delegate = self
   }
@@ -231,6 +249,42 @@ class AddLocationViewController : BaseViewController, DesiredContentHeightDelega
     
     // Update the address
     self.locationDescriptionLabel.text = self.mapItem?.address ?? self.clPlacemark?.address
+    
+    // Check if view not tall enough for mapView
+    guard self.view.bounds.height > 600 else {
+      self.mapView.isHidden = true
+      return
+    }
+    
+    // Insure map view is displayed
+    if self.mapView.isHidden {
+      self.mapView.isHidden = false
+    }
+    
+    // Map annotion
+    if let mapAnnotation = self.mapAnnotation, mapAnnotation.coordinate.latitude == coordinate.latitude && mapAnnotation.coordinate.longitude == coordinate.longitude {
+      // do nothing
+    } else {
+      
+      // Need to create/update the current annotation
+      if let mapAnnotation = self.mapAnnotation {
+        self.mapView.removeAnnotation(mapAnnotation)
+      }
+      
+      // Create the map annotation
+      let annotation = MKPointAnnotation()
+      annotation.coordinate = coordinate
+      self.mapAnnotation = annotation
+      self.mapView.addAnnotation(annotation)
+      self.mapView.showsUserLocation = true
+      self.mapView.isScrollEnabled = false
+      self.mapView.isUserInteractionEnabled = false
+      
+      // Set the map region
+      let regionRadius: CLLocationDistance = MapItem.defaultRegionRadius
+      let coordinateRegion = MKCoordinateRegionMakeWithDistance(coordinate, regionRadius, regionRadius)
+      self.mapView.setRegion(coordinateRegion, animated: true)
+    }
   }
   
   // MARK: - Actions
