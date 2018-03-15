@@ -27,13 +27,13 @@ class BaseNavigationController : UINavigationController, PresentableController {
   // MARK: - NavigationBarStyle
   
   enum NavigationBarStyle {
-    case standard, transparent, transparentBlack
+    case standard, transparent, transparentBlueTint
     
     var isTranslucent: Bool {
       switch self {
       case .standard:
         return false
-      case .transparent, .transparentBlack:
+      case .transparent, .transparentBlueTint:
         return true
       }
     }
@@ -42,7 +42,7 @@ class BaseNavigationController : UINavigationController, PresentableController {
       switch self {
       case .standard:
         return .white
-      case .transparent, .transparentBlack:
+      case .transparent, .transparentBlueTint:
         return .clear
       }
     }
@@ -53,8 +53,8 @@ class BaseNavigationController : UINavigationController, PresentableController {
         return .kozBlue
       case .transparent:
         return .white
-      case .transparentBlack:
-        return .black
+      case .transparentBlueTint:
+        return .kozBlue
       }
     }
     
@@ -64,7 +64,7 @@ class BaseNavigationController : UINavigationController, PresentableController {
         return [ NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20, weight: .regular), NSAttributedStringKey.foregroundColor: UIColor.black ]
       case .transparent:
         return [ NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20, weight: .regular), NSAttributedStringKey.foregroundColor: UIColor.white ]
-      case .transparentBlack:
+      case .transparentBlueTint:
         return [ NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20, weight: .regular), NSAttributedStringKey.foregroundColor: UIColor.black ]
       }
     }
@@ -75,7 +75,7 @@ class BaseNavigationController : UINavigationController, PresentableController {
         return [ NSAttributedStringKey.foregroundColor: UIColor.black ]
       case .transparent:
         return [ NSAttributedStringKey.foregroundColor: UIColor.white ]
-      case .transparentBlack:
+      case .transparentBlueTint:
         return [ NSAttributedStringKey.foregroundColor: UIColor.black ]
       }
     }
@@ -119,7 +119,7 @@ class BaseNavigationController : UINavigationController, PresentableController {
     self.navigationBar.isTranslucent = self.navigationBarStyle.isTranslucent
     
     switch self.navigationBarStyle {
-    case .transparent:
+    case .transparent, .transparentBlueTint:
       self.navigationBar.setBackgroundImage(UIImage(), for: .default)
       self.navigationBar.shadowImage = UIImage()
       self.navigationBar.backgroundColor = .clear
@@ -134,19 +134,27 @@ class BaseNavigationController : UINavigationController, PresentableController {
   
   override var preferredStatusBarStyle: UIStatusBarStyle {
     switch self.navigationBarStyle {
-    case .standard, .transparentBlack:
-      if UIDevice.current.isPhone {
+    case .standard, .transparentBlueTint:
+      switch self.presentedMode {
+      case .modal(.fullScreen, _), .modal(.overFullScreen, _):
         return .default
-      } else {
-        switch self.presentedMode {
-        case .modal(.fullScreen, _), .modal(.overFullScreen, _):
-          return .default
-        default:
-          return .lightContent
-        }
+      default:
+        return .lightContent
       }
     case .transparent:
       return .lightContent
     }
+  }
+  override var prefersStatusBarHidden: Bool {
+    
+    guard let topViewController = self.viewControllers.last else {
+      return false
+    }
+    
+    return topViewController.prefersStatusBarHidden
+  }
+  
+  override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+    return .slide
   }
 }

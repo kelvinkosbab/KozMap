@@ -28,25 +28,30 @@ class ARViewController : UIViewController {
   public private(set) var sceneNode: SCNNode?
   public private(set) var basePlane: SCNNode?
   public private(set) var axisNode: AxisNode?
-  internal var placemarkNodeContainers = Set<PlacemarkNodeContainer>()
   
-  var placemarks: [Placemark] {
-    return self.savedLocationsFetchedResultsController.fetchedObjects ?? []
+  // MARK: - Defaults
+  
+  var defaults: Defaults {
+    return self.defaultsFetchedResultsController.fetchedObjects?.first ?? Defaults.shared
   }
   
-  private lazy var savedLocationsFetchedResultsController: NSFetchedResultsController<Placemark> = {
-    let controller = Placemark.newFetchedResultsController()
+  private lazy var defaultsFetchedResultsController: NSFetchedResultsController<Defaults> = {
+    let controller = Defaults.newFetchedResultsController()
     controller.delegate = self
     try? controller.performFetch()
     return controller
   }()
   
-  var defaults: Defaults? {
-    return self.defaultsFetchedResultsController.fetchedObjects?.first
+  // MARK: - Placemark Data Source
+  
+  internal var placemarkNodeContainers = Set<PlacemarkNodeContainer>()
+  
+  var placemarks: [Placemark] {
+    return self.placemarksFetchedResultsController.fetchedObjects ?? []
   }
   
-  private lazy var defaultsFetchedResultsController: NSFetchedResultsController<Defaults> = {
-    let controller = Defaults.newFetchedResultsController()
+  private lazy var placemarksFetchedResultsController: NSFetchedResultsController<Placemark> = {
+    let controller = Placemark.newFetchedResultsController()
     controller.delegate = self
     try? controller.performFetch()
     return controller
@@ -105,6 +110,8 @@ class ARViewController : UIViewController {
     }
     return nil
   }
+  
+  // MARK: - Location Properties
   
   var currentLocation: CLLocation? {
     return LocationManager.shared.currentLocation
@@ -167,7 +174,17 @@ class ARViewController : UIViewController {
   // MARK: - Notifications
   
   @objc func didReceiveUpdatedLocationNotification(_ notification: Notification) {
-    self.updatePlacemarkNodes(updatePosition: true)
+    
+    guard let state = self.state else {
+      return
+    }
+    
+    switch state {
+    case .normal:
+      self.updatePlacemarkNodes(updatePosition: true)
+      
+    default: break
+    }
   }
   
   @objc func didReceiveUpdatedHeadingNotification(_ notification: Notification) {}
@@ -175,12 +192,32 @@ class ARViewController : UIViewController {
   // MARK: - Scene
   
   @objc func pauseScene() {
+    
+    guard !UIDevice.current.isSimulator else {
+      self.state = .normal
+      return
+    }
+    
     self.session.pause()
   }
   
   @objc func restartPlaneDetection() {
     
+    guard !UIDevice.current.isSimulator else {
+      self.state = .normal
+      return
+    }
+    
     // Remove all nodes
+    self.removeAllNodesFromScene()
+    
+    // Configure session
+    self.sessionConfig.isLightEstimationEnabled = true
+    self.sessionConfig.worldAlignment = .gravityAndHeading
+    self.session.run(self.sessionConfig, options: [.resetTracking, .removeExistingAnchors])
+  }
+  
+  func removeAllNodesFromScene() {
     self.sceneNode?.removeFromParentNode()
     self.sceneNode = nil
     self.basePlane?.removeFromParentNode()
@@ -193,12 +230,6 @@ class ARViewController : UIViewController {
     self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
       node.removeFromParentNode()
     }
-    
-    // Configure session
-    self.sessionConfig.planeDetection = .horizontal
-    self.sessionConfig.isLightEstimationEnabled = true
-    self.sessionConfig.worldAlignment = .gravityAndHeading
-    self.session.run(self.sessionConfig, options: [.resetTracking, .removeExistingAnchors])
   }
   
   // MARK: - Placemark Node Containers
@@ -218,6 +249,13 @@ class ARViewController : UIViewController {
   
   internal func update(placemarkNodeContainer: PlacemarkNodeContainer, animated: Bool = false, updatePosition: Bool = true) {
     Log.log("Updating placemark \(placemarkNodeContainer.placemark.name ?? "nil name") at location \(placemarkNodeContainer.placemark.location.coordinate)")
+    
+    // Check if this node is hidden by the
+    guard self.defaults.appMode == placemarkNodeContainer.placemark.placemarkType else {
+      placemarkNodeContainer.placemarkNode?.removeFromParentNode()
+      placemarkNodeContainer.placemarkNode = nil
+      return
+    }
     
     // Refresh saved location properties
     placemarkNodeContainer.refreshContent()
@@ -393,27 +431,54 @@ extension ARViewController : NSFetchedResultsControllerDelegate {
   func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {}
   
   func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-    switch type {
-    case .insert:
-      if let placemark = anObject as? Placemark {
-        self.add(placemark: placemark)
+    
+    guard let state = self.state else {
+      return
+    }
+    
+    guard controller == self.placemarksFetchedResultsController else {
+      return
+    }
+    
+    switch state {
+    case .normal:
+      switch type {
+      case .insert:
+        if let placemark = anObject as? Placemark {
+          self.add(placemark: placemark)
+        }
+        
+      case .delete:
+        if let placemark = anObject as? Placemark {
+          self.remove(placemark: placemark)
+        }
+        
+      case .update, .move:
+        if let placemark = anObject as? Placemark {
+          self.update(placemark: placemark)
+        }
       }
       
-    case .delete:
-      if let placemark = anObject as? Placemark {
-        self.remove(placemark: placemark)
-      }
-      
-    case .update, .move:
-      if let placemark = anObject as? Placemark {
-        self.update(placemark: placemark)
-      }
+    default: break
     }
   }
   
   func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-    if controller == self.defaultsFetchedResultsController {
+    
+    guard let state = self.state else {
+      return
+    }
+    
+    guard controller == self.defaultsFetchedResultsController else {
+      return
+    }
+    
+    switch state {
+    case .normal:
       self.configureAxisNode()
+      self.updatePlacemarks()
+      
+    default: break
     }
   }
   
@@ -421,23 +486,25 @@ extension ARViewController : NSFetchedResultsControllerDelegate {
   
   func configureAxisNode() {
     
-    guard let defaults = self.defaults else {
+    // Check if should remove the show axis
+    guard self.defaults.showAxis else {
+      self.axisNode?.removeFromParentNode()
+      self.axisNode = nil
       return
     }
     
-    if defaults.showAxis {
-      if self.axisNode == nil {
-        let axisNode = AxisNode()
-        self.axisNode = axisNode
-        if let pointOfView = self.sceneView.pointOfView {
-          axisNode.position = pointOfView.position
-        }
-        self.sceneNode?.addChildNode(axisNode)
-      }
-    } else {
-      self.axisNode?.removeFromParentNode()
-      self.axisNode = nil
+    // Check if axis node has already been created
+    guard self.axisNode == nil else {
+      return
     }
+    
+    // Create the axis node
+    let axisNode = AxisNode()
+    self.axisNode = axisNode
+    if let pointOfView = self.sceneView.pointOfView {
+      axisNode.position = pointOfView.position
+    }
+    self.sceneNode?.addChildNode(axisNode)
   }
   
   // MARK: - Placemarks

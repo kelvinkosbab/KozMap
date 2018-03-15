@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad9_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HomeTabBarView" customModule="KozMap" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="762" height="104"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5fJ-ud-pCL">
+                    <rect key="frame" x="81" y="20" width="600" height="84"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vqy-aQ-his">
+                            <rect key="frame" x="0.0" y="0.0" width="84" height="84"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="vqy-aQ-his" secondAttribute="height" multiplier="1:1" id="20T-8g-WUF"/>
+                            </constraints>
+                            <state key="normal" image="assetOptions"/>
+                            <connections>
+                                <action selector="farLeftButtonSelected" destination="iN0-l3-epB" eventType="touchUpInside" id="Zid-O3-jGk"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wZA-nI-TCs">
+                            <rect key="frame" x="84" y="0.0" width="88" height="84"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q7Z-7p-DTA">
+                            <rect key="frame" x="172" y="0.0" width="84" height="84"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="q7Z-7p-DTA" secondAttribute="height" multiplier="1:1" id="iFb-c0-0L1"/>
+                            </constraints>
+                            <state key="normal" image="assetList"/>
+                            <connections>
+                                <action selector="centerLeftButtonSelected" destination="iN0-l3-epB" eventType="touchUpInside" id="fH5-8q-GJM"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GGy-b7-Vl5">
+                            <rect key="frame" x="256" y="0.0" width="88" height="84"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gQp-TT-c6X">
+                            <rect key="frame" x="344" y="0.0" width="84" height="84"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="gQp-TT-c6X" secondAttribute="height" multiplier="1:1" id="sE1-rP-0r3"/>
+                            </constraints>
+                            <state key="normal" image="assetPlus"/>
+                            <connections>
+                                <action selector="centerRightButtonSelected" destination="iN0-l3-epB" eventType="touchUpInside" id="UJC-Dr-HlT"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pt9-7B-SEN">
+                            <rect key="frame" x="428" y="0.0" width="88" height="84"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KSE-gf-mtx">
+                            <rect key="frame" x="516" y="0.0" width="84" height="84"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="KSE-gf-mtx" secondAttribute="height" multiplier="1:1" id="Q1R-3w-wJS"/>
+                            </constraints>
+                            <state key="normal" image="assetPlacemark"/>
+                            <connections>
+                                <action selector="farRightButtonSelected" destination="iN0-l3-epB" eventType="touchUpInside" id="rrq-L0-wze"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r3y-dR-w8q">
+                            <rect key="frame" x="258" y="0.0" width="84" height="84"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="r3y-dR-w8q" secondAttribute="height" multiplier="1:1" id="gSU-nI-uC1"/>
+                            </constraints>
+                            <state key="normal" image="assetList"/>
+                            <connections>
+                                <action selector="centerButtonSelected" destination="iN0-l3-epB" eventType="touchUpInside" id="mFE-4t-70G"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="wZA-nI-TCs" secondAttribute="bottom" id="30N-gh-FIO"/>
+                        <constraint firstAttribute="bottom" secondItem="vqy-aQ-his" secondAttribute="bottom" id="9vy-ja-NhX"/>
+                        <constraint firstAttribute="width" constant="600" id="Aqc-oV-nLU"/>
+                        <constraint firstItem="gQp-TT-c6X" firstAttribute="top" secondItem="5fJ-ud-pCL" secondAttribute="top" id="B65-KI-4gC"/>
+                        <constraint firstItem="r3y-dR-w8q" firstAttribute="top" secondItem="5fJ-ud-pCL" secondAttribute="top" id="Bmy-5e-J8A"/>
+                        <constraint firstItem="Pt9-7B-SEN" firstAttribute="width" secondItem="wZA-nI-TCs" secondAttribute="width" id="Eb1-Lb-Fwo"/>
+                        <constraint firstItem="gQp-TT-c6X" firstAttribute="leading" secondItem="GGy-b7-Vl5" secondAttribute="trailing" id="IO3-ek-h2w"/>
+                        <constraint firstAttribute="trailing" secondItem="KSE-gf-mtx" secondAttribute="trailing" id="KxZ-hh-efs"/>
+                        <constraint firstItem="r3y-dR-w8q" firstAttribute="centerX" secondItem="5fJ-ud-pCL" secondAttribute="centerX" id="LOp-st-zUp"/>
+                        <constraint firstAttribute="bottom" secondItem="q7Z-7p-DTA" secondAttribute="bottom" id="PA7-hJ-02G"/>
+                        <constraint firstItem="vqy-aQ-his" firstAttribute="top" secondItem="5fJ-ud-pCL" secondAttribute="top" id="Re2-rv-zlw"/>
+                        <constraint firstItem="GGy-b7-Vl5" firstAttribute="leading" secondItem="q7Z-7p-DTA" secondAttribute="trailing" id="SHf-6L-anB"/>
+                        <constraint firstItem="q7Z-7p-DTA" firstAttribute="leading" secondItem="wZA-nI-TCs" secondAttribute="trailing" id="ScA-M6-307"/>
+                        <constraint firstAttribute="bottom" secondItem="KSE-gf-mtx" secondAttribute="bottom" id="Vuf-S2-XJz"/>
+                        <constraint firstItem="q7Z-7p-DTA" firstAttribute="top" secondItem="5fJ-ud-pCL" secondAttribute="top" id="cqt-vJ-5Ip"/>
+                        <constraint firstItem="GGy-b7-Vl5" firstAttribute="width" secondItem="wZA-nI-TCs" secondAttribute="width" id="eaN-Dc-i4H"/>
+                        <constraint firstAttribute="bottom" secondItem="Pt9-7B-SEN" secondAttribute="bottom" id="eai-G3-wtm"/>
+                        <constraint firstItem="GGy-b7-Vl5" firstAttribute="top" secondItem="5fJ-ud-pCL" secondAttribute="top" id="fz1-Ms-X2q"/>
+                        <constraint firstItem="KSE-gf-mtx" firstAttribute="leading" secondItem="Pt9-7B-SEN" secondAttribute="trailing" id="gcc-WI-tj1"/>
+                        <constraint firstItem="wZA-nI-TCs" firstAttribute="leading" secondItem="vqy-aQ-his" secondAttribute="trailing" id="gmx-lI-sSh"/>
+                        <constraint firstItem="KSE-gf-mtx" firstAttribute="top" secondItem="5fJ-ud-pCL" secondAttribute="top" id="i4m-Oz-cG9"/>
+                        <constraint firstItem="Pt9-7B-SEN" firstAttribute="leading" secondItem="gQp-TT-c6X" secondAttribute="trailing" id="jGG-NW-1n0"/>
+                        <constraint firstItem="Pt9-7B-SEN" firstAttribute="top" secondItem="5fJ-ud-pCL" secondAttribute="top" id="jfM-Nv-eC6"/>
+                        <constraint firstItem="vqy-aQ-his" firstAttribute="leading" secondItem="5fJ-ud-pCL" secondAttribute="leading" id="p8D-tG-xmp"/>
+                        <constraint firstAttribute="bottom" secondItem="GGy-b7-Vl5" secondAttribute="bottom" id="pxs-bZ-JDx"/>
+                        <constraint firstAttribute="bottom" secondItem="r3y-dR-w8q" secondAttribute="bottom" id="rT6-ea-epV"/>
+                        <constraint firstAttribute="bottom" secondItem="gQp-TT-c6X" secondAttribute="bottom" id="swO-hR-BJp"/>
+                        <constraint firstItem="wZA-nI-TCs" firstAttribute="top" secondItem="5fJ-ud-pCL" secondAttribute="top" id="wpl-yg-hyJ"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="Aqc-oV-nLU"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <mask key="constraints">
+                            <include reference="Aqc-oV-nLU"/>
+                        </mask>
+                    </variation>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="5fJ-ud-pCL" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="7OP-rF-Dcu"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="5fJ-ud-pCL" secondAttribute="bottom" id="I0C-vU-ab9"/>
+                <constraint firstItem="5fJ-ud-pCL" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="JTX-XN-G47"/>
+                <constraint firstItem="5fJ-ud-pCL" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="S6d-54-Zkw"/>
+                <constraint firstItem="5fJ-ud-pCL" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="mE8-bn-leT"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="JTX-XN-G47"/>
+                    <exclude reference="S6d-54-Zkw"/>
+                    <exclude reference="mE8-bn-leT"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=compact">
+                <mask key="constraints">
+                    <include reference="JTX-XN-G47"/>
+                    <include reference="S6d-54-Zkw"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=regular">
+                <mask key="constraints">
+                    <include reference="mE8-bn-leT"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="centerButton" destination="r3y-dR-w8q" id="ERp-mS-33B"/>
+                <outlet property="centerLeftButton" destination="q7Z-7p-DTA" id="Qx7-kl-Snu"/>
+                <outlet property="centerRightButton" destination="gQp-TT-c6X" id="pFg-yo-62Y"/>
+                <outlet property="farLeftButton" destination="vqy-aQ-his" id="bSf-Fg-dBf"/>
+                <outlet property="farRightButton" destination="KSE-gf-mtx" id="RoA-Sm-NcS"/>
+            </connections>
+            <point key="canvasLocation" x="57" y="235"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="assetList" width="24" height="14"/>
+        <image name="assetOptions" width="24" height="24"/>
+        <image name="assetPlacemark" width="24" height="24"/>
+        <image name="assetPlus" width="24" height="24"/>
+    </resources>
+</document>

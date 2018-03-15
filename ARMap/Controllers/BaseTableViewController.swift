@@ -16,9 +16,22 @@ class BaseTableViewController : UITableViewController, PresentableController {
   var presentationManager: UIViewControllerTransitioningDelegate? = nil
   var currentFlowInitialController: PresentableController? = nil
   
+  // MARK: - Status Bar
+  
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
+  }
+  
   // MARK: - UITableView
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 60
+  }
+}
+
+extension BaseTableViewController {
+  
+  var baseNavigationController: BaseNavigationController? {
+    return self.navigationController as? BaseNavigationController
   }
 }

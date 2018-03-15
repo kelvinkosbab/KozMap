@@ -15,11 +15,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     
+    // Crash reporting
+    CrashManager.shared.appDidFinishLaunching()
+    
+    // Analytics
+    AnalyticsManager.shared.appDidFinishLaunching()
+    
     // Check if we don't have the correct permissions
     if !PermissionManager.shared.isAccessAuthorized {
       let permissionsViewController = PermissionsViewController.newViewController(delegate: self)
       RootNavigationController.shared.viewControllers = [ permissionsViewController ]
     }
+    
+    // Set the initial app mode
+    Defaults.shared.appMode = .myPlacemark
+    FoodNearbyService.shared.configure()
     
     return true
   }

@@ -33,6 +33,18 @@ extension UIViewController {
     childViewController.removeFromParentViewController()
   }
   
+  // MARK: - Dismissing Presented View Controllers
+  
+  func dismissPresented(completion: (() -> Void)? = nil) {
+    
+    guard let _ = self.presentedViewController else {
+      completion?()
+      return
+    }
+    
+    self.dismiss(animated: true, completion: completion)
+  }
+  
   // MARK: - Top View Controller
   
   var topViewController: UIViewController {
