@@ -18,4 +18,10 @@ extension UIViewController {
       }
     }
   }
+  
+  func presentOkAlert(title: String?, message: String?, okSelected: (() -> Void)? = nil) {
+    let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    alertController.addDefaultOkAction(handler: okSelected)
+    self.present(alertController, animated: true, completion: nil)
+  }
 }

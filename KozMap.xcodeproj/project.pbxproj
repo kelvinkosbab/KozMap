@@ -107,6 +107,8 @@
 		B686EFA420166F1300ACF075 /* PermissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF8D20166F1300ACF075 /* PermissionsViewController.swift */; };
 		B686EFA520166F1300ACF075 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF8E20166F1300ACF075 /* BaseNavigationController.swift */; };
 		B686EFA620166F1300ACF075 /* InlineColorChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF9020166F1300ACF075 /* InlineColorChooserViewController.swift */; };
+		B693DD62205A3D8B00772FA7 /* UIAlertController+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B693DD61205A3D8B00772FA7 /* UIAlertController+Util.swift */; };
+		B693DD64205A3DCC00772FA7 /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = B693DD63205A3DCC00772FA7 /* LocalizedString.swift */; };
 		B69E7BFE2057CD7E008318FC /* String+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69E7BFD2057CD7E008318FC /* String+UIKit.swift */; };
 		B69E7C002057D49C008318FC /* PlacemarkDetailNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69E7BFF2057D49C008318FC /* PlacemarkDetailNavigationDelegate.swift */; };
 		B69E7C022057DA0D008318FC /* PlacemarkListNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69E7C012057DA0D008318FC /* PlacemarkListNavigationDelegate.swift */; };
@@ -263,6 +265,8 @@
 		B686EF8D20166F1300ACF075 /* PermissionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsViewController.swift; sourceTree = "<group>"; };
 		B686EF8E20166F1300ACF075 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		B686EF9020166F1300ACF075 /* InlineColorChooserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InlineColorChooserViewController.swift; sourceTree = "<group>"; };
+		B693DD61205A3D8B00772FA7 /* UIAlertController+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Util.swift"; sourceTree = "<group>"; };
+		B693DD63205A3DCC00772FA7 /* LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
 		B69E7BFD2057CD7E008318FC /* String+UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+UIKit.swift"; sourceTree = "<group>"; };
 		B69E7BFF2057D49C008318FC /* PlacemarkDetailNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacemarkDetailNavigationDelegate.swift; sourceTree = "<group>"; };
 		B69E7C012057DA0D008318FC /* PlacemarkListNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacemarkListNavigationDelegate.swift; sourceTree = "<group>"; };
@@ -524,6 +528,7 @@
 				B686EF1320166D8600ACF075 /* UnitType.swift */,
 				B686EF1420166D8600ACF075 /* ARDistanceType.swift */,
 				B686EF1220166D8600ACF075 /* ARState.swift */,
+				B693DD63205A3DCC00772FA7 /* LocalizedString.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -590,6 +595,7 @@
 				B6082E092055EC360022943F /* UINavigationController+Util.swift */,
 				B686EEF620166D5A00ACF075 /* UIViewController+Util.swift */,
 				B6082DF9205496320022943F /* UIViewController+Alert.swift */,
+				B693DD61205A3D8B00772FA7 /* UIAlertController+Util.swift */,
 				B686EEF720166D5A00ACF075 /* String+Util.swift */,
 				B69E7BFD2057CD7E008318FC /* String+UIKit.swift */,
 				B686EEF820166D5A00ACF075 /* UIColor+Util.swift */,
@@ -1125,6 +1131,7 @@
 				B6DCCDCD203B9CA200201385 /* VisualEffectFadeAnimator.swift in Sources */,
 				B686EF9820166F1300ACF075 /* AddLocationViewController.swift in Sources */,
 				B686EF5720166D8700ACF075 /* KeyboardFrameRespondable.swift in Sources */,
+				B693DD64205A3DCC00772FA7 /* LocalizedString.swift in Sources */,
 				B64D1220204E670B008E5C5F /* AnalyticsScreen.swift in Sources */,
 				B6BEF50820538391002FD2AA /* ModeChooserNavigationDelegate.swift in Sources */,
 				B6DCCDDF203BDF4400201385 /* CustomPresentationController.swift in Sources */,
@@ -1199,6 +1206,7 @@
 				B686EF0320166D5A00ACF075 /* LocationSearchService.swift in Sources */,
 				B6DCCDE3203BED1100201385 /* RightToLeftAnimator.swift in Sources */,
 				B686EED020166C7300ACF075 /* AppDelegate.swift in Sources */,
+				B693DD62205A3D8B00772FA7 /* UIAlertController+Util.swift in Sources */,
 				B686EF5B20166D8700ACF075 /* Log.swift in Sources */,
 				B64D121E204E666D008E5C5F /* AnalyticsManager.swift in Sources */,
 				B6DCCDD7203BD4D200201385 /* BottomUpPresentationController.swift in Sources */,
