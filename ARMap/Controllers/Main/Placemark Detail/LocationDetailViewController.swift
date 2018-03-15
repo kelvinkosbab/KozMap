@@ -88,13 +88,17 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.navigationItem.largeTitleDisplayMode = UIDevice.current.isPhone ? .never : .always
+    self.navigationItem.largeTitleDisplayMode = .never
     if UIDevice.current.isPhone {
       self.baseNavigationController?.navigationBarStyle = .transparentBlueTint
       self.view.backgroundColor = .clear
     } else {
       self.baseNavigationController?.navigationBarStyle = .standard
       self.view.backgroundColor = .white
+    }
+    
+    if !UIDevice.current.isPhone {
+      self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(self.closeButtonSelected))
     }
     
     // Style open in maps button
@@ -302,6 +306,10 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
   }
   
   // MARK: - Actions
+  
+  @objc func closeButtonSelected() {
+    self.dismissController()
+  }
   
   @IBAction func nameTextFieldEditingChanged(_ sender: UITextField) {
     self.placemark?.name = sender.text
