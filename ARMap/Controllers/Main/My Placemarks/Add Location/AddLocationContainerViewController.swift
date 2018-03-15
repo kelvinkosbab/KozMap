@@ -28,7 +28,7 @@ class AddLocationContainerViewController : BaseViewController, DesiredContentHei
   // MARK: - DesiredContentHeightDelegate
   
   var desiredContentHeight: CGFloat {
-    return 378
+    return UIScreen.main.bounds.height
   }
   
   // MARK: - DismissInteractable
