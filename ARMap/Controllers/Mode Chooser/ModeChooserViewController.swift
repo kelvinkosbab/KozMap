@@ -66,17 +66,29 @@ class ModeChooserViewController : BaseViewController {
     self.delegate?.didChooseMode(.myPlacemark, sender: self)
   }
   
-  @IBAction func myPlacemarksInfoButtonSelected() {}
+  @IBAction func myPlacemarksInfoButtonSelected() {
+    let title = NSLocalizedString("Your Placemarks", comment: "Your Placemarks")
+    let message = NSLocalizedString("Add Placemarks that are important to you. These Placemarks are then saved and visible to you. Included in the Placemark details is the address and the phone number if you added from search.", comment: "Your Placemarks description text")
+    self.presentOkAlert(title: title, message: message)
+  }
   
   @IBAction func foodNearMeButtonSelected() {
     self.delegate?.didChooseMode(.food, sender: self)
   }
   
-  @IBAction func foodNearMeInfoButtonSelected() {}
+  @IBAction func foodNearMeInfoButtonSelected() {
+    let title = NSLocalizedString("Restaurants Nearby", comment: "Restaurants Nearby")
+    let message = NSLocalizedString("Discover Restaurants Nearby and add your favorite places to eat! Ten resaurants are automatically visiable in your current area. Looking for a specific kind of restaurant? Simply search and the visible restaurants will be updated. Your favorites will always be visible regardless to what you are searching for.", comment: "Restaurants Nearby description text")
+    self.presentOkAlert(title: title, message: message)
+  }
   
   @IBAction func mountainViewerButtonSelected() {
     self.delegate?.didChooseMode(.mountain, sender: self)
   }
   
-  @IBAction func mountainViewerInfoButtonSelected() {}
+  @IBAction func mountainViewerInfoButtonSelected() {
+    let title = NSLocalizedString("Mountain Viewer", comment: "Mountain Viewer")
+    let message = NSLocalizedString("View significant Mountains in your region and access general information as well as information for visiting and conquering these peaks.\n(Currently only supported for the Colorado Front Range)", comment: "Mountain Viewer description text")
+    self.presentOkAlert(title: title, message: message)
+  }
 }

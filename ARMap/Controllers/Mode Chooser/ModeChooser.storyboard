@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14105" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -56,19 +56,19 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2r5-9z-8tz">
-                                        <rect key="frame" x="0.0" y="80" width="375" height="175"/>
+                                        <rect key="frame" x="0.0" y="80" width="375" height="263"/>
                                         <subviews>
                                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f8S-8K-hxr">
-                                                <rect key="frame" x="0.0" y="24" width="375" height="127"/>
+                                                <rect key="frame" x="0.0" y="24" width="375" height="215"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="j4R-vf-oWh">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="127"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="215"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="assetPlacemarkLarge" translatesAutoresizingMaskIntoConstraints="NO" id="nVZ-zo-HSV">
-                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="127"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="215"/>
                                                         </imageView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QeG-18-Coz">
-                                                            <rect key="frame" x="93" y="0.0" width="190" height="127"/>
+                                                            <rect key="frame" x="27" y="0.0" width="322.5" height="215"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="QeG-18-Coz" secondAttribute="height" multiplier="1.5:1" id="WL2-BQ-3iC"/>
                                                             </constraints>
@@ -77,7 +77,7 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="miV-NL-LDL">
-                                                            <rect key="frame" x="16" y="86.5" width="40" height="40"/>
+                                                            <rect key="frame" x="16" y="174.5" width="40" height="40"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="40" id="Ymk-Kz-u62"/>
                                                                 <constraint firstAttribute="width" constant="40" id="aOA-0T-bnx"/>
@@ -113,7 +113,7 @@
                                         </constraints>
                                     </view>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="urj-b3-Mvm">
-                                        <rect key="frame" x="16" y="255" width="343" height="1"/>
+                                        <rect key="frame" x="16" y="343" width="343" height="1"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="pl2-Q7-rGk">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="1"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -124,19 +124,19 @@
                                         <blurEffect style="prominent"/>
                                     </visualEffectView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XhV-Fh-QxP">
-                                        <rect key="frame" x="0.0" y="256" width="375" height="175"/>
+                                        <rect key="frame" x="0.0" y="344" width="375" height="263"/>
                                         <subviews>
                                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mii-WC-oIx">
-                                                <rect key="frame" x="0.0" y="24" width="375" height="127"/>
+                                                <rect key="frame" x="0.0" y="24" width="375" height="215"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="3p7-g8-4Op">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="127"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="215"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="assetForkKnifeLarge" translatesAutoresizingMaskIntoConstraints="NO" id="cyp-fI-OYg">
-                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="127"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="215"/>
                                                         </imageView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lGR-o0-jyf">
-                                                            <rect key="frame" x="92.5" y="-0.5" width="191" height="127.5"/>
+                                                            <rect key="frame" x="26.5" y="-0.5" width="323.5" height="215.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="lGR-o0-jyf" secondAttribute="height" multiplier="1.5:1" id="ZQg-hE-eAS"/>
                                                             </constraints>
@@ -145,7 +145,7 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ad-ed-m87">
-                                                            <rect key="frame" x="16" y="87" width="40" height="40"/>
+                                                            <rect key="frame" x="16" y="175" width="40" height="40"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="40" id="YZT-uX-87M"/>
                                                                 <constraint firstAttribute="width" constant="40" id="ta3-zs-Gjx"/>
@@ -180,74 +180,6 @@
                                             <constraint firstAttribute="trailing" secondItem="Mii-WC-oIx" secondAttribute="trailing" id="cg9-M5-hLo"/>
                                         </constraints>
                                     </view>
-                                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z7c-Wd-Plh">
-                                        <rect key="frame" x="16" y="431" width="343" height="1"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="aiw-Ec-k7Q">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="1"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        </view>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="1" id="zu1-Da-2ss"/>
-                                        </constraints>
-                                        <blurEffect style="prominent"/>
-                                    </visualEffectView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z3q-zY-rKY">
-                                        <rect key="frame" x="0.0" y="432" width="375" height="175"/>
-                                        <subviews>
-                                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kml-hL-v1u">
-                                                <rect key="frame" x="0.0" y="24" width="375" height="127"/>
-                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="KSI-hw-TeM">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="127"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                    <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="assetMountainsLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Bi2-Lv-lbs">
-                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="127"/>
-                                                        </imageView>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GPe-27-7ej">
-                                                            <rect key="frame" x="92.5" y="-0.5" width="191.5" height="128"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" secondItem="GPe-27-7ej" secondAttribute="height" multiplier="1.5:1" id="9j2-nA-Eoh"/>
-                                                            </constraints>
-                                                            <connections>
-                                                                <action selector="mountainViewerButtonSelected" destination="33l-QV-U0o" eventType="touchUpInside" id="nFm-CR-JUs"/>
-                                                            </connections>
-                                                        </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zhG-5y-R3k">
-                                                            <rect key="frame" x="16" y="87.5" width="40" height="40"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="40" id="6Bs-JH-1Mx"/>
-                                                                <constraint firstAttribute="width" constant="40" id="8CI-h4-PmO"/>
-                                                            </constraints>
-                                                            <state key="normal" image="assetInfo"/>
-                                                            <connections>
-                                                                <action selector="mountainViewerInfoButtonSelected" destination="33l-QV-U0o" eventType="touchUpInside" id="dDH-de-JuA"/>
-                                                            </connections>
-                                                        </button>
-                                                    </subviews>
-                                                    <constraints>
-                                                        <constraint firstItem="GPe-27-7ej" firstAttribute="top" secondItem="KSI-hw-TeM" secondAttribute="top" id="92X-6S-Zzv"/>
-                                                        <constraint firstItem="Bi2-Lv-lbs" firstAttribute="leading" secondItem="KSI-hw-TeM" secondAttribute="leading" id="FVu-kK-JP5"/>
-                                                        <constraint firstItem="Bi2-Lv-lbs" firstAttribute="top" secondItem="KSI-hw-TeM" secondAttribute="top" id="Jqm-YM-muk"/>
-                                                        <constraint firstItem="zhG-5y-R3k" firstAttribute="leading" secondItem="KSI-hw-TeM" secondAttribute="leading" constant="16" id="O2M-QI-v7A"/>
-                                                        <constraint firstAttribute="bottom" secondItem="Bi2-Lv-lbs" secondAttribute="bottom" id="W2I-ri-hvT"/>
-                                                        <constraint firstAttribute="bottom" secondItem="zhG-5y-R3k" secondAttribute="bottom" id="Y13-4s-BcI"/>
-                                                        <constraint firstItem="GPe-27-7ej" firstAttribute="centerX" secondItem="KSI-hw-TeM" secondAttribute="centerX" id="acG-SJ-7cr"/>
-                                                        <constraint firstAttribute="bottom" secondItem="GPe-27-7ej" secondAttribute="bottom" id="c02-yg-FGz"/>
-                                                        <constraint firstAttribute="trailing" secondItem="Bi2-Lv-lbs" secondAttribute="trailing" id="uwc-rj-bYu"/>
-                                                    </constraints>
-                                                </view>
-                                                <vibrancyEffect>
-                                                    <blurEffect style="dark"/>
-                                                </vibrancyEffect>
-                                            </visualEffectView>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="kml-hL-v1u" firstAttribute="top" secondItem="z3q-zY-rKY" secondAttribute="top" constant="24" id="4iw-3k-K8C"/>
-                                            <constraint firstAttribute="bottom" secondItem="kml-hL-v1u" secondAttribute="bottom" constant="24" id="Hyv-mM-rrx"/>
-                                            <constraint firstItem="kml-hL-v1u" firstAttribute="leading" secondItem="z3q-zY-rKY" secondAttribute="leading" id="Z9s-Xb-wT0"/>
-                                            <constraint firstAttribute="trailing" secondItem="kml-hL-v1u" secondAttribute="trailing" id="mRn-5Z-h70"/>
-                                        </constraints>
-                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="xg4-Gx-7Kx" secondAttribute="trailing" id="2S2-dh-ZFc"/>
@@ -255,24 +187,17 @@
                                     <constraint firstItem="XhV-Fh-QxP" firstAttribute="top" secondItem="urj-b3-Mvm" secondAttribute="bottom" id="6nu-WD-PJ2"/>
                                     <constraint firstItem="urj-b3-Mvm" firstAttribute="leading" secondItem="4HO-yc-HRA" secondAttribute="leading" constant="16" id="BfM-vH-DbD"/>
                                     <constraint firstAttribute="trailing" secondItem="XhV-Fh-QxP" secondAttribute="trailing" id="Fee-q8-kWL"/>
-                                    <constraint firstAttribute="trailing" secondItem="z3q-zY-rKY" secondAttribute="trailing" id="H5l-UI-1KJ"/>
-                                    <constraint firstItem="z3q-zY-rKY" firstAttribute="leading" secondItem="4HO-yc-HRA" secondAttribute="leading" id="IA7-zY-rER"/>
                                     <constraint firstItem="xg4-Gx-7Kx" firstAttribute="top" secondItem="4HO-yc-HRA" secondAttribute="top" id="IyE-zr-G97"/>
                                     <constraint firstAttribute="trailing" secondItem="2r5-9z-8tz" secondAttribute="trailing" id="Mt9-Gm-36A"/>
                                     <constraint firstItem="2r5-9z-8tz" firstAttribute="leading" secondItem="4HO-yc-HRA" secondAttribute="leading" id="P8a-U7-aKb"/>
-                                    <constraint firstItem="Z7c-Wd-Plh" firstAttribute="leading" secondItem="4HO-yc-HRA" secondAttribute="leading" constant="16" id="Rhe-HG-J8l"/>
-                                    <constraint firstItem="Z7c-Wd-Plh" firstAttribute="top" secondItem="XhV-Fh-QxP" secondAttribute="bottom" id="WAx-og-rdp"/>
                                     <constraint firstAttribute="width" constant="500" id="a6Z-xK-4ju"/>
                                     <constraint firstItem="XhV-Fh-QxP" firstAttribute="leading" secondItem="4HO-yc-HRA" secondAttribute="leading" id="aXc-Vb-bLE"/>
                                     <constraint firstItem="urj-b3-Mvm" firstAttribute="top" secondItem="2r5-9z-8tz" secondAttribute="bottom" id="fmw-TD-egQ"/>
                                     <constraint firstAttribute="trailing" secondItem="urj-b3-Mvm" secondAttribute="trailing" constant="16" id="fyk-DG-rU1"/>
-                                    <constraint firstAttribute="trailing" secondItem="Z7c-Wd-Plh" secondAttribute="trailing" constant="16" id="mfu-8p-OxU"/>
-                                    <constraint firstItem="z3q-zY-rKY" firstAttribute="top" secondItem="Z7c-Wd-Plh" secondAttribute="bottom" id="nGl-QF-gLe"/>
                                     <constraint firstAttribute="height" constant="700" id="o4F-GQ-E0c"/>
-                                    <constraint firstAttribute="bottom" secondItem="z3q-zY-rKY" secondAttribute="bottom" id="om9-Oc-IMa"/>
                                     <constraint firstItem="xg4-Gx-7Kx" firstAttribute="leading" secondItem="4HO-yc-HRA" secondAttribute="leading" id="sYq-AV-VOj"/>
-                                    <constraint firstItem="z3q-zY-rKY" firstAttribute="height" secondItem="2r5-9z-8tz" secondAttribute="height" id="vQQ-Th-ho8"/>
                                     <constraint firstItem="XhV-Fh-QxP" firstAttribute="height" secondItem="2r5-9z-8tz" secondAttribute="height" id="vip-Nh-aUg"/>
+                                    <constraint firstAttribute="bottom" secondItem="XhV-Fh-QxP" secondAttribute="bottom" id="wlI-3L-W7u"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -332,20 +257,20 @@
                         <viewLayoutGuide key="safeArea" id="FMP-zX-I59"/>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="3Uy-fx-b6t"/>
+                                <exclude reference="r0r-5o-VSz"/>
                                 <exclude reference="LRa-nm-tRo"/>
                                 <exclude reference="QUF-4h-pYU"/>
                                 <exclude reference="RPJ-dC-OvQ"/>
                                 <exclude reference="o8k-gt-WcZ"/>
-                                <exclude reference="3Uy-fx-b6t"/>
-                                <exclude reference="r0r-5o-VSz"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="constraints">
-                                <include reference="LRa-nm-tRo"/>
-                                <include reference="RPJ-dC-OvQ"/>
                                 <include reference="3Uy-fx-b6t"/>
                                 <include reference="r0r-5o-VSz"/>
+                                <include reference="LRa-nm-tRo"/>
+                                <include reference="RPJ-dC-OvQ"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
@@ -359,8 +284,6 @@
                         <outlet property="arrowDownButton" destination="ITw-rl-OZ9" id="xEf-YK-fyx"/>
                         <outlet property="foodNearMeButton" destination="lGR-o0-jyf" id="YQG-5f-hVn"/>
                         <outlet property="foodNearMeInfoButton" destination="7ad-ed-m87" id="cUm-cT-pw9"/>
-                        <outlet property="mountainViewerButton" destination="GPe-27-7ej" id="ZZH-jo-5ng"/>
-                        <outlet property="mountainViewerInfoButton" destination="zhG-5y-R3k" id="mjN-nT-M0V"/>
                         <outlet property="myPlacemarksButton" destination="QeG-18-Coz" id="GMO-a6-CE3"/>
                         <outlet property="myPlacemarksInfoButton" destination="miV-NL-LDL" id="uCF-nR-xQD"/>
                     </connections>
@@ -374,7 +297,6 @@
         <image name="assetArrowDown" width="171" height="171"/>
         <image name="assetForkKnifeLarge" width="512" height="512"/>
         <image name="assetInfo" width="24" height="24"/>
-        <image name="assetMountainsLarge" width="512" height="512"/>
         <image name="assetPlacemarkLarge" width="512" height="512"/>
     </resources>
 </document>

@@ -20,6 +20,14 @@ extension MainViewController : PresentingViewControllerDelegate {
   
   func didPresentViewController(_ viewController: UIViewController?) {
     self.hideAllElements()
+    
+    if let _ = viewController as? ConfiguringViewController {
+      switch self.arViewController?.state ?? .normal {
+      case .normal:
+        self.hideConfiguringView()
+      default: break
+      }
+    }
   }
   
   func willDismissViewController(_ viewController: UIViewController) {}
