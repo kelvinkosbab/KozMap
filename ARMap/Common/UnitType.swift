@@ -8,8 +8,17 @@
 
 import Foundation
 
-enum UnitType : Int {
+enum UnitType : Int16 {
   case imperial, metric
+  
+  var string: String {
+    switch self {
+    case .imperial:
+      return "Imperial"
+    case .metric:
+      return "Metric"
+    }
+  }
   
   var farName: String {
     switch self {

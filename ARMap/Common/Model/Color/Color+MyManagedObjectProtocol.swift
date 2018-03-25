@@ -75,7 +75,27 @@ extension Color : MyManagedObjectProtocol {
     return color
   }
   
+  static var null: Color {
+    let color = Color.create()
+    color.red = -1
+    color.green = -1
+    color.blue = -1
+    return color
+  }
+  
   // MARK: - Helpers
+  
+  var isNull: Bool {
+    return self.red < 0 || self.red > 255 || self.green < 0 || self.green > 255 || self.blue < 0 || self.blue > 255
+  }
+  
+  var isBlack: Bool {
+    return self.red == 0 && self.green == 0 && self.blue == 0
+  }
+  
+  var isWhite: Bool {
+    return self.red == 255 && self.green == 255 && self.blue == 255
+  }
   
   var color: UIColor {
     get {

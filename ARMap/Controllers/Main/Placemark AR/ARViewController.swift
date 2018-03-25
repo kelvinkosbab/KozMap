@@ -27,7 +27,6 @@ class ARViewController : UIViewController {
   private let sessionConfig = ARWorldTrackingConfiguration()
   public private(set) var sceneNode: SCNNode?
   public private(set) var basePlane: SCNNode?
-  public private(set) var axisNode: AxisNode?
   
   // MARK: - Defaults
   
@@ -279,6 +278,7 @@ class ARViewController : UIViewController {
           defaultPlacemarkNode.loadModel { [weak self] in
             placemarkNodeContainer.placemarkNode?.removeFromParentNode()
             placemarkNodeContainer.placemarkNode = defaultPlacemarkNode
+            defaultPlacemarkNode.beamTransparency = CGFloat(Defaults.shared.beamNodeTransparency)
             
             placemarkNodeContainer.refreshContent()
             self?.sceneNode?.addChildNode(defaultPlacemarkNode)
@@ -292,7 +292,7 @@ class ARViewController : UIViewController {
           textFlagPlacemarkNode.loadModel { [weak self] in
             placemarkNodeContainer.placemarkNode?.removeFromParentNode()
             placemarkNodeContainer.placemarkNode = textFlagPlacemarkNode
-            textFlagPlacemarkNode.beamTransparency = 0.25
+            textFlagPlacemarkNode.beamTransparency = CGFloat(Defaults.shared.beamNodeTransparency)
             
             placemarkNodeContainer.refreshContent()
             self?.sceneNode?.addChildNode(textFlagPlacemarkNode)
@@ -371,9 +371,6 @@ extension ARViewController : ARSCNViewDelegate {
         let sceneNode = SCNNode()
         self.sceneNode = sceneNode
         scene.rootNode.addChildNode(sceneNode)
-        
-        // Axes node
-        self.configureAxisNode()
         
         // Base plane
         let basePlane = Plane(width: 3000, length: 3000)
@@ -475,36 +472,10 @@ extension ARViewController : NSFetchedResultsControllerDelegate {
     
     switch state {
     case .normal:
-      self.configureAxisNode()
       self.updatePlacemarks()
       
     default: break
     }
-  }
-  
-  // MARK: - Axis Node
-  
-  func configureAxisNode() {
-    
-    // Check if should remove the show axis
-    guard self.defaults.showAxis else {
-      self.axisNode?.removeFromParentNode()
-      self.axisNode = nil
-      return
-    }
-    
-    // Check if axis node has already been created
-    guard self.axisNode == nil else {
-      return
-    }
-    
-    // Create the axis node
-    let axisNode = AxisNode()
-    self.axisNode = axisNode
-    if let pointOfView = self.sceneView.pointOfView {
-      axisNode.position = pointOfView.position
-    }
-    self.sceneNode?.addChildNode(axisNode)
   }
   
   // MARK: - Placemarks

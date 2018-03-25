@@ -9,7 +9,7 @@
 import UIKit
 import StoreKit
 
-class SettingsViewController : BaseViewController, DesiredContentHeightDelegate, DismissInteractable {
+class SettingsViewController : BaseTableViewController, DesiredContentHeightDelegate, DismissInteractable {
   
   // MARK: - Static Accessors
   
@@ -22,7 +22,7 @@ class SettingsViewController : BaseViewController, DesiredContentHeightDelegate,
   // MARK: - DesiredContentHeightDelegate
   
   var desiredContentHeight: CGFloat {
-    return 308
+    return 440
   }
   
   // MARK: - DismissInteractable
@@ -41,12 +41,21 @@ class SettingsViewController : BaseViewController, DesiredContentHeightDelegate,
   // MARK: - Properties
   
   @IBOutlet weak var unitLabel: UILabel!
-  @IBOutlet weak var unitTypeControl: UISegmentedControl!
+  @IBOutlet weak var unitSelectLabel: UILabel!
+  
+  @IBOutlet weak var beamTransparencyLabel: UILabel!
+  @IBOutlet weak var beamTransparencySelectLabel: UILabel!
+  
+  @IBOutlet weak var dayTextColorLabel: UILabel!
+  @IBOutlet weak var dayTextColorSelectLabel: UILabel!
+  
+  @IBOutlet weak var nightTextColorLabel: UILabel!
+  @IBOutlet weak var nightTextColorSelectLabel: UILabel!
+  
+  @IBOutlet weak var rateLabel: UILabel!
+  @IBOutlet weak var contactLabel: UILabel!
   @IBOutlet weak var versionLabel: UILabel!
   @IBOutlet weak var companyLabel: UILabel!
-  @IBOutlet weak var showAxisSwitch: UISwitch!
-  @IBOutlet weak var rateButton: UIButton!
-  @IBOutlet weak var contactButton: UIButton!
   
   // MARK: - Lifecycle
   
@@ -59,9 +68,11 @@ class SettingsViewController : BaseViewController, DesiredContentHeightDelegate,
     if UIDevice.current.isPhone {
       self.baseNavigationController?.navigationBarStyle = .transparentBlueTint
       self.view.backgroundColor = .clear
+      self.tableView.backgroundColor = .clear
     } else {
       self.baseNavigationController?.navigationBarStyle = .standard
       self.view.backgroundColor = .white
+      self.tableView.backgroundColor = .white
     }
     
     if !UIDevice.current.isPhone {
@@ -95,10 +106,31 @@ class SettingsViewController : BaseViewController, DesiredContentHeightDelegate,
   func reloadContent() {
     
     // Unit type
-    self.unitTypeControl.selectedSegmentIndex = Defaults.shared.unitType.rawValue
+    self.unitSelectLabel.text = Defaults.shared.unitType.string
     
-    // Show axis on start
-    self.showAxisSwitch.isOn = Defaults.shared.showAxis
+    // Beam transparency
+    let beamNodeTransparencyPercent = Int(Defaults.shared.beamNodeTransparency * 100)
+    self.beamTransparencySelectLabel.text = "\(beamNodeTransparencyPercent)%"
+    
+    // Day text color
+    let dayColor = Defaults.shared.dayTextColor
+    if dayColor.isBlack {
+      self.dayTextColorSelectLabel.text = "Black"
+    } else if dayColor.isWhite {
+      self.dayTextColorSelectLabel.text = "White"
+    } else {
+      self.dayTextColorSelectLabel.text = "Placemark's Color"
+    }
+    
+    // Night text color
+    let nightColor = Defaults.shared.nightTextColor
+    if nightColor.isBlack {
+      self.nightTextColorSelectLabel.text = "Black"
+    } else if nightColor.isWhite {
+      self.nightTextColorSelectLabel.text = "White"
+    } else {
+      self.nightTextColorSelectLabel.text = "Placemark's Color"
+    }
     
     // Version
     self.versionLabel.text = "Version \(UIApplication.shared.versionString ?? "N/A")"
@@ -107,10 +139,10 @@ class SettingsViewController : BaseViewController, DesiredContentHeightDelegate,
     self.companyLabel.text = BuildManager.shared.buildTarget.companyName
     
     // Rate button
-    self.rateButton.setTitle("Rate \(BuildManager.shared.buildTarget.appName)", for: .normal)
+    self.rateLabel.text = "Rate \(BuildManager.shared.buildTarget.appName)"
     
     // Contact button
-    self.contactButton.setTitle("Give Feedback", for: .normal)
+    self.contactLabel.text = "Give Feedback"
   }
   
   // MARK: - Actions
@@ -119,31 +151,84 @@ class SettingsViewController : BaseViewController, DesiredContentHeightDelegate,
     self.dismissController()
   }
   
-  @IBAction func segmentedControlValueChanged(_ control: UISegmentedControl) {
-    switch control {
-    case self.unitTypeControl:
-      if let unitType = UnitType(rawValue: control.selectedSegmentIndex) {
-        Defaults.shared.unitType = unitType
-        MyDataManager.shared.saveMainContext()
-      }
-    default: break
+  // MARK: - SectionType
+  
+  enum SectionType {
+    case main([RowType])
+  }
+  
+  func getSectionType(section: Int) -> SectionType? {
+    switch section {
+    case 0:
+      return .main([ .units, .beamTransparency, .dayTextColor, .nightTextColor, .rate, .feedback, .info ])
+    default:
+      return nil
     }
   }
   
-  @IBAction func showAxisSwitchValueChanged(_ sender: UISwitch) {
-    Defaults.shared.showAxis = sender.isOn
+  // MARK: - RowType
+  
+  enum RowType {
+    case units, beamTransparency, dayTextColor, nightTextColor, rate, feedback, info
   }
   
-  @IBAction func rateButtonSelected() {
-    SKStoreReviewController.requestReview()
-  }
-  
-  @IBAction func contactButtonSelected() {
+  func getRowType(at indexPath: IndexPath) -> RowType? {
     
-    guard let url = URL(string: BuildManager.shared.buildTarget.giveFeedbackUrlString) else {
+    guard let sectionType = self.getSectionType(section: indexPath.section) else {
+      return nil
+    }
+    
+    switch sectionType {
+    case .main(let rowTypes):
+      if indexPath.row < rowTypes.count {
+        let rowType = rowTypes[indexPath.row]
+        return rowType
+      }
+      return nil
+    }
+  }
+  
+  // MARK: - UITableView
+  
+  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = super.tableView(tableView, cellForRowAt: indexPath)
+    cell.backgroundColor = .clear
+    cell.contentView.backgroundColor = .clear
+    return cell
+  }
+  
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+    guard let rowType = self.getRowType(at: indexPath) else {
       return
     }
     
-    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    switch rowType {
+    case .units:
+      /*
+       switch control {
+       case self.unitTypeControl:
+       if let unitType = UnitType(rawValue: control.selectedSegmentIndex) {
+       Defaults.shared.unitType = unitType
+       MyDataManager.shared.saveMainContext()
+       }
+       default: break
+       }*/
+      break
+      
+    case .beamTransparency: break
+    case .dayTextColor: break
+    case .nightTextColor: break
+      
+    case .rate:
+      SKStoreReviewController.requestReview()
+      
+    case .feedback:
+      if let url = URL(string: BuildManager.shared.buildTarget.giveFeedbackUrlString) {
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+      }
+      
+    case .info: break
+    }
   }
 }

@@ -32,7 +32,7 @@ extension Defaults {
   
   var unitType: UnitType {
     get {
-      if let unitType = UnitType(rawValue: Int(self.unitTypeValue)) {
+      if let unitType = UnitType(rawValue: self.unitTypeValue) {
         return unitType
       }
       
@@ -41,7 +41,7 @@ extension Defaults {
       return self.unitType
     }
     set {
-      self.unitTypeValue = Int16(newValue.rawValue)
+      self.unitTypeValue = newValue.rawValue
       MyDataManager.shared.saveMainContext()
     }
   }
@@ -58,6 +58,38 @@ extension Defaults {
     }
     set {
       self.appModeValue = newValue.rawValue
+      MyDataManager.shared.saveMainContext()
+    }
+  }
+  
+  // MARK: - Daytime / Nightime Colors
+  
+  var dayTextColor: Color {
+    get {
+      if let color = self.daytimeTextColorValue {
+        return color
+      }
+      
+      self.dayTextColor = Color.black
+      return self.dayTextColor
+    }
+    set {
+      self.daytimeTextColorValue = newValue
+      MyDataManager.shared.saveMainContext()
+    }
+  }
+  
+  var nightTextColor: Color {
+    get {
+      if let color = self.nighttimeTextColorValue {
+        return color
+      }
+      
+      self.nightTextColor = Color.white
+      return self.nightTextColor
+    }
+    set {
+      self.nighttimeTextColorValue = newValue
       MyDataManager.shared.saveMainContext()
     }
   }
