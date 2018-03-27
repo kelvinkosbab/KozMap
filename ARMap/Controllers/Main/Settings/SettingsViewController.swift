@@ -129,7 +129,7 @@ class SettingsViewController : BaseTableViewController, DesiredContentHeightDele
     self.unitSelectLabel.text = self.defaults.unitType.string
     
     // Beam transparency
-    let beamNodeTransparencyPercent = Int(self.defaults.beamNodeTransparency * 100)
+    let beamNodeTransparencyPercent = Int((1 - self.defaults.beamNodeTransparency) * 100)
     self.beamTransparencySelectLabel.text = "\(beamNodeTransparencyPercent)%"
     
     // Day text color
@@ -211,7 +211,7 @@ class SettingsViewController : BaseTableViewController, DesiredContentHeightDele
   // MARK: - Navigation
   
   func presentItemChooser(mode: ItemChooserViewController.Mode, selectedItem: ItemChooserViewController.Item) {
-    let viewController = ItemChooserViewController.newViewController(mode: mode, delegate: self)
+    let viewController = ItemChooserViewController.newViewController(mode: mode, selectedItem: selectedItem, delegate: self)
     viewController.presentIn(self, withMode: .custom(.rightToLeftCurrentContext), options: [ .presentingViewControllerDelegate(self) ])
   }
   
@@ -239,9 +239,42 @@ class SettingsViewController : BaseTableViewController, DesiredContentHeightDele
         self.presentItemChooser(mode: .units, selectedItem: .metric)
       }
       
-    case .beamTransparency: break
-    case .dayTextColor: break
-    case .nightTextColor: break
+    case .beamTransparency:
+      switch self.defaults.beamNodeTransparency {
+      case ..<0.31:
+        self.presentItemChooser(mode: .beamTransparency, selectedItem: .v30)
+      case ..<0.41:
+        self.presentItemChooser(mode: .beamTransparency, selectedItem: .v40)
+      case ..<0.51:
+        self.presentItemChooser(mode: .beamTransparency, selectedItem: .v50)
+      case ..<0.61:
+        self.presentItemChooser(mode: .beamTransparency, selectedItem: .v60)
+      case ..<0.71:
+        self.presentItemChooser(mode: .beamTransparency, selectedItem: .v70)
+      case ..<0.81:
+        self.presentItemChooser(mode: .beamTransparency, selectedItem: .v80)
+      case ..<0.91:
+        self.presentItemChooser(mode: .beamTransparency, selectedItem: .v90)
+      default:
+        self.presentItemChooser(mode: .beamTransparency, selectedItem: .v100)
+      }
+    case .dayTextColor:
+      if self.defaults.dayTextColor.isBlack {
+        self.presentItemChooser(mode: .dayTextColor, selectedItem: .black)
+      } else if self.defaults.dayTextColor.isWhite {
+        self.presentItemChooser(mode: .dayTextColor, selectedItem: .white)
+      } else {
+        self.presentItemChooser(mode: .dayTextColor, selectedItem: .placemarkColor)
+      }
+      
+    case .nightTextColor:
+      if self.defaults.nightTextColor.isBlack {
+        self.presentItemChooser(mode: .nightTextColor, selectedItem: .black)
+      } else if self.defaults.nightTextColor.isWhite {
+        self.presentItemChooser(mode: .nightTextColor, selectedItem: .white)
+      } else {
+        self.presentItemChooser(mode: .nightTextColor, selectedItem: .placemarkColor)
+      }
       
     case .rate:
       SKStoreReviewController.requestReview()

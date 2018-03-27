@@ -28,7 +28,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jF7-z4-i4k">
-                                            <rect key="frame" x="24" y="13" width="335" height="18"/>
+                                            <rect key="frame" x="24" y="13" width="315" height="18"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" name="SeaBlue"/>
                                             <nil key="highlightedColor"/>
@@ -40,17 +40,27 @@
                                                 <constraint firstAttribute="height" constant="1" id="zdN-BR-Jlr"/>
                                             </constraints>
                                         </view>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MZx-V2-wde">
+                                            <rect key="frame" x="339" y="12" width="20" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="20" id="rdm-if-6EQ"/>
+                                                <constraint firstAttribute="height" constant="20" id="vqZ-X2-cV4"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailingMargin" secondItem="jF7-z4-i4k" secondAttribute="trailing" id="Dnr-nB-oG3"/>
                                         <constraint firstItem="wD5-cO-X2N" firstAttribute="leading" secondItem="8Pc-Dz-G0G" secondAttribute="leading" constant="24" id="MFU-mO-fcP"/>
+                                        <constraint firstItem="MZx-V2-wde" firstAttribute="leading" secondItem="jF7-z4-i4k" secondAttribute="trailing" id="QtB-Pr-5YN"/>
                                         <constraint firstItem="jF7-z4-i4k" firstAttribute="centerY" secondItem="8Pc-Dz-G0G" secondAttribute="centerY" id="RYM-sq-sLd"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="MZx-V2-wde" secondAttribute="trailing" id="WRb-Y4-QUI"/>
+                                        <constraint firstItem="MZx-V2-wde" firstAttribute="centerY" secondItem="8Pc-Dz-G0G" secondAttribute="centerY" id="kmx-fN-yMx"/>
                                         <constraint firstItem="jF7-z4-i4k" firstAttribute="leading" secondItem="8Pc-Dz-G0G" secondAttribute="leadingMargin" constant="8" id="n1Y-xE-bex"/>
                                         <constraint firstAttribute="trailing" secondItem="wD5-cO-X2N" secondAttribute="trailing" id="oP8-bC-DJG"/>
                                         <constraint firstAttribute="bottom" secondItem="wD5-cO-X2N" secondAttribute="bottom" id="s9t-t0-ULl"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="selectedImageView" destination="MZx-V2-wde" id="E3B-DE-yHK"/>
                                     <outlet property="titleLabel" destination="jF7-z4-i4k" id="Vf4-1p-h91"/>
                                 </connections>
                             </tableViewCell>
@@ -63,7 +73,7 @@
                     </tableView>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="1385" y="-11"/>
+            <point key="canvasLocation" x="1384.8" y="-11.244377811094454"/>
         </scene>
     </scenes>
     <resources>

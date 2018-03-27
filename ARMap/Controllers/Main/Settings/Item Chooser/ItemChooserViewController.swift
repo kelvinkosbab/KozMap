@@ -20,9 +20,10 @@ class ItemChooserViewController : BaseTableViewController, DismissInteractable {
     return self.newViewController(fromStoryboardWithName: "ItemChooser")
   }
   
-  static func newViewController(mode: ItemChooserViewController.Mode, delegate: ItemChooserViewControllerDelegate?) -> ItemChooserViewController {
+  static func newViewController(mode: ItemChooserViewController.Mode, selectedItem: ItemChooserViewController.Item?, delegate: ItemChooserViewControllerDelegate?) -> ItemChooserViewController {
     let viewController = self.newViewController()
     viewController.mode = mode
+    viewController.selectedItem = selectedItem
     viewController.delegate = delegate
     return viewController
   }
@@ -95,6 +96,7 @@ class ItemChooserViewController : BaseTableViewController, DismissInteractable {
   
   var mode: Mode = .units
   weak var delegate: ItemChooserViewControllerDelegate? = nil
+  var selectedItem: Item? = nil
   
   // MARK: - Lifecycle
   
@@ -202,6 +204,9 @@ class ItemChooserViewController : BaseTableViewController, DismissInteractable {
     switch rowType {
     case .item(let item):
       cell.titleLabel.text = item.string
+      let selectedImage = item == self.selectedItem ? #imageLiteral(resourceName: "assetCheck") : nil
+      cell.selectedImageView.image = selectedImage?.withRenderingMode(.alwaysTemplate)
+      cell.selectedImageView.tintColor = .kozBlue
       return cell
     }
   }
@@ -223,4 +228,5 @@ class ItemChooserViewController : BaseTableViewController, DismissInteractable {
 
 class ItemChooserViewControllerCell : UITableViewCell, ClassNamable {
   @IBOutlet weak var titleLabel: UILabel!
+  @IBOutlet weak var selectedImageView: UIImageView!
 }
