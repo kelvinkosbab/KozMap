@@ -74,6 +74,9 @@ extension Defaults {
       return self.dayTextColor
     }
     set {
+      if let oldValue = self.daytimeTextColorValue {
+        oldValue.managedObjectContext?.delete(oldValue)
+      }
       self.daytimeTextColorValue = newValue
       MyDataManager.shared.saveMainContext()
     }
@@ -89,6 +92,9 @@ extension Defaults {
       return self.nightTextColor
     }
     set {
+      if let oldValue = self.nighttimeTextColorValue {
+        oldValue.managedObjectContext?.delete(oldValue)
+      }
       self.nighttimeTextColorValue = newValue
       MyDataManager.shared.saveMainContext()
     }

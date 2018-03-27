@@ -112,6 +112,10 @@
 		B69E7BFE2057CD7E008318FC /* String+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69E7BFD2057CD7E008318FC /* String+UIKit.swift */; };
 		B69E7C002057D49C008318FC /* PlacemarkDetailNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69E7BFF2057D49C008318FC /* PlacemarkDetailNavigationDelegate.swift */; };
 		B69E7C022057DA0D008318FC /* PlacemarkListNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69E7C012057DA0D008318FC /* PlacemarkListNavigationDelegate.swift */; };
+		B6A154732067F31F004F0FDF /* ItemChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A154722067F31F004F0FDF /* ItemChooserViewController.swift */; };
+		B6A1547520681212004F0FDF /* ItemChooser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6A1547420681212004F0FDF /* ItemChooser.storyboard */; };
+		B6A1548C206A174A004F0FDF /* RightToLeftCurrentContextAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A1548B206A174A004F0FDF /* RightToLeftCurrentContextAnimator.swift */; };
+		B6A1548E206A1759004F0FDF /* RightToLeftCurrentContextPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A1548D206A1759004F0FDF /* RightToLeftCurrentContextPresentationController.swift */; };
 		B6A8ABC8204B8851007FDAEC /* ServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A8ABC2204B8850007FDAEC /* ServiceResponse.swift */; };
 		B6A8ABC9204B8851007FDAEC /* Loggable+Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A8ABC3204B8850007FDAEC /* Loggable+Service.swift */; };
 		B6A8ABCA204B8851007FDAEC /* Data+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A8ABC4204B8851007FDAEC /* Data+JSON.swift */; };
@@ -271,6 +275,10 @@
 		B69E7BFF2057D49C008318FC /* PlacemarkDetailNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacemarkDetailNavigationDelegate.swift; sourceTree = "<group>"; };
 		B69E7C012057DA0D008318FC /* PlacemarkListNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacemarkListNavigationDelegate.swift; sourceTree = "<group>"; };
 		B6A15470206600DD004F0FDF /* ARMap 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ARMap 7.xcdatamodel"; sourceTree = "<group>"; };
+		B6A154722067F31F004F0FDF /* ItemChooserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemChooserViewController.swift; sourceTree = "<group>"; };
+		B6A1547420681212004F0FDF /* ItemChooser.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ItemChooser.storyboard; sourceTree = "<group>"; };
+		B6A1548B206A174A004F0FDF /* RightToLeftCurrentContextAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightToLeftCurrentContextAnimator.swift; sourceTree = "<group>"; };
+		B6A1548D206A1759004F0FDF /* RightToLeftCurrentContextPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightToLeftCurrentContextPresentationController.swift; sourceTree = "<group>"; };
 		B6A8ABC2204B8850007FDAEC /* ServiceResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceResponse.swift; sourceTree = "<group>"; };
 		B6A8ABC3204B8850007FDAEC /* Loggable+Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Loggable+Service.swift"; sourceTree = "<group>"; };
 		B6A8ABC4204B8851007FDAEC /* Data+JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+JSON.swift"; sourceTree = "<group>"; };
@@ -671,6 +679,7 @@
 				B6F451B120392AD50084AFC8 /* PresentingViewControllerDelegate.swift */,
 				B6DCCDD2203BBE8700201385 /* Left Menu */,
 				B6DCCDD1203BBE7F00201385 /* Right to Left */,
+				B6A1548A206A172C004F0FDF /* Right to Left Current Context */,
 				B6DCCDD3203BBE9100201385 /* Top Down */,
 				B6DCCDD0203BBE7500201385 /* Bottom Up */,
 				B6DCCDBA203B351000201385 /* Top Knob Bottom Up */,
@@ -732,6 +741,7 @@
 				B6082DF5205487CE0022943F /* SettingsNavigationDelegate.swift */,
 				B6A8ABD6204B9AA9007FDAEC /* Settings.storyboard */,
 				B686EF7820166F1200ACF075 /* SettingsViewController.swift */,
+				B6A154712067F2FE004F0FDF /* Item Chooser */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -803,6 +813,24 @@
 				B686EF9020166F1300ACF075 /* InlineColorChooserViewController.swift */,
 			);
 			path = InlineColorChooser;
+			sourceTree = "<group>";
+		};
+		B6A154712067F2FE004F0FDF /* Item Chooser */ = {
+			isa = PBXGroup;
+			children = (
+				B6A1547420681212004F0FDF /* ItemChooser.storyboard */,
+				B6A154722067F31F004F0FDF /* ItemChooserViewController.swift */,
+			);
+			path = "Item Chooser";
+			sourceTree = "<group>";
+		};
+		B6A1548A206A172C004F0FDF /* Right to Left Current Context */ = {
+			isa = PBXGroup;
+			children = (
+				B6A1548B206A174A004F0FDF /* RightToLeftCurrentContextAnimator.swift */,
+				B6A1548D206A1759004F0FDF /* RightToLeftCurrentContextPresentationController.swift */,
+			);
+			path = "Right to Left Current Context";
 			sourceTree = "<group>";
 		};
 		B6A8ABC0204B8833007FDAEC /* Service */ = {
@@ -993,6 +1021,7 @@
 				B686EF3E20166D8700ACF075 /* Models.scnassets in Resources */,
 				B6A8ABD3204B9A5B007FDAEC /* Permissions.storyboard in Resources */,
 				B686EEDA20166C7300ACF075 /* Assets.xcassets in Resources */,
+				B6A1547520681212004F0FDF /* ItemChooser.storyboard in Resources */,
 				B6BEF50220537BF4002FD2AA /* FoodNearby.storyboard in Resources */,
 				B664AE0F20503B8200719D5A /* HomeTabBarView.xib in Resources */,
 				B6A8ABD5204B9A92007FDAEC /* InlineColorChooser.storyboard in Resources */,
@@ -1101,6 +1130,7 @@
 				B64D121A204E5F8A008E5C5F /* CrashManager.swift in Sources */,
 				B607C7BB205268CA00E57A63 /* Placemark+Type.swift in Sources */,
 				B686EF4120166D8700ACF075 /* Plane.swift in Sources */,
+				B6A154732067F31F004F0FDF /* ItemChooserViewController.swift in Sources */,
 				B686EF5C20166D8700ACF075 /* CameraPermissionManager.swift in Sources */,
 				B686EF5A20166D8700ACF075 /* ViewControllerFromStoryboardProtocol.swift in Sources */,
 				B6082E062054D5050022943F /* MainViewController+UIPopoverPresentationControllerDelegate.swift in Sources */,
@@ -1108,6 +1138,7 @@
 				B686EF9220166F1300ACF075 /* BaseViewController.swift in Sources */,
 				B686EF0F20166D5A00ACF075 /* UICollectionView+Util.swift in Sources */,
 				B6082DFA205496320022943F /* UIViewController+Alert.swift in Sources */,
+				B6A1548C206A174A004F0FDF /* RightToLeftCurrentContextAnimator.swift in Sources */,
 				B6A8ABC8204B8851007FDAEC /* ServiceResponse.swift in Sources */,
 				B686EF5820166D8700ACF075 /* DesiredContentHeightDelegate.swift in Sources */,
 				B6A8ABCA204B8851007FDAEC /* Data+JSON.swift in Sources */,
@@ -1172,6 +1203,7 @@
 				B686EF3F20166D8700ACF075 /* ARSCNView+Util.swift in Sources */,
 				B686EF4320166D8700ACF075 /* AxisNode.swift in Sources */,
 				B64D1224204E6744008E5C5F /* AnalyticsEvent.swift in Sources */,
+				B6A1548E206A1759004F0FDF /* RightToLeftCurrentContextPresentationController.swift in Sources */,
 				B6082E0A2055EC360022943F /* UINavigationController+Util.swift in Sources */,
 				B6BEF50620537E50002FD2AA /* FoodNearbyNavigationDelegate.swift in Sources */,
 				B69E7C002057D49C008318FC /* PlacemarkDetailNavigationDelegate.swift in Sources */,

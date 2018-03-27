@@ -8,8 +8,9 @@
 
 import UIKit
 import StoreKit
+import CoreData
 
-class SettingsViewController : BaseTableViewController, DesiredContentHeightDelegate, DismissInteractable {
+class SettingsViewController : BaseTableViewController, DesiredContentHeightDelegate, DismissInteractable, NSFetchedResultsControllerDelegate {
   
   // MARK: - Static Accessors
   
@@ -57,6 +58,19 @@ class SettingsViewController : BaseTableViewController, DesiredContentHeightDele
   @IBOutlet weak var versionLabel: UILabel!
   @IBOutlet weak var companyLabel: UILabel!
   
+  // MARK: - Defaults
+  
+  var defaults: Defaults {
+    return self.defaultsFetchedResultsController.fetchedObjects?.first ?? Defaults.shared
+  }
+  
+  private lazy var defaultsFetchedResultsController: NSFetchedResultsController<Defaults> = {
+    let controller = Defaults.newFetchedResultsController()
+    controller.delegate = self
+    try? controller.performFetch()
+    return controller
+  }()
+  
   // MARK: - Lifecycle
   
   override func viewDidLoad() {
@@ -87,6 +101,12 @@ class SettingsViewController : BaseTableViewController, DesiredContentHeightDele
     self.reloadContent()
   }
   
+  // MARK: - NSFetchedResultsControllerDelegate
+  
+  func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    self.reloadContent()
+  }
+  
   // MARK: - Status Bar
   
   override var prefersStatusBarHidden: Bool {
@@ -106,14 +126,14 @@ class SettingsViewController : BaseTableViewController, DesiredContentHeightDele
   func reloadContent() {
     
     // Unit type
-    self.unitSelectLabel.text = Defaults.shared.unitType.string
+    self.unitSelectLabel.text = self.defaults.unitType.string
     
     // Beam transparency
-    let beamNodeTransparencyPercent = Int(Defaults.shared.beamNodeTransparency * 100)
+    let beamNodeTransparencyPercent = Int(self.defaults.beamNodeTransparency * 100)
     self.beamTransparencySelectLabel.text = "\(beamNodeTransparencyPercent)%"
     
     // Day text color
-    let dayColor = Defaults.shared.dayTextColor
+    let dayColor = self.defaults.dayTextColor
     if dayColor.isBlack {
       self.dayTextColorSelectLabel.text = "Black"
     } else if dayColor.isWhite {
@@ -123,7 +143,7 @@ class SettingsViewController : BaseTableViewController, DesiredContentHeightDele
     }
     
     // Night text color
-    let nightColor = Defaults.shared.nightTextColor
+    let nightColor = self.defaults.nightTextColor
     if nightColor.isBlack {
       self.nightTextColorSelectLabel.text = "Black"
     } else if nightColor.isWhite {
@@ -188,6 +208,13 @@ class SettingsViewController : BaseTableViewController, DesiredContentHeightDele
     }
   }
   
+  // MARK: - Navigation
+  
+  func presentItemChooser(mode: ItemChooserViewController.Mode, selectedItem: ItemChooserViewController.Item) {
+    let viewController = ItemChooserViewController.newViewController(mode: mode, delegate: self)
+    viewController.presentIn(self, withMode: .custom(.rightToLeftCurrentContext), options: [ .presentingViewControllerDelegate(self) ])
+  }
+  
   // MARK: - UITableView
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -205,16 +232,12 @@ class SettingsViewController : BaseTableViewController, DesiredContentHeightDele
     
     switch rowType {
     case .units:
-      /*
-       switch control {
-       case self.unitTypeControl:
-       if let unitType = UnitType(rawValue: control.selectedSegmentIndex) {
-       Defaults.shared.unitType = unitType
-       MyDataManager.shared.saveMainContext()
-       }
-       default: break
-       }*/
-      break
+      switch self.defaults.unitType {
+      case .imperial:
+        self.presentItemChooser(mode: .units, selectedItem: .imperial)
+      case .metric:
+        self.presentItemChooser(mode: .units, selectedItem: .metric)
+      }
       
     case .beamTransparency: break
     case .dayTextColor: break
@@ -231,4 +254,98 @@ class SettingsViewController : BaseTableViewController, DesiredContentHeightDele
     case .info: break
     }
   }
+}
+
+// MARK: - ItemChooserViewControllerDelegate
+
+extension SettingsViewController : ItemChooserViewControllerDelegate {
+  
+  func didChooseItem(_ item: ItemChooserViewController.Item, forMode mode: ItemChooserViewController.Mode, sender: ItemChooserViewController) {
+    sender.dismissController()
+    switch mode {
+    case .units:
+      switch item {
+      case .imperial:
+        self.defaults.unitType = .imperial
+      case .metric:
+        self.defaults.unitType = .metric
+      default: break
+      }
+    case .beamTransparency:
+      switch item {
+      case .v30:
+        self.defaults.beamNodeTransparency = 0.3
+      case .v40:
+        self.defaults.beamNodeTransparency = 0.4
+      case .v50:
+        self.defaults.beamNodeTransparency = 0.5
+      case .v60:
+        self.defaults.beamNodeTransparency = 0.6
+      case .v70:
+        self.defaults.beamNodeTransparency = 0.7
+      case .v80:
+        self.defaults.beamNodeTransparency = 0.8
+      case .v90:
+        self.defaults.beamNodeTransparency = 0.9
+      case .v100:
+        self.defaults.beamNodeTransparency = 1
+      default: break
+      }
+    case .dayTextColor:
+      switch item {
+      case .black:
+        self.defaults.dayTextColor = .black
+      case .white:
+        self.defaults.dayTextColor = .white
+      case .placemarkColor:
+        self.defaults.dayTextColor = .null
+      default: break
+      }
+    case .nightTextColor:
+      switch item {
+      case .black:
+        self.defaults.nightTextColor = .black
+      case .white:
+        self.defaults.nightTextColor = .white
+      case .placemarkColor:
+        self.defaults.nightTextColor = .null
+      default: break
+      }
+    }
+  }
+}
+
+// MARK: - PresentingViewControllerDelegate
+
+extension SettingsViewController : PresentingViewControllerDelegate {
+  
+  func willPresentViewController(_ viewController: UIViewController) {}
+  
+  func isPresentingViewController(_ viewController: UIViewController?) {
+    if let _ = (viewController as? UINavigationController)?.viewControllers.first ?? viewController as? ItemChooserViewController {
+      self.navigationController?.navigationBar.alpha = 0
+      self.view.alpha = 0
+    }
+  }
+  
+  func didPresentViewController(_ viewController: UIViewController?) {
+    if let _ = (viewController as? UINavigationController)?.viewControllers.first ?? viewController as? ItemChooserViewController {
+      self.navigationController?.navigationBar.alpha = 0
+      self.view.alpha = 0
+    }
+  }
+  
+  func willDismissViewController(_ viewController: UIViewController) {}
+  
+  func isDismissingViewController(_ viewController: UIViewController?) {
+    self.navigationController?.navigationBar.alpha = 1
+    self.view.alpha = 1
+  }
+  
+  func didDismissViewController(_ viewController: UIViewController?) {
+    self.navigationController?.navigationBar.alpha = 1
+    self.view.alpha = 1
+  }
+  
+  func didCancelDissmissViewController(_ viewController: UIViewController?) {}
 }
