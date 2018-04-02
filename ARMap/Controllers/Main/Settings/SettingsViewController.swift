@@ -212,7 +212,11 @@ class SettingsViewController : BaseTableViewController, DesiredContentHeightDele
   
   func presentItemChooser(mode: ItemChooserViewController.Mode, selectedItem: ItemChooserViewController.Item) {
     let viewController = ItemChooserViewController.newViewController(mode: mode, selectedItem: selectedItem, delegate: self)
-    viewController.presentIn(self, withMode: .custom(.rightToLeftCurrentContext), options: [ .presentingViewControllerDelegate(self) ])
+    if UIDevice.current.isPhone {
+      viewController.presentIn(self, withMode: .custom(.rightToLeftCurrentContext), options: [ .presentingViewControllerDelegate(self) ])
+    } else {
+      viewController.presentIn(self, withMode: .navStack, options: [ .presentingViewControllerDelegate(self) ])
+    }
   }
   
   // MARK: - UITableView

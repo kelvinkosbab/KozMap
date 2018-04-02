@@ -46,13 +46,13 @@ enum ARState {
       return "Please move to a well lit area with defined surface features."
     case .limited(.excessiveMotion):
       return "Please hold the device steady pointing horizontally."
-    case .limited(.initializing), .limited(.relocalizing):
+    case .configuring, .limited(.initializing), .limited(.relocalizing):
       return "Please hold the device steady pointing horizontally in a well lit area."
     case .notAvailable:
       return "Only supported on Apple devices with an A9, A10, or A11 chip or newer. This includes all phones including the iPhone 6s/6s+ and newer as well as all iPad Pro models and the 2017 iPad."
     case .error(let message):
       return message
-    case .normal, .configuring:
+    case .normal:
       return nil
     }
   }
