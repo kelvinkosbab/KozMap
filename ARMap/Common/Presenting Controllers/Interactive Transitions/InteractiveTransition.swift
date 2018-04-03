@@ -43,7 +43,7 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
   let velocityThreshold: CGFloat
   
   private(set) var hasStarted: Bool = false
-  private var shouldFinish: Bool = false
+  internal(set) var shouldFinish: Bool = false
   private var activeGestureRecognizers: [UIPanGestureRecognizer] = []
   
   private var lastTranslation: CGPoint? = nil
@@ -88,6 +88,31 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
       return
     }
     
+    // Handling for scroll views
+    if let scrollView = view as? UIScrollView {
+      
+      // Insure the scroll view is in a position for interactive dismissal
+      if self.axis == .y && self.direction == .positive && scrollView.contentOffset.y > scrollView.contentInset.top {
+        self.hasStarted = false
+        self.cancel()
+        return
+      } else if self.axis == .y && self.direction == .negative && scrollView.contentOffset.y < scrollView.contentSize.height {
+        self.hasStarted = false
+        self.cancel()
+        return
+      } else if self.axis == .x && self.direction == .positive && scrollView.contentOffset.x > scrollView.contentInset.left {
+        self.hasStarted = false
+        self.cancel()
+        return
+      } else if self.axis == .x && self.direction == .negative && scrollView.contentOffset.x < scrollView.contentSize.width {
+        self.hasStarted = false
+        self.cancel()
+        return
+      } else {
+        scrollView.contentOffset = CGPoint(x: 0, y: -44)
+      }
+    }
+    
     // Convert position to progress
     let translation = sender.translation(in: view)
     let progress = self.calculateProgress(translation: translation, in: view)
@@ -104,6 +129,8 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
     case .began:
       self.hasStarted = true
       self.delegate?.interactionDidSurpassThreshold(self)
+      self.update(progress)
+      self.shouldFinish = self.calculateShouldFinish(progress: progress, velocity: self.lastVelocity)
     case .changed:
       self.update(progress)
       self.shouldFinish = self.calculateShouldFinish(progress: progress, velocity: self.lastVelocity)
@@ -135,7 +162,7 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
   
   // MARK: - Calculations
   
-  private func updateVelocityProperties(currentTranslation: CGPoint) {
+  internal func updateVelocityProperties(currentTranslation: CGPoint) {
     let currentDate: Date = Date()
     if self.lastTranslation == nil && self.lastTranslationDate == nil {
       self.lastVelocity = nil
@@ -149,7 +176,7 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
     }
   }
   
-  private func calculateShouldFinish(progress: CGFloat, velocity: CGFloat?) -> Bool {
+  internal func calculateShouldFinish(progress: CGFloat, velocity: CGFloat?) -> Bool {
     if progress > self.percentThreshold {
       return true
     } else if let velocity = velocity, abs(velocity) > self.velocityThreshold {
@@ -203,11 +230,11 @@ extension InteractiveTransition : UIGestureRecognizerDelegate {
   func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
     // gestureRecognizer is the activeGestureRecognizer associated with this interactive transition
     if gestureRecognizer.view == otherGestureRecognizer.view, let scrollView = gestureRecognizer.view as? UIScrollView {
-      if self.axis == .y && self.direction == .positive && scrollView.contentOffset.y <= 0 {
+      if self.axis == .y && self.direction == .positive && scrollView.contentOffset.y <= scrollView.contentInset.top {
         return true
       } else if self.axis == .y && self.direction == .negative && scrollView.contentOffset.y >= scrollView.contentSize.height {
         return true
-      } else if self.axis == .x && self.direction == .positive && scrollView.contentOffset.x <= 0 {
+      } else if self.axis == .x && self.direction == .positive && scrollView.contentOffset.x <= scrollView.contentInset.left {
         return true
       } else if self.axis == .x && self.direction == .negative && scrollView.contentOffset.x >= scrollView.contentSize.width {
         return true
