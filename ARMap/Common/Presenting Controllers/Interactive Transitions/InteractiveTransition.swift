@@ -20,6 +20,14 @@ protocol DismissInteractable : class {
   var dismissInteractiveViews: [UIView] { get }
 }
 
+// MARK: - DismissInteractable
+
+protocol ScrollViewDismissInteractableDelegate : class {
+  func scrollViewWillBeginDragging(_ scrollView: UIScrollView)
+  func scrollViewDidScroll(_ scrollView: UIScrollView)
+  func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
+}
+
 // MARK: - InteractiveTransitionDelegate
 
 protocol InteractiveTransitionDelegate : class {
@@ -72,8 +80,14 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
     
     // Configure the dismiss interactive gesture recognizer
     for interactiveView in interactiveViews {
+      
+      // Skip scroll views
+      if let _ = interactiveView as? UIScrollView {
+        continue
+      }
+      
+      // Configure the gesture for the view
       let gestureRecognizer = self.gestureType.createGestureRecognizer(target: self, action: #selector(self.handleGesture(_:)), axis: self.axis, direction: self.direction)
-      gestureRecognizer.delegate = self
       interactiveView.isUserInteractionEnabled = true
       interactiveView.addGestureRecognizer(gestureRecognizer)
       self.activeGestureRecognizers.append(gestureRecognizer)
@@ -86,31 +100,6 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
     
     guard let view = sender.view, self.interactiveViews.contains(view) else {
       return
-    }
-    
-    // Handling for scroll views
-    if let scrollView = view as? UIScrollView {
-      
-      // Insure the scroll view is in a position for interactive dismissal
-      if self.axis == .y && self.direction == .positive && scrollView.contentOffset.y > scrollView.contentInset.top {
-        self.hasStarted = false
-        self.cancel()
-        return
-      } else if self.axis == .y && self.direction == .negative && scrollView.contentOffset.y < scrollView.contentSize.height {
-        self.hasStarted = false
-        self.cancel()
-        return
-      } else if self.axis == .x && self.direction == .positive && scrollView.contentOffset.x > scrollView.contentInset.left {
-        self.hasStarted = false
-        self.cancel()
-        return
-      } else if self.axis == .x && self.direction == .negative && scrollView.contentOffset.x < scrollView.contentSize.width {
-        self.hasStarted = false
-        self.cancel()
-        return
-      } else {
-        scrollView.contentOffset = CGPoint(x: 0, y: -44)
-      }
     }
     
     // Convert position to progress
@@ -220,26 +209,5 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
     case .xy:
       return sqrt(CGFloat(pow(xVelocity, 2) + pow(yVelocity, 2)))
     }
-  }
-}
-
-// MARK: - UIGestureRecognizerDelegate
-
-extension InteractiveTransition : UIGestureRecognizerDelegate {
-  
-  func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-    // gestureRecognizer is the activeGestureRecognizer associated with this interactive transition
-    if gestureRecognizer.view == otherGestureRecognizer.view, let scrollView = gestureRecognizer.view as? UIScrollView {
-      if self.axis == .y && self.direction == .positive && scrollView.contentOffset.y <= scrollView.contentInset.top {
-        return true
-      } else if self.axis == .y && self.direction == .negative && scrollView.contentOffset.y >= scrollView.contentSize.height {
-        return true
-      } else if self.axis == .x && self.direction == .positive && scrollView.contentOffset.x <= scrollView.contentInset.left {
-        return true
-      } else if self.axis == .x && self.direction == .negative && scrollView.contentOffset.x >= scrollView.contentSize.width {
-        return true
-      }
-    }
-    return false
   }
 }

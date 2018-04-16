@@ -352,6 +352,23 @@ extension SettingsViewController : ItemChooserViewControllerDelegate {
   }
 }
 
+// MARK: - UIScrollViewDelegate
+
+extension SettingsViewController {
+  
+  override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    super.scrollViewWillBeginDragging(scrollView)
+  }
+  
+  override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    super.scrollViewDidScroll(scrollView)
+  }
+  
+  override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    super.scrollViewDidEndDragging(scrollView, willDecelerate: decelerate)
+  }
+}
+
 // MARK: - PresentingViewControllerDelegate
 
 extension SettingsViewController : PresentingViewControllerDelegate {
