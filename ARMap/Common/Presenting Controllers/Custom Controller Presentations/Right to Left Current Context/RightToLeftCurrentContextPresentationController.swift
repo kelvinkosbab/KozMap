@@ -24,7 +24,7 @@ class RightToLeftCurrentContextPresentationController : CustomPresentationContro
     super.presentationTransitionWillBegin()
     
     // Configure presentation interaction
-    self.presentationInteractiveTransition = DragRightDismissInteractiveTransition(interactiveViews: self.allPresentationInteractiveViews, options: [ .gestureType(.screenEdgePan) ], delegate: self)
+    self.presentationInteractiveTransition = DragRightDismissInteractiveTransition(interactiveViews: self.allPresentationInteractiveViews, scrollViewInteractiveSenderDelegate: self.scrollViewInteractiveSenderDelegate, options: [ .gestureType(.screenEdgePan) ], delegate: self)
   }
   
   override func presentationTransitionDidEnd(_ completed: Bool) {
@@ -37,7 +37,7 @@ class RightToLeftCurrentContextPresentationController : CustomPresentationContro
     }
     
     // Configure dismiss interaction
-    self.dismissInteractiveTransition = DragRightDismissInteractiveTransition(interactiveViews: self.allDismissInteractiveViews, options: [ .gestureType(.screenEdgePan) ], delegate: self)
+    self.dismissInteractiveTransition = DragRightDismissInteractiveTransition(interactiveViews: self.allDismissInteractiveViews, scrollViewInteractiveSenderDelegate: self.scrollViewInteractiveSenderDelegate, options: [ .gestureType(.screenEdgePan) ], delegate: self)
   }
   
   override var frameOfPresentedViewInContainerView: CGRect {

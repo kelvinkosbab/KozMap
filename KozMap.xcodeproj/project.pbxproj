@@ -45,7 +45,6 @@
 		B686EF0320166D5A00ACF075 /* LocationSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EEEF20166D5A00ACF075 /* LocationSearchService.swift */; };
 		B686EF0420166D5A00ACF075 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EEF020166D5A00ACF075 /* LocationManager.swift */; };
 		B686EF0520166D5A00ACF075 /* CLLocation+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EEF120166D5A00ACF075 /* CLLocation+Util.swift */; };
-		B686EF0620166D5A00ACF075 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EEF320166D5A00ACF075 /* Device.swift */; };
 		B686EF0720166D5A00ACF075 /* Distance.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EEF520166D5A00ACF075 /* Distance.swift */; };
 		B686EF0820166D5A00ACF075 /* UIViewController+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EEF620166D5A00ACF075 /* UIViewController+Util.swift */; };
 		B686EF0920166D5A00ACF075 /* String+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EEF720166D5A00ACF075 /* String+Util.swift */; };
@@ -207,7 +206,6 @@
 		B686EEEF20166D5A00ACF075 /* LocationSearchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchService.swift; sourceTree = "<group>"; };
 		B686EEF020166D5A00ACF075 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		B686EEF120166D5A00ACF075 /* CLLocation+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLLocation+Util.swift"; sourceTree = "<group>"; };
-		B686EEF320166D5A00ACF075 /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		B686EEF520166D5A00ACF075 /* Distance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Distance.swift; sourceTree = "<group>"; };
 		B686EEF620166D5A00ACF075 /* UIViewController+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Util.swift"; sourceTree = "<group>"; };
 		B686EEF720166D5A00ACF075 /* String+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Util.swift"; sourceTree = "<group>"; };
@@ -521,7 +519,6 @@
 		B686EEE420166CF500ACF075 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				B6A8ABC1204B883C007FDAEC /* 3rd Party Libraries */,
 				B686EEE720166D4500ACF075 /* Build Manager */,
 				B64D1218204E5F6B008E5C5F /* Analytics and Crash Reporting */,
 				B6A8ABC0204B8833007FDAEC /* Service */,
@@ -587,14 +584,6 @@
 				B6FD0773204D18B3007D677A /* CLLocation+Solar.swift */,
 			);
 			path = Location;
-			sourceTree = "<group>";
-		};
-		B686EEF220166D5A00ACF075 /* Device */ = {
-			isa = PBXGroup;
-			children = (
-				B686EEF320166D5A00ACF075 /* Device.swift */,
-			);
-			path = Device;
 			sourceTree = "<group>";
 		};
 		B686EEF420166D5A00ACF075 /* Extensions */ = {
@@ -846,14 +835,6 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
-		B6A8ABC1204B883C007FDAEC /* 3rd Party Libraries */ = {
-			isa = PBXGroup;
-			children = (
-				B686EEF220166D5A00ACF075 /* Device */,
-			);
-			path = "3rd Party Libraries";
-			sourceTree = "<group>";
-		};
 		B6A8ABDE204BB0A8007FDAEC /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -965,7 +946,6 @@
 				B686EEC920166C7300ACF075 /* Frameworks */,
 				B686EECA20166C7300ACF075 /* Resources */,
 				F21D81CC31F352D68CA4D33C /* [CP] Embed Pods Frameworks */,
-				C5DAC3EFA15A03616627D1FF /* [CP] Copy Pods Resources */,
 				B64D1217204E5EBA008E5C5F /* Crashlytics Run Script */,
 			);
 			buildRules = (
@@ -1071,21 +1051,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" 05416dc4edda44974a71be7016600285b91582f5 85ad5e06e76e0391bcb5746e799aa944a3abdadb6217ccc7e2d82c64551fb59e ";
 		};
-		C5DAC3EFA15A03616627D1FF /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KozMap/Pods-KozMap-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		F21D81CC31F352D68CA4D33C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1094,8 +1059,8 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-KozMap/Pods-KozMap-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/Solar/Solar.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -1103,8 +1068,8 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DeviceKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Solar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -1153,7 +1118,6 @@
 				B6DCCDE5203BED1D00201385 /* RightToLeftPresenationController.swift in Sources */,
 				B6C01FEF2050CD6000437B45 /* Placemark+Util.swift in Sources */,
 				B6DCCDE1203BE6C500201385 /* PresentableControllerOption.swift in Sources */,
-				B686EF0620166D5A00ACF075 /* Device.swift in Sources */,
 				B6DCCDC1203B63D500201385 /* InteractiveTransitionOption.swift in Sources */,
 				B6A8ABCC204B8851007FDAEC /* AuthenticationState.swift in Sources */,
 				B6A8ABC9204B8851007FDAEC /* Loggable+Service.swift in Sources */,

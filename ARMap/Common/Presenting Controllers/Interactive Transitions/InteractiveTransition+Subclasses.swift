@@ -12,8 +12,8 @@ import UIKit
 
 class DragUpDismissInteractiveTransition : InteractiveTransition {
   
-  init?(interactiveViews: [UIView], options: [InteractiveTransition.Option] = [], delegate: InteractiveTransitionDelegate? = nil) {
-    super.init(interactiveViews: interactiveViews, axis: .y, direction: .negative, options: options, delegate: delegate)
+  init?(interactiveViews: [UIView], scrollViewInteractiveSenderDelegate: ScrollViewInteractiveSenderDelegate?, options: [InteractiveTransition.Option] = [], delegate: InteractiveTransitionDelegate? = nil) {
+    super.init(interactiveViews: interactiveViews, scrollViewInteractiveSenderDelegate: scrollViewInteractiveSenderDelegate, axis: .y, direction: .negative, options: options, delegate: delegate)
   }
 }
 
@@ -21,8 +21,8 @@ class DragUpDismissInteractiveTransition : InteractiveTransition {
 
 class DragDownDismissInteractiveTransition : InteractiveTransition {
   
-  init?(interactiveViews: [UIView], options: [InteractiveTransition.Option] = [], delegate: InteractiveTransitionDelegate? = nil) {
-    super.init(interactiveViews: interactiveViews, axis: .y, direction: .positive, options: options, delegate: delegate)
+  init?(interactiveViews: [UIView], scrollViewInteractiveSenderDelegate: ScrollViewInteractiveSenderDelegate?, options: [InteractiveTransition.Option] = [], delegate: InteractiveTransitionDelegate? = nil) {
+    super.init(interactiveViews: interactiveViews, scrollViewInteractiveSenderDelegate: scrollViewInteractiveSenderDelegate, axis: .y, direction: .positive, options: options, delegate: delegate)
   }
 }
 
@@ -30,8 +30,8 @@ class DragDownDismissInteractiveTransition : InteractiveTransition {
 
 class DragLeftDismissInteractiveTransition : InteractiveTransition {
   
-  init?(interactiveViews: [UIView], options: [InteractiveTransition.Option] = [], delegate: InteractiveTransitionDelegate? = nil) {
-    super.init(interactiveViews: interactiveViews, axis: .x, direction: .negative, options: options, delegate: delegate)
+  init?(interactiveViews: [UIView], scrollViewInteractiveSenderDelegate: ScrollViewInteractiveSenderDelegate?, options: [InteractiveTransition.Option] = [], delegate: InteractiveTransitionDelegate? = nil) {
+    super.init(interactiveViews: interactiveViews, scrollViewInteractiveSenderDelegate: scrollViewInteractiveSenderDelegate, axis: .x, direction: .negative, options: options, delegate: delegate)
   }
 }
 
@@ -39,7 +39,7 @@ class DragLeftDismissInteractiveTransition : InteractiveTransition {
 
 class DragRightDismissInteractiveTransition : InteractiveTransition {
   
-  init?(interactiveViews: [UIView], options: [InteractiveTransition.Option] = [], delegate: InteractiveTransitionDelegate? = nil) {
-    super.init(interactiveViews: interactiveViews, axis: .x, direction: .positive, options: options, delegate: delegate)
+  init?(interactiveViews: [UIView], scrollViewInteractiveSenderDelegate: ScrollViewInteractiveSenderDelegate?, options: [InteractiveTransition.Option] = [], delegate: InteractiveTransitionDelegate? = nil) {
+    super.init(interactiveViews: interactiveViews, scrollViewInteractiveSenderDelegate: scrollViewInteractiveSenderDelegate, axis: .x, direction: .positive, options: options, delegate: delegate)
   }
 }

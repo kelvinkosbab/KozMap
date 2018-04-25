@@ -20,9 +20,15 @@ protocol DismissInteractable : class {
   var dismissInteractiveViews: [UIView] { get }
 }
 
-// MARK: - DismissInteractable
+// MARK: - ScrollViewInteractiveSenderDelegate
 
-protocol ScrollViewDismissInteractableDelegate : class {
+protocol ScrollViewInteractiveSenderDelegate : class {
+  var scrollViewInteractiveReceiverDelegate: ScrollViewInteractiveReceiverDelegate? { get set }
+}
+
+// MARK: - ScrollViewInteractiveReceiverDelegate
+
+protocol ScrollViewInteractiveReceiverDelegate : class {
   func scrollViewWillBeginDragging(_ scrollView: UIScrollView)
   func scrollViewDidScroll(_ scrollView: UIScrollView)
   func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
@@ -41,6 +47,7 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
   // MARK: - Properties
   
   let interactiveViews: [UIView]
+  let scrollViewInteractiveSenderDelegate: ScrollViewInteractiveSenderDelegate?
   let axis: InteractiveTransition.Axis
   let direction: InteractiveTransition.Direction
   weak var delegate: InteractiveTransitionDelegate? = nil
@@ -60,13 +67,14 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
   
   // MARK: - Init
   
-  init?(interactiveViews: [UIView], axis: InteractiveTransition.Axis, direction: InteractiveTransition.Direction, gestureType: GestureType = .pan, options: [InteractiveTransition.Option] = [], delegate: InteractiveTransitionDelegate? = nil) {
+  init?(interactiveViews: [UIView], scrollViewInteractiveSenderDelegate: ScrollViewInteractiveSenderDelegate?, axis: InteractiveTransition.Axis, direction: InteractiveTransition.Direction, gestureType: GestureType = .pan, options: [InteractiveTransition.Option] = [], delegate: InteractiveTransitionDelegate? = nil) {
     
     guard interactiveViews.count > 0 else {
       return nil
     }
     
     self.interactiveViews = interactiveViews
+    self.scrollViewInteractiveSenderDelegate = scrollViewInteractiveSenderDelegate
     self.axis = axis
     self.direction = direction
     self.delegate = delegate
@@ -78,7 +86,7 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
     
     super.init()
     
-    // Configure the dismiss interactive gesture recognizer
+    // Configure the gestures for the interactive views
     for interactiveView in interactiveViews {
       
       // Skip scroll views
@@ -92,6 +100,9 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
       interactiveView.addGestureRecognizer(gestureRecognizer)
       self.activeGestureRecognizers.append(gestureRecognizer)
     }
+    
+    // Configure the scroll view interactive delegate
+    scrollViewInteractiveSenderDelegate?.scrollViewInteractiveReceiverDelegate = self
   }
   
   // MARK: - Gestures
@@ -209,5 +220,22 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
     case .xy:
       return sqrt(CGFloat(pow(xVelocity, 2) + pow(yVelocity, 2)))
     }
+  }
+}
+
+// MARK: - ScrollViewInteractiveReceiverDelegate
+
+extension InteractiveTransition : ScrollViewInteractiveReceiverDelegate {
+  
+  func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    Log.log("KAK")
+  }
+  
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    Log.log("KAK")
+  }
+  
+  func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    Log.log("KAK")
   }
 }

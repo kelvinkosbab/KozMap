@@ -7,12 +7,12 @@ target 'KozMap' do
   # Pods for KozMap
   pod 'Alamofire', '~> 4.5'
   pod 'Solar'
+  pod 'DeviceKit', '~> 1.3'
 
   # Analytics
   pod 'Firebase'
   pod 'Firebase/Core'
   pod 'Firebase/Database'
-  pod 'Firebase/Crash'
 
   # Crashlytics
   pod 'Fabric'

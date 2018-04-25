@@ -10,7 +10,7 @@ import UIKit
 import StoreKit
 import CoreData
 
-class SettingsViewController : BaseTableViewController, DesiredContentHeightDelegate, DismissInteractable, NSFetchedResultsControllerDelegate {
+class SettingsViewController : BaseTableViewController, DesiredContentHeightDelegate, DismissInteractable, ScrollViewInteractiveSenderDelegate, NSFetchedResultsControllerDelegate {
   
   // MARK: - Static Accessors
   
@@ -30,14 +30,15 @@ class SettingsViewController : BaseTableViewController, DesiredContentHeightDele
   
   var dismissInteractiveViews: [UIView] {
     var views: [UIView] = []
-    if let view = self.view {
-      views.append(view)
-    }
     if let navigationBar = self.navigationController?.navigationBar {
       views.append(navigationBar)
     }
     return views
   }
+  
+  // MARK: - ScrollViewInteractiveSenderDelegate
+  
+  weak var scrollViewInteractiveReceiverDelegate: ScrollViewInteractiveReceiverDelegate?
   
   // MARK: - Properties
   
@@ -352,23 +353,6 @@ extension SettingsViewController : ItemChooserViewControllerDelegate {
   }
 }
 
-// MARK: - UIScrollViewDelegate
-
-extension SettingsViewController {
-  
-  override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-    super.scrollViewWillBeginDragging(scrollView)
-  }
-  
-  override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    super.scrollViewDidScroll(scrollView)
-  }
-  
-  override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-    super.scrollViewDidEndDragging(scrollView, willDecelerate: decelerate)
-  }
-}
-
 // MARK: - PresentingViewControllerDelegate
 
 extension SettingsViewController : PresentingViewControllerDelegate {
@@ -402,4 +386,21 @@ extension SettingsViewController : PresentingViewControllerDelegate {
   }
   
   func didCancelDissmissViewController(_ viewController: UIViewController?) {}
+}
+
+// MARK: - UIScrollView
+
+extension SettingsViewController {
+  
+  override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    self.scrollViewInteractiveReceiverDelegate?.scrollViewWillBeginDragging(scrollView)
+  }
+  
+  override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    self.scrollViewInteractiveReceiverDelegate?.scrollViewDidScroll(scrollView)
+  }
+  
+  override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    self.scrollViewInteractiveReceiverDelegate?.scrollViewDidEndDragging(scrollView, willDecelerate: decelerate)
+  }
 }
