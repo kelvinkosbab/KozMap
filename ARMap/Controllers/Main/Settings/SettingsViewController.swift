@@ -10,7 +10,7 @@ import UIKit
 import StoreKit
 import CoreData
 
-class SettingsViewController : BaseTableViewController, DesiredContentHeightDelegate, DismissInteractable, ScrollViewInteractiveSenderDelegate, NSFetchedResultsControllerDelegate {
+class SettingsViewController : BaseTableViewController, DesiredContentHeightDelegate, DismissInteractable, NSFetchedResultsControllerDelegate {
   
   // MARK: - Static Accessors
   
@@ -90,7 +90,9 @@ class SettingsViewController : BaseTableViewController, DesiredContentHeightDele
       self.tableView.backgroundColor = .white
     }
     
-    if !UIDevice.current.isPhone {
+    if UIDevice.current.isPhone {
+      self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icChevronDown"), style: .plain, target: self, action: #selector(self.closeButtonSelected))
+    } else {
       self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(self.closeButtonSelected))
     }
   }

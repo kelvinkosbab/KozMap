@@ -122,7 +122,9 @@ class LocationListViewController : BaseTableViewController, NSFetchedResultsCont
     }
     
     // Title and navigation items
-    if !UIDevice.current.isPhone {
+    if UIDevice.current.isPhone {
+      self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icChevronDown"), style: .plain, target: self, action: #selector(self.closeButtonSelected))
+    } else {
       self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(self.closeButtonSelected))
     }
     
