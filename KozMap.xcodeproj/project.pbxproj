@@ -34,6 +34,9 @@
 		B64D1224204E6744008E5C5F /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64D1223204E6744008E5C5F /* AnalyticsEvent.swift */; };
 		B664AE0D20503B6400719D5A /* HomeTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B664AE0C20503B6400719D5A /* HomeTabBarView.swift */; };
 		B664AE0F20503B8200719D5A /* HomeTabBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B664AE0E20503B8200719D5A /* HomeTabBarView.xib */; };
+		B66B748620918F8C00DBB992 /* PrivacyOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66B748520918F8C00DBB992 /* PrivacyOnboardingViewController.swift */; };
+		B66B748820918FA600DBB992 /* PrivacyNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66B748720918FA600DBB992 /* PrivacyNavigationDelegate.swift */; };
+		B66B748A2092315C00DBB992 /* Privacy.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B66B74892092315C00DBB992 /* Privacy.storyboard */; };
 		B686EED020166C7300ACF075 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EECF20166C7300ACF075 /* AppDelegate.swift */; };
 		B686EED820166C7300ACF075 /* ARMap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B686EED620166C7300ACF075 /* ARMap.xcdatamodeld */; };
 		B686EEDA20166C7300ACF075 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B686EED920166C7300ACF075 /* Assets.xcassets */; };
@@ -106,6 +109,7 @@
 		B686EFA420166F1300ACF075 /* PermissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF8D20166F1300ACF075 /* PermissionsViewController.swift */; };
 		B686EFA520166F1300ACF075 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF8E20166F1300ACF075 /* BaseNavigationController.swift */; };
 		B686EFA620166F1300ACF075 /* InlineColorChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF9020166F1300ACF075 /* InlineColorChooserViewController.swift */; };
+		B6886A672093004600FE5DD2 /* ModalControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6886A662093004600FE5DD2 /* ModalControllerDelegate.swift */; };
 		B693DD62205A3D8B00772FA7 /* UIAlertController+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B693DD61205A3D8B00772FA7 /* UIAlertController+Util.swift */; };
 		B693DD64205A3DCC00772FA7 /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = B693DD63205A3DCC00772FA7 /* LocalizedString.swift */; };
 		B69E7BFE2057CD7E008318FC /* String+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69E7BFD2057CD7E008318FC /* String+UIKit.swift */; };
@@ -134,6 +138,9 @@
 		B6BEF50820538391002FD2AA /* ModeChooserNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BEF50720538391002FD2AA /* ModeChooserNavigationDelegate.swift */; };
 		B6C01FED2050CD3600437B45 /* Placemark+CoreLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C01FEC2050CD3600437B45 /* Placemark+CoreLocation.swift */; };
 		B6C01FEF2050CD6000437B45 /* Placemark+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C01FEE2050CD6000437B45 /* Placemark+Util.swift */; };
+		B6CD007D2094C6AA001C4095 /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CD007C2094C6AA001C4095 /* PrivacyViewController.swift */; };
+		B6CD007F20950941001C4095 /* PrivacyLandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CD007E20950941001C4095 /* PrivacyLandingViewController.swift */; };
+		B6CD008120950BE5001C4095 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CD008020950BE5001C4095 /* RoundedButton.swift */; };
 		B6DCCDBD203B355C00201385 /* TopKnobBottomUpAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDBC203B355C00201385 /* TopKnobBottomUpAnimator.swift */; };
 		B6DCCDBF203B3DE700201385 /* TopKnobBottomUpPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDBE203B3DE600201385 /* TopKnobBottomUpPresentationController.swift */; };
 		B6DCCDC1203B63D500201385 /* InteractiveTransitionOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDC0203B63D500201385 /* InteractiveTransitionOption.swift */; };
@@ -193,6 +200,9 @@
 		B64D1223204E6744008E5C5F /* AnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
 		B664AE0C20503B6400719D5A /* HomeTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarView.swift; sourceTree = "<group>"; };
 		B664AE0E20503B8200719D5A /* HomeTabBarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTabBarView.xib; sourceTree = "<group>"; };
+		B66B748520918F8C00DBB992 /* PrivacyOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyOnboardingViewController.swift; sourceTree = "<group>"; };
+		B66B748720918FA600DBB992 /* PrivacyNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyNavigationDelegate.swift; sourceTree = "<group>"; };
+		B66B74892092315C00DBB992 /* Privacy.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Privacy.storyboard; sourceTree = "<group>"; };
 		B686EECC20166C7300ACF075 /* KozMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KozMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B686EECF20166C7300ACF075 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B686EED720166C7300ACF075 /* ARMap.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ARMap.xcdatamodel; sourceTree = "<group>"; };
@@ -267,6 +277,8 @@
 		B686EF8D20166F1300ACF075 /* PermissionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsViewController.swift; sourceTree = "<group>"; };
 		B686EF8E20166F1300ACF075 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		B686EF9020166F1300ACF075 /* InlineColorChooserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InlineColorChooserViewController.swift; sourceTree = "<group>"; };
+		B6886A652092FF5C00FE5DD2 /* ARMap 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ARMap 8.xcdatamodel"; sourceTree = "<group>"; };
+		B6886A662093004600FE5DD2 /* ModalControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalControllerDelegate.swift; sourceTree = "<group>"; };
 		B693DD61205A3D8B00772FA7 /* UIAlertController+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Util.swift"; sourceTree = "<group>"; };
 		B693DD63205A3DCC00772FA7 /* LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
 		B69E7BFD2057CD7E008318FC /* String+UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+UIKit.swift"; sourceTree = "<group>"; };
@@ -296,6 +308,9 @@
 		B6BEF50720538391002FD2AA /* ModeChooserNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeChooserNavigationDelegate.swift; sourceTree = "<group>"; };
 		B6C01FEC2050CD3600437B45 /* Placemark+CoreLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Placemark+CoreLocation.swift"; sourceTree = "<group>"; };
 		B6C01FEE2050CD6000437B45 /* Placemark+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Placemark+Util.swift"; sourceTree = "<group>"; };
+		B6CD007C2094C6AA001C4095 /* PrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyViewController.swift; sourceTree = "<group>"; };
+		B6CD007E20950941001C4095 /* PrivacyLandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyLandingViewController.swift; sourceTree = "<group>"; };
+		B6CD008020950BE5001C4095 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		B6DCCDBC203B355C00201385 /* TopKnobBottomUpAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopKnobBottomUpAnimator.swift; sourceTree = "<group>"; };
 		B6DCCDBE203B3DE600201385 /* TopKnobBottomUpPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopKnobBottomUpPresentationController.swift; sourceTree = "<group>"; };
 		B6DCCDC0203B63D500201385 /* InteractiveTransitionOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveTransitionOption.swift; sourceTree = "<group>"; };
@@ -485,6 +500,18 @@
 			path = "Home Tab Bar";
 			sourceTree = "<group>";
 		};
+		B66B748420918F7A00DBB992 /* Privacy */ = {
+			isa = PBXGroup;
+			children = (
+				B66B74892092315C00DBB992 /* Privacy.storyboard */,
+				B66B748720918FA600DBB992 /* PrivacyNavigationDelegate.swift */,
+				B66B748520918F8C00DBB992 /* PrivacyOnboardingViewController.swift */,
+				B6CD007E20950941001C4095 /* PrivacyLandingViewController.swift */,
+				B6CD007C2094C6AA001C4095 /* PrivacyViewController.swift */,
+			);
+			path = Privacy;
+			sourceTree = "<group>";
+		};
 		B686EEC320166C7300ACF075 = {
 			isa = PBXGroup;
 			children = (
@@ -550,6 +577,7 @@
 				B686EF8F20166F1300ACF075 /* InlineColorChooser */,
 				B686EF8C20166F1300ACF075 /* Permissions */,
 				B6299B89204FE15400043CD1 /* Mode Chooser */,
+				B66B748420918F7A00DBB992 /* Privacy */,
 				B686EF7620166F1200ACF075 /* Main */,
 			);
 			path = Controllers;
@@ -686,6 +714,7 @@
 				B686EF3620166D8700ACF075 /* ViewControllerFromStoryboardProtocol.swift */,
 				B6A8ABD0204B89C2007FDAEC /* ClassNamable.swift */,
 				B686EF3720166D8700ACF075 /* Log.swift */,
+				B6886A662093004600FE5DD2 /* ModalControllerDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -727,8 +756,8 @@
 		B686EF7720166F1200ACF075 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				B6082DF5205487CE0022943F /* SettingsNavigationDelegate.swift */,
 				B6A8ABD6204B9AA9007FDAEC /* Settings.storyboard */,
+				B6082DF5205487CE0022943F /* SettingsNavigationDelegate.swift */,
 				B686EF7820166F1200ACF075 /* SettingsViewController.swift */,
 				B6A154712067F2FE004F0FDF /* Item Chooser */,
 			);
@@ -921,6 +950,7 @@
 			children = (
 				B664AE0B20503B4900719D5A /* Home Tab Bar */,
 				B664AE0A20503B3500719D5A /* Top Knob Visual Effect View */,
+				B6CD008020950BE5001C4095 /* RoundedButton.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -1013,6 +1043,7 @@
 				B6A8ABD9204B9AEC007FDAEC /* Configuring.storyboard in Resources */,
 				B686EF6F20166F0C00ACF075 /* AddLocation.storyboard in Resources */,
 				B6299B82204F8F6500043CD1 /* LocationList.storyboard in Resources */,
+				B66B748A2092315C00DBB992 /* Privacy.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1089,6 +1120,7 @@
 				B6299B8B204FE16600043CD1 /* ModeChooserViewController.swift in Sources */,
 				B686EF4420166D8700ACF075 /* PlacemarkNode.swift in Sources */,
 				B6DCCDC5203B6EA300201385 /* PresentableManager.swift in Sources */,
+				B6CD007F20950941001C4095 /* PrivacyLandingViewController.swift in Sources */,
 				B6082DF8205489510022943F /* MyPlacemarksNavigationDelegate.swift in Sources */,
 				B686EF3C20166D8700ACF075 /* UnitType.swift in Sources */,
 				B64D1222204E673A008E5C5F /* AnalyticsItem.swift in Sources */,
@@ -1117,6 +1149,8 @@
 				B686EF6420166D9D00ACF075 /* MyDataManager.swift in Sources */,
 				B6DCCDE5203BED1D00201385 /* RightToLeftPresenationController.swift in Sources */,
 				B6C01FEF2050CD6000437B45 /* Placemark+Util.swift in Sources */,
+				B66B748820918FA600DBB992 /* PrivacyNavigationDelegate.swift in Sources */,
+				B66B748620918F8C00DBB992 /* PrivacyOnboardingViewController.swift in Sources */,
 				B6DCCDE1203BE6C500201385 /* PresentableControllerOption.swift in Sources */,
 				B6DCCDC1203B63D500201385 /* InteractiveTransitionOption.swift in Sources */,
 				B6A8ABCC204B8851007FDAEC /* AuthenticationState.swift in Sources */,
@@ -1171,6 +1205,7 @@
 				B6082E0A2055EC360022943F /* UINavigationController+Util.swift in Sources */,
 				B6BEF50620537E50002FD2AA /* FoodNearbyNavigationDelegate.swift in Sources */,
 				B69E7C002057D49C008318FC /* PlacemarkDetailNavigationDelegate.swift in Sources */,
+				B6886A672093004600FE5DD2 /* ModalControllerDelegate.swift in Sources */,
 				B686EFA320166F1300ACF075 /* BaseTableViewController.swift in Sources */,
 				B686EF9520166F1300ACF075 /* SettingsViewController.swift in Sources */,
 				B69E7BFE2057CD7E008318FC /* String+UIKit.swift in Sources */,
@@ -1179,9 +1214,11 @@
 				B686EF4D20166D8700ACF075 /* InteractiveTransition.swift in Sources */,
 				B6082E0F205643840022943F /* FoodNearbyService.swift in Sources */,
 				B6082E022054D4B30022943F /* MainViewController+ModeChooserDelegate.swift in Sources */,
+				B6CD008120950BE5001C4095 /* RoundedButton.swift in Sources */,
 				B686EF6520166D9D00ACF075 /* DataManagerProtocol.swift in Sources */,
 				B69E7C022057DA0D008318FC /* PlacemarkListNavigationDelegate.swift in Sources */,
 				B6299B88204F901D00043CD1 /* AddLocationMapViewController.swift in Sources */,
+				B6CD007D2094C6AA001C4095 /* PrivacyViewController.swift in Sources */,
 				B686EF9920166F1300ACF075 /* MainViewController+AR.swift in Sources */,
 				B686EF6920166D9D00ACF075 /* Defaults+MyManagedObjectProtocol.swift in Sources */,
 				B686EF3D20166D8700ACF075 /* ARDistanceType.swift in Sources */,
@@ -1412,6 +1449,7 @@
 		B686EED620166C7300ACF075 /* ARMap.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				B6886A652092FF5C00FE5DD2 /* ARMap 8.xcdatamodel */,
 				B6A15470206600DD004F0FDF /* ARMap 7.xcdatamodel */,
 				B64C7BDD2057ED0D006B3EF5 /* ARMap 6.xcdatamodel */,
 				B6066B4020565505007C8AB9 /* ARMap 5.xcdatamodel */,
@@ -1420,7 +1458,7 @@
 				B607C7B32052673D00E57A63 /* ARMap 2.xcdatamodel */,
 				B686EED720166C7300ACF075 /* ARMap.xcdatamodel */,
 			);
-			currentVersion = B6A15470206600DD004F0FDF /* ARMap 7.xcdatamodel */;
+			currentVersion = B6886A652092FF5C00FE5DD2 /* ARMap 8.xcdatamodel */;
 			path = ARMap.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

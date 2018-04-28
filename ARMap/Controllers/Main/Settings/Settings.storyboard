@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14111" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -229,8 +229,38 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="SimpleButtonCell" id="QqO-XH-wxb">
+                                        <rect key="frame" x="0.0" y="264" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QqO-XH-wxb" id="kF0-R5-jHm">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Tj-dz-1RF">
+                                                    <rect key="frame" x="24" y="43" width="351" height="1"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="xdl-q0-n0W"/>
+                                                    </constraints>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nSF-3W-fyg">
+                                                    <rect key="frame" x="143" y="12.5" width="89" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" name="SeaBlue"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="nSF-3W-fyg" firstAttribute="centerX" secondItem="kF0-R5-jHm" secondAttribute="centerX" id="ChF-qb-Uz8"/>
+                                                <constraint firstItem="nSF-3W-fyg" firstAttribute="centerY" secondItem="kF0-R5-jHm" secondAttribute="centerY" id="SD0-Pg-YCF"/>
+                                                <constraint firstAttribute="trailing" secondItem="5Tj-dz-1RF" secondAttribute="trailing" id="ZDH-lX-Zgg"/>
+                                                <constraint firstAttribute="bottom" secondItem="5Tj-dz-1RF" secondAttribute="bottom" id="d10-xK-G2Y"/>
+                                                <constraint firstItem="5Tj-dz-1RF" firstAttribute="leading" secondItem="kF0-R5-jHm" secondAttribute="leading" constant="24" id="wcI-6a-y5e"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="InfoCell" rowHeight="60" id="lrf-f5-Icr">
-                                        <rect key="frame" x="0.0" y="264" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="308" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lrf-f5-Icr" id="Oh2-RK-FmV">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -274,6 +304,7 @@
                         <outlet property="dayTextColorSelectLabel" destination="2R3-7c-aFZ" id="OGe-rf-kQZ"/>
                         <outlet property="nightTextColorLabel" destination="tOx-Go-jW5" id="r7G-XY-IPc"/>
                         <outlet property="nightTextColorSelectLabel" destination="MZU-tm-RaL" id="gdZ-PM-92w"/>
+                        <outlet property="privacyLabel" destination="nSF-3W-fyg" id="7QJ-CI-jc1"/>
                         <outlet property="rateLabel" destination="2Fj-4P-g7i" id="K4e-YE-PnH"/>
                         <outlet property="unitLabel" destination="55w-b7-KUV" id="TT3-9v-PG8"/>
                         <outlet property="unitSelectLabel" destination="zg3-wR-H6a" id="s2l-zq-oDO"/>
@@ -286,6 +317,9 @@
         </scene>
     </scenes>
     <resources>
+        <namedColor name="SeaBlue">
+            <color red="0.28999999170000001" green="0.56499999759999997" blue="0.88599997760000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="SeaBlue">
             <color red="0.28999999170000001" green="0.56499999759999997" blue="0.88599997760000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
