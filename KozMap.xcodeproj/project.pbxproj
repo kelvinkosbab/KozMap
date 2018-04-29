@@ -505,7 +505,7 @@
 			children = (
 				B66B74892092315C00DBB992 /* Privacy.storyboard */,
 				B66B748720918FA600DBB992 /* PrivacyNavigationDelegate.swift */,
-				B66B748520918F8C00DBB992 /* PrivacyOnboardingViewController.swift */,
+				B6CD0082209542A0001C4095 /* Onboarding */,
 				B6CD007E20950941001C4095 /* PrivacyLandingViewController.swift */,
 				B6CD007C2094C6AA001C4095 /* PrivacyViewController.swift */,
 			);
@@ -889,6 +889,14 @@
 				B607C7BA205268CA00E57A63 /* Placemark+Type.swift */,
 			);
 			path = Placemark;
+			sourceTree = "<group>";
+		};
+		B6CD0082209542A0001C4095 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				B66B748520918F8C00DBB992 /* PrivacyOnboardingViewController.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		B6DCCDBA203B351000201385 /* Top Knob Bottom Up */ = {

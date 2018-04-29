@@ -39,6 +39,10 @@ class AnalyticsManager : NSObject {
     FirebaseApp.configure(options: firebaseOptions!)
   }
   
+  func setAnalyticsCollectionEnabled(_ isEnabled: Bool) {
+    AnalyticsConfiguration.shared().setAnalyticsCollectionEnabled(isEnabled)
+  }
+  
   // MARK: - Screen Views
   
   func didView(_ screen: AnalyticsScreen, screenClass: String? = nil) {
