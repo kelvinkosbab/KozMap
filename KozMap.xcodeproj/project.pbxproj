@@ -140,6 +140,9 @@
 		B6C01FEF2050CD6000437B45 /* Placemark+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C01FEE2050CD6000437B45 /* Placemark+Util.swift */; };
 		B6CD007D2094C6AA001C4095 /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CD007C2094C6AA001C4095 /* PrivacyViewController.swift */; };
 		B6CD008120950BE5001C4095 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CD008020950BE5001C4095 /* RoundedButton.swift */; };
+		B6CD00872097785B001C4095 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CD00862097785B001C4095 /* OnboardingViewController.swift */; };
+		B6CD0089209778C2001C4095 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6CD0088209778C2001C4095 /* Onboarding.storyboard */; };
+		B6CD008B20977974001C4095 /* OnboardingNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CD008A20977974001C4095 /* OnboardingNavigationDelegate.swift */; };
 		B6DCCDBD203B355C00201385 /* TopKnobBottomUpAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDBC203B355C00201385 /* TopKnobBottomUpAnimator.swift */; };
 		B6DCCDBF203B3DE700201385 /* TopKnobBottomUpPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDBE203B3DE600201385 /* TopKnobBottomUpPresentationController.swift */; };
 		B6DCCDC1203B63D500201385 /* InteractiveTransitionOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDC0203B63D500201385 /* InteractiveTransitionOption.swift */; };
@@ -309,6 +312,9 @@
 		B6C01FEE2050CD6000437B45 /* Placemark+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Placemark+Util.swift"; sourceTree = "<group>"; };
 		B6CD007C2094C6AA001C4095 /* PrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyViewController.swift; sourceTree = "<group>"; };
 		B6CD008020950BE5001C4095 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		B6CD00862097785B001C4095 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		B6CD0088209778C2001C4095 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
+		B6CD008A20977974001C4095 /* OnboardingNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingNavigationDelegate.swift; sourceTree = "<group>"; };
 		B6DCCDBC203B355C00201385 /* TopKnobBottomUpAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopKnobBottomUpAnimator.swift; sourceTree = "<group>"; };
 		B6DCCDBE203B3DE600201385 /* TopKnobBottomUpPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopKnobBottomUpPresentationController.swift; sourceTree = "<group>"; };
 		B6DCCDC0203B63D500201385 /* InteractiveTransitionOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveTransitionOption.swift; sourceTree = "<group>"; };
@@ -570,11 +576,11 @@
 				B686EF8B20166F1300ACF075 /* BaseTableViewController.swift */,
 				B686EF7220166F1200ACF075 /* BaseViewController.swift */,
 				B686EF8A20166F1200ACF075 /* RootNavigationController.swift */,
+				B6CD008520977848001C4095 /* Onboarding */,
+				B66B748420918F7A00DBB992 /* Privacy */,
+				B686EF8C20166F1300ACF075 /* Permissions */,
 				B686EF7020166F1200ACF075 /* Configuring View */,
 				B686EF8F20166F1300ACF075 /* InlineColorChooser */,
-				B686EF8C20166F1300ACF075 /* Permissions */,
-				B6299B89204FE15400043CD1 /* Mode Chooser */,
-				B66B748420918F7A00DBB992 /* Privacy */,
 				B686EF7620166F1200ACF075 /* Main */,
 			);
 			path = Controllers;
@@ -739,6 +745,7 @@
 			children = (
 				B686EF6C20166F0400ACF075 /* Main.storyboard */,
 				B6082E072054D5F40022943F /* Main Controller */,
+				B6299B89204FE15400043CD1 /* Mode Chooser */,
 				B686EF8620166F1200ACF075 /* Placemark AR */,
 				B686EF7720166F1200ACF075 /* Settings */,
 				B686EF8320166F1200ACF075 /* Placemark List */,
@@ -886,6 +893,16 @@
 				B607C7BA205268CA00E57A63 /* Placemark+Type.swift */,
 			);
 			path = Placemark;
+			sourceTree = "<group>";
+		};
+		B6CD008520977848001C4095 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				B6CD0088209778C2001C4095 /* Onboarding.storyboard */,
+				B6CD00862097785B001C4095 /* OnboardingViewController.swift */,
+				B6CD008A20977974001C4095 /* OnboardingNavigationDelegate.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		B6DCCDBA203B351000201385 /* Top Knob Bottom Up */ = {
@@ -1039,6 +1056,7 @@
 				B64D121C204E65D6008E5C5F /* GoogleService-Info.plist in Resources */,
 				B6A8ABD9204B9AEC007FDAEC /* Configuring.storyboard in Resources */,
 				B686EF6F20166F0C00ACF075 /* AddLocation.storyboard in Resources */,
+				B6CD0089209778C2001C4095 /* Onboarding.storyboard in Resources */,
 				B6299B82204F8F6500043CD1 /* LocationList.storyboard in Resources */,
 				B66B748A2092315C00DBB992 /* Privacy.storyboard in Resources */,
 			);
@@ -1187,6 +1205,7 @@
 				B6DCCDCF203B9CF400201385 /* VisualEffectFadePresentationController.swift in Sources */,
 				B6DCCDEB203BEE1200201385 /* PresentationMode.swift in Sources */,
 				B686EFA620166F1300ACF075 /* InlineColorChooserViewController.swift in Sources */,
+				B6CD00872097785B001C4095 /* OnboardingViewController.swift in Sources */,
 				B686EF0820166D5A00ACF075 /* UIViewController+Util.swift in Sources */,
 				B686EF0120166D5A00ACF075 /* CLPlacemark+Util.swift in Sources */,
 				B6442400204110D4006E524A /* SCNTextAlignment.swift in Sources */,
@@ -1234,6 +1253,7 @@
 				B686EF4520166D8700ACF075 /* VirtualObject.swift in Sources */,
 				B686EF4720166D8700ACF075 /* SCNVector3+Util.swift in Sources */,
 				B686EF0320166D5A00ACF075 /* LocationSearchService.swift in Sources */,
+				B6CD008B20977974001C4095 /* OnboardingNavigationDelegate.swift in Sources */,
 				B6DCCDE3203BED1100201385 /* RightToLeftAnimator.swift in Sources */,
 				B686EED020166C7300ACF075 /* AppDelegate.swift in Sources */,
 				B693DD62205A3D8B00772FA7 /* UIAlertController+Util.swift in Sources */,

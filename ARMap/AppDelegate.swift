@@ -22,7 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     AnalyticsManager.shared.appDidFinishLaunching()
     
     // Check if we have verified privacy
-    if !Defaults.shared.hasOnboardedPrivacy {
+    if !Defaults.shared.hasOnboarded {
+      let onboardingViewController = OnboardingViewController.newViewController(modalControllerDelegate: self)
+      RootNavigationController.shared.viewControllers = [ onboardingViewController ]
+    } else if !Defaults.shared.hasOnboardedPrivacy {
       let privacyViewController = self.getPrivacyOnbardingController(modalControllerDelegate: self)
       RootNavigationController.shared.viewControllers = [ privacyViewController ]
     } else if !PermissionManager.shared.isAccessAuthorized {
@@ -79,7 +82,9 @@ extension AppDelegate : PrivacyNavigationDelegate {}
 extension AppDelegate : ModalControllerDelegate {
   
   func dismissModalController(_ sender: UIViewController) {
-    if !Defaults.shared.hasOnboardedPrivacy {
+    if !Defaults.shared.hasOnboarded {
+      self.showOnboardingController()
+    } else if !Defaults.shared.hasOnboardedPrivacy {
       self.showPrivacyController()
     } else if !PermissionManager.shared.isAccessAuthorized {
       self.showPermissionsController()
@@ -90,6 +95,12 @@ extension AppDelegate : ModalControllerDelegate {
   
   func didAuthorizeAllPermissions() {
     self.showMainController()
+  }
+  
+  private func showOnboardingController() {
+    let onboardingViewController = OnboardingViewController.newViewController(modalControllerDelegate: self)
+    onboardingViewController.navigationItem.hidesBackButton = true
+    RootNavigationController.shared.pushViewController(onboardingViewController, animated: true)
   }
   
   private func showPermissionsController() {
