@@ -338,11 +338,11 @@ extension LocationListViewController : LocationListViewControllerCellDelegate {
     }
     alertController.addAction(editAction)
     
-    switch self.appMode {
+    switch placemark.placemarkType {
     case .myPlacemark:
       
       // Delete
-      let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
+      let deleteAction = UIAlertAction(title: "Remove Placemark", style: .destructive) { [weak self] _ in
         self?.promptDeletePlacemark(placemark: placemark)
       }
       alertController.addAction(deleteAction)
