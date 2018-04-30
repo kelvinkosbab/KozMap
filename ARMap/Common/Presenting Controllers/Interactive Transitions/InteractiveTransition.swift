@@ -328,6 +328,6 @@ extension InteractiveTransition : ScrollViewInteractiveReceiverDelegate {
     self.lastContentOffset = scrollView.contentOffset
     
     // Handle the gesture state
-    self.handleGestureState(gestureState, progress: progress * 2)
+    self.handleGestureState(gestureState, progress: progress * 2.5)
   }
 }

@@ -20,12 +20,12 @@ extension PrivacyNavigationDelegate {
 extension PrivacyNavigationDelegate where Self : UIViewController {
   
   func presentPrivacyOnboarding(modalControllerDelegate: ModalControllerDelegate?, presentationMode: PresentationMode, options: [PresentableControllerOption] = []) {
-    let modeChooserViewController = PrivacyOnboardingViewController.newViewController(modalControllerDelegate: modalControllerDelegate)
-    modeChooserViewController.presentIn(self, withMode: presentationMode, options: options)
+    let viewController = PrivacyOnboardingViewController.newViewController(modalControllerDelegate: modalControllerDelegate)
+    viewController.presentIn(self, withMode: presentationMode, options: options)
   }
   
   func presentPrivacy(presentationMode: PresentationMode, options: [PresentableControllerOption] = []) {
-    let modeChooserViewController = PrivacyViewController.newViewController()
-    modeChooserViewController.presentIn(self, withMode: presentationMode, options: options)
+    let viewController = PrivacyViewController.newViewController()
+    viewController.presentIn(self, withMode: presentationMode, options: options)
   }
 }

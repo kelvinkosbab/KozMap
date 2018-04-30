@@ -18,6 +18,7 @@ class LocationListViewControllerCell : UITableViewCell, ClassNamable {
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var detailLabel: UILabel!
   @IBOutlet weak var colorView: UIView!
+  @IBOutlet weak var iconImageView: UIImageView!
   @IBOutlet weak var moreButton: UIButton!
   private weak var placemark: Placemark? = nil
   weak var delegate: LocationListViewControllerCellDelegate? = nil
@@ -55,6 +56,25 @@ class LocationListViewControllerCell : UITableViewCell, ClassNamable {
       self.colorView.backgroundColor = color.color
     } else {
       self.colorView.backgroundColor = .kozRed
+    }
+    
+    // Image
+    switch placemark.placemarkType {
+    case .myPlacemark:
+      let image = #imageLiteral(resourceName: "assetPlacemark").withRenderingMode(.alwaysTemplate)
+      self.iconImageView.image = image
+      self.iconImageView.tintColor = .white
+      self.iconImageView.alpha = 0.4
+    case .food:
+      let image = #imageLiteral(resourceName: "assetForkKnife").withRenderingMode(.alwaysTemplate)
+      self.iconImageView.image = image
+      self.iconImageView.tintColor = .white
+      self.iconImageView.alpha = 0.4
+    case .mountain:
+      let image = #imageLiteral(resourceName: "assetMountains").withRenderingMode(.alwaysTemplate)
+      self.iconImageView.image = image
+      self.iconImageView.tintColor = .white
+      self.iconImageView.alpha = 0.4
     }
     
     // More button
