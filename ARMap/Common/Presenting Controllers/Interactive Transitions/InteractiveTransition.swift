@@ -64,6 +64,7 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
   private var lastTranslation: CGPoint? = nil
   private var lastTranslationDate: Date? = nil
   private var lastVelocity: CGFloat? = nil
+  internal var lastContentOffset: CGPoint? = nil
   
   // MARK: - Init
   
@@ -150,6 +151,7 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
     self.lastTranslation = nil
     self.lastTranslationDate = nil
     self.lastVelocity = nil
+    self.lastContentOffset = nil
     super.finish()
   }
   
@@ -157,6 +159,7 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
     self.lastTranslation = nil
     self.lastTranslationDate = nil
     self.lastVelocity = nil
+    self.lastContentOffset = nil
     super.cancel()
   }
   
@@ -231,13 +234,15 @@ extension InteractiveTransition : ScrollViewInteractiveReceiverDelegate {
     
     // Determine if should begin dismissal
     if self.axis == .y && self.direction == .positive && -scrollView.contentOffset.y >= scrollView.adjustedContentInset.top {
-      self.hasStarted = true
+      self.lastContentOffset = scrollView.contentOffset
     } else if self.axis == .y && self.direction == .negative && -scrollView.contentOffset.y <= scrollView.contentSize.height {
-      self.hasStarted = true
+      self.lastContentOffset = scrollView.contentOffset
     } else if self.axis == .x && self.direction == .positive && -scrollView.contentOffset.x >= scrollView.contentInset.left {
-      self.hasStarted = true
+      self.lastContentOffset = scrollView.contentOffset
     } else if self.axis == .x && self.direction == .negative && -scrollView.contentOffset.x <= scrollView.contentSize.width {
-      self.hasStarted = true
+      self.lastContentOffset = scrollView.contentOffset
+    } else {
+      self.lastContentOffset = nil
     }
     
     // Only update if the interactive gesture has started
@@ -251,13 +256,35 @@ extension InteractiveTransition : ScrollViewInteractiveReceiverDelegate {
   
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
     
-    // Only update if the interactive gesture has started
-    guard self.hasStarted else {
+    // Check if valid last content offset
+    guard let lastContentOffset = self.lastContentOffset else {
       return
     }
     
-    // Handle the scrolling gesture
-    self.handleScrollingGesture(scrollView, gestureState: .changed)
+    // Check if this scroll gesture has already started
+    if self.hasStarted {
+      
+      // Handle the scrolling gesture
+      self.handleScrollingGesture(scrollView, gestureState: .changed)
+      return
+    }
+    
+    // Check if the scroll dismiss should start
+    if self.axis == .y && self.direction == .positive && scrollView.contentOffset.y <= lastContentOffset.y {
+      self.hasStarted = true
+      self.handleScrollingGesture(scrollView, gestureState: .began)
+    } else if self.axis == .y && self.direction == .negative && scrollView.contentOffset.y >= lastContentOffset.y {
+      self.hasStarted = true
+      self.handleScrollingGesture(scrollView, gestureState: .began)
+    } else if self.axis == .x && self.direction == .positive && scrollView.contentOffset.x <= lastContentOffset.x {
+      self.hasStarted = true
+      self.handleScrollingGesture(scrollView, gestureState: .began)
+    } else if self.axis == .x && self.direction == .negative && scrollView.contentOffset.x >= lastContentOffset.x {
+      self.hasStarted = true
+      self.handleScrollingGesture(scrollView, gestureState: .began)
+    } else {
+      self.lastContentOffset = nil
+    }
   }
   
   func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -276,16 +303,12 @@ extension InteractiveTransition : ScrollViewInteractiveReceiverDelegate {
     // Calculate translation
     let scrollTranslation: CGPoint?
     if self.axis == .y && self.direction == .positive {
-      self.hasStarted = false
       scrollTranslation = CGPoint(x: 0, y: -scrollView.contentOffset.y - scrollView.adjustedContentInset.top)
     } else if self.axis == .y && self.direction == .negative {
-      self.hasStarted = false
       scrollTranslation = CGPoint(x: 0, y: -scrollView.contentOffset.y - scrollView.contentSize.height)
     } else if self.axis == .x && self.direction == .positive {
-      self.hasStarted = false
       scrollTranslation = CGPoint(x: -scrollView.contentOffset.x - scrollView.contentInset.left, y: 0)
     } else if self.axis == .x && self.direction == .negative {
-      self.hasStarted = false
       scrollTranslation = CGPoint(x: -scrollView.contentOffset.x - scrollView.contentSize.width, y: 0)
     } else {
       scrollTranslation = nil
@@ -298,12 +321,13 @@ extension InteractiveTransition : ScrollViewInteractiveReceiverDelegate {
     // Convert position to progress
     let progress = self.calculateProgress(translation: translation, inBounds: scrollView.bounds)
     
-    print("KAK offset - \(scrollView.contentOffset.y) vs inset \(scrollView.adjustedContentInset.top) - progress \(progress)")
-    
     // Velocity calculations
     self.updateVelocityProperties(currentTranslation: translation)
     
+    // Update the last content offset
+    self.lastContentOffset = scrollView.contentOffset
+    
     // Handle the gesture state
-    self.handleGestureState(gestureState, progress: progress)
+    self.handleGestureState(gestureState, progress: progress * 2)
   }
 }

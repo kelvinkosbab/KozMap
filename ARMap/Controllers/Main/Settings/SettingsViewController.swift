@@ -10,7 +10,7 @@ import UIKit
 import StoreKit
 import CoreData
 
-class SettingsViewController : BaseTableViewController, DesiredContentHeightDelegate, DismissInteractable, NSFetchedResultsControllerDelegate, PrivacyNavigationDelegate {
+class SettingsViewController : BaseTableViewController, DesiredContentHeightDelegate, DismissInteractable, NSFetchedResultsControllerDelegate, PrivacyNavigationDelegate, ScrollViewInteractiveSenderDelegate {
   
   // MARK: - Static Accessors
   
