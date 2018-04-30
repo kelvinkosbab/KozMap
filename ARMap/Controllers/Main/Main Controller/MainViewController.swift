@@ -33,6 +33,7 @@ class MainViewController : BaseViewController {
     
     // Navigation bar
     self.navigationItem.title = nil
+    self.navigationController?.isNavigationBarHidden = false
     self.navigationItem.largeTitleDisplayMode = .never
     
     // Configure views

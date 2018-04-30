@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol PermissionsViewControllerDelegate : class {
-  func didAuthorizeAllPermissions()
-}
-
 class PermissionsViewController : UIViewController {
   
   // MARK: - Static Accessors
@@ -20,9 +16,9 @@ class PermissionsViewController : UIViewController {
     return self.newViewController(fromStoryboardWithName: "Permissions")
   }
   
-  static func newViewController(delegate: PermissionsViewControllerDelegate?) -> PermissionsViewController {
+  static func newViewController(modalControllerDelegate: ModalControllerDelegate?) -> PermissionsViewController {
     let viewController = self.newViewController()
-    viewController.delegate = delegate
+    viewController.modalControllerDelegate = modalControllerDelegate
     return viewController
   }
   
@@ -33,7 +29,7 @@ class PermissionsViewController : UIViewController {
   @IBOutlet weak var cameraPermissionButton: UIButton!
   @IBOutlet weak var cameraActivityIndicatorView: UIActivityIndicatorView!
   
-  weak var delegate: PermissionsViewControllerDelegate? = nil
+  weak var modalControllerDelegate: ModalControllerDelegate? = nil
   
   var isLocationAuthorized: Bool {
     return LocationManager.shared.isAccessAuthorized
@@ -56,6 +52,7 @@ class PermissionsViewController : UIViewController {
     super.viewDidLoad()
     
     self.title = "Permissions"
+    self.navigationController?.isNavigationBarHidden = false
     self.navigationItem.largeTitleDisplayMode = .never
     
     self.locationActivityIndicatorView.isHidden = true
@@ -169,7 +166,7 @@ extension PermissionsViewController : LocationManagerAuthorizationDelegate {
   func locationManagerDidUpdateAuthorization() {
     
     if self.areAllPermissionAuthorized {
-      self.delegate?.didAuthorizeAllPermissions()
+      self.modalControllerDelegate?.dismissModalController(self)
     }
     
     // Update the content
@@ -190,7 +187,7 @@ extension PermissionsViewController : CameraPermissionDelegate {
   func cameraPermissionManagerDidUpdateAuthorization(isAuthorized: Bool) {
     self.isCameraAuthorized = isAuthorized
     if self.areAllPermissionAuthorized {
-      self.delegate?.didAuthorizeAllPermissions()
+      self.modalControllerDelegate?.dismissModalController(self)
     }
     
     // Update the content

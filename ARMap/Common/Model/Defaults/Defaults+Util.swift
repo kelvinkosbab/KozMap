@@ -78,7 +78,6 @@ extension Defaults {
         oldValue.managedObjectContext?.delete(oldValue)
       }
       self.daytimeTextColorValue = newValue
-      MyDataManager.shared.saveMainContext()
     }
   }
   
@@ -96,7 +95,6 @@ extension Defaults {
         oldValue.managedObjectContext?.delete(oldValue)
       }
       self.nighttimeTextColorValue = newValue
-      MyDataManager.shared.saveMainContext()
     }
   }
   

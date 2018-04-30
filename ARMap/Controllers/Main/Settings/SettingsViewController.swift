@@ -10,7 +10,7 @@ import UIKit
 import StoreKit
 import CoreData
 
-class SettingsViewController : BaseTableViewController, DesiredContentHeightDelegate, DismissInteractable, NSFetchedResultsControllerDelegate {
+class SettingsViewController : BaseTableViewController, DesiredContentHeightDelegate, DismissInteractable, NSFetchedResultsControllerDelegate, PrivacyNavigationDelegate, ScrollViewInteractiveSenderDelegate {
   
   // MARK: - Static Accessors
   
@@ -23,21 +23,22 @@ class SettingsViewController : BaseTableViewController, DesiredContentHeightDele
   // MARK: - DesiredContentHeightDelegate
   
   var desiredContentHeight: CGFloat {
-    return 440
+    return 490
   }
   
   // MARK: - DismissInteractable
   
   var dismissInteractiveViews: [UIView] {
     var views: [UIView] = []
-    if let view = self.view {
-      views.append(view)
-    }
     if let navigationBar = self.navigationController?.navigationBar {
       views.append(navigationBar)
     }
     return views
   }
+  
+  // MARK: - ScrollViewInteractiveSenderDelegate
+  
+  weak var scrollViewInteractiveReceiverDelegate: ScrollViewInteractiveReceiverDelegate?
   
   // MARK: - Properties
   
@@ -55,6 +56,7 @@ class SettingsViewController : BaseTableViewController, DesiredContentHeightDele
   
   @IBOutlet weak var rateLabel: UILabel!
   @IBOutlet weak var contactLabel: UILabel!
+  @IBOutlet weak var privacyLabel: UILabel!
   @IBOutlet weak var versionLabel: UILabel!
   @IBOutlet weak var companyLabel: UILabel!
   
@@ -89,7 +91,9 @@ class SettingsViewController : BaseTableViewController, DesiredContentHeightDele
       self.tableView.backgroundColor = .white
     }
     
-    if !UIDevice.current.isPhone {
+    if UIDevice.current.isPhone {
+      self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icChevronDown"), style: .plain, target: self, action: #selector(self.closeButtonSelected))
+    } else {
       self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(self.closeButtonSelected))
     }
   }
@@ -152,17 +156,20 @@ class SettingsViewController : BaseTableViewController, DesiredContentHeightDele
       self.nightTextColorSelectLabel.text = "Placemark's Color"
     }
     
-    // Version
-    self.versionLabel.text = "Version \(UIApplication.shared.versionString ?? "N/A")"
-    
-    // Company
-    self.companyLabel.text = BuildManager.shared.buildTarget.companyName
-    
     // Rate button
     self.rateLabel.text = "Rate \(BuildManager.shared.buildTarget.appName)"
     
     // Contact button
     self.contactLabel.text = "Give Feedback"
+    
+    // Privacy button
+    self.privacyLabel.text = "Privacy"
+    
+    // Version
+    self.versionLabel.text = "Version \(UIApplication.shared.versionString ?? "N/A")"
+    
+    // Company
+    self.companyLabel.text = BuildManager.shared.buildTarget.companyName
   }
   
   // MARK: - Actions
@@ -180,7 +187,7 @@ class SettingsViewController : BaseTableViewController, DesiredContentHeightDele
   func getSectionType(section: Int) -> SectionType? {
     switch section {
     case 0:
-      return .main([ .units, .beamTransparency, .dayTextColor, .nightTextColor, .rate, .feedback, .info ])
+      return .main([ .units, .beamTransparency, .dayTextColor, .nightTextColor, .rate, .feedback, .privacy, .info ])
     default:
       return nil
     }
@@ -189,7 +196,7 @@ class SettingsViewController : BaseTableViewController, DesiredContentHeightDele
   // MARK: - RowType
   
   enum RowType {
-    case units, beamTransparency, dayTextColor, nightTextColor, rate, feedback, info
+    case units, beamTransparency, dayTextColor, nightTextColor, rate, feedback, privacy, info
   }
   
   func getRowType(at indexPath: IndexPath) -> RowType? {
@@ -286,6 +293,13 @@ class SettingsViewController : BaseTableViewController, DesiredContentHeightDele
     case .feedback:
       if let url = URL(string: BuildManager.shared.buildTarget.giveFeedbackUrlString) {
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
+      }
+      
+    case .privacy:
+      if UIDevice.current.isPhone {
+        self.presentPrivacy(presentationMode: .custom(.rightToLeftCurrentContext), options: [ .presentingViewControllerDelegate(self) ])
+      } else {
+        self.presentPrivacy(presentationMode: .navStack, options: [ .presentingViewControllerDelegate(self) ])
       }
       
     case .info: break
@@ -385,4 +399,21 @@ extension SettingsViewController : PresentingViewControllerDelegate {
   }
   
   func didCancelDissmissViewController(_ viewController: UIViewController?) {}
+}
+
+// MARK: - UIScrollView
+
+extension SettingsViewController {
+  
+  override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    self.scrollViewInteractiveReceiverDelegate?.scrollViewWillBeginDragging(scrollView)
+  }
+  
+  override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    self.scrollViewInteractiveReceiverDelegate?.scrollViewDidScroll(scrollView)
+  }
+  
+  override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    self.scrollViewInteractiveReceiverDelegate?.scrollViewDidEndDragging(scrollView, willDecelerate: decelerate)
+  }
 }

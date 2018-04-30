@@ -22,6 +22,8 @@ class CustomPresentationController : UIPresentationController {
 
 extension CustomPresentationController {
   
+  // MARK: - Interactive Views
+  
   internal var allPresentationInteractiveViews: [UIView] {
     var interactiveViews: [UIView] = []
     
@@ -52,5 +54,11 @@ extension CustomPresentationController {
     }
     
     return interactiveViews
+  }
+  
+  // MARK: - Scroll View Interactive
+  
+  internal var scrollViewInteractiveSenderDelegate: ScrollViewInteractiveSenderDelegate? {
+    return self.presentedViewController.topViewController as? ScrollViewInteractiveSenderDelegate
   }
 }

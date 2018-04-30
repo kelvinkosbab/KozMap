@@ -79,7 +79,7 @@ class LeftMenuPresentationController : CustomPresentationController {
     }, completion: nil)
     
     // Configure presentation interaction
-    self.presentationInteractiveTransition = DragLeftDismissInteractiveTransition(interactiveViews: self.allPresentationInteractiveViews, delegate: self)
+    self.presentationInteractiveTransition = DragLeftDismissInteractiveTransition(interactiveViews: self.allPresentationInteractiveViews, scrollViewInteractiveSenderDelegate: self.scrollViewInteractiveSenderDelegate, delegate: self)
   }
   
   override func presentationTransitionDidEnd(_ completed: Bool) {
@@ -88,7 +88,7 @@ class LeftMenuPresentationController : CustomPresentationController {
     if completed {
       
       // Configure dismiss interaction
-      self.dismissInteractiveTransition = DragLeftDismissInteractiveTransition(interactiveViews: self.allDismissInteractiveViews, options: [ .contentSize(self.presentedViewController.preferredContentSize) ], delegate: self)
+      self.dismissInteractiveTransition = DragLeftDismissInteractiveTransition(interactiveViews: self.allDismissInteractiveViews, scrollViewInteractiveSenderDelegate: self.scrollViewInteractiveSenderDelegate, options: [ .contentSize(self.presentedViewController.preferredContentSize) ], delegate: self)
     }
   }
   
