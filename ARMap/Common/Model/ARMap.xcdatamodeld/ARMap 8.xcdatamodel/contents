@@ -13,6 +13,7 @@
         <attribute name="appModeValue" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="beamNodeTransparency" optional="YES" attributeType="Float" defaultValueString="0.7" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="hasOnboardedPrivacy" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isAnalyticsCollectionEnabled" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="lastFoodSearchText" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="unitTypeValue" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="daytimeTextColorValue" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Color" inverseName="defaultsDaytime" inverseEntity="Color" syncable="YES"/>
@@ -38,7 +39,7 @@
     </entity>
     <elements>
         <element name="Color" positionX="-63" positionY="-18" width="128" height="150"/>
-        <element name="Defaults" positionX="-54" positionY="-9" width="128" height="150"/>
+        <element name="Defaults" positionX="-54" positionY="-9" width="128" height="165"/>
         <element name="Placemark" positionX="-36" positionY="9" width="128" height="285"/>
     </elements>
 </model>

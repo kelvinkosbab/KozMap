@@ -139,7 +139,6 @@
 		B6C01FED2050CD3600437B45 /* Placemark+CoreLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C01FEC2050CD3600437B45 /* Placemark+CoreLocation.swift */; };
 		B6C01FEF2050CD6000437B45 /* Placemark+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C01FEE2050CD6000437B45 /* Placemark+Util.swift */; };
 		B6CD007D2094C6AA001C4095 /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CD007C2094C6AA001C4095 /* PrivacyViewController.swift */; };
-		B6CD007F20950941001C4095 /* PrivacyLandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CD007E20950941001C4095 /* PrivacyLandingViewController.swift */; };
 		B6CD008120950BE5001C4095 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CD008020950BE5001C4095 /* RoundedButton.swift */; };
 		B6DCCDBD203B355C00201385 /* TopKnobBottomUpAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDBC203B355C00201385 /* TopKnobBottomUpAnimator.swift */; };
 		B6DCCDBF203B3DE700201385 /* TopKnobBottomUpPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCCDBE203B3DE600201385 /* TopKnobBottomUpPresentationController.swift */; };
@@ -309,7 +308,6 @@
 		B6C01FEC2050CD3600437B45 /* Placemark+CoreLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Placemark+CoreLocation.swift"; sourceTree = "<group>"; };
 		B6C01FEE2050CD6000437B45 /* Placemark+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Placemark+Util.swift"; sourceTree = "<group>"; };
 		B6CD007C2094C6AA001C4095 /* PrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyViewController.swift; sourceTree = "<group>"; };
-		B6CD007E20950941001C4095 /* PrivacyLandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyLandingViewController.swift; sourceTree = "<group>"; };
 		B6CD008020950BE5001C4095 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		B6DCCDBC203B355C00201385 /* TopKnobBottomUpAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopKnobBottomUpAnimator.swift; sourceTree = "<group>"; };
 		B6DCCDBE203B3DE600201385 /* TopKnobBottomUpPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopKnobBottomUpPresentationController.swift; sourceTree = "<group>"; };
@@ -505,8 +503,7 @@
 			children = (
 				B66B74892092315C00DBB992 /* Privacy.storyboard */,
 				B66B748720918FA600DBB992 /* PrivacyNavigationDelegate.swift */,
-				B6CD0082209542A0001C4095 /* Onboarding */,
-				B6CD007E20950941001C4095 /* PrivacyLandingViewController.swift */,
+				B66B748520918F8C00DBB992 /* PrivacyOnboardingViewController.swift */,
 				B6CD007C2094C6AA001C4095 /* PrivacyViewController.swift */,
 			);
 			path = Privacy;
@@ -891,14 +888,6 @@
 			path = Placemark;
 			sourceTree = "<group>";
 		};
-		B6CD0082209542A0001C4095 /* Onboarding */ = {
-			isa = PBXGroup;
-			children = (
-				B66B748520918F8C00DBB992 /* PrivacyOnboardingViewController.swift */,
-			);
-			path = Onboarding;
-			sourceTree = "<group>";
-		};
 		B6DCCDBA203B351000201385 /* Top Knob Bottom Up */ = {
 			isa = PBXGroup;
 			children = (
@@ -1128,7 +1117,6 @@
 				B6299B8B204FE16600043CD1 /* ModeChooserViewController.swift in Sources */,
 				B686EF4420166D8700ACF075 /* PlacemarkNode.swift in Sources */,
 				B6DCCDC5203B6EA300201385 /* PresentableManager.swift in Sources */,
-				B6CD007F20950941001C4095 /* PrivacyLandingViewController.swift in Sources */,
 				B6082DF8205489510022943F /* MyPlacemarksNavigationDelegate.swift in Sources */,
 				B686EF3C20166D8700ACF075 /* UnitType.swift in Sources */,
 				B64D1222204E673A008E5C5F /* AnalyticsItem.swift in Sources */,

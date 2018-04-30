@@ -77,6 +77,7 @@ class PrivacyOnboardingViewController : BaseViewController {
     
     // Enable analytics
     AnalyticsManager.shared.setAnalyticsCollectionEnabled(true)
+    self.defaults.isAnalyticsCollectionEnabled = true
     
     // Privacy onboarding flag
     self.defaults.hasOnboardedPrivacy = true
@@ -89,6 +90,7 @@ class PrivacyOnboardingViewController : BaseViewController {
     
     // Disable analytics
     AnalyticsManager.shared.setAnalyticsCollectionEnabled(false)
+    self.defaults.isAnalyticsCollectionEnabled = false
     
     // Privacy onboarding flag
     self.defaults.hasOnboardedPrivacy = true
