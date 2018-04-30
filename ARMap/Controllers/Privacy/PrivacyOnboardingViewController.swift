@@ -38,6 +38,7 @@ class PrivacyOnboardingViewController : BaseViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    self.navigationController?.isNavigationBarHidden = true
     self.navigationItem.largeTitleDisplayMode = .never
   }
   
@@ -78,6 +79,7 @@ class PrivacyOnboardingViewController : BaseViewController {
     // Enable analytics
     AnalyticsManager.shared.setAnalyticsCollectionEnabled(true)
     self.defaults.isAnalyticsCollectionEnabled = true
+    MyDataManager.shared.saveMainContext()
     
     // Privacy onboarding flag
     self.defaults.hasOnboardedPrivacy = true
@@ -91,6 +93,7 @@ class PrivacyOnboardingViewController : BaseViewController {
     // Disable analytics
     AnalyticsManager.shared.setAnalyticsCollectionEnabled(false)
     self.defaults.isAnalyticsCollectionEnabled = false
+    MyDataManager.shared.saveMainContext()
     
     // Privacy onboarding flag
     self.defaults.hasOnboardedPrivacy = true

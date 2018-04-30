@@ -52,6 +52,7 @@ class PermissionsViewController : UIViewController {
     super.viewDidLoad()
     
     self.title = "Permissions"
+    self.navigationController?.isNavigationBarHidden = false
     self.navigationItem.largeTitleDisplayMode = .never
     
     self.locationActivityIndicatorView.isHidden = true

@@ -15,10 +15,6 @@ extension PrivacyNavigationDelegate {
   func getPrivacyOnbardingController(modalControllerDelegate: ModalControllerDelegate?) -> PrivacyOnboardingViewController {
     return PrivacyOnboardingViewController.newViewController(modalControllerDelegate: modalControllerDelegate)
   }
-  
-  func getPrivacyController(modalControllerDelegate: ModalControllerDelegate?) -> PrivacyViewController {
-    return PrivacyViewController.newViewController()
-  }
 }
 
 extension PrivacyNavigationDelegate where Self : UIViewController {
