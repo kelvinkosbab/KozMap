@@ -66,6 +66,11 @@ extension Placemark : MyManagedObjectProtocol {
     return self.newFetchedResultsController(predicate: predicate)
   }
   
+  static func newMyPlacemarksController() -> NSFetchedResultsController<Placemark> {
+    let predicate = NSPredicate(format: "placemarkTypeValue == %d || isFavorite == %@", PlacemarkType.myPlacemark.rawValue, NSNumber(value: true))
+    return self.newFetchedResultsController(predicate: predicate)
+  }
+  
   static func newFetchedResultsController(placemarkType: PlacemarkType, isFavorite: Bool) -> NSFetchedResultsController<Placemark> {
     let predicate = NSPredicate(format: "isFavorite == %@", NSNumber(value: isFavorite))
     return self.newFetchedResultsController(predicate: predicate)

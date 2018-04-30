@@ -74,10 +74,12 @@ class LocationListViewController : BaseTableViewController, NSFetchedResultsCont
   private lazy var placemarksFetchedResultsController: NSFetchedResultsController<Placemark> = {
     let controller: NSFetchedResultsController<Placemark>
     switch self.appMode {
-    case .myPlacemark, .mountain:
-      controller = Placemark.newFetchedResultsController(placemarkType: self.appMode)
+    case .myPlacemark:
+      controller = Placemark.newMyPlacemarksController()
     case .food:
       controller = Placemark.newFetchedResultsController(placemarkType: self.appMode, isFavorite: true)
+    case .mountain:
+      controller = Placemark.newFetchedResultsController(placemarkType: self.appMode)
     }
     controller.delegate = self
     try? controller.performFetch()
