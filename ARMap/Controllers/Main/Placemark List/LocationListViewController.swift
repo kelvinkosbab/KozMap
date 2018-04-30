@@ -16,7 +16,7 @@ protocol LocationListViewControllerDelegate : class {
   func shouldTransitionToSearch(sender: UIViewController)
 }
 
-class LocationListViewController : BaseTableViewController, NSFetchedResultsControllerDelegate, DesiredContentHeightDelegate, DismissInteractable, PlacemarkAPIDelegate, PlacemarkDetailNavigationDelegate {
+class LocationListViewController : BaseTableViewController, NSFetchedResultsControllerDelegate, DesiredContentHeightDelegate, DismissInteractable, PlacemarkAPIDelegate, PlacemarkDetailNavigationDelegate, ScrollViewInteractiveSenderDelegate {
   
   // MARK: - Static Accessors
   
@@ -56,6 +56,10 @@ class LocationListViewController : BaseTableViewController, NSFetchedResultsCont
     }
     return views
   }
+  
+  // MARK: - ScrollViewInteractiveSenderDelegate
+  
+  weak var scrollViewInteractiveReceiverDelegate: ScrollViewInteractiveReceiverDelegate?
   
   // MARK: - Properties
   
@@ -374,5 +378,22 @@ extension LocationListViewController : LocationListViewControllerCellDelegate {
       alertController.popoverPresentationController?.sourceRect = sender.frame
       self.present(alertController, animated: true, completion: nil)
     }
+  }
+}
+
+// MARK: - UIScrollView
+
+extension LocationListViewController {
+  
+  override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    self.scrollViewInteractiveReceiverDelegate?.scrollViewWillBeginDragging(scrollView)
+  }
+  
+  override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    self.scrollViewInteractiveReceiverDelegate?.scrollViewDidScroll(scrollView)
+  }
+  
+  override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    self.scrollViewInteractiveReceiverDelegate?.scrollViewDidEndDragging(scrollView, willDecelerate: decelerate)
   }
 }

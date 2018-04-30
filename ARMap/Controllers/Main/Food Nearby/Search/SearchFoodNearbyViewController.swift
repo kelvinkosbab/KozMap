@@ -14,7 +14,7 @@ protocol SearchFoodNearbyViewControllerDelegate : class {
   func didSelectPlacemark(_ placemark: Placemark, sender: UIViewController)
 }
 
-class SearchFoodNearbyViewController : BaseTableViewController, DismissInteractable {
+class SearchFoodNearbyViewController : BaseTableViewController, DismissInteractable, ScrollViewInteractiveSenderDelegate {
   
   // MARK: - Static Accessors
   
@@ -46,6 +46,10 @@ class SearchFoodNearbyViewController : BaseTableViewController, DismissInteracta
     }
     return views
   }
+  
+  // MARK: - ScrollViewInteractiveSenderDelegate
+  
+  weak var scrollViewInteractiveReceiverDelegate: ScrollViewInteractiveReceiverDelegate?
   
   // MARK: - Properties
   
@@ -297,5 +301,22 @@ extension SearchFoodNearbyViewController : UISearchBarDelegate {
     
     // Update the last search result
     self.foodNearbyService.currentSearchText = text
+  }
+}
+
+// MARK: - UIScrollView
+
+extension SearchFoodNearbyViewController {
+  
+  override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    self.scrollViewInteractiveReceiverDelegate?.scrollViewWillBeginDragging(scrollView)
+  }
+  
+  override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    self.scrollViewInteractiveReceiverDelegate?.scrollViewDidScroll(scrollView)
+  }
+  
+  override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    self.scrollViewInteractiveReceiverDelegate?.scrollViewDidEndDragging(scrollView, willDecelerate: decelerate)
   }
 }
