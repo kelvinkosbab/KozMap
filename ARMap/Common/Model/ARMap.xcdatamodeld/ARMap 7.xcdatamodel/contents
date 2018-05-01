@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17E190a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Color" representedClassName="Color" syncable="YES" codeGenerationType="class">
+        <attribute name="alpha" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="blue" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="green" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="red" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="defaultsDaytime" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Defaults" inverseName="daytimeTextColorValue" inverseEntity="Defaults" syncable="YES"/>
+        <relationship name="defaultsNighttime" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Defaults" inverseName="nighttimeTextColorValue" inverseEntity="Defaults" syncable="YES"/>
+        <relationship name="placemark" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Placemark" inverseName="color" inverseEntity="Placemark" syncable="YES"/>
+    </entity>
+    <entity name="Defaults" representedClassName="Defaults" syncable="YES" codeGenerationType="class">
+        <attribute name="appModeValue" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="beamNodeTransparency" optional="YES" attributeType="Float" defaultValueString="0.7" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="lastFoodSearchText" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="unitTypeValue" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="daytimeTextColorValue" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Color" inverseName="defaultsDaytime" inverseEntity="Color" syncable="YES"/>
+        <relationship name="nighttimeTextColorValue" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Color" inverseName="defaultsNighttime" inverseEntity="Color" syncable="YES"/>
+    </entity>
+    <entity name="Placemark" representedClassName="Placemark" syncable="YES" codeGenerationType="class">
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="altitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="course" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="horizontalAccuracy" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isFavorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="lastDistance" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phoneNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="placemarkTypeValue" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="speed" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="verticalAccuracy" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="color" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Color" inverseName="placemark" inverseEntity="Color" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Color" positionX="-63" positionY="-18" width="128" height="150"/>
+        <element name="Defaults" positionX="-54" positionY="-9" width="128" height="135"/>
+        <element name="Placemark" positionX="-36" positionY="9" width="128" height="285"/>
+    </elements>
+</model>

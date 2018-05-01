@@ -67,4 +67,14 @@ extension UIViewController {
     // Completion
     return topViewController
   }
+  
+  // MARK: - Back Buttons
+  
+  func configureBackButton(title: String, target: Any? = nil, action: Selector? = nil) {
+    self.navigationItem.backBarButtonItem = UIBarButtonItem(title: title, style: .plain, target: target, action: action)
+  }
+  
+  func configureDefaultBackButton(target: Any? = nil, action: Selector? = nil) {
+    self.configureBackButton(title: LocalizedString.back, target: target, action: action)
+  }
 }

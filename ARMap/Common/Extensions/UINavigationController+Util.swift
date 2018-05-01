@@ -10,25 +10,63 @@ import UIKit
 
 extension UINavigationController {
   
-  public func pushViewController(_ viewController: UIViewController, animated: Bool, completion: @escaping () -> Void) {
+  public func pushViewController(_ viewController: UIViewController, animated: Bool, animations: (() -> Void)?, completion: @escaping (_ completed: Bool) -> Void) {
     self.pushViewController(viewController, animated: animated)
     
     guard animated, let coordinator = self.transitionCoordinator else {
-      completion()
+      completion(true)
       return
     }
     
-    coordinator.animate(alongsideTransition: nil) { _ in completion() }
+    coordinator.animate(alongsideTransition: { context in
+      animations?()
+    }) { context in
+      completion(!context.isCancelled)
+    }
   }
   
-  public func popToRootViewController(animated: Bool, completion: @escaping () -> Void) {
+  public func popViewController(animated: Bool, animations: (() -> Void)?, completion: @escaping (_ completed: Bool) -> Void) {
+    self.popViewController(animated: animated)
+    
+    guard animated, let coordinator = self.transitionCoordinator else {
+      completion(true)
+      return
+    }
+    
+    coordinator.animate(alongsideTransition: { context in
+      animations?()
+    }) { context in
+      completion(!context.isCancelled)
+    }
+  }
+  
+  public func popToViewController(_ viewController: UIViewController, animated: Bool, animations: (() -> Void)?, completion: @escaping (_ completed: Bool) -> Void) {
+    self.popToViewController(viewController, animated: animated)
+    
+    guard animated, let coordinator = self.transitionCoordinator else {
+      completion(true)
+      return
+    }
+    
+    coordinator.animate(alongsideTransition: { context in
+      animations?()
+    }) { context in
+      completion(!context.isCancelled)
+    }
+  }
+  
+  public func popToRootViewController(animated: Bool, animations: (() -> Void)?, completion: @escaping (_ completed: Bool) -> Void) {
     self.popToRootViewController(animated: animated)
     
     guard animated, let coordinator = self.transitionCoordinator else {
-      completion()
+      completion(true)
       return
     }
     
-    coordinator.animate(alongsideTransition: nil) { _ in completion() }
+    coordinator.animate(alongsideTransition: { context in
+      animations?()
+    }) { context in
+      completion(!context.isCancelled)
+    }
   }
 }

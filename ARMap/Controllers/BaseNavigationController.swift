@@ -21,6 +21,8 @@ class BaseNavigationController : UINavigationController, PresentableController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    self.configureDefaultBackButton()
+    
     self.navigationBar.prefersLargeTitles = true
   }
   

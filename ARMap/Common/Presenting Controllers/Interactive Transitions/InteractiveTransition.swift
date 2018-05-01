@@ -20,6 +20,20 @@ protocol DismissInteractable : class {
   var dismissInteractiveViews: [UIView] { get }
 }
 
+// MARK: - ScrollViewInteractiveSenderDelegate
+
+protocol ScrollViewInteractiveSenderDelegate : class {
+  var scrollViewInteractiveReceiverDelegate: ScrollViewInteractiveReceiverDelegate? { get set }
+}
+
+// MARK: - ScrollViewInteractiveReceiverDelegate
+
+protocol ScrollViewInteractiveReceiverDelegate : class {
+  func scrollViewWillBeginDragging(_ scrollView: UIScrollView)
+  func scrollViewDidScroll(_ scrollView: UIScrollView)
+  func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
+}
+
 // MARK: - InteractiveTransitionDelegate
 
 protocol InteractiveTransitionDelegate : class {
@@ -33,6 +47,7 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
   // MARK: - Properties
   
   let interactiveViews: [UIView]
+  let scrollViewInteractiveSenderDelegate: ScrollViewInteractiveSenderDelegate?
   let axis: InteractiveTransition.Axis
   let direction: InteractiveTransition.Direction
   weak var delegate: InteractiveTransitionDelegate? = nil
@@ -42,23 +57,25 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
   let percentThreshold: CGFloat
   let velocityThreshold: CGFloat
   
-  private(set) var hasStarted: Bool = false
-  private var shouldFinish: Bool = false
+  internal(set) var hasStarted: Bool = false
+  internal(set) var shouldFinish: Bool = false
   private var activeGestureRecognizers: [UIPanGestureRecognizer] = []
   
   private var lastTranslation: CGPoint? = nil
   private var lastTranslationDate: Date? = nil
   private var lastVelocity: CGFloat? = nil
+  internal var lastContentOffset: CGPoint? = nil
   
   // MARK: - Init
   
-  init?(interactiveViews: [UIView], axis: InteractiveTransition.Axis, direction: InteractiveTransition.Direction, gestureType: GestureType = .pan, options: [InteractiveTransition.Option] = [], delegate: InteractiveTransitionDelegate? = nil) {
+  init?(interactiveViews: [UIView], scrollViewInteractiveSenderDelegate: ScrollViewInteractiveSenderDelegate?, axis: InteractiveTransition.Axis, direction: InteractiveTransition.Direction, gestureType: GestureType = .pan, options: [InteractiveTransition.Option] = [], delegate: InteractiveTransitionDelegate? = nil) {
     
     guard interactiveViews.count > 0 else {
       return nil
     }
     
     self.interactiveViews = interactiveViews
+    self.scrollViewInteractiveSenderDelegate = scrollViewInteractiveSenderDelegate
     self.axis = axis
     self.direction = direction
     self.delegate = delegate
@@ -70,14 +87,23 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
     
     super.init()
     
-    // Configure the dismiss interactive gesture recognizer
+    // Configure the gestures for the interactive views
     for interactiveView in interactiveViews {
+      
+      // Skip scroll views
+      if let scrollView = interactiveView as? UIScrollView, scrollView.isScrollEnabled {
+        continue
+      }
+      
+      // Configure the gesture for the view
       let gestureRecognizer = self.gestureType.createGestureRecognizer(target: self, action: #selector(self.handleGesture(_:)), axis: self.axis, direction: self.direction)
-      gestureRecognizer.delegate = self
       interactiveView.isUserInteractionEnabled = true
       interactiveView.addGestureRecognizer(gestureRecognizer)
       self.activeGestureRecognizers.append(gestureRecognizer)
     }
+    
+    // Configure the scroll view interactive delegate
+    scrollViewInteractiveSenderDelegate?.scrollViewInteractiveReceiverDelegate = self
   }
   
   // MARK: - Gestures
@@ -90,20 +116,22 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
     
     // Convert position to progress
     let translation = sender.translation(in: view)
-    let progress = self.calculateProgress(translation: translation, in: view)
+    let progress = self.calculateProgress(translation: translation, inBounds: view.bounds)
     
     // Velocity calculations
     self.updateVelocityProperties(currentTranslation: translation)
     
     // Handle the gesture state
-    self.handleGestureState(gesture: sender, progress: progress)
+    self.handleGestureState(sender.state, progress: progress)
   }
   
-  private func handleGestureState(gesture: UIPanGestureRecognizer, progress: CGFloat) {
-    switch gesture.state {
+  internal func handleGestureState(_ gestureState: UIGestureRecognizerState, progress: CGFloat) {
+    switch gestureState {
     case .began:
       self.hasStarted = true
       self.delegate?.interactionDidSurpassThreshold(self)
+      self.update(progress)
+      self.shouldFinish = self.calculateShouldFinish(progress: progress, velocity: self.lastVelocity)
     case .changed:
       self.update(progress)
       self.shouldFinish = self.calculateShouldFinish(progress: progress, velocity: self.lastVelocity)
@@ -123,6 +151,7 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
     self.lastTranslation = nil
     self.lastTranslationDate = nil
     self.lastVelocity = nil
+    self.lastContentOffset = nil
     super.finish()
   }
   
@@ -130,12 +159,13 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
     self.lastTranslation = nil
     self.lastTranslationDate = nil
     self.lastVelocity = nil
+    self.lastContentOffset = nil
     super.cancel()
   }
   
   // MARK: - Calculations
   
-  private func updateVelocityProperties(currentTranslation: CGPoint) {
+  internal func updateVelocityProperties(currentTranslation: CGPoint) {
     let currentDate: Date = Date()
     if self.lastTranslation == nil && self.lastTranslationDate == nil {
       self.lastVelocity = nil
@@ -149,7 +179,7 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
     }
   }
   
-  private func calculateShouldFinish(progress: CGFloat, velocity: CGFloat?) -> Bool {
+  internal func calculateShouldFinish(progress: CGFloat, velocity: CGFloat?) -> Bool {
     if progress > self.percentThreshold {
       return true
     } else if let velocity = velocity, abs(velocity) > self.velocityThreshold {
@@ -158,9 +188,9 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
     return false
   }
   
-  private func calculateProgress(translation: CGPoint, in view: UIView) -> CGFloat {
-    let xMovement = (self.direction == .negative ? -translation.x : translation.x) / (self.contentSize?.width ?? view.bounds.width)
-    let yMovement = (self.direction == .negative ? -translation.y : translation.y) / (self.contentSize?.height ?? view.bounds.height)
+  private func calculateProgress(translation: CGPoint, inBounds viewBounds: CGRect) -> CGFloat {
+    let xMovement = (self.direction == .negative ? -translation.x : translation.x) / (self.contentSize?.width ?? viewBounds.width)
+    let yMovement = (self.direction == .negative ? -translation.y : translation.y) / (self.contentSize?.height ?? viewBounds.height)
     
     let movement: CGFloat
     switch self.axis {
@@ -196,23 +226,108 @@ class InteractiveTransition : UIPercentDrivenInteractiveTransition {
   }
 }
 
-// MARK: - UIGestureRecognizerDelegate
+// MARK: - ScrollViewInteractiveReceiverDelegate
 
-extension InteractiveTransition : UIGestureRecognizerDelegate {
+extension InteractiveTransition : ScrollViewInteractiveReceiverDelegate {
   
-  func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-    // gestureRecognizer is the activeGestureRecognizer associated with this interactive transition
-    if gestureRecognizer.view == otherGestureRecognizer.view, let scrollView = gestureRecognizer.view as? UIScrollView {
-      if self.axis == .y && self.direction == .positive && scrollView.contentOffset.y <= 0 {
-        return true
-      } else if self.axis == .y && self.direction == .negative && scrollView.contentOffset.y >= scrollView.contentSize.height {
-        return true
-      } else if self.axis == .x && self.direction == .positive && scrollView.contentOffset.x <= 0 {
-        return true
-      } else if self.axis == .x && self.direction == .negative && scrollView.contentOffset.x >= scrollView.contentSize.width {
-        return true
-      }
+  func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    
+    // Determine if should begin dismissal
+    if self.axis == .y && self.direction == .positive && -scrollView.contentOffset.y >= scrollView.adjustedContentInset.top {
+      self.lastContentOffset = scrollView.contentOffset
+    } else if self.axis == .y && self.direction == .negative && -scrollView.contentOffset.y <= scrollView.contentSize.height {
+      self.lastContentOffset = scrollView.contentOffset
+    } else if self.axis == .x && self.direction == .positive && -scrollView.contentOffset.x >= scrollView.contentInset.left {
+      self.lastContentOffset = scrollView.contentOffset
+    } else if self.axis == .x && self.direction == .negative && -scrollView.contentOffset.x <= scrollView.contentSize.width {
+      self.lastContentOffset = scrollView.contentOffset
+    } else {
+      self.lastContentOffset = nil
     }
-    return false
+    
+    // Only update if the interactive gesture has started
+    guard self.hasStarted else {
+      return
+    }
+    
+    // Handle the scrolling gesture
+    self.handleScrollingGesture(scrollView, gestureState: .began)
+  }
+  
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    
+    // Check if valid last content offset
+    guard let lastContentOffset = self.lastContentOffset else {
+      return
+    }
+    
+    // Check if this scroll gesture has already started
+    if self.hasStarted {
+      
+      // Handle the scrolling gesture
+      self.handleScrollingGesture(scrollView, gestureState: .changed)
+      return
+    }
+    
+    // Check if the scroll dismiss should start
+    if self.axis == .y && self.direction == .positive && scrollView.contentOffset.y <= lastContentOffset.y {
+      self.hasStarted = true
+      self.handleScrollingGesture(scrollView, gestureState: .began)
+    } else if self.axis == .y && self.direction == .negative && scrollView.contentOffset.y >= lastContentOffset.y {
+      self.hasStarted = true
+      self.handleScrollingGesture(scrollView, gestureState: .began)
+    } else if self.axis == .x && self.direction == .positive && scrollView.contentOffset.x <= lastContentOffset.x {
+      self.hasStarted = true
+      self.handleScrollingGesture(scrollView, gestureState: .began)
+    } else if self.axis == .x && self.direction == .negative && scrollView.contentOffset.x >= lastContentOffset.x {
+      self.hasStarted = true
+      self.handleScrollingGesture(scrollView, gestureState: .began)
+    } else {
+      self.lastContentOffset = nil
+    }
+  }
+  
+  func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    
+    // Only update if the interactive gesture has started
+    guard self.hasStarted else {
+      return
+    }
+    
+    // Handle the scrolling gesture
+    self.handleScrollingGesture(scrollView, gestureState: .ended)
+  }
+  
+  private func handleScrollingGesture(_ scrollView: UIScrollView, gestureState: UIGestureRecognizerState) {
+    
+    // Calculate translation
+    let scrollTranslation: CGPoint?
+    if self.axis == .y && self.direction == .positive {
+      scrollTranslation = CGPoint(x: 0, y: -scrollView.contentOffset.y - scrollView.adjustedContentInset.top)
+    } else if self.axis == .y && self.direction == .negative {
+      scrollTranslation = CGPoint(x: 0, y: -scrollView.contentOffset.y - scrollView.contentSize.height)
+    } else if self.axis == .x && self.direction == .positive {
+      scrollTranslation = CGPoint(x: -scrollView.contentOffset.x - scrollView.contentInset.left, y: 0)
+    } else if self.axis == .x && self.direction == .negative {
+      scrollTranslation = CGPoint(x: -scrollView.contentOffset.x - scrollView.contentSize.width, y: 0)
+    } else {
+      scrollTranslation = nil
+    }
+    
+    guard let translation = scrollTranslation else {
+      return
+    }
+    
+    // Convert position to progress
+    let progress = self.calculateProgress(translation: translation, inBounds: scrollView.bounds)
+    
+    // Velocity calculations
+    self.updateVelocityProperties(currentTranslation: translation)
+    
+    // Update the last content offset
+    self.lastContentOffset = scrollView.contentOffset
+    
+    // Handle the gesture state
+    self.handleGestureState(gestureState, progress: progress * 2.5)
   }
 }

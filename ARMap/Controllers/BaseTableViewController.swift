@@ -16,6 +16,14 @@ class BaseTableViewController : UITableViewController, PresentableController {
   var presentationManager: UIViewControllerTransitioningDelegate? = nil
   var currentFlowInitialController: PresentableController? = nil
   
+  // MARK: - Lifecycle
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    self.configureDefaultBackButton()
+  }
+  
   // MARK: - Status Bar
   
   override var preferredStatusBarStyle: UIStatusBarStyle {

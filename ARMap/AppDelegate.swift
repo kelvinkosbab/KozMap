@@ -21,9 +21,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Analytics
     AnalyticsManager.shared.appDidFinishLaunching()
     
-    // Check if we don't have the correct permissions
-    if !PermissionManager.shared.isAccessAuthorized {
-      let permissionsViewController = PermissionsViewController.newViewController(delegate: self)
+    // Check if we have verified privacy
+    if !Defaults.shared.hasOnboarded {
+      let onboardingViewController = OnboardingViewController.newViewController(modalControllerDelegate: self)
+      RootNavigationController.shared.viewControllers = [ onboardingViewController ]
+    } else if !Defaults.shared.hasOnboardedPrivacy {
+      let privacyViewController = self.getPrivacyOnbardingController(modalControllerDelegate: self)
+      RootNavigationController.shared.viewControllers = [ privacyViewController ]
+    } else if !PermissionManager.shared.isAccessAuthorized {
+      let permissionsViewController = PermissionsViewController.newViewController(modalControllerDelegate: self)
       RootNavigationController.shared.viewControllers = [ permissionsViewController ]
     }
     
@@ -65,12 +71,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 }
 
-// MARK: - PermissionsViewControllerDelegate
+// MARK: - Delegates -
 
-extension AppDelegate : PermissionsViewControllerDelegate {
+// MARK: - PrivacyNavigationDelegate
+
+extension AppDelegate : PrivacyNavigationDelegate {}
+
+// MARK: - ModalControllerDelegate
+
+extension AppDelegate : ModalControllerDelegate {
+  
+  func dismissModalController(_ sender: UIViewController) {
+    if !Defaults.shared.hasOnboarded {
+      self.showOnboardingController()
+    } else if !Defaults.shared.hasOnboardedPrivacy {
+      self.showPrivacyController()
+    } else if !PermissionManager.shared.isAccessAuthorized {
+      self.showPermissionsController()
+    } else {
+      self.showMainController()
+    }
+  }
   
   func didAuthorizeAllPermissions() {
     self.showMainController()
+  }
+  
+  private func showOnboardingController() {
+    let onboardingViewController = OnboardingViewController.newViewController(modalControllerDelegate: self)
+    onboardingViewController.navigationItem.hidesBackButton = true
+    RootNavigationController.shared.pushViewController(onboardingViewController, animated: true)
+  }
+  
+  private func showPermissionsController() {
+    let privacyViewController = PermissionsViewController.newViewController(modalControllerDelegate: self)
+    privacyViewController.navigationItem.hidesBackButton = true
+    RootNavigationController.shared.pushViewController(privacyViewController, animated: true)
+  }
+  
+  private func showPrivacyController() {
+    let privacyViewController = self.getPrivacyOnbardingController(modalControllerDelegate: self)
+    privacyViewController.navigationItem.hidesBackButton = true
+    RootNavigationController.shared.pushViewController(privacyViewController, animated: true)
   }
   
   private func showMainController() {

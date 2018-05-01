@@ -97,7 +97,9 @@ class LocationDetailViewController : BaseViewController, NSFetchedResultsControl
       self.view.backgroundColor = .white
     }
     
-    if !UIDevice.current.isPhone {
+    if UIDevice.current.isPhone {
+      self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icChevronDown"), style: .plain, target: self, action: #selector(self.closeButtonSelected))
+    } else {
       self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(self.closeButtonSelected))
     }
     

@@ -16,7 +16,7 @@ protocol LocationListViewControllerDelegate : class {
   func shouldTransitionToSearch(sender: UIViewController)
 }
 
-class LocationListViewController : BaseTableViewController, NSFetchedResultsControllerDelegate, DesiredContentHeightDelegate, DismissInteractable, PlacemarkAPIDelegate, PlacemarkDetailNavigationDelegate {
+class LocationListViewController : BaseTableViewController, NSFetchedResultsControllerDelegate, DesiredContentHeightDelegate, DismissInteractable, PlacemarkAPIDelegate, PlacemarkDetailNavigationDelegate, ScrollViewInteractiveSenderDelegate {
   
   // MARK: - Static Accessors
   
@@ -57,6 +57,10 @@ class LocationListViewController : BaseTableViewController, NSFetchedResultsCont
     return views
   }
   
+  // MARK: - ScrollViewInteractiveSenderDelegate
+  
+  weak var scrollViewInteractiveReceiverDelegate: ScrollViewInteractiveReceiverDelegate?
+  
   // MARK: - Properties
   
   var appMode: AppMode = .myPlacemark
@@ -70,10 +74,12 @@ class LocationListViewController : BaseTableViewController, NSFetchedResultsCont
   private lazy var placemarksFetchedResultsController: NSFetchedResultsController<Placemark> = {
     let controller: NSFetchedResultsController<Placemark>
     switch self.appMode {
-    case .myPlacemark, .mountain:
-      controller = Placemark.newFetchedResultsController(placemarkType: self.appMode)
+    case .myPlacemark:
+      controller = Placemark.newMyPlacemarksController()
     case .food:
       controller = Placemark.newFetchedResultsController(placemarkType: self.appMode, isFavorite: true)
+    case .mountain:
+      controller = Placemark.newFetchedResultsController(placemarkType: self.appMode)
     }
     controller.delegate = self
     try? controller.performFetch()
@@ -122,7 +128,9 @@ class LocationListViewController : BaseTableViewController, NSFetchedResultsCont
     }
     
     // Title and navigation items
-    if !UIDevice.current.isPhone {
+    if UIDevice.current.isPhone {
+      self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icChevronDown"), style: .plain, target: self, action: #selector(self.closeButtonSelected))
+    } else {
       self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(self.closeButtonSelected))
     }
     
@@ -330,11 +338,11 @@ extension LocationListViewController : LocationListViewControllerCellDelegate {
     }
     alertController.addAction(editAction)
     
-    switch self.appMode {
+    switch placemark.placemarkType {
     case .myPlacemark:
       
       // Delete
-      let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
+      let deleteAction = UIAlertAction(title: "Remove Placemark", style: .destructive) { [weak self] _ in
         self?.promptDeletePlacemark(placemark: placemark)
       }
       alertController.addAction(deleteAction)
@@ -372,5 +380,22 @@ extension LocationListViewController : LocationListViewControllerCellDelegate {
       alertController.popoverPresentationController?.sourceRect = sender.frame
       self.present(alertController, animated: true, completion: nil)
     }
+  }
+}
+
+// MARK: - UIScrollView
+
+extension LocationListViewController {
+  
+  override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    self.scrollViewInteractiveReceiverDelegate?.scrollViewWillBeginDragging(scrollView)
+  }
+  
+  override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    self.scrollViewInteractiveReceiverDelegate?.scrollViewDidScroll(scrollView)
+  }
+  
+  override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    self.scrollViewInteractiveReceiverDelegate?.scrollViewDidEndDragging(scrollView, willDecelerate: decelerate)
   }
 }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14111" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -38,7 +38,7 @@
                                             <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <view alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hzb-TI-SW5">
+                                        <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hzb-TI-SW5">
                                             <rect key="frame" x="16" y="2" width="40" height="40"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
@@ -46,6 +46,9 @@
                                                 <constraint firstAttribute="width" constant="40" id="tBE-eZ-3P7"/>
                                             </constraints>
                                         </view>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hDy-8z-Uyu">
+                                            <rect key="frame" x="24" y="10" width="24" height="24"/>
+                                        </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DZb-mC-5BD">
                                             <rect key="frame" x="319" y="2" width="40" height="40"/>
                                             <constraints>
@@ -59,12 +62,16 @@
                                         </button>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="hDy-8z-Uyu" firstAttribute="bottom" secondItem="Hzb-TI-SW5" secondAttribute="bottom" constant="-8" id="1lt-8d-VeT"/>
                                         <constraint firstItem="HYE-Je-Q5P" firstAttribute="top" secondItem="QKw-K6-mml" secondAttribute="centerY" id="5bU-dE-od3"/>
                                         <constraint firstItem="HYE-Je-Q5P" firstAttribute="leading" secondItem="Hzb-TI-SW5" secondAttribute="trailing" constant="8" id="CEz-BT-50i"/>
                                         <constraint firstItem="DZb-mC-5BD" firstAttribute="centerY" secondItem="QKw-K6-mml" secondAttribute="centerY" id="F9O-bO-xdm"/>
+                                        <constraint firstItem="hDy-8z-Uyu" firstAttribute="leading" secondItem="Hzb-TI-SW5" secondAttribute="leading" constant="8" id="HKx-Yu-R5s"/>
                                         <constraint firstItem="Hzb-TI-SW5" firstAttribute="centerY" secondItem="QKw-K6-mml" secondAttribute="centerY" id="KkH-IA-WV7"/>
                                         <constraint firstItem="DZb-mC-5BD" firstAttribute="leading" secondItem="HYE-Je-Q5P" secondAttribute="trailing" id="UZl-0k-JC9"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="DZb-mC-5BD" secondAttribute="trailing" id="WRO-DC-QED"/>
+                                        <constraint firstItem="hDy-8z-Uyu" firstAttribute="top" secondItem="Hzb-TI-SW5" secondAttribute="top" constant="8" id="Zdc-tl-ncN"/>
+                                        <constraint firstItem="hDy-8z-Uyu" firstAttribute="trailing" secondItem="Hzb-TI-SW5" secondAttribute="trailing" constant="-8" id="ZgT-kf-rxU"/>
                                         <constraint firstItem="Hzb-TI-SW5" firstAttribute="leading" secondItem="QKw-K6-mml" secondAttribute="leadingMargin" id="pjd-Hc-IcP"/>
                                         <constraint firstItem="DZb-mC-5BD" firstAttribute="leading" secondItem="O6t-dd-trW" secondAttribute="trailing" id="r35-Aj-WuY"/>
                                         <constraint firstItem="O6t-dd-trW" firstAttribute="leading" secondItem="Hzb-TI-SW5" secondAttribute="trailing" constant="8" id="ung-A2-inB"/>
@@ -74,6 +81,7 @@
                                 <connections>
                                     <outlet property="colorView" destination="Hzb-TI-SW5" id="4ob-X3-Wcb"/>
                                     <outlet property="detailLabel" destination="HYE-Je-Q5P" id="ZRL-UJ-8xl"/>
+                                    <outlet property="iconImageView" destination="hDy-8z-Uyu" id="Qxc-oc-vWg"/>
                                     <outlet property="moreButton" destination="DZb-mC-5BD" id="xoT-K1-jVw"/>
                                     <outlet property="titleLabel" destination="O6t-dd-trW" id="0RD-gV-DQ6"/>
                                 </connections>
