@@ -12,10 +12,10 @@ import CoreLocation
 class PlacemarkNodeContainer : Hashable {
   
   // MARK: - Hashable
-  
-  var hashValue: Int {
-    return self.placemark.hashValue
-  }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.placemark.hashValue)
+    }
   
   // MARK: - Equatable
   

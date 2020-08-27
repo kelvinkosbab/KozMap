@@ -12,7 +12,7 @@ protocol InlineColorChooserViewControllerDelegate : class {
   func didSelect(color: UIColor)
 }
 
-class InlineColorChooserViewController : UICollectionViewController, UICollectionViewDelegateFlowLayout, BatchUpdatable {
+class InlineColorChooserViewController : UICollectionViewController, UICollectionViewDelegateFlowLayout {
   
   // MARK: - Static Accessors
   
@@ -25,11 +25,6 @@ class InlineColorChooserViewController : UICollectionViewController, UICollectio
     viewController.delegate = delegate
     return viewController
   }
-  
-  // MARK: - BatchUpdatable
-  
-  var isProcessingBatchUpdate: Bool = false
-  var batchUpdateQueue: [BatchUpdatableItem] = []
   
   // MARK: - Properties
   

@@ -1,0 +1,10 @@
+*.DS_Store
+Pods/*
+Pods
+*xcuserdata*
+
+# Ignore AppCode user-related files
+.idea
+
+# Ignore Carthage installed files
+Carthage/*

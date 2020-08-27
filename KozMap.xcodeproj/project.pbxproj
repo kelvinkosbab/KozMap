@@ -75,7 +75,6 @@
 		B686EF5020166D8700ACF075 /* PresentableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF2A20166D8700ACF075 /* PresentableController.swift */; };
 		B686EF5720166D8700ACF075 /* KeyboardFrameRespondable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF3320166D8700ACF075 /* KeyboardFrameRespondable.swift */; };
 		B686EF5820166D8700ACF075 /* DesiredContentHeightDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF3420166D8700ACF075 /* DesiredContentHeightDelegate.swift */; };
-		B686EF5920166D8700ACF075 /* BatchUpdatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF3520166D8700ACF075 /* BatchUpdatable.swift */; };
 		B686EF5A20166D8700ACF075 /* ViewControllerFromStoryboardProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF3620166D8700ACF075 /* ViewControllerFromStoryboardProtocol.swift */; };
 		B686EF5B20166D8700ACF075 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF3720166D8700ACF075 /* Log.swift */; };
 		B686EF5C20166D8700ACF075 /* CameraPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686EF3920166D8700ACF075 /* CameraPermissionManager.swift */; };
@@ -245,7 +244,6 @@
 		B686EF2A20166D8700ACF075 /* PresentableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentableController.swift; sourceTree = "<group>"; };
 		B686EF3320166D8700ACF075 /* KeyboardFrameRespondable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardFrameRespondable.swift; sourceTree = "<group>"; };
 		B686EF3420166D8700ACF075 /* DesiredContentHeightDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesiredContentHeightDelegate.swift; sourceTree = "<group>"; };
-		B686EF3520166D8700ACF075 /* BatchUpdatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchUpdatable.swift; sourceTree = "<group>"; };
 		B686EF3620166D8700ACF075 /* ViewControllerFromStoryboardProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerFromStoryboardProtocol.swift; sourceTree = "<group>"; };
 		B686EF3720166D8700ACF075 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		B686EF3920166D8700ACF075 /* CameraPermissionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraPermissionManager.swift; sourceTree = "<group>"; };
@@ -713,7 +711,6 @@
 			children = (
 				B686EF3320166D8700ACF075 /* KeyboardFrameRespondable.swift */,
 				B686EF3420166D8700ACF075 /* DesiredContentHeightDelegate.swift */,
-				B686EF3520166D8700ACF075 /* BatchUpdatable.swift */,
 				B686EF3620166D8700ACF075 /* ViewControllerFromStoryboardProtocol.swift */,
 				B6A8ABD0204B89C2007FDAEC /* ClassNamable.swift */,
 				B686EF3720166D8700ACF075 /* Log.swift */,
@@ -1103,7 +1100,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-KozMap/Pods-KozMap-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-KozMap/Pods-KozMap-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
@@ -1122,7 +1119,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KozMap/Pods-KozMap-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KozMap/Pods-KozMap-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1260,7 +1257,6 @@
 				B686EF5B20166D8700ACF075 /* Log.swift in Sources */,
 				B64D121E204E666D008E5C5F /* AnalyticsManager.swift in Sources */,
 				B6DCCDD7203BD4D200201385 /* BottomUpPresentationController.swift in Sources */,
-				B686EF5920166D8700ACF075 /* BatchUpdatable.swift in Sources */,
 				B6DCCDDB203BDC0800201385 /* TopDownAnimator.swift in Sources */,
 				B6A8ABD1204B89C2007FDAEC /* ClassNamable.swift in Sources */,
 				B686EF9B20166F1300ACF075 /* MyPlacemarkSearchViewController.swift in Sources */,
@@ -1348,10 +1344,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6SS93B87P2;
 				INFOPLIST_FILE = "$(SRCROOT)/ARMap/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kozinga.KozMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "556fa2ed-09fe-429f-aafc-911fcd6c43a9";
@@ -1425,10 +1423,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6SS93B87P2;
 				INFOPLIST_FILE = "$(SRCROOT)/ARMap/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kozinga.KozMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "9599f5f2-9f54-4e69-8b4d-2748530eb5ba";

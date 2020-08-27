@@ -36,10 +36,10 @@ class Service : Hashable, Loggable, ClassNamable {
   }
   
   // MARK: - Hashable
-  
-  var hashValue: Int {
-    return self.endpoint?.hashValue ?? 0
-  }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.endpoint?.hashValue ?? 0)
+    }
   
   static func == (lhs: Service, rhs: Service) -> Bool {
     return lhs.endpoint == rhs.endpoint
