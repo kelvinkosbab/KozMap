@@ -2,6 +2,7 @@
 Pods/*
 Pods
 *xcuserdata*
+Podfile.lock
 
 # Ignore AppCode user-related files
 .idea
